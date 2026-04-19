@@ -4,7 +4,9 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/vendor/SDL3-3.4.4/include"
+                "${workspaceFolder}/vendor/SDL3-3.4.4/include",
+                "${workspaceFolder}/vendor/SDL3_image-3.4.2/include",
+                "${workspaceFolder}/vendor"
             ],
             "defines": [],
             "compilerPath": "cl.exe",
