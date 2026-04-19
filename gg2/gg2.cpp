@@ -22,8 +22,15 @@ int main()
 
     bool running = true;
     SDL_Event event;
+    int maxFps = 60;
+    int frameCount = 0;
+    Uint64 lastTicks = SDL_GetTicks();
     while (running)
     {
+        Uint64 now = SDL_GetTicks();
+        float dt = (now - lastTicks) / 1000.0f;
+        lastTicks = now;
+
         while (SDL_PollEvent(&event))
         {
             if (event.type == SDL_EVENT_QUIT)
@@ -33,6 +40,14 @@ int main()
         SDL_RenderClear(renderer);
         SDL_RenderTexture(renderer, texture, (SDL_FRect*)&grassRect, &dst);
         SDL_RenderPresent(renderer);
+
+        Uint64 frameTime = SDL_GetTicks() - now;
+        Uint64 targetTime = 1000 / maxFps;
+        if (frameTime < targetTime)
+            SDL_Delay(targetTime - frameTime);
+
+        if (++frameCount % 60 == 0)
+            SDL_Log("frame: %llu ms", frameTime);
     }
 
     SDL_DestroyTexture(texture);
