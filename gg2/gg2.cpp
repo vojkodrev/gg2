@@ -105,10 +105,7 @@ struct RenderDst
     float y[MAX_RENDER_BUFFER];
     float w[MAX_RENDER_BUFFER];
     float h[MAX_RENDER_BUFFER];
-    float colOffX[MAX_RENDER_BUFFER];
     float colOffY[MAX_RENDER_BUFFER];
-    float colW[MAX_RENDER_BUFFER];
-    float colH[MAX_RENDER_BUFFER];
 };
 
 struct RenderBuffer
