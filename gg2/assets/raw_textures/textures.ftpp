@@ -2,7 +2,7 @@
   "meta": {
     "version": "0.6.7"
   },
-  "savePath": "C:\\code\\gg2\\gg2\\assets",
+  "savePath": "C:\\code\\gg2\\gg2\\assets\\texture",
   "images": [],
   "folders": [
     "C:/code/gg2/gg2/assets/raw_textures/grass"
@@ -19,7 +19,7 @@
     "filter": "none",
     "exporter": "JSON (hash)",
     "fileName": "pack-result",
-    "savePath": "C:\\code\\gg2\\gg2\\assets",
+    "savePath": "C:\\code\\gg2\\gg2\\assets\\texture",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,
