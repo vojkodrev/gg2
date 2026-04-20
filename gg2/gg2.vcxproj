@@ -150,9 +150,6 @@
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\miniz.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\texture\texture.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="assets\texture\texture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -164,7 +161,6 @@
     </None>
   </ItemGroup>
   <Target Name="CopyAssets" AfterTargets="Build">
-    <Copy SourceFiles="$(ProjectDir)assets\texture\texture.json" DestinationFolder="$(OutDir)assets\texture\" SkipUnchangedFiles="true" />
     <Copy SourceFiles="$(ProjectDir)assets\texture\texture.png" DestinationFolder="$(OutDir)assets\texture\" SkipUnchangedFiles="true" />
     <Copy SourceFiles="$(ProjectDir)assets\map\map1.tmx" DestinationFolder="$(OutDir)assets\map\" SkipUnchangedFiles="true" />
     <Copy SourceFiles="$(ProjectDir)assets\map\texture.tsx" DestinationFolder="$(OutDir)assets\map\" SkipUnchangedFiles="true" />

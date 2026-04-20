@@ -111,7 +111,6 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     auto &srcTiles = tileLayer.getTiles();
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
-    tileMap.tileCount = (int)srcTiles.size();
     props.srcTileW = tileset.getTileSize().x;
     props.srcTileH = tileset.getTileSize().y;
     props.columns = tileset.getColumnCount();
@@ -119,19 +118,18 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     props.dstTileW = map.getTileSize().x;
     props.dstTileH = map.getTileSize().y;
     props.firstGid = tileset.getFirstGID();
-    for (int i = 0; i < tileMap.tileCount; i++)
+    tileMap.tileCount = 0;
+    for (int i = 0; i < (int)srcTiles.size(); i++)
     {
         uint32_t gid = srcTiles[i].ID;
         if (gid == 0)
-        {
-            tileMap.tiles.srcX[i] = UINT32_MAX;
             continue;
-        }
+        int n = tileMap.tileCount++;
         int idx = gid - props.firstGid;
-        tileMap.tiles.srcX[i] = idx % props.columns * props.srcTileW;
-        tileMap.tiles.srcY[i] = idx / props.columns * props.srcTileH;
-        tileMap.tiles.dstX[i] = i % props.mapW * props.dstTileW;
-        tileMap.tiles.dstY[i] = i / props.mapW * props.dstTileH;
+        tileMap.tiles.srcX[n] = idx % props.columns * props.srcTileW;
+        tileMap.tiles.srcY[n] = idx / props.columns * props.srcTileH;
+        tileMap.tiles.dstX[n] = i % props.mapW * props.dstTileW;
+        tileMap.tiles.dstY[n] = i / props.mapW * props.dstTileH;
     }
 
     auto &playerLayer = map.getLayers()[1]->getLayerAs<tmx::TileLayer>();
@@ -180,8 +178,6 @@ void RenderSystem(const Context &ctx)
     SDL_RenderClear(ctx.renderer);
     for (int i = 0; i < tileMap.tileCount; i++)
     {
-        if (tileMap.tiles.srcX[i] == UINT32_MAX)
-            continue;
         SDL_FRect src = {(float)tileMap.tiles.srcX[i], (float)tileMap.tiles.srcY[i], (float)props.srcTileW, (float)props.srcTileH};
         SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
