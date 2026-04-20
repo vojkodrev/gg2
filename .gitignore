@@ -23,6 +23,7 @@ Release/
 
 # CMake
 build/
+out/
 
 # Tiled editor
 *.tiled-session
