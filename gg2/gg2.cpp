@@ -28,10 +28,43 @@ struct TileMap
     Tile tiles;
 };
 
+struct Player
+{
+    uint32_t srcX, srcY, srcW, srcH;
+    uint32_t x, y, w, h;
+};
+
+const int MAX_NPCS = 100;
+
+struct NPCPosition
+{
+    uint32_t x[MAX_NPCS];
+    uint32_t y[MAX_NPCS];
+    uint32_t w[MAX_NPCS];
+    uint32_t h[MAX_NPCS];
+};
+
+struct NPCSrc
+{
+    uint32_t x[MAX_NPCS];
+    uint32_t y[MAX_NPCS];
+    uint32_t w[MAX_NPCS];
+    uint32_t h[MAX_NPCS];
+};
+
+struct NPC
+{
+    int npcCount;
+    NPCSrc src;
+    NPCPosition position;
+};
+
 struct Data
 {
     TileMapProperties tileMapProps;
     TileMap tileMap;
+    Player player;
+    NPC npc;
 };
 
 struct FrameState
@@ -100,6 +133,44 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
         tileMap.tiles.dstX[i] = i % props.mapW * props.dstTileW;
         tileMap.tiles.dstY[i] = i / props.mapW * props.dstTileH;
     }
+
+    auto &playerLayer = map.getLayers()[1]->getLayerAs<tmx::TileLayer>();
+    auto &playerTiles = playerLayer.getTiles();
+    for (int i = 0; i < (int)playerTiles.size(); i++)
+    {
+        if (playerTiles[i].ID == 0)
+            continue;
+        int idx = playerTiles[i].ID - props.firstGid;
+        ctx.data.player.srcX = idx % props.columns * props.srcTileW;
+        ctx.data.player.srcY = idx / props.columns * props.srcTileH;
+        ctx.data.player.srcW = props.srcTileW;
+        ctx.data.player.srcH = props.srcTileH;
+        ctx.data.player.x = i % props.mapW * props.dstTileW;
+        ctx.data.player.y = i / props.mapW * props.dstTileH;
+        ctx.data.player.w = props.dstTileW;
+        ctx.data.player.h = props.dstTileH;
+        break;
+    }
+
+    auto &npcLayer = map.getLayers()[2]->getLayerAs<tmx::TileLayer>();
+    auto &npcTiles = npcLayer.getTiles();
+    auto &npc = ctx.data.npc;
+    npc.npcCount = 0;
+    for (int i = 0; i < (int)npcTiles.size(); i++)
+    {
+        if (npcTiles[i].ID == 0)
+            continue;
+        int n = npc.npcCount++;
+        int idx = npcTiles[i].ID - props.firstGid;
+        npc.src.x[n] = idx % props.columns * props.srcTileW;
+        npc.src.y[n] = idx / props.columns * props.srcTileH;
+        npc.src.w[n] = props.srcTileW;
+        npc.src.h[n] = props.srcTileH;
+        npc.position.x[n] = i % props.mapW * props.dstTileW;
+        npc.position.y[n] = i / props.mapW * props.dstTileH;
+        npc.position.w[n] = props.dstTileW;
+        npc.position.h[n] = props.dstTileH;
+    }
 }
 
 void RenderSystem(const Context &ctx)
@@ -115,6 +186,19 @@ void RenderSystem(const Context &ctx)
         SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
+    auto &player = ctx.data.player;
+    SDL_FRect playerSrc = {(float)player.srcX, (float)player.srcY, (float)player.srcW, (float)player.srcH};
+    SDL_FRect playerDst = {(float)player.x, (float)player.y, (float)player.w, (float)player.h};
+    SDL_RenderTexture(ctx.renderer, ctx.texture, &playerSrc, &playerDst);
+
+    auto &npc = ctx.data.npc;
+    for (int i = 0; i < npc.npcCount; i++)
+    {
+        SDL_FRect npcSrc = {(float)npc.src.x[i], (float)npc.src.y[i], (float)npc.src.w[i], (float)npc.src.h[i]};
+        SDL_FRect npcDst = {(float)npc.position.x[i], (float)npc.position.y[i], (float)npc.position.w[i], (float)npc.position.h[i]};
+        SDL_RenderTexture(ctx.renderer, ctx.texture, &npcSrc, &npcDst);
+    }
+
     SDL_RenderPresent(ctx.renderer);
 }
 
