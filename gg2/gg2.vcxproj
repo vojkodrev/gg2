@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs;$(ProjectDir)systems;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs;$(ProjectDir)systems;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs;$(ProjectDir)systems;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs;$(ProjectDir)systems;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,13 +136,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gg2.cpp" />
-    <ClCompile Include="UpdateFrameStateSystem.cpp" />
-    <ClCompile Include="UpdateKeyboardStateSystem.cpp" />
-    <ClCompile Include="PlayerMovementSystem.cpp" />
-    <ClCompile Include="FrameRateLimitSystem.cpp" />
-    <ClCompile Include="LoadTileMap.cpp" />
-    <ClCompile Include="FillRenderBufferSystem.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="systems\UpdateFrameStateSystem.cpp" />
+    <ClCompile Include="systems\UpdateKeyboardStateSystem.cpp" />
+    <ClCompile Include="systems\PlayerMovementSystem.cpp" />
+    <ClCompile Include="systems\FrameRateLimitSystem.cpp" />
+    <ClCompile Include="systems\LoadTileMap.cpp" />
+    <ClCompile Include="systems\FillRenderBufferSystem.cpp" />
+    <ClCompile Include="systems\RenderSystem.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\FreeFuncs.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\ImageLayer.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\LayerGroup.cpp" />
