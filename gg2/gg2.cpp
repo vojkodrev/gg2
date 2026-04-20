@@ -8,6 +8,7 @@
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
 #include "UpdateKeyboardStateSystem.h"
+#include "PlayerMovementSystem.h"
 
 int main()
 {
@@ -43,6 +44,8 @@ int main()
         }
 
         UpdateKeyboardStateSystem(ctx);
+
+        PlayerMovementSystem(ctx);
 
         FillRenderBufferSystem(ctx);
         RenderSystem(ctx);

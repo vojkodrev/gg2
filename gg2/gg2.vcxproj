@@ -138,6 +138,7 @@
     <ClCompile Include="gg2.cpp" />
     <ClCompile Include="UpdateFrameStateSystem.cpp" />
     <ClCompile Include="UpdateKeyboardStateSystem.cpp" />
+    <ClCompile Include="PlayerMovementSystem.cpp" />
     <ClCompile Include="FrameRateLimitSystem.cpp" />
     <ClCompile Include="LoadTileMap.cpp" />
     <ClCompile Include="FillRenderBufferSystem.cpp" />
