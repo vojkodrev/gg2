@@ -1,10 +1,21 @@
 #include "LoadTileMap.h"
 #include <tmxlite/TileLayer.hpp>
 
+namespace
+{
+    const tmx::Layer *findLayer(const tmx::Map &map, const std::string &name)
+    {
+        for (auto &layer : map.getLayers())
+            if (layer->getName() == name)
+                return layer.get();
+        return nullptr;
+    }
+}
+
 void LoadTileMap(Context &ctx, const tmx::Map &map)
 {
     auto &tileset = map.getTilesets()[0];
-    auto &tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
+    auto &tileLayer = findLayer(map, "Ground")->getLayerAs<tmx::TileLayer>();
     auto &srcTiles = tileLayer.getTiles();
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
@@ -45,7 +56,7 @@ void LoadTileMap(Context &ctx, const tmx::Map &map)
         }
     };
 
-    auto &playerLayer = map.getLayers()[1]->getLayerAs<tmx::TileLayer>();
+    auto &playerLayer = findLayer(map, "Player")->getLayerAs<tmx::TileLayer>();
     auto &playerTiles = playerLayer.getTiles();
     for (int i = 0; i < (int)playerTiles.size(); i++)
     {
@@ -64,7 +75,7 @@ void LoadTileMap(Context &ctx, const tmx::Map &map)
         break;
     }
 
-    auto &npcLayer = map.getLayers()[2]->getLayerAs<tmx::TileLayer>();
+    auto &npcLayer = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>();
     auto &npcTiles = npcLayer.getTiles();
     auto &npc = ctx.data.npc;
     npc.npcCount = 0;
