@@ -229,6 +229,37 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     }
 }
 
+void FillRenderBufferSystem(Context &ctx)
+{
+    auto &rb = ctx.renderBuffer;
+    rb.count = 0;
+
+    auto &player = ctx.data.player;
+    int n = rb.count++;
+    rb.src.x[n] = (float)player.srcX;
+    rb.src.y[n] = (float)player.srcY;
+    rb.src.w[n] = (float)player.srcW;
+    rb.src.h[n] = (float)player.srcH;
+    rb.dst.x[n] = player.x;
+    rb.dst.y[n] = player.y;
+    rb.dst.w[n] = player.w;
+    rb.dst.h[n] = player.h;
+
+    auto &npc = ctx.data.npc;
+    for (int i = 0; i < npc.npcCount; i++)
+    {
+        n = rb.count++;
+        rb.src.x[n] = (float)npc.src.x[i];
+        rb.src.y[n] = (float)npc.src.y[i];
+        rb.src.w[n] = (float)npc.src.w[i];
+        rb.src.h[n] = (float)npc.src.h[i];
+        rb.dst.x[n] = npc.position.x[i];
+        rb.dst.y[n] = npc.position.y[i];
+        rb.dst.w[n] = npc.position.w[i];
+        rb.dst.h[n] = npc.position.h[i];
+    }
+}
+
 void RenderSystem(const Context &ctx)
 {
     auto &props = ctx.data.tileMapProps;
@@ -240,19 +271,13 @@ void RenderSystem(const Context &ctx)
         SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
-    auto &player = ctx.data.player;
-    SDL_FRect playerSrc = {(float)player.srcX, (float)player.srcY, (float)player.srcW, (float)player.srcH};
-    SDL_FRect playerDst = {player.x, player.y, player.w, player.h};
-    SDL_RenderTexture(ctx.renderer, ctx.texture, &playerSrc, &playerDst);
-
-    auto &npc = ctx.data.npc;
-    for (int i = 0; i < npc.npcCount; i++)
+    auto &rb = ctx.renderBuffer;
+    for (int i = 0; i < rb.count; i++)
     {
-        SDL_FRect npcSrc = {(float)npc.src.x[i], (float)npc.src.y[i], (float)npc.src.w[i], (float)npc.src.h[i]};
-        SDL_FRect npcDst = {npc.position.x[i], npc.position.y[i], npc.position.w[i], npc.position.h[i]};
-        SDL_RenderTexture(ctx.renderer, ctx.texture, &npcSrc, &npcDst);
+        SDL_FRect src = {rb.src.x[i], rb.src.y[i], rb.src.w[i], rb.src.h[i]};
+        SDL_FRect dst = {rb.dst.x[i], rb.dst.y[i], rb.dst.w[i], rb.dst.h[i]};
+        SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
-
     SDL_RenderPresent(ctx.renderer);
 }
 
@@ -289,6 +314,7 @@ int main()
                 running = false;
         }
 
+        FillRenderBufferSystem(ctx);
         RenderSystem(ctx);
 
         FrameRateLimitSystem(ctx);
