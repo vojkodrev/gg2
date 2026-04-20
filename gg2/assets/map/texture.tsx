@@ -18,9 +18,15 @@
  </tile>
  <tile id="48">
   <properties>
-   <property name="start" value="7"/>
-   <property name="stop" value="110"/>
+   <property name="colH" type="int" value="36"/>
+   <property name="colOffX" type="int" value="118"/>
+   <property name="colOffY" type="int" value="342"/>
+   <property name="colW" type="int" value="26"/>
+   <property name="h" type="int" value="384"/>
    <property name="type" value="marker"/>
+   <property name="w" type="int" value="288"/>
+   <property name="x" type="int" value="336"/>
+   <property name="y" type="int" value="0"/>
   </properties>
  </tile>
  <tile id="68">

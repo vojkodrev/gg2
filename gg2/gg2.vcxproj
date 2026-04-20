@@ -143,6 +143,8 @@
     <ClCompile Include="systems\core\tilemap\GetCollision.cpp" />
     <ClCompile Include="systems\core\tilemap\LoadGround.cpp" />
     <ClCompile Include="systems\core\tilemap\LoadNPCs.cpp" />
+    <ClCompile Include="systems\core\tilemap\GetTileProp.cpp" />
+    <ClCompile Include="systems\core\tilemap\IsMarker.cpp" />
     <ClCompile Include="systems\core\tilemap\LoadObjects.cpp" />
     <ClCompile Include="systems\core\tilemap\LoadPlayer.cpp" />
     <ClCompile Include="systems\core\tilemap\LoadTileMap.cpp" />
