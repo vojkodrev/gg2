@@ -144,7 +144,7 @@ void FrameRateLimitSystem(Context &ctx)
         SDL_Log("frame: %llu ms", ctx.frame.frameTime);
 }
 
-void loadTileMap(Context &ctx, const tmx::Map &map)
+void LoadTileMap(Context &ctx, const tmx::Map &map)
 {
     auto &tileset = map.getTilesets()[0];
     auto &tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
@@ -297,7 +297,7 @@ int main()
     tmx::Map map;
     map.load("assets/map/map1.tmx");
 
-    loadTileMap(ctx, map);
+    LoadTileMap(ctx, map);
 
     bool running = true;
     SDL_Event event;
