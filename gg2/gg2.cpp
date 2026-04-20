@@ -3,47 +3,69 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-struct TileMap
+struct TileMapProperties
 {
     int srcTileW, srcTileH;
     int columns;
     int mapW;
     int dstTileW, dstTileH;
     uint32_t firstGid;
-    int tileCount;
-    uint32_t tiles[1000];
 };
 
-TileMap loadTileMap(const tmx::Map &map)
+const int MAX_TILES = 1000;
+
+struct Tile
+{
+    uint32_t srcX[MAX_TILES];
+    uint32_t srcY[MAX_TILES];
+    uint32_t dstX[MAX_TILES];
+    uint32_t dstY[MAX_TILES];
+};
+
+struct TileMap
+{
+    int tileCount;
+    Tile tiles;
+};
+
+void loadTileMap(const tmx::Map &map, TileMapProperties &props, TileMap &tileMap)
 {
     auto &tileset = map.getTilesets()[0];
     auto &tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
-    TileMap tm;
     auto &srcTiles = tileLayer.getTiles();
-    tm.tileCount = (int)srcTiles.size();
-    for (int i = 0; i < tm.tileCount; i++)
-        tm.tiles[i] = srcTiles[i].ID;
-    tm.srcTileW = tileset.getTileSize().x;
-    tm.srcTileH = tileset.getTileSize().y;
-    tm.columns = tileset.getColumnCount();
-    tm.mapW = map.getTileCount().x;
-    tm.dstTileW = map.getTileSize().x;
-    tm.dstTileH = map.getTileSize().y;
-    tm.firstGid = tileset.getFirstGID();
-    return tm;
+    tileMap.tileCount = (int)srcTiles.size();
+    props.srcTileW = tileset.getTileSize().x;
+    props.srcTileH = tileset.getTileSize().y;
+    props.columns = tileset.getColumnCount();
+    props.mapW = map.getTileCount().x;
+    props.dstTileW = map.getTileSize().x;
+    props.dstTileH = map.getTileSize().y;
+    props.firstGid = tileset.getFirstGID();
+    for (int i = 0; i < tileMap.tileCount; i++)
+    {
+        uint32_t gid = srcTiles[i].ID;
+        if (gid == 0)
+        {
+            tileMap.tiles.srcX[i] = UINT32_MAX;
+            continue;
+        }
+        int idx = gid - props.firstGid;
+        tileMap.tiles.srcX[i] = idx % props.columns * props.srcTileW;
+        tileMap.tiles.srcY[i] = idx / props.columns * props.srcTileH;
+        tileMap.tiles.dstX[i] = i % props.mapW * props.dstTileW;
+        tileMap.tiles.dstY[i] = i / props.mapW * props.dstTileH;
+    }
 }
 
-void RenderSystem(SDL_Renderer *renderer, SDL_Texture *texture, const TileMap &tileMap)
+void RenderSystem(SDL_Renderer *renderer, SDL_Texture *texture, const TileMapProperties &props, const TileMap &tileMap)
 {
     SDL_RenderClear(renderer);
     for (int i = 0; i < tileMap.tileCount; i++)
     {
-        uint32_t gid = tileMap.tiles[i];
-        if (gid == 0)
+        if (tileMap.tiles.srcX[i] == UINT32_MAX)
             continue;
-        int idx = gid - tileMap.firstGid;
-        SDL_FRect src = {(float)(idx % tileMap.columns * tileMap.srcTileW), (float)(idx / tileMap.columns * tileMap.srcTileH), (float)tileMap.srcTileW, (float)tileMap.srcTileH};
-        SDL_FRect dst = {(float)(i % tileMap.mapW * tileMap.dstTileW), (float)(i / tileMap.mapW * tileMap.dstTileH), (float)tileMap.dstTileW, (float)tileMap.dstTileH};
+        SDL_FRect src = {(float)tileMap.tiles.srcX[i], (float)tileMap.tiles.srcY[i], (float)props.srcTileW, (float)props.srcTileH};
+        SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
         SDL_RenderTexture(renderer, texture, &src, &dst);
     }
     SDL_RenderPresent(renderer);
@@ -64,7 +86,9 @@ int main()
     tmx::Map map;
     map.load("assets/map/map1.tmx");
 
-    TileMap tileMap = loadTileMap(map);
+    TileMapProperties tileMapProps;
+    TileMap tileMap;
+    loadTileMap(map, tileMapProps, tileMap);
 
     bool running = true;
     SDL_Event event;
@@ -83,7 +107,7 @@ int main()
                 running = false;
         }
 
-        RenderSystem(renderer, texture, tileMap);
+        RenderSystem(renderer, texture, tileMapProps, tileMap);
 
         Uint64 frameTime = SDL_GetTicks() - now;
         Uint64 targetTime = 1000 / maxFps;
