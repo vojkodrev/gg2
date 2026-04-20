@@ -5,8 +5,8 @@
 
 int main()
 {
-    nlohmann::json atlas = nlohmann::json::parse(std::ifstream("assets/texture.json"));
-    auto& grassFrame = atlas["frames"]["grass/000.png"]["frame"];
+    nlohmann::json atlas = nlohmann::json::parse(std::ifstream("assets/texture/texture.json"));
+    auto& grassFrame = atlas["frames"]["grass/00.png"]["frame"];
     SDL_Rect grassRect = { grassFrame["x"], grassFrame["y"], grassFrame["w"], grassFrame["h"] };
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -14,11 +14,11 @@ int main()
     SDL_Window* window = SDL_CreateWindow("gg2", 1280, 720, 0);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
 
-    SDL_Surface* surface = IMG_Load("assets/texture.png");
+    SDL_Surface* surface = IMG_Load("assets/texture/texture.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_DestroySurface(surface);
 
-    SDL_FRect dst = { 100, 100, (float)grassRect.w * 5, (float)grassRect.h * 5 };
+    SDL_FRect dst = { 100, 100, (float)grassRect.w * 2, (float)grassRect.h * 2 };
 
     bool running = true;
     SDL_Event event;

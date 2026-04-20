@@ -138,16 +138,16 @@
     <ClCompile Include="gg2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\texture.json">
+    <None Include="assets\texture\texture.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="assets\texture.png">
+    <None Include="assets\texture\texture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Target Name="CopyAssets" AfterTargets="Build">
-    <Copy SourceFiles="$(ProjectDir)assets\texture.json" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(ProjectDir)assets\texture.png" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(ProjectDir)assets\texture\texture.json" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(ProjectDir)assets\texture\texture.png" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
   </Target>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
