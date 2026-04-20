@@ -5,10 +5,10 @@
 
 struct TileMapProperties
 {
-    int srcTileW, srcTileH;
-    int columns;
-    int mapW;
-    int dstTileW, dstTileH;
+    uint32_t srcTileW, srcTileH;
+    uint32_t columns;
+    uint32_t mapW;
+    uint32_t dstTileW, dstTileH;
     uint32_t firstGid;
 };
 
@@ -18,13 +18,13 @@ struct Tile
 {
     uint32_t srcX[MAX_TILES];
     uint32_t srcY[MAX_TILES];
-    uint32_t dstX[MAX_TILES];
-    uint32_t dstY[MAX_TILES];
+    int32_t dstX[MAX_TILES];
+    int32_t dstY[MAX_TILES];
 };
 
 struct TileMap
 {
-    int tileCount;
+    uint32_t tileCount;
     Tile tiles;
 };
 
@@ -63,7 +63,7 @@ struct NPCCollision
 
 struct NPC
 {
-    int npcCount;
+    uint32_t npcCount;
     NPCSrc src;
     NPCPosition position;
     NPCCollision collision;
@@ -79,8 +79,8 @@ struct Data
 
 struct FrameState
 {
-    int maxFps;
-    int frameCount;
+    uint32_t maxFps;
+    uint32_t frameCount;
     Uint64 lastTicks;
     Uint64 now;
     float dt;
@@ -112,7 +112,7 @@ struct RenderDst
 
 struct RenderBuffer
 {
-    int count;
+    uint32_t count;
     RenderSrc src;
     RenderDst dst;
 };
@@ -164,17 +164,17 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
         uint32_t gid = srcTiles[i].ID;
         if (gid == 0)
             continue;
-        int n = tileMap.tileCount++;
-        int idx = gid - props.firstGid;
+        uint32_t n = tileMap.tileCount++;
+        uint32_t idx = gid - props.firstGid;
         tileMap.tiles.srcX[n] = idx % props.columns * props.srcTileW;
         tileMap.tiles.srcY[n] = idx / props.columns * props.srcTileH;
         tileMap.tiles.dstX[n] = i % props.mapW * props.dstTileW;
         tileMap.tiles.dstY[n] = i / props.mapW * props.dstTileH;
     }
 
-    auto getCollision = [&](int tileIdx, float &offX, float &offY, float &w, float &h) {
+    auto getCollision = [&](uint32_t tileIdx, float &offX, float &offY, float &w, float &h) {
         for (auto &tile : tileset.getTiles()) {
-            if ((int)tile.ID != tileIdx)
+            if (tile.ID != tileIdx)
                 continue;
             auto &objs = tile.objectGroup.getObjects();
             if (!objs.empty()) {
@@ -194,7 +194,7 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     {
         if (playerTiles[i].ID == 0)
             continue;
-        int idx = playerTiles[i].ID - props.firstGid;
+        uint32_t idx = playerTiles[i].ID - props.firstGid;
         ctx.data.player.srcX = idx % props.columns * props.srcTileW;
         ctx.data.player.srcY = idx / props.columns * props.srcTileH;
         ctx.data.player.srcW = props.srcTileW;
@@ -211,12 +211,12 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     auto &npcTiles = npcLayer.getTiles();
     auto &npc = ctx.data.npc;
     npc.npcCount = 0;
-    for (int i = 0; i < (int)npcTiles.size(); i++)
+    for (uint32_t i = 0; i < npcTiles.size(); i++)
     {
         if (npcTiles[i].ID == 0)
             continue;
-        int n = npc.npcCount++;
-        int idx = npcTiles[i].ID - props.firstGid;
+        uint32_t n = npc.npcCount++;
+        uint32_t idx = npcTiles[i].ID - props.firstGid;
         npc.src.x[n] = idx % props.columns * props.srcTileW;
         npc.src.y[n] = idx / props.columns * props.srcTileH;
         npc.src.w[n] = props.srcTileW;
@@ -235,7 +235,7 @@ void FillRenderBufferSystem(Context &ctx)
     rb.count = 0;
 
     auto &player = ctx.data.player;
-    int n = rb.count++;
+    uint32_t n = rb.count++;
     rb.src.x[n] = (float)player.srcX;
     rb.src.y[n] = (float)player.srcY;
     rb.src.w[n] = (float)player.srcW;
@@ -246,7 +246,7 @@ void FillRenderBufferSystem(Context &ctx)
     rb.dst.h[n] = player.h;
 
     auto &npc = ctx.data.npc;
-    for (int i = 0; i < npc.npcCount; i++)
+    for (uint32_t i = 0; i < npc.npcCount; i++)
     {
         n = rb.count++;
         rb.src.x[n] = (float)npc.src.x[i];
@@ -265,14 +265,14 @@ void RenderSystem(const Context &ctx)
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
     SDL_RenderClear(ctx.renderer);
-    for (int i = 0; i < tileMap.tileCount; i++)
+    for (uint32_t i = 0; i < tileMap.tileCount; i++)
     {
         SDL_FRect src = {(float)tileMap.tiles.srcX[i], (float)tileMap.tiles.srcY[i], (float)props.srcTileW, (float)props.srcTileH};
         SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
     auto &rb = ctx.renderBuffer;
-    for (int i = 0; i < rb.count; i++)
+    for (uint32_t i = 0; i < rb.count; i++)
     {
         SDL_FRect src = {rb.src.x[i], rb.src.y[i], rb.src.w[i], rb.src.h[i]};
         SDL_FRect dst = {rb.dst.x[i], rb.dst.y[i], rb.dst.w[i], rb.dst.h[i]};
