@@ -1,14 +1,10 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
-#include <nlohmann/json.hpp>
-#include <fstream>
+#include <tmxlite/Map.hpp>
+#include <tmxlite/TileLayer.hpp>
 
 int main()
 {
-    nlohmann::json atlas = nlohmann::json::parse(std::ifstream("assets/texture/texture.json"));
-    auto& grassFrame = atlas["frames"]["grass/00.png"]["frame"];
-    SDL_Rect grassRect = { grassFrame["x"], grassFrame["y"], grassFrame["w"], grassFrame["h"] };
-
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window* window = SDL_CreateWindow("gg2", 1280, 720, 0);
@@ -16,9 +12,22 @@ int main()
 
     SDL_Surface* surface = IMG_Load("assets/texture/texture.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     SDL_DestroySurface(surface);
 
-    SDL_FRect dst = { 100, 100, (float)grassRect.w * 2, (float)grassRect.h * 2 };
+    tmx::Map map;
+    map.load("assets/map/map1.tmx");
+
+    auto& tileset = map.getTilesets()[0];
+    auto& tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
+    auto& tiles = tileLayer.getTiles();
+    int srcTileW = tileset.getTileSize().x;
+    int srcTileH = tileset.getTileSize().y;
+    int columns = tileset.getColumnCount();
+    int mapW = map.getTileCount().x;
+    int dstTileW = map.getTileSize().x;
+    int dstTileH = map.getTileSize().y;
+    uint32_t firstGid = tileset.getFirstGID();
 
     bool running = true;
     SDL_Event event;
@@ -38,7 +47,15 @@ int main()
         }
 
         SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, texture, (SDL_FRect*)&grassRect, &dst);
+        for (int i = 0; i < (int)tiles.size(); i++)
+        {
+            uint32_t gid = tiles[i].ID;
+            if (gid == 0) continue;
+            int idx = gid - firstGid;
+            SDL_FRect src = { (float)(idx % columns * srcTileW), (float)(idx / columns * srcTileH), (float)srcTileW, (float)srcTileH };
+            SDL_FRect dst = { (float)(i % mapW * dstTileW), (float)(i / mapW * dstTileH), (float)dstTileW, (float)dstTileH };
+            SDL_RenderTexture(renderer, texture, &src, &dst);
+        }
         SDL_RenderPresent(renderer);
 
         Uint64 frameTime = SDL_GetTicks() - now;
