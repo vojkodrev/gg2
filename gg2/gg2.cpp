@@ -3,22 +3,26 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-struct TileMapProperties
+struct TileMap
 {
-    const std::vector<tmx::TileLayer::Tile>* tiles;
     int srcTileW, srcTileH;
     int columns;
     int mapW;
     int dstTileW, dstTileH;
     uint32_t firstGid;
+    int tileCount;
+    uint32_t tiles[1000];
 };
 
-TileMapProperties loadTileMapProperties(const tmx::Map& map)
+TileMap loadTileMap(const tmx::Map &map)
 {
-    auto& tileset = map.getTilesets()[0];
-    auto& tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
-    TileMapProperties tm;
-    tm.tiles = &tileLayer.getTiles();
+    auto &tileset = map.getTilesets()[0];
+    auto &tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
+    TileMap tm;
+    auto &srcTiles = tileLayer.getTiles();
+    tm.tileCount = (int)srcTiles.size();
+    for (int i = 0; i < tm.tileCount; i++)
+        tm.tiles[i] = srcTiles[i].ID;
     tm.srcTileW = tileset.getTileSize().x;
     tm.srcTileH = tileset.getTileSize().y;
     tm.columns = tileset.getColumnCount();
@@ -33,18 +37,18 @@ int main()
 {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window* window = SDL_CreateWindow("gg2", 1280, 720, 0);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, nullptr);
+    SDL_Window *window = SDL_CreateWindow("gg2", 1280, 720, 0);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, nullptr);
 
-    SDL_Surface* surface = IMG_Load("assets/texture/texture.png");
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_Surface *surface = IMG_Load("assets/texture/texture.png");
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
     SDL_DestroySurface(surface);
 
     tmx::Map map;
     map.load("assets/map/map1.tmx");
 
-    TileMapProperties tileMap = loadTileMapProperties(map);
+    TileMap tileMap = loadTileMap(map);
 
     bool running = true;
     SDL_Event event;
@@ -64,13 +68,14 @@ int main()
         }
 
         SDL_RenderClear(renderer);
-        for (int i = 0; i < (int)tileMap.tiles->size(); i++)
+        for (int i = 0; i < tileMap.tileCount; i++)
         {
-            uint32_t gid = (*tileMap.tiles)[i].ID;
-            if (gid == 0) continue;
+            uint32_t gid = tileMap.tiles[i];
+            if (gid == 0)
+                continue;
             int idx = gid - tileMap.firstGid;
-            SDL_FRect src = { (float)(idx % tileMap.columns * tileMap.srcTileW), (float)(idx / tileMap.columns * tileMap.srcTileH), (float)tileMap.srcTileW, (float)tileMap.srcTileH };
-            SDL_FRect dst = { (float)(i % tileMap.mapW * tileMap.dstTileW), (float)(i / tileMap.mapW * tileMap.dstTileH), (float)tileMap.dstTileW, (float)tileMap.dstTileH };
+            SDL_FRect src = {(float)(idx % tileMap.columns * tileMap.srcTileW), (float)(idx / tileMap.columns * tileMap.srcTileH), (float)tileMap.srcTileW, (float)tileMap.srcTileH};
+            SDL_FRect dst = {(float)(i % tileMap.mapW * tileMap.dstTileW), (float)(i / tileMap.mapW * tileMap.dstTileH), (float)tileMap.dstTileW, (float)tileMap.dstTileH};
             SDL_RenderTexture(renderer, texture, &src, &dst);
         }
         SDL_RenderPresent(renderer);
