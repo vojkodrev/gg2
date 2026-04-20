@@ -34,10 +34,22 @@ struct Data
     TileMap tileMap;
 };
 
+struct FrameState
+{
+    int maxFps;
+    int frameCount;
+    Uint64 lastTicks;
+    Uint64 now;
+    float dt;
+    Uint64 frameTime;
+    Uint64 targetTime;
+};
+
 struct Context
 {
     SDL_Renderer *renderer;
     SDL_Texture *texture;
+    FrameState frame;
     Data data;
 };
 
@@ -108,14 +120,14 @@ int main()
 
     bool running = true;
     SDL_Event event;
-    int maxFps = 60;
-    int frameCount = 0;
-    Uint64 lastTicks = SDL_GetTicks();
+    ctx.frame.maxFps = 60;
+    ctx.frame.frameCount = 0;
+    ctx.frame.lastTicks = SDL_GetTicks();
     while (running)
     {
-        Uint64 now = SDL_GetTicks();
-        float dt = (now - lastTicks) / 1000.0f;
-        lastTicks = now;
+        ctx.frame.now = SDL_GetTicks();
+        ctx.frame.dt = (ctx.frame.now - ctx.frame.lastTicks) / 1000.0f;
+        ctx.frame.lastTicks = ctx.frame.now;
 
         while (SDL_PollEvent(&event))
         {
@@ -125,13 +137,13 @@ int main()
 
         RenderSystem(ctx);
 
-        Uint64 frameTime = SDL_GetTicks() - now;
-        Uint64 targetTime = 1000 / maxFps;
-        if (frameTime < targetTime)
-            SDL_Delay(targetTime - frameTime);
+        ctx.frame.frameTime = SDL_GetTicks() - ctx.frame.now;
+        ctx.frame.targetTime = 1000 / ctx.frame.maxFps;
+        if (ctx.frame.frameTime < ctx.frame.targetTime)
+            SDL_Delay(ctx.frame.targetTime - ctx.frame.frameTime);
 
-        if (++frameCount % 60 == 0)
-            SDL_Log("frame: %llu ms", frameTime);
+        if (++ctx.frame.frameCount % 60 == 0)
+            SDL_Log("frame: %llu ms", ctx.frame.frameTime);
     }
 
     SDL_DestroyTexture(ctx.texture);
