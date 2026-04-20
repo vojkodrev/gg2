@@ -33,6 +33,22 @@ TileMap loadTileMap(const tmx::Map &map)
     return tm;
 }
 
+void RenderSystem(SDL_Renderer *renderer, SDL_Texture *texture, const TileMap &tileMap)
+{
+    SDL_RenderClear(renderer);
+    for (int i = 0; i < tileMap.tileCount; i++)
+    {
+        uint32_t gid = tileMap.tiles[i];
+        if (gid == 0)
+            continue;
+        int idx = gid - tileMap.firstGid;
+        SDL_FRect src = {(float)(idx % tileMap.columns * tileMap.srcTileW), (float)(idx / tileMap.columns * tileMap.srcTileH), (float)tileMap.srcTileW, (float)tileMap.srcTileH};
+        SDL_FRect dst = {(float)(i % tileMap.mapW * tileMap.dstTileW), (float)(i / tileMap.mapW * tileMap.dstTileH), (float)tileMap.dstTileW, (float)tileMap.dstTileH};
+        SDL_RenderTexture(renderer, texture, &src, &dst);
+    }
+    SDL_RenderPresent(renderer);
+}
+
 int main()
 {
     SDL_Init(SDL_INIT_VIDEO);
@@ -67,18 +83,7 @@ int main()
                 running = false;
         }
 
-        SDL_RenderClear(renderer);
-        for (int i = 0; i < tileMap.tileCount; i++)
-        {
-            uint32_t gid = tileMap.tiles[i];
-            if (gid == 0)
-                continue;
-            int idx = gid - tileMap.firstGid;
-            SDL_FRect src = {(float)(idx % tileMap.columns * tileMap.srcTileW), (float)(idx / tileMap.columns * tileMap.srcTileH), (float)tileMap.srcTileW, (float)tileMap.srcTileH};
-            SDL_FRect dst = {(float)(i % tileMap.mapW * tileMap.dstTileW), (float)(i / tileMap.mapW * tileMap.dstTileH), (float)tileMap.dstTileW, (float)tileMap.dstTileH};
-            SDL_RenderTexture(renderer, texture, &src, &dst);
-        }
-        SDL_RenderPresent(renderer);
+        RenderSystem(renderer, texture, tileMap);
 
         Uint64 frameTime = SDL_GetTicks() - now;
         Uint64 targetTime = 1000 / maxFps;
