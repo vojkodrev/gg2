@@ -21,5 +21,8 @@ Release/
 *.exe
 *.dll
 
+# CMake
+build/
+
 # Tiled editor
 *.tiled-session
