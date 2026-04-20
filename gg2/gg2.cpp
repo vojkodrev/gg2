@@ -53,6 +53,24 @@ struct Context
     Data data;
 };
 
+void UpdateFrameStateSystem(Context &ctx)
+{
+    ctx.frame.now = SDL_GetTicks();
+    ctx.frame.dt = (ctx.frame.now - ctx.frame.lastTicks) / 1000.0f;
+    ctx.frame.lastTicks = ctx.frame.now;
+}
+
+void FrameRateLimitSystem(Context &ctx)
+{
+    ctx.frame.frameTime = SDL_GetTicks() - ctx.frame.now;
+    ctx.frame.targetTime = 1000 / ctx.frame.maxFps;
+    if (ctx.frame.frameTime < ctx.frame.targetTime)
+        SDL_Delay(ctx.frame.targetTime - ctx.frame.frameTime);
+
+    if (++ctx.frame.frameCount % 60 == 0)
+        SDL_Log("frame: %llu ms", ctx.frame.frameTime);
+}
+
 void loadTileMap(Context &ctx, const tmx::Map &map)
 {
     auto &tileset = map.getTilesets()[0];
@@ -125,9 +143,7 @@ int main()
     ctx.frame.lastTicks = SDL_GetTicks();
     while (running)
     {
-        ctx.frame.now = SDL_GetTicks();
-        ctx.frame.dt = (ctx.frame.now - ctx.frame.lastTicks) / 1000.0f;
-        ctx.frame.lastTicks = ctx.frame.now;
+        UpdateFrameStateSystem(ctx);
 
         while (SDL_PollEvent(&event))
         {
@@ -137,13 +153,7 @@ int main()
 
         RenderSystem(ctx);
 
-        ctx.frame.frameTime = SDL_GetTicks() - ctx.frame.now;
-        ctx.frame.targetTime = 1000 / ctx.frame.maxFps;
-        if (ctx.frame.frameTime < ctx.frame.targetTime)
-            SDL_Delay(ctx.frame.targetTime - ctx.frame.frameTime);
-
-        if (++ctx.frame.frameCount % 60 == 0)
-            SDL_Log("frame: %llu ms", ctx.frame.frameTime);
+        FrameRateLimitSystem(ctx);
     }
 
     SDL_DestroyTexture(ctx.texture);
