@@ -136,6 +136,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gg2.cpp" />
+    <ClCompile Include="UpdateFrameStateSystem.cpp" />
+    <ClCompile Include="UpdateKeyboardStateSystem.cpp" />
+    <ClCompile Include="FrameRateLimitSystem.cpp" />
+    <ClCompile Include="LoadTileMap.cpp" />
+    <ClCompile Include="FillRenderBufferSystem.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\FreeFuncs.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\ImageLayer.cpp" />
     <ClCompile Include="$(SolutionDir)vendor\tmxlite\tmxlite\src\LayerGroup.cpp" />
