@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core\tilemap;$(ProjectDir)systems\core\frame;$(ProjectDir)systems\core\input;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core\tilemap;$(ProjectDir)systems\core\frame;$(ProjectDir)systems\core\input;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core\tilemap;$(ProjectDir)systems\core\frame;$(ProjectDir)systems\core\input;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)structs\core;$(ProjectDir)structs\tilemap;$(ProjectDir)structs\npc;$(ProjectDir)structs\render;$(ProjectDir)structs\player;$(ProjectDir)systems\core\tilemap;$(ProjectDir)systems\core\frame;$(ProjectDir)systems\core\input;$(ProjectDir)systems\rendering;$(ProjectDir)systems\gameplay;$(SolutionDir)vendor\SDL3-3.4.4\include;$(SolutionDir)vendor\SDL3_image-3.4.2\include;$(SolutionDir)vendor;$(SolutionDir)vendor\tmxlite\tmxlite\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,10 +136,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="gg2.cpp" />
-    <ClCompile Include="systems\core\UpdateFrameStateSystem.cpp" />
-    <ClCompile Include="systems\core\UpdateKeyboardStateSystem.cpp" />
-    <ClCompile Include="systems\core\FrameRateLimitSystem.cpp" />
-    <ClCompile Include="systems\core\LoadTileMap.cpp" />
+    <ClCompile Include="systems\core\frame\FrameRateLimitSystem.cpp" />
+    <ClCompile Include="systems\core\frame\UpdateFrameStateSystem.cpp" />
+    <ClCompile Include="systems\core\input\UpdateKeyboardStateSystem.cpp" />
+    <ClCompile Include="systems\core\tilemap\FindLayer.cpp" />
+    <ClCompile Include="systems\core\tilemap\GetCollision.cpp" />
+    <ClCompile Include="systems\core\tilemap\LoadGround.cpp" />
+    <ClCompile Include="systems\core\tilemap\LoadNPCs.cpp" />
+    <ClCompile Include="systems\core\tilemap\LoadPlayer.cpp" />
+    <ClCompile Include="systems\core\tilemap\LoadTileMap.cpp" />
     <ClCompile Include="systems\gameplay\PlayerMovementSystem.cpp" />
     <ClCompile Include="systems\rendering\FillRenderBufferSystem.cpp" />
     <ClCompile Include="systems\rendering\RenderSystem.cpp" />
