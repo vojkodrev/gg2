@@ -31,17 +31,18 @@ struct TileMap
 struct Player
 {
     uint32_t srcX, srcY, srcW, srcH;
-    uint32_t x, y, w, h;
+    float x, y, w, h;
+    float colOffX, colOffY, colW, colH;
 };
 
 const int MAX_NPCS = 100;
 
 struct NPCPosition
 {
-    uint32_t x[MAX_NPCS];
-    uint32_t y[MAX_NPCS];
-    uint32_t w[MAX_NPCS];
-    uint32_t h[MAX_NPCS];
+    float x[MAX_NPCS];
+    float y[MAX_NPCS];
+    float w[MAX_NPCS];
+    float h[MAX_NPCS];
 };
 
 struct NPCSrc
@@ -52,11 +53,20 @@ struct NPCSrc
     uint32_t h[MAX_NPCS];
 };
 
+struct NPCCollision
+{
+    float offX[MAX_NPCS];
+    float offY[MAX_NPCS];
+    float w[MAX_NPCS];
+    float h[MAX_NPCS];
+};
+
 struct NPC
 {
     int npcCount;
     NPCSrc src;
     NPCPosition position;
+    NPCCollision collision;
 };
 
 struct Data
@@ -78,12 +88,42 @@ struct FrameState
     Uint64 targetTime;
 };
 
+const int MAX_RENDER_BUFFER = 100;
+
+struct RenderSrc
+{
+    float x[MAX_RENDER_BUFFER];
+    float y[MAX_RENDER_BUFFER];
+    float w[MAX_RENDER_BUFFER];
+    float h[MAX_RENDER_BUFFER];
+};
+
+struct RenderDst
+{
+    float x[MAX_RENDER_BUFFER];
+    float y[MAX_RENDER_BUFFER];
+    float w[MAX_RENDER_BUFFER];
+    float h[MAX_RENDER_BUFFER];
+    float colOffX[MAX_RENDER_BUFFER];
+    float colOffY[MAX_RENDER_BUFFER];
+    float colW[MAX_RENDER_BUFFER];
+    float colH[MAX_RENDER_BUFFER];
+};
+
+struct RenderBuffer
+{
+    int count;
+    RenderSrc src;
+    RenderDst dst;
+};
+
 struct Context
 {
     SDL_Renderer *renderer;
     SDL_Texture *texture;
     FrameState frame;
     Data data;
+    RenderBuffer renderBuffer;
 };
 
 void UpdateFrameStateSystem(Context &ctx)
@@ -132,6 +172,22 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
         tileMap.tiles.dstY[n] = i / props.mapW * props.dstTileH;
     }
 
+    auto getCollision = [&](int tileIdx, float &offX, float &offY, float &w, float &h) {
+        for (auto &tile : tileset.getTiles()) {
+            if ((int)tile.ID != tileIdx)
+                continue;
+            auto &objs = tile.objectGroup.getObjects();
+            if (!objs.empty()) {
+                auto &aabb = objs[0].getAABB();
+                offX = aabb.left;
+                offY = aabb.top;
+                w = aabb.width;
+                h = aabb.height;
+            }
+            return;
+        }
+    };
+
     auto &playerLayer = map.getLayers()[1]->getLayerAs<tmx::TileLayer>();
     auto &playerTiles = playerLayer.getTiles();
     for (int i = 0; i < (int)playerTiles.size(); i++)
@@ -147,6 +203,7 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
         ctx.data.player.y = i / props.mapW * props.dstTileH;
         ctx.data.player.w = props.dstTileW;
         ctx.data.player.h = props.dstTileH;
+        getCollision(idx, ctx.data.player.colOffX, ctx.data.player.colOffY, ctx.data.player.colW, ctx.data.player.colH);
         break;
     }
 
@@ -168,6 +225,7 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
         npc.position.y[n] = i / props.mapW * props.dstTileH;
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
+        getCollision(idx, npc.collision.offX[n], npc.collision.offY[n], npc.collision.w[n], npc.collision.h[n]);
     }
 }
 
@@ -184,14 +242,14 @@ void RenderSystem(const Context &ctx)
     }
     auto &player = ctx.data.player;
     SDL_FRect playerSrc = {(float)player.srcX, (float)player.srcY, (float)player.srcW, (float)player.srcH};
-    SDL_FRect playerDst = {(float)player.x, (float)player.y, (float)player.w, (float)player.h};
+    SDL_FRect playerDst = {player.x, player.y, player.w, player.h};
     SDL_RenderTexture(ctx.renderer, ctx.texture, &playerSrc, &playerDst);
 
     auto &npc = ctx.data.npc;
     for (int i = 0; i < npc.npcCount; i++)
     {
         SDL_FRect npcSrc = {(float)npc.src.x[i], (float)npc.src.y[i], (float)npc.src.w[i], (float)npc.src.h[i]};
-        SDL_FRect npcDst = {(float)npc.position.x[i], (float)npc.position.y[i], (float)npc.position.w[i], (float)npc.position.h[i]};
+        SDL_FRect npcDst = {npc.position.x[i], npc.position.y[i], npc.position.w[i], npc.position.h[i]};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &npcSrc, &npcDst);
     }
 
