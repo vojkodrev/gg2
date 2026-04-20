@@ -28,11 +28,26 @@ struct TileMap
     Tile tiles;
 };
 
-void loadTileMap(const tmx::Map &map, TileMapProperties &props, TileMap &tileMap)
+struct Data
+{
+    TileMapProperties tileMapProps;
+    TileMap tileMap;
+};
+
+struct Context
+{
+    SDL_Renderer *renderer;
+    SDL_Texture *texture;
+    Data data;
+};
+
+void loadTileMap(Context &ctx, const tmx::Map &map)
 {
     auto &tileset = map.getTilesets()[0];
     auto &tileLayer = map.getLayers()[0]->getLayerAs<tmx::TileLayer>();
     auto &srcTiles = tileLayer.getTiles();
+    auto &props = ctx.data.tileMapProps;
+    auto &tileMap = ctx.data.tileMap;
     tileMap.tileCount = (int)srcTiles.size();
     props.srcTileW = tileset.getTileSize().x;
     props.srcTileH = tileset.getTileSize().y;
@@ -57,18 +72,20 @@ void loadTileMap(const tmx::Map &map, TileMapProperties &props, TileMap &tileMap
     }
 }
 
-void RenderSystem(SDL_Renderer *renderer, SDL_Texture *texture, const TileMapProperties &props, const TileMap &tileMap)
+void RenderSystem(const Context &ctx)
 {
-    SDL_RenderClear(renderer);
+    auto &props = ctx.data.tileMapProps;
+    auto &tileMap = ctx.data.tileMap;
+    SDL_RenderClear(ctx.renderer);
     for (int i = 0; i < tileMap.tileCount; i++)
     {
         if (tileMap.tiles.srcX[i] == UINT32_MAX)
             continue;
         SDL_FRect src = {(float)tileMap.tiles.srcX[i], (float)tileMap.tiles.srcY[i], (float)props.srcTileW, (float)props.srcTileH};
         SDL_FRect dst = {(float)tileMap.tiles.dstX[i], (float)tileMap.tiles.dstY[i], (float)props.dstTileW, (float)props.dstTileH};
-        SDL_RenderTexture(renderer, texture, &src, &dst);
+        SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(ctx.renderer);
 }
 
 int main()
@@ -76,19 +93,18 @@ int main()
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow("gg2", 1280, 720, 0);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, nullptr);
+    Context ctx;
+    ctx.renderer = SDL_CreateRenderer(window, nullptr);
 
     SDL_Surface *surface = IMG_Load("assets/texture/texture.png");
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST);
+    ctx.texture = SDL_CreateTextureFromSurface(ctx.renderer, surface);
+    SDL_SetTextureScaleMode(ctx.texture, SDL_SCALEMODE_NEAREST);
     SDL_DestroySurface(surface);
 
     tmx::Map map;
     map.load("assets/map/map1.tmx");
 
-    TileMapProperties tileMapProps;
-    TileMap tileMap;
-    loadTileMap(map, tileMapProps, tileMap);
+    loadTileMap(ctx, map);
 
     bool running = true;
     SDL_Event event;
@@ -107,7 +123,7 @@ int main()
                 running = false;
         }
 
-        RenderSystem(renderer, texture, tileMapProps, tileMap);
+        RenderSystem(ctx);
 
         Uint64 frameTime = SDL_GetTicks() - now;
         Uint64 targetTime = 1000 / maxFps;
@@ -118,8 +134,8 @@ int main()
             SDL_Log("frame: %llu ms", frameTime);
     }
 
-    SDL_DestroyTexture(texture);
-    SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(ctx.texture);
+    SDL_DestroyRenderer(ctx.renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
