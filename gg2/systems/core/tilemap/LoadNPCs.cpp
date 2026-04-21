@@ -30,6 +30,7 @@ void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.spawn.x[n] = npc.position.x[n];
         npc.ai.spawn.y[n] = npc.position.y[n];
         npc.ai.patrolIndex[n] = 0;
+        npc.ai.state[n] = NPCAiState::Idle;
 
         std::string aiType = GetTileStringProp(tileset, idx, "AI");
         strncpy(npc.ai.type[n], aiType.c_str(), MAX_AI_TYPE_LEN - 1);
