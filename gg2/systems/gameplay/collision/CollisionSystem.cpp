@@ -13,18 +13,18 @@ void CollisionSystem(Context &ctx)
     auto &hash = ctx.spatialHash;
     hash.clear();
 
-    SDL_FRect pBox = entityAABB(player);
+    SDL_FRect pBox = entityColAABB(player);
     hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
-        SDL_FRect box = entityAABB(npc, i);
+        SDL_FRect box = entityColAABB(npc, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + i));
     }
 
     for (uint32_t i = 0; i < object.objectCount; i++)
     {
-        SDL_FRect box = entityAABB(object, i);
+        SDL_FRect box = entityColAABB(object, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + MAX_NPCS + i));
     }
 
@@ -50,7 +50,7 @@ void CollisionSystem(Context &ctx)
             uint16_t other = candidates[k];
             if (other <= id)
                 continue;
-            SDL_FRect ob = getEntityAABB(ctx, other);
+            SDL_FRect ob = getEntityColAABB(ctx, other);
             if (SDL_HasRectIntersectionFloat(&box, &ob))
                 addPair(id, other);
         }
@@ -58,7 +58,7 @@ void CollisionSystem(Context &ctx)
 
     checkEntity(COLLISION_ENTITY_PLAYER, pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        checkEntity((uint16_t)(1 + i), entityAABB(npc, i));
+        checkEntity((uint16_t)(1 + i), entityColAABB(npc, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
-        checkEntity((uint16_t)(1 + MAX_NPCS + i), entityAABB(object, i));
+        checkEntity((uint16_t)(1 + MAX_NPCS + i), entityColAABB(object, i));
 }

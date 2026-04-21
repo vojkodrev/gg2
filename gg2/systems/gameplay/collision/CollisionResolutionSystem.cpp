@@ -13,8 +13,8 @@ void CollisionResolutionSystem(Context &ctx)
         uint16_t idA = cr.pair.a[k];
         uint16_t idB = cr.pair.b[k];
 
-        SDL_FRect a = getEntityAABB(ctx, idA);
-        SDL_FRect b = getEntityAABB(ctx, idB);
+        SDL_FRect a = getEntityColAABB(ctx, idA);
+        SDL_FRect b = getEntityColAABB(ctx, idB);
 
         float overlapX = std::fminf(a.x + a.w, b.x + b.w) - std::fmaxf(a.x, b.x);
         float overlapY = std::fminf(a.y + a.h, b.y + b.h) - std::fmaxf(a.y, b.y);

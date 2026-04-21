@@ -9,10 +9,10 @@
  <tile id="20">
   <properties>
    <property name="AI" value="monster"/>
-   <property name="patrol01" value="-10,-10"/>
-   <property name="patrol02" value="20,-15"/>
-   <property name="patrol03" value="10,5"/>
-   <property name="patrol04" value="-20,10"/>
+   <property name="patrol01" value="-50,-50"/>
+   <property name="patrol02" value="70,-75"/>
+   <property name="patrol03" value="70,75"/>
+   <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
   </properties>
   <objectgroup draworder="index" id="2">

@@ -1,15 +1,13 @@
 #include "NPCAiSystem.h"
 #include "EntityAABB.h"
+#include "RandomIdleTimer.h"
 #include <cmath>
-#include <cstdlib>
 
-static constexpr float MONSTER_SPEED    = 60.0f;
-static constexpr float DETECT_RADIUS    = 200.0f;
-static constexpr float ATTACK_REACH     = 20.0f;
-static constexpr float LEASH_RADIUS     = 400.0f;
-static constexpr float NEAR_POINT_REACH = 8.0f;
-static constexpr float IDLE_TIME_MIN    = 1.0f;
-static constexpr float IDLE_TIME_MAX    = 3.0f;
+static constexpr float MONSTER_SPEED       = 100.0f;
+static constexpr float DETECT_RADIUS       = 200.0f;
+static constexpr float ATTACK_REACH        = 20.0f;
+static constexpr float LEASH_RADIUS        = 400.0f;
+static constexpr float NEAR_POINT_BUFFER   = 8.0f;
 
 static float dist(float ax, float ay, float bx, float by)
 {
@@ -18,12 +16,32 @@ static float dist(float ax, float ay, float bx, float by)
     return sqrtf(dx * dx + dy * dy);
 }
 
+static bool isNearColEdge(const NPC &npc, uint32_t n, float tx, float ty, float buffer = 0.0f)
+{
+    SDL_FRect col = entityColAABB(npc, n);
+    SDL_FPoint colCenter = entityColCenter(col);
+    float nearReach = SDL_min(col.w, col.h) * 0.5f + buffer;
+    return dist(colCenter.x, colCenter.y, tx, ty) < nearReach;
+}
+
 static void moveToward(float &x, float &y, float tx, float ty, float speed, float dt)
 {
     float dx = tx - x;
     float dy = ty - y;
     float d = sqrtf(dx * dx + dy * dy);
-    if (d < 0.5f)
+    if (d == 0.0f)
+        return;
+    x += dx / d * speed * dt;
+    y += dy / d * speed * dt;
+}
+
+static void moveColCenterToward(float &x, float &y, SDL_FRect col, float tx, float ty, float speed, float dt)
+{
+    SDL_FPoint colCenter = entityColCenter(col);
+    float dx = tx - colCenter.x;
+    float dy = ty - colCenter.y;
+    float d = sqrtf(dx * dx + dy * dy);
+    if (d == 0.0f)
         return;
     x += dx / d * speed * dt;
     y += dy / d * speed * dt;
@@ -35,16 +53,11 @@ static void updateMonster(uint32_t n, Context &ctx, float dt)
     auto &ai = npc.ai;
     auto &player = ctx.data.player;
 
-    SDL_FRect npcBox = entityAABB(npc, n);
-    float npcCx = npcBox.x + npcBox.w * 0.5f;
-    float npcCy = npcBox.y + npcBox.h * 0.5f;
+    SDL_FPoint npcColCenter    = entityColCenter(entityColAABB(npc, n));
+    SDL_FPoint playerColCenter = entityColCenter(entityColAABB(player));
 
-    SDL_FRect playerBox = entityAABB(player);
-    float playerCx = playerBox.x + playerBox.w * 0.5f;
-    float playerCy = playerBox.y + playerBox.h * 0.5f;
-
-    float distToPlayer = dist(npcCx, npcCy, playerCx, playerCy);
-    float distToSpawn  = dist(npcCx, npcCy, ai.spawn.x[n], ai.spawn.y[n]);
+    float distToPlayer = dist(npcColCenter.x, npcColCenter.y, playerColCenter.x, playerColCenter.y);
+    float distToSpawn  = dist(npcColCenter.x, npcColCenter.y, ai.spawn.x[n], ai.spawn.y[n]);
 
     switch (ai.state[n])
     {
@@ -72,8 +85,8 @@ static void updateMonster(uint32_t n, Context &ctx, float dt)
         uint32_t p = ai.patrolIndex[n];
         float tx = ai.spawn.x[n] + ai.patrol.x[n][p];
         float ty = ai.spawn.y[n] + ai.patrol.y[n][p];
-        moveToward(npc.position.x[n], npc.position.y[n], tx, ty, MONSTER_SPEED, dt);
-        if (dist(npcCx, npcCy, tx, ty) < NEAR_POINT_REACH)
+        moveColCenterToward(npc.position.x[n], npc.position.y[n], entityColAABB(npc, n), tx, ty, MONSTER_SPEED, dt);
+        if (isNearColEdge(npc, n, tx, ty, NEAR_POINT_BUFFER))
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
         break;
     }
@@ -84,7 +97,7 @@ static void updateMonster(uint32_t n, Context &ctx, float dt)
             ai.state[n] = NPCAiState::GoToSpawn;
             break;
         }
-        moveToward(npc.position.x[n], npc.position.y[n], playerCx, playerCy, MONSTER_SPEED, dt);
+        moveColCenterToward(npc.position.x[n], npc.position.y[n], entityColAABB(npc, n), playerColCenter.x, playerColCenter.y, MONSTER_SPEED, dt);
         if (distToPlayer < ATTACK_REACH)
             ai.state[n] = NPCAiState::Attack;
         break;
@@ -100,10 +113,10 @@ static void updateMonster(uint32_t n, Context &ctx, float dt)
         break;
 
     case NPCAiState::GoToSpawn:
-        moveToward(npc.position.x[n], npc.position.y[n], ai.spawn.x[n], ai.spawn.y[n], MONSTER_SPEED, dt);
-        if (dist(npcCx, npcCy, ai.spawn.x[n], ai.spawn.y[n]) < NEAR_POINT_REACH)
+        moveColCenterToward(npc.position.x[n], npc.position.y[n], entityColAABB(npc, n), ai.spawn.x[n], ai.spawn.y[n], MONSTER_SPEED, dt);
+        if (isNearColEdge(npc, n, ai.spawn.x[n], ai.spawn.y[n], NEAR_POINT_BUFFER))
         {
-            ai.idleTimer[n] = IDLE_TIME_MIN + (float)rand() / RAND_MAX * (IDLE_TIME_MAX - IDLE_TIME_MIN);
+            ai.idleTimer[n] = RandomIdleTimer();
             ai.state[n] = NPCAiState::Idle;
         }
         break;
