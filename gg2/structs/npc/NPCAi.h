@@ -10,4 +10,5 @@ struct NPCAi
     NPCSpawn spawn;
     NPCPatrolPoint patrol;
     uint32_t patrolCount[MAX_NPCS];
+    uint32_t patrolIndex[MAX_NPCS];
 };
