@@ -1,19 +1,15 @@
 #include "CollisionResolutionSystem.h"
+#include <SDL3/SDL.h>
 #include <cmath>
 
 static bool isStatic(uint16_t id) { return id > MAX_NPCS; }
 
-struct Box
-{
-    float x, y, w, h;
-};
-
-static Box playerBox(const Player &p)
+static SDL_FRect playerBox(const Player &p)
 {
     return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
 }
 
-static Box npcBox(const NPC &npc, uint32_t i)
+static SDL_FRect npcBox(const NPC &npc, uint32_t i)
 {
     return {
         npc.position.x[i] + npc.collision.offX[i],
@@ -22,7 +18,7 @@ static Box npcBox(const NPC &npc, uint32_t i)
         npc.collision.h[i]};
 }
 
-static Box objectBox(const Object &object, uint32_t i)
+static SDL_FRect objectBox(const Object &object, uint32_t i)
 {
     return {
         object.position.x[i] + object.collision.offX[i],
@@ -31,7 +27,7 @@ static Box objectBox(const Object &object, uint32_t i)
         object.collision.h[i]};
 }
 
-static Box getBox(Context &ctx, uint16_t id)
+static SDL_FRect getBox(Context &ctx, uint16_t id)
 {
     if (id == COLLISION_ENTITY_PLAYER)
         return playerBox(ctx.data.player);
@@ -64,8 +60,8 @@ void CollisionResolutionSystem(Context &ctx)
         uint16_t idA = cr.pair.a[k];
         uint16_t idB = cr.pair.b[k];
 
-        Box a = getBox(ctx, idA);
-        Box b = getBox(ctx, idB);
+        SDL_FRect a = getBox(ctx, idA);
+        SDL_FRect b = getBox(ctx, idB);
 
         float overlapX = std::fminf(a.x + a.w, b.x + b.w) - std::fmaxf(a.x, b.x);
         float overlapY = std::fminf(a.y + a.h, b.y + b.h) - std::fmaxf(a.y, b.y);

@@ -1,23 +1,12 @@
 #include "CollisionSystem.h"
+#include <SDL3/SDL.h>
 
-static bool aabbOverlap(float ax, float ay, float aw, float ah,
-                        float bx, float by, float bw, float bh)
-{
-    return ax < bx + bw && ax + aw > bx &&
-           ay < by + bh && ay + ah > by;
-}
-
-struct AABB
-{
-    float x, y, w, h;
-};
-
-static AABB playerAABB(const Player &p)
+static SDL_FRect playerAABB(const Player &p)
 {
     return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
 }
 
-static AABB npcAABB(const NPC &npc, uint32_t i)
+static SDL_FRect npcAABB(const NPC &npc, uint32_t i)
 {
     return {
         npc.position.x[i] + npc.collision.offX[i],
@@ -26,7 +15,7 @@ static AABB npcAABB(const NPC &npc, uint32_t i)
         npc.collision.h[i]};
 }
 
-static AABB objectAABB(const Object &object, uint32_t i)
+static SDL_FRect objectAABB(const Object &object, uint32_t i)
 {
     return {
         object.position.x[i] + object.collision.offX[i],
@@ -47,18 +36,18 @@ void CollisionSystem(Context &ctx)
     auto &hash = ctx.spatialHash;
     hash.clear();
 
-    AABB pBox = playerAABB(player);
+    SDL_FRect pBox = playerAABB(player);
     hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
-        AABB box = npcAABB(npc, i);
+        SDL_FRect box = npcAABB(npc, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + i));
     }
 
     for (uint32_t i = 0; i < object.objectCount; i++)
     {
-        AABB box = objectAABB(object, i);
+        SDL_FRect box = objectAABB(object, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + MAX_NPCS + i));
     }
 
@@ -74,7 +63,7 @@ void CollisionSystem(Context &ctx)
         }
     };
 
-    auto getAABB = [&](uint16_t id) -> AABB
+    auto getAABB = [&](uint16_t id) -> SDL_FRect
     {
         if (id == COLLISION_ENTITY_PLAYER)
             return pBox;
@@ -84,7 +73,7 @@ void CollisionSystem(Context &ctx)
     };
 
     // For each entity, query candidates with higher ID to avoid duplicate pairs
-    auto checkEntity = [&](uint16_t id, AABB box)
+    auto checkEntity = [&](uint16_t id, SDL_FRect box)
     {
         int n = hash.query(box.x, box.y, box.w, box.h, candidates,
                            SpatialHash::MAX_PER_BUCKET * 4);
@@ -93,8 +82,8 @@ void CollisionSystem(Context &ctx)
             uint16_t other = candidates[k];
             if (other <= id)
                 continue;
-            AABB ob = getAABB(other);
-            if (aabbOverlap(box.x, box.y, box.w, box.h, ob.x, ob.y, ob.w, ob.h))
+            SDL_FRect ob = getAABB(other);
+            if (SDL_HasRectIntersectionFloat(&box, &ob))
                 addPair(id, other);
         }
     };
