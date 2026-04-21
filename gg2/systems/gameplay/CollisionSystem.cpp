@@ -51,8 +51,11 @@ void CollisionSystem(Context &ctx)
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
 
     auto addPair = [&](uint16_t a, uint16_t b) {
-        if (cr.count < MAX_COLLISION_PAIRS)
-            cr.pairs[cr.count++] = { a, b };
+        if (cr.count < MAX_COLLISION_PAIRS) {
+            cr.pair.a[cr.count] = a;
+            cr.pair.b[cr.count] = b;
+            cr.count++;
+        }
     };
 
     auto getAABB = [&](uint16_t id) -> AABB {

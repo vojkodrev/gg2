@@ -3,6 +3,6 @@
 
 struct CollisionPair
 {
-    uint16_t a;
-    uint16_t b;
+    uint16_t a[MAX_COLLISION_PAIRS];
+    uint16_t b[MAX_COLLISION_PAIRS];
 };
