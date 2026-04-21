@@ -1,14 +1,16 @@
 #include "CollisionResolutionSystem.h"
 #include <cmath>
 
-
 static bool isStatic(uint16_t id) { return id > MAX_NPCS; }
 
-struct Box { float x, y, w, h; };
+struct Box
+{
+    float x, y, w, h;
+};
 
 static Box playerBox(const Player &p)
 {
-    return { p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH };
+    return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
 }
 
 static Box npcBox(const NPC &npc, uint32_t i)
@@ -17,8 +19,7 @@ static Box npcBox(const NPC &npc, uint32_t i)
         npc.position.x[i] + npc.collision.offX[i],
         npc.position.y[i] + npc.collision.offY[i],
         npc.collision.w[i],
-        npc.collision.h[i]
-    };
+        npc.collision.h[i]};
 }
 
 static Box objectBox(const Object &object, uint32_t i)
@@ -27,23 +28,27 @@ static Box objectBox(const Object &object, uint32_t i)
         object.position.x[i] + object.collision.offX[i],
         object.position.y[i] + object.collision.offY[i],
         object.collision.w[i],
-        object.collision.h[i]
-    };
+        object.collision.h[i]};
 }
 
 static Box getBox(Context &ctx, uint16_t id)
 {
-    if (id == COLLISION_ENTITY_PLAYER) return playerBox(ctx.data.player);
-    if (id <= MAX_NPCS)  return npcBox(ctx.data.npc, id - 1);
+    if (id == COLLISION_ENTITY_PLAYER)
+        return playerBox(ctx.data.player);
+    if (id <= MAX_NPCS)
+        return npcBox(ctx.data.npc, id - 1);
     return objectBox(ctx.data.object, id - 1 - MAX_NPCS);
 }
 
 static void getPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
 {
-    if (id == COLLISION_ENTITY_PLAYER) {
+    if (id == COLLISION_ENTITY_PLAYER)
+    {
         ox = &ctx.data.player.x;
         oy = &ctx.data.player.y;
-    } else {
+    }
+    else
+    {
         uint32_t i = id - 1;
         ox = &ctx.data.npc.position.x[i];
         oy = &ctx.data.npc.position.y[i];
@@ -65,7 +70,8 @@ void CollisionResolutionSystem(Context &ctx)
         float overlapX = std::fminf(a.x + a.w, b.x + b.w) - std::fmaxf(a.x, b.x);
         float overlapY = std::fminf(a.y + a.h, b.y + b.h) - std::fmaxf(a.y, b.y);
 
-        if (overlapX <= 0.0f || overlapY <= 0.0f) continue;
+        if (overlapX <= 0.0f || overlapY <= 0.0f)
+            continue;
 
         bool staticA = isStatic(idA);
         bool staticB = isStatic(idB);
@@ -74,27 +80,43 @@ void CollisionResolutionSystem(Context &ctx)
         float pushB = staticB ? 0.0f : (staticA ? 1.0f : 0.5f);
 
         float *axPtr, *ayPtr, *bxPtr, *byPtr;
-        if (!staticA) getPos(ctx, idA, axPtr, ayPtr);
-        if (!staticB) getPos(ctx, idB, bxPtr, byPtr);
+        if (!staticA)
+            getPos(ctx, idA, axPtr, ayPtr);
+        if (!staticB)
+            getPos(ctx, idB, bxPtr, byPtr);
 
         if (overlapX < overlapY)
         {
-            if (a.x < b.x) {
-                if (!staticA) *axPtr -= overlapX * pushA;
-                if (!staticB) *bxPtr += overlapX * pushB;
-            } else {
-                if (!staticA) *axPtr += overlapX * pushA;
-                if (!staticB) *bxPtr -= overlapX * pushB;
+            if (a.x < b.x)
+            {
+                if (!staticA)
+                    *axPtr -= overlapX * pushA;
+                if (!staticB)
+                    *bxPtr += overlapX * pushB;
+            }
+            else
+            {
+                if (!staticA)
+                    *axPtr += overlapX * pushA;
+                if (!staticB)
+                    *bxPtr -= overlapX * pushB;
             }
         }
         else
         {
-            if (a.y < b.y) {
-                if (!staticA) *ayPtr -= overlapY * pushA;
-                if (!staticB) *byPtr += overlapY * pushB;
-            } else {
-                if (!staticA) *ayPtr += overlapY * pushA;
-                if (!staticB) *byPtr -= overlapY * pushB;
+            if (a.y < b.y)
+            {
+                if (!staticA)
+                    *ayPtr -= overlapY * pushA;
+                if (!staticB)
+                    *byPtr += overlapY * pushB;
+            }
+            else
+            {
+                if (!staticA)
+                    *ayPtr += overlapY * pushA;
+                if (!staticB)
+                    *byPtr -= overlapY * pushB;
             }
         }
     }
