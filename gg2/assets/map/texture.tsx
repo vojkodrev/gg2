@@ -18,8 +18,8 @@
  </tile>
  <tile id="48">
   <properties>
-   <property name="colH" type="int" value="36"/>
-   <property name="colOffX" type="int" value="118"/>
+   <property name="colH" type="int" value="26"/>
+   <property name="colOffX" type="int" value="128"/>
    <property name="colOffY" type="int" value="342"/>
    <property name="colW" type="int" value="26"/>
    <property name="h" type="int" value="384"/>
