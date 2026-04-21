@@ -4,6 +4,7 @@
 #include "Data.h"
 #include "RenderBuffer.h"
 #include "KeyboardState.h"
+#include "CollisionResult.h"
 
 struct Context
 {
@@ -13,4 +14,5 @@ struct Context
     Data data;
     RenderBuffer renderBuffer;
     KeyboardState keyboard;
+    CollisionResult collisions;
 };

@@ -13,6 +13,7 @@ target_include_directories(gg2 PRIVATE
     structs/object
     structs/render
     structs/player
+    structs/collision
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include
     ${CMAKE_SOURCE_DIR}/vendor/SDL3_image-3.4.2/include
     ${CMAKE_SOURCE_DIR}/vendor
