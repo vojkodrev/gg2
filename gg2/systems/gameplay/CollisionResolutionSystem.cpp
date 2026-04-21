@@ -1,8 +1,10 @@
 #include "CollisionResolutionSystem.h"
 #include <cmath>
 
-// Entity ID: 0 = player, 1+i = NPC i
+// Entity ID: 0 = player, 1+i = NPC i, 1+MAX_NPCS+i = object i
 static const uint16_t PLAYER_ID = 0;
+
+static bool isStatic(uint16_t id) { return id > MAX_NPCS; }
 
 struct Box { float x, y, w, h; };
 
@@ -21,6 +23,23 @@ static Box npcBox(const NPC &npc, uint32_t i)
     };
 }
 
+static Box objectBox(const Object &object, uint32_t i)
+{
+    return {
+        object.position.x[i] + object.collision.offX[i],
+        object.position.y[i] + object.collision.offY[i],
+        object.collision.w[i],
+        object.collision.h[i]
+    };
+}
+
+static Box getBox(Context &ctx, uint16_t id)
+{
+    if (id == PLAYER_ID) return playerBox(ctx.data.player);
+    if (id <= MAX_NPCS)  return npcBox(ctx.data.npc, id - 1);
+    return objectBox(ctx.data.object, id - 1 - MAX_NPCS);
+}
+
 static void getPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
 {
     if (id == PLAYER_ID) {
@@ -31,12 +50,6 @@ static void getPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
         ox = &ctx.data.npc.position.x[i];
         oy = &ctx.data.npc.position.y[i];
     }
-}
-
-static Box getBox(Context &ctx, uint16_t id)
-{
-    if (id == PLAYER_ID) return playerBox(ctx.data.player);
-    return npcBox(ctx.data.npc, id - 1);
 }
 
 void CollisionResolutionSystem(Context &ctx)
@@ -56,22 +69,35 @@ void CollisionResolutionSystem(Context &ctx)
 
         if (overlapX <= 0.0f || overlapY <= 0.0f) continue;
 
-        float *axPtr, *ayPtr, *bxPtr, *byPtr;
-        getPos(ctx, idA, axPtr, ayPtr);
-        getPos(ctx, idB, bxPtr, byPtr);
+        bool staticA = isStatic(idA);
+        bool staticB = isStatic(idB);
 
-        // Push along the axis of least overlap, split equally
+        float pushA = staticA ? 0.0f : (staticB ? 1.0f : 0.5f);
+        float pushB = staticB ? 0.0f : (staticA ? 1.0f : 0.5f);
+
+        float *axPtr, *ayPtr, *bxPtr, *byPtr;
+        if (!staticA) getPos(ctx, idA, axPtr, ayPtr);
+        if (!staticB) getPos(ctx, idB, bxPtr, byPtr);
+
         if (overlapX < overlapY)
         {
-            float push = overlapX * 0.5f;
-            if (a.x < b.x) { *axPtr -= push; *bxPtr += push; }
-            else            { *axPtr += push; *bxPtr -= push; }
+            if (a.x < b.x) {
+                if (!staticA) *axPtr -= overlapX * pushA;
+                if (!staticB) *bxPtr += overlapX * pushB;
+            } else {
+                if (!staticA) *axPtr += overlapX * pushA;
+                if (!staticB) *bxPtr -= overlapX * pushB;
+            }
         }
         else
         {
-            float push = overlapY * 0.5f;
-            if (a.y < b.y) { *ayPtr -= push; *byPtr += push; }
-            else            { *ayPtr += push; *byPtr -= push; }
+            if (a.y < b.y) {
+                if (!staticA) *ayPtr -= overlapY * pushA;
+                if (!staticB) *byPtr += overlapY * pushB;
+            } else {
+                if (!staticA) *ayPtr += overlapY * pushA;
+                if (!staticB) *byPtr -= overlapY * pushB;
+            }
         }
     }
 }
