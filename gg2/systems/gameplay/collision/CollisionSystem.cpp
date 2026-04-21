@@ -1,28 +1,5 @@
 #include "CollisionSystem.h"
-#include <SDL3/SDL.h>
-
-static SDL_FRect playerAABB(const Player &p)
-{
-    return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
-}
-
-static SDL_FRect npcAABB(const NPC &npc, uint32_t i)
-{
-    return {
-        npc.position.x[i] + npc.collision.offX[i],
-        npc.position.y[i] + npc.collision.offY[i],
-        npc.collision.w[i],
-        npc.collision.h[i]};
-}
-
-static SDL_FRect objectAABB(const Object &object, uint32_t i)
-{
-    return {
-        object.position.x[i] + object.collision.offX[i],
-        object.position.y[i] + object.collision.offY[i],
-        object.collision.w[i],
-        object.collision.h[i]};
-}
+#include "EntityAABB.h"
 
 void CollisionSystem(Context &ctx)
 {
@@ -36,18 +13,18 @@ void CollisionSystem(Context &ctx)
     auto &hash = ctx.spatialHash;
     hash.clear();
 
-    SDL_FRect pBox = playerAABB(player);
+    SDL_FRect pBox = entityAABB(player);
     hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
-        SDL_FRect box = npcAABB(npc, i);
+        SDL_FRect box = entityAABB(npc, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + i));
     }
 
     for (uint32_t i = 0; i < object.objectCount; i++)
     {
-        SDL_FRect box = objectAABB(object, i);
+        SDL_FRect box = entityAABB(object, i);
         hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + MAX_NPCS + i));
     }
 
@@ -68,8 +45,8 @@ void CollisionSystem(Context &ctx)
         if (id == COLLISION_ENTITY_PLAYER)
             return pBox;
         if (id <= MAX_NPCS)
-            return npcAABB(npc, id - 1);
-        return objectAABB(object, id - 1 - MAX_NPCS);
+            return entityAABB(npc, id - 1);
+        return entityAABB(object, id - 1 - MAX_NPCS);
     };
 
     // For each entity, query candidates with higher ID to avoid duplicate pairs
@@ -90,7 +67,7 @@ void CollisionSystem(Context &ctx)
 
     checkEntity(COLLISION_ENTITY_PLAYER, pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        checkEntity((uint16_t)(1 + i), npcAABB(npc, i));
+        checkEntity((uint16_t)(1 + i), entityAABB(npc, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
-        checkEntity((uint16_t)(1 + MAX_NPCS + i), objectAABB(object, i));
+        checkEntity((uint16_t)(1 + MAX_NPCS + i), entityAABB(object, i));
 }

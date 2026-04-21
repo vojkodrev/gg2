@@ -1,39 +1,16 @@
 #include "CollisionResolutionSystem.h"
-#include <SDL3/SDL.h>
+#include "EntityAABB.h"
 #include <cmath>
 
 static bool isStatic(uint16_t id) { return id > MAX_NPCS; }
 
-static SDL_FRect playerBox(const Player &p)
-{
-    return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
-}
-
-static SDL_FRect npcBox(const NPC &npc, uint32_t i)
-{
-    return {
-        npc.position.x[i] + npc.collision.offX[i],
-        npc.position.y[i] + npc.collision.offY[i],
-        npc.collision.w[i],
-        npc.collision.h[i]};
-}
-
-static SDL_FRect objectBox(const Object &object, uint32_t i)
-{
-    return {
-        object.position.x[i] + object.collision.offX[i],
-        object.position.y[i] + object.collision.offY[i],
-        object.collision.w[i],
-        object.collision.h[i]};
-}
-
 static SDL_FRect getBox(Context &ctx, uint16_t id)
 {
     if (id == COLLISION_ENTITY_PLAYER)
-        return playerBox(ctx.data.player);
+        return entityAABB(ctx.data.player);
     if (id <= MAX_NPCS)
-        return npcBox(ctx.data.npc, id - 1);
-    return objectBox(ctx.data.object, id - 1 - MAX_NPCS);
+        return entityAABB(ctx.data.npc, id - 1);
+    return entityAABB(ctx.data.object, id - 1 - MAX_NPCS);
 }
 
 static void getPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
