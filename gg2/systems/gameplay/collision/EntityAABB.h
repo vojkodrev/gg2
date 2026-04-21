@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include "Context.h"
 #include "Player.h"
 #include "NPC.h"
 #include "Object.h"
@@ -25,4 +26,13 @@ inline SDL_FRect entityAABB(const Object &object, uint32_t i)
         object.position.y[i] + object.collision.offY[i],
         object.collision.w[i],
         object.collision.h[i]};
+}
+
+inline SDL_FRect getEntityAABB(Context &ctx, uint16_t id)
+{
+    if (id == COLLISION_ENTITY_PLAYER)
+        return entityAABB(ctx.data.player);
+    if (id <= MAX_NPCS)
+        return entityAABB(ctx.data.npc, id - 1);
+    return entityAABB(ctx.data.object, id - 1 - MAX_NPCS);
 }

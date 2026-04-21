@@ -1,6 +1,5 @@
 #include "CollisionSystem.h"
 #include "EntityAABB.h"
-#include "GetEntityAABB.h"
 
 void CollisionSystem(Context &ctx)
 {

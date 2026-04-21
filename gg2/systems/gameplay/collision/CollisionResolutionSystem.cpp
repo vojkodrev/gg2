@@ -1,6 +1,6 @@
 #include "CollisionResolutionSystem.h"
 #include "IsStatic.h"
-#include "GetEntityAABB.h"
+#include "EntityAABB.h"
 #include "GetDynamicEntityPos.h"
 #include <cmath>
 
