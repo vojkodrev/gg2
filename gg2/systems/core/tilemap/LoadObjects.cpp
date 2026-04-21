@@ -25,20 +25,24 @@ void LoadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.src.h[n] = GetTileProp(tileset, idx, "h");
             float colOffX = (float)GetTileProp(tileset, idx, "colOffX");
             float colOffY = (float)GetTileProp(tileset, idx, "colOffY");
-            float colW    = (float)GetTileProp(tileset, idx, "colW");
-            float colH    = (float)GetTileProp(tileset, idx, "colH");
-            float w       = (float)GetTileProp(tileset, idx, "w");
-            float h       = (float)GetTileProp(tileset, idx, "h");
-            float gridX   = (float)(i % props.mapW * props.dstTileW);
-            float gridY   = (float)(i / props.mapW * props.dstTileH);
+            float colW = (float)GetTileProp(tileset, idx, "colW");
+            float colH = (float)GetTileProp(tileset, idx, "colH");
+            float w = (float)GetTileProp(tileset, idx, "w");
+            float h = (float)GetTileProp(tileset, idx, "h");
+            float gridX = (float)(i % props.mapW * props.dstTileW);
+            float gridY = (float)(i / props.mapW * props.dstTileH);
+
+            // center collision box horizontally in tile, then shift by colOffX
+            // align collision box to tile bottom, then shift up by colOffY and colH
             object.position.x[n] = gridX + (props.dstTileW - colW) / 2.0f - colOffX;
             object.position.y[n] = gridY + props.dstTileH - colOffY - colH;
+
             object.position.w[n] = w;
             object.position.h[n] = h;
             object.collision.offX[n] = colOffX;
             object.collision.offY[n] = colOffY;
-            object.collision.w[n]    = colW;
-            object.collision.h[n]    = colH;
+            object.collision.w[n] = colW;
+            object.collision.h[n] = colH;
         }
         else
         {
