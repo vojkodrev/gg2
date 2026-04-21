@@ -1,5 +1,6 @@
 #include "CollisionSystem.h"
 #include "EntityAABB.h"
+#include "GetEntityAABB.h"
 
 void CollisionSystem(Context &ctx)
 {
@@ -40,15 +41,6 @@ void CollisionSystem(Context &ctx)
         }
     };
 
-    auto getAABB = [&](uint16_t id) -> SDL_FRect
-    {
-        if (id == COLLISION_ENTITY_PLAYER)
-            return pBox;
-        if (id <= MAX_NPCS)
-            return entityAABB(npc, id - 1);
-        return entityAABB(object, id - 1 - MAX_NPCS);
-    };
-
     // For each entity, query candidates with higher ID to avoid duplicate pairs
     auto checkEntity = [&](uint16_t id, SDL_FRect box)
     {
@@ -59,7 +51,7 @@ void CollisionSystem(Context &ctx)
             uint16_t other = candidates[k];
             if (other <= id)
                 continue;
-            SDL_FRect ob = getAABB(other);
+            SDL_FRect ob = getEntityAABB(ctx, other);
             if (SDL_HasRectIntersectionFloat(&box, &ob))
                 addPair(id, other);
         }
