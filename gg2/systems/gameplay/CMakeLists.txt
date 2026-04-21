@@ -1,6 +1,7 @@
 add_library(systems_gameplay
     PlayerMovementSystem.cpp
     CollisionSystem.cpp
+    CollisionResolutionSystem.cpp
 )
 
 target_include_directories(systems_gameplay PUBLIC
