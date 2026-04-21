@@ -16,4 +16,5 @@ struct NPCAi
     uint32_t patrolIndex[MAX_NPCS];
 
     NPCAiState state[MAX_NPCS];
+    float idleTimer[MAX_NPCS];
 };

@@ -1,5 +1,6 @@
 add_library(systems_gameplay
     PlayerMovementSystem.cpp
+    NPCAiSystem.cpp
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
 )

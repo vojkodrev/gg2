@@ -10,6 +10,7 @@
 #include "FrameRateLimitSystem.h"
 #include "UpdateKeyboardStateSystem.h"
 #include "PlayerMovementSystem.h"
+#include "NPCAiSystem.h"
 #include "CollisionSystem.h"
 #include "CollisionResolutionSystem.h"
 
@@ -49,6 +50,7 @@ int main()
         UpdateKeyboardStateSystem(*ctx);
 
         PlayerMovementSystem(*ctx);
+        NPCAiSystem(*ctx);
 
         CollisionSystem(*ctx);
         CollisionResolutionSystem(*ctx);
