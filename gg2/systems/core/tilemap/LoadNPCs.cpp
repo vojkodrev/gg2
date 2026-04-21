@@ -27,6 +27,8 @@ void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
         GetCollision(tileset, idx, npc.collision.offX[n], npc.collision.offY[n], npc.collision.w[n], npc.collision.h[n]);
+        npc.ai.spawn.x[n] = npc.position.x[n];
+        npc.ai.spawn.y[n] = npc.position.y[n];
 
         std::string aiType = GetTileStringProp(tileset, idx, "AI");
         strncpy(npc.ai.type[n], aiType.c_str(), MAX_AI_TYPE_LEN - 1);
