@@ -4,7 +4,7 @@ add_subdirectory(systems/core/tilemap)
 add_subdirectory(systems/rendering)
 add_subdirectory(systems/gameplay)
 
-add_executable(gg2 gg2.cpp)
+add_executable(gg2 main.cpp)
 
 target_include_directories(gg2 PRIVATE
     structs/core
