@@ -9,6 +9,8 @@
 #include "FrameRateLimitSystem.h"
 #include "UpdateKeyboardStateSystem.h"
 #include "PlayerMovementSystem.h"
+#include "CollisionSystem.h"
+#include "CollisionResolutionSystem.h"
 
 int main()
 {
@@ -46,6 +48,9 @@ int main()
         UpdateKeyboardStateSystem(ctx);
 
         PlayerMovementSystem(ctx);
+
+        CollisionSystem(ctx);
+        CollisionResolutionSystem(ctx);
 
         FillRenderBufferSystem(ctx);
         RenderSystem(ctx);
