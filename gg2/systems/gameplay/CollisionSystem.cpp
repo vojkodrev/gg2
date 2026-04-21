@@ -1,5 +1,4 @@
 #include "CollisionSystem.h"
-#include "SpatialHash.h"
 
 // Entity ID: 0 = player, 1+i = NPC i
 static const uint16_t PLAYER_ID = 0;
@@ -36,7 +35,7 @@ void CollisionSystem(Context &ctx)
     auto &npc = ctx.data.npc;
     auto &player = ctx.data.player;
 
-    static SpatialHash hash;
+    auto &hash = ctx.spatialHash;
     hash.clear();
 
     AABB pBox = playerAABB(player);
