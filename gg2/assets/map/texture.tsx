@@ -7,6 +7,14 @@
   </objectgroup>
  </tile>
  <tile id="20">
+  <properties>
+   <property name="AI" value="monster"/>
+   <property name="patrol01" value="-10,-10"/>
+   <property name="patrol02" value="20,-15"/>
+   <property name="patrol03" value="10,5"/>
+   <property name="patrol04" value="-20,10"/>
+   <property name="patrolCount" type="int" value="4"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="9.75" y="31.75" width="31.5" height="15.75"/>
   </objectgroup>

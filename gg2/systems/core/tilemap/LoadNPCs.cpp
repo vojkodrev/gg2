@@ -1,7 +1,10 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
 #include "GetCollision.h"
+#include "GetTileProp.h"
 #include <tmxlite/TileLayer.hpp>
+#include <cstdio>
+#include <cstring>
 
 void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
@@ -24,5 +27,18 @@ void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
         GetCollision(tileset, idx, npc.collision.offX[n], npc.collision.offY[n], npc.collision.w[n], npc.collision.h[n]);
+
+        std::string aiType = GetTileStringProp(tileset, idx, "AI");
+        strncpy(npc.ai.type[n], aiType.c_str(), MAX_AI_TYPE_LEN - 1);
+        npc.ai.type[n][MAX_AI_TYPE_LEN - 1] = '\0';
+
+        npc.ai.patrolCount[n] = (uint32_t)GetTileProp(tileset, idx, "patrolCount");
+        for (uint32_t p = 0; p < npc.ai.patrolCount[n] && p < MAX_PATROL_POINTS; p++)
+        {
+            char key[16];
+            snprintf(key, sizeof(key), "patrol%02u", p + 1);
+            std::string val = GetTileStringProp(tileset, idx, key);
+            sscanf(val.c_str(), "%f,%f", &npc.ai.patrol.x[n][p], &npc.ai.patrol.y[n][p]);
+        }
     }
 }

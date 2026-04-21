@@ -3,6 +3,7 @@
 #include "NPCSrc.h"
 #include "NPCPosition.h"
 #include "NPCCollision.h"
+#include "NPCAi.h"
 
 struct NPC
 {
@@ -10,4 +11,5 @@ struct NPC
     NPCSrc src;
     NPCPosition position;
     NPCCollision collision;
+    NPCAi ai;
 };
