@@ -1,8 +1,6 @@
 #include "CollisionResolutionSystem.h"
 #include <cmath>
 
-// Entity ID: 0 = player, 1+i = NPC i, 1+MAX_NPCS+i = object i
-static const uint16_t PLAYER_ID = 0;
 
 static bool isStatic(uint16_t id) { return id > MAX_NPCS; }
 
@@ -35,14 +33,14 @@ static Box objectBox(const Object &object, uint32_t i)
 
 static Box getBox(Context &ctx, uint16_t id)
 {
-    if (id == PLAYER_ID) return playerBox(ctx.data.player);
+    if (id == COLLISION_ENTITY_PLAYER) return playerBox(ctx.data.player);
     if (id <= MAX_NPCS)  return npcBox(ctx.data.npc, id - 1);
     return objectBox(ctx.data.object, id - 1 - MAX_NPCS);
 }
 
 static void getPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
 {
-    if (id == PLAYER_ID) {
+    if (id == COLLISION_ENTITY_PLAYER) {
         ox = &ctx.data.player.x;
         oy = &ctx.data.player.y;
     } else {

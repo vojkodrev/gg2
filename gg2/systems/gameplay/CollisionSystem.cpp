@@ -1,7 +1,5 @@
 #include "CollisionSystem.h"
 
-// Entity ID: 0 = player, 1+i = NPC i, 1+MAX_NPCS+i = object i
-static const uint16_t PLAYER_ID = 0;
 
 static bool aabbOverlap(float ax, float ay, float aw, float ah,
                         float bx, float by, float bw, float bh)
@@ -50,7 +48,7 @@ void CollisionSystem(Context &ctx)
     hash.clear();
 
     AABB pBox = playerAABB(player);
-    hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, PLAYER_ID);
+    hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
@@ -75,7 +73,7 @@ void CollisionSystem(Context &ctx)
     };
 
     auto getAABB = [&](uint16_t id) -> AABB {
-        if (id == PLAYER_ID) return pBox;
+        if (id == COLLISION_ENTITY_PLAYER) return pBox;
         if (id <= MAX_NPCS) return npcAABB(npc, id - 1);
         return objectAABB(object, id - 1 - MAX_NPCS);
     };
@@ -94,7 +92,7 @@ void CollisionSystem(Context &ctx)
         }
     };
 
-    checkEntity(PLAYER_ID, pBox);
+    checkEntity(COLLISION_ENTITY_PLAYER, pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
         checkEntity((uint16_t)(1 + i), npcAABB(npc, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
