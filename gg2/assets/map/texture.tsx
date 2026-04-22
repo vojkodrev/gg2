@@ -32,8 +32,8 @@
  <tile id="42">
   <properties>
    <property name="colH" type="int" value="21" />
-   <property name="colOffX" type="int" value="115" />
-   <property name="colOffY" type="int" value="278" />
+   <property name="colOffX" type="int" value="100" />
+   <property name="colOffY" type="int" value="257" />
    <property name="colW" type="int" value="22" />
    <property name="h" type="int" value="278" />
    <property name="type" value="marker" />
@@ -45,8 +45,8 @@
  <tile id="50">
   <properties>
    <property name="colH" type="int" value="51" />
-   <property name="colOffX" type="int" value="27" />
-   <property name="colOffY" type="int" value="117" />
+   <property name="colOffX" type="int" value="0" />
+   <property name="colOffY" type="int" value="93" />
    <property name="colW" type="int" value="74" />
    <property name="h" type="int" value="144" />
    <property name="scale" type="float" value="1" />

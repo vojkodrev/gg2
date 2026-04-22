@@ -122,8 +122,8 @@ def update_tileset(dir, meta):
         if "colX" in img:
             tm = meta[img["markerFor"]]
             s = tm["scale"]
-            set_prop(props_el, "colOffX", "int", round(img["colX"] * s) + tm["offX"])
-            set_prop(props_el, "colOffY", "int", round(img["colY"] * s) + tm["offY"])
+            set_prop(props_el, "colOffX", "int", round(img["colX"] * s))
+            set_prop(props_el, "colOffY", "int", round(img["colY"] * s))
             set_prop(props_el, "colW", "int", round(img["colW"] * s))
             set_prop(props_el, "colH", "int", round(img["colH"] * s))
 
