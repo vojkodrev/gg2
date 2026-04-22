@@ -70,6 +70,8 @@ def build_atlas(dir):
             "w": src.width,
             "h": src.height,
             "scale": scale,
+            "offX": offX,
+            "offY": offY,
         }
         atlas.paste(src, (pasteX, pasteY))
     atlas.save(os.path.join(dir, settings["output"]))
@@ -118,9 +120,10 @@ def update_tileset(dir, meta):
         set_prop(props_el, "w", "int", m["w"])
         set_prop(props_el, "h", "int", m["h"])
         if "colX" in img:
-            s = meta[img["id"]]["scale"]
-            set_prop(props_el, "colOffX", "int", round(img["colX"] * s))
-            set_prop(props_el, "colOffY", "int", round(img["colY"] * s))
+            tm = meta[img["markerFor"]]
+            s = tm["scale"]
+            set_prop(props_el, "colOffX", "int", round(img["colX"] * s) + tm["offX"])
+            set_prop(props_el, "colOffY", "int", round(img["colY"] * s) + tm["offY"])
             set_prop(props_el, "colW", "int", round(img["colW"] * s))
             set_prop(props_el, "colH", "int", round(img["colH"] * s))
 

@@ -31,10 +31,10 @@
  </tile>
  <tile id="42">
   <properties>
-   <property name="colH" type="int" value="23" />
-   <property name="colOffX" type="int" value="112" />
-   <property name="colOffY" type="int" value="291" />
-   <property name="colW" type="int" value="28" />
+   <property name="colH" type="int" value="21" />
+   <property name="colOffX" type="int" value="115" />
+   <property name="colOffY" type="int" value="278" />
+   <property name="colW" type="int" value="22" />
    <property name="h" type="int" value="278" />
    <property name="type" value="marker" />
    <property name="w" type="int" value="226" />
@@ -44,10 +44,10 @@
  </tile>
  <tile id="50">
   <properties>
-   <property name="colH" type="int" value="9" />
-   <property name="colOffX" type="int" value="44" />
-   <property name="colOffY" type="int" value="114" />
-   <property name="colW" type="int" value="10" />
+   <property name="colH" type="int" value="51" />
+   <property name="colOffX" type="int" value="27" />
+   <property name="colOffY" type="int" value="117" />
+   <property name="colW" type="int" value="74" />
    <property name="h" type="int" value="144" />
    <property name="scale" type="float" value="1" />
    <property name="type" value="marker" />
