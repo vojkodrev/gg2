@@ -2,7 +2,7 @@ settings = {
     "tileW": 64,
     "tileH": 64,
     "w": 12,
-    "h": 7,
+    "h": 8,
     "output": "../texture.png",
     "tileset": "../../map/texture.tsx",
 }
@@ -39,6 +39,7 @@ images = [
     },
     {"id": 7, "filename": "statue praying.png", "x": 0, "y": 4},
     {"id": 8, "filename": "tree.png", "x": 7, "y": 0, "h": 350},
+    {"id": 9, "filename": "flowers.png", "x": 3, "y": 4},
 ]
 
 
