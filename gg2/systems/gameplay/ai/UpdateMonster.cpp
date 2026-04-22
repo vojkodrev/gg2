@@ -7,7 +7,7 @@
 #include "EntityAABB.h"
 #include "constants.h"
 
-void updateMonster(uint32_t n, Context &ctx)
+void UpdateMonster(uint32_t n, Context &ctx)
 {
     float dt = ctx.frame.dt;
     auto &npc = ctx.data.npc;
@@ -18,7 +18,7 @@ void updateMonster(uint32_t n, Context &ctx)
     {
     case NPCAiState::Idle:
         ai.idleTimer[n] -= dt;
-        if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
+        if (DistToPlayer(ctx, n) < NPC_DETECT_RADIUS)
         {
             ai.state[n] = NPCAiState::GoToPlayer;
         }
@@ -30,7 +30,7 @@ void updateMonster(uint32_t n, Context &ctx)
 
     case NPCAiState::Patrolling:
     {
-        if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
+        if (DistToPlayer(ctx, n) < NPC_DETECT_RADIUS)
         {
             ai.state[n] = NPCAiState::GoToPlayer;
             break;
@@ -40,8 +40,8 @@ void updateMonster(uint32_t n, Context &ctx)
         uint32_t p = ai.patrolIndex[n];
         float tx = ai.spawn.x[n] + ai.patrol.x[n][p];
         float ty = ai.spawn.y[n] + ai.patrol.y[n][p];
-        moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
-        if (isNearColEdge(ctx, n, tx, ty))
+        MoveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
+        if (IsNearColEdge(ctx, n, tx, ty))
         {
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
             if ((rand() % 100) + 1 <= 10)
@@ -55,34 +55,34 @@ void updateMonster(uint32_t n, Context &ctx)
 
     case NPCAiState::GoToPlayer:
     {
-        if (distToSpawn(ctx, n) > NPC_LEASH_RADIUS)
+        if (DistToSpawn(ctx, n) > NPC_LEASH_RADIUS)
         {
             ai.state[n] = NPCAiState::GoToSpawn;
             break;
         }
-        SDL_FPoint playerColCenter = entityColCenter(entityColAABB(ctx.data.player));
-        moveColCenterToward(ctx, n, playerColCenter.x, playerColCenter.y, NPC_MONSTER_SPEED);
-        if (isNearColEdge(ctx, n, playerColCenter.x, playerColCenter.y, NPC_ATTACK_REACH))
+        SDL_FPoint playerColCenter = EntityColCenter(EntityColAABB(ctx.data.player));
+        MoveColCenterToward(ctx, n, playerColCenter.x, playerColCenter.y, NPC_MONSTER_SPEED);
+        if (IsNearColEdge(ctx, n, playerColCenter.x, playerColCenter.y, NPC_ATTACK_REACH))
             ai.state[n] = NPCAiState::Attack;
         break;
     }
 
     case NPCAiState::Attack:
     {
-        if (distToSpawn(ctx, n) > NPC_LEASH_RADIUS)
+        if (DistToSpawn(ctx, n) > NPC_LEASH_RADIUS)
         {
             ai.state[n] = NPCAiState::GoToSpawn;
             break;
         }
-        SDL_FPoint playerColCenter = entityColCenter(entityColAABB(ctx.data.player));
-        if (!isNearColEdge(ctx, n, playerColCenter.x, playerColCenter.y, NPC_ATTACK_REACH))
+        SDL_FPoint playerColCenter = EntityColCenter(EntityColAABB(ctx.data.player));
+        if (!IsNearColEdge(ctx, n, playerColCenter.x, playerColCenter.y, NPC_ATTACK_REACH))
             ai.state[n] = NPCAiState::GoToPlayer;
         break;
     }
 
     case NPCAiState::GoToSpawn:
-        moveColCenterToward(ctx, n, ai.spawn.x[n], ai.spawn.y[n], NPC_MONSTER_SPEED);
-        if (isNearColEdge(ctx, n, ai.spawn.x[n], ai.spawn.y[n]))
+        MoveColCenterToward(ctx, n, ai.spawn.x[n], ai.spawn.y[n], NPC_MONSTER_SPEED);
+        if (IsNearColEdge(ctx, n, ai.spawn.x[n], ai.spawn.y[n]))
         {
             ai.idleTimer[n] = RandomIdleTimer();
             ai.state[n] = NPCAiState::Idle;

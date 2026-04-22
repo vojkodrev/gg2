@@ -2,12 +2,12 @@
 #include "EntityAABB.h"
 #include <cmath>
 
-void moveColCenterToward(Context &ctx, uint32_t n, float tx, float ty, float speed)
+void MoveColCenterToward(Context &ctx, uint32_t n, float tx, float ty, float speed)
 {
     auto &npc = ctx.data.npc;
     float dt = ctx.frame.dt;
-    SDL_FRect col = entityColAABB(npc, n);
-    SDL_FPoint colCenter = entityColCenter(col);
+    SDL_FRect col = EntityColAABB(npc, n);
+    SDL_FPoint colCenter = EntityColCenter(col);
     float dx = tx - colCenter.x;
     float dy = ty - colCenter.y;
     float d = sqrtf(dx * dx + dy * dy);

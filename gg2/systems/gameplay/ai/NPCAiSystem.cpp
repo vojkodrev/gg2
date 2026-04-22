@@ -8,6 +8,6 @@ void NPCAiSystem(Context &ctx)
     for (uint32_t n = 0; n < npc.npcCount; n++)
     {
         if (npc.ai.type[n] == NPCAiType::Monster)
-            updateMonster(n, ctx);
+            UpdateMonster(n, ctx);
     }
 }
