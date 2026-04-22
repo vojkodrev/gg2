@@ -41,9 +41,9 @@ void collisionSystem(Context &ctx)
     };
 
     // For each entity, query candidates with higher ID to avoid duplicate pairs
-    auto checkEntity = [&](uint16_t id, SDL_FRect box)
+    auto checkEntity = [&](uint16_t id, SDL_FRect colBox)
     {
-        int n = hash.query(box.x, box.y, box.w, box.h, candidates,
+        int n = hash.query(colBox.x, colBox.y, colBox.w, colBox.h, candidates,
                            SpatialHash::MAX_PER_BUCKET * 4);
         for (int k = 0; k < n; k++)
         {
@@ -51,7 +51,7 @@ void collisionSystem(Context &ctx)
             if (other <= id)
                 continue;
             SDL_FRect ob = getEntityColAABB(ctx, other);
-            if (SDL_HasRectIntersectionFloat(&box, &ob))
+            if (SDL_HasRectIntersectionFloat(&colBox, &ob))
                 addPair(id, other);
         }
     };
