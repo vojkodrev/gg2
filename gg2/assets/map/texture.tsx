@@ -44,10 +44,10 @@
  </tile>
  <tile id="50">
   <properties>
-   <property name="colH" type="int" value="40" />
-   <property name="colOffX" type="int" value="0" />
-   <property name="colOffY" type="int" value="71" />
-   <property name="colW" type="int" value="57" />
+   <property name="colH" type="int" value="9" />
+   <property name="colOffX" type="int" value="44" />
+   <property name="colOffY" type="int" value="114" />
+   <property name="colW" type="int" value="10" />
    <property name="h" type="int" value="144" />
    <property name="scale" type="float" value="1" />
    <property name="type" value="marker" />
