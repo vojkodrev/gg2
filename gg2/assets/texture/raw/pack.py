@@ -4,6 +4,7 @@ settings = {
     "w": 12,
     "h": 7,
     "output": "../texture.png",
+    "tileset": "../../map/texture.tsx"
 }
 
 images = [
