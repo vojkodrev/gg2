@@ -8,7 +8,7 @@
  </tile>
  <tile id="20">
   <properties>
-   <property name="AI" value="monster"/>
+   <property name="AI" type="int" value="1"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>

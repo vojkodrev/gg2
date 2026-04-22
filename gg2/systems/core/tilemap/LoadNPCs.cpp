@@ -5,7 +5,6 @@
 #include "RandomIdleTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
-#include <cstring>
 
 void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
@@ -34,9 +33,7 @@ void LoadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.state[n] = NPCAiState::Idle;
         npc.ai.idleTimer[n] = RandomIdleTimer();
 
-        std::string aiType = GetTileStringProp(tileset, idx, "AI");
-        strncpy(npc.ai.type[n], aiType.c_str(), MAX_AI_TYPE_LEN - 1);
-        npc.ai.type[n][MAX_AI_TYPE_LEN - 1] = '\0';
+        npc.ai.type[n] = (NPCAiType)(int)GetTileProp(tileset, idx, "AI");
 
         npc.ai.patrolCount[n] = (uint32_t)GetTileProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrolCount[n] && p < MAX_PATROL_POINTS; p++)

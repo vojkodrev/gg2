@@ -4,10 +4,11 @@
 #include "NPCPatrolPoint.h"
 #include "NPCSpawn.h"
 #include "NPCAiState.h"
+#include "NPCAiType.h"
 
 struct NPCAi
 {
-    char type[MAX_NPCS][MAX_AI_TYPE_LEN];
+    NPCAiType type[MAX_NPCS];
 
     NPCSpawn spawn;
 

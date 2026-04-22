@@ -141,7 +141,7 @@ void NPCAiSystem(Context &ctx)
 
     for (uint32_t n = 0; n < npc.npcCount; n++)
     {
-        if (strcmp(npc.ai.type[n], "monster") == 0)
+        if (npc.ai.type[n] == NPCAiType::Monster)
             updateMonster(n, ctx);
     }
 }
