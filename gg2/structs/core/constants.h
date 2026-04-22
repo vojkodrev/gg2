@@ -10,6 +10,8 @@ const int MAX_PATROL_POINTS = 16;
 
 const uint16_t COLLISION_ENTITY_PLAYER = 0;
 
+const float PLAYER_SPEED      = 100.0f;
+
 const float NPC_MONSTER_SPEED  = 100.0f;
 const float NPC_DETECT_RADIUS  = 200.0f;
 const float NPC_ATTACK_REACH   = 40.0f;

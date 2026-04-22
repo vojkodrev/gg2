@@ -1,7 +1,6 @@
 #include "PlayerMovementSystem.h"
+#include "constants.h"
 #include <cmath>
-
-const float PLAYER_SPEED = 100.0f;
 
 void playerMovementSystem(Context &ctx)
 {
