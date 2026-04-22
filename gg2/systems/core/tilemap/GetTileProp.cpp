@@ -13,6 +13,19 @@ int getTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string
     return 0;
 }
 
+float getTileFloatProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name, float defaultVal)
+{
+    for (auto &tile : tileset.getTiles())
+    {
+        if (tile.ID != tileIdx)
+            continue;
+        for (auto &prop : tile.properties)
+            if (prop.getName() == name)
+                return prop.getFloatValue();
+    }
+    return defaultVal;
+}
+
 std::string getTileStringProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name)
 {
     for (auto &tile : tileset.getTiles())

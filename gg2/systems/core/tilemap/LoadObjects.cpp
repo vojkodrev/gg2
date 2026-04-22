@@ -23,12 +23,13 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.src.y[n] = getTileProp(tileset, idx, "y");
             object.src.w[n] = getTileProp(tileset, idx, "w");
             object.src.h[n] = getTileProp(tileset, idx, "h");
-            float colOffX = (float)getTileProp(tileset, idx, "colOffX");
-            float colOffY = (float)getTileProp(tileset, idx, "colOffY");
-            float colW = (float)getTileProp(tileset, idx, "colW");
-            float colH = (float)getTileProp(tileset, idx, "colH");
-            float w = (float)getTileProp(tileset, idx, "w");
-            float h = (float)getTileProp(tileset, idx, "h");
+            float scale = getTileFloatProp(tileset, idx, "scale", 1.0f);
+            float colOffX = (float)getTileProp(tileset, idx, "colOffX") * scale;
+            float colOffY = (float)getTileProp(tileset, idx, "colOffY") * scale;
+            float colW = (float)getTileProp(tileset, idx, "colW") * scale;
+            float colH = (float)getTileProp(tileset, idx, "colH") * scale;
+            float w = (float)getTileProp(tileset, idx, "w") * scale;
+            float h = (float)getTileProp(tileset, idx, "h") * scale;
             float gridX = (float)(i % props.mapW * props.dstTileW);
             float gridY = (float)(i / props.mapW * props.dstTileH);
 
