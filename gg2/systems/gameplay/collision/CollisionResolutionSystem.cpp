@@ -6,7 +6,7 @@
 
 void collisionResolutionSystem(Context &ctx)
 {
-    auto &cr = ctx.collisions;
+    auto &cr = ctx.collision.collisions;
 
     for (uint32_t k = 0; k < cr.count; k++)
     {

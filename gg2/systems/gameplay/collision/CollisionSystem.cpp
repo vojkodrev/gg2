@@ -3,14 +3,14 @@
 
 void collisionSystem(Context &ctx)
 {
-    auto &cr = ctx.collisions;
+    auto &cr = ctx.collision.collisions;
     cr.count = 0;
 
     auto &npc = ctx.data.npc;
     auto &object = ctx.data.object;
     auto &player = ctx.data.player;
 
-    auto &hash = ctx.spatialHash;
+    auto &hash = ctx.collision.spatialHash;
     hash.clear();
 
     SDL_FRect pBox = entityColAABB(player);

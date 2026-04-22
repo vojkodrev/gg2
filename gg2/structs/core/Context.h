@@ -4,8 +4,7 @@
 #include "Data.h"
 #include "RenderBuffer.h"
 #include "KeyboardState.h"
-#include "CollisionResult.h"
-#include "SpatialHash.h"
+#include "../collision/CollisionContext.h"
 
 struct Context
 {
@@ -15,8 +14,7 @@ struct Context
     FrameState frame;
     KeyboardState keyboard;
 
-    SpatialHash spatialHash;
-    CollisionResult collisions;
+    CollisionContext collision;
 
     Data data;
     RenderBuffer renderBuffer;
