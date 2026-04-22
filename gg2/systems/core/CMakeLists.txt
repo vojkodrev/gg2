@@ -13,6 +13,7 @@ add_library(systems_core
     tilemap/LoadTileMap.cpp
 )
 target_include_directories(systems_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/frame
     ${CMAKE_CURRENT_SOURCE_DIR}/input
     ${CMAKE_CURRENT_SOURCE_DIR}/tilemap

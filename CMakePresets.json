@@ -26,12 +26,14 @@
     {
       "name": "x64-debug",
       "configurePreset": "x64-debug",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "jobs": 16
     },
     {
       "name": "x64-release",
       "configurePreset": "x64-release",
-      "configuration": "Release"
+      "configuration": "Release",
+      "jobs": 16
     }
   ]
 }

@@ -11,6 +11,7 @@ add_library(systems_gameplay
     collision/CollisionResolutionSystem.cpp
 )
 target_include_directories(systems_gameplay PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
 )
