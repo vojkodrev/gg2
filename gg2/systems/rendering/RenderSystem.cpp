@@ -1,7 +1,7 @@
 #include "RenderSystem.h"
 #include <SDL3/SDL.h>
 
-void RenderSystem(const Context &ctx)
+void renderSystem(const Context &ctx)
 {
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;

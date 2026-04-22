@@ -4,11 +4,11 @@
 #include "FillObjectRenderBuffer.h"
 #include "SortRenderBuffer.h"
 
-void FillRenderBufferSystem(Context &ctx)
+void fillRenderBufferSystem(Context &ctx)
 {
     ctx.renderBuffer.count = 0;
-    FillPlayerRenderBuffer(ctx);
-    FillNpcRenderBuffer(ctx);
-    FillObjectRenderBuffer(ctx);
-    SortRenderBuffer(ctx);
+    fillPlayerRenderBuffer(ctx);
+    fillNpcRenderBuffer(ctx);
+    fillObjectRenderBuffer(ctx);
+    sortRenderBuffer(ctx);
 }

@@ -2,7 +2,7 @@
 
 const float PLAYER_SPEED = 100.0f;
 
-void PlayerMovementSystem(Context &ctx)
+void playerMovementSystem(Context &ctx)
 {
     auto &p = ctx.data.player;
     auto &kb = ctx.keyboard;

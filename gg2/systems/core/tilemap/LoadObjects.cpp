@@ -5,11 +5,11 @@
 #include "GetTileProp.h"
 #include <tmxlite/TileLayer.hpp>
 
-void LoadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
+void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
     auto &object = ctx.data.object;
-    auto &objectTiles = FindLayer(map, "Object")->getLayerAs<tmx::TileLayer>().getTiles();
+    auto &objectTiles = findLayer(map, "Object")->getLayerAs<tmx::TileLayer>().getTiles();
     object.objectCount = 0;
     for (uint32_t i = 0; i < objectTiles.size(); i++)
     {
@@ -17,18 +17,18 @@ void LoadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = object.objectCount++;
         uint32_t idx = objectTiles[i].ID - props.firstGid;
-        if (IsMarker(tileset, idx))
+        if (isMarker(tileset, idx))
         {
-            object.src.x[n] = GetTileProp(tileset, idx, "x");
-            object.src.y[n] = GetTileProp(tileset, idx, "y");
-            object.src.w[n] = GetTileProp(tileset, idx, "w");
-            object.src.h[n] = GetTileProp(tileset, idx, "h");
-            float colOffX = (float)GetTileProp(tileset, idx, "colOffX");
-            float colOffY = (float)GetTileProp(tileset, idx, "colOffY");
-            float colW = (float)GetTileProp(tileset, idx, "colW");
-            float colH = (float)GetTileProp(tileset, idx, "colH");
-            float w = (float)GetTileProp(tileset, idx, "w");
-            float h = (float)GetTileProp(tileset, idx, "h");
+            object.src.x[n] = getTileProp(tileset, idx, "x");
+            object.src.y[n] = getTileProp(tileset, idx, "y");
+            object.src.w[n] = getTileProp(tileset, idx, "w");
+            object.src.h[n] = getTileProp(tileset, idx, "h");
+            float colOffX = (float)getTileProp(tileset, idx, "colOffX");
+            float colOffY = (float)getTileProp(tileset, idx, "colOffY");
+            float colW = (float)getTileProp(tileset, idx, "colW");
+            float colH = (float)getTileProp(tileset, idx, "colH");
+            float w = (float)getTileProp(tileset, idx, "w");
+            float h = (float)getTileProp(tileset, idx, "h");
             float gridX = (float)(i % props.mapW * props.dstTileW);
             float gridY = (float)(i / props.mapW * props.dstTileH);
 
@@ -54,7 +54,7 @@ void LoadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.position.y[n] = i / props.mapW * props.dstTileH;
             object.position.w[n] = props.dstTileW;
             object.position.h[n] = props.dstTileH;
-            GetCollision(tileset, idx, object.collision.offX[n], object.collision.offY[n], object.collision.w[n], object.collision.h[n]);
+            getCollision(tileset, idx, object.collision.offX[n], object.collision.offY[n], object.collision.w[n], object.collision.h[n]);
         }
     }
 }

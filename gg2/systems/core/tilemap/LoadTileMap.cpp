@@ -4,11 +4,11 @@
 #include "LoadNPCs.h"
 #include "LoadObjects.h"
 
-void LoadTileMap(Context &ctx, const tmx::Map &map)
+void loadTileMap(Context &ctx, const tmx::Map &map)
 {
     auto &tileset = map.getTilesets()[0];
-    LoadGround(ctx, map, tileset);
-    LoadPlayer(ctx, map, tileset);
-    LoadNPCs(ctx, map, tileset);
-    LoadObjects(ctx, map, tileset);
+    loadGround(ctx, map, tileset);
+    loadPlayer(ctx, map, tileset);
+    loadNPCs(ctx, map, tileset);
+    loadObjects(ctx, map, tileset);
 }

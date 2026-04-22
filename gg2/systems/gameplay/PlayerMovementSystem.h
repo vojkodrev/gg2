@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void PlayerMovementSystem(Context &ctx);
+void playerMovementSystem(Context &ctx);

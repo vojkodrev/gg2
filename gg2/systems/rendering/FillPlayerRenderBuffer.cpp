@@ -1,6 +1,6 @@
 #include "FillPlayerRenderBuffer.h"
 
-void FillPlayerRenderBuffer(Context &ctx)
+void fillPlayerRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &player = ctx.data.player;

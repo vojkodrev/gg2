@@ -3,4 +3,4 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/Tileset.hpp>
 
-void LoadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset);
+void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset);

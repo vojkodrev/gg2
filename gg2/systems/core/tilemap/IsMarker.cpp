@@ -1,6 +1,6 @@
 #include "IsMarker.h"
 
-bool IsMarker(const tmx::Tileset &tileset, uint32_t tileIdx)
+bool isMarker(const tmx::Tileset &tileset, uint32_t tileIdx)
 {
     for (auto &tile : tileset.getTiles())
     {

@@ -2,7 +2,7 @@
 #include <functional>
 #include <algorithm>
 
-void SortRenderBuffer(Context &ctx)
+void sortRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     if (rb.count <= 1) return;

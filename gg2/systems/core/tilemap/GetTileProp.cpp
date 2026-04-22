@@ -1,6 +1,6 @@
 #include "GetTileProp.h"
 
-int GetTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name)
+int getTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name)
 {
     for (auto &tile : tileset.getTiles())
     {
@@ -13,7 +13,7 @@ int GetTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string
     return 0;
 }
 
-std::string GetTileStringProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name)
+std::string getTileStringProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name)
 {
     for (auto &tile : tileset.getTiles())
     {

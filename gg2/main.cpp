@@ -30,7 +30,7 @@ int main()
     tmx::Map map;
     map.load("assets/map/map1.tmx");
 
-    LoadTileMap(*ctx, map);
+    loadTileMap(*ctx, map);
 
     bool running = true;
     SDL_Event event;
@@ -39,7 +39,7 @@ int main()
     ctx->frame.lastTicks = SDL_GetTicks();
     while (running)
     {
-        UpdateFrameStateSystem(*ctx);
+        updateFrameStateSystem(*ctx);
 
         while (SDL_PollEvent(&event))
         {
@@ -47,18 +47,18 @@ int main()
                 running = false;
         }
 
-        UpdateKeyboardStateSystem(*ctx);
+        updateKeyboardStateSystem(*ctx);
 
-        PlayerMovementSystem(*ctx);
-        NPCAiSystem(*ctx);
+        playerMovementSystem(*ctx);
+        npcAiSystem(*ctx);
 
-        CollisionSystem(*ctx);
-        CollisionResolutionSystem(*ctx);
+        collisionSystem(*ctx);
+        collisionResolutionSystem(*ctx);
 
-        FillRenderBufferSystem(*ctx);
-        RenderSystem(*ctx);
+        fillRenderBufferSystem(*ctx);
+        renderSystem(*ctx);
 
-        FrameRateLimitSystem(*ctx);
+        frameRateLimitSystem(*ctx);
     }
 
     SDL_DestroyTexture(ctx->texture);

@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void CollisionSystem(Context &ctx);
+void collisionSystem(Context &ctx);

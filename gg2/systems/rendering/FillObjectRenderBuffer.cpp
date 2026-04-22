@@ -1,6 +1,6 @@
 #include "FillObjectRenderBuffer.h"
 
-void FillObjectRenderBuffer(Context &ctx)
+void fillObjectRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &object = ctx.data.object;

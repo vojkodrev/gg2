@@ -3,4 +3,4 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/Tileset.hpp>
 
-void LoadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset);
+void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset);

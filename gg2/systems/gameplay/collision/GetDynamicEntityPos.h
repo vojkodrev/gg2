@@ -1,7 +1,7 @@
 #pragma once
 #include "Context.h"
 
-inline void GetDynamicEntityPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
+inline void getDynamicEntityPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
 {
     if (id == COLLISION_ENTITY_PLAYER)
     {

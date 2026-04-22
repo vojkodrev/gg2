@@ -2,7 +2,7 @@
 #include "FindLayer.h"
 #include <tmxlite/TileLayer.hpp>
 
-void LoadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
+void loadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
@@ -14,7 +14,7 @@ void LoadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     props.dstTileH = map.getTileSize().y;
     props.firstGid = tileset.getFirstGID();
 
-    auto &srcTiles = FindLayer(map, "Ground")->getLayerAs<tmx::TileLayer>().getTiles();
+    auto &srcTiles = findLayer(map, "Ground")->getLayerAs<tmx::TileLayer>().getTiles();
     tileMap.tileCount = 0;
     for (int i = 0; i < (int)srcTiles.size(); i++)
     {

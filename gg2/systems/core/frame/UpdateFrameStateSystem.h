@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void UpdateFrameStateSystem(Context &ctx);
+void updateFrameStateSystem(Context &ctx);

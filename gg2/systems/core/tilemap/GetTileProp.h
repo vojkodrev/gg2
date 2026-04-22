@@ -2,5 +2,5 @@
 #include <tmxlite/Tileset.hpp>
 #include <string>
 
-int GetTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name);
-std::string GetTileStringProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name);
+int getTileProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name);
+std::string getTileStringProp(const tmx::Tileset &tileset, uint32_t tileIdx, const std::string &name);

@@ -1,7 +1,7 @@
 #include "FrameRateLimitSystem.h"
 #include <SDL3/SDL.h>
 
-void FrameRateLimitSystem(Context &ctx)
+void frameRateLimitSystem(Context &ctx)
 {
     ctx.frame.frameTime = SDL_GetTicks() - ctx.frame.now;
     ctx.frame.targetTime = 1000 / ctx.frame.maxFps;

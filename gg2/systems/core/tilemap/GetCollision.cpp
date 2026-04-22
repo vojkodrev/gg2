@@ -1,6 +1,6 @@
 #include "GetCollision.h"
 
-void GetCollision(const tmx::Tileset &tileset, uint32_t tileIdx, float &offX, float &offY, float &w, float &h)
+void getCollision(const tmx::Tileset &tileset, uint32_t tileIdx, float &offX, float &offY, float &w, float &h)
 {
     offX = offY = w = h = 0.0f;
     for (auto &tile : tileset.getTiles())

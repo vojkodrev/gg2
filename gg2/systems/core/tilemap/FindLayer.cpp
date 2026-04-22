@@ -1,6 +1,6 @@
 #include "FindLayer.h"
 
-const tmx::Layer *FindLayer(const tmx::Map &map, const std::string &name)
+const tmx::Layer *findLayer(const tmx::Map &map, const std::string &name)
 {
     for (auto &layer : map.getLayers())
         if (layer->getName() == name)

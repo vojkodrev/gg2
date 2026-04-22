@@ -1,6 +1,6 @@
 #include "FillNpcRenderBuffer.h"
 
-void FillNpcRenderBuffer(Context &ctx)
+void fillNpcRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &npc = ctx.data.npc;

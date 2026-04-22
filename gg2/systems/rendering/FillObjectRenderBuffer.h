@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void FillObjectRenderBuffer(Context &ctx);
+void fillObjectRenderBuffer(Context &ctx);

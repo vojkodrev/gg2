@@ -3,10 +3,10 @@
 #include "GetCollision.h"
 #include <tmxlite/TileLayer.hpp>
 
-void LoadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
+void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
-    auto &playerTiles = FindLayer(map, "Player")->getLayerAs<tmx::TileLayer>().getTiles();
+    auto &playerTiles = findLayer(map, "Player")->getLayerAs<tmx::TileLayer>().getTiles();
     for (int i = 0; i < (int)playerTiles.size(); i++)
     {
         if (playerTiles[i].ID == 0)
@@ -20,7 +20,7 @@ void LoadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.y = i / props.mapW * props.dstTileH;
         ctx.data.player.w = props.dstTileW;
         ctx.data.player.h = props.dstTileH;
-        GetCollision(tileset, idx, ctx.data.player.colOffX, ctx.data.player.colOffY, ctx.data.player.colW, ctx.data.player.colH);
+        getCollision(tileset, idx, ctx.data.player.colOffX, ctx.data.player.colOffY, ctx.data.player.colW, ctx.data.player.colH);
         break;
     }
 }

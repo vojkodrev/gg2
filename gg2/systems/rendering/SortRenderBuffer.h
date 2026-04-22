@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void SortRenderBuffer(Context &ctx);
+void sortRenderBuffer(Context &ctx);
