@@ -28,19 +28,21 @@ if __name__ == "__main__":
     tileH = settings["tileH"]
     atlas = Image.new("RGBA", (settings["w"] * tileW, settings["h"] * tileH), (0, 0, 0, 0))
 
+    meta = {}
     for img in images:
         src = Image.open(os.path.join(dir, img["filename"])).convert("RGBA")
         if "h" in img:
             target_h = img["h"]
             target_w = round(src.width * target_h / src.height)
             src = src.resize((target_w, target_h), Image.NEAREST)
-        tilesW = max(1, -(-src.width // tileW))   # ceil div
+        tilesW = max(1, -(-src.width // tileW))
         tilesH = max(1, -(-src.height // tileH))
-        areaW = tilesW * tileW
-        areaH = tilesH * tileH
-        offX = (areaW - src.width) // 2
-        offY = (areaH - src.height) // 2
-        atlas.paste(src, (img["x"] * tileW + offX, img["y"] * tileH + offY))
+        offX = (tilesW * tileW - src.width) // 2
+        offY = (tilesH * tileH - src.height) // 2
+        pasteX = img["x"] * tileW + offX
+        pasteY = img["y"] * tileH + offY
+        meta[img["id"]] = {"x": pasteX, "y": pasteY, "w": src.width, "h": src.height}
+        atlas.paste(src, (pasteX, pasteY))
 
     atlas.save(os.path.join(dir, settings["output"]))
 
@@ -53,27 +55,12 @@ if __name__ == "__main__":
     root = tree.getroot()
     columns = settings["w"]
 
-    img_by_id = {img["id"]: img for img in images}
-
     for img in images:
         if "markerFor" not in img:
             continue
 
-        target = img_by_id[img["markerFor"]]
-        tsrc = Image.open(os.path.join(dir, target["filename"])).convert("RGBA")
-        if "h" in target:
-            th = target["h"]
-            tw = round(tsrc.width * th / tsrc.height)
-            tsrc = tsrc.resize((tw, th), Image.NEAREST)
-
-        t_tilesW = max(1, -(-tsrc.width // tileW))
-        t_tilesH = max(1, -(-tsrc.height // tileH))
-        t_offX = (t_tilesW * tileW - tsrc.width) // 2
-        t_offY = (t_tilesH * tileH - tsrc.height) // 2
-        px = target["x"] * tileW + t_offX
-        py = target["y"] * tileH + t_offY
-        pw = tsrc.width
-        ph = tsrc.height
+        m = meta[img["markerFor"]]
+        px, py, pw, ph = m["x"], m["y"], m["w"], m["h"]
 
         tile_id = str(img["y"] * columns + img["x"])
         tile_el = next((t for t in root.findall("tile") if t.get("id") == tile_id), None)
