@@ -19,15 +19,11 @@ images = [
     {"id": 8, "filename": "tree.png", "x": 7, "y": 0},
 ]
 
-if __name__ == "__main__":
+def build_atlas(dir):
     from PIL import Image
-    import os
-
-    dir = os.path.dirname(os.path.abspath(__file__))
     tileW = settings["tileW"]
     tileH = settings["tileH"]
     atlas = Image.new("RGBA", (settings["w"] * tileW, settings["h"] * tileH), (0, 0, 0, 0))
-
     meta = {}
     for img in images:
         src = Image.open(os.path.join(dir, img["filename"])).convert("RGBA")
@@ -43,51 +39,53 @@ if __name__ == "__main__":
         pasteY = img["y"] * tileH + offY
         meta[img["id"]] = {"x": pasteX, "y": pasteY, "w": src.width, "h": src.height}
         atlas.paste(src, (pasteX, pasteY))
-
     atlas.save(os.path.join(dir, settings["output"]))
+    return meta
 
-    # update marker tile properties in tsx
+
+def update_tileset(dir, meta):
     import xml.etree.ElementTree as ET
-
     ET.register_namespace("", "")
     tsx_path = os.path.join(dir, settings["tileset"])
     tree = ET.parse(tsx_path)
     root = tree.getroot()
     columns = settings["w"]
 
+    def set_prop(props_el, name, ptype, value):
+        prop = next((p for p in props_el.findall("property") if p.get("name") == name), None)
+        if prop is None:
+            prop = ET.SubElement(props_el, "property")
+            prop.set("name", name)
+        if ptype:
+            prop.set("type", ptype)
+        elif "type" in prop.attrib:
+            del prop.attrib["type"]
+        prop.set("value", str(value))
+
     for img in images:
         if "markerFor" not in img:
             continue
-
         m = meta[img["markerFor"]]
-        px, py, pw, ph = m["x"], m["y"], m["w"], m["h"]
-
         tile_id = str(img["y"] * columns + img["x"])
         tile_el = next((t for t in root.findall("tile") if t.get("id") == tile_id), None)
         if tile_el is None:
             tile_el = ET.SubElement(root, "tile")
             tile_el.set("id", tile_id)
-
         props_el = tile_el.find("properties")
         if props_el is None:
             props_el = ET.SubElement(tile_el, "properties")
-
-        def set_prop(name, ptype, value):
-            prop = next((p for p in props_el.findall("property") if p.get("name") == name), None)
-            if prop is None:
-                prop = ET.SubElement(props_el, "property")
-                prop.set("name", name)
-            if ptype:
-                prop.set("type", ptype)
-            elif "type" in prop.attrib:
-                del prop.attrib["type"]
-            prop.set("value", str(value))
-
-        set_prop("type", None, "marker")
-        set_prop("x", "int", px)
-        set_prop("y", "int", py)
-        set_prop("w", "int", pw)
-        set_prop("h", "int", ph)
+        set_prop(props_el, "type", None, "marker")
+        set_prop(props_el, "x", "int", m["x"])
+        set_prop(props_el, "y", "int", m["y"])
+        set_prop(props_el, "w", "int", m["w"])
+        set_prop(props_el, "h", "int", m["h"])
 
     ET.indent(tree, space=" ")
     tree.write(tsx_path, encoding="unicode", xml_declaration=True)
+
+
+if __name__ == "__main__":
+    import os
+    dir = os.path.dirname(os.path.abspath(__file__))
+    meta = build_atlas(dir)
+    update_tileset(dir, meta)
