@@ -37,9 +37,18 @@
    <property name="y" type="int" value="35"/>
   </properties>
  </tile>
- <tile id="68">
+ <tile id="58">
   <properties>
-   <property name="stop" value=""/>
+   <property name="colH" type="int" value="40"/>
+   <property name="colOffX" type="int" value="0"/>
+   <property name="colOffY" type="int" value="71"/>
+   <property name="colW" type="int" value="57"/>
+   <property name="h" type="int" value="112"/>
+   <property name="scale" type="float" value="1.2"/>
+   <property name="type" value="marker"/>
+   <property name="w" type="int" value="58"/>
+   <property name="x" type="int" value="19"/>
+   <property name="y" type="int" value="208"/>
   </properties>
  </tile>
  <tile id="93">
