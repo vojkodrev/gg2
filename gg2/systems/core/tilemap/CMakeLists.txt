@@ -19,6 +19,7 @@ target_include_directories(systems_tilemap PUBLIC
     ${CMAKE_SOURCE_DIR}/gg2/structs/render
     ${CMAKE_SOURCE_DIR}/gg2/structs/player
     ${CMAKE_SOURCE_DIR}/gg2/structs/collision
+    ${CMAKE_SOURCE_DIR}/gg2/utils/npc
     ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/include
     ${CMAKE_SOURCE_DIR}/vendor
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include

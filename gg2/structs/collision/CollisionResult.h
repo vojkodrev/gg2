@@ -1,5 +1,5 @@
 #pragma once
-#include "constants.h"
+#include "Constants.h"
 #include "CollisionPair.h"
 
 // Entity ID encoding: 0 = player, 1..N = NPC index (id - 1)

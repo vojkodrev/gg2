@@ -22,5 +22,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_SOURCE_DIR}/gg2/structs/render
     ${CMAKE_SOURCE_DIR}/gg2/structs/player
     ${CMAKE_SOURCE_DIR}/gg2/structs/collision
+    ${CMAKE_SOURCE_DIR}/gg2/utils/collision
+    ${CMAKE_SOURCE_DIR}/gg2/utils/npc
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include
 )

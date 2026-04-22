@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "constants.h"
+#include "Constants.h"
 
 struct NPCSrc
 {

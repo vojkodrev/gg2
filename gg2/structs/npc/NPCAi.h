@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "constants.h"
+#include "Constants.h"
 #include "NPCPatrolPoint.h"
 #include "NPCSpawn.h"
 #include "NPCAiState.h"
