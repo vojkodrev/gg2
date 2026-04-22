@@ -3,7 +3,7 @@ settings = {
     "tileH": 64,
     "w": 12,
     "h": 7,
-    "output": "texture.png",
+    "output": "../texture.png",
 }
 
 images = [
@@ -33,6 +33,12 @@ if __name__ == "__main__":
             target_h = img["h"]
             target_w = round(src.width * target_h / src.height)
             src = src.resize((target_w, target_h), Image.NEAREST)
-        atlas.paste(src, (img["x"] * tileW, img["y"] * tileH))
+        tilesW = max(1, -(-src.width // tileW))   # ceil div
+        tilesH = max(1, -(-src.height // tileH))
+        areaW = tilesW * tileW
+        areaH = tilesH * tileH
+        offX = (areaW - src.width) // 2
+        offY = (areaH - src.height) // 2
+        atlas.paste(src, (img["x"] * tileW + offX, img["y"] * tileH + offY))
 
     atlas.save(os.path.join(dir, settings["output"]))
