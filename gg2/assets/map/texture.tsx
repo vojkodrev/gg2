@@ -31,15 +31,15 @@
  </tile>
  <tile id="42">
   <properties>
-   <property name="colH" type="int" value="21" />
-   <property name="colOffX" type="int" value="100" />
-   <property name="colOffY" type="int" value="257" />
-   <property name="colW" type="int" value="22" />
-   <property name="h" type="int" value="278" />
+   <property name="colH" type="int" value="26" />
+   <property name="colOffX" type="int" value="126" />
+   <property name="colOffY" type="int" value="324" />
+   <property name="colW" type="int" value="28" />
+   <property name="h" type="int" value="350" />
    <property name="type" value="marker" />
-   <property name="w" type="int" value="226" />
-   <property name="x" type="int" value="463" />
-   <property name="y" type="int" value="21" />
+   <property name="w" type="int" value="285" />
+   <property name="x" type="int" value="465" />
+   <property name="y" type="int" value="17" />
   </properties>
  </tile>
  <tile id="50">

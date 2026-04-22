@@ -38,7 +38,7 @@ images = [
         "colH": 51,
     },
     {"id": 7, "filename": "statue praying.png", "x": 0, "y": 4},
-    {"id": 8, "filename": "tree.png", "x": 7, "y": 0},
+    {"id": 8, "filename": "tree.png", "x": 7, "y": 0, "h": 350},
 ]
 
 
