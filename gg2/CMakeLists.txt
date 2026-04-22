@@ -1,29 +1,45 @@
-add_subdirectory(systems/core/frame)
-add_subdirectory(systems/core/input)
-add_subdirectory(systems/core/tilemap)
+add_library(gg2_common INTERFACE)
+target_include_directories(gg2_common INTERFACE
+    ${CMAKE_SOURCE_DIR}/gg2/structs/core
+    ${CMAKE_SOURCE_DIR}/gg2/structs/tilemap
+    ${CMAKE_SOURCE_DIR}/gg2/structs/npc
+    ${CMAKE_SOURCE_DIR}/gg2/structs/object
+    ${CMAKE_SOURCE_DIR}/gg2/structs/render
+    ${CMAKE_SOURCE_DIR}/gg2/structs/player
+    ${CMAKE_SOURCE_DIR}/gg2/structs/collision
+    ${CMAKE_SOURCE_DIR}/gg2/utils/collision
+    ${CMAKE_SOURCE_DIR}/gg2/utils/npc
+    ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include
+    ${CMAKE_SOURCE_DIR}/vendor/SDL3_image-3.4.2/include
+)
+
+add_library(tmxlite STATIC
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/FreeFuncs.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/ImageLayer.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/LayerGroup.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/Map.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/Object.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/ObjectGroup.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/ObjectTypes.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/Property.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/TileLayer.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/Tileset.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/detail/pugixml.cpp
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/src/miniz.c
+)
+target_include_directories(tmxlite PUBLIC
+    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/include
+    ${CMAKE_SOURCE_DIR}/vendor
+)
+
+add_subdirectory(systems/core)
 add_subdirectory(systems/rendering)
 add_subdirectory(systems/gameplay)
 
 add_executable(gg2 main.cpp)
-
-target_include_directories(gg2 PRIVATE
-    structs/core
-    structs/tilemap
-    structs/npc
-    structs/object
-    structs/render
-    structs/player
-    structs/collision
-    ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include
-    ${CMAKE_SOURCE_DIR}/vendor/SDL3_image-3.4.2/include
-    ${CMAKE_SOURCE_DIR}/vendor
-    ${CMAKE_SOURCE_DIR}/vendor/tmxlite/tmxlite/include
-)
-
 target_link_libraries(gg2 PRIVATE
-    systems_frame
-    systems_input
-    systems_tilemap
+    gg2_common
+    systems_core
     systems_rendering
     systems_gameplay
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/lib/x64/SDL3.lib
