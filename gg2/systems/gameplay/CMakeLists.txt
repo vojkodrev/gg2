@@ -12,6 +12,7 @@ add_library(systems_gameplay
     ai/astar/AStarGScoreMap.cpp
     ai/astar/AStarPool.cpp
     ai/astar/AStarNode.cpp
+    ai/astar/AStarCost.cpp
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
 )
