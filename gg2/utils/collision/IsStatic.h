@@ -1,4 +1,4 @@
 #pragma once
-#include "Constants.h"
+#include "ColId.h"
 
-inline bool isStatic(uint16_t id) { return id > MAX_NPCS; }
+inline bool isStatic(uint16_t id) { return colIdIsObject(id); }

@@ -1,5 +1,7 @@
 #include "AStarNeighbors.h"
 #include "AStarNode.h"
+#include "EntityAABB.h"
+#include "ColId.h"
 #include <SDL3/SDL.h>
 
 static const int DIR_X[8] = {  1, -1,  0,  0,  1,  1, -1, -1 };
@@ -16,16 +18,10 @@ static bool isBlocked(const SpatialHash& hash, const Object& object, int wx, int
     for (int i = 0; i < n; i++)
     {
         uint16_t id = candidates[i];
-        if (id < 1 + MAX_NPCS)
+        if (!colIdIsObject(id))
             continue;
 
-        uint32_t oi = id - 1 - MAX_NPCS;
-        SDL_FRect box = {
-            object.position.x[oi] + object.collision.offX[oi],
-            object.position.y[oi] + object.collision.offY[oi],
-            object.collision.w[oi],
-            object.collision.h[oi]
-        };
+        SDL_FRect box = entityColAABB(object, colIdObjectIndex(id));
 
         if (SDL_PointInRectFloat(&p, &box))
             return true;

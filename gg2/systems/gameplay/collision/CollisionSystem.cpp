@@ -1,5 +1,6 @@
 #include "CollisionSystem.h"
 #include "EntityAABB.h"
+#include "ColId.h"
 
 void collisionSystem(Context &ctx)
 {
@@ -19,13 +20,13 @@ void collisionSystem(Context &ctx)
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
         SDL_FRect box = entityColAABB(npc, i);
-        hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + i));
+        hash.insert(box.x, box.y, box.w, box.h, colIdNpc(i));
     }
 
     for (uint32_t i = 0; i < object.objectCount; i++)
     {
         SDL_FRect box = entityColAABB(object, i);
-        hash.insert(box.x, box.y, box.w, box.h, (uint16_t)(1 + MAX_NPCS + i));
+        hash.insert(box.x, box.y, box.w, box.h, colIdObject(i));
     }
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
@@ -58,7 +59,7 @@ void collisionSystem(Context &ctx)
 
     checkEntity(COLLISION_ENTITY_PLAYER, pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        checkEntity((uint16_t)(1 + i), entityColAABB(npc, i));
+        checkEntity(colIdNpc(i), entityColAABB(npc, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
-        checkEntity((uint16_t)(1 + MAX_NPCS + i), entityColAABB(object, i));
+        checkEntity(colIdObject(i), entityColAABB(object, i));
 }

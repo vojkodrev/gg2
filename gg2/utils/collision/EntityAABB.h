@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "NPC.h"
 #include "Object.h"
+#include "ColId.h"
 
 inline SDL_FRect entityColAABB(const Player &p)
 {
@@ -35,9 +36,9 @@ inline SDL_FPoint entityColCenter(const SDL_FRect &r)
 
 inline SDL_FRect getEntityColAABB(Context &ctx, uint16_t id)
 {
-    if (id == COLLISION_ENTITY_PLAYER)
+    if (colIdIsPlayer(id))
         return entityColAABB(ctx.data.player);
-    if (id <= MAX_NPCS)
-        return entityColAABB(ctx.data.npc, id - 1);
-    return entityColAABB(ctx.data.object, id - 1 - MAX_NPCS);
+    if (colIdIsNpc(id))
+        return entityColAABB(ctx.data.npc, colIdNpcIndex(id));
+    return entityColAABB(ctx.data.object, colIdObjectIndex(id));
 }
