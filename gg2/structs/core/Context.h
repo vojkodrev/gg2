@@ -5,6 +5,7 @@
 #include "RenderBuffer.h"
 #include "KeyboardState.h"
 #include "../collision/CollisionContext.h"
+#include "../gameplay/ai/AStarContext.h"
 
 struct Context
 {
@@ -18,4 +19,6 @@ struct Context
 
     Data data;
     RenderBuffer renderBuffer;
+
+    AStarContext astar;
 };
