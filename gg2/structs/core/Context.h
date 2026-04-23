@@ -17,8 +17,8 @@ struct Context
 
     CollisionContext collision;
 
+    AStarPool astarPool;
+
     Data data;
     RenderBuffer renderBuffer;
-
-    AStarPool astarPool;
 };
