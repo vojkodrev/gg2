@@ -5,8 +5,7 @@
 #include "RenderBuffer.h"
 #include "KeyboardState.h"
 #include "../collision/CollisionContext.h"
-#include "../gameplay/ai/AStarContext.h"
-#include "Constants.h"
+#include "../gameplay/ai/AStarPool.h"
 
 struct Context
 {
@@ -21,5 +20,5 @@ struct Context
     Data data;
     RenderBuffer renderBuffer;
 
-    AStarContext astar[MAX_ASTARS];
+    AStarPool astarPool;
 };
