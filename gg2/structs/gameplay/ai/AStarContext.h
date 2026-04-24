@@ -1,13 +1,13 @@
 #pragma once
 #include "AStarHeap.h"
-#include "AStarClosedSet.h"
-#include "AStarGScoreMap.h"
+#include "../../../utils/hashmap/HashMap.h"
+#include "../../../core/Constants.h"
 
 struct AStarContext
 {
-    AStarHeap      heap;
-    AStarClosedSet closed;
-    AStarGScoreMap gscores;
+    AStarHeap                        heap;
+    HashMap<void,  ASTAR_HASH_SIZE>  closed;
+    HashMap<float, ASTAR_HASH_SIZE>  gscores;
 
     int generation;
     int offsetX;

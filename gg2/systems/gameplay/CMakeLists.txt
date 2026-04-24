@@ -12,12 +12,6 @@ add_library(systems_gameplay
     ai/astar/pool/QueueEnqueue.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp
-    ai/astar/closedset/ClosedSlot.cpp
-    ai/astar/closedset/ClosedInsert.cpp
-    ai/astar/closedset/ClosedContains.cpp
-    ai/astar/gscore/GScoreSlot.cpp
-    ai/astar/gscore/GScoreSet.cpp
-    ai/astar/gscore/GScoreGet.cpp
     ai/astar/heap/HeapSwap.cpp
     ai/astar/heap/HeapPush.cpp
     ai/astar/heap/HeapPop.cpp
@@ -36,8 +30,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
-    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/closedset
-    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/gscore
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/heap
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/cost
