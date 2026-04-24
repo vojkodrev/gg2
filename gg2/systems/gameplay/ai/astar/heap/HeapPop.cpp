@@ -1,4 +1,4 @@
-#include "AStarHeap.h"
+#include "HeapPop.h"
 
 static void swap(AStarHeap& h, int a, int b)
 {
@@ -6,24 +6,9 @@ static void swap(AStarHeap& h, int a, int b)
     float tf = h.fscores[a]; h.fscores[a] = h.fscores[b]; h.fscores[b] = tf;
 }
 
-void heapPush(AStarHeap& h, int node, float fscore)
-{
-    int i = h.size++;
-    h.nodes[i]   = node;
-    h.fscores[i] = fscore;
-
-    while (i > 0)
-    {
-        int parent = (i - 1) / 2;
-        if (h.fscores[parent] <= h.fscores[i]) break;
-        swap(h, parent, i);
-        i = parent;
-    }
-}
-
 int heapPop(AStarHeap& h)
 {
-    int result  = h.nodes[0];
+    int result   = h.nodes[0];
     h.nodes[0]   = h.nodes[--h.size];
     h.fscores[0] = h.fscores[h.size];
 
@@ -39,9 +24,4 @@ int heapPop(AStarHeap& h)
     }
 
     return result;
-}
-
-bool heapEmpty(const AStarHeap& h)
-{
-    return h.size == 0;
 }

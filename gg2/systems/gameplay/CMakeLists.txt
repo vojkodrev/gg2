@@ -7,13 +7,21 @@ add_library(systems_gameplay
     ai/DistToSpawn.cpp
     ai/IsNearColEdge.cpp
     ai/MoveColCenterToward.cpp
-    ai/astar/AStarHeap.cpp
-    ai/astar/AStarClosedSet.cpp
-    ai/astar/AStarGScoreMap.cpp
-    ai/astar/AStarPool.cpp
-    ai/astar/AStarNode.cpp
-    ai/astar/AStarCost.cpp
-    ai/astar/AStarNeighbors.cpp
+    ai/astar/pool/AStarAlloc.cpp
+    ai/astar/pool/AStarFree.cpp
+    ai/astar/closedset/ClosedInsert.cpp
+    ai/astar/closedset/ClosedContains.cpp
+    ai/astar/gscore/GScoreSet.cpp
+    ai/astar/gscore/GScoreGet.cpp
+    ai/astar/heap/HeapPush.cpp
+    ai/astar/heap/HeapPop.cpp
+    ai/astar/heap/HeapEmpty.cpp
+    ai/astar/node/AStarEncode.cpp
+    ai/astar/node/AStarDecode.cpp
+    ai/astar/cost/AStarH.cpp
+    ai/astar/cost/AStarD.cpp
+    ai/astar/neighbors/IsBlocked.cpp
+    ai/astar/neighbors/GetNeighbors.cpp
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
 )
@@ -21,6 +29,12 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
-    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/closedset
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/gscore
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/heap
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/cost
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/neighbors
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

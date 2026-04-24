@@ -1,4 +1,4 @@
-#include "AStarPool.h"
+#include "AStarAlloc.h"
 
 static bool queueEmpty(const AStarPool& pool)
 {
@@ -12,12 +12,6 @@ static int queueDequeue(AStarPool& pool)
     return idx;
 }
 
-static void queueEnqueue(AStarPool& pool, int index)
-{
-    pool.freeQueue[pool.freeTail] = index;
-    pool.freeTail = (pool.freeTail + 1) & (MAX_ASTARS - 1);
-}
-
 int astarAlloc(AStarPool& pool)
 {
     if (!queueEmpty(pool))
@@ -27,9 +21,4 @@ int astarAlloc(AStarPool& pool)
         return -1;
 
     return pool.count++;
-}
-
-void astarFree(AStarPool& pool, int index)
-{
-    queueEnqueue(pool, index);
 }
