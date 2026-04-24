@@ -29,6 +29,7 @@ static bool isBlocked(const SpatialHash& hash, const Object& object, int wx, int
     return false;
 }
 
+// hash must be a collision state snapshot taken before pathfinding begins
 int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Object& object,
                  int node, int* neighborsOut)
 {
