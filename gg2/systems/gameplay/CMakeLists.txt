@@ -12,6 +12,7 @@ add_library(systems_gameplay
     ai/astar/pool/QueueEnqueue.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp
+    ai/astar/reconstruct/ReconstructPath.cpp
     ai/astar/heap/HeapSwap.cpp
     ai/astar/heap/HeapPush.cpp
     ai/astar/heap/HeapPop.cpp
