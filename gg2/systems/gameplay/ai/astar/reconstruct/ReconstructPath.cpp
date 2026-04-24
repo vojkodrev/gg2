@@ -1,25 +1,19 @@
 #include "ReconstructPath.h"
-#include "../node/AStarDecode.h"
-#include "../../../../../utils/hashmap/HashMapContains.h"
-#include "../../../../../utils/hashmap/HashMapGet.h"
+#include "../../../../../utils/hashmap/HashMapTryGet.h"
 
 void reconstructPath(AStarContext& ctx, int current)
 {
     ctx.pathLen = 0;
 
-    while (hashMapContains(ctx.cameFrom, current, ctx.generation))
+    int parent;
+    while (hashMapTryGet(ctx.cameFrom, current, ctx.generation, parent))
     {
-        int x, y;
-        astarDecode(ctx, current, x, y);
-
         if (ctx.pathLen < ASTAR_MAX_PATH)
-            ctx.path[ctx.pathLen++] = { x, y };
+            ctx.path[ctx.pathLen++] = current;
 
-        current = hashMapGet(ctx.cameFrom, current, ctx.generation, -1);
+        current = parent;
     }
 
-    int x, y;
-    astarDecode(ctx, current, x, y);
     if (ctx.pathLen < ASTAR_MAX_PATH)
-        ctx.path[ctx.pathLen++] = { x, y };
+        ctx.path[ctx.pathLen++] = current;
 }
