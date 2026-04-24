@@ -33,6 +33,7 @@ target_include_directories(tmxlite PUBLIC
 )
 
 add_subdirectory(systems/core)
+add_subdirectory(systems/tilemap)
 add_subdirectory(systems/rendering)
 add_subdirectory(systems/gameplay)
 
@@ -40,6 +41,7 @@ add_executable(gg2 main.cpp)
 target_link_libraries(gg2 PRIVATE
     gg2_common
     systems_core
+    systems_tilemap
     systems_rendering
     systems_gameplay
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/lib/x64/SDL3.lib
