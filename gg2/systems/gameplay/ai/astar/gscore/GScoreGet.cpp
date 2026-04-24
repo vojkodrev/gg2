@@ -1,10 +1,6 @@
 #include "GScoreGet.h"
+#include "GScoreSlot.h"
 #include <cfloat>
-
-static int gscoreSlot(int node)
-{
-    return (node * 2654435761u) >> (32 - 16);
-}
 
 float gscoreGet(const AStarGScoreMap& gm, int node, int generation)
 {

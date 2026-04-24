@@ -1,10 +1,5 @@
 #include "HeapPop.h"
-
-static void swap(AStarHeap& h, int a, int b)
-{
-    int   tn = h.nodes[a];   h.nodes[a]   = h.nodes[b];   h.nodes[b]   = tn;
-    float tf = h.fscores[a]; h.fscores[a] = h.fscores[b]; h.fscores[b] = tf;
-}
+#include "HeapSwap.h"
 
 int heapPop(AStarHeap& h)
 {
@@ -19,7 +14,7 @@ int heapPop(AStarHeap& h)
         if (l < h.size && h.fscores[l] < h.fscores[smallest]) smallest = l;
         if (r < h.size && h.fscores[r] < h.fscores[smallest]) smallest = r;
         if (smallest == i) break;
-        swap(h, i, smallest);
+        heapSwap(h, i, smallest);
         i = smallest;
     }
 

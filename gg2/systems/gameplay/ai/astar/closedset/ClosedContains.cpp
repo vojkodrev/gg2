@@ -1,9 +1,5 @@
 #include "ClosedContains.h"
-
-static int closedSlot(int node)
-{
-    return (node * 2654435761u) >> (32 - 16);
-}
+#include "ClosedSlot.h"
 
 bool closedContains(const AStarClosedSet& cs, int node, int generation)
 {

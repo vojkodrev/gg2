@@ -1,10 +1,5 @@
 #include "AStarFree.h"
-
-static void queueEnqueue(AStarPool& pool, int index)
-{
-    pool.freeQueue[pool.freeTail] = index;
-    pool.freeTail = (pool.freeTail + 1) & (MAX_ASTARS - 1);
-}
+#include "QueueEnqueue.h"
 
 void astarFree(AStarPool& pool, int index)
 {

@@ -7,12 +7,18 @@ add_library(systems_gameplay
     ai/DistToSpawn.cpp
     ai/IsNearColEdge.cpp
     ai/MoveColCenterToward.cpp
+    ai/astar/pool/QueueEmpty.cpp
+    ai/astar/pool/QueueDequeue.cpp
+    ai/astar/pool/QueueEnqueue.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp
+    ai/astar/closedset/ClosedSlot.cpp
     ai/astar/closedset/ClosedInsert.cpp
     ai/astar/closedset/ClosedContains.cpp
+    ai/astar/gscore/GScoreSlot.cpp
     ai/astar/gscore/GScoreSet.cpp
     ai/astar/gscore/GScoreGet.cpp
+    ai/astar/heap/HeapSwap.cpp
     ai/astar/heap/HeapPush.cpp
     ai/astar/heap/HeapPop.cpp
     ai/astar/heap/HeapEmpty.cpp
