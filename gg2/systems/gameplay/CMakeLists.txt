@@ -5,7 +5,8 @@ add_library(systems_gameplay
     ai/Dist.cpp
     ai/DistToPlayer.cpp
     ai/DistToSpawn.cpp
-    ai/IsNearColEdge.cpp
+    ai/HasReachedPoint.cpp
+    ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
     ai/astar/pool/QueueEmpty.cpp
     ai/astar/pool/QueueDequeue.cpp
