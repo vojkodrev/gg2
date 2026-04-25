@@ -1,5 +1,5 @@
 #pragma once
 #include "../../../../../structs/collision/SpatialHash.h"
-#include "../../../../../structs/object/Object.h"
+#include "../../../../../structs/core/Context.h"
 
-bool isBlocked(const SpatialHash& hash, const Object& object, int wx, int wy);
+bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy);

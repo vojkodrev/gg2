@@ -52,7 +52,7 @@ bool runAStar(AStarContext& astar, Context& ctx,
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, colHashSnapshot, ctx.data.object, current, speed, neighbors);
+        int count = getNeighbors(astar, colHashSnapshot, ctx, current, speed, neighbors);
 
         float gCurrent;
         if (!hashMapTryGet(astar.gscores, current, astar.generation, gCurrent))

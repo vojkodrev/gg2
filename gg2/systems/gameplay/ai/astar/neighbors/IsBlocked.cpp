@@ -3,7 +3,7 @@
 #include "ColId.h"
 #include <SDL3/SDL.h>
 
-bool isBlocked(const SpatialHash& hash, const Object& object, int wx, int wy)
+bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy)
 {
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
     int n = hash.query((float)wx, (float)wy, 1.0f, 1.0f,
@@ -17,7 +17,7 @@ bool isBlocked(const SpatialHash& hash, const Object& object, int wx, int wy)
         if (!colIdIsObject(id))
             continue;
 
-        SDL_FRect box = entityColAABB(object, colIdObjectIndex(id));
+        SDL_FRect box = entityColAABB(ctx.data.object, colIdObjectIndex(id));
 
         if (SDL_PointInRectFloat(&p, &box))
             return true;
