@@ -25,6 +25,7 @@ add_library(systems_gameplay
     ai/astar/neighbors/IsBlocked.cpp
     ai/astar/neighbors/GetNeighbors.cpp
     ai/astar/goal/IsGoalReached.cpp
+    ai/astar/RunAStar.cpp
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
 )
@@ -38,5 +39,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/cost
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/neighbors
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/goal
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)
