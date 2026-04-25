@@ -24,11 +24,11 @@ bool runAStar(AStarContext& astar, Context& ctx,
 
     float h = astarH(astar, startNode, goalX, goalY);
     hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
-    heapPush(astar.heap, startNode, h);
+    heapPush(astar.fscoreHeap, startNode, h);
 
-    while (!heapEmpty(astar.heap))
+    while (!heapEmpty(astar.fscoreHeap))
     {
-        int current = heapPop(astar.heap);
+        int current = heapPop(astar.fscoreHeap);
 
         if (hashMapContains(astar.closed, current, astar.generation))
             continue;
@@ -62,7 +62,7 @@ bool runAStar(AStarContext& astar, Context& ctx,
 
             hashMapInsert(astar.gscores,  nb, astar.generation, tentativeG);
             hashMapInsert(astar.cameFrom, nb, astar.generation, current);
-            heapPush(astar.heap, nb, tentativeG + astarH(astar, nb, goalX, goalY));
+            heapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalX, goalY));
         }
     }
 

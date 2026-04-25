@@ -5,7 +5,7 @@
 
 struct AStarContext
 {
-    AStarHeap                        heap;
+    AStarHeap                        fscoreHeap;
     HashMap<void,  ASTAR_HASH_SIZE>  closed;
     HashMap<float, ASTAR_HASH_SIZE>  gscores;
     HashMap<int,   ASTAR_HASH_SIZE>  cameFrom;
