@@ -1,5 +1,6 @@
 #include "RunAStar.h"
 #include "../../../../structs/core/Context.h"
+#include "../../../../utils/collision/EntityAABB.h"
 #include "heap/HeapPush.h"
 #include "heap/HeapPop.h"
 #include "heap/HeapEmpty.h"
@@ -8,6 +9,7 @@
 #include "neighbors/GetNeighbors.h"
 #include "goal/IsGoalReached.h"
 #include "reconstruct/ReconstructPath.h"
+#include "node/AStarEncode.h"
 #include "../../../../utils/hashmap/HashMapInsert.h"
 #include "../../../../utils/hashmap/HashMapInsertVoid.h"
 #include "../../../../utils/hashmap/HashMapContains.h"
@@ -16,11 +18,20 @@
 static const int MAX_NEIGHBORS = 8;
 
 bool runAStar(AStarContext& astar, Context& ctx,
-              int startNode, float goalX, float goalY, const SDL_FRect& col, int speed)
+              SDL_FPoint start, const SDL_FRect& destCol, int speed)
 {
     SpatialHash colHashSnapshot = ctx.collision.spatialHash;
 
+    astar.generation++;
     astar.pathLen = 0;
+    astar.offsetX = (int)start.x - ASTAR_SEARCH_R;
+    astar.offsetY = (int)start.y - ASTAR_SEARCH_R;
+
+    int startNode = astarEncode(astar, (int)start.x, (int)start.y);
+
+    SDL_FPoint goalCenter = entityColCenter(destCol);
+    float goalX = goalCenter.x;
+    float goalY = goalCenter.y;
 
     float h = astarH(astar, startNode, goalX, goalY);
     hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
@@ -34,7 +45,7 @@ bool runAStar(AStarContext& astar, Context& ctx,
             continue;
         hashMapInsert(astar.closed, current, astar.generation);
 
-        if (isGoalReached(astar, col, current))
+        if (isGoalReached(astar, destCol, current))
         {
             reconstructPath(astar, current);
             return true;
