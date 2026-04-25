@@ -13,11 +13,19 @@ int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Objec
     int cx, cy;
     astarDecode(astar, node, cx, cy);
 
+    int minX = astar.offsetX;
+    int minY = astar.offsetY;
+    int maxX = astar.offsetX + ASTAR_SEARCH_D - 1;
+    int maxY = astar.offsetY + ASTAR_SEARCH_D - 1;
+
     int count = 0;
     for (int d = 0; d < 8; d++)
     {
         int nx = cx + DIR_X[d] * speed;
         int ny = cy + DIR_Y[d] * speed;
+
+        if (nx < minX || nx > maxX || ny < minY || ny > maxY)
+            continue;
 
         if (isBlocked(hash, object, nx, ny))
             continue;
