@@ -1,4 +1,5 @@
 #include "RunAStar.h"
+#include "../../../../structs/core/Context.h"
 #include "heap/HeapPush.h"
 #include "heap/HeapPop.h"
 #include "heap/HeapEmpty.h"
@@ -14,9 +15,11 @@
 
 static const int MAX_NEIGHBORS = 8;
 
-bool runAStar(AStarContext& astar, const SpatialHash& hash, const Object& object,
+bool runAStar(AStarContext& astar, Context& ctx,
               int startNode, float goalX, float goalY, const SDL_FRect& col, int speed)
 {
+    SpatialHash colHashSnapshot = ctx.collision.spatialHash;
+
     astar.pathLen = 0;
 
     float h = astarH(astar, startNode, goalX, goalY);
@@ -38,7 +41,7 @@ bool runAStar(AStarContext& astar, const SpatialHash& hash, const Object& object
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, hash, object, current, speed, neighbors);
+        int count = getNeighbors(astar, colHashSnapshot, ctx.data.object, current, speed, neighbors);
 
         float gCurrent;
         if (!hashMapTryGet(astar.gscores, current, astar.generation, gCurrent))
