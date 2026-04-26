@@ -7,6 +7,7 @@
 #include "RandomIdleTimer.h"
 #include "EntityAABB.h"
 #include "Constants.h"
+#include "astar/RequestAStarPath.h"
 
 void updateMonster(uint32_t n, Context &ctx)
 {
@@ -61,11 +62,35 @@ void updateMonster(uint32_t n, Context &ctx)
             ai.state[n] = NPCAiState::GoToSpawn;
             break;
         }
+
         SDL_FRect playerCol = entityColAABB(ctx.data.player);
-        SDL_FPoint playerColCenter = entityColCenter(playerCol);
-        moveColCenterToward(ctx, n, playerColCenter.x, playerColCenter.y, NPC_MONSTER_SPEED);
+
         if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
+        {
             ai.state[n] = NPCAiState::Attack;
+            break;
+        }
+
+        if (ai.pathStatus[n] == NPCPathStatus::IDLE ||
+            ai.pathStatus[n] == NPCPathStatus::CALCULATION_FAILED)
+        {
+            SDL_FPoint npcPos = { npc.position.x[n], npc.position.y[n] };
+            requestAStarPath(ctx, n, npcPos, playerCol, NPC_MONSTER_SPEED);
+        }
+        else if (ai.pathStatus[n] == NPCPathStatus::CALCULATION_FINISHED)
+        {
+            uint32_t i = ai.pathIndex[n];
+            float tx = (float)ai.path.x[n][i];
+            float ty = (float)ai.path.y[n][i];
+            moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
+            if (hasReachedPoint(ctx, n, tx, ty))
+            {
+                if (i + 1 < ai.pathLength[n])
+                    ai.pathIndex[n]++;
+                else
+                    ai.pathStatus[n] = NPCPathStatus::IDLE;
+            }
+        }
         break;
     }
 
