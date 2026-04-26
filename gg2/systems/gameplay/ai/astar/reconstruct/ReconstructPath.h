@@ -1,4 +1,4 @@
 #pragma once
 #include "../../../../../structs/gameplay/ai/AStarContext.h"
 
-void reconstructPath(AStarContext& ctx, int current);
+int reconstructPath(AStarContext& ctx, int current, int* path);

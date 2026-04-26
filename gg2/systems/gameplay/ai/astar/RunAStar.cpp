@@ -17,13 +17,13 @@
 
 static const int MAX_NEIGHBORS = 8;
 
-bool runAStar(AStarContext& astar, Context& ctx,
-              SDL_FPoint start, const SDL_FRect& destCol, int speed)
+int runAStar(AStarContext& astar, Context& ctx,
+             SDL_FPoint start, const SDL_FRect& destCol, int speed,
+             int* pathOut)
 {
     SpatialHash colHashSnapshot = ctx.collision.spatialHash;
 
     astar.generation++;
-    astar.pathLen = 0;
     astar.offsetX = (int)start.x - ASTAR_SEARCH_R;
     astar.offsetY = (int)start.y - ASTAR_SEARCH_R;
 
@@ -46,10 +46,7 @@ bool runAStar(AStarContext& astar, Context& ctx,
         hashMapInsert(astar.closed, current, astar.generation);
 
         if (isGoalReached(astar, destCol, current))
-        {
-            reconstructPath(astar, current);
-            return true;
-        }
+            return reconstructPath(astar, current, pathOut);
 
         int neighbors[MAX_NEIGHBORS];
         int count = getNeighbors(astar, colHashSnapshot, ctx, current, speed, neighbors);
@@ -77,5 +74,5 @@ bool runAStar(AStarContext& astar, Context& ctx,
         }
     }
 
-    return false;
+    return -1;
 }

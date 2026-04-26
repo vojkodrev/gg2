@@ -10,9 +10,6 @@ struct AStarContext
     HashMap<float, ASTAR_HASH_SIZE>  gscores;
     HashMap<int,   ASTAR_HASH_SIZE>  cameFrom;
 
-    int path[ASTAR_MAX_PATH];
-    int       pathLen;
-
     int generation;
     int offsetX;
     int offsetY;
