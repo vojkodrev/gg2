@@ -67,6 +67,7 @@ void updateMonster(uint32_t n, Context &ctx)
 
         if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
         {
+            ai.pathStatus[n] = NPCPathStatus::IDLE;
             ai.state[n] = NPCAiState::Attack;
             break;
         }
@@ -75,7 +76,7 @@ void updateMonster(uint32_t n, Context &ctx)
             ai.pathStatus[n] == NPCPathStatus::CALCULATION_FAILED)
         {
             SDL_FPoint npcPos = { npc.position.x[n], npc.position.y[n] };
-            requestAStarPath(ctx, n, npcPos, playerCol, NPC_MONSTER_SPEED);
+            requestAStarPath(ctx, n, npcPos, playerCol, NPC_MONSTER_PATH_STEP);
         }
         else if (ai.pathStatus[n] == NPCPathStatus::CALCULATION_FINISHED)
         {
