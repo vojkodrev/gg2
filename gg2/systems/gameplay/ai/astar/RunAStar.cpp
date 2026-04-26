@@ -21,6 +21,8 @@ int runAStar(AStarContext& astar, Context& ctx,
              SDL_FPoint start, const SDL_FRect& destCol, int speed,
              int* pathOut)
 {
+    astar.status = AStarStatus::CALCULATING_PATH;
+
     SpatialHash colHashSnapshot = ctx.collision.spatialHash;
 
     astar.generation++;
@@ -46,7 +48,10 @@ int runAStar(AStarContext& astar, Context& ctx,
         hashMapInsert(astar.closed, current, astar.generation);
 
         if (isGoalReached(astar, destCol, current))
+        {
+            astar.status = AStarStatus::FINISHED_CALCULATING;
             return reconstructPath(astar, current, pathOut);
+        }
 
         int neighbors[MAX_NEIGHBORS];
         int count = getNeighbors(astar, colHashSnapshot, ctx, current, speed, neighbors);
@@ -74,5 +79,6 @@ int runAStar(AStarContext& astar, Context& ctx,
         }
     }
 
+    astar.status = AStarStatus::PATH_NOT_FOUND;
     return -1;
 }
