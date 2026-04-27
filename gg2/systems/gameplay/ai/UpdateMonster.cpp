@@ -84,17 +84,29 @@ void updateMonster(uint32_t n, Context &ctx)
         }
         else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
         {
+            SDL_FPoint npcCenter = entityColCenter(entityColAABB(npc, n));
+            float r = NPC_MONSTER_SPEED * dt;
+            uint32_t len = ai.pathLength[n];
             uint32_t i = ai.pathIndex[n];
+
+            // skip ahead to the furthest path point reachable this frame
+            for (uint32_t j = i + 1; j < len; j++)
+            {
+                float dx = (float)ai.path.x[n][j] - npcCenter.x;
+                float dy = (float)ai.path.y[n][j] - npcCenter.y;
+                if (dx * dx + dy * dy <= r * r)
+                    i = j;
+                else
+                    break;
+            }
+            ai.pathIndex[n] = i;
+
             float tx = (float)ai.path.x[n][i];
             float ty = (float)ai.path.y[n][i];
             moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
-            if (hasReachedPoint(ctx, n, tx, ty))
-            {
-                if (i + 1 < ai.pathLength[n])
-                    ai.pathIndex[n]++;
-                else
-                    ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-            }
+
+            if (i + 1 >= len || hasReachedPoint(ctx, n, tx, ty))
+                ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
         }
         break;
     }

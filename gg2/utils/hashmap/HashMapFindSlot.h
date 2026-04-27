@@ -3,7 +3,7 @@
 #include "HashMapSlot.h"
 
 template<typename T, int Size>
-int hashMapFind(const HashMap<T, Size>& map, int node, int generation)
+int hashMapFindSlot(const HashMap<T, Size>& map, int node, int generation)
 {
     int slot = hashMapSlot<Size>(node);
     for (int i = 0; i < Size; i++)

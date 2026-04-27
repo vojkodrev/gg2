@@ -37,6 +37,8 @@ int runAStar(AStarContext& astar, Context& ctx,
     float goalX = goalCenter.x;
     float goalY = goalCenter.y;
 
+    astar.fscoreHeap.size = 0;
+
     float h = astarH(astar, startNode, goalX, goalY);
     hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
     heapPush(astar.fscoreHeap, startNode, h);
