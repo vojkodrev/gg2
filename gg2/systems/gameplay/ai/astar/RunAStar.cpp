@@ -23,6 +23,8 @@ int runAStar(AStarContext& astar, Context& ctx,
 {
     astar.status = AStarStatus::CALCULATING_PATH;
 
+    Uint64 startTime = SDL_GetTicks();
+
     SpatialHash colHashSnapshot = ctx.collision.spatialHash;
 
     astar.generation++;
@@ -50,6 +52,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         if (isGoalReached(astar, destCol, current))
         {
             astar.status = AStarStatus::FINISHED_CALCULATING;
+            SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
             return reconstructPath(astar, current, pathOut);
         }
 
@@ -80,5 +83,6 @@ int runAStar(AStarContext& astar, Context& ctx,
     }
 
     astar.status = AStarStatus::PATH_NOT_FOUND;
+    SDL_Log("AStar: path not found (%.2f ms)", (float)(SDL_GetTicks() - startTime));
     return -1;
 }

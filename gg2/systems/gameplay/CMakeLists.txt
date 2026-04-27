@@ -26,6 +26,7 @@ add_library(systems_gameplay
     ai/astar/neighbors/GetNeighbors.cpp
     ai/astar/goal/IsGoalReached.cpp
     ai/astar/RunAStar.cpp
+    ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
 )
