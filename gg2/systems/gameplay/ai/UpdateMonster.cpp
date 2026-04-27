@@ -10,6 +10,37 @@
 #include "Constants.h"
 #include "astar/RequestAStarPath.h"
 
+static void setNpcAiStateGoToPlayer(uint32_t n, Context &ctx)
+{
+    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+    ctx.data.npc.ai.state[n] = NPCAiState::GoToPlayer;
+}
+
+static void setNpcAiStateGoToSpawn(uint32_t n, Context &ctx)
+{
+    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+    ctx.data.npc.ai.state[n] = NPCAiState::GoToSpawn;
+}
+
+static void setNpcAiStateAttack(uint32_t n, Context &ctx)
+{
+    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+    ctx.data.npc.ai.state[n] = NPCAiState::Attack;
+}
+
+static void setNpcAiStatePatrolling(uint32_t n, Context &ctx)
+{
+    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+    ctx.data.npc.ai.state[n] = NPCAiState::Patrolling;
+}
+
+static void setNpcAiStateIdle(uint32_t n, Context &ctx)
+{
+    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+    ctx.data.npc.ai.idleTimer[n] = randomIdleTimer();
+    ctx.data.npc.ai.state[n] = NPCAiState::Idle;
+}
+
 void updateMonster(uint32_t n, Context &ctx)
 {
     float dt = ctx.frame.dt;
@@ -23,11 +54,11 @@ void updateMonster(uint32_t n, Context &ctx)
         ai.idleTimer[n] -= dt;
         if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
         {
-            ai.state[n] = NPCAiState::GoToPlayer;
+            setNpcAiStateGoToPlayer(n, ctx);
         }
         else if (ai.idleTimer[n] <= 0.0f)
         {
-            ai.state[n] = NPCAiState::Patrolling;
+            setNpcAiStatePatrolling(n, ctx);
         }
         break;
 
@@ -35,7 +66,7 @@ void updateMonster(uint32_t n, Context &ctx)
     {
         if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
         {
-            ai.state[n] = NPCAiState::GoToPlayer;
+            setNpcAiStateGoToPlayer(n, ctx);
             break;
         }
         if (ai.patrolCount[n] == 0)
@@ -49,8 +80,7 @@ void updateMonster(uint32_t n, Context &ctx)
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
             if ((rand() % 100) + 1 <= 10)
             {
-                ai.state[n] = NPCAiState::Idle;
-                ai.idleTimer[n] = randomIdleTimer();
+                setNpcAiStateIdle(n, ctx);
             }
         }
         break;
@@ -60,7 +90,7 @@ void updateMonster(uint32_t n, Context &ctx)
     {
         if (distToSpawn(ctx, n) > NPC_LEASH_RADIUS)
         {
-            ai.state[n] = NPCAiState::GoToSpawn;
+            setNpcAiStateGoToSpawn(n, ctx);
             break;
         }
 
@@ -68,8 +98,7 @@ void updateMonster(uint32_t n, Context &ctx)
 
         if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
         {
-            ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-            ai.state[n] = NPCAiState::Attack;
+            setNpcAiStateAttack(n, ctx);
             break;
         }
 
@@ -115,12 +144,12 @@ void updateMonster(uint32_t n, Context &ctx)
     {
         if (distToSpawn(ctx, n) > NPC_LEASH_RADIUS)
         {
-            ai.state[n] = NPCAiState::GoToSpawn;
+            setNpcAiStateGoToSpawn(n, ctx);
             break;
         }
         SDL_FRect playerCol = entityColAABB(ctx.data.player);
         if (!areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
-            ai.state[n] = NPCAiState::GoToPlayer;
+            setNpcAiStateGoToPlayer(n, ctx);
         break;
     }
 
@@ -128,8 +157,7 @@ void updateMonster(uint32_t n, Context &ctx)
         moveColCenterToward(ctx, n, ai.spawn.x[n], ai.spawn.y[n], NPC_MONSTER_SPEED);
         if (hasReachedPoint(ctx, n, ai.spawn.x[n], ai.spawn.y[n]))
         {
-            ai.idleTimer[n] = randomIdleTimer();
-            ai.state[n] = NPCAiState::Idle;
+            setNpcAiStateIdle(n, ctx);
         }
         break;
     }
