@@ -1,4 +1,5 @@
 #pragma once
+#include <atomic>
 #include <cstdint>
 #include "Constants.h"
 #include "NPCPatrolPoint.h"
@@ -23,7 +24,7 @@ struct NPCAi
     NPCPath       path;
     uint32_t      pathLength[MAX_NPCS];
     uint32_t      pathIndex[MAX_NPCS];
-    NPCPathStatus pathStatus[MAX_NPCS];
+    std::atomic<NPCPathStatus> pathStatus[MAX_NPCS];
 
     float idleTimer[MAX_NPCS];
 };

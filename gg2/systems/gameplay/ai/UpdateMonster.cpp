@@ -1,4 +1,5 @@
 #include "UpdateMonster.h"
+#include <atomic>
 #include "DistToPlayer.h"
 #include "DistToSpawn.h"
 #include "HasReachedPoint.h"
@@ -67,18 +68,21 @@ void updateMonster(uint32_t n, Context &ctx)
 
         if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
         {
-            ai.pathStatus[n] = NPCPathStatus::IDLE;
+            ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
             ai.state[n] = NPCAiState::Attack;
             break;
         }
 
-        if (ai.pathStatus[n] == NPCPathStatus::IDLE ||
-            ai.pathStatus[n] == NPCPathStatus::CALCULATION_FAILED)
+        // acquire: pairs with release store in RequestAStarPath, ensures path data is visible
+        auto pathStatus = ai.pathStatus[n].load(std::memory_order_acquire);
+
+        if (pathStatus == NPCPathStatus::IDLE ||
+            pathStatus == NPCPathStatus::CALCULATION_FAILED)
         {
             SDL_FPoint npcPos = { npc.position.x[n], npc.position.y[n] };
             requestAStarPath(ctx, n, npcPos, playerCol, NPC_MONSTER_PATH_STEP);
         }
-        else if (ai.pathStatus[n] == NPCPathStatus::CALCULATION_FINISHED)
+        else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
         {
             uint32_t i = ai.pathIndex[n];
             float tx = (float)ai.path.x[n][i];
@@ -89,7 +93,7 @@ void updateMonster(uint32_t n, Context &ctx)
                 if (i + 1 < ai.pathLength[n])
                     ai.pathIndex[n]++;
                 else
-                    ai.pathStatus[n] = NPCPathStatus::IDLE;
+                    ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
             }
         }
         break;

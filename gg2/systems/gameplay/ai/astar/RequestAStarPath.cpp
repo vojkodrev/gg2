@@ -13,7 +13,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
 {
     NPCAi& npcAi = ctx.data.npc.ai;
 
-    npcAi.pathStatus[npcIndex] = NPCPathStatus::STARTED;
+    npcAi.pathStatus[npcIndex].store(NPCPathStatus::PATH_REQUESTED, std::memory_order_relaxed);
 
     int astarIndex = astarAlloc(ctx.astarPool);
     if (astarIndex == -1)
@@ -27,7 +27,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
         defer(astarFree(ctx.astarPool, astarIndex));
 
         NPCAi& npcAi = ctx.data.npc.ai;
-        npcAi.pathStatus[npcIndex] = NPCPathStatus::WAITING_FOR_PATH;
+        npcAi.pathStatus[npcIndex].store(NPCPathStatus::WAITING_FOR_PATH, std::memory_order_relaxed);
 
         int pathBuffer[ASTAR_MAX_PATH];
         int length = runAStar(astar, ctx, start, destCol, speed, pathBuffer);
@@ -43,11 +43,12 @@ void requestAStarPath(Context& ctx, int npcIndex,
             }
             npcAi.pathLength[npcIndex] = (uint32_t)length;
             npcAi.pathIndex[npcIndex]  = 0;
-            npcAi.pathStatus[npcIndex] = NPCPathStatus::CALCULATION_FINISHED;
+            // release: guarantees path data writes above are visible to main thread on acquire load
+            npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FINISHED, std::memory_order_release);
         }
         else
         {
-            npcAi.pathStatus[npcIndex] = NPCPathStatus::CALCULATION_FAILED;
+            npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FAILED, std::memory_order_relaxed);
         }
     });
 }

@@ -1,9 +1,9 @@
 #pragma once
 
-enum class NPCPathStatus
+enum class NPCPathStatus : int
 {
     IDLE,
-    STARTED,
+    PATH_REQUESTED,
     WAITING_FOR_PATH,
     CALCULATION_FINISHED,
     WALKING,
