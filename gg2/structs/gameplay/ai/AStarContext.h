@@ -13,8 +13,10 @@ struct AStarContext
     HashMap<int,   ASTAR_HASH_SIZE>  cameFrom;
 
     int          generation;
-    int          offsetX;
-    int          offsetY;
+    int          searchX;
+    int          searchY;
+    int          searchW;
+    int          searchH;
     AStarStatus  status;
     std::future<void> future;
 };

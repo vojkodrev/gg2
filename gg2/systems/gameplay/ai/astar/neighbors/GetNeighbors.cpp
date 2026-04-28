@@ -13,10 +13,10 @@ int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Conte
     int cx, cy;
     astarDecode(astar, node, cx, cy);
 
-    int minX = astar.offsetX;
-    int minY = astar.offsetY;
-    int maxX = astar.offsetX + ASTAR_SEARCH_D - 1;
-    int maxY = astar.offsetY + ASTAR_SEARCH_D - 1;
+    int minX = astar.searchX;
+    int minY = astar.searchY;
+    int maxX = astar.searchX + astar.searchW - 1;
+    int maxY = astar.searchY + astar.searchH - 1;
 
     int count = 0;
     for (int d = 0; d < 8; d++)

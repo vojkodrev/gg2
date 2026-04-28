@@ -30,12 +30,20 @@ int runAStar(AStarContext& astar, Context& ctx,
     SDL_FPoint startCenter = entityColCenter(startCol);
 
     astar.generation++;
-    astar.offsetX = (int)startCenter.x - ASTAR_SEARCH_R;
-    astar.offsetY = (int)startCenter.y - ASTAR_SEARCH_R;
+    SDL_FPoint goalCenter = entityColCenter(destCol);
+
+    int minX = (int)SDL_min(startCenter.x, goalCenter.x) - ASTAR_SEARCH_PAD;
+    int minY = (int)SDL_min(startCenter.y, goalCenter.y) - ASTAR_SEARCH_PAD;
+    int maxX = (int)SDL_max(startCenter.x, goalCenter.x) + ASTAR_SEARCH_PAD;
+    int maxY = (int)SDL_max(startCenter.y, goalCenter.y) + ASTAR_SEARCH_PAD;
+
+    astar.searchX = minX;
+    astar.searchY = minY;
+    astar.searchW = maxX - minX + 1;
+    astar.searchH = maxY - minY + 1;
 
     int startNode = astarEncode(astar, (int)startCenter.x, (int)startCenter.y);
 
-    SDL_FPoint goalCenter = entityColCenter(destCol);
     float goalX = goalCenter.x;
     float goalY = goalCenter.y;
 
@@ -73,7 +81,7 @@ int runAStar(AStarContext& astar, Context& ctx,
             if (hashMapContains(astar.closed, nb, astar.generation))
                 continue;
 
-            float tentativeG = gCurrent + astarD(current, nb, speed);
+            float tentativeG = gCurrent + astarD(astar, current, nb, speed);
 
             float existingG;
             if (hashMapTryGet(astar.gscores, nb, astar.generation, existingG) &&
