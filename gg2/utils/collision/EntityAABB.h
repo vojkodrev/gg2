@@ -6,27 +6,28 @@
 #include "Object.h"
 #include "ColId.h"
 
-inline SDL_FRect entityColAABB(const Player &p)
+inline SDL_FRect entityColAABB(const Player &p, float buffer = 0.0f)
 {
-    return {p.x + p.colOffX, p.y + p.colOffY, p.colW, p.colH};
+    return {p.x + p.colOffX - buffer, p.y + p.colOffY - buffer,
+            p.colW + buffer * 2, p.colH + buffer * 2};
 }
 
-inline SDL_FRect entityColAABB(const NPC &npc, uint32_t i)
+inline SDL_FRect entityColAABB(const NPC &npc, uint32_t i, float buffer = 0.0f)
 {
     return {
-        npc.position.x[i] + npc.collision.offX[i],
-        npc.position.y[i] + npc.collision.offY[i],
-        npc.collision.w[i],
-        npc.collision.h[i]};
+        npc.position.x[i] + npc.collision.offX[i] - buffer,
+        npc.position.y[i] + npc.collision.offY[i] - buffer,
+        npc.collision.w[i] + buffer * 2,
+        npc.collision.h[i] + buffer * 2};
 }
 
-inline SDL_FRect entityColAABB(const Object &object, uint32_t i)
+inline SDL_FRect entityColAABB(const Object &object, uint32_t i, float buffer = 0.0f)
 {
     return {
-        object.position.x[i] + object.collision.offX[i],
-        object.position.y[i] + object.collision.offY[i],
-        object.collision.w[i],
-        object.collision.h[i]};
+        object.position.x[i] + object.collision.offX[i] - buffer,
+        object.position.y[i] + object.collision.offY[i] - buffer,
+        object.collision.w[i] + buffer * 2,
+        object.collision.h[i] + buffer * 2};
 }
 
 inline SDL_FPoint entityColCenter(const SDL_FRect &r)

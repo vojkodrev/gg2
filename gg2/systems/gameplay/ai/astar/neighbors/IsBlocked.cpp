@@ -1,15 +1,19 @@
 #include "IsBlocked.h"
 #include "EntityAABB.h"
 #include "ColId.h"
+#include "Constants.h"
 #include <SDL3/SDL.h>
 
-bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy)
+bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy, SDL_FRect startCol)
 {
-    uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
-    int n = hash.query((float)wx, (float)wy, 1.0f, 1.0f,
-                       candidates, SpatialHash::MAX_PER_BUCKET * 4);
+    SDL_FRect moverBox = { (float)wx - startCol.w * 0.5f - NPC_MONSTER_PATH_STEP,
+                           (float)wy - startCol.h * 0.5f - NPC_MONSTER_PATH_STEP,
+                           startCol.w + NPC_MONSTER_PATH_STEP * 2,
+                           startCol.h + NPC_MONSTER_PATH_STEP * 2 };
 
-    SDL_FPoint p = { (float)wx, (float)wy };
+    uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
+    int n = hash.query(moverBox.x, moverBox.y, moverBox.w, moverBox.h,
+                       candidates, SpatialHash::MAX_PER_BUCKET * 4);
 
     for (int i = 0; i < n; i++)
     {
@@ -19,7 +23,7 @@ bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy)
 
         SDL_FRect box = entityColAABB(ctx.data.object, colIdObjectIndex(id));
 
-        if (SDL_PointInRectFloat(&p, &box))
+        if (SDL_HasRectIntersectionFloat(&moverBox, &box))
             return true;
     }
     return false;

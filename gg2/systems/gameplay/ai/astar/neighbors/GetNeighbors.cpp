@@ -8,7 +8,7 @@ static const int DIR_Y[8] = {  0,  0,  1, -1,  1, -1,  1, -1 };
 
 // hash must be a collision state snapshot taken before pathfinding begins
 int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Context& ctx,
-                 int node, int speed, int* neighborsOut)
+                 int node, int speed, SDL_FRect startCol, int* neighborsOut)
 {
     int cx, cy;
     astarDecode(astar, node, cx, cy);
@@ -27,7 +27,7 @@ int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Conte
         if (nx < minX || nx > maxX || ny < minY || ny > maxY)
             continue;
 
-        if (isBlocked(hash, ctx, nx, ny))
+        if (isBlocked(hash, ctx, nx, ny, startCol))
             continue;
 
         neighborsOut[count++] = astarEncode(astar, nx, ny);

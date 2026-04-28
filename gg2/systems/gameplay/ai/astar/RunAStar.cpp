@@ -18,7 +18,7 @@
 static const int MAX_NEIGHBORS = 8;
 
 int runAStar(AStarContext& astar, Context& ctx,
-             SDL_FPoint start, const SDL_FRect& destCol, int speed,
+             SDL_FRect startCol, const SDL_FRect& destCol, int speed,
              int* pathOut)
 {
     astar.status = AStarStatus::CALCULATING_PATH;
@@ -27,11 +27,13 @@ int runAStar(AStarContext& astar, Context& ctx,
 
     SpatialHash colHashSnapshot = ctx.collision.spatialHash;
 
-    astar.generation++;
-    astar.offsetX = (int)start.x - ASTAR_SEARCH_R;
-    astar.offsetY = (int)start.y - ASTAR_SEARCH_R;
+    SDL_FPoint startCenter = entityColCenter(startCol);
 
-    int startNode = astarEncode(astar, (int)start.x, (int)start.y);
+    astar.generation++;
+    astar.offsetX = (int)startCenter.x - ASTAR_SEARCH_R;
+    astar.offsetY = (int)startCenter.y - ASTAR_SEARCH_R;
+
+    int startNode = astarEncode(astar, (int)startCenter.x, (int)startCenter.y);
 
     SDL_FPoint goalCenter = entityColCenter(destCol);
     float goalX = goalCenter.x;
@@ -59,7 +61,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, colHashSnapshot, ctx, current, speed, neighbors);
+        int count = getNeighbors(astar, colHashSnapshot, ctx, current, speed, startCol, neighbors);
 
         float gCurrent;
         if (!hashMapTryGet(astar.gscores, current, astar.generation, gCurrent))

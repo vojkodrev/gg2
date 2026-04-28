@@ -4,4 +4,4 @@
 #include "../../../../../structs/core/Context.h"
 
 int getNeighbors(const AStarContext& astar, const SpatialHash& hash, const Context& ctx,
-                 int node, int speed, int* neighborsOut);
+                 int node, int speed, SDL_FRect startCol, int* neighborsOut);
