@@ -3,4 +3,4 @@
 #include <SDL3/SDL.h>
 
 void requestAStarPath(Context& ctx, int npcIndex,
-                      SDL_FRect startCol, const SDL_FRect& destCol, int speed);
+                      const SDL_FRect& destCol);

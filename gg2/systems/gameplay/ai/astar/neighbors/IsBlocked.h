@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/collision/SpatialHash.h"
+#include "../../../../../structs/gameplay/ai/AStarContext.h"
 #include "../../../../../structs/core/Context.h"
 
-bool isBlocked(const SpatialHash& hash, const Context& ctx, int wx, int wy, SDL_FRect startCol);
+bool isBlocked(const AStarContext& astar, const Context& ctx, int wx, int wy, SDL_FRect startCol);

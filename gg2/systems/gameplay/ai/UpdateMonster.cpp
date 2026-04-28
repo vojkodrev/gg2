@@ -108,7 +108,7 @@ void updateMonster(uint32_t n, Context &ctx)
         if (pathStatus == NPCPathStatus::IDLE ||
             pathStatus == NPCPathStatus::CALCULATION_FAILED)
         {
-            requestAStarPath(ctx, n, entityColAABB(npc, n), playerCol, NPC_MONSTER_PATH_STEP);
+            requestAStarPath(ctx, n, playerCol);
         }
         else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
         {
