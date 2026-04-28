@@ -112,17 +112,18 @@ void updateMonster(uint32_t n, Context &ctx)
         }
         else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
         {
+            uint32_t len = ai.pathLength[n];
             uint32_t i = ai.pathIndex[n];
 
-            while (i > 0 && hasReachedPoint(ctx, n, (float)ai.path.x[n][i], (float)ai.path.y[n][i]))
-                i--;
+            while (i + 1 < len && hasReachedPoint(ctx, n, (float)ai.path.x[n][i], (float)ai.path.y[n][i]))
+                i++;
             ai.pathIndex[n] = i;
 
             float tx = (float)ai.path.x[n][i];
             float ty = (float)ai.path.y[n][i];
             moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
 
-            if (i == 0 && hasReachedPoint(ctx, n, tx, ty))
+            if (i + 1 >= len && hasReachedPoint(ctx, n, tx, ty))
                 ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
         }
         break;

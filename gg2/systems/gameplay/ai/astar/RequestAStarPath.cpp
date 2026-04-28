@@ -42,7 +42,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
                 npcAi.path.y[npcIndex][i] = y;
             }
             npcAi.pathLength[npcIndex] = (uint32_t)length;
-            npcAi.pathIndex[npcIndex]  = (uint32_t)length - 1;
+            npcAi.pathIndex[npcIndex]  = 0;
             // release: guarantees path data writes above are visible to main thread on acquire load
             npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FINISHED, std::memory_order_release);
         }
