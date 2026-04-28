@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "DebugRenderSystem.h"
 #include <SDL3/SDL.h>
 
 void renderSystem(const Context &ctx)
@@ -19,5 +20,7 @@ void renderSystem(const Context &ctx)
         SDL_FRect dst = {rb.dst.x[i], rb.dst.y[i], rb.dst.w[i], rb.dst.h[i]};
         SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
     }
+    debugRenderSystem(ctx);
+
     SDL_RenderPresent(ctx.renderer);
 }

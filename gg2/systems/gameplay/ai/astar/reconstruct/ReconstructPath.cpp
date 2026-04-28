@@ -14,8 +14,12 @@ int reconstructPath(AStarContext& ctx, int current, int* path)
         current = parent;
     }
 
-    if (pathLen < ASTAR_MAX_PATH)
-        path[pathLen++] = current;
+    for (int l = 0, r = pathLen - 1; l < r; l++, r--)
+    {
+        int tmp = path[l];
+        path[l] = path[r];
+        path[r] = tmp;
+    }
 
     return pathLen;
 }

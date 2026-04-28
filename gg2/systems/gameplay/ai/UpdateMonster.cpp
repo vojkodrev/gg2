@@ -133,7 +133,7 @@ void updateMonster(uint32_t n, Context &ctx)
             float ty = (float)ai.path.y[n][i];
             moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
 
-            if (i + 1 >= len || hasReachedPoint(ctx, n, tx, ty))
+            if (i + 1 >= len && hasReachedPoint(ctx, n, tx, ty))
                 ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
         }
         break;
