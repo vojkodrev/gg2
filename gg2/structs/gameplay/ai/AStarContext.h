@@ -3,6 +3,7 @@
 #include "AStarStatus.h"
 #include "../../../utils/hashmap/HashMap.h"
 #include "../../core/Constants.h"
+#include <future>
 
 struct AStarContext
 {
@@ -15,4 +16,5 @@ struct AStarContext
     int          offsetX;
     int          offsetY;
     AStarStatus  status;
+    std::future<void> future;
 };

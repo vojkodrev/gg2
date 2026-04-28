@@ -22,7 +22,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
     AStarContext& astar = ctx.astarPool.ctx[astarIndex];
     astar.status = AStarStatus::STARTED;
 
-    std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, startCol, destCol, speed]()
+    astar.future = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, startCol, destCol, speed]()
     {
         defer(astarFree(ctx.astarPool, astarIndex));
 
@@ -42,7 +42,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
                 npcAi.path.y[npcIndex][i] = y;
             }
             npcAi.pathLength[npcIndex] = (uint32_t)length;
-            npcAi.pathIndex[npcIndex]  = 0;
+            npcAi.pathIndex[npcIndex]  = (uint32_t)length - 1;
             // release: guarantees path data writes above are visible to main thread on acquire load
             npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FINISHED, std::memory_order_release);
         }
