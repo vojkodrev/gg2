@@ -5,41 +5,14 @@
 #include "HasReachedPoint.h"
 #include "AreColBoxesNear.h"
 #include "MoveColCenterToward.h"
-#include "RandomIdleTimer.h"
 #include "EntityAABB.h"
 #include "Constants.h"
 #include "UpdateAStarPath.h"
-
-static void setNpcAiStateGoToPlayer(uint32_t n, Context &ctx)
-{
-    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-    ctx.data.npc.ai.state[n] = NPCAiState::GoToPlayer;
-}
-
-static void setNpcAiStateGoToSpawn(uint32_t n, Context &ctx)
-{
-    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-    ctx.data.npc.ai.state[n] = NPCAiState::GoToSpawn;
-}
-
-static void setNpcAiStateAttack(uint32_t n, Context &ctx)
-{
-    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-    ctx.data.npc.ai.state[n] = NPCAiState::Attack;
-}
-
-static void setNpcAiStatePatrolling(uint32_t n, Context &ctx)
-{
-    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-    ctx.data.npc.ai.state[n] = NPCAiState::Patrolling;
-}
-
-static void setNpcAiStateIdle(uint32_t n, Context &ctx)
-{
-    ctx.data.npc.ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-    ctx.data.npc.ai.idleTimer[n] = randomIdleTimer();
-    ctx.data.npc.ai.state[n] = NPCAiState::Idle;
-}
+#include "SetNpcAiStateGoToPlayer.h"
+#include "SetNpcAiStateGoToSpawn.h"
+#include "SetNpcAiStateAttack.h"
+#include "SetNpcAiStatePatrolling.h"
+#include "SetNpcAiStateIdle.h"
 
 void updateMonster(uint32_t n, Context &ctx)
 {
