@@ -8,16 +8,9 @@ add_library(systems_gameplay
     ai/HasReachedPoint.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
-    ai/astar/pool/QueueEmpty.cpp
-    ai/astar/pool/QueueDequeue.cpp
-    ai/astar/pool/QueueEnqueue.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp
     ai/astar/reconstruct/ReconstructPath.cpp
-    ai/astar/heap/HeapSwap.cpp
-    ai/astar/heap/HeapPush.cpp
-    ai/astar/heap/HeapPop.cpp
-    ai/astar/heap/HeapEmpty.cpp
     ai/astar/node/AStarEncode.cpp
     ai/astar/node/AStarDecode.cpp
     ai/astar/cost/AStarH.cpp
@@ -35,7 +28,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
-    ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/heap
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/cost
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/neighbors

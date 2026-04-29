@@ -9,6 +9,8 @@ target_include_directories(gg2_common INTERFACE
     ${CMAKE_SOURCE_DIR}/gg2/structs/collision
     ${CMAKE_SOURCE_DIR}/gg2/utils/collision
     ${CMAKE_SOURCE_DIR}/gg2/utils/npc
+    ${CMAKE_SOURCE_DIR}/gg2/utils/minheap
+    ${CMAKE_SOURCE_DIR}/gg2/utils/queue
     ${CMAKE_SOURCE_DIR}/vendor/SDL3-3.4.4/include
     ${CMAKE_SOURCE_DIR}/vendor/SDL3_image-3.4.2/include
 )
