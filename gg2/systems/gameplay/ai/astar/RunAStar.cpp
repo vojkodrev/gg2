@@ -1,9 +1,9 @@
 #include "RunAStar.h"
 #include "../../../../structs/core/Context.h"
 #include "../../../../utils/collision/EntityAABB.h"
-#include "heap/HeapPush.h"
-#include "heap/HeapPop.h"
-#include "heap/HeapEmpty.h"
+#include "../../../../utils/minheap/MinHeapPush.h"
+#include "../../../../utils/minheap/MinHeapPop.h"
+#include "../../../../utils/minheap/MinHeapEmpty.h"
 #include "cost/AStarH.h"
 #include "cost/AStarD.h"
 #include "neighbors/GetNeighbors.h"
@@ -51,11 +51,11 @@ int runAStar(AStarContext& astar, Context& ctx,
 
     float h = astarH(astar, startNode, goalX, goalY);
     hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
-    heapPush(astar.fscoreHeap, startNode, h);
+    minHeapPush(astar.fscoreHeap, startNode, h);
 
-    while (!heapEmpty(astar.fscoreHeap))
+    while (!minHeapEmpty(astar.fscoreHeap))
     {
-        int current = heapPop(astar.fscoreHeap);
+        int current = minHeapPop(astar.fscoreHeap);
 
         if (hashMapContains(astar.closed, current, astar.generation))
             continue;
@@ -92,7 +92,7 @@ int runAStar(AStarContext& astar, Context& ctx,
 
             hashMapInsert(astar.gscores,  nb, astar.generation, tentativeG);
             hashMapInsert(astar.cameFrom, nb, astar.generation, current);
-            heapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalX, goalY));
+            minHeapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalX, goalY));
         }
     }
 
