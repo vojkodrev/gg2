@@ -1,6 +1,7 @@
 add_library(systems_gameplay
     PlayerMovementSystem.cpp
     ai/NPCAiSystem.cpp
+    ai/UpdateAStarPath.cpp
     ai/UpdateMonster.cpp
     ai/Dist.cpp
     ai/DistToPlayer.cpp

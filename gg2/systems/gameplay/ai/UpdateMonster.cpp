@@ -8,7 +8,7 @@
 #include "RandomIdleTimer.h"
 #include "EntityAABB.h"
 #include "Constants.h"
-#include "astar/RequestAStarPath.h"
+#include "UpdateAStarPath.h"
 
 static void setNpcAiStateGoToPlayer(uint32_t n, Context &ctx)
 {
@@ -102,30 +102,7 @@ void updateMonster(uint32_t n, Context &ctx)
             break;
         }
 
-        // acquire: pairs with release store in RequestAStarPath, ensures path data is visible
-        auto pathStatus = ai.pathStatus[n].load(std::memory_order_acquire);
-
-        if (pathStatus == NPCPathStatus::IDLE ||
-            pathStatus == NPCPathStatus::CALCULATION_FAILED)
-        {
-            requestAStarPath(ctx, n, playerCol);
-        }
-        else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
-        {
-            uint32_t len = ai.pathLength[n];
-            uint32_t i = ai.pathIndex[n];
-
-            while (i + 1 < len && hasReachedPoint(ctx, n, (float)ai.path.x[n][i], (float)ai.path.y[n][i]))
-                i++;
-            ai.pathIndex[n] = i;
-
-            float tx = (float)ai.path.x[n][i];
-            float ty = (float)ai.path.y[n][i];
-            moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
-
-            if (i + 1 >= len && hasReachedPoint(ctx, n, tx, ty))
-                ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-        }
+        updateAStarPath(n, ctx, playerCol);
         break;
     }
 
@@ -143,11 +120,14 @@ void updateMonster(uint32_t n, Context &ctx)
     }
 
     case NPCAiState::GoToSpawn:
-        moveColCenterToward(ctx, n, ai.spawn.x[n], ai.spawn.y[n], NPC_MONSTER_SPEED);
-        if (hasReachedPoint(ctx, n, ai.spawn.x[n], ai.spawn.y[n]))
-        {
+    {
+        float spawnX = ai.spawn.x[n], spawnY = ai.spawn.y[n];
+        SDL_FRect spawnCol = { spawnX - NPC_MONSTER_PATH_STEP * 0.5f, spawnY - NPC_MONSTER_PATH_STEP * 0.5f,
+                               (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP };
+        updateAStarPath(n, ctx, spawnCol);
+        if (hasReachedPoint(ctx, n, spawnX, spawnY))
             setNpcAiStateIdle(n, ctx);
-        }
         break;
+    }
     }
 }
