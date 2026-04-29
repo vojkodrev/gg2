@@ -1,14 +1,14 @@
 #include "AStarAlloc.h"
-#include "QueueEmpty.h"
-#include "QueueDequeue.h"
+#include "../../../../utils/queue/QueueEmpty.h"
+#include "../../../../utils/queue/QueueDequeue.h"
 #include "../../../../structs/gameplay/ai/AStarStatus.h"
 
 int astarAlloc(AStarPool& pool)
 {
     int index = -1;
 
-    if (!queueEmpty(pool))
-        index = queueDequeue(pool);
+    if (!queueEmpty(pool.freeQueue))
+        index = queueDequeue(pool.freeQueue);
     else if (pool.count < MAX_ASTARS)
         index = pool.count++;
 
