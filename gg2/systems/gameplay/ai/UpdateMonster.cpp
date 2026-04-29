@@ -4,8 +4,8 @@
 #include "DistToSpawn.h"
 #include "HasReachedPoint.h"
 #include "AreColBoxesNear.h"
-#include "MoveColCenterToward.h"
 #include "EntityAABB.h"
+#include "CenteredRect.h"
 #include "Constants.h"
 #include "UpdateAStarPath.h"
 #include "SetNpcAiStateGoToPlayer.h"
@@ -47,7 +47,8 @@ void updateMonster(uint32_t n, Context &ctx)
         uint32_t p = ai.patrolIndex[n];
         float tx = ai.spawn.x[n] + ai.patrol.x[n][p];
         float ty = ai.spawn.y[n] + ai.patrol.y[n][p];
-        moveColCenterToward(ctx, n, tx, ty, NPC_MONSTER_SPEED);
+        SDL_FRect patrolCol = centeredRect(tx, ty, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
+        updateAStarPath(n, ctx, patrolCol);
         if (hasReachedPoint(ctx, n, tx, ty))
         {
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
@@ -95,8 +96,7 @@ void updateMonster(uint32_t n, Context &ctx)
     case NPCAiState::GoToSpawn:
     {
         float spawnX = ai.spawn.x[n], spawnY = ai.spawn.y[n];
-        SDL_FRect spawnCol = { spawnX - NPC_MONSTER_PATH_STEP * 0.5f, spawnY - NPC_MONSTER_PATH_STEP * 0.5f,
-                               (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP };
+        SDL_FRect spawnCol = centeredRect(spawnX, spawnY, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
         updateAStarPath(n, ctx, spawnCol);
         if (hasReachedPoint(ctx, n, spawnX, spawnY))
             setNpcAiStateIdle(n, ctx);
