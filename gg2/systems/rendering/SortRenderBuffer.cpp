@@ -1,5 +1,5 @@
 #include "SortRenderBuffer.h"
-#include <functional>
+#include "../../utils/sort/QuickSort.h"
 #include <algorithm>
 
 void sortRenderBuffer(Context &ctx)
@@ -7,7 +7,7 @@ void sortRenderBuffer(Context &ctx)
     auto &rb = ctx.renderBuffer;
     if (rb.count <= 1) return;
 
-    auto rbSwap = [&](uint32_t a, uint32_t b) {
+    auto rbSwap = [&](int a, int b) {
         std::swap(rb.src.x[a], rb.src.x[b]);
         std::swap(rb.src.y[a], rb.src.y[b]);
         std::swap(rb.src.w[a], rb.src.w[b]);
@@ -18,18 +18,7 @@ void sortRenderBuffer(Context &ctx)
         std::swap(rb.dst.h[a], rb.dst.h[b]);
         std::swap(rb.dst.colOffY[a], rb.dst.colOffY[b]);
     };
-    auto depthKey = [&](uint32_t i) { return rb.dst.y[i] + rb.dst.colOffY[i]; };
-    std::function<void(int, int)> rbSort = [&](int lo, int hi) {
-        if (lo >= hi) return;
-        float pivot = depthKey(lo + (hi - lo) / 2);
-        int i = lo, j = hi;
-        while (i <= j) {
-            while (depthKey(i) < pivot) i++;
-            while (depthKey(j) > pivot) j--;
-            if (i <= j) { rbSwap(i++, j--); }
-        }
-        rbSort(lo, j);
-        rbSort(i, hi);
-    };
-    rbSort(0, (int)rb.count - 1);
+    auto depthKey = [&](int i) { return rb.dst.y[i] + rb.dst.colOffY[i]; };
+
+    quickSort<float>(0, (int)rb.count - 1, depthKey, rbSwap);
 }
