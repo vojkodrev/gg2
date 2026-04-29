@@ -1,6 +1,8 @@
 #include "DistToPlayer.h"
 #include "Dist.h"
-#include "EntityAABB.h"
+#include "EntityColAABBPlayer.h"
+#include "EntityColAABBNPC.h"
+#include "EntityColCenter.h"
 
 float distToPlayer(Context &ctx, uint32_t n)
 {

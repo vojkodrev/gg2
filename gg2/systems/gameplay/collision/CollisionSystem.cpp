@@ -1,5 +1,8 @@
 #include "CollisionSystem.h"
-#include "EntityAABB.h"
+#include "EntityColAABBPlayer.h"
+#include "EntityColAABBNPC.h"
+#include "EntityColAABBObject.h"
+#include "GetEntityColAABB.h"
 #include "ColId.h"
 
 void collisionSystem(Context &ctx)

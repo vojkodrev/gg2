@@ -1,6 +1,6 @@
 #include "RequestAStarPath.h"
 #include "../../../../structs/gameplay/ai/AStarStatus.h"
-#include "../../../../utils/collision/EntityAABB.h"
+#include "../../../../utils/collision/EntityColAABBNPC.h"
 #include "../../../../structs/npc/NPCPathStatus.h"
 #include "pool/AStarAlloc.h"
 #include "pool/AStarFree.h"

@@ -1,6 +1,6 @@
 #include "RunAStar.h"
 #include "../../../../structs/core/Context.h"
-#include "../../../../utils/collision/EntityAABB.h"
+#include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/minheap/MinHeapPush.h"
 #include "../../../../utils/minheap/MinHeapPop.h"
 #include "../../../../utils/minheap/MinHeapEmpty.h"

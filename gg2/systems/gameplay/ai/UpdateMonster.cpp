@@ -4,7 +4,7 @@
 #include "DistToSpawn.h"
 #include "HasReachedRect.h"
 #include "AreColBoxesNear.h"
-#include "EntityAABB.h"
+#include "EntityColAABBPlayer.h"
 #include "CenteredRect.h"
 #include "Constants.h"
 #include "UpdateAStarPath.h"

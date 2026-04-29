@@ -1,5 +1,5 @@
 #include "AreColBoxesNear.h"
-#include "EntityAABB.h"
+#include "EntityColAABBNPC.h"
 #include <SDL3/SDL.h>
 
 bool areColBoxesNear(Context &ctx, uint32_t n, const SDL_FRect &targetCol, float buffer)
