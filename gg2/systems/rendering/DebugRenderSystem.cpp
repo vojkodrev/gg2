@@ -1,6 +1,8 @@
 #include "DebugRenderSystem.h"
 #include <SDL3/SDL.h>
 #include "../../utils/collision/EntityAABB.h"
+#include "../../structs/gameplay/ai/AStarPool.h"
+#include "../../structs/gameplay/ai/AStarStatus.h"
 
 static void renderColBox(SDL_Renderer *renderer, SDL_FRect col)
 {
@@ -43,6 +45,14 @@ void debugRenderSystem(const Context &ctx)
 
     for (uint32_t i = 0; i < ctx.data.object.objectCount; i++)
         renderColBox(ctx.renderer, entityColAABB(ctx.data.object, i));
+
+    SDL_SetRenderDrawColor(ctx.renderer, 0, 0, 255, 80);
+    for (int i = 0; i < ctx.astarPool.count; i++)
+    {
+        const AStarContext &a = ctx.astarPool.ctx[i];
+        SDL_FRect rect = { (float)a.searchX, (float)a.searchY, (float)a.searchW, (float)a.searchH };
+        SDL_RenderRect(ctx.renderer, &rect);
+    }
 
     SDL_SetRenderDrawColor(ctx.renderer, 0, 0, 0, 255);
 }
