@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-bool hasReachedPoint(Context &ctx, uint32_t n, float tx, float ty);
+bool hasReachedPoint(Context &ctx, uint32_t n, SDL_FPoint target);

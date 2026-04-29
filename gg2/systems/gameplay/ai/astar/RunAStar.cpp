@@ -42,14 +42,11 @@ int runAStar(AStarContext& astar, Context& ctx,
     astar.searchW = maxX - minX + 1;
     astar.searchH = maxY - minY + 1;
 
-    int startNode = astarEncode(astar, (int)startCenter.x, (int)startCenter.y);
-
-    float goalX = goalCenter.x;
-    float goalY = goalCenter.y;
+    int startNode = astarEncode(astar, { (int)startCenter.x, (int)startCenter.y });
 
     astar.fscoreHeap.size = 0;
 
-    float h = astarH(astar, startNode, goalX, goalY);
+    float h = astarH(astar, startNode, goalCenter);
     hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
     minHeapPush(astar.fscoreHeap, startNode, h);
 
@@ -92,7 +89,7 @@ int runAStar(AStarContext& astar, Context& ctx,
 
             hashMapInsert(astar.gscores,  nb, astar.generation, tentativeG);
             hashMapInsert(astar.cameFrom, nb, astar.generation, current);
-            minHeapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalX, goalY));
+            minHeapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalCenter));
         }
     }
 

@@ -4,8 +4,8 @@
 
 bool isGoalReached(const AStarContext& astar, const SDL_FRect& col, int node)
 {
-    int x, y;
-    astarDecode(astar, node, x, y);
-    SDL_FPoint point = {(float)x, (float)y};
-    return SDL_PointInRectFloat(&point, &col);
+    SDL_Point p;
+    astarDecode(astar, node, p);
+    SDL_FPoint fp = { (float)p.x, (float)p.y };
+    return SDL_PointInRectFloat(&fp, &col);
 }

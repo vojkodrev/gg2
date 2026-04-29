@@ -15,19 +15,13 @@ void collisionSystem(Context &ctx)
     hash.clear();
 
     SDL_FRect pBox = entityColAABB(player);
-    hash.insert(pBox.x, pBox.y, pBox.w, pBox.h, COLLISION_ENTITY_PLAYER);
+    hash.insert(pBox, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
-    {
-        SDL_FRect box = entityColAABB(npc, i);
-        hash.insert(box.x, box.y, box.w, box.h, colIdNpc(i));
-    }
+        hash.insert(entityColAABB(npc, i), colIdNpc(i));
 
     for (uint32_t i = 0; i < object.objectCount; i++)
-    {
-        SDL_FRect box = entityColAABB(object, i);
-        hash.insert(box.x, box.y, box.w, box.h, colIdObject(i));
-    }
+        hash.insert(entityColAABB(object, i), colIdObject(i));
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
 
@@ -44,8 +38,7 @@ void collisionSystem(Context &ctx)
     // For each entity, query candidates with higher ID to avoid duplicate pairs
     auto checkEntity = [&](uint16_t id, SDL_FRect colBox)
     {
-        int n = hash.query(colBox.x, colBox.y, colBox.w, colBox.h, candidates,
-                           SpatialHash::MAX_PER_BUCKET * 4);
+        int n = hash.query(colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
         for (int k = 0; k < n; k++)
         {
             uint16_t other = candidates[k];

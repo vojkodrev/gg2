@@ -47,9 +47,10 @@ void updateMonster(uint32_t n, Context &ctx)
         uint32_t p = ai.patrolIndex[n];
         float tx = ai.spawn.x[n] + ai.patrol.x[n][p];
         float ty = ai.spawn.y[n] + ai.patrol.y[n][p];
-        SDL_FRect patrolCol = centeredRect(tx, ty, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
+        SDL_FPoint patrolPt = { tx, ty };
+        SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
         updateAStarPath(n, ctx, patrolCol);
-        if (hasReachedPoint(ctx, n, tx, ty))
+        if (hasReachedPoint(ctx, n, patrolPt))
         {
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
             if ((rand() % 100) + 1 <= 10)
@@ -95,10 +96,10 @@ void updateMonster(uint32_t n, Context &ctx)
 
     case NPCAiState::GoToSpawn:
     {
-        float spawnX = ai.spawn.x[n], spawnY = ai.spawn.y[n];
-        SDL_FRect spawnCol = centeredRect(spawnX, spawnY, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
+        SDL_FPoint spawnPt = { ai.spawn.x[n], ai.spawn.y[n] };
+        SDL_FRect spawnCol = centeredRect(spawnPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
         updateAStarPath(n, ctx, spawnCol);
-        if (hasReachedPoint(ctx, n, spawnX, spawnY))
+        if (hasReachedPoint(ctx, n, spawnPt))
             setNpcAiStateIdle(n, ctx);
         break;
     }

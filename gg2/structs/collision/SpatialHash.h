@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <cstring>
+#include <SDL3/SDL.h>
 
 // Flat spatial hash for broad-phase collision.
 // Entities in the same grid cell are collision candidates.
@@ -20,23 +21,23 @@ struct SpatialHash
         memset(counts, 0, sizeof(counts));
     }
 
-    void insert(float x, float y, float w, float h, uint16_t id)
+    void insert(SDL_FRect rect, uint16_t id)
     {
-        int minCx = (int)(x / CELL_SIZE);
-        int minCy = (int)(y / CELL_SIZE);
-        int maxCx = (int)((x + w) / CELL_SIZE);
-        int maxCy = (int)((y + h) / CELL_SIZE);
+        int minCx = (int)(rect.x / CELL_SIZE);
+        int minCy = (int)(rect.y / CELL_SIZE);
+        int maxCx = (int)((rect.x + rect.w) / CELL_SIZE);
+        int maxCy = (int)((rect.y + rect.h) / CELL_SIZE);
         for (int cy = minCy; cy <= maxCy; cy++)
             for (int cx = minCx; cx <= maxCx; cx++)
                 insertCell(cx, cy, id);
     }
 
-    int query(float x, float y, float w, float h, uint16_t *out, int maxOut) const
+    int query(SDL_FRect rect, uint16_t *out, int maxOut) const
     {
-        int minCx = (int)(x / CELL_SIZE);
-        int minCy = (int)(y / CELL_SIZE);
-        int maxCx = (int)((x + w) / CELL_SIZE);
-        int maxCy = (int)((y + h) / CELL_SIZE);
+        int minCx = (int)(rect.x / CELL_SIZE);
+        int minCy = (int)(rect.y / CELL_SIZE);
+        int maxCx = (int)((rect.x + rect.w) / CELL_SIZE);
+        int maxCy = (int)((rect.y + rect.h) / CELL_SIZE);
         int total = 0;
         for (int cy = minCy; cy <= maxCy && total < maxOut; cy++)
             for (int cx = minCx; cx <= maxCx && total < maxOut; cx++)

@@ -10,8 +10,8 @@ static const int DIR_Y[8] = {  0,  0,  1, -1,  1, -1,  1, -1 };
 int getNeighbors(const AStarContext& astar, const Context& ctx,
                  int node, SDL_FRect startCol, int* neighborsOut)
 {
-    int cx, cy;
-    astarDecode(astar, node, cx, cy);
+    SDL_Point c;
+    astarDecode(astar, node, c);
 
     int minX = astar.searchX;
     int minY = astar.searchY;
@@ -21,16 +21,16 @@ int getNeighbors(const AStarContext& astar, const Context& ctx,
     int count = 0;
     for (int d = 0; d < 8; d++)
     {
-        int nx = cx + DIR_X[d] * NPC_MONSTER_PATH_STEP;
-        int ny = cy + DIR_Y[d] * NPC_MONSTER_PATH_STEP;
+        SDL_Point nb = { c.x + DIR_X[d] * NPC_MONSTER_PATH_STEP,
+                         c.y + DIR_Y[d] * NPC_MONSTER_PATH_STEP };
 
-        if (nx < minX || nx > maxX || ny < minY || ny > maxY)
+        if (nb.x < minX || nb.x > maxX || nb.y < minY || nb.y > maxY)
             continue;
 
-        if (isBlocked(astar, ctx, nx, ny, startCol))
+        if (isBlocked(astar, ctx, nb, startCol))
             continue;
 
-        neighborsOut[count++] = astarEncode(astar, nx, ny);
+        neighborsOut[count++] = astarEncode(astar, nb);
     }
     return count;
 }

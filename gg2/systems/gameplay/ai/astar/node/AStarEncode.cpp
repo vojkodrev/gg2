@@ -1,6 +1,6 @@
 #include "AStarEncode.h"
 
-int astarEncode(const AStarContext& ctx, int x, int y)
+int astarEncode(const AStarContext& ctx, SDL_Point p)
 {
-    return (y - ctx.searchY) * ctx.searchW + (x - ctx.searchX);
+    return (p.y - ctx.searchY) * ctx.searchW + (p.x - ctx.searchX);
 }

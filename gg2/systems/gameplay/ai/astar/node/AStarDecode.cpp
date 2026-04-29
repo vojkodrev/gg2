@@ -1,7 +1,7 @@
 #include "AStarDecode.h"
 
-void astarDecode(const AStarContext& ctx, int node, int& x, int& y)
+void astarDecode(const AStarContext& ctx, int node, SDL_Point& p)
 {
-    x = node % ctx.searchW + ctx.searchX;
-    y = node / ctx.searchW + ctx.searchY;
+    p.x = node % ctx.searchW + ctx.searchX;
+    p.y = node / ctx.searchW + ctx.searchY;
 }

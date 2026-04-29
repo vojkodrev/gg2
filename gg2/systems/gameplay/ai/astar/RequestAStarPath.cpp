@@ -39,10 +39,10 @@ void requestAStarPath(Context& ctx, int npcIndex,
         {
             for (int i = 0; i < length; i++)
             {
-                int x, y;
-                astarDecode(astar, pathBuffer[i], x, y);
-                npcAi.path.x[npcIndex][i] = x;
-                npcAi.path.y[npcIndex][i] = y;
+                SDL_Point p;
+                astarDecode(astar, pathBuffer[i], p);
+                npcAi.path.x[npcIndex][i] = p.x;
+                npcAi.path.y[npcIndex][i] = p.y;
             }
             npcAi.pathLength[npcIndex] = (uint32_t)length;
             npcAi.pathIndex[npcIndex]  = 0;
