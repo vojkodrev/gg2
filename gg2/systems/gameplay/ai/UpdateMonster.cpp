@@ -46,10 +46,9 @@ void updateMonster(uint32_t n, Context &ctx)
             break;
         uint32_t p = ai.patrolIndex[n];
         SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.x[n][p], ai.spawn.y[n] + ai.patrol.y[n][p] };
-        SDL_FRect patrolCol   = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP,     (float)NPC_MONSTER_PATH_STEP);
-        SDL_FRect arrivalCol  = centeredRect(patrolPt, (float)(NPC_MONSTER_PATH_STEP + NPC_PATROL_ARRIVAL_PAD), (float)(NPC_MONSTER_PATH_STEP + NPC_PATROL_ARRIVAL_PAD));
+        SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
         updateAStarPath(n, ctx, patrolCol);
-        if (hasReachedRect(ctx, n, arrivalCol))
+        if (hasReachedRect(ctx, n, patrolCol))
         {
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
             if ((rand() % 100) + 1 <= 10)
