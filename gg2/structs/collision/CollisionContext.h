@@ -1,5 +1,5 @@
 #pragma once
-#include "SpatialHash.h"
+#include "spatialhash/SpatialHash.h"
 #include "CollisionResult.h"
 
 struct CollisionContext

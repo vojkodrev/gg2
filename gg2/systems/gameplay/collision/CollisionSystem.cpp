@@ -4,6 +4,9 @@
 #include "EntityColAABBObject.h"
 #include "GetEntityColAABB.h"
 #include "ColId.h"
+#include "spatialhash/SpatialHashClear.h"
+#include "spatialhash/SpatialHashInsert.h"
+#include "spatialhash/SpatialHashQuery.h"
 
 void collisionSystem(Context &ctx)
 {
@@ -15,16 +18,16 @@ void collisionSystem(Context &ctx)
     auto &player = ctx.data.player;
 
     auto &hash = ctx.collision.spatialHash;
-    hash.clear();
+    spatialHashClear(hash);
 
     SDL_FRect pBox = entityColAABB(player);
-    hash.insert(pBox, COLLISION_ENTITY_PLAYER);
+    spatialHashInsert(hash, pBox, COLLISION_ENTITY_PLAYER);
 
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        hash.insert(entityColAABB(npc, i), colIdNpc(i));
+        spatialHashInsert(hash, entityColAABB(npc, i), colIdNpc(i));
 
     for (uint32_t i = 0; i < object.objectCount; i++)
-        hash.insert(entityColAABB(object, i), colIdObject(i));
+        spatialHashInsert(hash, entityColAABB(object, i), colIdObject(i));
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
 
@@ -41,7 +44,7 @@ void collisionSystem(Context &ctx)
     // For each entity, query candidates with higher ID to avoid duplicate pairs
     auto checkEntity = [&](uint16_t id, SDL_FRect colBox)
     {
-        int n = hash.query(colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
+        int n = spatialHashQuery(hash, colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
         for (int k = 0; k < n; k++)
         {
             uint16_t other = candidates[k];

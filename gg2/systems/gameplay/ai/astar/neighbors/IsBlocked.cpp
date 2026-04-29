@@ -3,6 +3,7 @@
 #include "ColId.h"
 #include "Constants.h"
 #include <SDL3/SDL.h>
+#include "spatialhash/SpatialHashQuery.h"
 
 bool isBlocked(const AStarContext& astar, const Context& ctx, SDL_Point node, SDL_FRect startCol)
 {
@@ -12,7 +13,7 @@ bool isBlocked(const AStarContext& astar, const Context& ctx, SDL_Point node, SD
                            startCol.h + NPC_MONSTER_PATH_STEP * 2 };
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
-    int n = astar.colHashSnapshot.query(moverBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
+    int n = spatialHashQuery(astar.colHashSnapshot, moverBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
 
     for (int i = 0; i < n; i++)
     {
