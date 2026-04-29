@@ -2,7 +2,7 @@
 #include <atomic>
 #include "DistToPlayer.h"
 #include "DistToSpawn.h"
-#include "HasReachedPoint.h"
+#include "HasReachedRect.h"
 #include "AreColBoxesNear.h"
 #include "EntityAABB.h"
 #include "CenteredRect.h"
@@ -45,12 +45,11 @@ void updateMonster(uint32_t n, Context &ctx)
         if (ai.patrolCount[n] == 0)
             break;
         uint32_t p = ai.patrolIndex[n];
-        float tx = ai.spawn.x[n] + ai.patrol.x[n][p];
-        float ty = ai.spawn.y[n] + ai.patrol.y[n][p];
-        SDL_FPoint patrolPt = { tx, ty };
-        SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
+        SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.x[n][p], ai.spawn.y[n] + ai.patrol.y[n][p] };
+        SDL_FRect patrolCol   = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP,     (float)NPC_MONSTER_PATH_STEP);
+        SDL_FRect arrivalCol  = centeredRect(patrolPt, (float)(NPC_MONSTER_PATH_STEP + NPC_PATROL_ARRIVAL_PAD), (float)(NPC_MONSTER_PATH_STEP + NPC_PATROL_ARRIVAL_PAD));
         updateAStarPath(n, ctx, patrolCol);
-        if (hasReachedPoint(ctx, n, patrolPt))
+        if (hasReachedRect(ctx, n, arrivalCol))
         {
             ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
             if ((rand() % 100) + 1 <= 10)
@@ -99,7 +98,7 @@ void updateMonster(uint32_t n, Context &ctx)
         SDL_FPoint spawnPt = { ai.spawn.x[n], ai.spawn.y[n] };
         SDL_FRect spawnCol = centeredRect(spawnPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
         updateAStarPath(n, ctx, spawnCol);
-        if (hasReachedPoint(ctx, n, spawnPt))
+        if (hasReachedRect(ctx, n, spawnCol))
             setNpcAiStateIdle(n, ctx);
         break;
     }

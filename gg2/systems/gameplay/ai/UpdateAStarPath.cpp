@@ -1,6 +1,6 @@
 #include "UpdateAStarPath.h"
 #include <atomic>
-#include "HasReachedPoint.h"
+#include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "Constants.h"
 #include "astar/RequestAStarPath.h"
@@ -22,14 +22,14 @@ void updateAStarPath(uint32_t n, Context &ctx, SDL_FRect targetCol)
         uint32_t len = ai.pathLength[n];
         uint32_t i = ai.pathIndex[n];
 
-        while (i + 1 < len && hasReachedPoint(ctx, n, { (float)ai.path.x[n][i], (float)ai.path.y[n][i] }))
+        while (i + 1 < len && hasReachedRect(ctx, n, { (float)ai.path.x[n][i], (float)ai.path.y[n][i], 1, 1 }))
             i++;
         ai.pathIndex[n] = i;
 
         SDL_FPoint target = { (float)ai.path.x[n][i], (float)ai.path.y[n][i] };
         moveColCenterToward(ctx, n, target, NPC_MONSTER_SPEED);
 
-        if (i + 1 >= len && hasReachedPoint(ctx, n, target))
+        if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
             ai.pathStatus[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
     }
 }

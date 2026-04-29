@@ -62,7 +62,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         if (isGoalReached(astar, destCol, current))
         {
             SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
-            int length = reconstructPath(astar, current, pathOut);
+            int length = reconstructPath(astar, current, goalCenter, pathOut);
             astar.status = AStarStatus::FINISHED_CALCULATING;
             return length;
         }
