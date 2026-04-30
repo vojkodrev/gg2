@@ -1,0 +1,33 @@
+#include "UpdateMonsterPatrolling.h"
+#include "DistToPlayer.h"
+#include "HasReachedRect.h"
+#include "CenteredRect.h"
+#include "Constants.h"
+#include "astar/UpdateAStarPath.h"
+#include "SetNpcAiStateGoToPlayer.h"
+#include "SetNpcAiStateIdle.h"
+
+void updateMonsterPatrolling(uint32_t n, Context &ctx)
+{
+    auto &ai = ctx.data.npc.ai;
+
+    if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
+    {
+        setNpcAiStateGoToPlayer(n, ctx);
+        return;
+    }
+    if (ai.patrolCount[n] == 0)
+        return;
+    uint32_t p = ai.patrolIndex[n];
+    SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.x[n][p], ai.spawn.y[n] + ai.patrol.y[n][p] };
+    SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
+    updateAStarPath(n, ctx, patrolCol);
+    if (hasReachedRect(ctx, n, patrolCol))
+    {
+        ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
+        if ((rand() % 100) + 1 <= 10)
+        {
+            setNpcAiStateIdle(n, ctx);
+        }
+    }
+}

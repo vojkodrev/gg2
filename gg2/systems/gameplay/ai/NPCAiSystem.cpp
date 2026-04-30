@@ -1,5 +1,5 @@
 #include "NPCAiSystem.h"
-#include "UpdateMonster.h"
+#include "monster/UpdateMonster.h"
 
 void npcAiSystem(Context &ctx)
 {

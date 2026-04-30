@@ -3,7 +3,7 @@
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "Constants.h"
-#include "astar/RequestAStarPath.h"
+#include "RequestAStarPath.h"
 
 void updateAStarPath(uint32_t n, Context &ctx, SDL_FRect targetCol)
 {
