@@ -1,5 +1,6 @@
 #include "FillRenderBufferSystem.h"
 #include <SDL3/SDL.h>
+#include "Constants.h"
 #include "FillPlayerRenderBuffer.h"
 #include "FillNpcRenderBuffer.h"
 #include "FillObjectRenderBuffer.h"
@@ -15,10 +16,24 @@ void fillRenderBufferSystem(Context &ctx)
     sortRenderBuffer(ctx);
 
     SDL_FPoint off = getCameraOffset(ctx);
+    SDL_FRect screen = {0, 0, SCREEN_W, SCREEN_H};
     auto &rb = ctx.renderBuffer;
+    uint32_t visible = 0;
     for (uint32_t i = 0; i < rb.count; i++)
     {
-        rb.dst.x[i] += off.x;
-        rb.dst.y[i] += off.y;
+        SDL_FRect dst = {rb.dst.x[i] + off.x, rb.dst.y[i] + off.y, rb.dst.w[i], rb.dst.h[i]};
+        if (!SDL_HasRectIntersectionFloat(&dst, &screen))
+            continue;
+        rb.src.x[visible] = rb.src.x[i];
+        rb.src.y[visible] = rb.src.y[i];
+        rb.src.w[visible] = rb.src.w[i];
+        rb.src.h[visible] = rb.src.h[i];
+        rb.dst.x[visible] = dst.x;
+        rb.dst.y[visible] = dst.y;
+        rb.dst.w[visible] = dst.w;
+        rb.dst.h[visible] = dst.h;
+        rb.dst.colOffY[visible] = rb.dst.colOffY[i];
+        visible++;
     }
+    rb.count = visible;
 }
