@@ -1,6 +1,9 @@
 #pragma once
 #include <cstdint>
 
+const int SCREEN_W = 1280;
+const int SCREEN_H = 720;
+
 const int MAX_TILES = 1000;
 const int MAX_NPCS = 100;
 const int MAX_OBJECTS = 100;
