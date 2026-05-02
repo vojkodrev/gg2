@@ -1,13 +1,13 @@
 #include "DebugRenderSystem.h"
 #include <SDL3/SDL.h>
-#include "../../utils/collision/EntityColAABBPlayer.h"
-#include "../../utils/collision/EntityColAABBNPC.h"
-#include "../../utils/collision/EntityColAABBObject.h"
-#include "../../utils/collision/EntityColCenter.h"
-#include "../../structs/gameplay/ai/AStarPool.h"
-#include "../../structs/gameplay/ai/AStarStatus.h"
-#include "../gameplay/camera/GetCameraOffset.h"
-#include "Constants.h"
+#include "../../../utils/collision/EntityColAABBPlayer.h"
+#include "../../../utils/collision/EntityColAABBNPC.h"
+#include "../../../utils/collision/EntityColAABBObject.h"
+#include "../../../utils/collision/EntityColCenter.h"
+#include "../../../structs/gameplay/ai/AStarPool.h"
+#include "../../../structs/gameplay/ai/AStarStatus.h"
+#include "../../gameplay/camera/GetCameraOffset.h"
+#include "../Constants.h"
 
 static void renderColBox(SDL_Renderer *renderer, SDL_FRect col, SDL_FPoint off, const SDL_FRect &screen)
 {

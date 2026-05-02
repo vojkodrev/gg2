@@ -1,5 +1,5 @@
 #include "RenderSystem.h"
-#include "DebugRenderSystem.h"
+#include "debug/DebugRenderSystem.h"
 #include <SDL3/SDL.h>
 #include "../gameplay/camera/GetCameraOffset.h"
 #include "Constants.h"
