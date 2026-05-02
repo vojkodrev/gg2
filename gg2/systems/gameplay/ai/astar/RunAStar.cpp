@@ -1,5 +1,6 @@
 #include "RunAStar.h"
 #include "../../../../structs/core/Context.h"
+#include <shared_mutex>
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/minheap/MinHeapPush.h"
 #include "../../../../utils/minheap/MinHeapPop.h"
@@ -25,7 +26,10 @@ int runAStar(AStarContext& astar, Context& ctx,
 
     Uint64 startTime = SDL_GetTicks();
 
-    astar.colHashSnapshot = ctx.collision.spatialHash;
+    {
+        std::shared_lock lock(ctx.collision.spatialHashMutex);
+        astar.colHashSnapshot = ctx.collision.spatialHash;
+    }
 
     SDL_FPoint startCenter = entityColCenter(startCol);
 

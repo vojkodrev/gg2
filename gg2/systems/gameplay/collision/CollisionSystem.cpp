@@ -1,4 +1,5 @@
 #include "CollisionSystem.h"
+#include <shared_mutex>
 #include "EntityColAABBPlayer.h"
 #include "EntityColAABBNPC.h"
 #include "EntityColAABBObject.h"
@@ -17,18 +18,22 @@ void collisionSystem(Context &ctx)
     auto &object = ctx.data.object;
     auto &player = ctx.data.player;
 
-    auto &hash = ctx.collision.spatialHash;
-    spatialHashClear(hash);
-
     SDL_FRect pBox = entityColAABB(player);
-    spatialHashInsert(hash, pBox, COLLISION_ENTITY_PLAYER);
+    auto &hash = ctx.collision.spatialHash;
+    {
+        std::unique_lock lock(ctx.collision.spatialHashMutex);
+        spatialHashClear(hash);
 
-    for (uint32_t i = 0; i < npc.npcCount; i++)
-        spatialHashInsert(hash, entityColAABB(npc, i), colIdNpc(i));
+        spatialHashInsert(hash, pBox, COLLISION_ENTITY_PLAYER);
 
-    for (uint32_t i = 0; i < object.objectCount; i++)
-        spatialHashInsert(hash, entityColAABB(object, i), colIdObject(i));
+        for (uint32_t i = 0; i < npc.npcCount; i++)
+            spatialHashInsert(hash, entityColAABB(npc, i), colIdNpc(i));
 
+        for (uint32_t i = 0; i < object.objectCount; i++)
+            spatialHashInsert(hash, entityColAABB(object, i), colIdObject(i));
+    }
+
+    std::shared_lock readLock(ctx.collision.spatialHashMutex);
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
 
     auto addPair = [&](uint16_t a, uint16_t b)
