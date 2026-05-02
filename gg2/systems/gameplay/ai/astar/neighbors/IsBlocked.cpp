@@ -10,7 +10,7 @@
 bool isBlocked(const AStarContext& astar, const Context& ctx, SDL_Point node, int npcIndex)
 {
     SDL_FRect npcCol = entityColAABB(ctx.data.npc, npcIndex);
-    SDL_FRect moverBox = centeredRect({(float)node.x, (float)node.y}, npcCol.w, npcCol.h, NPC_MONSTER_PATH_STEP);
+    SDL_FRect moverBox = centeredRect({(float)node.x, (float)node.y}, npcCol.w, npcCol.h);
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
     int n = spatialHashQuery(astar.colHashSnapshot, moverBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
