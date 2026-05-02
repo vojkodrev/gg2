@@ -21,7 +21,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
         return;
 
     AStarContext& astar = ctx.astarPool.ctx[astarIndex];
-    astar.status = AStarStatus::STARTED;
+    astar.status.store(AStarStatus::STARTED, std::memory_order_relaxed);
 
     SDL_FRect startCol = entityColAABB(ctx.data.npc, npcIndex);
 

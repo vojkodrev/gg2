@@ -5,6 +5,7 @@
 #include "../../core/Constants.h"
 #include "spatialhash/SpatialHash.h"
 #include <future>
+#include <atomic>
 
 struct AStarContext
 {
@@ -20,6 +21,6 @@ struct AStarContext
     int          searchY;
     int          searchW;
     int          searchH;
-    AStarStatus  status;
+    std::atomic<AStarStatus>  status;
     std::future<void> future;
 };

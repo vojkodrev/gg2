@@ -4,6 +4,6 @@
 
 void astarFree(AStarPool& pool, int index)
 {
-    pool.ctx[index].status = AStarStatus::IDLE;
+    pool.ctx[index].status.store(AStarStatus::IDLE, std::memory_order_relaxed);
     queueEnqueue(pool.freeQueue, index);
 }

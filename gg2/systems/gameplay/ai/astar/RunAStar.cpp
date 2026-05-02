@@ -21,7 +21,7 @@ int runAStar(AStarContext& astar, Context& ctx,
              SDL_FRect startCol, const SDL_FRect& destCol,
              int* pathOut)
 {
-    astar.status = AStarStatus::CALCULATING_PATH;
+    astar.status.store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
 
     Uint64 startTime = SDL_GetTicks();
 
@@ -63,7 +63,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         {
             SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
             int length = reconstructPath(astar, current, goalCenter, pathOut);
-            astar.status = AStarStatus::FINISHED_CALCULATING;
+            astar.status.store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
             return length;
         }
 
@@ -93,7 +93,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         }
     }
 
-    astar.status = AStarStatus::PATH_NOT_FOUND;
+    astar.status.store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
     SDL_Log("AStar: path not found (%.2f ms)", (float)(SDL_GetTicks() - startTime));
     return -1;
 }

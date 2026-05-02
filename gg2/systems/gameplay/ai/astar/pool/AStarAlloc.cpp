@@ -13,7 +13,7 @@ int astarAlloc(AStarPool& pool)
         index = pool.count++;
 
     if (index != -1)
-        pool.ctx[index].status = AStarStatus::IDLE;
+        pool.ctx[index].status.store(AStarStatus::IDLE, std::memory_order_relaxed);
 
     return index;
 }
