@@ -2,7 +2,7 @@ settings = {
     "tileW": 64,
     "tileH": 64,
     "w": 12,
-    "h": 8,
+    "h": 9,
     "output": "../texture.png",
     "tileset": "../../map/texture.tsx",
 }
@@ -40,6 +40,18 @@ images = [
     {"id": 7, "filename": "statue praying.png", "x": 0, "y": 4},
     {"id": 8, "filename": "tree.png", "x": 7, "y": 0, "h": 350},
     {"id": 9, "filename": "flowers.png", "x": 3, "y": 4},
+    {"id": 10, "filename": "fireplace/frame_00_delay-0.08s.gif", "x": 0, "y": 8, "h": 64},
+    {"id": 11, "filename": "fireplace/frame_01_delay-0.08s.gif", "x": 1, "y": 8, "h": 64},
+    {"id": 12, "filename": "fireplace/frame_02_delay-0.08s.gif", "x": 2, "y": 8, "h": 64},
+    {"id": 13, "filename": "fireplace/frame_03_delay-0.08s.gif", "x": 3, "y": 8, "h": 64},
+    {"id": 14, "filename": "fireplace/frame_04_delay-0.08s.gif", "x": 4, "y": 8, "h": 64},
+    {"id": 15, "filename": "fireplace/frame_05_delay-0.08s.gif", "x": 5, "y": 8, "h": 64},
+    {"id": 16, "filename": "fireplace/frame_06_delay-0.08s.gif", "x": 6, "y": 8, "h": 64},
+    {"id": 17, "filename": "fireplace/frame_07_delay-0.08s.gif", "x": 7, "y": 8, "h": 64},
+    {"id": 18, "filename": "fireplace/frame_08_delay-0.08s.gif", "x": 8, "y": 8, "h": 64},
+    {"id": 19, "filename": "fireplace/frame_09_delay-0.08s.gif", "x": 9, "y": 8, "h": 64},
+    {"id": 20, "filename": "fireplace/frame_10_delay-0.08s.gif", "x": 10, "y": 8, "h": 64},
+    {"id": 21, "filename": "fireplace/frame_11_delay-0.08s.gif", "x": 11, "y": 8, "h": 64},
 ]
 
 
