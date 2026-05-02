@@ -2,6 +2,7 @@
 #include "IsStatic.h"
 #include "GetEntityColAABB.h"
 #include "GetDynamicEntityPos.h"
+#include "SetDynamicEntityPos.h"
 #include <cmath>
 
 void collisionResolutionSystem(Context &ctx)
@@ -28,45 +29,39 @@ void collisionResolutionSystem(Context &ctx)
         float pushA = staticA ? 0.0f : (staticB ? 1.0f : 0.5f);
         float pushB = staticB ? 0.0f : (staticA ? 1.0f : 0.5f);
 
-        float *axPtr, *ayPtr, *bxPtr, *byPtr;
-        if (!staticA)
-            getDynamicEntityPos(ctx, idA, axPtr, ayPtr);
-        if (!staticB)
-            getDynamicEntityPos(ctx, idB, bxPtr, byPtr);
+        SDL_FPoint posA = staticA ? SDL_FPoint{} : getDynamicEntityPos(ctx, idA);
+        SDL_FPoint posB = staticB ? SDL_FPoint{} : getDynamicEntityPos(ctx, idB);
 
         if (overlapX < overlapY)
         {
             if (a.x < b.x)
             {
-                if (!staticA)
-                    *axPtr -= overlapX * pushA;
-                if (!staticB)
-                    *bxPtr += overlapX * pushB;
+                posA.x -= overlapX * pushA;
+                posB.x += overlapX * pushB;
             }
             else
             {
-                if (!staticA)
-                    *axPtr += overlapX * pushA;
-                if (!staticB)
-                    *bxPtr -= overlapX * pushB;
+                posA.x += overlapX * pushA;
+                posB.x -= overlapX * pushB;
             }
         }
         else
         {
             if (a.y < b.y)
             {
-                if (!staticA)
-                    *ayPtr -= overlapY * pushA;
-                if (!staticB)
-                    *byPtr += overlapY * pushB;
+                posA.y -= overlapY * pushA;
+                posB.y += overlapY * pushB;
             }
             else
             {
-                if (!staticA)
-                    *ayPtr += overlapY * pushA;
-                if (!staticB)
-                    *byPtr -= overlapY * pushB;
+                posA.y += overlapY * pushA;
+                posB.y -= overlapY * pushB;
             }
         }
+
+        if (!staticA)
+            setDynamicEntityPos(ctx, idA, posA);
+        if (!staticB)
+            setDynamicEntityPos(ctx, idB, posB);
     }
 }

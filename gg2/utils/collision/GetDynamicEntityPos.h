@@ -1,17 +1,10 @@
 #pragma once
 #include "Context.h"
 
-inline void getDynamicEntityPos(Context &ctx, uint16_t id, float *&ox, float *&oy)
+inline SDL_FPoint getDynamicEntityPos(Context &ctx, uint16_t id)
 {
     if (id == COLLISION_ENTITY_PLAYER)
-    {
-        ox = &ctx.data.player.x;
-        oy = &ctx.data.player.y;
-    }
-    else
-    {
-        uint32_t i = id - 1;
-        ox = &ctx.data.npc.position.x[i];
-        oy = &ctx.data.npc.position.y[i];
-    }
+        return {ctx.data.player.x, ctx.data.player.y};
+    uint32_t i = id - 1;
+    return {ctx.data.npc.position.x[i], ctx.data.npc.position.y[i]};
 }
