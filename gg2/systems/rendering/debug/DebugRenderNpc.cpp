@@ -10,24 +10,24 @@ void debugRenderNpc(SDL_Renderer *renderer, const Context &ctx, SDL_FPoint off, 
         auto &patrol = ctx.data.npc.ai.patrol;
         float spawnX = ctx.data.npc.ai.spawn.x[i];
         float spawnY = ctx.data.npc.ai.spawn.y[i];
-        for (uint32_t p = 0; p < ctx.data.npc.ai.patrolCount[i]; p++)
+        for (uint32_t p = 0; p < patrol.count[i]; p++)
         {
-            SDL_FRect pt = {spawnX + patrol.x[i][p] - 1 + off.x, spawnY + patrol.y[i][p] - 1 + off.y, 2, 2};
+            SDL_FRect pt = {spawnX + patrol.point.x[i][p] - 1 + off.x, spawnY + patrol.point.y[i][p] - 1 + off.y, 2, 2};
             if (SDL_HasRectIntersectionFloat(&pt, &screen))
                 SDL_RenderFillRect(renderer, &pt);
         }
 
-        auto &ai = ctx.data.npc.ai;
-        uint32_t pathLen = ai.pathLength[i];
+        auto &path = ctx.data.npc.ai.path;
+        uint32_t pathLen = path.length[i];
         for (uint32_t p = 0; p < pathLen; p++)
         {
-            float px = (float)ai.path.x[i][p] + off.x;
-            float py = (float)ai.path.y[i][p] + off.y;
+            float px = (float)path.point.x[i][p] + off.x;
+            float py = (float)path.point.y[i][p] + off.y;
             SDL_FRect pt = {px - 1, py - 1, 2, 2};
             if (SDL_HasRectIntersectionFloat(&pt, &screen))
                 SDL_RenderFillRect(renderer, &pt);
             if (p + 1 < pathLen)
-                SDL_RenderLine(renderer, px, py, (float)ai.path.x[i][p + 1] + off.x, (float)ai.path.y[i][p + 1] + off.y);
+                SDL_RenderLine(renderer, px, py, (float)path.point.x[i][p + 1] + off.x, (float)path.point.y[i][p + 1] + off.y);
         }
     }
 }

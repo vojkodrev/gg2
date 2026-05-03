@@ -16,15 +16,15 @@ void updateMonsterPatrolling(uint32_t n, Context &ctx)
         setNpcAiStateGoToPlayer(n, ctx);
         return;
     }
-    if (ai.patrolCount[n] == 0)
+    if (ai.patrol.count[n] == 0)
         return;
-    uint32_t p = ai.patrolIndex[n];
-    SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.x[n][p], ai.spawn.y[n] + ai.patrol.y[n][p] };
+    uint32_t p = ai.patrol.index[n];
+    SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.point.x[n][p], ai.spawn.y[n] + ai.patrol.point.y[n][p] };
     SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
     updateAStarPath(n, ctx, patrolCol);
     if (hasReachedRect(ctx, n, patrolCol))
     {
-        ai.patrolIndex[n] = (p + 1) % ai.patrolCount[n];
+        ai.patrol.index[n] = (p + 1) % ai.patrol.count[n];
         if ((rand() % 100) + 1 <= 10)
         {
             setNpcAiStateIdle(n, ctx);

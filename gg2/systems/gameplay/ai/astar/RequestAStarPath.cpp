@@ -13,7 +13,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
 {
     NPCAi& npcAi = ctx.data.npc.ai;
 
-    npcAi.pathStatus[npcIndex].store(NPCPathStatus::PATH_REQUESTED, std::memory_order_relaxed);
+    npcAi.path.status[npcIndex].store(NPCPathStatus::PATH_REQUESTED, std::memory_order_relaxed);
 
     int astarIndex = astarAlloc(ctx.astarPool);
     if (astarIndex == -1)
@@ -27,7 +27,7 @@ void requestAStarPath(Context& ctx, int npcIndex,
         defer(astarFree(ctx.astarPool, astarIndex));
 
         NPCAi& npcAi = ctx.data.npc.ai;
-        npcAi.pathStatus[npcIndex].store(NPCPathStatus::WAITING_FOR_PATH, std::memory_order_relaxed);
+        npcAi.path.status[npcIndex].store(NPCPathStatus::WAITING_FOR_PATH, std::memory_order_relaxed);
 
         int pathBuffer[ASTAR_MAX_PATH];
         int length = runAStar(astar, ctx, npcIndex, destCol, pathBuffer);
@@ -37,17 +37,17 @@ void requestAStarPath(Context& ctx, int npcIndex,
             for (int i = 0; i < length; i++)
             {
                 SDL_Point p = astarDecode(astar, pathBuffer[i]);
-                npcAi.path.x[npcIndex][i] = p.x;
-                npcAi.path.y[npcIndex][i] = p.y;
+                npcAi.path.point.x[npcIndex][i] = p.x;
+                npcAi.path.point.y[npcIndex][i] = p.y;
             }
-            npcAi.pathLength[npcIndex] = (uint32_t)length;
-            npcAi.pathIndex[npcIndex]  = 0;
+            npcAi.path.length[npcIndex] = (uint32_t)length;
+            npcAi.path.index[npcIndex]  = 0;
             // release: guarantees path data writes above are visible to main thread on acquire load
-            npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FINISHED, std::memory_order_release);
+            npcAi.path.status[npcIndex].store(NPCPathStatus::CALCULATION_FINISHED, std::memory_order_release);
         }
         else
         {
-            npcAi.pathStatus[npcIndex].store(NPCPathStatus::CALCULATION_FAILED, std::memory_order_relaxed);
+            npcAi.path.status[npcIndex].store(NPCPathStatus::CALCULATION_FAILED, std::memory_order_relaxed);
         }
     });
 }
