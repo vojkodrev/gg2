@@ -1,8 +1,7 @@
 #include "GetCollision.h"
 
-void getCollision(const tmx::Tileset &tileset, uint32_t tileIdx, float &offX, float &offY, float &w, float &h)
+SDL_FRect getCollision(const tmx::Tileset &tileset, uint32_t tileIdx)
 {
-    offX = offY = w = h = 0.0f;
     for (auto &tile : tileset.getTiles())
     {
         if (tile.ID != tileIdx)
@@ -11,11 +10,9 @@ void getCollision(const tmx::Tileset &tileset, uint32_t tileIdx, float &offX, fl
         if (!objs.empty())
         {
             auto &aabb = objs[0].getAABB();
-            offX = aabb.left;
-            offY = aabb.top;
-            w = aabb.width;
-            h = aabb.height;
+            return { aabb.left, aabb.top, aabb.width, aabb.height };
         }
-        return;
+        return { 0.0f, 0.0f, 0.0f, 0.0f };
     }
+    return { 0.0f, 0.0f, 0.0f, 0.0f };
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include <tmxlite/Tileset.hpp>
 
-void getCollision(const tmx::Tileset &tileset, uint32_t tileIdx, float &offX, float &offY, float &w, float &h);
+SDL_FRect getCollision(const tmx::Tileset &tileset, uint32_t tileIdx);
