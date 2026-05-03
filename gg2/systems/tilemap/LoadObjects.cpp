@@ -1,8 +1,8 @@
 #include "LoadObjects.h"
 #include "FindLayer.h"
-#include "GetCollision.h"
 #include "IsMarker.h"
 #include "GetTileProp.h"
+#include "LoadTileAnimation.h"
 #include <tmxlite/TileLayer.hpp>
 
 void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
@@ -43,55 +43,17 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.animation.frame.collision.h[n][0] = colH;
             object.animation.frameCount[n] = 1;
             object.animation.frame.frameDuration[n][0] = 0;
+            object.animation.frameIndex[n] = 0;
+            object.animation.animationStartTime[n] = 0;
         }
         else
         {
-            // find animation frames for this tile
-            const tmx::Tileset::Tile *tileData = nullptr;
-            for (auto &t : tileset.getTiles())
-                if (t.ID == idx) { tileData = &t; break; }
-
-            SDL_FRect col = getCollision(tileset, idx);
-
-            if (tileData && !tileData->animation.frames.empty())
-            {
-                int frameCount = (int)tileData->animation.frames.size();
-                if (frameCount > MAX_ANIMATION_FRAMES) frameCount = MAX_ANIMATION_FRAMES;
-                object.animation.frameCount[n] = frameCount;
-                for (int f = 0; f < frameCount; f++)
-                {
-                    uint32_t fid = tileData->animation.frames[f].tileID;
-                    object.animation.frame.src.x[n][f] = fid % props.columns * props.srcTileW;
-                    object.animation.frame.src.y[n][f] = fid / props.columns * props.srcTileH;
-                    object.animation.frame.src.w[n][f] = props.srcTileW;
-                    object.animation.frame.src.h[n][f] = props.srcTileH;
-                    object.animation.frame.collision.offX[n][f] = col.x;
-                    object.animation.frame.collision.offY[n][f] = col.y;
-                    object.animation.frame.collision.w[n][f] = col.w;
-                    object.animation.frame.collision.h[n][f] = col.h;
-                    object.animation.frame.frameDuration[n][f] = tileData->animation.frames[f].duration;
-                }
-            }
-            else
-            {
-                object.animation.frameCount[n] = 1;
-                object.animation.frame.src.x[n][0] = idx % props.columns * props.srcTileW;
-                object.animation.frame.src.y[n][0] = idx / props.columns * props.srcTileH;
-                object.animation.frame.src.w[n][0] = props.srcTileW;
-                object.animation.frame.src.h[n][0] = props.srcTileH;
-                object.animation.frame.collision.offX[n][0] = col.x;
-                object.animation.frame.collision.offY[n][0] = col.y;
-                object.animation.frame.collision.w[n][0] = col.w;
-                object.animation.frame.collision.h[n][0] = col.h;
-                object.animation.frame.frameDuration[n][0] = 0;
-            }
+            loadTileAnimation(object.animation, n, tileset, idx, props);
 
             object.position.x[n] = i % props.mapW * props.dstTileW;
             object.position.y[n] = i / props.mapW * props.dstTileH;
             object.position.w[n] = props.dstTileW;
             object.position.h[n] = props.dstTileH;
         }
-        object.animation.frameIndex[n] = 0;
-        object.animation.animationStartTime[n] = 0;
     }
 }
