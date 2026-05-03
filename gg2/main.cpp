@@ -13,6 +13,7 @@
 #include "PlayerMovementSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
+#include "animation/AnimationSystem.h"
 #include "CollisionSystem.h"
 #include "CollisionResolutionSystem.h"
 
@@ -59,6 +60,7 @@ int main()
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         npcAiSystem(*ctx);
+        animationSystem(*ctx);
 
         collisionSystem(*ctx);
         collisionResolutionSystem(*ctx);

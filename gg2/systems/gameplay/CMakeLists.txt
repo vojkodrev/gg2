@@ -29,6 +29,7 @@ add_library(systems_gameplay
     collision/CollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     camera/CameraSystem.cpp
+    animation/AnimationSystem.cpp
 )
 target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -41,5 +42,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/goal
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar
     ${CMAKE_CURRENT_SOURCE_DIR}/camera
+    ${CMAKE_CURRENT_SOURCE_DIR}/animation
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

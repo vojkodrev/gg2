@@ -22,7 +22,7 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
         animation.frameCount[n] = frameCount;
         for (int f = 0; f < frameCount; f++)
         {
-            uint32_t fid = tileData->animation.frames[f].tileID;
+            uint32_t fid = tileData->animation.frames[f].tileID - props.firstGid;
             animation.frame.src.x[n][f] = fid % props.columns * props.srcTileW;
             animation.frame.src.y[n][f] = fid / props.columns * props.srcTileH;
             animation.frame.src.w[n][f] = props.srcTileW;
