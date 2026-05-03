@@ -5,8 +5,8 @@ inline void setDynamicEntityPos(Context &ctx, uint16_t id, SDL_FPoint pos)
 {
     if (id == COLLISION_ENTITY_PLAYER)
     {
-        ctx.data.player.x = pos.x;
-        ctx.data.player.y = pos.y;
+        ctx.data.player.position.x[0] = pos.x;
+        ctx.data.player.position.y[0] = pos.y;
     }
     else
     {

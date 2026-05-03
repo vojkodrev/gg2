@@ -21,6 +21,6 @@ void playerMovementSystem(Context &ctx)
         dx /= len;
         dy /= len;
     }
-    p.x += dx * PLAYER_SPEED * ctx.frame.dt;
-    p.y += dy * PLAYER_SPEED * ctx.frame.dt;
+    p.position.x[0] += dx * PLAYER_SPEED * ctx.frame.dt;
+    p.position.y[0] += dy * PLAYER_SPEED * ctx.frame.dt;
 }

@@ -9,7 +9,7 @@ void renderSystem(const Context &ctx)
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
     SDL_FPoint off = getCameraOffset(ctx);
-    SDL_FRect screen = {0, 0, SCREEN_W, SCREEN_H};
+    SDL_FRect screen = {0, 0, ctx.data.camera.position.w[0], ctx.data.camera.position.h[0]};
     SDL_RenderClear(ctx.renderer);
     for (uint32_t i = 0; i < tileMap.tileCount; i++)
     {

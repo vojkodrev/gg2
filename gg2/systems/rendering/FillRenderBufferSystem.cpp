@@ -16,7 +16,7 @@ void fillRenderBufferSystem(Context &ctx)
     sortRenderBuffer(ctx);
 
     SDL_FPoint off = getCameraOffset(ctx);
-    SDL_FRect screen = {0, 0, SCREEN_W, SCREEN_H};
+    SDL_FRect screen = {0, 0, ctx.data.camera.position.w[0], ctx.data.camera.position.h[0]};
     auto &rb = ctx.renderBuffer;
     uint32_t visible = 0;
     for (uint32_t i = 0; i < rb.count; i++)

@@ -4,6 +4,6 @@
 
 inline SDL_FRect entityColAABB(const Player &p, float buffer = 0.0f)
 {
-    return {p.x + p.colOffX - buffer, p.y + p.colOffY - buffer,
-            p.colW + buffer * 2, p.colH + buffer * 2};
+    return {p.position.x[0] + p.collision.offX[0] - buffer, p.position.y[0] + p.collision.offY[0] - buffer,
+            p.collision.w[0] + buffer * 2, p.collision.h[0] + buffer * 2};
 }

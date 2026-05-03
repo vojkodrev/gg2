@@ -1,13 +1,14 @@
 #pragma once
 #include <cstdint>
-#include "ObjectSrc.h"
-#include "ObjectPosition.h"
-#include "ObjectCollision.h"
+#include "../core/SpriteSrc.h"
+#include "../core/EntityPosition.h"
+#include "../core/EntityCollision.h"
+#include "../core/Constants.h"
 
 struct Object
 {
     uint32_t objectCount;
-    ObjectSrc src;
-    ObjectPosition position;
-    ObjectCollision collision;
+    SpriteSrc<MAX_OBJECTS> src;
+    EntityPosition<MAX_OBJECTS> position;
+    EntityCollision<MAX_OBJECTS> collision;
 };

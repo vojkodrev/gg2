@@ -3,6 +3,7 @@
 #include <tmxlite/Map.hpp>
 #include <memory>
 #include "Context.h"
+#include "Constants.h"
 #include "LoadTileMap.h"
 #include "UpdateFrameStateSystem.h"
 #include "FillRenderBufferSystem.h"
@@ -19,7 +20,7 @@ int main()
 {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window *window = SDL_CreateWindow("gg2", 1280, 720, 0);
+    SDL_Window *window = SDL_CreateWindow("gg2", SCREEN_W, SCREEN_H, 0);
     auto ctx = std::make_unique<Context>();
     ctx->renderer = SDL_CreateRenderer(window, nullptr);
 
@@ -30,6 +31,9 @@ int main()
 
     tmx::Map map;
     map.load("assets/map/map1.tmx");
+
+    ctx->data.camera.position.w[0] = SCREEN_W;
+    ctx->data.camera.position.h[0] = SCREEN_H;
 
     loadTileMap(*ctx, map);
 

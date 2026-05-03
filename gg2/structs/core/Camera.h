@@ -1,7 +1,7 @@
 #pragma once
+#include "EntityPosition.h"
 
 struct Camera
 {
-    float x;
-    float y;
+    EntityPosition<1> position;
 };

@@ -1,9 +1,9 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "Context.h"
-#include "Constants.h"
 
 inline SDL_FPoint getCameraOffset(const Context &ctx)
 {
-    return {SCREEN_W * 0.5f - ctx.data.camera.x, SCREEN_H * 0.5f - ctx.data.camera.y};
+    return {ctx.data.camera.position.w[0] * 0.5f - ctx.data.camera.position.x[0],
+            ctx.data.camera.position.h[0] * 0.5f - ctx.data.camera.position.y[0]};
 }
