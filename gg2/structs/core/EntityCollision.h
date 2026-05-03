@@ -1,10 +1,10 @@
 #pragma once
 
-template<int N>
+template<int NItems, int NSlots>
 struct EntityCollision
 {
-    float offX[N];
-    float offY[N];
-    float w[N];
-    float h[N];
+    float offX[NItems][NSlots];
+    float offY[NItems][NSlots];
+    float w[NItems][NSlots];
+    float h[NItems][NSlots];
 };
