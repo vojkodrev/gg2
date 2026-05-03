@@ -24,7 +24,8 @@ void renderSystem(const Context &ctx)
     {
         SDL_FRect src = {rb.src.x[i], rb.src.y[i], rb.src.w[i], rb.src.h[i]};
         SDL_FRect dst = {rb.dst.x[i], rb.dst.y[i], rb.dst.w[i], rb.dst.h[i]};
-        SDL_RenderTexture(ctx.renderer, ctx.texture, &src, &dst);
+        SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+        SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, 0.0, nullptr, flip);
     }
     debugRenderSystem(ctx);
 

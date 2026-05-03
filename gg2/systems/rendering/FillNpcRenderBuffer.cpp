@@ -17,5 +17,6 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.dst.w[n] = npc.position.w[i];
         rb.dst.h[n] = npc.position.h[i];
         rb.dst.colOffY[n] = npc.animation.frame.collision.offY[i][f];
+        rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
     }
 }

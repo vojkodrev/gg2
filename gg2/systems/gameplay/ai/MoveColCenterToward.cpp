@@ -16,4 +16,8 @@ void moveColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float spee
         return;
     npc.position.x[n] += dx / d * speed * dt;
     npc.position.y[n] += dy / d * speed * dt;
+    if (dx < 0.0f)
+        npc.facing.facing[n] = FacingDirection::Left;
+    else if (dx > 0.0f)
+        npc.facing.facing[n] = FacingDirection::Right;
 }

@@ -15,4 +15,5 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.dst.w[n] = player.position.w[0];
     rb.dst.h[n] = player.position.h[0];
     rb.dst.colOffY[n] = player.animation.frame.collision.offY[0][f];
+    rb.flipX[n] = player.facing.facing[0] != player.facing.initialFacing[0];
 }

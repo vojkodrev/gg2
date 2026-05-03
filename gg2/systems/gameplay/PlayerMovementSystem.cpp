@@ -23,4 +23,8 @@ void playerMovementSystem(Context &ctx)
     }
     p.position.x[0] += dx * PLAYER_SPEED * ctx.frame.dt;
     p.position.y[0] += dy * PLAYER_SPEED * ctx.frame.dt;
+    if (dx < 0.0f)
+        p.facing.facing[0] = FacingDirection::Left;
+    else if (dx > 0.0f)
+        p.facing.facing[0] = FacingDirection::Right;
 }
