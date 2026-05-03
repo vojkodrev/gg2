@@ -1,5 +1,6 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
+#include "GetTileProp.h"
 #include "LoadTileAnimation.h"
 #include <tmxlite/TileLayer.hpp>
 
@@ -17,6 +18,9 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.position.y[0] = i / props.mapW * props.dstTileH;
         ctx.data.player.position.w[0] = props.dstTileW;
         ctx.data.player.position.h[0] = props.dstTileH;
+        FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
+        ctx.data.player.facing.facing[0] = f;
+        ctx.data.player.facing.initialFacing[0] = f;
         break;
     }
 }

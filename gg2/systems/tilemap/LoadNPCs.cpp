@@ -29,6 +29,9 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.state[n] = NPCAiState::Idle;
         npc.ai.idleTimer[n] = randomIdleTimer();
 
+        FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
+        npc.facing.facing[n] = f;
+        npc.facing.initialFacing[n] = f;
         npc.ai.type[n] = (NPCAiType)(int)getTileProp(tileset, idx, "AI");
 
         npc.ai.patrol.count[n] = (uint32_t)getTileProp(tileset, idx, "patrolCount");

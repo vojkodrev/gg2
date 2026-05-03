@@ -2,6 +2,9 @@
 <tileset version="1.11" tiledversion="1.12.1" name="texture" tilewidth="64" tileheight="64" tilecount="108" columns="12" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
  <image source="../texture/texture.png" width="768" height="576"/>
  <tile id="6">
+  <properties>
+   <property name="facing" value="right"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
   </objectgroup>
@@ -9,6 +12,7 @@
  <tile id="18">
   <properties>
    <property name="AI" type="int" value="1"/>
+   <property name="facing" value="left"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
@@ -22,6 +26,7 @@
  <tile id="30">
   <properties>
    <property name="AI" type="int" value="1"/>
+   <property name="facing" value="left"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
