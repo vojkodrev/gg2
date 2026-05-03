@@ -1,7 +1,7 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
-#include "GetCollision.h"
 #include "GetTileProp.h"
+#include "LoadTileAnimation.h"
 #include "RandomIdleTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
@@ -18,30 +18,26 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = npc.npcCount++;
         uint32_t idx = npcTiles[i].ID - props.firstGid;
-        npc.src.x[n] = idx % props.columns * props.srcTileW;
-        npc.src.y[n] = idx / props.columns * props.srcTileH;
-        npc.src.w[n] = props.srcTileW;
-        npc.src.h[n] = props.srcTileH;
+        loadTileAnimation(npc.animation, n, tileset, idx, props);
         npc.position.x[n] = i % props.mapW * props.dstTileW;
         npc.position.y[n] = i / props.mapW * props.dstTileH;
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
-        getCollision(tileset, idx, npc.collision.offX[n], npc.collision.offY[n], npc.collision.w[n], npc.collision.h[n]);
         npc.ai.spawn.x[n] = npc.position.x[n];
         npc.ai.spawn.y[n] = npc.position.y[n];
-        npc.ai.patrolIndex[n] = 0;
+        npc.ai.patrol.index[n] = 0;
         npc.ai.state[n] = NPCAiState::Idle;
         npc.ai.idleTimer[n] = randomIdleTimer();
 
         npc.ai.type[n] = (NPCAiType)(int)getTileProp(tileset, idx, "AI");
 
-        npc.ai.patrolCount[n] = (uint32_t)getTileProp(tileset, idx, "patrolCount");
-        for (uint32_t p = 0; p < npc.ai.patrolCount[n] && p < MAX_PATROL_POINTS; p++)
+        npc.ai.patrol.count[n] = (uint32_t)getTileProp(tileset, idx, "patrolCount");
+        for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)
         {
             char key[16];
             snprintf(key, sizeof(key), "patrol%02u", p + 1);
             std::string val = getTileStringProp(tileset, idx, key);
-            sscanf(val.c_str(), "%f,%f", &npc.ai.patrol.x[n][p], &npc.ai.patrol.y[n][p]);
+            sscanf(val.c_str(), "%f,%f", &npc.ai.patrol.point.x[n][p], &npc.ai.patrol.point.y[n][p]);
         }
     }
 }
