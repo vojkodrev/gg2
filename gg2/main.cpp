@@ -22,7 +22,7 @@ int main()
 
     SDL_Window *window = SDL_CreateWindow("gg2", SCREEN_W, SCREEN_H, 0);
     auto ctx = std::make_unique<Context>();
-    ctx->renderer = SDL_CreateRenderer(window, nullptr);
+    ctx->renderer = SDL_CreateRenderer(window, "direct3d11");
 
     SDL_Surface *surface = IMG_Load("assets/texture/texture.png");
     ctx->texture = SDL_CreateTextureFromSurface(ctx->renderer, surface);
@@ -37,9 +37,11 @@ int main()
 
     loadTileMap(*ctx, map);
 
+    SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
+
     bool running = true;
     SDL_Event event;
-    ctx->frame.maxFps = 60;
+    ctx->frame.maxFps = 120;
     ctx->frame.frameCount = 0;
     ctx->frame.lastTicks = SDL_GetTicks();
     while (running)
