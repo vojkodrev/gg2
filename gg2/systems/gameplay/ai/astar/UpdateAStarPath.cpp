@@ -2,7 +2,7 @@
 #include <atomic>
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
-#include "Constants.h"
+#include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 
 void updateAStarPath(uint32_t n, Context &ctx, SDL_FRect targetCol)

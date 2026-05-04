@@ -2,7 +2,7 @@
 #include "DistToPlayer.h"
 #include "HasReachedRect.h"
 #include "CenteredRect.h"
-#include "Constants.h"
+#include "NpcMonsterConstants.h"
 #include "astar/UpdateAStarPath.h"
 #include "SetNpcAiStateGoToPlayer.h"
 #include "SetNpcAiStateIdle.h"

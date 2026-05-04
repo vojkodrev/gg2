@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "Constants.h"
+#include "CapacityConstants.h"
 #include "NPCPatrolPoint.h"
 
 struct NPCPatrol

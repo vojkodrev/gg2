@@ -2,7 +2,6 @@
 #include "EntityColAABBObject.h"
 #include "EntityColAABBNPC.h"
 #include "ColId.h"
-#include "Constants.h"
 #include <SDL3/SDL.h>
 #include "spatialhash/SpatialHashQuery.h"
 #include "../../../../../utils/collision/CenteredRect.h"

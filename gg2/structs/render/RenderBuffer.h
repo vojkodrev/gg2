@@ -3,7 +3,7 @@
 #include "RenderSrc.h"
 #include "RenderDst.h"
 #include "../core/Facing.h"
-#include "../core/Constants.h"
+#include "CapacityConstants.h"
 
 struct RenderBuffer
 {

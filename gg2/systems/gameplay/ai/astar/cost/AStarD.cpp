@@ -1,6 +1,6 @@
 #include "AStarD.h"
 
-#include "../../../../../structs/core/Constants.h"
+#include "NpcMonsterConstants.h"
 
 float astarD(const AStarContext& ctx, int fromNode, int toNode)
 {

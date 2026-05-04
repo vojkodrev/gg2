@@ -3,7 +3,7 @@
 #include <tmxlite/Map.hpp>
 #include <memory>
 #include "Context.h"
-#include "Constants.h"
+#include "ScreenConstants.h"
 #include "LoadTileMap.h"
 #include "UpdateFrameStateSystem.h"
 #include "FillRenderBufferSystem.h"

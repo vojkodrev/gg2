@@ -3,7 +3,7 @@
 #include "../core/Animation.h"
 #include "../core/EntityPosition.h"
 #include "../core/Facing.h"
-#include "../core/Constants.h"
+#include "CapacityConstants.h"
 #include "NPCAi.h"
 
 struct NPC

@@ -1,7 +1,7 @@
 #include "UpdateMonsterGoToSpawn.h"
 #include "HasReachedRect.h"
 #include "CenteredRect.h"
-#include "Constants.h"
+#include "NpcMonsterConstants.h"
 #include "astar/UpdateAStarPath.h"
 #include "SetNpcAiStateIdle.h"
 

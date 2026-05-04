@@ -2,7 +2,7 @@
 #include "DistToSpawn.h"
 #include "AreColBoxesNear.h"
 #include "EntityColAABBPlayer.h"
-#include "Constants.h"
+#include "NpcMonsterConstants.h"
 #include "astar/UpdateAStarPath.h"
 #include "SetNpcAiStateGoToSpawn.h"
 #include "SetNpcAiStateAttack.h"

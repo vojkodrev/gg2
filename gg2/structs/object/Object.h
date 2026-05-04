@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "../core/Animation.h"
 #include "../core/EntityPosition.h"
-#include "../core/Constants.h"
+#include "CapacityConstants.h"
 
 struct Object
 {

@@ -1,6 +1,6 @@
 #include "UpdateMonsterIdle.h"
 #include "DistToPlayer.h"
-#include "Constants.h"
+#include "NpcMonsterConstants.h"
 #include "SetNpcAiStateGoToPlayer.h"
 #include "SetNpcAiStatePatrolling.h"
 

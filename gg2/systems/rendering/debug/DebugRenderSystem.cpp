@@ -4,7 +4,6 @@
 #include "DebugRenderObjects.h"
 #include "DebugRenderAstar.h"
 #include "../../gameplay/camera/GetCameraOffset.h"
-#include "../../../structs/core/Constants.h"
 
 void debugRenderSystem(const Context &ctx)
 {

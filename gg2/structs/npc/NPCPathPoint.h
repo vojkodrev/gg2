@@ -1,5 +1,6 @@
 #pragma once
-#include "Constants.h"
+#include "CapacityConstants.h"
+#include "AStarConstants.h"
 
 struct NPCPathPoint
 {

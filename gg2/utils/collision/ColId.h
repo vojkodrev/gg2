@@ -1,5 +1,6 @@
 #pragma once
-#include "Constants.h"
+#include "CapacityConstants.h"
+#include "CollisionConstants.h"
 #include <cstdint>
 
 inline uint16_t colIdNpc(uint32_t i)    { return (uint16_t)(1 + i); }

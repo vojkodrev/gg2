@@ -1,5 +1,5 @@
 #include "GetNeighbors.h"
-#include "../../../../../structs/core/Constants.h"
+#include "NpcMonsterConstants.h"
 #include "IsBlocked.h"
 #include "../node/AStarEncode.h"
 #include "../node/AStarDecode.h"

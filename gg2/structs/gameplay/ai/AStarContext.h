@@ -2,7 +2,7 @@
 #include "AStarStatus.h"
 #include "../../../utils/hashmap/HashMap.h"
 #include "../../../utils/minheap/MinHeap.h"
-#include "../../core/Constants.h"
+#include "AStarConstants.h"
 #include "spatialhash/SpatialHash.h"
 #include <future>
 #include <atomic>

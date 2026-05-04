@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 #include "../../structs/core/Animation.h"
-#include "../../structs/core/Constants.h"
+#include "CapacityConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "GetCollision.h"
 

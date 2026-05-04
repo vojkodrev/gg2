@@ -1,7 +1,7 @@
 #pragma once
 #include "AStarContext.h"
 #include "../../../utils/queue/Queue.h"
-#include "../../core/Constants.h"
+#include "CapacityConstants.h"
 
 struct AStarPool
 {
