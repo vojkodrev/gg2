@@ -1,6 +1,7 @@
 add_library(gg2_common INTERFACE)
 target_include_directories(gg2_common INTERFACE
     ${CMAKE_SOURCE_DIR}/gg2/structs/core
+    ${CMAKE_SOURCE_DIR}/gg2/structs/core/constants
     ${CMAKE_SOURCE_DIR}/gg2/structs/tilemap
     ${CMAKE_SOURCE_DIR}/gg2/structs/npc
     ${CMAKE_SOURCE_DIR}/gg2/structs/object
