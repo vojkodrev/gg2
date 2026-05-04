@@ -8,6 +8,9 @@ add_library(systems_gameplay
     ai/monster/UpdateMonsterGoToPlayer.cpp
     ai/monster/UpdateMonsterAttack.cpp
     ai/monster/UpdateMonsterGoToSpawn.cpp
+    ai/pet/UpdatePet.cpp
+    ai/pet/UpdatePetIdle.cpp
+    ai/pet/UpdatePetGoToPlayer.cpp
     ai/Dist.cpp
     ai/DistToPlayer.cpp
     ai/DistToSpawn.cpp
@@ -35,6 +38,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
+    ${CMAKE_CURRENT_SOURCE_DIR}/ai/pet
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/cost

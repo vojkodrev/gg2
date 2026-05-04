@@ -2,5 +2,6 @@
 
 enum class NPCAiType : int
 {
-    Monster = 1
+    Monster = 1,
+    Pet = 2
 };

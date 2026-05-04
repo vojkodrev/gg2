@@ -1,5 +1,6 @@
 #include "NPCAiSystem.h"
 #include "monster/UpdateMonster.h"
+#include "pet/UpdatePet.h"
 
 void npcAiSystem(Context &ctx)
 {
@@ -9,5 +10,7 @@ void npcAiSystem(Context &ctx)
     {
         if (npc.ai.type[n] == NPCAiType::Monster)
             updateMonster(n, ctx);
+        else if (npc.ai.type[n] == NPCAiType::Pet)
+            updatePet(n, ctx);
     }
 }
