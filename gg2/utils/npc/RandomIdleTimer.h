@@ -1,10 +1,8 @@
 #pragma once
 #include <cstdlib>
-
-static constexpr float IDLE_TIME_MIN = 1.0f;
-static constexpr float IDLE_TIME_MAX = 3.0f;
+#include "NpcMonsterConstants.h"
 
 inline float randomIdleTimer()
 {
-    return IDLE_TIME_MIN + (float)rand() / RAND_MAX * (IDLE_TIME_MAX - IDLE_TIME_MIN);
+    return NPC_IDLE_TIME_MIN + (float)rand() / RAND_MAX * (NPC_IDLE_TIME_MAX - NPC_IDLE_TIME_MIN);
 }
