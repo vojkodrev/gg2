@@ -52,6 +52,7 @@ images = [
     {"id": 19, "filename": "fireplace/frame_09_delay-0.08s.gif", "x": 9, "y": 8, "h": 64},
     {"id": 20, "filename": "fireplace/frame_10_delay-0.08s.gif", "x": 10, "y": 8, "h": 64},
     {"id": 21, "filename": "fireplace/frame_11_delay-0.08s.gif", "x": 11, "y": 8, "h": 64},
+    {"id": 22, "filename": "dog.png", "x": 0, "y": 7},
 ]
 
 
