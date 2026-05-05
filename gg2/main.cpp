@@ -38,7 +38,9 @@ int main()
 
     loadTileMap(*ctx, map);
 
+#ifndef NDEBUG
     SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
+#endif
 
     bool running = true;
     SDL_Event event;

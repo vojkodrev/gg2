@@ -67,7 +67,9 @@ int runAStar(AStarContext& astar, Context& ctx,
 
         if (isGoalReached(astar, destCol, current))
         {
+#ifndef NDEBUG
             SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
+#endif
             int length = reconstructPath(astar, current, goalCenter, pathOut);
             astar.status.store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
             return length;
@@ -100,6 +102,8 @@ int runAStar(AStarContext& astar, Context& ctx,
     }
 
     astar.status.store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
+#ifndef NDEBUG
     SDL_Log("AStar: path not found (%.2f ms)", (float)(SDL_GetTicks() - startTime));
+#endif
     return -1;
 }

@@ -9,5 +9,7 @@ void frameRateLimitSystem(Context &ctx)
         SDL_Delay(ctx.frame.targetTime - ctx.frame.frameTime);
 
     if (++ctx.frame.frameCount % 60 == 0)
+#ifndef NDEBUG
         SDL_Log("frame: %llu ms", ctx.frame.frameTime);
+#endif
 }
