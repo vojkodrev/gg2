@@ -9,6 +9,7 @@ find_package(SDL3 REQUIRED CONFIG)
 find_package(SDL3_image REQUIRED CONFIG)
 
 add_library(gg2_common INTERFACE)
+target_link_libraries(gg2_common INTERFACE SDL3::SDL3 SDL3_image::SDL3_image)
 target_include_directories(gg2_common INTERFACE
     ${CMAKE_SOURCE_DIR}/gg2/structs/core
     ${CMAKE_SOURCE_DIR}/gg2/structs/core/constants
