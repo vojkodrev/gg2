@@ -20,6 +20,24 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
+    },
+    {
+      "name": "arm64-debug",
+      "displayName": "arm64 Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "arm64-release",
+      "displayName": "arm64 Release",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
     }
   ],
   "buildPresets": [
@@ -33,6 +51,16 @@
       "name": "x64-release",
       "configurePreset": "x64-release",
       "configuration": "Release",
+      "jobs": 16
+    },
+    {
+      "name": "arm64-debug",
+      "configurePreset": "arm64-debug",
+      "jobs": 16
+    },
+    {
+      "name": "arm64-release",
+      "configurePreset": "arm64-release",
       "jobs": 16
     }
   ]
