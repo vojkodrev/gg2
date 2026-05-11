@@ -19,7 +19,7 @@ def update_tileset(base_dir, settings, images, meta):
     tsx_path = os.path.join(base_dir, settings["tileset"])
     tree = ET.parse(tsx_path)
     root = tree.getroot()
-    columns = settings["w"]
+    columns = max((img["x"] for img in images), default=-1) + 1
 
     for img in images:
         if "markerFor" not in img:

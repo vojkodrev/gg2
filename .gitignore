@@ -34,3 +34,15 @@ out/
 # Python virtual environments
 .venv/
 **/.venv/
+
+# Python generated files
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/

@@ -6,10 +6,11 @@ from PIL import Image
 def build_atlas(base_dir, settings, images):
     tile_w = settings["tileW"]
     tile_h = settings["tileH"]
-    atlas = Image.new(
-        "RGBA", (settings["w"] * tile_w, settings["h"] * tile_h), (0, 0, 0, 0)
-    )
     meta = {}
+    prepared = []
+    atlas_tiles_w = 0
+    atlas_tiles_h = 0
+
     for img in images:
         src = Image.open(os.path.join(base_dir, img["filename"])).convert("RGBA")
         scale = 1.0
@@ -19,6 +20,15 @@ def build_atlas(base_dir, settings, images):
             src = src.resize((target_w, img["h"]), Image.Resampling.NEAREST)
         tiles_w = max(1, -(-src.width // tile_w))
         tiles_h = max(1, -(-src.height // tile_h))
+        atlas_tiles_w = max(atlas_tiles_w, img["x"] + tiles_w)
+        atlas_tiles_h = max(atlas_tiles_h, img["y"] + tiles_h)
+        prepared.append((img, src, scale, tiles_w, tiles_h))
+
+    atlas = Image.new(
+        "RGBA", (atlas_tiles_w * tile_w, atlas_tiles_h * tile_h), (0, 0, 0, 0)
+    )
+
+    for img, src, scale, tiles_w, tiles_h in prepared:
         off_x = (tiles_w * tile_w - src.width) // 2
         off_y = (tiles_h * tile_h - src.height) // 2
         paste_x = img["x"] * tile_w + off_x
