@@ -1,3 +1,8 @@
+import os
+
+from build_atlas import build_atlas
+from update_tileset import update_tileset
+
 settings = {
     "tileW": 64,
     "tileH": 64,
@@ -56,98 +61,7 @@ images = [
 ]
 
 
-def build_atlas(dir):
-    from PIL import Image
-
-    tileW = settings["tileW"]
-    tileH = settings["tileH"]
-    atlas = Image.new(
-        "RGBA", (settings["w"] * tileW, settings["h"] * tileH), (0, 0, 0, 0)
-    )
-    meta = {}
-    for img in images:
-        src = Image.open(os.path.join(dir, img["filename"])).convert("RGBA")
-        scale = 1.0
-        if "h" in img:
-            scale = img["h"] / src.height
-            target_w = round(src.width * scale)
-            src = src.resize((target_w, img["h"]), Image.NEAREST)
-        tilesW = max(1, -(-src.width // tileW))
-        tilesH = max(1, -(-src.height // tileH))
-        offX = (tilesW * tileW - src.width) // 2
-        offY = (tilesH * tileH - src.height) // 2
-        pasteX = img["x"] * tileW + offX
-        pasteY = img["y"] * tileH + offY
-        meta[img["id"]] = {
-            "x": pasteX,
-            "y": pasteY,
-            "w": src.width,
-            "h": src.height,
-            "scale": scale,
-            "offX": offX,
-            "offY": offY,
-        }
-        atlas.paste(src, (pasteX, pasteY))
-    atlas.save(os.path.join(dir, settings["output"]))
-    return meta
-
-
-def update_tileset(dir, meta):
-    import xml.etree.ElementTree as ET
-
-    ET.register_namespace("", "")
-    tsx_path = os.path.join(dir, settings["tileset"])
-    tree = ET.parse(tsx_path)
-    root = tree.getroot()
-    columns = settings["w"]
-
-    def set_prop(props_el, name, ptype, value):
-        prop = next(
-            (p for p in props_el.findall("property") if p.get("name") == name), None
-        )
-        if prop is None:
-            prop = ET.SubElement(props_el, "property")
-            prop.set("name", name)
-        if ptype:
-            prop.set("type", ptype)
-        elif "type" in prop.attrib:
-            del prop.attrib["type"]
-        prop.set("value", str(value))
-
-    for img in images:
-        if "markerFor" not in img:
-            continue
-        m = meta[img["markerFor"]]
-        tile_id = str(img["y"] * columns + img["x"])
-        tile_el = next(
-            (t for t in root.findall("tile") if t.get("id") == tile_id), None
-        )
-        if tile_el is None:
-            tile_el = ET.SubElement(root, "tile")
-            tile_el.set("id", tile_id)
-        props_el = tile_el.find("properties")
-        if props_el is None:
-            props_el = ET.SubElement(tile_el, "properties")
-        set_prop(props_el, "type", None, "marker")
-        set_prop(props_el, "x", "int", m["x"])
-        set_prop(props_el, "y", "int", m["y"])
-        set_prop(props_el, "w", "int", m["w"])
-        set_prop(props_el, "h", "int", m["h"])
-        if "colX" in img:
-            tm = meta[img["markerFor"]]
-            s = tm["scale"]
-            set_prop(props_el, "colOffX", "int", round(img["colX"] * s))
-            set_prop(props_el, "colOffY", "int", round(img["colY"] * s))
-            set_prop(props_el, "colW", "int", round(img["colW"] * s))
-            set_prop(props_el, "colH", "int", round(img["colH"] * s))
-
-    ET.indent(tree, space=" ")
-    tree.write(tsx_path, encoding="unicode", xml_declaration=True)
-
-
 if __name__ == "__main__":
-    import os
-
-    dir = os.path.dirname(os.path.abspath(__file__))
-    meta = build_atlas(dir)
-    update_tileset(dir, meta)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    meta = build_atlas(base_dir, settings, images)
+    update_tileset(base_dir, settings, images, meta)
