@@ -46,3 +46,9 @@ __pycache__/
 .coverage
 .coverage.*
 htmlcov/
+
+# VS Code local files
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/*.code-workspace
