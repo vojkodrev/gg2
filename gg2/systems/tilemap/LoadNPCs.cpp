@@ -2,7 +2,8 @@
 #include "FindLayer.h"
 #include "GetTileProp.h"
 #include "LoadTileAnimation.h"
-#include "RandomIdleTimer.h"
+#include "../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
 
@@ -27,7 +28,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.spawn.y[n] = npc.position.y[n];
         npc.ai.patrol.index[n] = 0;
         npc.ai.state[n] = NPCAiState::Idle;
-        npc.ai.idleTimer[n] = randomIdleTimer();
+        npc.ai.idleTimer[n] = randomTimer(NPC_IDLE_TIME_MIN, NPC_IDLE_TIME_MAX);
+        npc.ai.repathTimer[n] = 0.0f;
 
         FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
         npc.facing.facing[n] = f;
