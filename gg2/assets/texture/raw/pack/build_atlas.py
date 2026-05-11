@@ -16,7 +16,7 @@ def build_atlas(base_dir, settings, images):
         if "h" in img:
             scale = img["h"] / src.height
             target_w = round(src.width * scale)
-            src = src.resize((target_w, img["h"]), Image.NEAREST)
+            src = src.resize((target_w, img["h"]), Image.Resampling.NEAREST)
         tiles_w = max(1, -(-src.width // tile_w))
         tiles_h = max(1, -(-src.height // tile_h))
         off_x = (tiles_w * tile_w - src.width) // 2

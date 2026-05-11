@@ -1,0 +1,3 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/gg2/assets/texture/raw/pack/.venv/bin/python"
+}
