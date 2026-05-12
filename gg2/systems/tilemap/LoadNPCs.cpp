@@ -2,6 +2,7 @@
 #include "FindLayer.h"
 #include "GetTileProp.h"
 #include "LoadTileAnimation.h"
+#include "DecodeGridIndex.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
@@ -20,8 +21,9 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t n = npc.npcCount++;
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadTileAnimation(npc.animation, n, tileset, idx, props);
-        npc.position.x[n] = i % props.mapW * props.dstTileW;
-        npc.position.y[n] = i / props.mapW * props.dstTileH;
+        SDL_Point grid = decodeGridIndex(i, props.mapW);
+        npc.position.x[n] = grid.x * props.dstTileW;
+        npc.position.y[n] = grid.y * props.dstTileH;
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
         npc.ai.spawn.x[n] = npc.position.x[n];

@@ -97,4 +97,11 @@
    <frame tileid="123" duration="100"/>
   </animation>
  </tile>
+ <tile id="227">
+  <properties>
+   <property name="angle" value="225"/>
+   <property name="scale" type="float" value="0.75"/>
+   <property name="type" value="bow1"/>
+  </properties>
+ </tile>
 </tileset>

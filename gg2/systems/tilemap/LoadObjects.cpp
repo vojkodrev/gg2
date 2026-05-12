@@ -3,6 +3,7 @@
 #include "IsMarker.h"
 #include "GetTileProp.h"
 #include "LoadTileAnimation.h"
+#include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>
 
 void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
@@ -30,8 +31,9 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             float colH = (float)getTileProp(tileset, idx, "colH") * scale;
             float w = (float)getTileProp(tileset, idx, "w") * scale;
             float h = (float)getTileProp(tileset, idx, "h") * scale;
-            float gridX = (float)(i % props.mapW * props.dstTileW);
-            float gridY = (float)(i / props.mapW * props.dstTileH);
+            SDL_Point grid = decodeGridIndex(i, props.mapW);
+            float gridX = (float)(grid.x * props.dstTileW);
+            float gridY = (float)(grid.y * props.dstTileH);
 
             object.position.x[n] = gridX + (props.dstTileW - colW) / 2.0f - colOffX;
             object.position.y[n] = gridY + props.dstTileH - colOffY - colH;
@@ -50,8 +52,9 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         {
             loadTileAnimation(object.animation, n, tileset, idx, props);
 
-            object.position.x[n] = i % props.mapW * props.dstTileW;
-            object.position.y[n] = i / props.mapW * props.dstTileH;
+            SDL_Point grid = decodeGridIndex(i, props.mapW);
+            object.position.x[n] = grid.x * props.dstTileW;
+            object.position.y[n] = grid.y * props.dstTileH;
             object.position.w[n] = props.dstTileW;
             object.position.h[n] = props.dstTileH;
         }

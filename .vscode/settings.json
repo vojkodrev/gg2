@@ -1,4 +1,7 @@
 {
+  "files.associations": {
+    "**/assets/map/texture.tsx": "xml"
+  },
   "python.defaultInterpreterPath": "${workspaceFolder}/gg2/assets/texture/raw/pack/.venv/bin/python",
   "python.terminal.activateEnvironment": false,
   "python.terminal.activateEnvInCurrentTerminal": false

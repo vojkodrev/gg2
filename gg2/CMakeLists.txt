@@ -24,6 +24,7 @@ target_include_directories(gg2_common INTERFACE
     ${CMAKE_SOURCE_DIR}/gg2/utils/minheap
     ${CMAKE_SOURCE_DIR}/gg2/utils/queue
     ${CMAKE_SOURCE_DIR}/gg2/utils/sort
+    ${CMAKE_SOURCE_DIR}/gg2/utils/grid
 )
 
 include(cmake/tmxlite.cmake)
