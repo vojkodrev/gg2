@@ -16,7 +16,7 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.dst.y[n] = npc.position.y[i];
         rb.dst.w[n] = npc.position.w[i];
         rb.dst.h[n] = npc.position.h[i];
-        rb.dst.colOffY[n] = npc.animation.frame.collision.offY[i][f];
+        rb.dst.sortY[n] = rb.dst.y[n] + npc.animation.frame.collision.offY[i][f];
         rb.group.id[n] = rb.groupCount++;
         rb.group.zIndex[n] = 0;
         rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
