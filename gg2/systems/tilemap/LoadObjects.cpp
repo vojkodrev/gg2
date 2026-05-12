@@ -1,7 +1,8 @@
 #include "LoadObjects.h"
 #include "FindLayer.h"
 #include "IsMarker.h"
-#include "GetTileProp.h"
+#include "properties/GetTileFloatProp.h"
+#include "properties/GetTilePropInt.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>

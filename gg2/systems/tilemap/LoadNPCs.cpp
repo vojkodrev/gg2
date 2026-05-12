@@ -1,6 +1,7 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
-#include "GetTileProp.h"
+#include "properties/GetTilePropInt.h"
+#include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"

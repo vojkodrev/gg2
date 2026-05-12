@@ -1,6 +1,8 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
-#include "GetTileProp.h"
+#include "properties/FindTileByType.h"
+#include "properties/GetTilePropInt.h"
+#include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>
