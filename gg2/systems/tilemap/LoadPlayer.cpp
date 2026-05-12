@@ -1,6 +1,7 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
 #include "properties/FindTileByType.h"
+#include "properties/GetTileFloatProp.h"
 #include "properties/GetTilePropInt.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
@@ -33,6 +34,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (hasBow)
         {
             auto &weapon = ctx.data.player.equipment.weapon;
+            auto &weaponPos = ctx.data.player.equipment.position;
             weapon.frameCount[0] = 1;
             SDL_Point srcGrid = decodeGridIndex((int)bowIdx, props.columns);
             weapon.frame.src.x[0][0] = srcGrid.x * props.srcTileW;
@@ -40,6 +42,12 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             weapon.frame.src.w[0][0] = props.srcTileW;
             weapon.frame.src.h[0][0] = props.srcTileH;
             weapon.frame.frameDuration[0][0] = 0;
+
+            float scale = getTileFloatProp(tileset, bowIdx, "scale", 1.0f);
+            weaponPos.x[0] = 0.0f;
+            weaponPos.y[0] = 0.0f;
+            weaponPos.w[0] = props.dstTileW * scale;
+            weaponPos.h[0] = props.dstTileH * scale;
 
             uint32_t srcAngle = (uint32_t)getTileProp(tileset, bowIdx, "angle");
             weapon.frame.src.angle[0][0] = (srcAngle + 360 - 135) % 360;
