@@ -10,9 +10,12 @@
 void fillRenderBufferSystem(Context &ctx)
 {
     ctx.renderBuffer.count = 0;
+    ctx.renderBuffer.groupCount = 0;
+    
     fillPlayerRenderBuffer(ctx);
     fillNpcRenderBuffer(ctx);
     fillObjectRenderBuffer(ctx);
+
     sortRenderBuffer(ctx);
 
     SDL_FPoint off = getCameraOffset(ctx);
