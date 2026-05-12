@@ -54,7 +54,7 @@ if(WIN32)
     )
 endif()
 
-add_custom_command(TARGET gg2 POST_BUILD
+add_custom_target(gg2_assets ALL
     COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:gg2>/assets/map
     COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:gg2>/assets/texture
     COMMAND ${CMAKE_COMMAND} -E copy_if_different

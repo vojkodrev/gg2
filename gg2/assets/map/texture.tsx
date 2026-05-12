@@ -99,7 +99,7 @@
  </tile>
  <tile id="227">
   <properties>
-   <property name="angle" value="225"/>
+   <property name="angle" type="int" value="225"/>
    <property name="scale" type="float" value="0.75"/>
    <property name="type" value="bow1"/>
   </properties>
