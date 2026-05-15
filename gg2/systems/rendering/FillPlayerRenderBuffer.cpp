@@ -29,18 +29,22 @@ void fillPlayerRenderBuffer(Context &ctx)
     {
         int wf = weapon.frameIndex[0];
         uint32_t wn = rb.count++;
+
         rb.src.x[wn] = (float)weapon.frame.src.x[0][wf];
         rb.src.y[wn] = (float)weapon.frame.src.y[0][wf];
         rb.src.w[wn] = (float)weapon.frame.src.w[0][wf];
         rb.src.h[wn] = (float)weapon.frame.src.h[0][wf];
-        rb.dst.x[wn] = player.position.x[0] + weaponPos.x[0];
+
+        rb.group.id[wn] = groupId;
+        rb.group.zIndex[wn] = WEAPON_Z_INDEX;
+        rb.flipX[wn] = rb.flipX[n];
+
+        rb.dst.x[wn] = player.position.x[0] + (rb.flipX[wn] ? -weaponPos.x[0] : weaponPos.x[0]);
         rb.dst.y[wn] = player.position.y[0] + weaponPos.y[0];
         rb.dst.w[wn] = weaponPos.w[0];
         rb.dst.h[wn] = weaponPos.h[0];
         rb.dst.sortY[wn] = rb.dst.sortY[n];
-        rb.group.id[wn] = groupId;
-        rb.group.zIndex[wn] = WEAPON_Z_INDEX;
-        rb.flipX[wn] = rb.flipX[n];
+
         rb.src.angle[wn] = rb.flipX[wn] ? (float)weapon.frame.src.angleFlipped[0][wf] : (float)weapon.frame.src.angle[0][wf];
     }
 }

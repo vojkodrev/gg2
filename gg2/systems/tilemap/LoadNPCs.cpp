@@ -1,6 +1,6 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
-#include "properties/GetTilePropInt.h"
+#include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
@@ -37,9 +37,9 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
         npc.facing.facing[n] = f;
         npc.facing.initialFacing[n] = f;
-        npc.ai.type[n] = (NPCAiType)(int)getTileProp(tileset, idx, "AI");
+        npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
 
-        npc.ai.patrol.count[n] = (uint32_t)getTileProp(tileset, idx, "patrolCount");
+        npc.ai.patrol.count[n] = (uint32_t)getTileIntProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)
         {
             char key[16];

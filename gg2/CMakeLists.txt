@@ -65,3 +65,5 @@ add_custom_target(gg2_assets ALL
         ${CMAKE_CURRENT_SOURCE_DIR}/assets/texture/texture.png
         $<TARGET_FILE_DIR:gg2>/assets/texture
 )
+
+add_dependencies(gg2 gg2_assets)

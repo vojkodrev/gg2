@@ -9,7 +9,7 @@ add_library(systems_tilemap
     LoadTileMap.cpp
     properties/FindTileByType.cpp
     properties/GetTileFloatProp.cpp
-    properties/GetTilePropInt.cpp
+    properties/GetTileIntProp.cpp
     properties/GetTileStringProp.cpp
 )
 target_include_directories(systems_tilemap PUBLIC

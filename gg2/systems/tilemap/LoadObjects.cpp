@@ -2,7 +2,7 @@
 #include "FindLayer.h"
 #include "IsMarker.h"
 #include "properties/GetTileFloatProp.h"
-#include "properties/GetTilePropInt.h"
+#include "properties/GetTileIntProp.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>
@@ -21,18 +21,18 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t idx = objectTiles[i].ID - props.firstGid;
         if (isMarker(tileset, idx))
         {
-            object.animation.frame.src.x[n][0] = getTileProp(tileset, idx, "x");
-            object.animation.frame.src.y[n][0] = getTileProp(tileset, idx, "y");
-            object.animation.frame.src.w[n][0] = getTileProp(tileset, idx, "w");
-            object.animation.frame.src.h[n][0] = getTileProp(tileset, idx, "h");
+            object.animation.frame.src.x[n][0] = getTileIntProp(tileset, idx, "x");
+            object.animation.frame.src.y[n][0] = getTileIntProp(tileset, idx, "y");
+            object.animation.frame.src.w[n][0] = getTileIntProp(tileset, idx, "w");
+            object.animation.frame.src.h[n][0] = getTileIntProp(tileset, idx, "h");
             object.animation.frame.src.angle[n][0] = 0;
             float scale = getTileFloatProp(tileset, idx, "scale", 1.0f);
-            float colOffX = (float)getTileProp(tileset, idx, "colOffX") * scale;
-            float colOffY = (float)getTileProp(tileset, idx, "colOffY") * scale;
-            float colW = (float)getTileProp(tileset, idx, "colW") * scale;
-            float colH = (float)getTileProp(tileset, idx, "colH") * scale;
-            float w = (float)getTileProp(tileset, idx, "w") * scale;
-            float h = (float)getTileProp(tileset, idx, "h") * scale;
+            float colOffX = (float)getTileIntProp(tileset, idx, "colOffX") * scale;
+            float colOffY = (float)getTileIntProp(tileset, idx, "colOffY") * scale;
+            float colW = (float)getTileIntProp(tileset, idx, "colW") * scale;
+            float colH = (float)getTileIntProp(tileset, idx, "colH") * scale;
+            float w = (float)getTileIntProp(tileset, idx, "w") * scale;
+            float h = (float)getTileIntProp(tileset, idx, "h") * scale;
             SDL_Point grid = decodeGridIndex(i, props.mapW);
             float gridX = (float)(grid.x * props.dstTileW);
             float gridY = (float)(grid.y * props.dstTileH);
