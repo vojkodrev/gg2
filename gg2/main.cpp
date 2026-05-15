@@ -10,7 +10,9 @@
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
 #include "UpdateKeyboardStateSystem.h"
+#include "UpdateMouseStateSystem.h"
 #include "PlayerMovementSystem.h"
+#include "PlayerFacingSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -58,9 +60,11 @@ int main()
         }
 
         updateKeyboardStateSystem(*ctx);
+        updateMouseStateSystem(*ctx);
 
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
+        playerFacingSystem(*ctx);
         npcAiSystem(*ctx);
         animationSystem(*ctx);
 

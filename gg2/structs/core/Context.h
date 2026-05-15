@@ -4,6 +4,7 @@
 #include "Data.h"
 #include "RenderBuffer.h"
 #include "KeyboardState.h"
+#include "MouseState.h"
 #include "../collision/CollisionContext.h"
 #include "../gameplay/ai/AStarPool.h"
 
@@ -14,6 +15,7 @@ struct Context
 
     FrameState frame;
     KeyboardState keyboard;
+    MouseState mouse;
 
     CollisionContext collision;
 
