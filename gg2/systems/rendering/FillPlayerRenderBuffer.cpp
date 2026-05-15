@@ -13,6 +13,7 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.src.y[n] = (float)player.animation.frame.src.y[0][f];
     rb.src.w[n] = (float)player.animation.frame.src.w[0][f];
     rb.src.h[n] = (float)player.animation.frame.src.h[0][f];
+    rb.src.angle[n] = (float)player.animation.frame.src.angle[0][f];
     rb.dst.x[n] = player.position.x[0];
     rb.dst.y[n] = player.position.y[0];
     rb.dst.w[n] = player.position.w[0];
@@ -40,5 +41,6 @@ void fillPlayerRenderBuffer(Context &ctx)
         rb.group.id[wn] = groupId;
         rb.group.zIndex[wn] = WEAPON_Z_INDEX;
         rb.flipX[wn] = rb.flipX[n];
+        rb.src.angle[wn] = rb.flipX[wn] ? (float)weapon.frame.src.angleFlipped[0][wf] : (float)weapon.frame.src.angle[0][wf];
     }
 }

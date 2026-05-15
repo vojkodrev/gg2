@@ -2,7 +2,6 @@
 #include "FindLayer.h"
 #include "properties/FindTileByType.h"
 #include "properties/GetTileFloatProp.h"
-#include "properties/GetTilePropInt.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
 #include "DecodeGridIndex.h"
@@ -49,8 +48,10 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             weaponPos.w[0] = props.dstTileW * scale;
             weaponPos.h[0] = props.dstTileH * scale;
 
-            uint32_t srcAngle = (uint32_t)getTileProp(tileset, bowIdx, "angle");
-            weapon.frame.src.angle[0][0] = (srcAngle + 360 - 135) % 360;
+            float angleNormal = getTileFloatProp(tileset, bowIdx, "angle", 0.0f);
+            float angleFlipped = getTileFloatProp(tileset, bowIdx, "angle_flipped", angleNormal);
+            weapon.frame.src.angle[0][0] = angleNormal;
+            weapon.frame.src.angleFlipped[0][0] = angleFlipped;
 
             weapon.frameIndex[0] = 0;
             weapon.animationStartTime[0] = 0;

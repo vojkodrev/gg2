@@ -99,8 +99,9 @@
  </tile>
  <tile id="227">
   <properties>
-   <property name="angle" type="int" value="225"/>
-   <property name="scale" type="float" value="0.75"/>
+   <property name="angle" type="float" value="-135"/>
+   <property name="angle_flipped" type="float" value="135"/>
+   <property name="scale" type="float" value="1.2"/>
    <property name="type" value="bow1"/>
   </properties>
  </tile>

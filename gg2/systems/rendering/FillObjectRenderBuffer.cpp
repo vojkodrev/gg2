@@ -13,6 +13,7 @@ void fillObjectRenderBuffer(Context &ctx)
         rb.src.y[n] = (float)object.animation.frame.src.y[i][f];
         rb.src.w[n] = (float)object.animation.frame.src.w[i][f];
         rb.src.h[n] = (float)object.animation.frame.src.h[i][f];
+        rb.src.angle[n] = (float)object.animation.frame.src.angle[i][f];
         rb.dst.x[n] = object.position.x[i];
         rb.dst.y[n] = object.position.y[i];
         rb.dst.w[n] = object.position.w[i];

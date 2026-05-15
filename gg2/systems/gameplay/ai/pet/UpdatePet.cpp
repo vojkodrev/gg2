@@ -10,5 +10,6 @@ void updatePet(uint32_t n, Context &ctx)
     {
     case NPCAiState::Idle:       updatePetIdle(n, ctx);        break;
     case NPCAiState::GoToPlayer: updatePetGoToPlayer(n, ctx);  break;
+    default:                     break;
     }
 }
