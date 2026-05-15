@@ -1,4 +1,5 @@
 #include "FillObjectRenderBuffer.h"
+#include "../../structs/core/constants/RenderConstants.h"
 
 void fillObjectRenderBuffer(Context &ctx)
 {
@@ -18,7 +19,7 @@ void fillObjectRenderBuffer(Context &ctx)
         rb.dst.h[n] = object.position.h[i];
         rb.dst.sortY[n] = rb.dst.y[n] + object.animation.frame.collision.offY[i][f];
         rb.group.id[n] = rb.groupCount++;
-        rb.group.zIndex[n] = 0;
+        rb.group.zIndex[n] = PARENT_Z_INDEX;
         rb.flipX[n] = false;
     }
 }

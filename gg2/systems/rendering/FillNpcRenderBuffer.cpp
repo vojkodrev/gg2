@@ -1,4 +1,5 @@
 #include "FillNpcRenderBuffer.h"
+#include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
 {
@@ -18,7 +19,7 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.dst.h[n] = npc.position.h[i];
         rb.dst.sortY[n] = rb.dst.y[n] + npc.animation.frame.collision.offY[i][f];
         rb.group.id[n] = rb.groupCount++;
-        rb.group.zIndex[n] = 0;
+        rb.group.zIndex[n] = PARENT_Z_INDEX;
         rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
     }
 }

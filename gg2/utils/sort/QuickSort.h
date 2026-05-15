@@ -1,17 +1,17 @@
 #pragma once
 
-template<typename TKey, typename FKey, typename FSwap>
-void quickSort(int lo, int hi, FKey key, FSwap swap)
+template<typename FLess, typename FSwap>
+void quickSort(int lo, int hi, FLess less, FSwap swap)
 {
     if (lo >= hi) return;
-    TKey pivot = key(lo + (hi - lo) / 2);
+    int pivotIndex = lo + (hi - lo) / 2;
     int i = lo, j = hi;
     while (i <= j)
     {
-        while (key(i) < pivot) i++;
-        while (key(j) > pivot) j--;
+        while (less(i, pivotIndex)) i++;
+        while (less(pivotIndex, j)) j--;
         if (i <= j) { swap(i++, j--); }
     }
-    quickSort<TKey>(lo, j, key, swap);
-    quickSort<TKey>(i, hi, key, swap);
+    quickSort(lo, j, less, swap);
+    quickSort(i, hi, less, swap);
 }
