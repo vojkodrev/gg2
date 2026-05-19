@@ -13,7 +13,7 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.src.y[n] = (float)npc.animation.frame.src.y[i][f];
         rb.src.w[n] = (float)npc.animation.frame.src.w[i][f];
         rb.src.h[n] = (float)npc.animation.frame.src.h[i][f];
-        rb.src.angle[n] = (float)npc.animation.frame.src.angle[i][f];
+        rb.src.rotate[n] = (float)npc.animation.frame.src.rotate[i][f];
         rb.dst.x[n] = npc.position.x[i];
         rb.dst.y[n] = npc.position.y[i];
         rb.dst.w[n] = npc.position.w[i];

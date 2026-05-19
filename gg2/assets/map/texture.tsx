@@ -100,7 +100,7 @@
  </tile>
  <tile id="227">
   <properties>
-   <property name="angle" type="float" value="-135"/>
+   <property name="rotate" type="float" value="-135"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="bow1"/>
    <property name="x" type="int" value="30"/>

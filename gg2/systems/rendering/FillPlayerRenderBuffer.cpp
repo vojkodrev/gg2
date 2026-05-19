@@ -13,7 +13,7 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.src.y[n] = (float)player.animation.frame.src.y[0][f];
     rb.src.w[n] = (float)player.animation.frame.src.w[0][f];
     rb.src.h[n] = (float)player.animation.frame.src.h[0][f];
-    rb.src.angle[n] = (float)player.animation.frame.src.angle[0][f];
+    rb.src.rotate[n] = (float)player.animation.frame.src.rotate[0][f];
     rb.dst.x[n] = player.position.x[0];
     rb.dst.y[n] = player.position.y[0];
     rb.dst.w[n] = player.position.w[0];
@@ -45,7 +45,7 @@ void fillPlayerRenderBuffer(Context &ctx)
         rb.dst.h[wn] = weaponPos.h[0];
         rb.dst.sortY[wn] = rb.dst.sortY[n];
 
-        float weaponAngle = (float)weapon.frame.src.angle[0][wf];
-        rb.src.angle[wn] = rb.flipX[wn] ? -weaponAngle : weaponAngle;
+        float weaponAngle = (float)weapon.frame.src.rotate[0][wf];
+        rb.src.rotate[wn] = rb.flipX[wn] ? -weaponAngle : weaponAngle;
     }
 }

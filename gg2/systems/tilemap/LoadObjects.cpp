@@ -25,7 +25,7 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.animation.frame.src.y[n][0] = getTileIntProp(tileset, idx, "y");
             object.animation.frame.src.w[n][0] = getTileIntProp(tileset, idx, "w");
             object.animation.frame.src.h[n][0] = getTileIntProp(tileset, idx, "h");
-            object.animation.frame.src.angle[n][0] = 0;
+            object.animation.frame.src.rotate[n][0] = 0;
             float scale = getTileFloatProp(tileset, idx, "scale", 1.0f);
             float colOffX = (float)getTileIntProp(tileset, idx, "colOffX") * scale;
             float colOffY = (float)getTileIntProp(tileset, idx, "colOffY") * scale;

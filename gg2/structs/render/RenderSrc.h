@@ -7,5 +7,5 @@ struct RenderSrc
     float y[MAX_RENDER_BUFFER];
     float w[MAX_RENDER_BUFFER];
     float h[MAX_RENDER_BUFFER];
-    float angle[MAX_RENDER_BUFFER];
+    float rotate[MAX_RENDER_BUFFER];
 };

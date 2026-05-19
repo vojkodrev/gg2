@@ -49,8 +49,8 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             weaponPos.w[0] = props.dstTileW * scale;
             weaponPos.h[0] = props.dstTileH * scale;
 
-            float angleNormal = getTileFloatProp(tileset, weaponIdx, "angle", 0.0f);
-            weapon.frame.src.angle[0][0] = angleNormal;
+            float rotate = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
+            weapon.frame.src.rotate[0][0] = rotate;
 
             weapon.frameIndex[0] = 0;
             weapon.animationStartTime[0] = 0;
