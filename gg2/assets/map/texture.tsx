@@ -19,6 +19,7 @@
    <property name="patrol03" value="70,75"/>
    <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
+   <property name="weapon" value="staff1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="18.1711" y="44.0307" width="31.5" height="13.1769"/>
@@ -98,6 +99,15 @@
    <frame tileid="122" duration="100"/>
    <frame tileid="123" duration="100"/>
   </animation>
+ </tile>
+ <tile id="170">
+  <properties>
+   <property name="facing" value="right"/>
+   <property name="scale" type="float" value="1"/>
+   <property name="type" value="staff1"/>
+   <property name="x" type="int" value="30"/>
+   <property name="y" type="int" value="0"/>
+  </properties>
  </tile>
  <tile id="227">
   <properties>
