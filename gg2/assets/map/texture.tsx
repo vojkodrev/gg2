@@ -114,7 +114,7 @@
    <property name="scale" type="float" value="1"/>
    <property name="type" value="sword1"/>
    <property name="x" type="int" value="30"/>
-   <property name="y" type="int" value="0"/>
+   <property name="y" type="int" value="-10"/>
   </properties>
  </tile>
 </tileset>
