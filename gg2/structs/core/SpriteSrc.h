@@ -9,5 +9,4 @@ struct SpriteSrc
     uint32_t w[NItems][NSlots];
     uint32_t h[NItems][NSlots];
     float angle[NItems][NSlots];
-    float angleFlipped[NItems][NSlots];
 };

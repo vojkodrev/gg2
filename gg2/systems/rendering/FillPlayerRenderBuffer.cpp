@@ -45,6 +45,7 @@ void fillPlayerRenderBuffer(Context &ctx)
         rb.dst.h[wn] = weaponPos.h[0];
         rb.dst.sortY[wn] = rb.dst.sortY[n];
 
-        rb.src.angle[wn] = rb.flipX[wn] ? (float)weapon.frame.src.angleFlipped[0][wf] : (float)weapon.frame.src.angle[0][wf];
+        float weaponAngle = (float)weapon.frame.src.angle[0][wf];
+        rb.src.angle[wn] = rb.flipX[wn] ? -weaponAngle : weaponAngle;
     }
 }
