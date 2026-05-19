@@ -33,6 +33,7 @@
    <property name="patrol03" value="70,75"/>
    <property name="patrol04" value="-70,100"/>
    <property name="patrolCount" type="int" value="4"/>
+   <property name="weapon" value="sword1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="18.0117" y="38.4795" width="30.8772" height="18.3626"/>
@@ -103,6 +104,15 @@
    <property name="rotate" type="float" value="-135"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="bow1"/>
+   <property name="x" type="int" value="30"/>
+   <property name="y" type="int" value="0"/>
+  </properties>
+ </tile>
+ <tile id="253">
+  <properties>
+   <property name="rotate" type="float" value="-135"/>
+   <property name="scale" type="float" value="1"/>
+   <property name="type" value="sword1"/>
    <property name="x" type="int" value="30"/>
    <property name="y" type="int" value="0"/>
   </properties>
