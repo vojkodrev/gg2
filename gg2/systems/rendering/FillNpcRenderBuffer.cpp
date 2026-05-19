@@ -1,4 +1,5 @@
 #include "FillNpcRenderBuffer.h"
+#include "FillWeaponRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
@@ -19,8 +20,11 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.dst.w[n] = npc.position.w[i];
         rb.dst.h[n] = npc.position.h[i];
         rb.dst.sortY[n] = rb.dst.y[n] + npc.animation.frame.collision.offY[i][f];
-        rb.group.id[n] = rb.groupCount++;
+        uint32_t groupId = rb.groupCount++;
+        rb.group.id[n] = groupId;
         rb.group.zIndex[n] = PARENT_Z_INDEX;
         rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
+
+        fillWeaponRenderBuffer(rb, npc.equipment.weapon, npc.position, i, n, groupId);
     }
 }
