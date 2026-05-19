@@ -23,8 +23,8 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.group.zIndex[n] = PARENT_Z_INDEX;
     rb.flipX[n] = player.facing.facing[0] != player.facing.initialFacing[0];
 
-    auto &weapon = player.equipment.weapon;
-    auto &weaponPos = player.equipment.position;
+    auto &weapon = player.equipment.weapon.animation;
+    auto &weaponPos = player.equipment.weapon.position;
     if (weapon.frameCount[0] > 0)
     {
         int wf = weapon.frameIndex[0];

@@ -33,8 +33,8 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
         if (hasWeapon)
         {
-            auto &weapon = ctx.data.player.equipment.weapon;
-            auto &weaponPos = ctx.data.player.equipment.position;
+            auto &weapon = ctx.data.player.equipment.weapon.animation;
+            auto &weaponPos = ctx.data.player.equipment.weapon.position;
             weapon.frameCount[0] = 1;
             SDL_Point srcGrid = decodeGridIndex((int)weaponIdx, props.columns);
             weapon.frame.src.x[0][0] = srcGrid.x * props.srcTileW;

@@ -1,6 +1,6 @@
 #pragma once
 #include "../core/Animation.h"
-#include "../core/Equipment.h"
+#include "../equipment/Equipment.h"
 #include "../core/EntityPosition.h"
 #include "../core/Facing.h"
 
