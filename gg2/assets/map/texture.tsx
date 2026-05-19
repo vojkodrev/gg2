@@ -110,7 +110,7 @@
  </tile>
  <tile id="253">
   <properties>
-   <property name="rotate" type="float" value="-135"/>
+   <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="sword1"/>
    <property name="x" type="int" value="30"/>

@@ -25,6 +25,6 @@ void fillNpcRenderBuffer(Context &ctx)
         rb.group.zIndex[n] = PARENT_Z_INDEX;
         rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
 
-        fillWeaponRenderBuffer(rb, npc.equipment.weapon, npc.position, i, n, groupId);
+        fillWeaponRenderBuffer(rb, npc.equipment.weapon, npc.position, npc.facing, i, n, groupId);
     }
 }

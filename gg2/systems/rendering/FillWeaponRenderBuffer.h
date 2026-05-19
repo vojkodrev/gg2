@@ -1,12 +1,13 @@
 #pragma once
 #include "../../structs/equipment/Weapon.h"
 #include "../../structs/core/EntityPosition.h"
+#include "../../structs/core/Facing.h"
 #include "../../structs/render/RenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 #include <cstdint>
 
 template<int N>
-inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData, const EntityPosition<N> &parentPosition, uint32_t parentEntityIndex, uint32_t parentRenderIndex, uint32_t groupId)
+inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData, const EntityPosition<N> &parentPosition, const Facing<N> &parentFacing, uint32_t parentEntityIndex, uint32_t parentRenderIndex, uint32_t groupId)
 {
     const auto &weapon = weaponData.animation;
     const auto &weaponPos = weaponData.position;
@@ -23,7 +24,9 @@ inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData
 
     rb.group.id[wn] = groupId;
     rb.group.zIndex[wn] = WEAPON_Z_INDEX;
-    rb.flipX[wn] = rb.flipX[parentRenderIndex];
+    bool parentNeedsFlip = parentFacing.facing[parentEntityIndex] != weaponData.facing.initialFacing[parentEntityIndex];
+    bool weaponFacingChanged = weaponData.facing.facing[parentEntityIndex] != weaponData.facing.initialFacing[parentEntityIndex];
+    rb.flipX[wn] = parentNeedsFlip != weaponFacingChanged;
 
     rb.dst.x[wn] = parentPosition.x[parentEntityIndex] + (rb.flipX[wn] ? -weaponPos.x[parentEntityIndex] : weaponPos.x[parentEntityIndex]);
     rb.dst.y[wn] = parentPosition.y[parentEntityIndex] + weaponPos.y[parentEntityIndex];

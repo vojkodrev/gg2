@@ -24,5 +24,5 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.group.zIndex[n] = PARENT_Z_INDEX;
     rb.flipX[n] = player.facing.facing[0] != player.facing.initialFacing[0];
 
-    fillWeaponRenderBuffer(rb, player.equipment.weapon, player.position, 0, n, groupId);
+    fillWeaponRenderBuffer(rb, player.equipment.weapon, player.position, player.facing, 0, n, groupId);
 }

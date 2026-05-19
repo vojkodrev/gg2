@@ -40,6 +40,10 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     float rotate = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
     weapon.frame.src.rotate[parentEntityIndex][0] = rotate;
 
+    FacingDirection weaponFacing = getTileStringProp(tileset, weaponIdx, "facing") == "left" ? FacingDirection::Left : FacingDirection::Right;
+    weaponData.facing.facing[parentEntityIndex] = weaponFacing;
+    weaponData.facing.initialFacing[parentEntityIndex] = weaponFacing;
+
     weapon.frameIndex[parentEntityIndex] = 0;
     weapon.animationStartTime[parentEntityIndex] = 0;
 }
