@@ -26,7 +26,9 @@ void renderSystem(const Context &ctx)
         SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
         SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, rb.src.rotate[i], nullptr, flip);
     }
+#ifndef NDEBUG
     debugRenderSystem(ctx);
+#endif
 
     SDL_RenderPresent(ctx.renderer);
 }
