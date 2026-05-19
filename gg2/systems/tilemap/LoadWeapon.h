@@ -10,36 +10,36 @@
 #include <tmxlite/Tileset.hpp>
 
 template<int N>
-inline void loadWeapon(Weapon<N> &weaponData, uint32_t n, const tmx::Tileset &tileset, uint32_t idx, const TileMapProperties &props)
+inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const tmx::Tileset &tileset, uint32_t parentEntityTileIndex, const TileMapProperties &props)
 {
-    std::string weaponType = getTileStringProp(tileset, idx, "weapon");
+    std::string weaponType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
     if (!hasWeapon)
     {
-        weaponData.animation.frameCount[n] = 0;
+        weaponData.animation.frameCount[parentEntityIndex] = 0;
         return;
     }
 
     auto &weapon = weaponData.animation;
     auto &weaponPos = weaponData.position;
-    weapon.frameCount[n] = 1;
+    weapon.frameCount[parentEntityIndex] = 1;
     SDL_Point srcGrid = decodeGridIndex((int)weaponIdx, props.columns);
-    weapon.frame.src.x[n][0] = srcGrid.x * props.srcTileW;
-    weapon.frame.src.y[n][0] = srcGrid.y * props.srcTileH;
-    weapon.frame.src.w[n][0] = props.srcTileW;
-    weapon.frame.src.h[n][0] = props.srcTileH;
-    weapon.frame.frameDuration[n][0] = 0;
+    weapon.frame.src.x[parentEntityIndex][0] = srcGrid.x * props.srcTileW;
+    weapon.frame.src.y[parentEntityIndex][0] = srcGrid.y * props.srcTileH;
+    weapon.frame.src.w[parentEntityIndex][0] = props.srcTileW;
+    weapon.frame.src.h[parentEntityIndex][0] = props.srcTileH;
+    weapon.frame.frameDuration[parentEntityIndex][0] = 0;
 
     float scale = getTileFloatProp(tileset, weaponIdx, "scale", 1.0f);
-    weaponPos.x[n] = (float)getTileIntProp(tileset, weaponIdx, "x");
-    weaponPos.y[n] = (float)getTileIntProp(tileset, weaponIdx, "y");
-    weaponPos.w[n] = props.dstTileW * scale;
-    weaponPos.h[n] = props.dstTileH * scale;
+    weaponPos.x[parentEntityIndex] = (float)getTileIntProp(tileset, weaponIdx, "x");
+    weaponPos.y[parentEntityIndex] = (float)getTileIntProp(tileset, weaponIdx, "y");
+    weaponPos.w[parentEntityIndex] = props.dstTileW * scale;
+    weaponPos.h[parentEntityIndex] = props.dstTileH * scale;
 
     float rotate = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
-    weapon.frame.src.rotate[n][0] = rotate;
+    weapon.frame.src.rotate[parentEntityIndex][0] = rotate;
 
-    weapon.frameIndex[n] = 0;
-    weapon.animationStartTime[n] = 0;
+    weapon.frameIndex[parentEntityIndex] = 0;
+    weapon.animationStartTime[parentEntityIndex] = 0;
 }
