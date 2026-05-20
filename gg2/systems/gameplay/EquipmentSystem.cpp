@@ -37,10 +37,8 @@ static void updateWeaponAttachment(
         return {dstX + anchorX, dstY + localAnchor.y, localAnchor.w, localAnchor.h};
     };
 
-    bool parentFlipX = parentFacing.facing[i] != parentFacing.initialFacing[i];
-    bool parentNeedsFlip = parentFacing.facing[i] != weaponData.facing.initialFacing[i];
-    bool weaponFacingChanged = weaponData.facing.facing[i] != weaponData.facing.initialFacing[i];
-    bool weaponFlipX = parentNeedsFlip != weaponFacingChanged;
+    bool parentFlipX = parentFacing.flipX[i];
+    bool weaponFlipX = weaponData.facing.flipX[i];
 
     weaponData.position.w[i] = parentPosition.w[i] * weaponData.scale[i];
     weaponData.position.h[i] = parentPosition.h[i] * weaponData.scale[i];
