@@ -1,6 +1,7 @@
 add_library(systems_gameplay
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
+    FlipXSystem.cpp
     EquipmentSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/UpdateAStarPath.cpp

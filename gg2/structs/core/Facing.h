@@ -11,4 +11,5 @@ struct Facing
 {
     FacingDirection facing[N];
     FacingDirection initialFacing[N];
+    bool flipX[N];
 };
