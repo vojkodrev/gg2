@@ -1,13 +1,15 @@
 #pragma once
 #include "../../structs/equipment/Weapon.h"
+#include "../../structs/core/Animation.h"
 #include "../../structs/core/EntityPosition.h"
 #include "../../structs/core/Facing.h"
 #include "../../structs/render/RenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
+#include "../../utils/collision/EntityColCenter.h"
 #include <cstdint>
 
 template<int N>
-inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData, const EntityPosition<N> &parentPosition, const Facing<N> &parentFacing, uint32_t parentEntityIndex, uint32_t parentRenderIndex, uint32_t groupId)
+inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData, const Animation<N> &parentAnimation, const EntityPosition<N> &parentPosition, const Facing<N> &parentFacing, uint32_t parentEntityIndex, uint32_t parentRenderIndex, uint32_t groupId)
 {
     const auto &weapon = weaponData.animation;
     const auto &weaponPos = weaponData.position;
@@ -28,16 +30,57 @@ inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData
     bool weaponFacingChanged = weaponData.facing.facing[parentEntityIndex] != weaponData.facing.initialFacing[parentEntityIndex];
     rb.flipX[wn] = parentNeedsFlip != weaponFacingChanged;
 
-    const int parentX = parentPosition.x[parentEntityIndex];
-    const int parentW = parentPosition.w[parentEntityIndex];
-    const int weaponX = weaponPos.x[parentEntityIndex];
-    const int weaponW = weaponPos.w[parentEntityIndex];
-    rb.dst.x[wn] = rb.flipX[wn]
-        ? parentX + (parentW - weaponX - weaponW)
-        : parentX + weaponX;
-    rb.dst.y[wn] = parentPosition.y[parentEntityIndex] + weaponPos.y[parentEntityIndex];
     rb.dst.w[wn] = weaponPos.w[parentEntityIndex];
     rb.dst.h[wn] = weaponPos.h[parentEntityIndex];
+
+    const float baseDstX = rb.flipX[wn]
+        ? parentPosition.x[parentEntityIndex] + (parentPosition.w[parentEntityIndex] - weaponPos.x[parentEntityIndex] - weaponPos.w[parentEntityIndex])
+        : parentPosition.x[parentEntityIndex] + weaponPos.x[parentEntityIndex];
+    const float baseDstY = parentPosition.y[parentEntityIndex] + weaponPos.y[parentEntityIndex];
+
+    auto anchorOrCollision = [](const Animation<N> &anim, uint32_t i, int f) -> SDL_FRect
+    {
+        SDL_FRect anchor = {
+            anim.frame.anchor.offX[i][f],
+            anim.frame.anchor.offY[i][f],
+            anim.frame.anchor.w[i][f],
+            anim.frame.anchor.h[i][f]};
+        if (anchor.w > 0.0f && anchor.h > 0.0f)
+            return anchor;
+        return {
+            anim.frame.collision.offX[i][f],
+            anim.frame.collision.offY[i][f],
+            anim.frame.collision.w[i][f],
+            anim.frame.collision.h[i][f]};
+    };
+    auto worldAnchorRect = [](float dstX, float dstY, float dstW, const SDL_FRect &localAnchor, bool flipX) -> SDL_FRect
+    {
+        const float anchorX = flipX ? dstW - localAnchor.x - localAnchor.w : localAnchor.x;
+        return {dstX + anchorX, dstY + localAnchor.y, localAnchor.w, localAnchor.h};
+    };
+
+    int pf = parentAnimation.frameIndex[parentEntityIndex];
+    SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, parentEntityIndex, pf);
+    bool parentFlipX = parentFacing.facing[parentEntityIndex] != parentFacing.initialFacing[parentEntityIndex];
+    SDL_FRect parentAnchorWorld = worldAnchorRect(
+        parentPosition.x[parentEntityIndex],
+        parentPosition.y[parentEntityIndex],
+        parentPosition.w[parentEntityIndex],
+        parentAnchor,
+        parentFlipX);
+
+    SDL_FRect weaponAnchor = anchorOrCollision(weapon, parentEntityIndex, wf);
+    SDL_FRect weaponAnchorWorld = worldAnchorRect(
+        baseDstX,
+        baseDstY,
+        weaponPos.w[parentEntityIndex],
+        weaponAnchor,
+        rb.flipX[wn]);
+
+    SDL_FPoint parentCenter = entityColCenter(parentAnchorWorld);
+    SDL_FPoint weaponCenter = entityColCenter(weaponAnchorWorld);
+    rb.dst.x[wn] = baseDstX + (parentCenter.x - weaponCenter.x);
+    rb.dst.y[wn] = baseDstY + (parentCenter.y - weaponCenter.y);
     rb.dst.sortY[wn] = rb.dst.sortY[parentRenderIndex];
 
     float weaponRotate = (float)weapon.frame.src.rotate[parentEntityIndex][wf];
