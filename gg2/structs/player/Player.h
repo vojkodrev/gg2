@@ -8,6 +8,7 @@ struct Player
 {
     Animation<1> animation;
     EntityPosition<1> position;
+    float scale[1];
     Facing<1> facing;
     Equipment<1> equipment;
 };

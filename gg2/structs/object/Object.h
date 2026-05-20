@@ -9,4 +9,5 @@ struct Object
     uint32_t objectCount;
     Animation<MAX_OBJECTS> animation;
     EntityPosition<MAX_OBJECTS> position;
+    float scale[MAX_OBJECTS];
 };

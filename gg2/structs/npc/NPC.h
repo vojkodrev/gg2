@@ -12,6 +12,7 @@ struct NPC
     uint32_t npcCount;
     Animation<MAX_NPCS> animation;
     EntityPosition<MAX_NPCS> position;
+    float scale[MAX_NPCS];
     Facing<MAX_NPCS> facing;
     Equipment<MAX_NPCS> equipment;
     NPCAi ai;

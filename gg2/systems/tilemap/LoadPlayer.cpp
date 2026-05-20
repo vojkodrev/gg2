@@ -1,5 +1,6 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
+#include "properties/GetTileFloatProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
 #include "LoadWeapon.h"
@@ -22,6 +23,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.position.y[0] = grid.y * props.dstTileH;
         ctx.data.player.position.w[0] = props.dstTileW;
         ctx.data.player.position.h[0] = props.dstTileH;
+        ctx.data.player.scale[0] = getTileFloatProp(tileset, idx, "scale", 1.0f);
         FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
         ctx.data.player.facing.facing[0] = f;
         ctx.data.player.facing.initialFacing[0] = f;

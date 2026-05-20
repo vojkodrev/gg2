@@ -1,5 +1,6 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
+#include "properties/GetTileFloatProp.h"
 #include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
@@ -28,6 +29,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.position.y[n] = grid.y * props.dstTileH;
         npc.position.w[n] = props.dstTileW;
         npc.position.h[n] = props.dstTileH;
+        npc.scale[n] = getTileFloatProp(tileset, idx, "scale", 1.0f);
         npc.ai.spawn.x[n] = npc.position.x[n];
         npc.ai.spawn.y[n] = npc.position.y[n];
         npc.ai.patrol.index[n] = 0;

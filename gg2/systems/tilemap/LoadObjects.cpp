@@ -19,6 +19,8 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = object.objectCount++;
         uint32_t idx = objectTiles[i].ID - props.firstGid;
+        float scale = getTileFloatProp(tileset, idx, "scale", 1.0f);
+        object.scale[n] = scale;
         if (isMarker(tileset, idx))
         {
             object.animation.frame.src.x[n][0] = getTileIntProp(tileset, idx, "x");
@@ -26,13 +28,12 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.animation.frame.src.w[n][0] = getTileIntProp(tileset, idx, "w");
             object.animation.frame.src.h[n][0] = getTileIntProp(tileset, idx, "h");
             object.animation.frame.src.rotate[n][0] = 0;
-            float scale = getTileFloatProp(tileset, idx, "scale", 1.0f);
-            float colOffX = (float)getTileIntProp(tileset, idx, "colOffX") * scale;
-            float colOffY = (float)getTileIntProp(tileset, idx, "colOffY") * scale;
-            float colW = (float)getTileIntProp(tileset, idx, "colW") * scale;
-            float colH = (float)getTileIntProp(tileset, idx, "colH") * scale;
-            float w = (float)getTileIntProp(tileset, idx, "w") * scale;
-            float h = (float)getTileIntProp(tileset, idx, "h") * scale;
+            float colOffX = (float)getTileIntProp(tileset, idx, "colOffX");
+            float colOffY = (float)getTileIntProp(tileset, idx, "colOffY");
+            float colW = (float)getTileIntProp(tileset, idx, "colW");
+            float colH = (float)getTileIntProp(tileset, idx, "colH");
+            float w = (float)getTileIntProp(tileset, idx, "w");
+            float h = (float)getTileIntProp(tileset, idx, "h");
             SDL_Point grid = decodeGridIndex(i, props.mapW);
             float gridX = (float)(grid.x * props.dstTileW);
             float gridY = (float)(grid.y * props.dstTileH);
