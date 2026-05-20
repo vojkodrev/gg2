@@ -28,7 +28,13 @@ inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData
     bool weaponFacingChanged = weaponData.facing.facing[parentEntityIndex] != weaponData.facing.initialFacing[parentEntityIndex];
     rb.flipX[wn] = parentNeedsFlip != weaponFacingChanged;
 
-    rb.dst.x[wn] = parentPosition.x[parentEntityIndex] + (rb.flipX[wn] ? -weaponPos.x[parentEntityIndex] : weaponPos.x[parentEntityIndex]);
+    const int parentX = parentPosition.x[parentEntityIndex];
+    const int parentW = parentPosition.w[parentEntityIndex];
+    const int weaponX = weaponPos.x[parentEntityIndex];
+    const int weaponW = weaponPos.w[parentEntityIndex];
+    rb.dst.x[wn] = rb.flipX[wn]
+        ? parentX + (parentW - weaponX - weaponW)
+        : parentX + weaponX;
     rb.dst.y[wn] = parentPosition.y[parentEntityIndex] + weaponPos.y[parentEntityIndex];
     rb.dst.w[wn] = weaponPos.w[parentEntityIndex];
     rb.dst.h[wn] = weaponPos.h[parentEntityIndex];

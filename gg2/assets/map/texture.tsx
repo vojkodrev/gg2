@@ -4,7 +4,7 @@
  <tile id="6">
   <properties>
    <property name="facing" value="right"/>
-   <property name="weapon" value="bow1"/>
+   <property name="weapon" value="polearm1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
@@ -99,6 +99,15 @@
    <frame tileid="122" duration="100"/>
    <frame tileid="123" duration="100"/>
   </animation>
+ </tile>
+ <tile id="169">
+  <properties>
+   <property name="facing" value="right"/>
+   <property name="scale" type="float" value="1.2"/>
+   <property name="type" value="polearm1"/>
+   <property name="x" type="int" value="20"/>
+   <property name="y" type="int" value="-20"/>
+  </properties>
  </tile>
  <tile id="170">
   <properties>
