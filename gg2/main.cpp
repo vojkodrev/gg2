@@ -13,6 +13,7 @@
 #include "UpdateMouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
+#include "EquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -65,6 +66,7 @@ int main()
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
+        equipmentSystem(*ctx);
         npcAiSystem(*ctx);
         animationSystem(*ctx);
 

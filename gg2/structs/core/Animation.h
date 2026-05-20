@@ -6,8 +6,8 @@
 template<int N>
 struct Animation
 {
-    AnimationFrame<N> frame;
     AnimationType animationType[N];
+    AnimationFrame<N> frame;
     int frameCount[N];
     int frameIndex[N];
     uint64_t animationStartTime[N];
