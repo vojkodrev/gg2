@@ -13,7 +13,7 @@
 #include "UpdateMouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
-#include "FlipXSystem.h"
+#include "flipx/FlipXSystem.h"
 #include "equipment/EquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
