@@ -14,7 +14,7 @@
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "FlipXSystem.h"
-#include "EquipmentSystem.h"
+#include "equipment/EquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"

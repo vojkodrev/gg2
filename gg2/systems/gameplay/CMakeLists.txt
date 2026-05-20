@@ -2,7 +2,7 @@ add_library(systems_gameplay
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     FlipXSystem.cpp
-    EquipmentSystem.cpp
+    equipment/EquipmentSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/UpdateAStarPath.cpp
     ai/monster/UpdateMonster.cpp
