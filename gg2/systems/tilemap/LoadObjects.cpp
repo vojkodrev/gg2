@@ -40,8 +40,10 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 
             object.position.x[n] = gridX + (props.dstTileW - colW) / 2.0f - colOffX;
             object.position.y[n] = gridY + props.dstTileH - colOffY - colH;
-            object.position.w[n] = w;
-            object.position.h[n] = h;
+            object.position.initialW[n] = w;
+            object.position.initialH[n] = h;
+            object.position.w[n] = object.position.initialW[n];
+            object.position.h[n] = object.position.initialH[n];
             object.animation.frame.collision.offX[n][0] = colOffX;
             object.animation.frame.collision.offY[n][0] = colOffY;
             object.animation.frame.collision.w[n][0] = colW;
@@ -60,8 +62,10 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             SDL_Point grid = decodeGridIndex(i, props.mapW);
             object.position.x[n] = grid.x * props.dstTileW;
             object.position.y[n] = grid.y * props.dstTileH;
-            object.position.w[n] = props.dstTileW;
-            object.position.h[n] = props.dstTileH;
+            object.position.initialW[n] = props.dstTileW;
+            object.position.initialH[n] = props.dstTileH;
+            object.position.w[n] = object.position.initialW[n];
+            object.position.h[n] = object.position.initialH[n];
         }
     }
 }

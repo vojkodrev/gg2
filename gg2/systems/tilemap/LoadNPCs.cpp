@@ -27,8 +27,10 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         SDL_Point grid = decodeGridIndex(i, props.mapW);
         npc.position.x[n] = grid.x * props.dstTileW;
         npc.position.y[n] = grid.y * props.dstTileH;
-        npc.position.w[n] = props.dstTileW;
-        npc.position.h[n] = props.dstTileH;
+        npc.position.initialW[n] = props.dstTileW;
+        npc.position.initialH[n] = props.dstTileH;
+        npc.position.w[n] = npc.position.initialW[n];
+        npc.position.h[n] = npc.position.initialH[n];
         npc.scale[n] = getTileFloatProp(tileset, idx, "scale", 1.0f);
         npc.ai.spawn.x[n] = npc.position.x[n];
         npc.ai.spawn.y[n] = npc.position.y[n];

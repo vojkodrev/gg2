@@ -30,6 +30,10 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     weapon.frame.src.y[parentEntityIndex][0] = srcGrid.y * props.srcTileH;
     weapon.frame.src.w[parentEntityIndex][0] = props.srcTileW;
     weapon.frame.src.h[parentEntityIndex][0] = props.srcTileH;
+    weaponData.position.initialW[parentEntityIndex] = props.srcTileW;
+    weaponData.position.initialH[parentEntityIndex] = props.srcTileH;
+    weaponData.position.w[parentEntityIndex] = weaponData.position.initialW[parentEntityIndex];
+    weaponData.position.h[parentEntityIndex] = weaponData.position.initialH[parentEntityIndex];
     weapon.frame.frameDuration[parentEntityIndex][0] = 0;
     SDL_FRect anchor = getAnchor(tileset, weaponIdx, "anchor");
     weapon.frame.anchor.offX[parentEntityIndex][0] = anchor.x;

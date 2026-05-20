@@ -1,6 +1,7 @@
 add_library(systems_gameplay
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
+    scale/ScaleSystem.cpp
     flipx/FlipXSystem.cpp
     equipment/EquipmentSystem.cpp
     ai/NPCAiSystem.cpp

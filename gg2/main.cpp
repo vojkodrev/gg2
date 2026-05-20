@@ -13,6 +13,7 @@
 #include "UpdateMouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
+#include "scale/ScaleSystem.h"
 #include "flipx/FlipXSystem.h"
 #include "equipment/EquipmentSystem.h"
 #include "camera/CameraSystem.h"
@@ -65,6 +66,7 @@ int main()
         updateMouseStateSystem(*ctx);
 
         playerMovementSystem(*ctx);
+        scaleSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
         flipXSystem(*ctx);
