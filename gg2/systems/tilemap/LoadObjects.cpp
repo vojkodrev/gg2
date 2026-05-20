@@ -44,6 +44,10 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.position.initialH[n] = h;
             object.position.w[n] = object.position.initialW[n];
             object.position.h[n] = object.position.initialH[n];
+            object.animation.frame.collision.initialOffX[n][0] = colOffX;
+            object.animation.frame.collision.initialOffY[n][0] = colOffY;
+            object.animation.frame.collision.initialW[n][0] = colW;
+            object.animation.frame.collision.initialH[n][0] = colH;
             object.animation.frame.collision.offX[n][0] = colOffX;
             object.animation.frame.collision.offY[n][0] = colOffY;
             object.animation.frame.collision.w[n][0] = colW;
