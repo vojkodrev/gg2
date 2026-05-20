@@ -5,7 +5,6 @@
 #include "GetAnchor.h"
 #include "properties/FindTileByType.h"
 #include "properties/GetTileFloatProp.h"
-#include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
@@ -24,7 +23,6 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     }
 
     auto &weapon = weaponData.animation;
-    auto &weaponPos = weaponData.position;
     weapon.animationType[parentEntityIndex] = AnimationType::None;
     weapon.frameCount[parentEntityIndex] = 1;
     SDL_Point srcGrid = decodeGridIndex((int)weaponIdx, props.columns);
@@ -45,10 +43,7 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     weapon.frame.collision.h[parentEntityIndex][0] = col.h;
 
     float scale = getTileFloatProp(tileset, weaponIdx, "scale", 1.0f);
-    weaponPos.x[parentEntityIndex] = (float)getTileIntProp(tileset, weaponIdx, "x");
-    weaponPos.y[parentEntityIndex] = (float)getTileIntProp(tileset, weaponIdx, "y");
-    weaponPos.w[parentEntityIndex] = props.dstTileW * scale;
-    weaponPos.h[parentEntityIndex] = props.dstTileH * scale;
+    weaponData.scale[parentEntityIndex] = scale;
 
     float rotate = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
     weapon.frame.src.rotate[parentEntityIndex][0] = rotate;

@@ -112,8 +112,6 @@
    <property name="initialAngle" type="float" value="45"/>
    <property name="scale" type="float" value="1.2"/>
    <property name="type" value="polearm1"/>
-   <property name="x" type="int" value="20"/>
-   <property name="y" type="int" value="-20"/>
   </properties>
   <objectgroup draworder="index" id="3">
    <object id="2" name="collision" x="32.9775" y="4.23997" width="27.0887" height="26.9709"/>
@@ -125,9 +123,10 @@
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="staff1"/>
-   <property name="x" type="int" value="30"/>
-   <property name="y" type="int" value="0"/>
   </properties>
+  <objectgroup draworder="index" id="4">
+   <object id="4" name="anchor" x="18.491" y="40.6331" width="5.29996" height="5.18219"/>
+  </objectgroup>
  </tile>
  <tile id="227">
   <properties>
@@ -137,14 +136,19 @@
    <property name="x" type="int" value="30"/>
    <property name="y" type="int" value="0"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="anchor" x="18.491" y="31.0931" width="13.4266" height="14.6043"/>
+  </objectgroup>
  </tile>
  <tile id="253">
   <properties>
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="sword1"/>
-   <property name="x" type="int" value="30"/>
-   <property name="y" type="int" value="-10"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="21.0821" y="6.00662" width="38.5131" height="37.3353"/>
+   <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
+  </objectgroup>
  </tile>
 </tileset>
