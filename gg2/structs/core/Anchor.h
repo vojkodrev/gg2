@@ -1,7 +1,7 @@
 #pragma once
 
 template<int NItems, int NSlots>
-struct EntityCollision
+struct Anchor
 {
     float offX[NItems][NSlots];
     float offY[NItems][NSlots];

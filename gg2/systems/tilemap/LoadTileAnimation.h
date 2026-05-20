@@ -4,7 +4,7 @@
 #include "../../structs/core/Animation.h"
 #include "CapacityConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
-#include "GetCollision.h"
+#include "GetAnchor.h"
 
 template<int N>
 void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &tileset, uint32_t idx, const TileMapProperties &props)
@@ -13,7 +13,8 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
     for (auto &t : tileset.getTiles())
         if (t.ID == idx) { tileData = &t; break; }
 
-    SDL_FRect col = getCollision(tileset, idx);
+    SDL_FRect col = getAnchor(tileset, idx, "collision");
+    SDL_FRect anchor = getAnchor(tileset, idx, "anchor");
 
     if (tileData && !tileData->animation.frames.empty())
     {
@@ -29,6 +30,10 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
             animation.frame.src.w[n][f] = props.srcTileW;
             animation.frame.src.h[n][f] = props.srcTileH;
             animation.frame.src.rotate[n][f] = 0;
+            animation.frame.anchor.offX[n][f] = anchor.x;
+            animation.frame.anchor.offY[n][f] = anchor.y;
+            animation.frame.anchor.w[n][f] = anchor.w;
+            animation.frame.anchor.h[n][f] = anchor.h;
             animation.frame.collision.offX[n][f] = col.x;
             animation.frame.collision.offY[n][f] = col.y;
             animation.frame.collision.w[n][f] = col.w;
@@ -45,6 +50,10 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
         animation.frame.src.w[n][0] = props.srcTileW;
         animation.frame.src.h[n][0] = props.srcTileH;
         animation.frame.src.rotate[n][0] = 0;
+        animation.frame.anchor.offX[n][0] = anchor.x;
+        animation.frame.anchor.offY[n][0] = anchor.y;
+        animation.frame.anchor.w[n][0] = anchor.w;
+        animation.frame.anchor.h[n][0] = anchor.h;
         animation.frame.collision.offX[n][0] = col.x;
         animation.frame.collision.offY[n][0] = col.y;
         animation.frame.collision.w[n][0] = col.w;

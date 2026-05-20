@@ -1,6 +1,6 @@
-#include "GetCollision.h"
+#include "GetAnchor.h"
 
-SDL_FRect getCollision(const tmx::Tileset &tileset, uint32_t tileIdx)
+SDL_FRect getAnchor(const tmx::Tileset &tileset, uint32_t tileIdx, const char *name)
 {
     for (auto &tile : tileset.getTiles())
     {
@@ -9,7 +9,7 @@ SDL_FRect getCollision(const tmx::Tileset &tileset, uint32_t tileIdx)
         auto &objs = tile.objectGroup.getObjects();
         for (auto &obj : objs)
         {
-            if (obj.getName() != "collision")
+            if (obj.getName() != name)
                 continue;
             auto &aabb = obj.getAABB();
             return { aabb.left, aabb.top, aabb.width, aabb.height };

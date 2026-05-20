@@ -2,6 +2,7 @@
 #include "../../structs/equipment/Weapon.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "DecodeGridIndex.h"
+#include "GetAnchor.h"
 #include "properties/FindTileByType.h"
 #include "properties/GetTileFloatProp.h"
 #include "properties/GetTileIntProp.h"
@@ -32,6 +33,16 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     weapon.frame.src.w[parentEntityIndex][0] = props.srcTileW;
     weapon.frame.src.h[parentEntityIndex][0] = props.srcTileH;
     weapon.frame.frameDuration[parentEntityIndex][0] = 0;
+    SDL_FRect anchor = getAnchor(tileset, weaponIdx, "anchor");
+    weapon.frame.anchor.offX[parentEntityIndex][0] = anchor.x;
+    weapon.frame.anchor.offY[parentEntityIndex][0] = anchor.y;
+    weapon.frame.anchor.w[parentEntityIndex][0] = anchor.w;
+    weapon.frame.anchor.h[parentEntityIndex][0] = anchor.h;
+    SDL_FRect col = getAnchor(tileset, weaponIdx, "collision");
+    weapon.frame.collision.offX[parentEntityIndex][0] = col.x;
+    weapon.frame.collision.offY[parentEntityIndex][0] = col.y;
+    weapon.frame.collision.w[parentEntityIndex][0] = col.w;
+    weapon.frame.collision.h[parentEntityIndex][0] = col.h;
 
     float scale = getTileFloatProp(tileset, weaponIdx, "scale", 1.0f);
     weaponPos.x[parentEntityIndex] = (float)getTileIntProp(tileset, weaponIdx, "x");

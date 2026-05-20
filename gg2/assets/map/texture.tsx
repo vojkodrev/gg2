@@ -8,6 +8,7 @@
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
+   <object id="2" name="anchor" x="35.6864" y="38.5131" width="10.1288" height="9.65771"/>
   </objectgroup>
  </tile>
  <tile id="20">
@@ -23,6 +24,7 @@
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="18.1711" y="44.0307" width="31.5" height="13.1769"/>
+   <object id="2" name="anchor" x="18.7265" y="44.5197" width="7.18439" height="6.59551"/>
   </objectgroup>
  </tile>
  <tile id="34">
@@ -38,6 +40,7 @@
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="18.0117" y="38.4795" width="30.8772" height="18.3626"/>
+   <object id="2" name="anchor" x="18.8443" y="39.102" width="9.77549" height="8.95105"/>
   </objectgroup>
  </tile>
  <tile id="38">

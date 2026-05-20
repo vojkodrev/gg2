@@ -1,6 +1,6 @@
 add_library(systems_tilemap
     FindLayer.cpp
-    GetCollision.cpp
+    GetAnchor.cpp
     IsMarker.cpp
     LoadGround.cpp
     LoadNPCs.cpp
