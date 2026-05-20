@@ -7,7 +7,7 @@
    <property name="weapon" value="polearm1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
+   <object id="1" name="collision" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
   </objectgroup>
  </tile>
  <tile id="20">
@@ -22,7 +22,7 @@
    <property name="weapon" value="staff1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="18.1711" y="44.0307" width="31.5" height="13.1769"/>
+   <object id="1" name="collision" x="18.1711" y="44.0307" width="31.5" height="13.1769"/>
   </objectgroup>
  </tile>
  <tile id="34">
@@ -37,12 +37,12 @@
    <property name="weapon" value="sword1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="18.0117" y="38.4795" width="30.8772" height="18.3626"/>
+   <object id="1" name="collision" x="18.0117" y="38.4795" width="30.8772" height="18.3626"/>
   </objectgroup>
  </tile>
  <tile id="38">
   <objectgroup draworder="index" id="2">
-   <object id="1" x="10.75" y="29.5" width="29.75" height="18.5"/>
+   <object id="1" name="collision" x="10.75" y="29.5" width="29.75" height="18.5"/>
   </objectgroup>
  </tile>
  <tile id="48">
@@ -78,12 +78,12 @@
    <property name="facing" value="right"/>
   </properties>
   <objectgroup draworder="index" id="3">
-   <object id="3" x="16.6667" y="40.6667" width="33.6667" height="15.6667"/>
+   <object id="3" name="collision" x="16.6667" y="40.6667" width="33.6667" height="15.6667"/>
   </objectgroup>
  </tile>
  <tile id="112">
   <objectgroup draworder="index" id="3">
-   <object id="3" x="5.49708" y="44.6784" width="52.5146" height="19.4152"/>
+   <object id="3" name="collision" x="5.49708" y="44.6784" width="52.5146" height="19.4152"/>
   </objectgroup>
   <animation>
    <frame tileid="112" duration="100"/>
@@ -112,6 +112,10 @@
    <property name="x" type="int" value="20"/>
    <property name="y" type="int" value="-20"/>
   </properties>
+  <objectgroup draworder="index" id="3">
+   <object id="2" name="collision" x="32.9775" y="4.23997" width="27.0887" height="26.9709"/>
+   <object id="3" name="anchor" x="12.3666" y="44.9908" width="5.88885" height="6.59551"/>
+  </objectgroup>
  </tile>
  <tile id="170">
   <properties>
