@@ -45,10 +45,12 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             object.animation.frame.collision.offY[n][0] = colOffY;
             object.animation.frame.collision.w[n][0] = colW;
             object.animation.frame.collision.h[n][0] = colH;
+            object.animation.animationType[n] = AnimationType::None;
             object.animation.frameCount[n] = 1;
             object.animation.frame.frameDuration[n][0] = 0;
             object.animation.frameIndex[n] = 0;
             object.animation.animationStartTime[n] = 0;
+            object.animation.animationStopTime[n] = 0;
         }
         else
         {

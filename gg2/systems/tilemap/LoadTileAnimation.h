@@ -19,6 +19,7 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
     {
         int frameCount = (int)tileData->animation.frames.size();
         if (frameCount > MAX_ANIMATION_FRAMES) frameCount = MAX_ANIMATION_FRAMES;
+        animation.animationType[n] = AnimationType::Sprite;
         animation.frameCount[n] = frameCount;
         for (int f = 0; f < frameCount; f++)
         {
@@ -37,6 +38,7 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
     }
     else
     {
+        animation.animationType[n] = AnimationType::None;
         animation.frameCount[n] = 1;
         animation.frame.src.x[n][0] = idx % props.columns * props.srcTileW;
         animation.frame.src.y[n][0] = idx / props.columns * props.srcTileH;
@@ -52,4 +54,5 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
 
     animation.frameIndex[n] = 0;
     animation.animationStartTime[n] = 0;
+    animation.animationStopTime[n] = 0;
 }

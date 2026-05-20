@@ -102,7 +102,11 @@
  </tile>
  <tile id="169">
   <properties>
+   <property name="animationAngleStart" type="float" value="-20"/>
+   <property name="animationAngleStop" type="float" value="110"/>
+   <property name="animationTime" type="float" value="250"/>
    <property name="facing" value="right"/>
+   <property name="initialAngle" type="float" value="45"/>
    <property name="scale" type="float" value="1.2"/>
    <property name="type" value="polearm1"/>
    <property name="x" type="int" value="20"/>

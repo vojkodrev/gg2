@@ -17,12 +17,14 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
     if (!hasWeapon)
     {
+        weaponData.animation.animationType[parentEntityIndex] = AnimationType::None;
         weaponData.animation.frameCount[parentEntityIndex] = 0;
         return;
     }
 
     auto &weapon = weaponData.animation;
     auto &weaponPos = weaponData.position;
+    weapon.animationType[parentEntityIndex] = AnimationType::None;
     weapon.frameCount[parentEntityIndex] = 1;
     SDL_Point srcGrid = decodeGridIndex((int)weaponIdx, props.columns);
     weapon.frame.src.x[parentEntityIndex][0] = srcGrid.x * props.srcTileW;
@@ -39,6 +41,7 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
 
     float rotate = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
     weapon.frame.src.rotate[parentEntityIndex][0] = rotate;
+    weapon.frame.src.initialAngle[parentEntityIndex][0] = getTileFloatProp(tileset, weaponIdx, "initialAngle", 0.0f);
 
     FacingDirection weaponFacing = getTileStringProp(tileset, weaponIdx, "facing") == "left" ? FacingDirection::Left : FacingDirection::Right;
     weaponData.facing.facing[parentEntityIndex] = weaponFacing;
@@ -46,4 +49,5 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
 
     weapon.frameIndex[parentEntityIndex] = 0;
     weapon.animationStartTime[parentEntityIndex] = 0;
+    weapon.animationStopTime[parentEntityIndex] = 0;
 }
