@@ -26,9 +26,6 @@ inline void updateWeapon(
     bool parentFlipX = parentFacing.flipX[i];
     bool weaponFlipX = weaponData.facing.flipX[i];
 
-    weaponData.position.w[i] = weapon.frame.src.w[i][wf] * weaponData.scale[i];
-    weaponData.position.h[i] = weapon.frame.src.h[i][wf] * weaponData.scale[i];
-
     SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
     SDL_FRect parentAnchorWorld = worldAnchorRect(
         parentPosition.x[i],
