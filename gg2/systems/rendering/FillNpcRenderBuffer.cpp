@@ -23,8 +23,8 @@ void fillNpcRenderBuffer(Context &ctx)
         uint32_t groupId = rb.groupCount++;
         rb.group.id[n] = groupId;
         rb.group.zIndex[n] = PARENT_Z_INDEX;
-        rb.flipX[n] = npc.facing.facing[i] != npc.facing.initialFacing[i];
+        rb.flipX[n] = npc.facing.flipX[i];
 
-        fillWeaponRenderBuffer(rb, npc.equipment.weapon, npc.animation, npc.position, npc.facing, i, n, groupId);
+        fillWeaponRenderBuffer(rb, npc.equipment.weapon, i, n, groupId);
     }
 }

@@ -22,7 +22,7 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.dst.sortY[n] = rb.dst.y[n] + player.animation.frame.collision.offY[0][f];
     rb.group.id[n] = groupId;
     rb.group.zIndex[n] = PARENT_Z_INDEX;
-    rb.flipX[n] = player.facing.facing[0] != player.facing.initialFacing[0];
+    rb.flipX[n] = player.facing.flipX[0];
 
-    fillWeaponRenderBuffer(rb, player.equipment.weapon, player.animation, player.position, player.facing, 0, n, groupId);
+    fillWeaponRenderBuffer(rb, player.equipment.weapon, 0, n, groupId);
 }
