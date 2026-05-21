@@ -20,6 +20,7 @@
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
+#include "rotation/RotateEquipmentSystem.h"
 #include "equipment/EquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
@@ -83,6 +84,7 @@ int main()
         scaleObjectSystem(*ctx);
         scaleEquipmentSystem(*ctx);
         flipEquipmentSystem(*ctx);
+        rotateEquipmentSystem(*ctx);
         equipmentSystem(*ctx);
         animationSystem(*ctx);
 

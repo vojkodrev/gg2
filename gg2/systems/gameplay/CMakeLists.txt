@@ -8,6 +8,7 @@ add_library(systems_gameplay
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/FlipEquipmentSystem.cpp
+    rotation/RotateEquipmentSystem.cpp
     flipx/FlipXSystem.cpp
     equipment/EquipmentSystem.cpp
     ai/NPCAiSystem.cpp
@@ -57,5 +58,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar
     ${CMAKE_CURRENT_SOURCE_DIR}/camera
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
+    ${CMAKE_CURRENT_SOURCE_DIR}/rotation
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)
