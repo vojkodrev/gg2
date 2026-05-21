@@ -57,7 +57,8 @@ inline void loadWeapon(Weapon<N> &weaponData, uint32_t parentEntityIndex, const 
     float scale = getTileFloatProp(tileset, weaponIdx, "scale", 1.0f);
     weaponData.scale[parentEntityIndex] = scale;
 
-    weaponData.rotation.rotate[parentEntityIndex] = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
+    weaponData.rotation.initialRotate[parentEntityIndex] = getTileFloatProp(tileset, weaponIdx, "rotate", 0.0f);
+    weaponData.rotation.rotate[parentEntityIndex] = weaponData.rotation.initialRotate[parentEntityIndex];
     weaponData.rotation.initialAngle[parentEntityIndex] = getTileFloatProp(tileset, weaponIdx, "initialAngle", 0.0f);
 
     FacingDirection weaponFacing = getTileStringProp(tileset, weaponIdx, "facing") == "left" ? FacingDirection::Left : FacingDirection::Right;
