@@ -27,23 +27,24 @@ inline void updateWeapon(
     bool weaponFlipX = weaponData.facing.flipX[i];
 
     SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
+    SDL_FRect weaponAnchor = anchorOrCollision(weapon, i, wf);
+
     SDL_FRect parentAnchorWorld = worldAnchorRect(
         parentPosition.x[i],
         parentPosition.y[i],
         parentPosition.w[i],
         parentAnchor,
         parentFlipX);
+    SDL_FPoint parentAnchorCenterWorld = entityColCenter(parentAnchorWorld);
 
-    SDL_FRect weaponAnchor = anchorOrCollision(weapon, i, wf);
-    SDL_FRect weaponAnchorWorld = worldAnchorRect(
+    SDL_FRect weaponAnchorLocal = worldAnchorRect(
         0.0f,
         0.0f,
         weaponData.position.w[i],
         weaponAnchor,
         weaponFlipX);
+    SDL_FPoint weaponAnchorCenterLocal = entityColCenter(weaponAnchorLocal);
 
-    SDL_FPoint parentCenter = entityColCenter(parentAnchorWorld);
-    SDL_FPoint weaponCenter = entityColCenter(weaponAnchorWorld);
-    weaponData.position.x[i] = parentCenter.x - weaponCenter.x;
-    weaponData.position.y[i] = parentCenter.y - weaponCenter.y;
+    weaponData.position.x[i] = parentAnchorCenterWorld.x - weaponAnchorCenterLocal.x;
+    weaponData.position.y[i] = parentAnchorCenterWorld.y - weaponAnchorCenterLocal.y;
 }

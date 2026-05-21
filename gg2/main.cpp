@@ -21,7 +21,7 @@
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
-#include "equipment/EquipmentSystem.h"
+#include "equipment/MoveEquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -85,7 +85,7 @@ int main()
         scaleEquipmentSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
-        equipmentSystem(*ctx);
+        moveEquipmentSystem(*ctx);
         animationSystem(*ctx);
 
         collisionSystem(*ctx);

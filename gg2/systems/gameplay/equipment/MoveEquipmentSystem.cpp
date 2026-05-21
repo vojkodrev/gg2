@@ -1,7 +1,7 @@
-#include "EquipmentSystem.h"
+#include "MoveEquipmentSystem.h"
 #include "UpdateWeapon.h"
 
-void equipmentSystem(Context &ctx)
+void moveEquipmentSystem(Context &ctx)
 {
     updateWeapon(ctx.data.player.equipment.weapon, ctx.data.player.animation, ctx.data.player.position, ctx.data.player.facing, 0);
 

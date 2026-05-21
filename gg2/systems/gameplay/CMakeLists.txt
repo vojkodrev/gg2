@@ -10,7 +10,7 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     flipx/FlipXSystem.cpp
-    equipment/EquipmentSystem.cpp
+    equipment/MoveEquipmentSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/UpdateAStarPath.cpp
     ai/monster/UpdateMonster.cpp
