@@ -14,7 +14,7 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.src.y[n] = (float)player.animation.frame.src.y[0][f];
     rb.src.w[n] = (float)player.animation.frame.src.w[0][f];
     rb.src.h[n] = (float)player.animation.frame.src.h[0][f];
-    rb.src.rotate[n] = (float)player.animation.frame.src.rotate[0][f];
+    rb.src.rotate[n] = 0.0f;
     rb.dst.x[n] = player.position.x[0];
     rb.dst.y[n] = player.position.y[0];
     rb.dst.w[n] = player.position.w[0];

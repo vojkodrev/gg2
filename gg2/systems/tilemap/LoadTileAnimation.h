@@ -29,7 +29,6 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
             animation.frame.src.y[n][f] = fid / props.columns * props.srcTileH;
             animation.frame.src.w[n][f] = props.srcTileW;
             animation.frame.src.h[n][f] = props.srcTileH;
-            animation.frame.src.rotate[n][f] = 0;
             animation.frame.anchor.initialOffX[n][f] = anchor.x;
             animation.frame.anchor.initialOffY[n][f] = anchor.y;
             animation.frame.anchor.initialW[n][f] = anchor.w;
@@ -57,7 +56,6 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
         animation.frame.src.y[n][0] = idx / props.columns * props.srcTileH;
         animation.frame.src.w[n][0] = props.srcTileW;
         animation.frame.src.h[n][0] = props.srcTileH;
-        animation.frame.src.rotate[n][0] = 0;
         animation.frame.anchor.initialOffX[n][0] = anchor.x;
         animation.frame.anchor.initialOffY[n][0] = anchor.y;
         animation.frame.anchor.initialW[n][0] = anchor.w;

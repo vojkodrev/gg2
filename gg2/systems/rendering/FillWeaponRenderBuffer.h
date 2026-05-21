@@ -77,6 +77,6 @@ inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData
     rb.dst.y[wn] = parentCenter.y - weaponCenter.y;
     rb.dst.sortY[wn] = rb.dst.sortY[parentRenderIndex];
 
-    float weaponRotate = (float)weapon.frame.src.rotate[parentEntityIndex][wf];
+    float weaponRotate = weaponData.rotation.rotate[parentEntityIndex];
     rb.src.rotate[wn] = rb.flipX[wn] ? -weaponRotate : weaponRotate;
 }
