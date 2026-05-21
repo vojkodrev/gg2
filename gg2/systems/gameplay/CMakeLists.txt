@@ -3,7 +3,7 @@ add_library(systems_gameplay
     PlayerFacingSystem.cpp
     scale/ScalePlayerSystem.cpp
     scale/ScaleNpcSystem.cpp
-    scale/ScaleSystem.cpp
+    scale/ScaleObjectSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/FlipXSystem.cpp

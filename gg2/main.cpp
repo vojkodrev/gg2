@@ -15,7 +15,7 @@
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerSystem.h"
 #include "scale/ScaleNpcSystem.h"
-#include "scale/ScaleSystem.h"
+#include "scale/ScaleObjectSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "equipment/EquipmentSystem.h"
@@ -78,7 +78,7 @@ int main()
         npcAiSystem(*ctx);
         flipNpcSystem(*ctx);
 
-        scaleSystem(*ctx);
+        scaleObjectSystem(*ctx);
         equipmentSystem(*ctx);
         animationSystem(*ctx);
 

@@ -1,8 +1,8 @@
-#include "ScaleSystem.h"
+#include "ScaleObjectSystem.h"
 #include "ScaleAnimationFrames.h"
 #include <cstdint>
 
-void scaleSystem(Context &ctx)
+void scaleObjectSystem(Context &ctx)
 {
     for (uint32_t i = 0; i < ctx.data.object.objectCount; i++)
     {
