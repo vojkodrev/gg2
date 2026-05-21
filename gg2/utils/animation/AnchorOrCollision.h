@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../../structs/core/Animation.h"
+#include "../../structs/core/Animation.h"
 #include <cstdint>
 
 template<int N>

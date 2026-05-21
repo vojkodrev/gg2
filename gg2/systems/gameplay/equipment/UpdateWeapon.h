@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
-#include "AnchorOrCollision.h"
-#include "WorldAnchorRect.h"
+#include "../../../utils/rect/WorldAnchorRect.h"
+#include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../structs/equipment/Weapon.h"
 #include "../../../structs/core/Animation.h"
 #include "../../../structs/core/EntityPosition.h"
@@ -9,7 +9,7 @@
 #include "../../../utils/collision/EntityColCenter.h"
 
 template<int N>
-inline void updateWeapon(
+inline void updateWeaponPosition(
     Weapon<N> &weaponData,
     const Animation<N> &parentAnimation,
     const EntityPosition<N> &parentPosition,

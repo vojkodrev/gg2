@@ -1,7 +1,7 @@
 #include "DistToSpawn.h"
 #include "Dist.h"
 #include "EntityColAABBNPC.h"
-#include "EntityColCenter.h"
+#include "../../../utils/collision/EntityColCenter.h"
 
 float distToSpawn(Context &ctx, uint32_t n)
 {

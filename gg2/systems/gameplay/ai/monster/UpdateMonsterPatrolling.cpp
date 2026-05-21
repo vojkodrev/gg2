@@ -1,7 +1,7 @@
 #include "UpdateMonsterPatrolling.h"
 #include "DistToPlayer.h"
 #include "HasReachedRect.h"
-#include "CenteredRect.h"
+#include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"
 #include "astar/UpdateAStarPath.h"
 #include "SetNpcAiStateGoToPlayer.h"

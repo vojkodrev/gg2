@@ -1,6 +1,6 @@
 #include "MoveColCenterToward.h"
 #include "EntityColAABBNPC.h"
-#include "EntityColCenter.h"
+#include "../../../utils/collision/EntityColCenter.h"
 #include <cmath>
 
 void moveColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float speed)
