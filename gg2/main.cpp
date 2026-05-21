@@ -16,6 +16,7 @@
 #include "scale/ScalePlayerSystem.h"
 #include "scale/ScaleNpcSystem.h"
 #include "scale/ScaleObjectSystem.h"
+#include "scale/ScaleEquipmentSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "equipment/EquipmentSystem.h"
@@ -79,6 +80,7 @@ int main()
         flipNpcSystem(*ctx);
 
         scaleObjectSystem(*ctx);
+        scaleEquipmentSystem(*ctx);
         equipmentSystem(*ctx);
         animationSystem(*ctx);
 

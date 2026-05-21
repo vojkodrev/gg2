@@ -4,6 +4,7 @@ add_library(systems_gameplay
     scale/ScalePlayerSystem.cpp
     scale/ScaleNpcSystem.cpp
     scale/ScaleObjectSystem.cpp
+    scale/ScaleEquipmentSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/FlipXSystem.cpp
