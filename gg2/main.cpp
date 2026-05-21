@@ -14,9 +14,10 @@
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerSystem.h"
+#include "scale/ScaleNpcSystem.h"
 #include "scale/ScaleSystem.h"
 #include "flipx/FlipPlayerSystem.h"
-#include "flipx/FlipXSystem.h"
+#include "flipx/FlipNpcSystem.h"
 #include "equipment/EquipmentSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
@@ -72,10 +73,13 @@ int main()
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
         flipPlayerSystem(*ctx);
-        scaleSystem(*ctx);
-        flipXSystem(*ctx);
-        equipmentSystem(*ctx);
+
+        scaleNpcSystem(*ctx);
         npcAiSystem(*ctx);
+        flipNpcSystem(*ctx);
+
+        scaleSystem(*ctx);
+        equipmentSystem(*ctx);
         animationSystem(*ctx);
 
         collisionSystem(*ctx);
