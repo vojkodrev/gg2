@@ -2,8 +2,9 @@
 #include "../../../structs/gameplay/ai/AStarPool.h"
 #include "../../../structs/gameplay/ai/AStarStatus.h"
 
-void debugRenderAstar(SDL_Renderer *renderer, const Context &ctx, SDL_FPoint off, const SDL_FRect &screen)
+void debugRenderAstar(const Context &ctx, SDL_FPoint off, const SDL_FRect &screen)
 {
+    SDL_Renderer *renderer = ctx.renderer;
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 80);
     for (int i = 0; i < ctx.astarPool.count; i++)
     {

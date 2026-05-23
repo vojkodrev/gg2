@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <SDL3/SDL.h>
 
-void debugRenderAstar(SDL_Renderer *renderer, const Context &ctx, SDL_FPoint off, const SDL_FRect &screen);
+void debugRenderAstar(const Context &ctx, SDL_FPoint off, const SDL_FRect &screen);
