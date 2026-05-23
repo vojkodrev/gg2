@@ -1,7 +1,7 @@
-#include "UpdateKeyboardStateSystem.h"
+#include "KeyboardStateSystem.h"
 #include <SDL3/SDL.h>
 
-void updateKeyboardStateSystem(Context &ctx)
+void keyboardStateSystem(Context &ctx)
 {
     const bool *keys = SDL_GetKeyboardState(nullptr);
     ctx.keyboard.w = keys[SDL_SCANCODE_W];

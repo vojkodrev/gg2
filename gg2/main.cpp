@@ -9,8 +9,9 @@
 #include "FillRenderBufferSystem.h"
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
-#include "UpdateKeyboardStateSystem.h"
-#include "UpdateMouseStateSystem.h"
+#include "KeyboardStateSystem.h"
+#include "DebugStateSystem.h"
+#include "MouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerSystem.h"
@@ -68,8 +69,9 @@ int main()
                 running = false;
         }
 
-        updateKeyboardStateSystem(*ctx);
-        updateMouseStateSystem(*ctx);
+        keyboardStateSystem(*ctx);
+        debugStateSystem(*ctx);
+        mouseStateSystem(*ctx);
 
         scalePlayerSystem(*ctx);
         playerMovementSystem(*ctx);

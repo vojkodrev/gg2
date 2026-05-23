@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "NPC.h"
 #include "Object.h"
+#include "DebugState.h"
 
 struct Data
 {
@@ -14,4 +15,5 @@ struct Data
     Camera camera;
     NPC npc;
     Object object;
+    DebugState debug;
 };

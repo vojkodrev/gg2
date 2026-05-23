@@ -1,8 +1,9 @@
 add_library(systems_core
     frame/FrameRateLimitSystem.cpp
     frame/UpdateFrameStateSystem.cpp
-    input/UpdateKeyboardStateSystem.cpp
-    input/UpdateMouseStateSystem.cpp
+    input/DebugStateSystem.cpp
+    input/KeyboardStateSystem.cpp
+    input/MouseStateSystem.cpp
 )
 target_include_directories(systems_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

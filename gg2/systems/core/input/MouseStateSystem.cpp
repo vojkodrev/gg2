@@ -1,7 +1,7 @@
-#include "UpdateMouseStateSystem.h"
+#include "MouseStateSystem.h"
 #include <SDL3/SDL.h>
 
-void updateMouseStateSystem(Context &ctx)
+void mouseStateSystem(Context &ctx)
 {
     SDL_GetMouseState(&ctx.mouse.x, &ctx.mouse.y);
 }
