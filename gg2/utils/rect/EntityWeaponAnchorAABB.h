@@ -1,10 +1,10 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "NPC.h"
+#include "../../structs/equipment/Weapon.h"
 
-inline SDL_FRect entityWeaponAnchorAABB(const NPC &npc, uint32_t i, float buffer = 0.0f)
+template<int N>
+inline SDL_FRect entityWeaponAnchorAABB(const Weapon<N> &weapon, uint32_t i, float buffer = 0.0f)
 {
-    const auto &weapon = npc.equipment.weapon;
     if (weapon.animation.frameCount[i] == 0)
         return {0, 0, 0, 0};
 

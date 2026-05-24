@@ -8,4 +8,5 @@ struct DebugState
 
     bool prevCtrlAlt1Down = false;
     bool prevCtrlAlt2Down = false;
+    bool prevCtrlAlt3Down = false;
 };
