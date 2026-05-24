@@ -1,5 +1,4 @@
 #include "PlayerFacingSystem.h"
-#include "camera/GetCameraOffset.h"
 #include "../../utils/collision/EntityColAABBPlayer.h"
 #include "../../utils/collision/EntityColCenter.h"
 
@@ -8,7 +7,7 @@ void playerFacingSystem(Context &ctx)
     auto &p = ctx.data.player;
     SDL_FPoint center = entityColCenter(entityColAABB(p));
 
-    SDL_FPoint cameraOff = getCameraOffset(ctx);
+    const SDL_FPoint cameraOff = ctx.data.camera.offset;
     float mouseWorldX = ctx.mouse.x - cameraOff.x;
 
     if (mouseWorldX < center.x)

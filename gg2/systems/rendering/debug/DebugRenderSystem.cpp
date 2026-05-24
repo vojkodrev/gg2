@@ -3,12 +3,11 @@
 #include "DebugRenderNpc.h"
 #include "DebugRenderObjects.h"
 #include "DebugRenderAstar.h"
-#include "../../gameplay/camera/GetCameraOffset.h"
 
 void debugRenderSystem(const Context &ctx)
 {
-    SDL_FPoint off = getCameraOffset(ctx);
-    SDL_FRect screen = {0, 0, ctx.data.camera.position.w[0], ctx.data.camera.position.h[0]};
+    const SDL_FPoint off = ctx.data.camera.offset;
+    const SDL_FRect screen = ctx.data.camera.screen;
     const bool showCollision = ctx.data.debug.showCollision;
     const bool showNavigation = ctx.data.debug.showNavigation;
 

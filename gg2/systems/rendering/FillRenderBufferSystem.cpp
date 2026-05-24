@@ -5,7 +5,6 @@
 #include "FillNpcRenderBuffer.h"
 #include "FillObjectRenderBuffer.h"
 #include "SortRenderBuffer.h"
-#include "../gameplay/camera/GetCameraOffset.h"
 
 void fillRenderBufferSystem(Context &ctx)
 {
@@ -18,8 +17,8 @@ void fillRenderBufferSystem(Context &ctx)
 
     sortRenderBuffer(ctx);
 
-    SDL_FPoint off = getCameraOffset(ctx);
-    SDL_FRect screen = {0, 0, ctx.data.camera.position.w[0], ctx.data.camera.position.h[0]};
+    const SDL_FPoint off = ctx.data.camera.offset;
+    const SDL_FRect screen = ctx.data.camera.screen;
     auto &rb = ctx.renderBuffer;
     uint32_t visible = 0;
     for (uint32_t i = 0; i < rb.count; i++)

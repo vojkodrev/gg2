@@ -1,14 +1,13 @@
 #include "RenderSystem.h"
 #include "debug/DebugRenderSystem.h"
 #include <SDL3/SDL.h>
-#include "../gameplay/camera/GetCameraOffset.h"
 
 void renderSystem(const Context &ctx)
 {
     auto &props = ctx.data.tileMapProps;
     auto &tileMap = ctx.data.tileMap;
-    SDL_FPoint off = getCameraOffset(ctx);
-    SDL_FRect screen = {0, 0, ctx.data.camera.position.w[0], ctx.data.camera.position.h[0]};
+    const SDL_FPoint off = ctx.data.camera.offset;
+    const SDL_FRect screen = ctx.data.camera.screen;
     SDL_RenderClear(ctx.renderer);
     for (uint32_t i = 0; i < tileMap.tileCount; i++)
     {
@@ -26,9 +25,7 @@ void renderSystem(const Context &ctx)
         SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
         SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, rb.src.rotate[i], nullptr, flip);
     }
-#ifndef NDEBUG
     debugRenderSystem(ctx);
-#endif
 
     SDL_RenderPresent(ctx.renderer);
 }
