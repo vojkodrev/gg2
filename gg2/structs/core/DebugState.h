@@ -6,6 +6,7 @@ struct DebugState
     bool showCollision = false;
     bool showWeaponCollision = false;
 
+    bool prevCtrlAlt0Down = false;
     bool prevCtrlAlt1Down = false;
     bool prevCtrlAlt2Down = false;
     bool prevCtrlAlt3Down = false;
