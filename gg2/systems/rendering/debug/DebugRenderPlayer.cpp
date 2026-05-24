@@ -1,6 +1,6 @@
 #include "DebugRenderPlayer.h"
 #include "RenderColBox.h"
-#include "../../../utils/collision/EntityAnchorAABBPlayer.h"
+#include "../../../utils/rect/EntityAnchorAABBPlayer.h"
 #include "../../../utils/collision/EntityColAABBPlayer.h"
 
 void debugRenderPlayer(const Context &ctx, SDL_FPoint off, const SDL_FRect &screen)
