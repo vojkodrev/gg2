@@ -35,6 +35,7 @@ void debugRenderNpc(const Context &ctx)
 
         if (showNavigation)
         {
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             auto &patrol = ctx.data.npc.ai.patrol;
             float spawnX = ctx.data.npc.ai.spawn.x[i];
             float spawnY = ctx.data.npc.ai.spawn.y[i];

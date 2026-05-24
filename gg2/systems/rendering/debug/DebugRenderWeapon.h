@@ -13,7 +13,7 @@ inline void debugRenderWeapon(const Context &ctx, const Weapon<N> &weapon, uint3
     SDL_FRect weaponCol = entityWeaponColAABB(weapon, i);
     if (weaponCol.w > 0.0f && weaponCol.h > 0.0f)
     {
-        SDL_SetRenderDrawColor(ctx.renderer, 255, 255, 0, 255);
+        SDL_SetRenderDrawColor(ctx.renderer, 0, 255, 255, 255);
         renderColBox(ctx, weaponCol);
     }
 

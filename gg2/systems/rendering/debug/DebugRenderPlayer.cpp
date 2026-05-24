@@ -22,7 +22,7 @@ void debugRenderPlayer(const Context &ctx)
         SDL_FRect anchor = entityAnchorAABB(player);
         if (anchor.w > 0.0f && anchor.h > 0.0f)
         {
-            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             renderColBox(ctx, anchor);
         }
     }
