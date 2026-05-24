@@ -4,6 +4,9 @@
 
 void debugRenderAstar(const Context &ctx, SDL_FPoint off, const SDL_FRect &screen)
 {
+    if (!ctx.data.debug.showNavigation)
+        return;
+
     SDL_Renderer *renderer = ctx.renderer;
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 80);
     for (int i = 0; i < ctx.astarPool.count; i++)
