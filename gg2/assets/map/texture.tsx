@@ -4,7 +4,7 @@
  <tile id="6">
   <properties>
    <property name="facing" value="right"/>
-   <property name="weapon" value="polearm1"/>
+   <property name="weapon" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
@@ -137,7 +137,7 @@
    <property name="y" type="int" value="0"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="anchor" x="18.491" y="31.0931" width="13.4266" height="14.6043"/>
+   <object id="1" name="anchor" x="25.5576" y="6.71327" width="13.4266" height="14.6043"/>
   </objectgroup>
  </tile>
  <tile id="253">
