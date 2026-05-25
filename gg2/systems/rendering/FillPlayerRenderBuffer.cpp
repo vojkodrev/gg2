@@ -1,5 +1,5 @@
 #include "FillPlayerRenderBuffer.h"
-#include "FillWeaponRenderBuffer.h"
+#include "equipment/FillEquipmentRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillPlayerRenderBuffer(Context &ctx)
@@ -24,5 +24,5 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.group.zIndex[n] = PARENT_Z_INDEX;
     rb.flipX[n] = player.base.facing.flipX[0];
 
-    fillWeaponRenderBuffer(rb, player.equipment.weapon, 0, n, groupId);
+    fillEquipmentRenderBuffer(rb, player.equipment, 0, n, groupId);
 }
