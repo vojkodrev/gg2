@@ -17,7 +17,7 @@
 #include "scale/ScalePlayerSystem.h"
 #include "scale/ScaleNpcSystem.h"
 #include "scale/ScaleObjectSystem.h"
-#include "scale/ScaleEquipmentSystem.h"
+#include "scale/equipment/ScaleEquipmentSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
