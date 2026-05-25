@@ -6,11 +6,11 @@
 void scaleWeapon(Context &ctx)
 {
     auto &playerWeapon = ctx.data.player.equipment.weapon;
-    scaleEquipmentSize(playerWeapon.position, playerWeapon.scale, playerWeapon.animation.frameCount, 0);
+    scaleEquipmentSize(playerWeapon.position, playerWeapon.scale, 0);
     scaleAnimationFrames(playerWeapon.animation, playerWeapon.scale, 1);
 
     auto &npcWeapon = ctx.data.npc.equipment.weapon;
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
-        scaleEquipmentSize(npcWeapon.position, npcWeapon.scale, npcWeapon.animation.frameCount, i);
+        scaleEquipmentSize(npcWeapon.position, npcWeapon.scale, i);
     scaleAnimationFrames(npcWeapon.animation, npcWeapon.scale, ctx.data.npc.npcCount);
 }
