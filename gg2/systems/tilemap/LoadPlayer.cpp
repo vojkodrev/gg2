@@ -3,7 +3,7 @@
 #include "properties/GetTileFloatProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
-#include "LoadWeapon.h"
+#include "LoadEquipment.h"
 #include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>
 
@@ -30,7 +30,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.facing.facing[0] = f;
         ctx.data.player.facing.initialFacing[0] = f;
 
-        loadWeapon(ctx.data.player.equipment.weapon, 0, tileset, idx, props);
+        loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         break;
     }
 }

@@ -128,13 +128,21 @@
    <object id="4" name="anchor" x="18.491" y="40.6331" width="5.29996" height="5.18219"/>
   </objectgroup>
  </tile>
+ <tile id="188">
+  <properties>
+   <property name="rotate" type="float" value="45"/>
+   <property name="scale" type="float" value="1"/>
+   <property name="type" value="arrow1"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="anchor" x="14.4866" y="46.2863" width="5.53552" height="5.18219"/>
+  </objectgroup>
+ </tile>
  <tile id="227">
   <properties>
    <property name="rotate" type="float" value="-135"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="bow1"/>
-   <property name="x" type="int" value="30"/>
-   <property name="y" type="int" value="0"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="anchor" x="25.5576" y="6.71327" width="13.4266" height="14.6043"/>

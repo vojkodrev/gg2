@@ -4,7 +4,7 @@
 #include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadTileAnimation.h"
-#include "LoadWeapon.h"
+#include "LoadEquipment.h"
 #include "DecodeGridIndex.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/npc/RandomTimer.h"
@@ -43,7 +43,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.facing.facing[n] = f;
         npc.facing.initialFacing[n] = f;
 
-        loadWeapon(npc.equipment.weapon, n, tileset, idx, props);
+        loadEquipment(npc.equipment, n, tileset, idx, props);
 
         npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
 
