@@ -1,7 +1,9 @@
 #include "ScaleEquipmentSystem.h"
-#include "ScaleWeaponSystem.h"
+#include "ScaleAmmo.h"
+#include "ScaleWeapon.h"
 
 void scaleEquipmentSystem(Context &ctx)
 {
-    scaleWeaponSystem(ctx);
+    scaleAmmo(ctx);
+    scaleWeapon(ctx);
 }
