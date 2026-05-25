@@ -13,7 +13,7 @@ inline void updateWeaponPosition(
     const EntityPosition<N> &parentPosition,
     uint32_t i)
 {
-    auto &weapon = weaponData.animation;
+    auto &weapon = weaponData.base.animation;
     if (weapon.frameCount[i] == 0)
         return;
 
@@ -32,6 +32,6 @@ inline void updateWeaponPosition(
 
     SDL_FPoint weaponAnchorCenterLocal = entityColCenter(weaponAnchor);
 
-    weaponData.position.x[i] = parentAnchorCenterWorld.x - weaponAnchorCenterLocal.x;
-    weaponData.position.y[i] = parentAnchorCenterWorld.y - weaponAnchorCenterLocal.y;
+    weaponData.base.position.x[i] = parentAnchorCenterWorld.x - weaponAnchorCenterLocal.x;
+    weaponData.base.position.y[i] = parentAnchorCenterWorld.y - weaponAnchorCenterLocal.y;
 }

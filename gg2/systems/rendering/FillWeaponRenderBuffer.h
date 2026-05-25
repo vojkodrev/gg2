@@ -9,7 +9,7 @@
 template<int N>
 inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData, uint32_t parentEntityIndex, uint32_t parentRenderIndex, uint32_t groupId)
 {
-    const auto &weapon = weaponData.animation;
+    const auto &weapon = weaponData.base.animation;
     if (weapon.frameCount[parentEntityIndex] == 0)
         return;
 
@@ -23,13 +23,13 @@ inline void fillWeaponRenderBuffer(RenderBuffer &rb, const Weapon<N> &weaponData
 
     rb.group.id[wn] = groupId;
     rb.group.zIndex[wn] = WEAPON_Z_INDEX;
-    rb.flipX[wn] = weaponData.facing.flipX[parentEntityIndex];
+    rb.flipX[wn] = weaponData.base.facing.flipX[parentEntityIndex];
 
-    rb.dst.w[wn] = weaponData.position.w[parentEntityIndex];
-    rb.dst.h[wn] = weaponData.position.h[parentEntityIndex];
-    rb.dst.x[wn] = weaponData.position.x[parentEntityIndex];
-    rb.dst.y[wn] = weaponData.position.y[parentEntityIndex];
+    rb.dst.w[wn] = weaponData.base.position.w[parentEntityIndex];
+    rb.dst.h[wn] = weaponData.base.position.h[parentEntityIndex];
+    rb.dst.x[wn] = weaponData.base.position.x[parentEntityIndex];
+    rb.dst.y[wn] = weaponData.base.position.y[parentEntityIndex];
     rb.dst.sortY[wn] = rb.dst.sortY[parentRenderIndex];
 
-    rb.src.rotate[wn] = weaponData.rotation.rotate[parentEntityIndex];
+    rb.src.rotate[wn] = weaponData.base.rotation.rotate[parentEntityIndex];
 }

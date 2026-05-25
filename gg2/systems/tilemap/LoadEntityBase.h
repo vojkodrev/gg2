@@ -1,4 +1,5 @@
 #pragma once
+#include "../../structs/core/EntityBase.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "DecodeGridIndex.h"
 #include "IsMarker.h"
@@ -9,9 +10,9 @@
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 
-template<typename EntityData>
+template<int N>
 inline void loadEntityBase(
-    EntityData &entityData,
+    EntityBase<N> &entityData,
     uint32_t parentEntityIdx,
     const tmx::Tileset &tileset,
     uint32_t entityTileIdx,

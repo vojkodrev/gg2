@@ -11,7 +11,7 @@ void playerFacingSystem(Context &ctx)
     float mouseWorldX = ctx.mouse.x - cameraOff.x;
 
     if (mouseWorldX < center.x)
-        p.facing.facing[0] = FacingDirection::Left;
+        p.base.facing.facing[0] = FacingDirection::Left;
     else if (mouseWorldX > center.x)
-        p.facing.facing[0] = FacingDirection::Right;
+        p.base.facing.facing[0] = FacingDirection::Right;
 }

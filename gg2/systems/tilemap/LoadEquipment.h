@@ -14,11 +14,11 @@ inline void loadEquipment(Equipment<N> &equipmentData, uint32_t parentEntityIdx,
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
     if (hasAmmo)
-        loadEntityBase(equipmentData.ammo, parentEntityIdx, tileset, ammoIdx, props);
+        loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
 
     std::string weaponType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
     if (hasWeapon)
-        loadEntityBase(equipmentData.weapon, parentEntityIdx, tileset, weaponIdx, props);
+        loadEntityBase(equipmentData.weapon.base, parentEntityIdx, tileset, weaponIdx, props);
 }

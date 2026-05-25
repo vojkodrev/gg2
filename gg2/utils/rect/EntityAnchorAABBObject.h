@@ -4,11 +4,11 @@
 
 inline SDL_FRect entityAnchorAABB(const Object &object, uint32_t i, float buffer = 0.0f)
 {
-    int f = object.animation.frameIndex[i];
+    int f = object.base.animation.frameIndex[i];
     return {
-        object.position.x[i] + object.animation.frame.anchor.offX[i][f] - buffer,
-        object.position.y[i] + object.animation.frame.anchor.offY[i][f] - buffer,
-        object.animation.frame.anchor.w[i][f] + buffer * 2,
-        object.animation.frame.anchor.h[i][f] + buffer * 2
+        object.base.position.x[i] + object.base.animation.frame.anchor.offX[i][f] - buffer,
+        object.base.position.y[i] + object.base.animation.frame.anchor.offY[i][f] - buffer,
+        object.base.animation.frame.anchor.w[i][f] + buffer * 2,
+        object.base.animation.frame.anchor.h[i][f] + buffer * 2
     };
 }
