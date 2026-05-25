@@ -11,7 +11,6 @@ add_library(systems_gameplay
     flipx/FlipNpcSystem.cpp
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
-    flipx/FlipXSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/UpdateAStarPath.cpp
