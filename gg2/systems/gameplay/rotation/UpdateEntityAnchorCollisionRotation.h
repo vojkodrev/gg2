@@ -4,7 +4,7 @@
 #include <cstdint>
 
 template<int N>
-inline void updateEntityAnchorAndCollisionRotation(Animation<N> &animation, uint32_t i, float entityW, float entityH, float angle)
+inline void updateEntityAnchorCollisionRotation(Animation<N> &animation, uint32_t i, float entityW, float entityH, float angle)
 {
     if (angle == 0.0f)
         return;

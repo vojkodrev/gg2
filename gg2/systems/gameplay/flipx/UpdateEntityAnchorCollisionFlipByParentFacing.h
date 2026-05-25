@@ -1,15 +1,15 @@
 #pragma once
-#include "UpdateEntityAnchorAndCollisionFlip.h"
+#include "UpdateEntityAnchorCollisionFlipOnly.h"
 #include "UpdateEntityFlipByParentFacing.h"
 #include "../../../structs/core/EntityBase.h"
 #include <cstdint>
 
 template<int N>
-inline void updateEntityAnchorAndCollisionFlipByParentFacing(
+inline void updateEntityAnchorCollisionFlipByParentFacing(
     const Facing<N> &parentFacing,
     EntityBase<N> &entityBase,
     uint32_t i)
 {
     updateEntityFlipByParentFacing(parentFacing, entityBase.facing, i);
-    updateEntityAnchorAndCollisionFlip(entityBase, i);
+    updateEntityAnchorCollisionFlipOnly(entityBase, i);
 }
