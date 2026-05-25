@@ -1,27 +1,25 @@
 #pragma once
 #include <cstdint>
 #include "../../../utils/animation/AnchorOrCollision.h"
-#include "../../../structs/equipment/Weapon.h"
-#include "../../../structs/core/Animation.h"
-#include "../../../structs/core/EntityPosition.h"
+#include "../../../structs/core/EntityBase.h"
 #include "../../../utils/collision/EntityColCenter.h"
 
 template<int N>
-inline void updateWeaponPosition(
-    Weapon<N> &weaponData,
+inline void updateEquipmentEntityPosition(
+    EntityBase<N> &entityBase,
     const Animation<N> &parentAnimation,
     const EntityPosition<N> &parentPosition,
     uint32_t i)
 {
-    auto &weapon = weaponData.base.animation;
-    if (weapon.frameCount[i] == 0)
+    auto &animation = entityBase.animation;
+    if (animation.frameCount[i] == 0)
         return;
 
-    int wf = weapon.frameIndex[i];
+    int ef = animation.frameIndex[i];
     int pf = parentAnimation.frameIndex[i];
 
     SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
-    SDL_FRect weaponAnchor = anchorOrCollision(weapon, i, wf);
+    SDL_FRect entityAnchor = anchorOrCollision(animation, i, ef);
 
     SDL_FRect parentAnchorWorld = {
         parentPosition.x[i] + parentAnchor.x,
@@ -30,8 +28,8 @@ inline void updateWeaponPosition(
         parentAnchor.h};
     SDL_FPoint parentAnchorCenterWorld = entityColCenter(parentAnchorWorld);
 
-    SDL_FPoint weaponAnchorCenterLocal = entityColCenter(weaponAnchor);
+    SDL_FPoint entityAnchorCenterLocal = entityColCenter(entityAnchor);
 
-    weaponData.base.position.x[i] = parentAnchorCenterWorld.x - weaponAnchorCenterLocal.x;
-    weaponData.base.position.y[i] = parentAnchorCenterWorld.y - weaponAnchorCenterLocal.y;
+    entityBase.position.x[i] = parentAnchorCenterWorld.x - entityAnchorCenterLocal.x;
+    entityBase.position.y[i] = parentAnchorCenterWorld.y - entityAnchorCenterLocal.y;
 }
