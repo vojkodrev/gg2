@@ -2,7 +2,6 @@
 #include "../../structs/equipment/Equipment.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "LoadEntityBase.h"
-#include "LoadEmptyEntityBase.h"
 #include "properties/FindTileByType.h"
 #include "properties/GetTileStringProp.h"
 #include <cstdint>
@@ -14,16 +13,12 @@ inline void loadEquipment(Equipment<N> &equipmentData, uint32_t parentEntityIdx,
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
-    if (!hasAmmo)
-        loadEmptyEntityBase(equipmentData.ammo, parentEntityIdx);
-    else
+    if (hasAmmo)
         loadEntityBase(equipmentData.ammo, parentEntityIdx, tileset, ammoIdx, props);
 
     std::string weaponType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
-    if (!hasWeapon)
-        loadEmptyEntityBase(equipmentData.weapon, parentEntityIdx);
-    else
+    if (hasWeapon)
         loadEntityBase(equipmentData.weapon, parentEntityIdx, tileset, weaponIdx, props);
 }
