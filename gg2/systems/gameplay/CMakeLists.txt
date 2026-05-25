@@ -5,8 +5,6 @@ add_library(systems_gameplay
     scale/ScaleNpcSystem.cpp
     scale/ScaleObjectSystem.cpp
     scale/equipment/ScaleEquipmentSystem.cpp
-    scale/equipment/ScaleAmmo.cpp
-    scale/equipment/ScaleWeapon.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/FlipEquipmentSystem.cpp

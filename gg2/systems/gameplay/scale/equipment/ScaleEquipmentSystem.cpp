@@ -1,9 +1,14 @@
 #include "ScaleEquipmentSystem.h"
-#include "ScaleAmmo.h"
-#include "ScaleWeapon.h"
+#include "ScaleEquipmentEntity.h"
 
 void scaleEquipmentSystem(Context &ctx)
 {
-    scaleAmmo(ctx);
-    scaleWeapon(ctx);
+    scaleEquipmentEntity(
+        ctx.data.player.equipment.ammo.base,
+        ctx.data.npc.equipment.ammo.base,
+        ctx.data.npc.npcCount);
+    scaleEquipmentEntity(
+        ctx.data.player.equipment.weapon.base,
+        ctx.data.npc.equipment.weapon.base,
+        ctx.data.npc.npcCount);
 }
