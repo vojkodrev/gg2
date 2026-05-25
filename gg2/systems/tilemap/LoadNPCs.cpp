@@ -1,11 +1,10 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
-#include "properties/GetTileFloatProp.h"
 #include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
-#include "LoadTileAnimation.h"
+#include "LoadEntityBase.h"
+#include "LoadEntityPosition.h"
 #include "LoadEquipment.h"
-#include "DecodeGridIndex.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
@@ -23,25 +22,14 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = npc.npcCount++;
         uint32_t idx = npcTiles[i].ID - props.firstGid;
-        loadTileAnimation(npc.animation, n, tileset, idx, props);
-        SDL_Point grid = decodeGridIndex(i, props.mapW);
-        npc.position.x[n] = grid.x * props.dstTileW;
-        npc.position.y[n] = grid.y * props.dstTileH;
-        npc.position.initialW[n] = props.dstTileW;
-        npc.position.initialH[n] = props.dstTileH;
-        npc.position.w[n] = npc.position.initialW[n];
-        npc.position.h[n] = npc.position.initialH[n];
-        npc.scale[n] = getTileFloatProp(tileset, idx, "scale", 1.0f);
-        npc.ai.spawn.x[n] = npc.position.x[n];
-        npc.ai.spawn.y[n] = npc.position.y[n];
+        loadEntityBase(npc.base, n, tileset, idx, props);
+        loadEntityPosition(npc.base.position, n, i, props);
+        npc.ai.spawn.x[n] = npc.base.position.x[n];
+        npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;
         npc.ai.state[n] = NPCAiState::Idle;
         npc.ai.idleTimer[n] = randomTimer(NPC_IDLE_TIME_MIN, NPC_IDLE_TIME_MAX);
         npc.ai.repathTimer[n] = 0.0f;
-
-        FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
-        npc.facing.facing[n] = f;
-        npc.facing.initialFacing[n] = f;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
 
