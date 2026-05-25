@@ -1,15 +1,8 @@
 #pragma once
-#include "../core/Animation.h"
-#include "../core/EntityPosition.h"
-#include "../core/Facing.h"
-#include "../core/Rotation.h"
+#include "../core/EntityBase.h"
 
 template<int N>
 struct Weapon
 {
-    Animation<N> animation;
-    EntityPosition<N> position;
-    float scale[N];
-    Rotation<N> rotation;
-    Facing<N> facing;
+    EntityBase<N> base;
 };

@@ -1,14 +1,9 @@
 #pragma once
-#include "../core/Animation.h"
+#include "../core/EntityBase.h"
 #include "../equipment/Equipment.h"
-#include "../core/EntityPosition.h"
-#include "../core/Facing.h"
 
 struct Player
 {
-    Animation<1> animation;
-    EntityPosition<1> position;
-    float scale[1];
-    Facing<1> facing;
+    EntityBase<1> base;
     Equipment<1> equipment;
 };
