@@ -1,8 +1,6 @@
 #include "LoadObjects.h"
 #include "FindLayer.h"
 #include "LoadEntityBase.h"
-#include "LoadEntityPosition.h"
-#include "IsMarker.h"
 #include <tmxlite/TileLayer.hpp>
 
 void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
@@ -18,7 +16,5 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t n = object.objectCount++;
         uint32_t idx = objectTiles[i].ID - props.firstGid;
         loadEntityBase(object.base, n, tileset, idx, props, i);
-        if (!isMarker(tileset, idx))
-            loadEntityPosition(object.base.position, n, i, props);
     }
 }

@@ -3,7 +3,6 @@
 #include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
-#include "LoadEntityPosition.h"
 #include "LoadEquipment.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/npc/RandomTimer.h"
@@ -22,8 +21,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = npc.npcCount++;
         uint32_t idx = npcTiles[i].ID - props.firstGid;
-        loadEntityBase(npc.base, n, tileset, idx, props);
-        loadEntityPosition(npc.base.position, n, i, props);
+        loadEntityBase(npc.base, n, tileset, idx, props, i);
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;

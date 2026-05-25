@@ -59,6 +59,12 @@ inline void loadEntityBase(
     else
     {
         loadTileAnimation(entityData.animation, parentEntityIdx, tileset, entityTileIdx, props);
+        if (tileArrayIdx != UINT32_MAX)
+        {
+            SDL_Point grid = decodeGridIndex((int)tileArrayIdx, props.mapW);
+            entityData.position.x[parentEntityIdx] = grid.x * props.dstTileW;
+            entityData.position.y[parentEntityIdx] = grid.y * props.dstTileH;
+        }
         entityData.position.initialW[parentEntityIdx] = props.srcTileW;
         entityData.position.initialH[parentEntityIdx] = props.srcTileH;
         entityData.position.w[parentEntityIdx] = entityData.position.initialW[parentEntityIdx];
