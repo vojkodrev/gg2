@@ -5,12 +5,12 @@
 
 template<int N>
 inline void scaleEquipmentEntity(
-    EntityBase<1> &playerBase,
-    EntityBase<N> &npcBase,
+    EntityBase<1> &playerEquipmentBase,
+    EntityBase<N> &npcEquipmentBase,
     uint32_t npcCount)
 {
-    scaleEntityBase(playerBase, 0);
+    scaleEntityBase(playerEquipmentBase, 0);
 
     for (uint32_t i = 0; i < npcCount; i++)
-        scaleEntityBase(npcBase, i);
+        scaleEntityBase(npcEquipmentBase, i);
 }
