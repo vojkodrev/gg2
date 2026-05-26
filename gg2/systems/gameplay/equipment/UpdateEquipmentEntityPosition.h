@@ -11,14 +11,24 @@ inline void updateEquipmentEntityPosition(
     const EntityPosition<N> &parentPosition,
     uint32_t i)
 {
+    int pf = parentAnimation.frameIndex[i];
+    SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
+    updateEquipmentEntityPosition(entityBase, parentAnchor, parentPosition, i);
+}
+
+template<int N>
+inline void updateEquipmentEntityPosition(
+    EntityBase<N> &entityBase,
+    SDL_FRect &parentAnchor,
+    const EntityPosition<N> &parentPosition,
+    uint32_t i)
+{
     auto &animation = entityBase.animation;
     if (animation.frameCount[i] == 0)
         return;
 
     int ef = animation.frameIndex[i];
-    int pf = parentAnimation.frameIndex[i];
 
-    SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
     SDL_FRect entityAnchor = anchorOrCollision(animation, i, ef);
 
     SDL_FRect parentAnchorWorld = {

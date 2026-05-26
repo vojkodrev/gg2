@@ -1,5 +1,5 @@
 #include "MoveEquipmentSystem.h"
-#include "UpdateEquipmentEntityPosition.h"
+#include "UpdateEquipmentAmmoEntityPosition.h"
 
 void moveEquipmentSystem(Context &ctx)
 {
@@ -8,10 +8,11 @@ void moveEquipmentSystem(Context &ctx)
         ctx.data.player.base.animation,
         ctx.data.player.base.position,
         0);
-    updateEquipmentEntityPosition(
+    updateEquipmentAmmoEntityPosition(
         ctx.data.player.equipment.ammo.base,
-        ctx.data.player.base.animation,
-        ctx.data.player.base.position,
+        ctx.data.player.equipment.weapon.ammoAnchor,
+        ctx.data.player.equipment.weapon.base,
+        ctx.data.player.base,
         0);
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
@@ -21,10 +22,11 @@ void moveEquipmentSystem(Context &ctx)
             ctx.data.npc.base.animation,
             ctx.data.npc.base.position,
             i);
-        updateEquipmentEntityPosition(
+        updateEquipmentAmmoEntityPosition(
             ctx.data.npc.equipment.ammo.base,
-            ctx.data.npc.base.animation,
-            ctx.data.npc.base.position,
+            ctx.data.npc.equipment.weapon.ammoAnchor,
+            ctx.data.npc.equipment.weapon.base,
+            ctx.data.npc.base,
             i);
     }
 }
