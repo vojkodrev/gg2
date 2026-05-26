@@ -3,6 +3,7 @@
  <image source="../texture/texture.png" width="896" height="1472"/>
  <tile id="6">
   <properties>
+   <property name="ammo" value="arrow1"/>
    <property name="facing" value="right"/>
    <property name="weapon" value="bow1"/>
   </properties>

@@ -8,7 +8,12 @@
 #include <tmxlite/Tileset.hpp>
 
 template<int N>
-inline void loadEquipment(Equipment<N> &equipmentData, uint32_t parentEntityIdx, const tmx::Tileset &tileset, uint32_t parentEntityTileIndex, const TileMapProperties &props)
+inline void loadEquipment(
+    Equipment<N> &equipmentData, 
+    uint32_t parentEntityIdx, 
+    const tmx::Tileset &tileset, 
+    uint32_t parentEntityTileIndex, 
+    const TileMapProperties &props)
 {
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;

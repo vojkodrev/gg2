@@ -1,6 +1,6 @@
 #include "DebugRenderNpc.h"
 #include "RenderColBox.h"
-#include "DebugRenderWeapon.h"
+#include "DebugRenderEquipment.h"
 #include "../../../utils/collision/EntityColAABBNPC.h"
 #include "../../../utils/rect/EntityAnchorAABBNPC.h"
 
@@ -31,7 +31,7 @@ void debugRenderNpc(const Context &ctx)
             }
         }
 
-        debugRenderWeapon(ctx, ctx.data.npc.equipment.weapon, i);
+        debugRenderEquipment(ctx, ctx.data.npc.equipment, i);
 
         if (showNavigation)
         {

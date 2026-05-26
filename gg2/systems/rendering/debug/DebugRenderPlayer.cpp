@@ -1,6 +1,6 @@
 #include "DebugRenderPlayer.h"
 #include "RenderColBox.h"
-#include "DebugRenderWeapon.h"
+#include "DebugRenderEquipment.h"
 #include "../../../utils/rect/EntityAnchorAABBPlayer.h"
 #include "../../../utils/collision/EntityColAABBPlayer.h"
 
@@ -27,5 +27,5 @@ void debugRenderPlayer(const Context &ctx)
         }
     }
 
-    debugRenderWeapon(ctx, player.equipment.weapon, 0);
+    debugRenderEquipment(ctx, player.equipment, 0);
 }
