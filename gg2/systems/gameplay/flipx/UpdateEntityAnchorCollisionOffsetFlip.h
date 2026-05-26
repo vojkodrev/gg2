@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../structs/core/EntityBase.h"
+#include "UpdateAnchorOffsetFlip.h"
 #include <cstdint>
 
 template<int N>
@@ -10,9 +11,7 @@ inline void updateEntityAnchorCollisionOffsetFlip(EntityBase<N> &entityBase, uin
 
     for (int f = 0; f < entityBase.animation.frameCount[i]; f++)
     {
-        entityBase.animation.frame.anchor.offX[i][f] =
-            entityBase.position.w[i] - entityBase.animation.frame.anchor.offX[i][f] - entityBase.animation.frame.anchor.w[i][f];
-        entityBase.animation.frame.collision.offX[i][f] =
-            entityBase.position.w[i] - entityBase.animation.frame.collision.offX[i][f] - entityBase.animation.frame.collision.w[i][f];
+        updateAnchorOffsetFlip(entityBase.animation.frame.anchor, entityBase.position.w[i], i, f);
+        updateAnchorOffsetFlip(entityBase.animation.frame.collision, entityBase.position.w[i], i, f);
     }
 }
