@@ -13,10 +13,5 @@ inline void rotateEntityBase(EntityBase<N> &entityBase, uint32_t i)
         ? -entityBase.rotation.initialRotate[i]
         : entityBase.rotation.initialRotate[i];
 
-    updateEntityAnchorCollisionRotation(
-        entityBase.animation,
-        i,
-        entityBase.position.w[i],
-        entityBase.position.h[i],
-        entityBase.rotation.rotate[i]);
+    updateEntityAnchorCollisionRotation(entityBase, i);
 }

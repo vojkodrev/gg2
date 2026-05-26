@@ -1,34 +1,25 @@
 #pragma once
 #include "../../../structs/core/Animation.h"
-#include "../../../utils/rect/RotateRectCenter.h"
+#include "UpdateAnchorRotation.h"
 #include <cstdint>
 
 template<int N>
-inline void updateEntityAnchorCollisionRotation(Animation<N> &animation, uint32_t i, float entityW, float entityH, float angle)
+inline void updateEntityAnchorCollisionRotation(EntityBase<N> &entityBase, uint32_t i)
 {
-    if (angle == 0.0f)
+    if (entityBase.rotation.rotate[i] == 0.0f)
         return;
 
-    const float entityCenterX = entityW * 0.5f;
-    const float entityCenterY = entityH * 0.5f;
-
-    for (int f = 0; f < animation.frameCount[i]; f++)
+    for (int f = 0; f < entityBase.animation.frameCount[i]; f++)
     {
-        rotateRectCenter(
-            animation.frame.anchor.offX[i][f],
-            animation.frame.anchor.offY[i][f],
-            animation.frame.anchor.w[i][f],
-            animation.frame.anchor.h[i][f],
-            entityCenterX,
-            entityCenterY,
-            angle);
-        rotateRectCenter(
-            animation.frame.collision.offX[i][f],
-            animation.frame.collision.offY[i][f],
-            animation.frame.collision.w[i][f],
-            animation.frame.collision.h[i][f],
-            entityCenterX,
-            entityCenterY,
-            angle);
+        updateAnchorRotation(
+            entityBase.animation.frame.anchor,
+            entityBase,
+            i,
+            f);
+        updateAnchorRotation(
+            entityBase.animation.frame.collision,
+            entityBase,
+            i,
+            f);
     }
 }
