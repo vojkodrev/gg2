@@ -1,5 +1,5 @@
 #include "MoveColCenterToward.h"
-#include "EntityBaseColAABB.h"
+#include "EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include <cmath>
 
@@ -7,7 +7,7 @@ void moveColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float spee
 {
     auto &npc = ctx.data.npc;
     float dt = ctx.frame.dt;
-    SDL_FRect col = entityBaseColAABB(npc.base, n);
+    SDL_FRect col = entityColAABB(npc.base, n);
     SDL_FPoint colCenter = entityColCenter(col);
     float dx = target.x - colCenter.x;
     float dy = target.y - colCenter.y;

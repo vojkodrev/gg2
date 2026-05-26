@@ -3,7 +3,7 @@
 #include "../../structs/core/EntityBase.h"
 
 template<int N>
-inline SDL_FRect entityBaseColAABB(const EntityBase<N> &base, uint32_t i, float buffer = 0.0f)
+inline SDL_FRect entityColAABB(const EntityBase<N> &base, uint32_t i, float buffer = 0.0f)
 {
     if (base.animation.frameCount[i] == 0)
         return {0, 0, 0, 0};

@@ -1,5 +1,5 @@
 #include "IsBlocked.h"
-#include "EntityBaseColAABB.h"
+#include "EntityColAABB.h"
 #include "ColId.h"
 #include <SDL3/SDL.h>
 #include "spatialhash/SpatialHashQuery.h"
@@ -7,7 +7,7 @@
 
 bool isBlocked(const AStarContext& astar, const Context& ctx, SDL_Point node, int npcIndex)
 {
-    SDL_FRect npcCol = entityBaseColAABB(ctx.data.npc.base, npcIndex);
+    SDL_FRect npcCol = entityColAABB(ctx.data.npc.base, npcIndex);
     SDL_FRect moverBox = centeredRect({(float)node.x, (float)node.y}, npcCol.w, npcCol.h);
 
     uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
@@ -18,9 +18,9 @@ bool isBlocked(const AStarContext& astar, const Context& ctx, SDL_Point node, in
         uint16_t id = candidates[i];
         SDL_FRect box;
         if (colIdIsObject(id))
-            box = entityBaseColAABB(ctx.data.object.base, colIdObjectIndex(id));
+            box = entityColAABB(ctx.data.object.base, colIdObjectIndex(id));
         else if (colIdIsNpc(id) && (int)colIdNpcIndex(id) != npcIndex)
-            box = entityBaseColAABB(ctx.data.npc.base, colIdNpcIndex(id));
+            box = entityColAABB(ctx.data.npc.base, colIdNpcIndex(id));
         else
             continue;
 

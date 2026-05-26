@@ -1,6 +1,6 @@
 #include "CollisionSystem.h"
 #include <shared_mutex>
-#include "EntityBaseColAABB.h"
+#include "EntityColAABB.h"
 #include "GetEntityColAABB.h"
 #include "ColId.h"
 #include "spatialhash/SpatialHashClear.h"
@@ -16,7 +16,7 @@ void collisionSystem(Context &ctx)
     auto &object = ctx.data.object;
     auto &player = ctx.data.player;
 
-    SDL_FRect pBox = entityBaseColAABB(player.base, 0);
+    SDL_FRect pBox = entityColAABB(player.base, 0);
     auto &hash = ctx.collision.spatialHash;
     {
         std::unique_lock lock(ctx.collision.spatialHashMutex);
@@ -25,10 +25,10 @@ void collisionSystem(Context &ctx)
         spatialHashInsert(hash, pBox, COLLISION_ENTITY_PLAYER);
 
         for (uint32_t i = 0; i < npc.npcCount; i++)
-            spatialHashInsert(hash, entityBaseColAABB(npc.base, i), colIdNpc(i));
+            spatialHashInsert(hash, entityColAABB(npc.base, i), colIdNpc(i));
 
         for (uint32_t i = 0; i < object.objectCount; i++)
-            spatialHashInsert(hash, entityBaseColAABB(object.base, i), colIdObject(i));
+            spatialHashInsert(hash, entityColAABB(object.base, i), colIdObject(i));
     }
 
     std::shared_lock readLock(ctx.collision.spatialHashMutex);
@@ -61,7 +61,7 @@ void collisionSystem(Context &ctx)
 
     checkEntity(COLLISION_ENTITY_PLAYER, pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        checkEntity(colIdNpc(i), entityBaseColAABB(npc.base, i));
+        checkEntity(colIdNpc(i), entityColAABB(npc.base, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
-        checkEntity(colIdObject(i), entityBaseColAABB(object.base, i));
+        checkEntity(colIdObject(i), entityColAABB(object.base, i));
 }
