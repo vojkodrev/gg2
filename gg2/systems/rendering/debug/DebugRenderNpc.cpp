@@ -1,8 +1,8 @@
 #include "DebugRenderNpc.h"
 #include "RenderColBox.h"
 #include "DebugRenderEquipment.h"
-#include "../../../utils/collision/EntityColAABBNPC.h"
-#include "../../../utils/rect/EntityAnchorAABBNPC.h"
+#include "../../../utils/collision/EntityBaseColAABB.h"
+#include "../../../utils/rect/EntityBaseAnchorAABB.h"
 
 void debugRenderNpc(const Context &ctx)
 {
@@ -16,14 +16,14 @@ void debugRenderNpc(const Context &ctx)
     {
         if (showCollision)
         {
-            SDL_FRect col = entityColAABB(ctx.data.npc, i);
+            SDL_FRect col = entityBaseColAABB(ctx.data.npc.base, i);
             if (col.w > 0.0f && col.h > 0.0f)
             {
                 SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
                 renderColBox(ctx, col);
             }
 
-            SDL_FRect anchor = entityAnchorAABB(ctx.data.npc, i);
+            SDL_FRect anchor = entityBaseAnchorAABB(ctx.data.npc.base, i);
             if (anchor.w > 0.0f && anchor.h > 0.0f)
             {
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);

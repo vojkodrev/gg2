@@ -1,7 +1,7 @@
 #include "UpdateMonsterGoToPlayer.h"
 #include "DistToSpawn.h"
 #include "AreColBoxesNear.h"
-#include "EntityColAABBPlayer.h"
+#include "EntityBaseColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "astar/UpdateAStarPath.h"
 #include "SetNpcAiStateGoToSpawn.h"
@@ -15,7 +15,7 @@ void updateMonsterGoToPlayer(uint32_t n, Context &ctx)
         return;
     }
 
-    SDL_FRect playerCol = entityColAABB(ctx.data.player);
+    SDL_FRect playerCol = entityBaseColAABB(ctx.data.player.base, 0);
 
     if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
     {
