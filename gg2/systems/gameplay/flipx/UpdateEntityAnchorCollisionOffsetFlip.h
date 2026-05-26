@@ -3,7 +3,7 @@
 #include <cstdint>
 
 template<int N>
-inline void updateEntityAnchorCollisionFlipOnly(EntityBase<N> &entityBase, uint32_t i)
+inline void updateEntityAnchorCollisionOffsetFlip(EntityBase<N> &entityBase, uint32_t i)
 {
     if (!entityBase.facing.flipX[i])
         return;

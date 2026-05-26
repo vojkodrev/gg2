@@ -1,5 +1,5 @@
 #pragma once
-#include "UpdateEntityAnchorCollisionFlipOnly.h"
+#include "UpdateEntityAnchorCollisionOffsetFlip.h"
 #include "UpdateEntityFlipByParentFacing.h"
 #include "../../../structs/core/EntityBase.h"
 #include <cstdint>
@@ -11,5 +11,5 @@ inline void updateEntityAnchorCollisionFlipByParentFacing(
     uint32_t i)
 {
     updateEntityFlipByParentFacing(parentFacing, entityBase.facing, i);
-    updateEntityAnchorCollisionFlipOnly(entityBase, i);
+    updateEntityAnchorCollisionOffsetFlip(entityBase, i);
 }
