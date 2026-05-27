@@ -9,6 +9,7 @@ void debugStateSystem(Context &ctx)
     const bool ctrlAlt1Down = ctrlAlt && ctx.keyboard.digit1;
     const bool ctrlAlt2Down = ctrlAlt && ctx.keyboard.digit2;
     const bool ctrlAlt3Down = ctrlAlt && ctx.keyboard.digit3;
+    const bool ctrlAlt4Down = ctrlAlt && ctx.keyboard.digit4;
 
     if (debug.prevCtrlAlt0Down && !ctrlAlt0Down)
     {
@@ -16,6 +17,7 @@ void debugStateSystem(Context &ctx)
         debug.showNavigation = nextShow;
         debug.showCollision = nextShow;
         debug.showWeaponCollision = nextShow;
+        debug.showAmmoCollision = nextShow;
     }
 
     if (debug.prevCtrlAlt1Down && !ctrlAlt1Down)
@@ -27,8 +29,12 @@ void debugStateSystem(Context &ctx)
     if (debug.prevCtrlAlt3Down && !ctrlAlt3Down)
         debug.showWeaponCollision = !debug.showWeaponCollision;
 
+    if (debug.prevCtrlAlt4Down && !ctrlAlt4Down)
+        debug.showAmmoCollision = !debug.showAmmoCollision;
+
     debug.prevCtrlAlt0Down = ctrlAlt0Down;
     debug.prevCtrlAlt1Down = ctrlAlt1Down;
     debug.prevCtrlAlt2Down = ctrlAlt2Down;
     debug.prevCtrlAlt3Down = ctrlAlt3Down;
+    debug.prevCtrlAlt4Down = ctrlAlt4Down;
 }
