@@ -136,7 +136,7 @@
    <property name="type" value="arrow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="anchor" x="14.4866" y="46.2863" width="5.53552" height="5.18219"/>
+   <object id="1" name="anchor" x="10.1847" y="50.8033" width="5.53552" height="5.18219"/>
   </objectgroup>
  </tile>
  <tile id="227">
@@ -146,7 +146,8 @@
    <property name="type" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="anchor" x="25.5576" y="6.71327" width="13.4266" height="14.6043"/>
+   <object id="1" name="anchor" x="32.1179" y="2.73405" width="13.4266" height="14.6043"/>
+   <object id="2" name="ammoAnchor" x="30.4357" y="22.4772" width="9.78674" height="9.57164"/>
   </objectgroup>
  </tile>
  <tile id="253">
