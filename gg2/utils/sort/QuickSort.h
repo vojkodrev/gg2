@@ -10,7 +10,19 @@ void quickSort(int lo, int hi, FLess less, FSwap swap)
     {
         while (less(i, pivotIndex)) i++;
         while (less(pivotIndex, j)) j--;
-        if (i <= j) { swap(i++, j--); }
+        if (i <= j)
+        {
+            if (i != j)
+            {
+                swap(i, j);
+                if (pivotIndex == i)
+                    pivotIndex = j;
+                else if (pivotIndex == j)
+                    pivotIndex = i;
+            }
+            i++;
+            j--;
+        }
     }
     quickSort(lo, j, less, swap);
     quickSort(i, hi, less, swap);
