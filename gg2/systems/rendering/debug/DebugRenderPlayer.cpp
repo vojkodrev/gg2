@@ -1,8 +1,8 @@
 #include "DebugRenderPlayer.h"
 #include "RenderColBox.h"
-#include "DebugRenderWeapon.h"
-#include "../../../utils/rect/EntityAnchorAABBPlayer.h"
-#include "../../../utils/collision/EntityColAABBPlayer.h"
+#include "DebugRenderEquipment.h"
+#include "../../../utils/rect/EntityAnchorAABB.h"
+#include "../../../utils/collision/EntityColAABB.h"
 
 void debugRenderPlayer(const Context &ctx)
 {
@@ -12,14 +12,14 @@ void debugRenderPlayer(const Context &ctx)
 
     if (showCollision)
     {
-        SDL_FRect col = entityColAABB(player);
+        SDL_FRect col = entityColAABB(player.base, 0);
         if (col.w > 0.0f && col.h > 0.0f)
         {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
             renderColBox(ctx, col);
         }
 
-        SDL_FRect anchor = entityAnchorAABB(player);
+        SDL_FRect anchor = entityAnchorAABB(player.base, 0);
         if (anchor.w > 0.0f && anchor.h > 0.0f)
         {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
@@ -27,5 +27,5 @@ void debugRenderPlayer(const Context &ctx)
         }
     }
 
-    debugRenderWeapon(ctx, player.equipment.weapon, 0);
+    debugRenderEquipment(ctx, player.equipment, 0);
 }

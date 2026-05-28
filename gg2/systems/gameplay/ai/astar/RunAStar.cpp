@@ -2,7 +2,7 @@
 #include "../../../../structs/core/Context.h"
 #include <shared_mutex>
 #include "../../../../utils/collision/EntityColCenter.h"
-#include "../../../../utils/collision/EntityColAABBNPC.h"
+#include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/minheap/MinHeapPush.h"
 #include "../../../../utils/minheap/MinHeapPop.h"
 #include "../../../../utils/minheap/MinHeapEmpty.h"
@@ -32,7 +32,7 @@ int runAStar(AStarContext& astar, Context& ctx,
         astar.colHashSnapshot = ctx.collision.spatialHash;
     }
 
-    SDL_FRect startCol = entityColAABB(ctx.data.npc, npcIndex);
+    SDL_FRect startCol = entityColAABB(ctx.data.npc.base, npcIndex);
     SDL_FPoint startCenter = entityColCenter(startCol);
 
     astar.generation++;

@@ -1,10 +1,7 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
-#include "properties/GetTileFloatProp.h"
-#include "properties/GetTileStringProp.h"
-#include "LoadTileAnimation.h"
-#include "LoadWeapon.h"
-#include "DecodeGridIndex.h"
+#include "LoadEntityBase.h"
+#include "LoadEquipment.h"
 #include <tmxlite/TileLayer.hpp>
 
 void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
@@ -17,20 +14,8 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (playerTiles[i].ID == 0)
             continue;
         uint32_t idx = playerTiles[i].ID - props.firstGid;
-        loadTileAnimation(ctx.data.player.animation, 0, tileset, idx, props);
-        SDL_Point grid = decodeGridIndex(i, props.mapW);
-        ctx.data.player.position.x[0] = grid.x * props.dstTileW;
-        ctx.data.player.position.y[0] = grid.y * props.dstTileH;
-        ctx.data.player.position.initialW[0] = props.dstTileW;
-        ctx.data.player.position.initialH[0] = props.dstTileH;
-        ctx.data.player.position.w[0] = ctx.data.player.position.initialW[0];
-        ctx.data.player.position.h[0] = ctx.data.player.position.initialH[0];
-        ctx.data.player.scale[0] = getTileFloatProp(tileset, idx, "scale", 1.0f);
-        FacingDirection f = getTileStringProp(tileset, idx, "facing") == "right" ? FacingDirection::Right : FacingDirection::Left;
-        ctx.data.player.facing.facing[0] = f;
-        ctx.data.player.facing.initialFacing[0] = f;
-
-        loadWeapon(ctx.data.player.equipment.weapon, 0, tileset, idx, props);
+        loadEntityBase(ctx.data.player.base, 0, tileset, idx, props, (uint32_t)i);
+        loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         break;
     }
 }

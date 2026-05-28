@@ -4,12 +4,11 @@ add_library(systems_gameplay
     scale/ScalePlayerSystem.cpp
     scale/ScaleNpcSystem.cpp
     scale/ScaleObjectSystem.cpp
-    scale/ScaleEquipmentSystem.cpp
+    scale/equipment/ScaleEquipmentSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
-    flipx/FlipXSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/UpdateAStarPath.cpp
@@ -59,5 +58,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/camera
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
+    ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

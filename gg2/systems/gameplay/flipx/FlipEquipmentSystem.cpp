@@ -1,24 +1,44 @@
 #include "FlipEquipmentSystem.h"
-#include "UpdateEntityAnchorAndCollisionFlip.h"
-#include "UpdateWeaponFlip.h"
+#include "UpdateAnchorOffsetFlip.h"
+#include "UpdateEntityAnchorCollisionFlipByParentFacing.h"
 #include <cstdint>
 
 void flipEquipmentSystem(Context &ctx)
 {
-    updateWeaponFlip(ctx.data.player.facing, ctx.data.player.equipment.weapon.facing, 0);
-    updateEntityAnchorAndCollisionFlip(
-        ctx.data.player.equipment.weapon.animation,
-        0,
-        ctx.data.player.equipment.weapon.position.w[0],
-        ctx.data.player.equipment.weapon.facing.flipX[0]);
+    updateEntityAnchorCollisionFlipByParentFacing(
+        ctx.data.player.base.facing,
+        ctx.data.player.equipment.weapon.base,
+        0);
+    if (ctx.data.player.equipment.weapon.base.facing.flipX[0])
+    {
+        updateAnchorOffsetFlip(
+            ctx.data.player.equipment.weapon.ammoAnchor,
+            ctx.data.player.equipment.weapon.base.position.w[0],
+            0,
+            0);
+    }
+    updateEntityAnchorCollisionFlipByParentFacing(
+        ctx.data.player.base.facing,
+        ctx.data.player.equipment.ammo.base,
+        0);
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
-        updateWeaponFlip(ctx.data.npc.facing, ctx.data.npc.equipment.weapon.facing, i);
-        updateEntityAnchorAndCollisionFlip(
-            ctx.data.npc.equipment.weapon.animation,
-            i,
-            ctx.data.npc.equipment.weapon.position.w[i],
-            ctx.data.npc.equipment.weapon.facing.flipX[i]);
+        updateEntityAnchorCollisionFlipByParentFacing(
+            ctx.data.npc.base.facing,
+            ctx.data.npc.equipment.weapon.base,
+            i);
+        if (ctx.data.npc.equipment.weapon.base.facing.flipX[i])
+        {
+            updateAnchorOffsetFlip(
+                ctx.data.npc.equipment.weapon.ammoAnchor,
+                ctx.data.npc.equipment.weapon.base.position.w[i],
+                i,
+                0);
+        }
+        updateEntityAnchorCollisionFlipByParentFacing(
+            ctx.data.npc.base.facing,
+            ctx.data.npc.equipment.ammo.base,
+            i);
     }
 }

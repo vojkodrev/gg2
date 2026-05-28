@@ -3,6 +3,7 @@
  <image source="../texture/texture.png" width="896" height="1472"/>
  <tile id="6">
   <properties>
+   <property name="ammo" value="arrow1"/>
    <property name="facing" value="right"/>
    <property name="weapon" value="bow1"/>
   </properties>
@@ -128,16 +129,25 @@
    <object id="4" name="anchor" x="18.491" y="40.6331" width="5.29996" height="5.18219"/>
   </objectgroup>
  </tile>
+ <tile id="188">
+  <properties>
+   <property name="rotate" type="float" value="45"/>
+   <property name="scale" type="float" value="1"/>
+   <property name="type" value="arrow1"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="anchor" x="10.1847" y="50.8033" width="5.53552" height="5.18219"/>
+  </objectgroup>
+ </tile>
  <tile id="227">
   <properties>
    <property name="rotate" type="float" value="-135"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="bow1"/>
-   <property name="x" type="int" value="30"/>
-   <property name="y" type="int" value="0"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="anchor" x="25.5576" y="6.71327" width="13.4266" height="14.6043"/>
+   <object id="1" name="anchor" x="32.1179" y="2.73405" width="13.4266" height="14.6043"/>
+   <object id="2" name="ammoAnchor" x="30.4357" y="22.4772" width="9.78674" height="9.57164"/>
   </objectgroup>
  </tile>
  <tile id="253">
