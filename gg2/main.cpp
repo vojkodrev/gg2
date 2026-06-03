@@ -81,10 +81,10 @@ int main()
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
-        scalePlayerLocationSystem(*ctx);
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
+        scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
 
         scaleNpcLocationSystem(*ctx);
