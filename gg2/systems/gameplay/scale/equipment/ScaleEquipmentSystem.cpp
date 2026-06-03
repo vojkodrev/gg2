@@ -1,6 +1,7 @@
 #include "ScaleEquipmentSystem.h"
 #include "ScaleEquipmentEntity.h"
-#include "../ScaleAnchor.h"
+#include "../ScaleAnchorLocation.h"
+#include "../ScaleAnchorSize.h"
 
 void scaleEquipmentSystem(Context &ctx)
 {
@@ -13,7 +14,12 @@ void scaleEquipmentSystem(Context &ctx)
         ctx.data.npc.equipment.ammo.base,
         ctx.data.npc.npcCount);
 
-    scaleAnchor(
+    scaleAnchorLocation(
+        ctx.data.player.equipment.weapon.ammoAnchor,
+        ctx.data.player.equipment.weapon.base.scale[0],
+        0,
+        0);
+    scaleAnchorSize(
         ctx.data.player.equipment.weapon.ammoAnchor,
         ctx.data.player.equipment.weapon.base.scale[0],
         0,
@@ -21,7 +27,12 @@ void scaleEquipmentSystem(Context &ctx)
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
-        scaleAnchor(
+        scaleAnchorLocation(
+            ctx.data.npc.equipment.weapon.ammoAnchor,
+            ctx.data.npc.equipment.weapon.base.scale[i],
+            i,
+            0);
+        scaleAnchorSize(
             ctx.data.npc.equipment.weapon.ammoAnchor,
             ctx.data.npc.equipment.weapon.base.scale[i],
             i,
