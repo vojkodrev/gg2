@@ -1,12 +1,11 @@
 #include "FlipEquipmentSystem.h"
 #include "UpdateAnchorOffsetFlip.h"
-#include "UpdateEntityAnchorCollisionFlipByParentFacing.h"
+#include "UpdateEntityAnchorCollisionOffsetFlip.h"
 #include <cstdint>
 
 void flipEquipmentSystem(Context &ctx)
 {
-    updateEntityAnchorCollisionFlipByParentFacing(
-        ctx.data.player.base.facing,
+    updateEntityAnchorCollisionOffsetFlip(
         ctx.data.player.equipment.weapon.base,
         0);
     if (ctx.data.player.equipment.weapon.base.facing.flipX[0])
@@ -17,15 +16,13 @@ void flipEquipmentSystem(Context &ctx)
             0,
             0);
     }
-    updateEntityAnchorCollisionFlipByParentFacing(
-        ctx.data.player.base.facing,
+    updateEntityAnchorCollisionOffsetFlip(
         ctx.data.player.equipment.ammo.base,
         0);
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
-        updateEntityAnchorCollisionFlipByParentFacing(
-            ctx.data.npc.base.facing,
+        updateEntityAnchorCollisionOffsetFlip(
             ctx.data.npc.equipment.weapon.base,
             i);
         if (ctx.data.npc.equipment.weapon.base.facing.flipX[i])
@@ -36,8 +33,7 @@ void flipEquipmentSystem(Context &ctx)
                 i,
                 0);
         }
-        updateEntityAnchorCollisionFlipByParentFacing(
-            ctx.data.npc.base.facing,
+        updateEntityAnchorCollisionOffsetFlip(
             ctx.data.npc.equipment.ammo.base,
             i);
     }

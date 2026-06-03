@@ -24,6 +24,7 @@
 #include "scale/equipment/ScaleEquipmentSizeSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
+#include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -92,6 +93,7 @@ int main()
         flipNpcSystem(*ctx);
 
         scaleObjectLocationSystem(*ctx);
+        equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);

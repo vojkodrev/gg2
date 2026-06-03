@@ -11,6 +11,7 @@ add_library(systems_gameplay
     scale/equipment/ScaleEquipmentSizeSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
+    flipx/EquipmentFacingSystem.cpp
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
