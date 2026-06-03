@@ -14,10 +14,14 @@
 #include "MouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
-#include "scale/ScalePlayerSystem.h"
-#include "scale/ScaleNpcSystem.h"
-#include "scale/ScaleObjectSystem.h"
-#include "scale/equipment/ScaleEquipmentSystem.h"
+#include "scale/ScalePlayerLocationSystem.h"
+#include "scale/ScalePlayerSizeSystem.h"
+#include "scale/ScaleNpcLocationSystem.h"
+#include "scale/ScaleNpcSizeSystem.h"
+#include "scale/ScaleObjectLocationSystem.h"
+#include "scale/ScaleObjectSizeSystem.h"
+#include "scale/equipment/ScaleEquipmentLocationSystem.h"
+#include "scale/equipment/ScaleEquipmentSizeSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
@@ -73,18 +77,22 @@ int main()
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
-        scalePlayerSystem(*ctx);
+        scalePlayerLocationSystem(*ctx);
+        scalePlayerSizeSystem(*ctx);
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
         flipPlayerSystem(*ctx);
 
-        scaleNpcSystem(*ctx);
+        scaleNpcLocationSystem(*ctx);
+        scaleNpcSizeSystem(*ctx);
         npcAiSystem(*ctx);
         flipNpcSystem(*ctx);
 
-        scaleObjectSystem(*ctx);
-        scaleEquipmentSystem(*ctx);
+        scaleObjectLocationSystem(*ctx);
+        scaleObjectSizeSystem(*ctx);
+        scaleEquipmentLocationSystem(*ctx);
+        scaleEquipmentSizeSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
