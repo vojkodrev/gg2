@@ -6,5 +6,6 @@ struct Facing
 {
     FacingDirection facing[N];
     FacingDirection initialFacing[N];
+    bool dirty[N];
     bool flipX[N];
 };

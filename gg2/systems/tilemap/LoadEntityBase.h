@@ -80,4 +80,5 @@ inline void loadEntityBase(
     FacingDirection entityFacing = getTileStringProp(tileset, entityTileIdx, "facing") == "left" ? FacingDirection::Left : FacingDirection::Right;
     entityData.facing.facing[parentEntityIdx] = entityFacing;
     entityData.facing.initialFacing[parentEntityIdx] = entityFacing;
+    entityData.facing.dirty[parentEntityIdx] = true;
 }
