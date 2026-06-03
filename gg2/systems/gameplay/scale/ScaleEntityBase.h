@@ -1,5 +1,6 @@
 #pragma once
-#include "ScaleAnimationFrames.h"
+#include "ScaleAnimationFrameLocations.h"
+#include "ScaleAnimationFrameSizes.h"
 #include "ScaleEntityBaseSize.h"
 #include <cstdint>
 
@@ -7,7 +8,11 @@ template<int N>
 inline void scaleEntityBase(EntityBase<N> &entityBase, uint32_t i)
 {
     scaleEntityBaseSize(entityBase, i);
-    scaleAnimationFrames(
+    scaleAnimationFrameLocations(
+        entityBase.animation,
+        entityBase.scale,
+        i);
+    scaleAnimationFrameSizes(
         entityBase.animation,
         entityBase.scale,
         i);
