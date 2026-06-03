@@ -88,16 +88,18 @@ int main()
         scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
 
-        scaleNpcLocationSystem(*ctx);
         npcAiSystem(*ctx);
+        scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
 
         scaleObjectLocationSystem(*ctx);
+
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        
         animationSystem(*ctx);
 
         collisionSystem(*ctx);
