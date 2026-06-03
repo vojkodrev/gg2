@@ -1,10 +1,5 @@
 #pragma once
-
-enum class FacingDirection
-{
-    Left,
-    Right
-};
+#include "FacingDirection.h"
 
 template<int N>
 struct Facing
