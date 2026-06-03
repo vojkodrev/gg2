@@ -53,6 +53,10 @@ int main()
     ctx->data.camera.position.h[0] = SCREEN_H;
 
     loadTileMap(*ctx, map);
+    scalePlayerSizeSystem(*ctx);
+    scaleNpcSizeSystem(*ctx);
+    scaleObjectSizeSystem(*ctx);
+    scaleEquipmentSizeSystem(*ctx);
 
 #ifndef NDEBUG
     SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
@@ -78,21 +82,17 @@ int main()
         mouseStateSystem(*ctx);
 
         scalePlayerLocationSystem(*ctx);
-        scalePlayerSizeSystem(*ctx);
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
         flipPlayerSystem(*ctx);
 
         scaleNpcLocationSystem(*ctx);
-        scaleNpcSizeSystem(*ctx);
         npcAiSystem(*ctx);
         flipNpcSystem(*ctx);
 
         scaleObjectLocationSystem(*ctx);
-        scaleObjectSizeSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
-        scaleEquipmentSizeSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
