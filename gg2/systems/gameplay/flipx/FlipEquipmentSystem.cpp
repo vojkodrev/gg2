@@ -5,36 +5,48 @@
 
 void flipEquipmentSystem(Context &ctx)
 {
-    updateEntityAnchorCollisionOffsetFlip(
-        ctx.data.player.equipment.weapon.base,
-        0);
-    if (ctx.data.player.equipment.weapon.base.facing.flipX[0])
+    if (ctx.data.player.equipment.weapon.base.facing.dirty[0])
     {
-        updateAnchorOffsetFlip(
-            ctx.data.player.equipment.weapon.ammoAnchor,
-            ctx.data.player.equipment.weapon.base.position.w[0],
-            0,
+        updateEntityAnchorCollisionOffsetFlip(
+            ctx.data.player.equipment.weapon.base,
+            0);
+        if (ctx.data.player.equipment.weapon.base.facing.flipX[0])
+        {
+            updateAnchorOffsetFlip(
+                ctx.data.player.equipment.weapon.ammoAnchor,
+                ctx.data.player.equipment.weapon.base.position.w[0],
+                0,
+                0);
+        }
+    }
+    if (ctx.data.player.equipment.ammo.base.facing.dirty[0])
+    {
+        updateEntityAnchorCollisionOffsetFlip(
+            ctx.data.player.equipment.ammo.base,
             0);
     }
-    updateEntityAnchorCollisionOffsetFlip(
-        ctx.data.player.equipment.ammo.base,
-        0);
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
-        updateEntityAnchorCollisionOffsetFlip(
-            ctx.data.npc.equipment.weapon.base,
-            i);
-        if (ctx.data.npc.equipment.weapon.base.facing.flipX[i])
+        if (ctx.data.npc.equipment.weapon.base.facing.dirty[i])
         {
-            updateAnchorOffsetFlip(
-                ctx.data.npc.equipment.weapon.ammoAnchor,
-                ctx.data.npc.equipment.weapon.base.position.w[i],
-                i,
-                0);
+            updateEntityAnchorCollisionOffsetFlip(
+                ctx.data.npc.equipment.weapon.base,
+                i);
+            if (ctx.data.npc.equipment.weapon.base.facing.flipX[i])
+            {
+                updateAnchorOffsetFlip(
+                    ctx.data.npc.equipment.weapon.ammoAnchor,
+                    ctx.data.npc.equipment.weapon.base.position.w[i],
+                    i,
+                    0);
+            }
         }
-        updateEntityAnchorCollisionOffsetFlip(
-            ctx.data.npc.equipment.ammo.base,
-            i);
+        if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
+        {
+            updateEntityAnchorCollisionOffsetFlip(
+                ctx.data.npc.equipment.ammo.base,
+                i);
+        }
     }
 }
