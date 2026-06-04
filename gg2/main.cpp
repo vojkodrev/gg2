@@ -14,12 +14,17 @@
 #include "MouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
-#include "scale/ScalePlayerSystem.h"
-#include "scale/ScaleNpcSystem.h"
-#include "scale/ScaleObjectSystem.h"
-#include "scale/equipment/ScaleEquipmentSystem.h"
+#include "scale/ScalePlayerLocationSystem.h"
+#include "scale/ScalePlayerSizeSystem.h"
+#include "scale/ScaleNpcLocationSystem.h"
+#include "scale/ScaleNpcSizeSystem.h"
+#include "scale/ScaleObjectLocationSystem.h"
+#include "scale/ScaleObjectSizeSystem.h"
+#include "scale/equipment/ScaleEquipmentLocationSystem.h"
+#include "scale/equipment/ScaleEquipmentSizeSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
+#include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -49,6 +54,10 @@ int main()
     ctx->data.camera.position.h[0] = SCREEN_H;
 
     loadTileMap(*ctx, map);
+    scalePlayerSizeSystem(*ctx);
+    scaleNpcSizeSystem(*ctx);
+    scaleObjectSizeSystem(*ctx);
+    scaleEquipmentSizeSystem(*ctx);
 
 #ifndef NDEBUG
     SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
@@ -73,21 +82,24 @@ int main()
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
-        scalePlayerSystem(*ctx);
         playerMovementSystem(*ctx);
         cameraSystem(*ctx);
         playerFacingSystem(*ctx);
+        scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
 
-        scaleNpcSystem(*ctx);
         npcAiSystem(*ctx);
+        scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
 
-        scaleObjectSystem(*ctx);
-        scaleEquipmentSystem(*ctx);
+        scaleObjectLocationSystem(*ctx);
+
+        equipmentFacingSystem(*ctx);
+        scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        
         animationSystem(*ctx);
 
         collisionSystem(*ctx);
