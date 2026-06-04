@@ -37,7 +37,7 @@
    <property name="patrol03" value="70,75"/>
    <property name="patrol04" value="-70,100"/>
    <property name="patrolCount" type="int" value="4"/>
-   <property name="scale" type="float" value="1.5"/>
+   <property name="scale" type="float" value="1"/>
    <property name="weapon" value="sword1"/>
   </properties>
   <objectgroup draworder="index" id="2">
