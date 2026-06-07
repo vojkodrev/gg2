@@ -5,7 +5,7 @@
 #include "Context.h"
 #include "ScreenConstants.h"
 #include "LoadTileMap.h"
-#include "UpdateFrameStateSystem.h"
+#include "RefreshFrameTiming.h"
 #include "FillRenderBufferSystem.h"
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
@@ -70,7 +70,7 @@ int main()
     ctx->frame.lastTicks = SDL_GetTicks();
     while (running)
     {
-        updateFrameStateSystem(*ctx);
+        refreshFrameTiming(*ctx);
 
         while (SDL_PollEvent(&event))
         {

@@ -16,16 +16,16 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     ai/NPCAiSystem.cpp
-    ai/astar/UpdateAStarPath.cpp
-    ai/monster/UpdateMonster.cpp
-    ai/monster/UpdateMonsterIdle.cpp
-    ai/monster/UpdateMonsterPatrolling.cpp
-    ai/monster/UpdateMonsterGoToPlayer.cpp
-    ai/monster/UpdateMonsterAttack.cpp
-    ai/monster/UpdateMonsterGoToSpawn.cpp
-    ai/pet/UpdatePet.cpp
-    ai/pet/UpdatePetIdle.cpp
-    ai/pet/UpdatePetGoToPlayer.cpp
+    ai/astar/FollowAStarPathTo.cpp
+    ai/monster/RunMonsterAi.cpp
+    ai/monster/HandleMonsterIdle.cpp
+    ai/monster/HandleMonsterPatrol.cpp
+    ai/monster/HandleMonsterChasePlayer.cpp
+    ai/monster/HandleMonsterAttack.cpp
+    ai/monster/HandleMonsterReturnToSpawn.cpp
+    ai/pet/RunPetAi.cpp
+    ai/pet/HandlePetIdle.cpp
+    ai/pet/HandlePetFollowPlayer.cpp
     ai/Dist.cpp
     ai/DistToPlayer.cpp
     ai/DistToSpawn.cpp
