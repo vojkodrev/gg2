@@ -1,5 +1,6 @@
 #include "CollisionSystem.h"
 #include <shared_mutex>
+#include "CollisionConstants.h"
 #include "EntityColAABB.h"
 #include "GetEntityColAABB.h"
 #include "ColId.h"

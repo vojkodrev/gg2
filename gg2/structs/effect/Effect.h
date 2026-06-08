@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../core/EntityBase.h"
-#include "CapacityConstants.h"
+#include "EffectConstants.h"
 
 struct Effect
 {

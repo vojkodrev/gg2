@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "CapacityConstants.h"
+#include "RenderConstants.h"
 
 struct RenderGroup
 {

@@ -1,4 +1,5 @@
 #include "AStarAlloc.h"
+#include "AStarConstants.h"
 #include "../../../../utils/queue/QueueEmpty.h"
 #include "../../../../utils/queue/QueueDequeue.h"
 #include "../../../../structs/gameplay/ai/AStarStatus.h"

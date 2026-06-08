@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../core/EntityBase.h"
-#include "CapacityConstants.h"
+#include "ObjectConstants.h"
 
 struct Object
 {

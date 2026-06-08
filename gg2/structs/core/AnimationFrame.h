@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "CapacityConstants.h"
+#include "AnimationConstants.h"
 #include "SpriteSrc.h"
 #include "Anchor.h"
 

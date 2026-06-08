@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "CapacityConstants.h"
+#include "TileConstants.h"
 
 struct Tile
 {

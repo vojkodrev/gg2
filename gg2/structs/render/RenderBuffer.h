@@ -4,7 +4,7 @@
 #include "RenderDst.h"
 #include "RenderGroup.h"
 #include "../core/Facing.h"
-#include "CapacityConstants.h"
+#include "RenderConstants.h"
 
 struct RenderBuffer
 {

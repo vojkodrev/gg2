@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "../core/EntityBase.h"
 #include "../equipment/Equipment.h"
-#include "CapacityConstants.h"
+#include "NpcConstants.h"
 #include "NPCAi.h"
 
 struct NPC

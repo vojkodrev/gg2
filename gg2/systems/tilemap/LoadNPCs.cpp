@@ -4,6 +4,7 @@
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
+#include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>

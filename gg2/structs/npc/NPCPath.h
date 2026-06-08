@@ -1,7 +1,7 @@
 #pragma once
 #include <atomic>
 #include <cstdint>
-#include "CapacityConstants.h"
+#include "NpcConstants.h"
 #include "NPCPathPoint.h"
 #include "NPCPathStatus.h"
 
