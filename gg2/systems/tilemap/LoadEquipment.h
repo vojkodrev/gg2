@@ -38,5 +38,8 @@ inline void loadEquipment(
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
     if (hasAmmo)
+    {
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
+        equipmentData.weapon.showAmmo[parentEntityIdx] = true;
+    }
 }

@@ -19,11 +19,12 @@ inline void fillEquipmentRenderBuffer(
         parentRenderIndex,
         groupId,
         WEAPON_Z_INDEX);
-    fillEquipmentEntityRenderBuffer(
-        rb,
-        equipment.ammo.base,
-        entityIndex,
-        parentRenderIndex,
-        groupId,
-        AMMO_Z_INDEX);
+    if (equipment.weapon.showAmmo[entityIndex])
+        fillEquipmentEntityRenderBuffer(
+            rb,
+            equipment.ammo.base,
+            entityIndex,
+            parentRenderIndex,
+            groupId,
+            AMMO_Z_INDEX);
 }
