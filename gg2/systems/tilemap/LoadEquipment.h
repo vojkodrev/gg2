@@ -37,6 +37,7 @@ inline void loadEquipment(
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
+    equipmentData.weapon.hasAmmo[parentEntityIdx] = hasAmmo;
     if (hasAmmo)
     {
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);

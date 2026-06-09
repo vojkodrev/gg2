@@ -19,7 +19,7 @@ inline void fillEquipmentRenderBuffer(
         parentRenderIndex,
         groupId,
         WEAPON_Z_INDEX);
-    if (equipment.weapon.showAmmo[entityIndex])
+    if (equipment.weapon.hasAmmo[entityIndex] && equipment.weapon.showAmmo[entityIndex])
         fillEquipmentEntityRenderBuffer(
             rb,
             equipment.ammo.base,

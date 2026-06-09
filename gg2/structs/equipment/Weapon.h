@@ -7,5 +7,6 @@ struct Weapon
 {
     EntityBase<N> base;
     Anchor<N, 1> ammoAnchor;
+    bool hasAmmo[N] = {};
     bool showAmmo[N] = {};
 };
