@@ -6,6 +6,7 @@
 #include "NPC.h"
 #include "Object.h"
 #include "Effect.h"
+#include "ActionState.h"
 #include "DebugState.h"
 
 struct Data
@@ -17,5 +18,6 @@ struct Data
     NPC npc;
     Object object;
     Effect effect;
+    ActionState action;
     DebugState debug;
 };

@@ -9,6 +9,7 @@
 #include "FillRenderBufferSystem.h"
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
+#include "ActionStateSystem.h"
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
@@ -80,6 +81,7 @@ int main()
         }
 
         keyboardStateSystem(*ctx);
+        actionStateSystem(*ctx);
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
@@ -100,6 +102,7 @@ int main()
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        
         spawnProjectileSystem(*ctx);
         
         animationSystem(*ctx);
