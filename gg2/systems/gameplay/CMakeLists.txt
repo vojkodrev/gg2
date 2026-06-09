@@ -15,6 +15,7 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
+    projectile/SpawnProjectileSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp

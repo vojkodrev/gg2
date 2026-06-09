@@ -28,6 +28,7 @@
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
+#include "projectile/SpawnProjectileSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -99,6 +100,7 @@ int main()
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        spawnProjectileSystem(*ctx);
         
         animationSystem(*ctx);
 
