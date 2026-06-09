@@ -1,5 +1,5 @@
 #pragma once
-#include "AlignEquipmentToParentAnchor.h"
+#include "../../../utils/rect/AlignEntityToParentAnchor.h"
 
 template<int N>
 inline void alignAmmoToWeaponAnchor(
@@ -16,13 +16,13 @@ inline void alignAmmoToWeaponAnchor(
         weaponAmmoAnchor.h[i][0]};
 
     if (anchor.w > 0.0f && anchor.h > 0.0f)
-        alignEquipmentToParentAnchor(
+        alignEntityToParentAnchor(
             ammoBase,
             anchor,
             weaponBase.position,
             i);
     else
-        alignEquipmentToParentAnchor(
+        alignEntityToParentAnchor(
             ammoBase,
             parentBase.animation,
             parentBase.position,

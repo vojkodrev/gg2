@@ -5,7 +5,7 @@
 #include "../../../utils/collision/EntityColCenter.h"
 
 template<int N>
-inline void alignEquipmentToParentAnchor(
+inline void alignEntityToParentAnchor(
     EntityBase<N> &entityBase,
     const Animation<N> &parentAnimation,
     const EntityPosition<N> &parentPosition,
@@ -13,11 +13,11 @@ inline void alignEquipmentToParentAnchor(
 {
     int pf = parentAnimation.frameIndex[i];
     SDL_FRect parentAnchor = anchorOrCollision(parentAnimation, i, pf);
-    alignEquipmentToParentAnchor(entityBase, parentAnchor, parentPosition, i);
+    alignEntityToParentAnchor(entityBase, parentAnchor, parentPosition, i);
 }
 
 template<int N>
-inline void alignEquipmentToParentAnchor(
+inline void alignEntityToParentAnchor(
     EntityBase<N> &entityBase,
     SDL_FRect &parentAnchor,
     const EntityPosition<N> &parentPosition,

@@ -1,9 +1,10 @@
 #include "MoveEquipmentSystem.h"
 #include "AlignAmmoToWeaponAnchor.h"
+#include "../../../utils/rect/AlignEntityToParentAnchor.h"
 
 void moveEquipmentSystem(Context &ctx)
 {
-    alignEquipmentToParentAnchor(
+    alignEntityToParentAnchor(
         ctx.data.player.equipment.weapon.base,
         ctx.data.player.base.animation,
         ctx.data.player.base.position,
@@ -17,7 +18,7 @@ void moveEquipmentSystem(Context &ctx)
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
-        alignEquipmentToParentAnchor(
+        alignEntityToParentAnchor(
             ctx.data.npc.equipment.weapon.base,
             ctx.data.npc.base.animation,
             ctx.data.npc.base.position,
