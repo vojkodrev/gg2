@@ -20,6 +20,7 @@
 #include "scale/ScaleObjectLocationSystem.h"
 #include "scale/equipment/ScaleEquipmentLocationSystem.h"
 #include "flipx/FlipPlayerSystem.h"
+#include "depth/PlayerDepthSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
@@ -82,6 +83,7 @@ int main()
         playerFacingSystem(*ctx);
         scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
+        playerDepthSystem(*ctx);
 
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);

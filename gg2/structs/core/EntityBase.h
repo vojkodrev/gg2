@@ -9,6 +9,7 @@ struct EntityBase
 {
     Animation<N> animation;
     EntityPosition<N> position;
+    float depthY[N];
     float scale[N];
     Rotation<N> rotation;
     Facing<N> facing;
