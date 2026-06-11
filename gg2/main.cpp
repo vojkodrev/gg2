@@ -105,6 +105,7 @@ int main()
         equipmentDepthSystem(*ctx);
         
         playerShootProjectileSystem(*ctx);
+        
         effectDepthSystem(*ctx);
         
         animationSystem(*ctx);
