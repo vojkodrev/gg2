@@ -19,7 +19,7 @@ void fillObjectRenderBuffer(Context &ctx)
         rb.dst.w[n] = object.base.position.w[i];
         rb.dst.h[n] = object.base.position.h[i];
         rb.dst.sortY[n] = rb.dst.y[n] + object.base.animation.frame.collision.offY[i][f];
-        rb.group.id[n] = rb.groupCount++;
+        rb.group.id[n] = object.groupId[i];
         rb.group.zIndex[n] = PARENT_Z_INDEX;
         rb.flipX[n] = false;
     }

@@ -6,5 +6,6 @@
 struct Object
 {
     uint32_t objectCount;
+    int groupId[MAX_OBJECTS] = {};
     EntityBase<MAX_OBJECTS> base;
 };
