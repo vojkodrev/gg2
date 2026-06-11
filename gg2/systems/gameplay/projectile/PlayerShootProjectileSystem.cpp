@@ -1,8 +1,8 @@
-#include "SpawnProjectileSystem.h"
+#include "PlayerShootProjectileSystem.h"
 #include "../../../utils/pool/PoolAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 
-void spawnProjectileSystem(Context &ctx)
+void playerShootProjectileSystem(Context &ctx)
 {
     if (ctx.data.action.digit1Released)
     {

@@ -25,7 +25,7 @@
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "projectile/SpawnProjectileSystem.h"
+#include "projectile/PlayerShootProjectileSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -95,7 +95,7 @@ int main()
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
         
-        spawnProjectileSystem(*ctx);
+        playerShootProjectileSystem(*ctx);
         
         animationSystem(*ctx);
 
