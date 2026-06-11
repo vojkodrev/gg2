@@ -26,12 +26,19 @@ void playerShootProjectileSystem(Context &ctx)
 
         auto &effectBase = ctx.data.effect.base;
         const int frameIndex = effectBase.animation.frameIndex[effectIndex];
-        const SDL_FRect ammoAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
-        const SDL_FPoint anchorCenterLocal = entityColCenter(ammoAnchor);
+        const SDL_FRect currentAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
+        const SDL_FPoint currentAnchorCenterLocal = entityColCenter(currentAnchor);
         const SDL_FPoint anchorCenterWorld = {
-            effectBase.position.x[effectIndex] + anchorCenterLocal.x,
-            effectBase.position.y[effectIndex] + anchorCenterLocal.y
+            effectBase.position.x[effectIndex] + currentAnchorCenterLocal.x,
+            effectBase.position.y[effectIndex] + currentAnchorCenterLocal.y
         };
+        const SDL_FRect initialAnchor = {
+            effectBase.animation.frame.anchor.initialOffX[effectIndex][frameIndex],
+            effectBase.animation.frame.anchor.initialOffY[effectIndex][frameIndex],
+            effectBase.animation.frame.anchor.initialW[effectIndex][frameIndex],
+            effectBase.animation.frame.anchor.initialH[effectIndex][frameIndex]
+        };
+        const SDL_FPoint anchorCenterLocal = entityColCenter(initialAnchor);
 
         const SDL_FPoint cameraOff = ctx.data.camera.offset;
         const SDL_FPoint mouseWorld = {
@@ -39,6 +46,8 @@ void playerShootProjectileSystem(Context &ctx)
             ctx.mouse.y - cameraOff.y
         };
 
+        effectBase.position.x[effectIndex] = anchorCenterWorld.x - anchorCenterLocal.x;
+        effectBase.position.y[effectIndex] = anchorCenterWorld.y - anchorCenterLocal.y;
         effectBase.rotation.center.point.x[effectIndex] = anchorCenterLocal.x;
         effectBase.rotation.center.point.y[effectIndex] = anchorCenterLocal.y;
         effectBase.rotation.center.hasCenter[effectIndex] = true;
