@@ -8,6 +8,7 @@
 struct NPC
 {
     uint32_t npcCount;
+    int groupId[MAX_NPCS] = {};
     EntityBase<MAX_NPCS> base;
     Equipment<MAX_NPCS> equipment;
     NPCAi ai;

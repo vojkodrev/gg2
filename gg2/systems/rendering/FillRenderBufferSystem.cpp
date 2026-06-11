@@ -9,7 +9,7 @@
 void fillRenderBufferSystem(Context &ctx)
 {
     ctx.renderBuffer.count = 0;
-    ctx.renderBuffer.groupCount = 0;
+    ctx.renderBuffer.groupCount = ctx.data.groups.pool.count;
     
     fillPlayerRenderBuffer(ctx);
     fillNpcRenderBuffer(ctx);

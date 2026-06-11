@@ -6,7 +6,6 @@ void fillPlayerRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &player = ctx.data.player;
-    uint32_t groupId = rb.groupCount++;
 
     int f = player.base.animation.frameIndex[0];
     uint32_t n = rb.count++;
@@ -20,9 +19,9 @@ void fillPlayerRenderBuffer(Context &ctx)
     rb.dst.w[n] = player.base.position.w[0];
     rb.dst.h[n] = player.base.position.h[0];
     rb.dst.sortY[n] = rb.dst.y[n] + player.base.animation.frame.collision.offY[0][f];
-    rb.group.id[n] = groupId;
+    rb.group.id[n] = player.groupId;
     rb.group.zIndex[n] = PARENT_Z_INDEX;
     rb.flipX[n] = player.base.facing.flipX[0];
 
-    fillEquipmentRenderBuffer(rb, player.equipment, 0, n, groupId);
+    fillEquipmentRenderBuffer(rb, player.equipment, 0, n, player.groupId);
 }
