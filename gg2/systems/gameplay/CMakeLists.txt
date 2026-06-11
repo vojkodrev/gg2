@@ -8,6 +8,7 @@ add_library(systems_gameplay
     depth/PlayerDepthSystem.cpp
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
+    depth/EquipmentDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/EquipmentFacingSystem.cpp
