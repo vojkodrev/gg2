@@ -1,5 +1,4 @@
 #include "EffectDepthSystem.h"
-#include "SyncEntityBaseDepthYFromParent.h"
 #include <cstdint>
 
 void effectDepthSystem(Context &ctx)
@@ -9,10 +8,6 @@ void effectDepthSystem(Context &ctx)
         if (!ctx.data.effect.pool.active[i])
             continue;
 
-        syncEntityBaseDepthYFromParent(
-            ctx.data.effect.base,
-            ctx.data.player.base,
-            i,
-            0);
+        ctx.data.effect.base.depthY[i] = ctx.data.player.base.depthY[0];
     }
 }
