@@ -8,6 +8,7 @@
 struct Effect
 {
     Pool<MAX_EFFECTS> pool;
+    int groupId[MAX_EFFECTS] = {};
     EntityBase<MAX_EFFECTS> base;
     Target<MAX_EFFECTS> target;
 };
