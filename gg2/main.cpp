@@ -27,6 +27,7 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
+#include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
 #include "projectile/PlayerShootProjectileSystem.h"
@@ -104,6 +105,7 @@ int main()
         equipmentDepthSystem(*ctx);
         
         playerShootProjectileSystem(*ctx);
+        effectDepthSystem(*ctx);
         
         animationSystem(*ctx);
 
