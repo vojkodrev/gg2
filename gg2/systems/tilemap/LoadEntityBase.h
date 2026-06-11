@@ -10,6 +10,30 @@
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 
+template<int NItems, int NSlots>
+inline void loadScaledAnchorSize(
+    Anchor<NItems, NSlots> &anchor,
+    float scale,
+    uint32_t i,
+    int slot)
+{
+    anchor.w[i][slot] = anchor.initialW[i][slot] * scale;
+    anchor.h[i][slot] = anchor.initialH[i][slot] * scale;
+}
+
+template<int N>
+inline void loadScaledAnimationSizes(
+    Animation<N> &animation,
+    float scale,
+    uint32_t i)
+{
+    for (int f = 0; f < animation.frameCount[i]; f++)
+    {
+        loadScaledAnchorSize(animation.frame.anchor, scale, i, f);
+        loadScaledAnchorSize(animation.frame.collision, scale, i, f);
+    }
+}
+
 template<int N>
 inline void loadEntityBase(
     EntityBase<N> &entityData,
@@ -73,6 +97,13 @@ inline void loadEntityBase(
     }
 
     entityData.scale[parentEntityIdx] = getTileFloatProp(tileset, entityTileIdx, "scale", 1.0f);
+    entityData.position.w[parentEntityIdx] = entityData.position.initialW[parentEntityIdx] * entityData.scale[parentEntityIdx];
+    entityData.position.h[parentEntityIdx] = entityData.position.initialH[parentEntityIdx] * entityData.scale[parentEntityIdx];
+    loadScaledAnimationSizes(
+        entityData.animation,
+        entityData.scale[parentEntityIdx],
+        parentEntityIdx);
+
     entityData.rotation.initialRotate[parentEntityIdx] = getTileFloatProp(tileset, entityTileIdx, "rotate", 0.0f);
     entityData.rotation.rotate[parentEntityIdx] = entityData.rotation.initialRotate[parentEntityIdx];
     entityData.rotation.initialAngle[parentEntityIdx] = getTileFloatProp(tileset, entityTileIdx, "initialAngle", 0.0f);

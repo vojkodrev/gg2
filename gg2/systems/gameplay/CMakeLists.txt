@@ -2,13 +2,9 @@ add_library(systems_gameplay
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
-    scale/ScalePlayerSizeSystem.cpp
     scale/ScaleNpcLocationSystem.cpp
-    scale/ScaleNpcSizeSystem.cpp
     scale/ScaleObjectLocationSystem.cpp
-    scale/ScaleObjectSizeSystem.cpp
     scale/equipment/ScaleEquipmentLocationSystem.cpp
-    scale/equipment/ScaleEquipmentSizeSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/EquipmentFacingSystem.cpp

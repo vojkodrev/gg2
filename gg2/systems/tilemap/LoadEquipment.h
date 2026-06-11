@@ -30,8 +30,11 @@ inline void loadEquipment(
         equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] = ammoAnchor.h;
         equipmentData.weapon.ammoAnchor.offX[parentEntityIdx][0] = ammoAnchor.x;
         equipmentData.weapon.ammoAnchor.offY[parentEntityIdx][0] = ammoAnchor.y;
-        equipmentData.weapon.ammoAnchor.w[parentEntityIdx][0] = ammoAnchor.w;
-        equipmentData.weapon.ammoAnchor.h[parentEntityIdx][0] = ammoAnchor.h;
+        loadScaledAnchorSize(
+            equipmentData.weapon.ammoAnchor,
+            equipmentData.weapon.base.scale[parentEntityIdx],
+            parentEntityIdx,
+            0);
     }
 
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");

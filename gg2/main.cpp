@@ -16,13 +16,9 @@
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
-#include "scale/ScalePlayerSizeSystem.h"
 #include "scale/ScaleNpcLocationSystem.h"
-#include "scale/ScaleNpcSizeSystem.h"
 #include "scale/ScaleObjectLocationSystem.h"
-#include "scale/ScaleObjectSizeSystem.h"
 #include "scale/equipment/ScaleEquipmentLocationSystem.h"
-#include "scale/equipment/ScaleEquipmentSizeSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "flipx/FlipNpcSystem.h"
 #include "flipx/EquipmentFacingSystem.h"
@@ -56,10 +52,6 @@ int main()
     ctx->data.camera.position.h[0] = SCREEN_H;
 
     loadTileMap(*ctx, map);
-    scalePlayerSizeSystem(*ctx);
-    scaleNpcSizeSystem(*ctx);
-    scaleObjectSizeSystem(*ctx);
-    scaleEquipmentSizeSystem(*ctx);
 
 #ifndef NDEBUG
     SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
