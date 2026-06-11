@@ -22,6 +22,7 @@
 #include "flipx/FlipPlayerSystem.h"
 #include "depth/PlayerDepthSystem.h"
 #include "flipx/FlipNpcSystem.h"
+#include "depth/NpcDepthSystem.h"
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
@@ -88,6 +89,7 @@ int main()
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
+        npcDepthSystem(*ctx);
 
         scaleObjectLocationSystem(*ctx);
 
