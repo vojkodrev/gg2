@@ -15,6 +15,7 @@ void playerShootProjectileSystem(Context &ctx)
         if (effectIndex == -1)
             return;
 
+        ctx.data.effect.groupId[effectIndex] = ctx.data.player.groupId;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
         ctx.data.player.equipment.weapon.showAmmo[0] = false;
     }
