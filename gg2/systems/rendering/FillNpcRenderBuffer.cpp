@@ -1,6 +1,6 @@
 #include "FillNpcRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
-#include "equipment/FillEquipmentRenderBuffer.h"
+#include "FillEquipmentRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
@@ -10,13 +10,13 @@ void fillNpcRenderBuffer(Context &ctx)
     for (uint32_t i = 0; i < npc.npcCount; i++)
     {
         int groupId = npc.groupId[i];
-        uint32_t n = fillEntityBaseRenderBuffer(
+        fillEntityBaseRenderBuffer(
             rb,
             npc.base,
             i,
             groupId,
             PARENT_Z_INDEX);
 
-        fillEquipmentRenderBuffer(rb, npc.equipment, i, n, groupId);
+        fillEquipmentRenderBuffer(rb, npc.equipment, i, groupId);
     }
 }
