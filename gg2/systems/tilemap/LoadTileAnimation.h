@@ -7,7 +7,13 @@
 #include "GetAnchor.h"
 
 template<int N>
-void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &tileset, uint32_t idx, const TileMapProperties &props)
+void loadTileAnimation(
+    Animation<N> &animation,
+    uint32_t n,
+    const tmx::Tileset &tileset,
+    uint32_t idx,
+    const TileMapProperties &props,
+    float scale)
 {
     const tmx::Tileset::Tile *tileData = nullptr;
     for (auto &t : tileset.getTiles())
@@ -35,16 +41,16 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
             animation.frame.anchor.initialH[n][f] = anchor.h;
             animation.frame.anchor.offX[n][f] = anchor.x;
             animation.frame.anchor.offY[n][f] = anchor.y;
-            animation.frame.anchor.w[n][f] = anchor.w;
-            animation.frame.anchor.h[n][f] = anchor.h;
+            animation.frame.anchor.w[n][f] = anchor.w * scale;
+            animation.frame.anchor.h[n][f] = anchor.h * scale;
             animation.frame.collision.initialOffX[n][f] = col.x;
             animation.frame.collision.initialOffY[n][f] = col.y;
             animation.frame.collision.initialW[n][f] = col.w;
             animation.frame.collision.initialH[n][f] = col.h;
             animation.frame.collision.offX[n][f] = col.x;
             animation.frame.collision.offY[n][f] = col.y;
-            animation.frame.collision.w[n][f] = col.w;
-            animation.frame.collision.h[n][f] = col.h;
+            animation.frame.collision.w[n][f] = col.w * scale;
+            animation.frame.collision.h[n][f] = col.h * scale;
             animation.frame.frameDuration[n][f] = tileData->animation.frames[f].duration;
         }
     }
@@ -62,16 +68,16 @@ void loadTileAnimation(Animation<N> &animation, uint32_t n, const tmx::Tileset &
         animation.frame.anchor.initialH[n][0] = anchor.h;
         animation.frame.anchor.offX[n][0] = anchor.x;
         animation.frame.anchor.offY[n][0] = anchor.y;
-        animation.frame.anchor.w[n][0] = anchor.w;
-        animation.frame.anchor.h[n][0] = anchor.h;
+        animation.frame.anchor.w[n][0] = anchor.w * scale;
+        animation.frame.anchor.h[n][0] = anchor.h * scale;
         animation.frame.collision.initialOffX[n][0] = col.x;
         animation.frame.collision.initialOffY[n][0] = col.y;
         animation.frame.collision.initialW[n][0] = col.w;
         animation.frame.collision.initialH[n][0] = col.h;
         animation.frame.collision.offX[n][0] = col.x;
         animation.frame.collision.offY[n][0] = col.y;
-        animation.frame.collision.w[n][0] = col.w;
-        animation.frame.collision.h[n][0] = col.h;
+        animation.frame.collision.w[n][0] = col.w * scale;
+        animation.frame.collision.h[n][0] = col.h * scale;
         animation.frame.frameDuration[n][0] = 0;
     }
 
