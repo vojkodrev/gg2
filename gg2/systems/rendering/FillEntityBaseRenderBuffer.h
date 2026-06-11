@@ -19,6 +19,9 @@ inline uint32_t fillEntityBaseRenderBuffer(
     rb.src.w[renderIndex] = (float)entityBase.animation.frame.src.w[entityIndex][frameIndex];
     rb.src.h[renderIndex] = (float)entityBase.animation.frame.src.h[entityIndex][frameIndex];
     rb.src.rotate[renderIndex] = 0.0f;
+    rb.rotationCenter.point.x[renderIndex] = entityBase.rotation.center.point.x[entityIndex];
+    rb.rotationCenter.point.y[renderIndex] = entityBase.rotation.center.point.y[entityIndex];
+    rb.rotationCenter.hasCenter[renderIndex] = entityBase.rotation.center.hasCenter[entityIndex];
 
     rb.dst.x[renderIndex] = entityBase.position.x[entityIndex];
     rb.dst.y[renderIndex] = entityBase.position.y[entityIndex];

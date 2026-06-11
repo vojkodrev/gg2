@@ -35,4 +35,7 @@ inline void fillEquipmentEntityRenderBuffer(
     rb.dst.depthY[en] = entityBase.depthY[parentEntityIndex];
 
     rb.src.rotate[en] = entityBase.rotation.rotate[parentEntityIndex];
+    rb.rotationCenter.point.x[en] = entityBase.rotation.center.point.x[parentEntityIndex];
+    rb.rotationCenter.point.y[en] = entityBase.rotation.center.point.y[parentEntityIndex];
+    rb.rotationCenter.hasCenter[en] = entityBase.rotation.center.hasCenter[parentEntityIndex];
 }
