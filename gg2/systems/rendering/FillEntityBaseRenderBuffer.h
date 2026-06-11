@@ -1,0 +1,35 @@
+#pragma once
+#include "../../structs/core/EntityBase.h"
+#include "../../structs/render/RenderBuffer.h"
+#include <cstdint>
+
+template<int N>
+inline uint32_t fillEntityBaseRenderBuffer(
+    RenderBuffer &rb,
+    const EntityBase<N> &entityBase,
+    uint32_t entityIndex,
+    int groupId,
+    int zIndex)
+{
+    int frameIndex = entityBase.animation.frameIndex[entityIndex];
+    uint32_t renderIndex = rb.count++;
+
+    rb.src.x[renderIndex] = (float)entityBase.animation.frame.src.x[entityIndex][frameIndex];
+    rb.src.y[renderIndex] = (float)entityBase.animation.frame.src.y[entityIndex][frameIndex];
+    rb.src.w[renderIndex] = (float)entityBase.animation.frame.src.w[entityIndex][frameIndex];
+    rb.src.h[renderIndex] = (float)entityBase.animation.frame.src.h[entityIndex][frameIndex];
+    rb.src.rotate[renderIndex] = 0.0f;
+
+    rb.dst.x[renderIndex] = entityBase.position.x[entityIndex];
+    rb.dst.y[renderIndex] = entityBase.position.y[entityIndex];
+    rb.dst.w[renderIndex] = entityBase.position.w[entityIndex];
+    rb.dst.h[renderIndex] = entityBase.position.h[entityIndex];
+    rb.dst.sortY[renderIndex] =
+        rb.dst.y[renderIndex] + entityBase.animation.frame.collision.offY[entityIndex][frameIndex];
+
+    rb.group.id[renderIndex] = groupId;
+    rb.group.zIndex[renderIndex] = zIndex;
+    rb.flipX[renderIndex] = entityBase.facing.flipX[entityIndex];
+
+    return renderIndex;
+}
