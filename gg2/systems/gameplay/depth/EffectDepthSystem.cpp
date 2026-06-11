@@ -9,15 +9,15 @@ void effectDepthSystem(Context &ctx)
         if (!ctx.data.effect.pool.active[i])
             continue;
 
-        switch (ctx.data.effect.parentType[i])
+        switch (ctx.data.effect.parent.type[i])
         {
             case ParentType::Player:
                 ctx.data.effect.base.depthY[i] =
-                    ctx.data.player.base.depthY[ctx.data.effect.parentIndex[i]];
+                    ctx.data.player.base.depthY[ctx.data.effect.parent.id[i]];
                 break;
             case ParentType::NPC:
                 ctx.data.effect.base.depthY[i] =
-                    ctx.data.npc.base.depthY[ctx.data.effect.parentIndex[i]];
+                    ctx.data.npc.base.depthY[ctx.data.effect.parent.id[i]];
                 break;
         }
     }
