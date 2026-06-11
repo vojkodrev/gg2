@@ -14,8 +14,6 @@ void fillRenderBufferSystem(Context &ctx)
     fillNpcRenderBuffer(ctx);
     fillObjectRenderBuffer(ctx);
 
-    sortRenderBuffer(ctx);
-
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;
     auto &rb = ctx.renderBuffer;
@@ -28,4 +26,6 @@ void fillRenderBufferSystem(Context &ctx)
         copyRenderEntry(rb, visible++, i, &dst);
     }
     rb.count = visible;
+
+    sortRenderBuffer(ctx);
 }
