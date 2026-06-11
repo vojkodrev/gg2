@@ -44,7 +44,7 @@ void playerShootProjectileSystem(Context &ctx)
         effectBase.rotation.center.hasCenter[effectIndex] = true;
         effectBase.rotation.rotate[effectIndex] =
             std::atan2(mouseWorld.y - anchorCenterWorld.y, mouseWorld.x - anchorCenterWorld.x) * RAD_TO_DEG
-            - effectBase.rotation.initialAngle[effectIndex];
+            + effectBase.rotation.initialAngle[effectIndex];
 
         ctx.data.player.equipment.weapon.showAmmo[0] = false;
     }
