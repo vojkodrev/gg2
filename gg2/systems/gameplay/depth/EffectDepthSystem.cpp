@@ -1,4 +1,5 @@
 #include "EffectDepthSystem.h"
+#include "../../../structs/effect/ParentType.h"
 #include <cstdint>
 
 void effectDepthSystem(Context &ctx)
@@ -8,6 +9,16 @@ void effectDepthSystem(Context &ctx)
         if (!ctx.data.effect.pool.active[i])
             continue;
 
-        ctx.data.effect.base.depthY[i] = ctx.data.player.base.depthY[0];
+        switch (ctx.data.effect.parentType[i])
+        {
+            case ParentType::Player:
+                ctx.data.effect.base.depthY[i] =
+                    ctx.data.player.base.depthY[ctx.data.effect.parentIndex[i]];
+                break;
+            case ParentType::NPC:
+                ctx.data.effect.base.depthY[i] =
+                    ctx.data.npc.base.depthY[ctx.data.effect.parentIndex[i]];
+                break;
+        }
     }
 }
