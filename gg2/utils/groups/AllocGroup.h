@@ -4,7 +4,7 @@
 #include "../pool/PoolAlloc.h"
 
 template<uint32_t TGroupCapacity>
-int allocAssignGroup(Group<TGroupCapacity> &group)
+int allocGroup(Group<TGroupCapacity> &group)
 {
     int index = poolAlloc(group.pool);
     if (index == -1)
