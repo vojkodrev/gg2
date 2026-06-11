@@ -32,7 +32,7 @@ inline void fillEquipmentEntityRenderBuffer(
     rb.dst.h[en] = entityBase.position.h[parentEntityIndex];
     rb.dst.x[en] = entityBase.position.x[parentEntityIndex];
     rb.dst.y[en] = entityBase.position.y[parentEntityIndex];
-    rb.dst.sortY[en] = rb.dst.sortY[parentRenderIndex];
+    rb.dst.depthY[en] = entityBase.depthY[parentEntityIndex];
 
     rb.src.rotate[en] = entityBase.rotation.rotate[parentEntityIndex];
 }

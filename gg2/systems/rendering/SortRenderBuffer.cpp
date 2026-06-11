@@ -5,8 +5,8 @@
 
 static bool lessDepth(const RenderBuffer &rb, int a, int b)
 {
-    if (rb.dst.sortY[a] != rb.dst.sortY[b])
-        return rb.dst.sortY[a] < rb.dst.sortY[b];
+    if (rb.dst.depthY[a] != rb.dst.depthY[b])
+        return rb.dst.depthY[a] < rb.dst.depthY[b];
     if (rb.group.id[a] != rb.group.id[b])
         return rb.group.id[a] < rb.group.id[b];
     return rb.group.zIndex[a] < rb.group.zIndex[b];
