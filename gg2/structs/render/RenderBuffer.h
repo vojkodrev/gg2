@@ -9,7 +9,6 @@
 struct RenderBuffer
 {
     uint32_t count;
-    uint32_t groupCount;
     
     RenderSrc src;
     RenderDst dst;
