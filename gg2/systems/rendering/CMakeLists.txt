@@ -10,6 +10,7 @@ add_library(systems_rendering
     debug/DebugRenderPlayer.cpp
     debug/DebugRenderNpc.cpp
     debug/DebugRenderObjects.cpp
+    debug/DebugRenderEffect.cpp
     debug/DebugRenderAstar.cpp
 )
 target_include_directories(systems_rendering PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
