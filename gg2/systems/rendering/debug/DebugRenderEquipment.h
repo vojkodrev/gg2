@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "DebugRenderEquipmentEntity.h"
+#include "DebugRenderEntityBase.h"
 #include "RenderColBox.h"
 #include "../../../structs/equipment/Equipment.h"
 
@@ -9,7 +9,7 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
 {
     if (ctx.data.debug.showWeaponCollision)
     {
-        debugRenderEquipmentEntity(ctx, equipment.weapon.base, i, SDL_Color{0, 255, 255, 255});
+        debugRenderEntityBase(ctx, equipment.weapon.base, i, SDL_Color{0, 255, 255, 255});
 
         SDL_FRect ammoAnchor = {
             equipment.weapon.base.position.x[i] + equipment.weapon.ammoAnchor.offX[i][0],
@@ -26,5 +26,5 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
     }
 
     if (ctx.data.debug.showAmmoCollision)
-        debugRenderEquipmentEntity(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});
+        debugRenderEntityBase(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});
 }
