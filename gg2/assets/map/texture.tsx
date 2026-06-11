@@ -132,6 +132,7 @@
  </tile>
  <tile id="188">
   <properties>
+   <property name="initialAngle" type="float" value="45"/>
    <property name="rotate" type="float" value="45"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="arrow1"/>
