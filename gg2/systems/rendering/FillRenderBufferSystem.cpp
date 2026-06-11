@@ -4,6 +4,7 @@
 #include "FillPlayerRenderBuffer.h"
 #include "FillNpcRenderBuffer.h"
 #include "FillObjectRenderBuffer.h"
+#include "FillEffectRenderBuffer.h"
 #include "SortRenderBuffer.h"
 
 void fillRenderBufferSystem(Context &ctx)
@@ -13,6 +14,7 @@ void fillRenderBufferSystem(Context &ctx)
     fillPlayerRenderBuffer(ctx);
     fillNpcRenderBuffer(ctx);
     fillObjectRenderBuffer(ctx);
+    fillEffectRenderBuffer(ctx);
 
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;

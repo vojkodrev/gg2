@@ -3,6 +3,7 @@ add_library(systems_rendering
     FillPlayerRenderBuffer.cpp
     FillNpcRenderBuffer.cpp
     FillObjectRenderBuffer.cpp
+    FillEffectRenderBuffer.cpp
     SortRenderBuffer.cpp
     RenderSystem.cpp
     debug/DebugRenderSystem.cpp
