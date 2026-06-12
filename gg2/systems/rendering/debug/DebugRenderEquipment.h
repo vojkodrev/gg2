@@ -25,6 +25,6 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
         }
     }
 
-    if (ctx.data.debug.showAmmoCollision)
+    if (ctx.data.debug.showAmmoCollision && equipment.weapon.hasAmmo[i] && equipment.weapon.showAmmo[i])
         debugRenderEntityBase(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});
 }
