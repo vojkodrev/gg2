@@ -4,6 +4,7 @@
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/rect/AlignEntityToParentAnchor.h"
 #include <cmath>
 
 void playerShootProjectileSystem(Context &ctx)
@@ -46,8 +47,7 @@ void playerShootProjectileSystem(Context &ctx)
             ctx.mouse.y - cameraOff.y
         };
 
-        effectBase.position.x[effectIndex] = anchorCenterWorld.x - anchorCenterLocal.x;
-        effectBase.position.y[effectIndex] = anchorCenterWorld.y - anchorCenterLocal.y;
+        alignEntityToAnchorCenter(effectBase, initialAnchor, anchorCenterWorld, effectIndex);
         effectBase.rotation.center.point.x[effectIndex] = anchorCenterLocal.x;
         effectBase.rotation.center.point.y[effectIndex] = anchorCenterLocal.y;
         effectBase.rotation.center.hasCenter[effectIndex] = true;

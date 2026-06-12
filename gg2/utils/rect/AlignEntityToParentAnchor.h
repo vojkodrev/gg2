@@ -5,6 +5,19 @@
 #include "../../../utils/collision/EntityColCenter.h"
 
 template<int N>
+inline void alignEntityToAnchorCenter(
+    EntityBase<N> &entityBase,
+    const SDL_FRect &entityAnchor,
+    const SDL_FPoint &targetCenterWorld,
+    uint32_t i)
+{
+    const SDL_FPoint entityAnchorCenterLocal = entityColCenter(entityAnchor);
+
+    entityBase.position.x[i] = targetCenterWorld.x - entityAnchorCenterLocal.x;
+    entityBase.position.y[i] = targetCenterWorld.y - entityAnchorCenterLocal.y;
+}
+
+template<int N>
 inline void alignEntityToParentAnchor(
     EntityBase<N> &entityBase,
     const Animation<N> &parentAnimation,
@@ -19,7 +32,7 @@ inline void alignEntityToParentAnchor(
 template<int N>
 inline void alignEntityToParentAnchor(
     EntityBase<N> &entityBase,
-    SDL_FRect &parentAnchor,
+    const SDL_FRect &parentAnchor,
     const EntityPosition<N> &parentPosition,
     uint32_t i)
 {
@@ -36,10 +49,6 @@ inline void alignEntityToParentAnchor(
         parentPosition.y[i] + parentAnchor.y,
         parentAnchor.w,
         parentAnchor.h};
-    SDL_FPoint parentAnchorCenterWorld = entityColCenter(parentAnchorWorld);
-
-    SDL_FPoint entityAnchorCenterLocal = entityColCenter(entityAnchor);
-
-    entityBase.position.x[i] = parentAnchorCenterWorld.x - entityAnchorCenterLocal.x;
-    entityBase.position.y[i] = parentAnchorCenterWorld.y - entityAnchorCenterLocal.y;
+    const SDL_FPoint parentAnchorCenterWorld = entityColCenter(parentAnchorWorld);
+    alignEntityToAnchorCenter(entityBase, entityAnchor, parentAnchorCenterWorld, i);
 }
