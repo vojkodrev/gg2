@@ -2,6 +2,7 @@
 #include <cstdint>
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/collision/EntityColCenterWorld.h"
 #include "AlignEntityToAnchorCenter.h"
 
 template<int N>
@@ -31,11 +32,6 @@ inline void alignEntityToParentAnchor(
 
     SDL_FRect entityAnchor = anchorOrCollision(animation, i, ef);
 
-    SDL_FRect parentAnchorWorld = {
-        parentPosition.x[i] + parentAnchor.x,
-        parentPosition.y[i] + parentAnchor.y,
-        parentAnchor.w,
-        parentAnchor.h};
-    const SDL_FPoint parentAnchorCenterWorld = entityColCenter(parentAnchorWorld);
+    const SDL_FPoint parentAnchorCenterWorld = entityColCenterWorld(parentAnchor, parentPosition, i);
     alignEntityToAnchorCenter(entityBase, entityAnchor, parentAnchorCenterWorld, i);
 }

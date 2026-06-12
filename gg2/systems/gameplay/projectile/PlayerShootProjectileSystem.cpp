@@ -5,6 +5,7 @@
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/collision/EntityColCenterWorld.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
@@ -31,11 +32,8 @@ void playerShootProjectileSystem(Context &ctx)
         auto &effectBase = ctx.data.effect.base;
         const int frameIndex = effectBase.animation.frameIndex[effectIndex];
         const SDL_FRect currentAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
-        const SDL_FPoint currentAnchorCenterLocal = entityColCenter(currentAnchor);
-        const SDL_FPoint anchorCenterWorld = {
-            effectBase.position.x[effectIndex] + currentAnchorCenterLocal.x,
-            effectBase.position.y[effectIndex] + currentAnchorCenterLocal.y
-        };
+        const SDL_FPoint anchorCenterWorld =
+            entityColCenterWorld(currentAnchor, effectBase.position, effectIndex);
 
         const SDL_FPoint cameraOff = ctx.data.camera.offset;
         const SDL_FPoint mouseWorld = {
