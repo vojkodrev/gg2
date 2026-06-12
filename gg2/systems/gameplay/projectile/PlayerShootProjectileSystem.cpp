@@ -40,6 +40,8 @@ void playerShootProjectileSystem(Context &ctx)
             ctx.mouse.x - cameraOff.x,
             ctx.mouse.y - cameraOff.y
         };
+        ctx.data.effect.target.x[effectIndex] = mouseWorld.x;
+        ctx.data.effect.target.y[effectIndex] = mouseWorld.y;
 
         resetEntityBaseAnimationToInitial(effectBase, effectIndex);
         mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);

@@ -40,7 +40,7 @@ void followAStarPathTo(uint32_t n, Context &ctx, SDL_FRect targetCol)
             ai.repathTimer[n] = randomTimer(NPC_REPATH_TIME_MIN, NPC_REPATH_TIME_MAX);
 
         SDL_FPoint target = { (float)ai.path.point.x[n][i], (float)ai.path.point.y[n][i] };
-        moveColCenterToward(ctx, n, target, NPC_MONSTER_SPEED);
+        moveNpcColCenterToward(ctx, n, target, NPC_MONSTER_SPEED);
 
         if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
             ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);

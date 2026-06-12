@@ -1,23 +1,15 @@
 #include "MoveColCenterToward.h"
-#include "EntityColAABB.h"
-#include "../../../utils/collision/EntityColCenter.h"
-#include <cmath>
+#include "../../../utils/entity/MoveEntityColCenterToward.h"
 
-void moveColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float speed)
+void moveNpcColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float speed)
 {
     auto &npc = ctx.data.npc;
-    float dt = ctx.frame.dt;
-    SDL_FRect col = entityColAABB(npc.base, n);
-    SDL_FPoint colCenter = entityColCenter(col);
-    float dx = target.x - colCenter.x;
-    float dy = target.y - colCenter.y;
-    float d = sqrtf(dx * dx + dy * dy);
-    if (d == 0.0f)
-        return;
+    const SDL_FRect col = entityColAABB(npc.base, n);
+    const SDL_FPoint colCenter = entityColCenter(col);
+    const float dx = target.x - colCenter.x;
 
     npc.base.facing.dirty[n] = false;
-    npc.base.position.x[n] += dx / d * speed * dt;
-    npc.base.position.y[n] += dy / d * speed * dt;
+    moveEntityColCenterToward(ctx, npc.base, n, target, speed);
 
     FacingDirection facing = npc.base.facing.facing[n];
     if (dx < 0.0f)
