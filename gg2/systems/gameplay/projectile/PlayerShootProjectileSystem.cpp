@@ -31,9 +31,9 @@ void playerShootProjectileSystem(Context &ctx)
 
         auto &effectBase = ctx.data.effect.base;
         const int frameIndex = effectBase.animation.frameIndex[effectIndex];
-        const SDL_FRect currentAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
-        const SDL_FPoint anchorCenterWorld =
-            entityColCenterWorld(currentAnchor, effectBase.position, effectIndex);
+        const SDL_FRect originalAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
+        const SDL_FPoint originalAnchorCenterWorld =
+            entityColCenterWorld(originalAnchor, effectBase.position, effectIndex);
 
         const SDL_FPoint cameraOff = ctx.data.camera.offset;
         const SDL_FPoint mouseWorld = {
@@ -45,22 +45,24 @@ void playerShootProjectileSystem(Context &ctx)
         mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);
 
         const SDL_FRect resetAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
-        const SDL_FPoint anchorCenterLocal =
+        const SDL_FPoint resetAnchorCenterLocal =
             entityColCenter(resetAnchor);
         const SDL_FPoint collisionCenterLocal =
             entityColCenter(effectBase.animation.frame.collision, effectIndex, frameIndex);
 
         const float initialAngle =
             std::atan2(
-                collisionCenterLocal.y - anchorCenterLocal.y,
-                collisionCenterLocal.x - anchorCenterLocal.x) * RAD_TO_DEG;
+                collisionCenterLocal.y - resetAnchorCenterLocal.y,
+                collisionCenterLocal.x - resetAnchorCenterLocal.x) * RAD_TO_DEG;
         const float aimAngle =
-            std::atan2(mouseWorld.y - anchorCenterWorld.y, mouseWorld.x - anchorCenterWorld.x) * RAD_TO_DEG;
+            std::atan2(
+                mouseWorld.y - originalAnchorCenterWorld.y,
+                mouseWorld.x - originalAnchorCenterWorld.x) * RAD_TO_DEG;
 
-        alignEntityToAnchorCenter(effectBase, resetAnchor, anchorCenterWorld, effectIndex);
+        alignEntityToAnchorCenter(effectBase, resetAnchor, originalAnchorCenterWorld, effectIndex);
 
-        effectBase.rotation.center.point.x[effectIndex] = anchorCenterLocal.x;
-        effectBase.rotation.center.point.y[effectIndex] = anchorCenterLocal.y;
+        effectBase.rotation.center.point.x[effectIndex] = resetAnchorCenterLocal.x;
+        effectBase.rotation.center.point.y[effectIndex] = resetAnchorCenterLocal.y;
         effectBase.rotation.center.hasCenter[effectIndex] = true;
         effectBase.rotation.rotate[effectIndex] = aimAngle - initialAngle;
 
@@ -69,8 +71,8 @@ void playerShootProjectileSystem(Context &ctx)
             effectBase.animation.frame.collision.offY[effectIndex][frameIndex],
             effectBase.animation.frame.collision.w[effectIndex][frameIndex],
             effectBase.animation.frame.collision.h[effectIndex][frameIndex],
-            anchorCenterLocal.x,
-            anchorCenterLocal.y,
+            resetAnchorCenterLocal.x,
+            resetAnchorCenterLocal.y,
             effectBase.rotation.rotate[effectIndex]);
 
         ctx.data.player.equipment.weapon.showAmmo[0] = false;
