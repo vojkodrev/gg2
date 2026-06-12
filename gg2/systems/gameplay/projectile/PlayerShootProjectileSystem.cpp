@@ -2,6 +2,7 @@
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../utils/pool/PoolAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/rect/AlignEntityToParentAnchor.h"
@@ -47,6 +48,7 @@ void playerShootProjectileSystem(Context &ctx)
             ctx.mouse.y - cameraOff.y
         };
 
+        resetEntityBaseAnimationToInitial(effectBase, effectIndex);
         alignEntityToAnchorCenter(effectBase, initialAnchor, anchorCenterWorld, effectIndex);
         effectBase.rotation.center.point.x[effectIndex] = anchorCenterLocal.x;
         effectBase.rotation.center.point.y[effectIndex] = anchorCenterLocal.y;
