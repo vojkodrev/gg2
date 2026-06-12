@@ -5,7 +5,7 @@
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../../../utils/rect/AlignEntityToParentAnchor.h"
+#include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include <cmath>
 
