@@ -7,6 +7,7 @@
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
+#include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
 #include <cmath>
 
 void playerShootProjectileSystem(Context &ctx)
@@ -43,13 +44,14 @@ void playerShootProjectileSystem(Context &ctx)
         };
 
         resetEntityBaseAnimationToInitial(effectBase, effectIndex);
-        
+        mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);
+
         const SDL_FRect resetAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
         const SDL_FPoint anchorCenterLocal =
-            entityColCenter(effectBase.animation.frame.anchor, effectIndex, frameIndex);
+            entityColCenter(resetAnchor);
         const SDL_FPoint collisionCenterLocal =
             entityColCenter(effectBase.animation.frame.collision, effectIndex, frameIndex);
-        
+
         const float initialAngle =
             std::atan2(
                 collisionCenterLocal.y - anchorCenterLocal.y,
@@ -58,12 +60,12 @@ void playerShootProjectileSystem(Context &ctx)
             std::atan2(mouseWorld.y - anchorCenterWorld.y, mouseWorld.x - anchorCenterWorld.x) * RAD_TO_DEG;
 
         alignEntityToAnchorCenter(effectBase, resetAnchor, anchorCenterWorld, effectIndex);
-        
+
         effectBase.rotation.center.point.x[effectIndex] = anchorCenterLocal.x;
         effectBase.rotation.center.point.y[effectIndex] = anchorCenterLocal.y;
         effectBase.rotation.center.hasCenter[effectIndex] = true;
         effectBase.rotation.rotate[effectIndex] = aimAngle - initialAngle;
-        
+
         rotateRectCenter(
             effectBase.animation.frame.collision.offX[effectIndex][frameIndex],
             effectBase.animation.frame.collision.offY[effectIndex][frameIndex],
