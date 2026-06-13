@@ -1,5 +1,6 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
+#include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../utils/effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
@@ -42,8 +43,22 @@ void playerShootProjectileSystem(Context &ctx)
             ctx.mouse.x - cameraOff.x,
             ctx.mouse.y - cameraOff.y
         };
-        ctx.data.effect.target.x[effectIndex] = mouseWorld.x;
-        ctx.data.effect.target.y[effectIndex] = mouseWorld.y;
+        const float aimDx = mouseWorld.x - originalAnchorCenterWorld.x;
+        const float aimDy = mouseWorld.y - originalAnchorCenterWorld.y;
+        const float aimLen = sqrtf(aimDx * aimDx + aimDy * aimDy);
+        const float targetDistance = PROJECTILE_MAX_DISTANCE + PROJECTILE_SPEED;
+        if (aimLen > 0.0f)
+        {
+            ctx.data.effect.target.x[effectIndex] =
+                originalAnchorCenterWorld.x + aimDx / aimLen * targetDistance;
+            ctx.data.effect.target.y[effectIndex] =
+                originalAnchorCenterWorld.y + aimDy / aimLen * targetDistance;
+        }
+        else
+        {
+            ctx.data.effect.target.x[effectIndex] = originalAnchorCenterWorld.x + targetDistance;
+            ctx.data.effect.target.y[effectIndex] = originalAnchorCenterWorld.y;
+        }
 
         resetEntityBaseAnimationToInitial(effectBase, effectIndex);
         mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);
