@@ -12,5 +12,6 @@ struct Effect
     int groupId[MAX_EFFECTS] = {};
     Parent<MAX_EFFECTS> parent;
     EntityBase<MAX_EFFECTS> base;
+    AnchorPoint<MAX_EFFECTS> start;
     AnchorPoint<MAX_EFFECTS> target;
 };

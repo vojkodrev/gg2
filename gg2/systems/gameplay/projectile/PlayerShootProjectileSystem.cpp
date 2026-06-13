@@ -34,6 +34,8 @@ void playerShootProjectileSystem(Context &ctx)
         const SDL_FRect originalAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
         const SDL_FPoint originalAnchorCenterWorld =
             entityColCenterWorld(originalAnchor, effectBase.position, effectIndex);
+        ctx.data.effect.start.x[effectIndex] = originalAnchorCenterWorld.x;
+        ctx.data.effect.start.y[effectIndex] = originalAnchorCenterWorld.y;
 
         const SDL_FPoint cameraOff = ctx.data.camera.offset;
         const SDL_FPoint mouseWorld = {
