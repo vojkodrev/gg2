@@ -1,12 +1,11 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
-#include "../../../utils/pool/PoolAlloc.h"
+#include "../../../utils/effects/AllocEffect.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/collision/EntityColCenterWorld.h"
-#include "../../../utils/groups/RetainGroup.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
@@ -21,11 +20,10 @@ void playerShootProjectileSystem(Context &ctx)
         if (!playerWeapon.hasAmmo[0])
             return;
 
-        int effectIndex = poolAlloc(ctx.data.effect.pool);
+        int effectIndex = allocEffect(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);
         if (effectIndex == -1)
             return;
 
-        ctx.data.effect.groupId[effectIndex] = retainGroup(ctx.data.groups, ctx.data.player.groupId);
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
