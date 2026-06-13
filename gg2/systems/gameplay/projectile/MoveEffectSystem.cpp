@@ -1,7 +1,7 @@
 #include "MoveEffectSystem.h"
+#include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
-#include "../../../structs/core/constants/EffectConstants.h"
 #include <cstdint>
 
 void moveEffectSystem(Context &ctx)

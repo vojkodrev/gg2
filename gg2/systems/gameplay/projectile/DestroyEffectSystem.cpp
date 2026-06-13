@@ -1,5 +1,5 @@
 #include "DestroyEffectSystem.h"
-#include "../../../structs/core/constants/ScreenConstants.h"
+#include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
@@ -26,7 +26,7 @@ void destroyEffectSystem(Context &ctx)
                 ctx.data.effect.start.x[i],
                 ctx.data.effect.start.y[i]);
 
-        if (distFromStart >= SCREEN_W)
+        if (distFromStart >= PROJECTILE_MAX_DISTANCE)
             effectFree(ctx.data.effect, ctx.data.groups, i);
     }
 }
