@@ -3,6 +3,7 @@
 #include "../core/EntityBase.h"
 #include "../core/AnchorPoint.h"
 #include "EffectConstants.h"
+#include "EffectType.h"
 #include "Parent.h"
 #include "../../utils/pool/Pool.h"
 
@@ -10,6 +11,7 @@ struct Effect
 {
     Pool<MAX_EFFECTS> pool;
     int groupId[MAX_EFFECTS] = {};
+    EffectType type[MAX_EFFECTS] = {};
     Parent<MAX_EFFECTS> parent;
     EntityBase<MAX_EFFECTS> base;
     AnchorPoint<MAX_EFFECTS> start;

@@ -24,6 +24,7 @@ void playerShootProjectileSystem(Context &ctx)
         if (effectIndex == -1)
             return;
 
+        ctx.data.effect.type[effectIndex] = EffectType::Projectile;
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
