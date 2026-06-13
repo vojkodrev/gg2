@@ -6,6 +6,7 @@
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/collision/EntityColCenterWorld.h"
+#include "../../../utils/groups/RetainGroup.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
@@ -24,7 +25,7 @@ void playerShootProjectileSystem(Context &ctx)
         if (effectIndex == -1)
             return;
 
-        ctx.data.effect.groupId[effectIndex] = ctx.data.player.groupId;
+        ctx.data.effect.groupId[effectIndex] = retainGroup(ctx.data.groups, ctx.data.player.groupId);
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
