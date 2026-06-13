@@ -1,6 +1,6 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
-#include "../../../utils/effects/AllocEffect.h"
+#include "../../../utils/effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
@@ -20,7 +20,7 @@ void playerShootProjectileSystem(Context &ctx)
         if (!playerWeapon.hasAmmo[0])
             return;
 
-        int effectIndex = allocEffect(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);
+        int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);
         if (effectIndex == -1)
             return;
 

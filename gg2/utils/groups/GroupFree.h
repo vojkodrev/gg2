@@ -4,7 +4,7 @@
 #include "../pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>
-void freeGroup(Group<TGroupCapacity> &group, int groupId)
+void groupFree(Group<TGroupCapacity> &group, int groupId)
 {
     group.count[groupId]--;
 
