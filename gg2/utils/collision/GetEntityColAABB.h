@@ -10,5 +10,7 @@ inline SDL_FRect getEntityColAABB(Context &ctx, uint16_t id)
         return entityColAABB(ctx.data.player.base, 0);
     if (colIdIsNpc(id))
         return entityColAABB(ctx.data.npc.base, colIdNpcIndex(id));
-    return entityColAABB(ctx.data.object.base, colIdObjectIndex(id));
+    if (colIdIsObject(id))
+        return entityColAABB(ctx.data.object.base, colIdObjectIndex(id));
+    return entityColAABB(ctx.data.effect.base, colIdEffectIndex(id));
 }
