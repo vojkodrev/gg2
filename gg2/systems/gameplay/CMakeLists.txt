@@ -18,6 +18,7 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     projectile/PlayerShootProjectileSystem.cpp
     projectile/MoveEffectSystem.cpp
+    projectile/DestroyEffectSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp
@@ -29,9 +30,8 @@ add_library(systems_gameplay
     ai/pet/RunPetAi.cpp
     ai/pet/HandlePetIdle.cpp
     ai/pet/HandlePetFollowPlayer.cpp
-    ai/Dist.cpp
     ai/DistToPlayer.cpp
-    ai/DistToSpawn.cpp
+    ai/DistToNpcSpawn.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp

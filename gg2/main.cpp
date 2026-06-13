@@ -32,6 +32,7 @@
 #include "equipment/MoveEquipmentSystem.h"
 #include "projectile/PlayerShootProjectileSystem.h"
 #include "projectile/MoveEffectSystem.h"
+#include "projectile/DestroyEffectSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -107,6 +108,7 @@ int main()
         
         playerShootProjectileSystem(*ctx);
         moveEffectSystem(*ctx);
+        destroyEffectSystem(*ctx);
         
         effectDepthSystem(*ctx);
         
