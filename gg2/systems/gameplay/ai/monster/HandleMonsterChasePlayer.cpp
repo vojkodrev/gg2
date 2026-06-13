@@ -1,5 +1,5 @@
 #include "HandleMonsterChasePlayer.h"
-#include "DistToSpawn.h"
+#include "DistToNpcSpawn.h"
 #include "AreColBoxesNear.h"
 #include "EntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -9,7 +9,7 @@
 
 void handleMonsterChasePlayer(uint32_t n, Context &ctx)
 {
-    if (distToSpawn(ctx, n) > NPC_LEASH_RADIUS)
+    if (distToNpcSpawn(ctx, n) > NPC_LEASH_RADIUS)
     {
         setNpcAiStateGoToSpawn(n, ctx);
         return;

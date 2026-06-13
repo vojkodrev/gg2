@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-float distToSpawn(Context &ctx, uint32_t n);
+float distToNpcSpawn(Context &ctx, uint32_t n);
