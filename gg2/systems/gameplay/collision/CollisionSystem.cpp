@@ -3,7 +3,7 @@
 #include "CollisionConstants.h"
 #include "EntityColAABB.h"
 #include "GetEntityColAABB.h"
-#include "ColId.h"
+#include "ColIdMake.h"
 #include "spatialhash/SpatialHashClear.h"
 #include "spatialhash/SpatialHashInsert.h"
 #include "spatialhash/SpatialHashQuery.h"
@@ -23,19 +23,19 @@ void collisionSystem(Context &ctx)
         std::unique_lock lock(ctx.collision.spatialHashMutex);
         spatialHashClear(hash);
 
-        spatialHashInsert(hash, pBox, COLLISION_ENTITY_PLAYER);
+        spatialHashInsert(hash, pBox, colIdMake(ColType::Player, 0));
 
         for (uint32_t i = 0; i < npc.npcCount; i++)
-            spatialHashInsert(hash, entityColAABB(npc.base, i), colIdNpc(i));
+            spatialHashInsert(hash, entityColAABB(npc.base, i), colIdMake(ColType::NPC, i));
 
         for (uint32_t i = 0; i < object.objectCount; i++)
-            spatialHashInsert(hash, entityColAABB(object.base, i), colIdObject(i));
+            spatialHashInsert(hash, entityColAABB(object.base, i), colIdMake(ColType::Object, i));
     }
 
     std::shared_lock readLock(ctx.collision.spatialHashMutex);
-    uint16_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
+    uint32_t candidates[SpatialHash::MAX_PER_BUCKET * 4];
 
-    auto addPair = [&](uint16_t a, uint16_t b)
+    auto addPair = [&](uint32_t a, uint32_t b)
     {
         if (cr.count < MAX_COLLISION_PAIRS)
         {
@@ -46,12 +46,12 @@ void collisionSystem(Context &ctx)
     };
 
     // For each entity, query candidates with higher ID to avoid duplicate pairs
-    auto checkEntity = [&](uint16_t id, SDL_FRect colBox)
+    auto checkEntity = [&](uint32_t id, SDL_FRect colBox)
     {
         int n = spatialHashQuery(hash, colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
         for (int k = 0; k < n; k++)
         {
-            uint16_t other = candidates[k];
+            uint32_t other = candidates[k];
             if (other <= id)
                 continue;
             SDL_FRect ob = getEntityColAABB(ctx, other);
@@ -60,9 +60,9 @@ void collisionSystem(Context &ctx)
         }
     };
 
-    checkEntity(COLLISION_ENTITY_PLAYER, pBox);
+    checkEntity(colIdMake(ColType::Player, 0), pBox);
     for (uint32_t i = 0; i < npc.npcCount; i++)
-        checkEntity(colIdNpc(i), entityColAABB(npc.base, i));
+        checkEntity(colIdMake(ColType::NPC, i), entityColAABB(npc.base, i));
     for (uint32_t i = 0; i < object.objectCount; i++)
-        checkEntity(colIdObject(i), entityColAABB(object.base, i));
+        checkEntity(colIdMake(ColType::Object, i), entityColAABB(object.base, i));
 }

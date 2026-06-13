@@ -1,7 +1,8 @@
 #pragma once
 #include "CollisionPair.h"
 
-// Entity ID encoding: 0 = player, 1..N = NPC index (id - 1)
+// Collision ids are packed uint32_t values with type bits in the high byte
+// and entity index bits in the low 24 bits.
 struct CollisionResult
 {
     CollisionPair pair;

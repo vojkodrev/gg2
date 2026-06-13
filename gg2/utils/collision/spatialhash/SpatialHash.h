@@ -11,6 +11,6 @@ struct SpatialHash
     static constexpr int TABLE_SIZE = 4096; // must be power of 2
     static constexpr int MAX_PER_BUCKET = 16;
 
-    uint16_t buckets[TABLE_SIZE][MAX_PER_BUCKET];
+    uint32_t buckets[TABLE_SIZE][MAX_PER_BUCKET];
     uint8_t counts[TABLE_SIZE];
 };

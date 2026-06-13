@@ -3,7 +3,7 @@
 #include "SpatialHash.h"
 #include "SpatialHashInsertCell.h"
 
-inline void spatialHashInsert(SpatialHash &sh, SDL_FRect rect, uint16_t id)
+inline void spatialHashInsert(SpatialHash &sh, SDL_FRect rect, uint32_t id)
 {
     int minCx = (int)(rect.x / SpatialHash::CELL_SIZE);
     int minCy = (int)(rect.y / SpatialHash::CELL_SIZE);
