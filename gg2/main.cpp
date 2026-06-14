@@ -84,20 +84,26 @@ int main()
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
+        animationSystem(*ctx);
+
         playerMovementSystem(*ctx);
-        cameraSystem(*ctx);
         playerFacingSystem(*ctx);
         scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
         playerDepthSystem(*ctx);
-
+        
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
         npcDepthSystem(*ctx);
-
+        
         scaleObjectLocationSystem(*ctx);
         objectDepthSystem(*ctx);
+        
+        collisionSystem(*ctx);
+        collisionResolutionSystem(*ctx);
+        
+        cameraSystem(*ctx);
 
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
@@ -109,13 +115,7 @@ int main()
         playerShootProjectileSystem(*ctx);
         moveEffectSystem(*ctx);
         destroyEffectSystem(*ctx);
-        
         effectDepthSystem(*ctx);
-        
-        animationSystem(*ctx);
-
-        collisionSystem(*ctx);
-        collisionResolutionSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
