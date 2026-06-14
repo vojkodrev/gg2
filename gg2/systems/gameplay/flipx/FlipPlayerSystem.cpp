@@ -1,10 +1,10 @@
 #include "FlipPlayerSystem.h"
-#include "UpdateEntityAnchorCollisionFlip.h"
+#include "SyncEntityFlipAndMirrorOffsets.h"
 
 void flipPlayerSystem(Context &ctx)
 {
     if (!ctx.data.player.base.facing.dirty[0])
         return;
 
-    updateEntityAnchorCollisionFlip(ctx.data.player.base, 0);
+    syncEntityFlipAndMirrorOffsets(ctx.data.player.base, 0);
 }

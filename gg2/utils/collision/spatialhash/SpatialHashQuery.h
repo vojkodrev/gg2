@@ -3,7 +3,7 @@
 #include "SpatialHash.h"
 #include "SpatialHashQueryCell.h"
 
-inline int spatialHashQuery(const SpatialHash &sh, SDL_FRect rect, uint16_t *out, int maxOut)
+inline int spatialHashQuery(const SpatialHash &sh, SDL_FRect rect, uint32_t *out, int maxOut)
 {
     int minCx = (int)(rect.x / SpatialHash::CELL_SIZE);
     int minCy = (int)(rect.y / SpatialHash::CELL_SIZE);

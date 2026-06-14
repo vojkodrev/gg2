@@ -1,6 +1,7 @@
 add_library(systems_core
     frame/FrameRateLimitSystem.cpp
-    frame/UpdateFrameStateSystem.cpp
+    frame/RefreshFrameTiming.cpp
+    input/ActionStateSystem.cpp
     input/DebugStateSystem.cpp
     input/KeyboardStateSystem.cpp
     input/MouseStateSystem.cpp

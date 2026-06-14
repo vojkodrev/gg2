@@ -1,4 +1,5 @@
 #pragma once
-#include "ColId.h"
+#include "ColIdType.h"
 
-inline bool isStatic(uint16_t id) { return colIdIsObject(id); }
+inline bool isStatic(ColType type) { return type == ColType::Object; }
+inline bool isStatic(uint32_t id) { return isStatic(colIdType(id)); }

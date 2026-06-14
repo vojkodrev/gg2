@@ -1,6 +1,6 @@
 #include "RotateEquipmentSystem.h"
 #include "RotateEntityBase.h"
-#include "UpdateAnchorRotation.h"
+#include "RotateAnchorAroundEntityCenter.h"
 #include <cstdint>
 
 void rotateEquipmentSystem(Context &ctx)
@@ -9,7 +9,7 @@ void rotateEquipmentSystem(Context &ctx)
     if (playerWeapon.base.facing.dirty[0])
     {
         rotateEntityBase(playerWeapon.base, 0);
-        updateAnchorRotation(
+        rotateAnchorAroundEntityCenter(
             playerWeapon.ammoAnchor,
             playerWeapon.base,
             0,
@@ -27,7 +27,7 @@ void rotateEquipmentSystem(Context &ctx)
         if (npcWeapon.base.facing.dirty[i])
         {
             rotateEntityBase(npcWeapon.base, i);
-            updateAnchorRotation(
+            rotateAnchorAroundEntityCenter(
                 npcWeapon.ammoAnchor,
                 npcWeapon.base,
                 i,

@@ -1,31 +1,14 @@
 #include "DebugRenderPlayer.h"
-#include "RenderColBox.h"
+#include "DebugRenderEntityBase.h"
 #include "DebugRenderEquipment.h"
-#include "../../../utils/rect/EntityAnchorAABB.h"
-#include "../../../utils/collision/EntityColAABB.h"
 
 void debugRenderPlayer(const Context &ctx)
 {
-    SDL_Renderer *renderer = ctx.renderer;
     const auto &player = ctx.data.player;
     const bool showCollision = ctx.data.debug.showCollision;
 
     if (showCollision)
-    {
-        SDL_FRect col = entityColAABB(player.base, 0);
-        if (col.w > 0.0f && col.h > 0.0f)
-        {
-            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-            renderColBox(ctx, col);
-        }
-
-        SDL_FRect anchor = entityAnchorAABB(player.base, 0);
-        if (anchor.w > 0.0f && anchor.h > 0.0f)
-        {
-            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-            renderColBox(ctx, anchor);
-        }
-    }
+        debugRenderEntityBase(ctx, player.base, 0, SDL_Color{255, 0, 0, 255});
 
     debugRenderEquipment(ctx, player.equipment, 0);
 }

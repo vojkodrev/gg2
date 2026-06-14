@@ -2,33 +2,36 @@ add_library(systems_gameplay
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
-    scale/ScalePlayerSizeSystem.cpp
     scale/ScaleNpcLocationSystem.cpp
-    scale/ScaleNpcSizeSystem.cpp
     scale/ScaleObjectLocationSystem.cpp
-    scale/ScaleObjectSizeSystem.cpp
     scale/equipment/ScaleEquipmentLocationSystem.cpp
-    scale/equipment/ScaleEquipmentSizeSystem.cpp
+    depth/PlayerDepthSystem.cpp
+    depth/NpcDepthSystem.cpp
+    depth/ObjectDepthSystem.cpp
+    depth/EquipmentDepthSystem.cpp
+    depth/EffectDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
     flipx/EquipmentFacingSystem.cpp
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
+    projectile/PlayerShootProjectileSystem.cpp
+    projectile/MoveEffectSystem.cpp
+    projectile/DestroyEffectSystem.cpp
     ai/NPCAiSystem.cpp
-    ai/astar/UpdateAStarPath.cpp
-    ai/monster/UpdateMonster.cpp
-    ai/monster/UpdateMonsterIdle.cpp
-    ai/monster/UpdateMonsterPatrolling.cpp
-    ai/monster/UpdateMonsterGoToPlayer.cpp
-    ai/monster/UpdateMonsterAttack.cpp
-    ai/monster/UpdateMonsterGoToSpawn.cpp
-    ai/pet/UpdatePet.cpp
-    ai/pet/UpdatePetIdle.cpp
-    ai/pet/UpdatePetGoToPlayer.cpp
-    ai/Dist.cpp
+    ai/astar/FollowAStarPathTo.cpp
+    ai/monster/RunMonsterAi.cpp
+    ai/monster/HandleMonsterIdle.cpp
+    ai/monster/HandleMonsterPatrol.cpp
+    ai/monster/HandleMonsterChasePlayer.cpp
+    ai/monster/HandleMonsterAttack.cpp
+    ai/monster/HandleMonsterReturnToSpawn.cpp
+    ai/pet/RunPetAi.cpp
+    ai/pet/HandlePetIdle.cpp
+    ai/pet/HandlePetFollowPlayer.cpp
     ai/DistToPlayer.cpp
-    ai/DistToSpawn.cpp
+    ai/DistToNpcSpawn.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp

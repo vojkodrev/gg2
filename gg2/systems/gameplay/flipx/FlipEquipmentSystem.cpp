@@ -1,18 +1,18 @@
 #include "FlipEquipmentSystem.h"
-#include "UpdateAnchorOffsetFlip.h"
-#include "UpdateEntityAnchorCollisionOffsetFlip.h"
+#include "MirrorAnchorOffsetX.h"
+#include "MirrorEntityAnchorsAndCollisionOffsets.h"
 #include <cstdint>
 
 void flipEquipmentSystem(Context &ctx)
 {
     if (ctx.data.player.equipment.weapon.base.facing.dirty[0])
     {
-        updateEntityAnchorCollisionOffsetFlip(
+        mirrorEntityAnchorsAndCollisionOffsets(
             ctx.data.player.equipment.weapon.base,
             0);
         if (ctx.data.player.equipment.weapon.base.facing.flipX[0])
         {
-            updateAnchorOffsetFlip(
+            mirrorAnchorOffsetX(
                 ctx.data.player.equipment.weapon.ammoAnchor,
                 ctx.data.player.equipment.weapon.base.position.w[0],
                 0,
@@ -21,7 +21,7 @@ void flipEquipmentSystem(Context &ctx)
     }
     if (ctx.data.player.equipment.ammo.base.facing.dirty[0])
     {
-        updateEntityAnchorCollisionOffsetFlip(
+        mirrorEntityAnchorsAndCollisionOffsets(
             ctx.data.player.equipment.ammo.base,
             0);
     }
@@ -30,12 +30,12 @@ void flipEquipmentSystem(Context &ctx)
     {
         if (ctx.data.npc.equipment.weapon.base.facing.dirty[i])
         {
-            updateEntityAnchorCollisionOffsetFlip(
+            mirrorEntityAnchorsAndCollisionOffsets(
                 ctx.data.npc.equipment.weapon.base,
                 i);
             if (ctx.data.npc.equipment.weapon.base.facing.flipX[i])
             {
-                updateAnchorOffsetFlip(
+                mirrorAnchorOffsetX(
                     ctx.data.npc.equipment.weapon.ammoAnchor,
                     ctx.data.npc.equipment.weapon.base.position.w[i],
                     i,
@@ -44,7 +44,7 @@ void flipEquipmentSystem(Context &ctx)
         }
         if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
         {
-            updateEntityAnchorCollisionOffsetFlip(
+            mirrorEntityAnchorsAndCollisionOffsets(
                 ctx.data.npc.equipment.ammo.base,
                 i);
         }

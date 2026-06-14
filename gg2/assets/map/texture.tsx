@@ -111,7 +111,6 @@
    <property name="animationAngleStop" type="float" value="110"/>
    <property name="animationTime" type="float" value="250"/>
    <property name="facing" value="right"/>
-   <property name="initialAngle" type="float" value="45"/>
    <property name="scale" type="float" value="1.2"/>
    <property name="type" value="polearm1"/>
   </properties>
@@ -138,6 +137,7 @@
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="anchor" x="10.1847" y="50.8033" width="5.53552" height="5.18219"/>
+   <object id="2" name="collision" x="39.5771" y="6.34525" width="18.3905" height="19.7886"/>
   </objectgroup>
  </tile>
  <tile id="227">

@@ -16,6 +16,7 @@ target_include_directories(gg2_common INTERFACE
     ${CMAKE_SOURCE_DIR}/gg2/structs/tilemap
     ${CMAKE_SOURCE_DIR}/gg2/structs/npc
     ${CMAKE_SOURCE_DIR}/gg2/structs/object
+    ${CMAKE_SOURCE_DIR}/gg2/structs/effect
     ${CMAKE_SOURCE_DIR}/gg2/structs/render
     ${CMAKE_SOURCE_DIR}/gg2/structs/player
     ${CMAKE_SOURCE_DIR}/gg2/structs/collision

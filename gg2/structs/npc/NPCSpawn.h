@@ -1,5 +1,5 @@
 #pragma once
-#include "CapacityConstants.h"
+#include "NpcConstants.h"
 
 struct NPCSpawn
 {

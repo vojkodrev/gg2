@@ -5,29 +5,34 @@
 #include "Context.h"
 #include "ScreenConstants.h"
 #include "LoadTileMap.h"
-#include "UpdateFrameStateSystem.h"
+#include "RefreshFrameTiming.h"
 #include "FillRenderBufferSystem.h"
 #include "RenderSystem.h"
 #include "FrameRateLimitSystem.h"
+#include "ActionStateSystem.h"
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
-#include "scale/ScalePlayerSizeSystem.h"
 #include "scale/ScaleNpcLocationSystem.h"
-#include "scale/ScaleNpcSizeSystem.h"
 #include "scale/ScaleObjectLocationSystem.h"
-#include "scale/ScaleObjectSizeSystem.h"
 #include "scale/equipment/ScaleEquipmentLocationSystem.h"
-#include "scale/equipment/ScaleEquipmentSizeSystem.h"
 #include "flipx/FlipPlayerSystem.h"
+#include "depth/PlayerDepthSystem.h"
 #include "flipx/FlipNpcSystem.h"
+#include "depth/NpcDepthSystem.h"
+#include "depth/ObjectDepthSystem.h"
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
+#include "depth/EquipmentDepthSystem.h"
+#include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
+#include "projectile/PlayerShootProjectileSystem.h"
+#include "projectile/MoveEffectSystem.h"
+#include "projectile/DestroyEffectSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -54,10 +59,6 @@ int main()
     ctx->data.camera.position.h[0] = SCREEN_H;
 
     loadTileMap(*ctx, map);
-    scalePlayerSizeSystem(*ctx);
-    scaleNpcSizeSystem(*ctx);
-    scaleObjectSizeSystem(*ctx);
-    scaleEquipmentSizeSystem(*ctx);
 
 #ifndef NDEBUG
     SDL_Log("Renderer: %s", SDL_GetRendererName(ctx->renderer));
@@ -70,7 +71,7 @@ int main()
     ctx->frame.lastTicks = SDL_GetTicks();
     while (running)
     {
-        updateFrameStateSystem(*ctx);
+        refreshFrameTiming(*ctx);
 
         while (SDL_PollEvent(&event))
         {
@@ -79,6 +80,7 @@ int main()
         }
 
         keyboardStateSystem(*ctx);
+        actionStateSystem(*ctx);
         debugStateSystem(*ctx);
         mouseStateSystem(*ctx);
 
@@ -87,18 +89,28 @@ int main()
         playerFacingSystem(*ctx);
         scalePlayerLocationSystem(*ctx);
         flipPlayerSystem(*ctx);
+        playerDepthSystem(*ctx);
 
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
+        npcDepthSystem(*ctx);
 
         scaleObjectLocationSystem(*ctx);
+        objectDepthSystem(*ctx);
 
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        equipmentDepthSystem(*ctx);
+        
+        playerShootProjectileSystem(*ctx);
+        moveEffectSystem(*ctx);
+        destroyEffectSystem(*ctx);
+        
+        effectDepthSystem(*ctx);
         
         animationSystem(*ctx);
 

@@ -23,8 +23,10 @@ void renderSystem(const Context &ctx)
     {
         SDL_FRect src = {rb.src.x[i], rb.src.y[i], rb.src.w[i], rb.src.h[i]};
         SDL_FRect dst = {rb.dst.x[i], rb.dst.y[i], rb.dst.w[i], rb.dst.h[i]};
+        SDL_FPoint rotationCenter = {rb.rotationCenter.point.x[i], rb.rotationCenter.point.y[i]};
+        SDL_FPoint *center = rb.rotationCenter.hasCenter[i] ? &rotationCenter : nullptr;
         SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-        SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, rb.src.rotate[i], nullptr, flip);
+        SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, rb.src.rotate[i], center, flip);
     }
     debugRenderSystem(ctx);
 

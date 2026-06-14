@@ -30,13 +30,19 @@ inline void loadEquipment(
         equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] = ammoAnchor.h;
         equipmentData.weapon.ammoAnchor.offX[parentEntityIdx][0] = ammoAnchor.x;
         equipmentData.weapon.ammoAnchor.offY[parentEntityIdx][0] = ammoAnchor.y;
-        equipmentData.weapon.ammoAnchor.w[parentEntityIdx][0] = ammoAnchor.w;
-        equipmentData.weapon.ammoAnchor.h[parentEntityIdx][0] = ammoAnchor.h;
+        equipmentData.weapon.ammoAnchor.w[parentEntityIdx][0] =
+            equipmentData.weapon.ammoAnchor.initialW[parentEntityIdx][0] * equipmentData.weapon.base.scale[parentEntityIdx];
+        equipmentData.weapon.ammoAnchor.h[parentEntityIdx][0] =
+            equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] * equipmentData.weapon.base.scale[parentEntityIdx];
     }
 
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
+    equipmentData.weapon.hasAmmo[parentEntityIdx] = hasAmmo;
     if (hasAmmo)
+    {
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
+        equipmentData.weapon.showAmmo[parentEntityIdx] = true;
+    }
 }

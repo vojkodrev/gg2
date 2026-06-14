@@ -11,8 +11,10 @@ void collisionResolutionSystem(Context &ctx)
 
     for (uint32_t k = 0; k < cr.count; k++)
     {
-        uint16_t idA = cr.pair.a[k];
-        uint16_t idB = cr.pair.b[k];
+        uint32_t idA = cr.pair.a[k];
+        uint32_t idB = cr.pair.b[k];
+        ColType typeA = colIdType(idA);
+        ColType typeB = colIdType(idB);
 
         SDL_FRect a = getEntityColAABB(ctx, idA);
         SDL_FRect b = getEntityColAABB(ctx, idB);
@@ -23,8 +25,8 @@ void collisionResolutionSystem(Context &ctx)
         if (overlapX <= 0.0f || overlapY <= 0.0f)
             continue;
 
-        bool staticA = isStatic(idA);
-        bool staticB = isStatic(idB);
+        bool staticA = isStatic(typeA);
+        bool staticB = isStatic(typeB);
 
         float pushA = staticA ? 0.0f : (staticB ? 1.0f : 0.5f);
         float pushB = staticB ? 0.0f : (staticA ? 1.0f : 0.5f);

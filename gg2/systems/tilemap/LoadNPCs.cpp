@@ -4,7 +4,9 @@
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
+#include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
@@ -30,6 +32,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.repathTimer[n] = 0.0f;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
+        npc.groupId[n] = groupAlloc(ctx.data.groups);
 
         npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
 

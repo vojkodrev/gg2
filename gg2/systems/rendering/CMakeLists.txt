@@ -3,12 +3,14 @@ add_library(systems_rendering
     FillPlayerRenderBuffer.cpp
     FillNpcRenderBuffer.cpp
     FillObjectRenderBuffer.cpp
+    FillEffectRenderBuffer.cpp
     SortRenderBuffer.cpp
     RenderSystem.cpp
     debug/DebugRenderSystem.cpp
     debug/DebugRenderPlayer.cpp
     debug/DebugRenderNpc.cpp
     debug/DebugRenderObjects.cpp
+    debug/DebugRenderEffect.cpp
     debug/DebugRenderAstar.cpp
 )
 target_include_directories(systems_rendering PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

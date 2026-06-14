@@ -1,5 +1,5 @@
 #pragma once
-#include "UpdateEntityAnchorCollisionRotation.h"
+#include "RotateEntityAnchorsAndCollision.h"
 #include "../../../structs/core/EntityBase.h"
 #include <cstdint>
 
@@ -13,5 +13,5 @@ inline void rotateEntityBase(EntityBase<N> &entityBase, uint32_t i)
         ? -entityBase.rotation.initialRotate[i]
         : entityBase.rotation.initialRotate[i];
 
-    updateEntityAnchorCollisionRotation(entityBase, i);
+    rotateEntityAnchorsAndCollision(entityBase, i);
 }

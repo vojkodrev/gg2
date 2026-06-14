@@ -1,6 +1,6 @@
 #include "NPCAiSystem.h"
-#include "monster/UpdateMonster.h"
-#include "pet/UpdatePet.h"
+#include "monster/RunMonsterAi.h"
+#include "pet/RunPetAi.h"
 
 void npcAiSystem(Context &ctx)
 {
@@ -9,8 +9,8 @@ void npcAiSystem(Context &ctx)
     for (uint32_t n = 0; n < npc.npcCount; n++)
     {
         if (npc.ai.type[n] == NPCAiType::Monster)
-            updateMonster(n, ctx);
+            runMonsterAi(n, ctx);
         else if (npc.ai.type[n] == NPCAiType::Pet)
-            updatePet(n, ctx);
+            runPetAi(n, ctx);
     }
 }

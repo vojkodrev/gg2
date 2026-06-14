@@ -16,11 +16,11 @@ struct AStarContext
 
     SpatialHash  colHashSnapshot;
 
-    int          generation;
-    int          searchX;
-    int          searchY;
-    int          searchW;
-    int          searchH;
+    int          generation = 0;
+    int          searchX = 0;
+    int          searchY = 0;
+    int          searchW = 0;
+    int          searchH = 0;
     std::atomic<AStarStatus>  status;
     std::future<void> future;
 };

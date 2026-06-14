@@ -1,5 +1,5 @@
 #include "FlipNpcSystem.h"
-#include "UpdateEntityAnchorCollisionFlip.h"
+#include "SyncEntityFlipAndMirrorOffsets.h"
 #include <cstdint>
 
 void flipNpcSystem(Context &ctx)
@@ -9,6 +9,6 @@ void flipNpcSystem(Context &ctx)
         if (!ctx.data.npc.base.facing.dirty[i])
             continue;
 
-        updateEntityAnchorCollisionFlip(ctx.data.npc.base, i);
+        syncEntityFlipAndMirrorOffsets(ctx.data.npc.base, i);
     }
 }

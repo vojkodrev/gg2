@@ -4,6 +4,7 @@
 
 struct Player
 {
+    int groupId = -1;
     EntityBase<1> base;
     Equipment<1> equipment;
 };

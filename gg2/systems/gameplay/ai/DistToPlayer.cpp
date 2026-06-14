@@ -1,7 +1,7 @@
 #include "DistToPlayer.h"
-#include "Dist.h"
 #include "EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/math/Dist.h"
 
 float distToPlayer(Context &ctx, uint32_t n)
 {
