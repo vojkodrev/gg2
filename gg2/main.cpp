@@ -38,6 +38,7 @@
 #include "animation/AnimationSystem.h"
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
+#include "EffectCollisionResolutionSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -118,6 +119,7 @@ int main()
         destroyEffectByDistanceSystem(*ctx);
         effectDepthSystem(*ctx);
         effectCollisionSystem(*ctx);
+        effectCollisionResolutionSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);

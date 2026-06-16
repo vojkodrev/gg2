@@ -49,6 +49,7 @@ add_library(systems_gameplay
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
     collision/EffectCollisionSystem.cpp
+    collision/EffectCollisionResolutionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
