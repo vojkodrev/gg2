@@ -18,7 +18,7 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     projectile/PlayerShootProjectileSystem.cpp
     projectile/MoveEffectSystem.cpp
-    projectile/DestroyEffectSystem.cpp
+    projectile/DestroyEffectByDistanceSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp

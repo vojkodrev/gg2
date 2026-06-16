@@ -1,4 +1,4 @@
-#include "DestroyEffectSystem.h"
+#include "DestroyEffectByDistanceSystem.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
@@ -7,7 +7,7 @@
 #include "../../../utils/math/Dist.h"
 #include <cstdint>
 
-void destroyEffectSystem(Context &ctx)
+void destroyEffectByDistanceSystem(Context &ctx)
 {
     for (uint32_t i = 0; i < ctx.data.effect.pool.count; i++)
     {
