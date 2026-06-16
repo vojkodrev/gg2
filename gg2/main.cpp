@@ -37,6 +37,7 @@
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
 #include "CollisionSystem.h"
+#include "EffectCollisionSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -116,6 +117,7 @@ int main()
         moveEffectSystem(*ctx);
         destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
+        effectCollisionSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);

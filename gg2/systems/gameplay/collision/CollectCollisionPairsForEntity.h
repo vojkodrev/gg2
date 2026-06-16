@@ -8,18 +8,22 @@
 #include <cstdint>
 
 inline void collectCollisionPairsForEntity(
+    CollisionResult &cr,
     Context &ctx,
     uint32_t entityColId,
-    SDL_FRect colBox)
+    SDL_FRect colBox,
+    bool skipLowerIds)
 {
-    auto &cr = ctx.collision.collisions;
     const auto &hash = ctx.collision.spatialHash;
     auto *candidates = ctx.collision.candidates;
     int n = spatialHashQuery(hash, colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
     for (int k = 0; k < n; k++)
     {
         uint32_t other = candidates[k];
-        if (other <= entityColId)
+        if (other == entityColId)
+            continue;
+
+        if (skipLowerIds && other <= entityColId)
             continue;
         SDL_FRect ob = getEntityColAABB(ctx, other);
         if (SDL_HasRectIntersectionFloat(&colBox, &ob) && cr.count < MAX_COLLISION_PAIRS)

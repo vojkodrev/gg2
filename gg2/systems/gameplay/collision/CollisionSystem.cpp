@@ -37,15 +37,19 @@ void collisionSystem(Context &ctx)
 
     std::shared_lock readLock(ctx.collision.spatialHashMutex);
 
-    collectCollisionPairsForEntity(ctx, colIdMake(ColType::Player, 0), pBox);
+    collectCollisionPairsForEntity(ctx.collision.collisions, ctx, colIdMake(ColType::Player, 0), pBox, true);
     for (uint32_t i = 0; i < npc.npcCount; i++)
         collectCollisionPairsForEntity(
+            ctx.collision.collisions,
             ctx,
             colIdMake(ColType::NPC, i),
-            entityColAABB(npc.base, i));
+            entityColAABB(npc.base, i),
+            true);
     for (uint32_t i = 0; i < object.objectCount; i++)
         collectCollisionPairsForEntity(
+            ctx.collision.collisions,
             ctx,
             colIdMake(ColType::Object, i),
-            entityColAABB(object.base, i));
+            entityColAABB(object.base, i),
+            true);
 }
