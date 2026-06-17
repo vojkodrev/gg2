@@ -2,6 +2,7 @@ add_library(systems_tilemap
     FindLayer.cpp
     GetAnchor.cpp
     IsMarker.cpp
+    LoadEffects.cpp
     LoadGround.cpp
     LoadNPCs.cpp
     LoadObjects.cpp
