@@ -162,4 +162,14 @@
    <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
   </objectgroup>
  </tile>
+ <tile id="308">
+  <animation>
+   <frame tileid="313" duration="1000"/>
+   <frame tileid="312" duration="1000"/>
+   <frame tileid="311" duration="1000"/>
+   <frame tileid="310" duration="1000"/>
+   <frame tileid="309" duration="1000"/>
+   <frame tileid="308" duration="1000"/>
+  </animation>
+ </tile>
 </tileset>
