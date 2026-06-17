@@ -55,8 +55,14 @@ images = [
     {"id": 19, "filename": "../fireplace/frame_09_delay-0.08s.gif", "dx": 9, "dy": 8, "h": 64},
     {"id": 20, "filename": "../fireplace/frame_10_delay-0.08s.gif", "dx": 10, "dy": 8, "h": 64},
     {"id": 21, "filename": "../fireplace/frame_11_delay-0.08s.gif", "dx": 11, "dy": 8, "h": 64},
-    {"id": 23, "filename": "../pixelweapons.png", "dx": 0, "dy": 9},
     {"id": 22, "filename": "../dog.png", "dx": 0, "dy": 7},
+    {"id": 23, "filename": "../pixelweapons.png", "dx": 0, "dy": 9},
+    {"id": 24, "filename": "../healthbars.png", "dx": 0, "dy": 22, "sx": 1 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 25, "filename": "../healthbars.png", "dx": 1, "dy": 22, "sx": 2 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 26, "filename": "../healthbars.png", "dx": 2, "dy": 22, "sx": 3 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 27, "filename": "../healthbars.png", "dx": 3, "dy": 22, "sx": 4 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 28, "filename": "../healthbars.png", "dx": 4, "dy": 22, "sx": 5 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 29, "filename": "../healthbars.png", "dx": 5, "dy": 22, "sx": 6 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
 ]
 
 
