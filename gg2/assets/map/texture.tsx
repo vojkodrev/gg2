@@ -163,6 +163,10 @@
   </objectgroup>
  </tile>
  <tile id="308">
+  <properties>
+   <property name="effect" value="healthbar"/>
+   <property name="type" value="effect"/>
+  </properties>
   <animation>
    <frame tileid="313" duration="1000"/>
    <frame tileid="312" duration="1000"/>
