@@ -19,13 +19,13 @@ def update_tileset(base_dir, settings, images, meta):
     tsx_path = os.path.join(base_dir, settings["tileset"])
     tree = ET.parse(tsx_path)
     root = tree.getroot()
-    columns = max((img["x"] for img in images), default=-1) + 1
+    columns = max((img["dx"] for img in images), default=-1) + 1
 
     for img in images:
         if "markerFor" not in img:
             continue
         marker_meta = meta[img["markerFor"]]
-        tile_id = str(img["y"] * columns + img["x"])
+        tile_id = str(img["dy"] * columns + img["dx"])
         tile_el = next((t for t in root.findall("tile") if t.get("id") == tile_id), None)
         if tile_el is None:
             tile_el = ET.SubElement(root, "tile")

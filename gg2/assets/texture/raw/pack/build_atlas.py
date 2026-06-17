@@ -20,8 +20,8 @@ def build_atlas(base_dir, settings, images):
             src = src.resize((target_w, img["h"]), Image.Resampling.NEAREST)
         tiles_w = max(1, -(-src.width // tile_w))
         tiles_h = max(1, -(-src.height // tile_h))
-        atlas_tiles_w = max(atlas_tiles_w, img["x"] + tiles_w)
-        atlas_tiles_h = max(atlas_tiles_h, img["y"] + tiles_h)
+        atlas_tiles_w = max(atlas_tiles_w, img["dx"] + tiles_w)
+        atlas_tiles_h = max(atlas_tiles_h, img["dy"] + tiles_h)
         prepared.append((img, src, scale, tiles_w, tiles_h))
 
     atlas = Image.new(
@@ -31,8 +31,8 @@ def build_atlas(base_dir, settings, images):
     for img, src, scale, tiles_w, tiles_h in prepared:
         off_x = (tiles_w * tile_w - src.width) // 2
         off_y = (tiles_h * tile_h - src.height) // 2
-        paste_x = img["x"] * tile_w + off_x
-        paste_y = img["y"] * tile_h + off_y
+        paste_x = img["dx"] * tile_w + off_x
+        paste_y = img["dy"] * tile_h + off_y
         meta[img["id"]] = {
             "x": paste_x,
             "y": paste_y,
