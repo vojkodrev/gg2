@@ -50,6 +50,7 @@ add_library(systems_gameplay
     collision/CollisionSystem.cpp
     collision/effects/EffectCollisionSystem.cpp
     collision/effects/EffectCollisionResolutionSystem.cpp
+    collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp

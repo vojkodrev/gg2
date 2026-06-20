@@ -1,9 +1,8 @@
 #include "EffectCollisionResolutionSystem.h"
 #include "ColIdIndex.h"
 #include "ColIdType.h"
+#include "ResolveProjectileEffectCollision.h"
 #include "../../../structs/effect/EffectType.h"
-#include "../../../structs/npc/NPCAiType.h"
-#include "../../../utils/effects/EffectFree.h"
 
 void effectCollisionResolutionSystem(Context &ctx)
 {
@@ -40,22 +39,13 @@ void effectCollisionResolutionSystem(Context &ctx)
         if (!effect.pool.active[effectIndex])
             continue;
 
-        if (effect.type[effectIndex] != EffectType::Projectile)
-            continue;
-
-        if (otherType == ColType::Object)
+        switch (effect.type[effectIndex])
         {
-            effectFree(effect, ctx.data.groups, effectIndex);
-            continue;
-        }
-
-        if (otherType == ColType::NPC)
-        {
-            const uint32_t npcIndex = colIdIndex(otherId);
-            if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
-                continue;
-
-            effectFree(effect, ctx.data.groups, effectIndex);
+            case EffectType::Projectile:
+                resolveProjectileEffectCollision(ctx, effectIndex, otherId, otherType);
+                break;
+            default:
+                break;
         }
     }
 }
