@@ -48,8 +48,8 @@ add_library(systems_gameplay
     ai/astar/RunAStar.cpp
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
-    collision/EffectCollisionSystem.cpp
-    collision/EffectCollisionResolutionSystem.cpp
+    collision/effects/EffectCollisionSystem.cpp
+    collision/effects/EffectCollisionResolutionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
@@ -58,6 +58,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
+    ${CMAKE_CURRENT_SOURCE_DIR}/collision/effects
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/pet
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
