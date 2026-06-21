@@ -7,7 +7,6 @@ void playerMovementSystem(Context &ctx)
     auto &p = ctx.data.player;
     auto &kb = ctx.keyboard;
     float dx = 0.0f, dy = 0.0f;
-    p.base.position.dirty[0] = false;
 
     if (kb.w)
         dy -= 1.0f;

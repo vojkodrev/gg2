@@ -19,7 +19,6 @@ inline void moveEntityColCenterToward(
     const float dx = target.x - colCenter.x;
     const float dy = target.y - colCenter.y;
     const float d = sqrtf(dx * dx + dy * dy);
-    base.position.dirty[index] = false;
     if (d == 0.0f)
         return;
 

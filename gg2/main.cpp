@@ -13,6 +13,7 @@
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
+#include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -130,6 +131,7 @@ int main()
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
+        cleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }
