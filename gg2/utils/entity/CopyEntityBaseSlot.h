@@ -60,4 +60,10 @@ inline void copyEntityBaseSlot(
     to.facing.initialFacing[toIndex] = from.facing.initialFacing[fromIndex];
     to.facing.dirty[toIndex] = from.facing.dirty[fromIndex];
     to.facing.flipX[toIndex] = from.facing.flipX[fromIndex];
+
+    to.tint.r[toIndex] = from.tint.r[fromIndex];
+    to.tint.g[toIndex] = from.tint.g[fromIndex];
+    to.tint.b[toIndex] = from.tint.b[fromIndex];
+    to.tint.a[toIndex] = from.tint.a[fromIndex];
+    to.tint.clearTimer[toIndex] = from.tint.clearTimer[fromIndex];
 }

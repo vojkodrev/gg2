@@ -20,6 +20,10 @@ inline void swapRenderEntry(RenderBuffer &rb, int a, int b)
     std::swap(rb.group.id[a], rb.group.id[b]);
     std::swap(rb.group.zIndex[a], rb.group.zIndex[b]);
     std::swap(rb.flipX[a], rb.flipX[b]);
+    std::swap(rb.tint.r[a], rb.tint.r[b]);
+    std::swap(rb.tint.g[a], rb.tint.g[b]);
+    std::swap(rb.tint.b[a], rb.tint.b[b]);
+    std::swap(rb.tint.a[a], rb.tint.a[b]);
 }
 
 inline void copyRenderEntry(RenderBuffer &rb, int dst, int src, const SDL_FRect *dstOverride = nullptr)
@@ -40,4 +44,8 @@ inline void copyRenderEntry(RenderBuffer &rb, int dst, int src, const SDL_FRect 
     rb.group.id[dst] = rb.group.id[src];
     rb.group.zIndex[dst] = rb.group.zIndex[src];
     rb.flipX[dst] = rb.flipX[src];
+    rb.tint.r[dst] = rb.tint.r[src];
+    rb.tint.g[dst] = rb.tint.g[src];
+    rb.tint.b[dst] = rb.tint.b[src];
+    rb.tint.a[dst] = rb.tint.a[src];
 }
