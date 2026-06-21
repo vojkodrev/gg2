@@ -4,20 +4,26 @@
 
 void moveEquipmentSystem(Context &ctx)
 {
-    alignEntityToParentAnchor(
-        ctx.data.player.equipment.weapon.base,
-        ctx.data.player.base.animation,
-        ctx.data.player.base.position,
-        0);
-    alignAmmoToWeaponAnchor(
-        ctx.data.player.equipment.ammo.base,
-        ctx.data.player.equipment.weapon.ammoAnchor,
-        ctx.data.player.equipment.weapon.base,
-        ctx.data.player.base,
-        0);
+    if (ctx.data.player.base.position.dirty[0] || ctx.data.player.base.facing.dirty[0])
+    {
+        alignEntityToParentAnchor(
+            ctx.data.player.equipment.weapon.base,
+            ctx.data.player.base.animation,
+            ctx.data.player.base.position,
+            0);
+        alignAmmoToWeaponAnchor(
+            ctx.data.player.equipment.ammo.base,
+            ctx.data.player.equipment.weapon.ammoAnchor,
+            ctx.data.player.equipment.weapon.base,
+            ctx.data.player.base,
+            0);
+    }
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
     {
+        if (!ctx.data.npc.base.position.dirty[i] && !ctx.data.npc.base.facing.dirty[i])
+            continue;
+
         alignEntityToParentAnchor(
             ctx.data.npc.equipment.weapon.base,
             ctx.data.npc.base.animation,

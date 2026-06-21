@@ -19,11 +19,15 @@ inline void moveEntityColCenterToward(
     const float dx = target.x - colCenter.x;
     const float dy = target.y - colCenter.y;
     const float d = sqrtf(dx * dx + dy * dy);
+    base.position.dirty[index] = false;
     if (d == 0.0f)
         return;
 
-    base.position.x[index] += dx / d * speed * dt;
-    base.position.y[index] += dy / d * speed * dt;
+    const float moveX = dx / d * speed * dt;
+    const float moveY = dy / d * speed * dt;
+    base.position.dirty[index] = moveX != 0.0f || moveY != 0.0f;
+    base.position.x[index] += moveX;
+    base.position.y[index] += moveY;
 }
 
 template<int NBase, int NTarget>

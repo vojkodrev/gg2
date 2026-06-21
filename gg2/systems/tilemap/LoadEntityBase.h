@@ -82,6 +82,7 @@ inline void loadEntityBase(
 
     entityData.position.w[parentEntityIdx] = entityData.position.initialW[parentEntityIdx] * entityData.scale[parentEntityIdx];
     entityData.position.h[parentEntityIdx] = entityData.position.initialH[parentEntityIdx] * entityData.scale[parentEntityIdx];
+    entityData.position.dirty[parentEntityIdx] = true;
 
     entityData.rotation.initialRotate[parentEntityIdx] = getTileFloatProp(tileset, entityTileIdx, "rotate", 0.0f);
     entityData.rotation.rotate[parentEntityIdx] = entityData.rotation.initialRotate[parentEntityIdx];
