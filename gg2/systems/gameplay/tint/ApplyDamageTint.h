@@ -5,7 +5,7 @@
 #include <cstdint>
 
 template<int N>
-inline void tintWhenHpDrops(
+inline void applyDamageTint(
     EntityBase<N> &entityBase,
     const Statistics<N> &statistics,
     uint32_t count)
