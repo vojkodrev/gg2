@@ -1,7 +1,7 @@
-#include "HealthbarSystem.h"
+#include "MoveHealthbarSystem.h"
 #include <cstdint>
 
-void healthbarSystem(Context &ctx)
+void moveHealthbarSystem(Context &ctx)
 {
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
         ctx.data.npc.healthbar.show[i] =

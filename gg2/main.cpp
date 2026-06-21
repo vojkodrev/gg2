@@ -39,7 +39,7 @@
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
-#include "ui/healthbar/HealthbarSystem.h"
+#include "ui/healthbar/MoveHealthbarSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -121,7 +121,7 @@ int main()
         effectDepthSystem(*ctx);
         effectCollisionSystem(*ctx);
         effectCollisionResolutionSystem(*ctx);
-        healthbarSystem(*ctx);
+        moveHealthbarSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
