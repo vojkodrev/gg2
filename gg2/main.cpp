@@ -41,8 +41,8 @@
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
-#include "ui/healthbar/SetHealthbarFrameSystem.h"
-#include "ui/healthbar/SetHealthbarPositionSystem.h"
+#include "ui/healthbar/HealthbarFrameSystem.h"
+#include "ui/healthbar/HealthbarPositionSystem.h"
 #include "ui/healthbar/ShowHealthbarSystem.h"
 #include "CollisionResolutionSystem.h"
 
@@ -127,8 +127,8 @@ int main()
         effectCollisionResolutionSystem(*ctx);
 
         showHealthbarSystem(*ctx);
-        setHealthbarFrameSystem(*ctx);
-        setHealthbarPositionSystem(*ctx);
+        healthbarFrameSystem(*ctx);
+        healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);

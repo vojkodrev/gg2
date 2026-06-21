@@ -1,8 +1,8 @@
-#include "SetHealthbarFrameSystem.h"
+#include "HealthbarFrameSystem.h"
 #include "SetHealthbarFrame.h"
 #include <cstdint>
 
-void setHealthbarFrameSystem(Context &ctx)
+void healthbarFrameSystem(Context &ctx)
 {
     if (ctx.data.player.healthbar.show[0] && ctx.data.player.statistics.hpDirty[0])
         setHealthbarFrame(ctx.data.player.healthbar, ctx.data.player.statistics, 0);

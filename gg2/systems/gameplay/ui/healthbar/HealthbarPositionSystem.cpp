@@ -1,8 +1,8 @@
-#include "SetHealthbarPositionSystem.h"
+#include "HealthbarPositionSystem.h"
 #include "SetHealthbarPosition.h"
 #include <cstdint>
 
-void setHealthbarPositionSystem(Context &ctx)
+void healthbarPositionSystem(Context &ctx)
 {
     if (ctx.data.player.base.position.dirty[0])
         setHealthbarPosition(ctx.data.player.healthbar.base, ctx.data.player.base, 0);
