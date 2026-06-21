@@ -52,6 +52,7 @@ add_library(systems_gameplay
     collision/effects/EffectCollisionResolutionSystem.cpp
     collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
+    ui/healthbar/HealthbarSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )
@@ -71,5 +72,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
     ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/healthbar
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

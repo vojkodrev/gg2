@@ -3,6 +3,7 @@
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../../utils/effects/EffectFree.h"
+#include <algorithm>
 
 void resolveProjectileEffectCollision(
     Context &ctx,
@@ -24,7 +25,8 @@ void resolveProjectileEffectCollision(
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        ctx.data.npc.statistics.hp[npcIndex] -= PROJECTILE_DAMAGE;
+        ctx.data.npc.statistics.hp[npcIndex] =
+            std::max(0, ctx.data.npc.statistics.hp[npcIndex] - PROJECTILE_DAMAGE);
         effectFree(effect, ctx.data.groups, effectIndex);
     }
 }
