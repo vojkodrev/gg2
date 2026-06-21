@@ -5,6 +5,7 @@
   <properties>
    <property name="ammo" value="arrow1"/>
    <property name="facing" value="right"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="weapon" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
@@ -16,6 +17,7 @@
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
@@ -32,6 +34,7 @@
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
@@ -164,8 +167,7 @@
  </tile>
  <tile id="308">
   <properties>
-   <property name="effect" value="healthbar"/>
-   <property name="type" value="effect"/>
+   <property name="type" value="healthbar"/>
   </properties>
   <animation>
    <frame tileid="313" duration="1000"/>
