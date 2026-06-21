@@ -19,10 +19,10 @@ inline void setHealthbarFrame(
 
     if (maxHp <= 0)
     {
-        healthbar.base.animation.frameIndex[index] = frameCount - 1;
+        healthbar.base.animation.frameIndex[index] = 0;
         return;
     }
 
     healthbar.base.animation.frameIndex[index] =
-        (maxHp - hp) * (frameCount - 1) / maxHp;
+        hp * (frameCount - 1) / maxHp;
 }
