@@ -54,6 +54,7 @@ add_library(systems_gameplay
     collision/CollisionResolutionSystem.cpp
     ui/healthbar/ShowHealthbarSystem.cpp
     ui/healthbar/SetHealthbarFrameSystem.cpp
+    ui/healthbar/SetHealthbarPositionSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )
