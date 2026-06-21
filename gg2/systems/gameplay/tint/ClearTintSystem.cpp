@@ -1,8 +1,8 @@
-#include "TintSystem.h"
+#include "ClearTintSystem.h"
 #include "ClearTintWhenTimerExpires.h"
 #include <cstdint>
 
-void tintSystem(Context &ctx)
+void clearTintSystem(Context &ctx)
 {
     const float dt = ctx.frame.dt;
 

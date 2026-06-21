@@ -44,7 +44,8 @@
 #include "ui/healthbar/HealthbarFrameSystem.h"
 #include "ui/healthbar/HealthbarPositionSystem.h"
 #include "ui/healthbar/ShowHealthbarSystem.h"
-#include "tint/TintSystem.h"
+#include "tint/DamageTintSystem.h"
+#include "tint/ClearTintSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -132,7 +133,8 @@ int main()
         healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
 
-        tintSystem(*ctx);
+        damageTintSystem(*ctx);
+        clearTintSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
