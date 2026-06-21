@@ -53,6 +53,7 @@ add_library(systems_gameplay
     collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
     ui/healthbar/ShowHealthbarSystem.cpp
+    ui/healthbar/SetHealthbarFrameSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )
