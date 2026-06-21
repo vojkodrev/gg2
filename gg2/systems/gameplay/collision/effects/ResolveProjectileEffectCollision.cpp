@@ -1,6 +1,7 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../../utils/effects/EffectFree.h"
 #include <algorithm>
@@ -29,6 +30,14 @@ void resolveProjectileEffectCollision(
         const int nextHp = std::max(0, hp - PROJECTILE_DAMAGE);
         ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
         ctx.data.npc.statistics.hp[npcIndex] = nextHp;
+        if (hp != nextHp)
+        {
+            ctx.data.npc.base.tint.r[npcIndex] = DAMAGE_TINT_R;
+            ctx.data.npc.base.tint.g[npcIndex] = DAMAGE_TINT_G;
+            ctx.data.npc.base.tint.b[npcIndex] = DAMAGE_TINT_B;
+            ctx.data.npc.base.tint.a[npcIndex] = DAMAGE_TINT_A;
+            ctx.data.npc.base.tint.clearTimer[npcIndex] = DAMAGE_TINT_CLEAR_TIME;
+        }
         effectFree(effect, ctx.data.groups, effectIndex);
     }
 }
