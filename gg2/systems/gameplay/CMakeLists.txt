@@ -57,6 +57,7 @@ add_library(systems_gameplay
     ui/healthbar/ShowHealthbarSystem.cpp
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp
+    tint/TintSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )
@@ -76,6 +77,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
     ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
+    ${CMAKE_CURRENT_SOURCE_DIR}/tint
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/healthbar
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)
