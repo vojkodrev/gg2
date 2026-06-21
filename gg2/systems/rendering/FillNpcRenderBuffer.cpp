@@ -1,6 +1,7 @@
 #include "FillNpcRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
 #include "FillEquipmentRenderBuffer.h"
+#include "FillHealthbarRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
@@ -18,5 +19,6 @@ void fillNpcRenderBuffer(Context &ctx)
             PARENT_Z_INDEX);
 
         fillEquipmentRenderBuffer(rb, npc.equipment, i, groupId);
+        fillHealthbarRenderBuffer(rb, npc.healthbar, i, groupId);
     }
 }
