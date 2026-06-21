@@ -4,8 +4,16 @@
 
 void setHealthbarFrameSystem(Context &ctx)
 {
-    setHealthbarFrame(ctx.data.player.healthbar, ctx.data.player.statistics, 0);
+    if (ctx.data.player.healthbar.show[0] && ctx.data.player.statistics.hpDirty[0])
+        setHealthbarFrame(ctx.data.player.healthbar, ctx.data.player.statistics, 0);
+
+    ctx.data.player.statistics.hpDirty[0] = false;
 
     for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
-        setHealthbarFrame(ctx.data.npc.healthbar, ctx.data.npc.statistics, i);
+    {
+        if (ctx.data.npc.healthbar.show[i] && ctx.data.npc.statistics.hpDirty[i])
+            setHealthbarFrame(ctx.data.npc.healthbar, ctx.data.npc.statistics, i);
+
+        ctx.data.npc.statistics.hpDirty[i] = false;
+    }
 }

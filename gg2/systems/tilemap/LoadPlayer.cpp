@@ -19,6 +19,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t idx = playerTiles[i].ID - props.firstGid;
         loadEntityBase(ctx.data.player.base, 0, tileset, idx, props, (uint32_t)i);
         ctx.data.player.statistics.hp[0] = PLAYER_HP;
+        ctx.data.player.statistics.hpDirty[0] = true;
         ctx.data.player.statistics.maxHp[0] = PLAYER_HP;
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);

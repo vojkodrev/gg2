@@ -25,8 +25,10 @@ void resolveProjectileEffectCollision(
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        ctx.data.npc.statistics.hp[npcIndex] =
-            std::max(0, ctx.data.npc.statistics.hp[npcIndex] - PROJECTILE_DAMAGE);
+        const int hp = ctx.data.npc.statistics.hp[npcIndex];
+        const int nextHp = std::max(0, hp - PROJECTILE_DAMAGE);
+        ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
+        ctx.data.npc.statistics.hp[npcIndex] = nextHp;
         effectFree(effect, ctx.data.groups, effectIndex);
     }
 }
