@@ -28,6 +28,7 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
+#include "depth/HealthbarDepthSystem.h"
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -128,6 +129,7 @@ int main()
         showHealthbarSystem(*ctx);
         setHealthbarFrameSystem(*ctx);
         setHealthbarPositionSystem(*ctx);
+        healthbarDepthSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);

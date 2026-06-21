@@ -10,6 +10,7 @@ add_library(systems_gameplay
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
     depth/EquipmentDepthSystem.cpp
+    depth/HealthbarDepthSystem.cpp
     depth/EffectDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
