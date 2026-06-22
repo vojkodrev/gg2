@@ -3,10 +3,17 @@
 #include "Animation.h"
 
 template<int N>
-void advanceAnimation(Animation<N> &anim, uint32_t count, uint64_t now)
+void advanceAnimation(
+    Animation<N> &anim,
+    uint32_t count,
+    uint64_t now,
+    const bool *active = nullptr)
 {
     for (int i = 0; i < count; i++)
     {
+        if (active != nullptr && !active[i])
+            continue;
+
         int fc = anim.frameCount[i];
         if (fc <= 1)
             continue;

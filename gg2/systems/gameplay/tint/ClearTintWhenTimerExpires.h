@@ -7,10 +7,14 @@ template<int N>
 inline void clearTintWhenTimerExpires(
     EntityBase<N> &entityBase,
     uint32_t count,
-    float dt)
+    float dt,
+    const bool *active = nullptr)
 {
     for (uint32_t i = 0; i < count; i++)
     {
+        if (active != nullptr && !active[i])
+            continue;
+
         entityBase.tint.clearTimer[i] -= dt;
         if (entityBase.tint.clearTimer[i] > 0.0f)
             continue;

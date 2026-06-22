@@ -7,7 +7,7 @@
 #include "LoadHealthbar.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
-#include "../../utils/groups/GroupAlloc.h"
+#include "../../utils/npc/NpcAlloc.h"
 #include "../../utils/npc/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
@@ -17,12 +17,15 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &props = ctx.data.tileMapProps;
     auto &npc = ctx.data.npc;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
-    npc.npcCount = 0;
+    npc.pool = {};
     for (uint32_t i = 0; i < npcTiles.size(); i++)
     {
         if (npcTiles[i].ID == 0)
             continue;
-        uint32_t n = npc.npcCount++;
+        int npcIndex = npcAlloc(npc, ctx.data.groups);
+        if (npcIndex == -1)
+            break;
+        uint32_t n = (uint32_t)npcIndex;
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         npc.statistics.prevHp[n] = NPC_HP;
@@ -38,7 +41,6 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
-        npc.groupId[n] = groupAlloc(ctx.data.groups);
 
         npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
 

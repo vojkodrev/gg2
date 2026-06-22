@@ -8,10 +8,14 @@ template<int N>
 inline void applyDamageTint(
     EntityBase<N> &entityBase,
     const Statistics<N> &statistics,
-    uint32_t count)
+    uint32_t count,
+    const bool *active = nullptr)
 {
     for (uint32_t i = 0; i < count; i++)
     {
+        if (active != nullptr && !active[i])
+            continue;
+
         if (!statistics.hpDirty[i] || statistics.hp[i] >= statistics.prevHp[i])
             continue;
 

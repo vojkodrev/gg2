@@ -22,8 +22,11 @@ void rotateEquipmentSystem(Context &ctx)
 
     auto &npcAmmo = ctx.data.npc.equipment.ammo;
     auto &npcWeapon = ctx.data.npc.equipment.weapon;
-    for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
+    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
     {
+        if (!ctx.data.npc.pool.active[i])
+            continue;
+
         if (npcWeapon.base.facing.dirty[i])
         {
             rotateEntityBase(npcWeapon.base, i);

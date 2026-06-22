@@ -5,6 +5,11 @@ void healthbarDepthSystem(Context &ctx)
 {
     ctx.data.player.healthbar.base.depthY[0] = ctx.data.player.base.depthY[0];
 
-    for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
+    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
+    {
+        if (!ctx.data.npc.pool.active[i])
+            continue;
+
         ctx.data.npc.healthbar.base.depthY[i] = ctx.data.npc.base.depthY[i];
+    }
 }

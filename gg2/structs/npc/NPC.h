@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "../core/Group.h"
 #include "../core/EntityBase.h"
 #include "../core/Statistics.h"
 #include "../equipment/Equipment.h"
@@ -9,7 +10,7 @@
 
 struct NPC
 {
-    uint32_t npcCount;
+    Pool<MAX_NPCS> pool;
     int groupId[MAX_NPCS] = {};
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;

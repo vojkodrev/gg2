@@ -9,8 +9,11 @@ void scaleEquipmentLocationSystem(Context &ctx)
     if (ctx.data.player.equipment.ammo.base.facing.dirty[0])
         scaleEntityBaseLocations(ctx.data.player.equipment.ammo.base, 0);
 
-    for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
+    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
     {
+        if (!ctx.data.npc.pool.active[i])
+            continue;
+
         if (ctx.data.npc.equipment.weapon.base.facing.dirty[i])
             scaleEntityBaseLocations(ctx.data.npc.equipment.weapon.base, i);
         if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
@@ -26,8 +29,11 @@ void scaleEquipmentLocationSystem(Context &ctx)
             0);
     }
 
-    for (uint32_t i = 0; i < ctx.data.npc.npcCount; i++)
+    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
     {
+        if (!ctx.data.npc.pool.active[i])
+            continue;
+
         if (!ctx.data.npc.equipment.weapon.base.facing.dirty[i])
             continue;
 

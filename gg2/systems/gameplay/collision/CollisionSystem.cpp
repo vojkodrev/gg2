@@ -22,11 +22,15 @@ void collisionSystem(Context &ctx)
 
         spatialHashInsert(ctx.collision.spatialHash, pBox, colIdMake(ColType::Player, 0));
 
-        for (uint32_t i = 0; i < npc.npcCount; i++)
+        for (uint32_t i = 0; i < npc.pool.count; i++)
+        {
+            if (!npc.pool.active[i])
+                continue;
             spatialHashInsert(
                 ctx.collision.spatialHash,
                 entityColAABB(npc.base, i),
                 colIdMake(ColType::NPC, i));
+        }
 
         for (uint32_t i = 0; i < object.objectCount; i++)
             spatialHashInsert(
@@ -38,13 +42,17 @@ void collisionSystem(Context &ctx)
     std::shared_lock readLock(ctx.collision.spatialHashMutex);
 
     collectCollisionPairsForEntity(ctx.collision.collisions, ctx, colIdMake(ColType::Player, 0), pBox, true);
-    for (uint32_t i = 0; i < npc.npcCount; i++)
+    for (uint32_t i = 0; i < npc.pool.count; i++)
+    {
+        if (!npc.pool.active[i])
+            continue;
         collectCollisionPairsForEntity(
             ctx.collision.collisions,
             ctx,
             colIdMake(ColType::NPC, i),
             entityColAABB(npc.base, i),
             true);
+    }
     for (uint32_t i = 0; i < object.objectCount; i++)
         collectCollisionPairsForEntity(
             ctx.collision.collisions,
