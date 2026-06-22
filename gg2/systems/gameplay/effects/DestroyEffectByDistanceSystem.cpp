@@ -3,7 +3,7 @@
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../effects/EffectFree.h"
+#include "../projectile/DestroyProjectile.h"
 #include "../../../utils/math/Dist.h"
 #include <cstdint>
 
@@ -27,6 +27,6 @@ void destroyEffectByDistanceSystem(Context &ctx)
                 ctx.data.effect.start.y[i]);
 
         if (distFromStart >= PROJECTILE_MAX_DISTANCE)
-            effectFree(ctx.data.effect, ctx.data.groups, i);
+            destroyProjectile(ctx, i);
     }
 }

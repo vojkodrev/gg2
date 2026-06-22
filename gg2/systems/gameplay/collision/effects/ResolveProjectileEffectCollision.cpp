@@ -2,7 +2,7 @@
 #include "ColIdIndex.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../effects/EffectFree.h"
+#include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 
 void resolveProjectileEffectCollision(
@@ -15,7 +15,7 @@ void resolveProjectileEffectCollision(
 
     if (otherType == ColType::Object)
     {
-        effectFree(effect, ctx.data.groups, effectIndex);
+        destroyProjectile(ctx, effectIndex);
         return;
     }
 
@@ -30,6 +30,6 @@ void resolveProjectileEffectCollision(
         ctx.data.npc.statistics.prevHp[npcIndex] = hp;
         ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
         ctx.data.npc.statistics.hp[npcIndex] = nextHp;
-        effectFree(effect, ctx.data.groups, effectIndex);
+        destroyProjectile(ctx, effectIndex);
     }
 }
