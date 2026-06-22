@@ -1,9 +1,9 @@
 #pragma once
-#include "../../structs/core/Group.h"
-#include "../../structs/npc/NPC.h"
-#include "../groups/GroupAlloc.h"
-#include "../pool/PoolAlloc.h"
-#include "../pool/PoolFree.h"
+#include "../../../structs/core/Group.h"
+#include "../../../structs/npc/NPC.h"
+#include "../../../utils/groups/GroupAlloc.h"
+#include "../../../utils/pool/PoolAlloc.h"
+#include "../../../utils/pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>
 inline int npcAlloc(NPC &npc, Group<TGroupCapacity> &groups)

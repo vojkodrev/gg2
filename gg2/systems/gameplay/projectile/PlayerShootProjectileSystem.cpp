@@ -1,7 +1,7 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
-#include "../../../utils/effects/EffectAlloc.h"
+#include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"

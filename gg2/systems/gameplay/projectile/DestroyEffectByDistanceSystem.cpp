@@ -3,7 +3,7 @@
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../../../utils/effects/EffectFree.h"
+#include "../effects/EffectFree.h"
 #include "../../../utils/math/Dist.h"
 #include <cstdint>
 

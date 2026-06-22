@@ -138,6 +138,7 @@ int main()
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
+
         cleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);

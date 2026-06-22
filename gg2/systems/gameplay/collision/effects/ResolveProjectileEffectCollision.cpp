@@ -2,7 +2,7 @@
 #include "ColIdIndex.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../../utils/effects/EffectFree.h"
+#include "../../effects/EffectFree.h"
 #include <algorithm>
 
 void resolveProjectileEffectCollision(

@@ -7,8 +7,8 @@
 #include "LoadHealthbar.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
-#include "../../utils/npc/NpcAlloc.h"
-#include "../../utils/npc/RandomTimer.h"
+#include "../gameplay/npc/NpcAlloc.h"
+#include "../../utils/timers/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
 
