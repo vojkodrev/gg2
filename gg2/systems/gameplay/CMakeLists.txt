@@ -18,9 +18,9 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
-    projectile/PlayerShootProjectileSystem.cpp
-    projectile/MoveEffectSystem.cpp
-    projectile/DestroyEffectByDistanceSystem.cpp
+    effects/PlayerShootProjectileSystem.cpp
+    effects/MoveEffectSystem.cpp
+    effects/DestroyEffectByDistanceSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp
