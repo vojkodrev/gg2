@@ -5,11 +5,16 @@ void animationSystem(Context &ctx)
 {
     uint64_t now = ctx.frame.now;
 
-    advanceAnimation(ctx.data.player.base.animation, 1u, now);
-    advanceAnimation(
-        ctx.data.npc.base.animation,
-        ctx.data.npc.pool.count,
-        now,
-        ctx.data.npc.pool.active);
-    advanceAnimation(ctx.data.object.base.animation, ctx.data.object.objectCount, now);
+    advanceAnimation(ctx.data.player.base.animation, 0, now);
+
+    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
+    {
+        if (!ctx.data.npc.pool.active[i])
+            continue;
+
+        advanceAnimation(ctx.data.npc.base.animation, i, now);
+    }
+
+    for (uint32_t i = 0; i < ctx.data.object.objectCount; i++)
+        advanceAnimation(ctx.data.object.base.animation, i, now);
 }
