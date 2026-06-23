@@ -21,6 +21,7 @@ add_library(systems_gameplay
     effects/PlayerShootProjectileSystem.cpp
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByDistanceSystem.cpp
+    npc/DestroyNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp

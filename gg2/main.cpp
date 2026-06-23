@@ -35,6 +35,7 @@
 #include "effects/PlayerShootProjectileSystem.h"
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectByDistanceSystem.h"
+#include "npc/DestroyNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -127,6 +128,8 @@ int main()
         effectDepthSystem(*ctx);
         effectCollisionSystem(*ctx);
         effectCollisionResolutionSystem(*ctx);
+
+        destroyNpcSystem(*ctx);
 
         showHealthbarSystem(*ctx);
         healthbarFrameSystem(*ctx);
