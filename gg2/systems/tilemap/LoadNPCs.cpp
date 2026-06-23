@@ -7,7 +7,7 @@
 #include "LoadHealthbar.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
-#include "../gameplay/npc/NpcAlloc.h"
+#include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/timers/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
@@ -20,14 +20,24 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     for (uint32_t i = 0; i < MAX_NPCS; i++)
         npc.active[i] = false;
 
+    uint32_t npcCount = 0;
     for (uint32_t i = 0; i < npcTiles.size(); i++)
     {
         if (npcTiles[i].ID == 0)
             continue;
-        int npcIndex = npcAlloc(npc, ctx.data.groups);
-        if (npcIndex == -1)
+
+        if (npcCount >= MAX_NPCS)
             break;
-        uint32_t n = (uint32_t)npcIndex;
+
+        uint32_t n = npcCount++;
+        npc.active[n] = true;
+
+        if (npc.groupId[n] == -1)
+            npc.groupId[n] = groupAlloc(ctx.data.groups);
+
+        if (npc.groupId[n] == -1)
+            break;
+
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         npc.statistics.prevHp[n] = NPC_HP;

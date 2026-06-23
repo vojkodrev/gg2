@@ -11,10 +11,16 @@
 struct NPC
 {
     bool active[MAX_NPCS] = {};
-    int groupId[MAX_NPCS] = {};
+    int groupId[MAX_NPCS];
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
+
+    NPC()
+    {
+        for (uint32_t i = 0; i < MAX_NPCS; i++)
+            groupId[i] = -1;
+    }
 };
