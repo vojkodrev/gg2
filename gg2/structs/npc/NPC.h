@@ -11,6 +11,8 @@
 struct NPC
 {
     bool active[MAX_NPCS] = {};
+    bool initialized[MAX_NPCS] = {};
+    float inactiveTimer[MAX_NPCS] = {};
     int groupId[MAX_NPCS];
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;

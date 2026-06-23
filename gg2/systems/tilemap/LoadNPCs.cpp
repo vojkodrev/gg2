@@ -18,7 +18,10 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &npc = ctx.data.npc;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
     for (uint32_t i = 0; i < MAX_NPCS; i++)
+    {
         npc.active[i] = false;
+        npc.initialized[i] = false;
+    }
 
     uint32_t npcCount = 0;
     for (uint32_t i = 0; i < npcTiles.size(); i++)
@@ -31,6 +34,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 
         uint32_t n = npcCount++;
         npc.active[n] = true;
+        npc.initialized[n] = true;
 
         if (npc.groupId[n] == -1)
             npc.groupId[n] = groupAlloc(ctx.data.groups);

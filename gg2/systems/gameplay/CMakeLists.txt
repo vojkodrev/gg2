@@ -22,6 +22,7 @@ add_library(systems_gameplay
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByDistanceSystem.cpp
     npc/DestroyNpcSystem.cpp
+    npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp

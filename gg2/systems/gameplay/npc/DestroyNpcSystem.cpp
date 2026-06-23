@@ -12,5 +12,6 @@ void destroyNpcSystem(Context &ctx)
             continue;
 
         ctx.data.npc.active[i] = false;
+        ctx.data.npc.inactiveTimer[i] = NPC_INACTIVE_TIME;
     }
 }

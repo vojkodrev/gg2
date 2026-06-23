@@ -36,6 +36,7 @@
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectByDistanceSystem.h"
 #include "npc/DestroyNpcSystem.h"
+#include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
@@ -102,6 +103,7 @@ int main()
         flipPlayerSystem(*ctx);
         playerDepthSystem(*ctx);
         
+        spawnNpcSystem(*ctx);
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
