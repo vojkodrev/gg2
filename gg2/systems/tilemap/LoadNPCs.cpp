@@ -4,10 +4,11 @@
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
+#include "LoadHealthbar.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
-#include "../../utils/npc/RandomTimer.h"
+#include "../../utils/timers/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
 #include <cstdio>
 
@@ -16,14 +17,37 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &props = ctx.data.tileMapProps;
     auto &npc = ctx.data.npc;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
-    npc.npcCount = 0;
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    {
+        npc.active[i] = false;
+        npc.initialized[i] = false;
+    }
+
+    uint32_t npcCount = 0;
     for (uint32_t i = 0; i < npcTiles.size(); i++)
     {
         if (npcTiles[i].ID == 0)
             continue;
-        uint32_t n = npc.npcCount++;
+
+        if (npcCount >= MAX_NPCS)
+            break;
+
+        uint32_t n = npcCount++;
+        npc.active[n] = true;
+        npc.initialized[n] = true;
+
+        if (npc.groupId[n] == -1)
+            npc.groupId[n] = groupAlloc(ctx.data.groups);
+
+        if (npc.groupId[n] == -1)
+            break;
+
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, i);
+        npc.statistics.prevHp[n] = NPC_HP;
+        npc.statistics.hp[n] = NPC_HP;
+        npc.statistics.hpDirty[n] = true;
+        npc.statistics.maxHp[n] = NPC_HP;
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;
@@ -32,7 +56,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.repathTimer[n] = 0.0f;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
-        npc.groupId[n] = groupAlloc(ctx.data.groups);
+        loadHealthbar(npc.healthbar, n, tileset, idx, props);
 
         npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
 

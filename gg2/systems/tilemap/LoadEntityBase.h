@@ -1,5 +1,6 @@
 #pragma once
 #include "../../structs/core/EntityBase.h"
+#include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "DecodeGridIndex.h"
 #include "IsMarker.h"
@@ -82,6 +83,7 @@ inline void loadEntityBase(
 
     entityData.position.w[parentEntityIdx] = entityData.position.initialW[parentEntityIdx] * entityData.scale[parentEntityIdx];
     entityData.position.h[parentEntityIdx] = entityData.position.initialH[parentEntityIdx] * entityData.scale[parentEntityIdx];
+    entityData.position.dirty[parentEntityIdx] = true;
 
     entityData.rotation.initialRotate[parentEntityIdx] = getTileFloatProp(tileset, entityTileIdx, "rotate", 0.0f);
     entityData.rotation.rotate[parentEntityIdx] = entityData.rotation.initialRotate[parentEntityIdx];
@@ -90,4 +92,10 @@ inline void loadEntityBase(
     entityData.facing.facing[parentEntityIdx] = entityFacing;
     entityData.facing.initialFacing[parentEntityIdx] = entityFacing;
     entityData.facing.dirty[parentEntityIdx] = true;
+
+    entityData.tint.r[parentEntityIdx] = CLEAR_TINT_R;
+    entityData.tint.g[parentEntityIdx] = CLEAR_TINT_G;
+    entityData.tint.b[parentEntityIdx] = CLEAR_TINT_B;
+    entityData.tint.a[parentEntityIdx] = CLEAR_TINT_A;
+    entityData.tint.clearTimer[parentEntityIdx] = 0.0f;
 }

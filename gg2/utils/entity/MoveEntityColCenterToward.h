@@ -22,8 +22,11 @@ inline void moveEntityColCenterToward(
     if (d == 0.0f)
         return;
 
-    base.position.x[index] += dx / d * speed * dt;
-    base.position.y[index] += dy / d * speed * dt;
+    const float moveX = dx / d * speed * dt;
+    const float moveY = dy / d * speed * dt;
+    base.position.dirty[index] = moveX != 0.0f || moveY != 0.0f;
+    base.position.x[index] += moveX;
+    base.position.y[index] += moveY;
 }
 
 template<int NBase, int NTarget>

@@ -1,4 +1,5 @@
 add_library(systems_gameplay
+    cleanup/CleanupSystem.cpp
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
@@ -9,6 +10,7 @@ add_library(systems_gameplay
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
     depth/EquipmentDepthSystem.cpp
+    depth/HealthbarDepthSystem.cpp
     depth/EffectDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
@@ -16,9 +18,11 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
-    projectile/PlayerShootProjectileSystem.cpp
-    projectile/MoveEffectSystem.cpp
-    projectile/DestroyEffectSystem.cpp
+    effects/PlayerShootProjectileSystem.cpp
+    effects/MoveEffectSystem.cpp
+    effects/DestroyEffectByDistanceSystem.cpp
+    npc/DestroyNpcSystem.cpp
+    npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/RunMonsterAi.cpp
@@ -48,7 +52,15 @@ add_library(systems_gameplay
     ai/astar/RunAStar.cpp
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
+    collision/effects/EffectCollisionSystem.cpp
+    collision/effects/EffectCollisionResolutionSystem.cpp
+    collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
+    ui/healthbar/ShowHealthbarSystem.cpp
+    ui/healthbar/HealthbarFrameSystem.cpp
+    ui/healthbar/HealthbarPositionSystem.cpp
+    tint/DamageTintSystem.cpp
+    tint/ClearTintSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )
@@ -56,6 +68,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/ai
     ${CMAKE_CURRENT_SOURCE_DIR}/collision
+    ${CMAKE_CURRENT_SOURCE_DIR}/collision/effects
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/pet
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/pool
     ${CMAKE_CURRENT_SOURCE_DIR}/ai/astar/node
@@ -67,5 +80,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
     ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
+    ${CMAKE_CURRENT_SOURCE_DIR}/tint
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/healthbar
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

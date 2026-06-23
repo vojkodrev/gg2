@@ -7,6 +7,7 @@ void playerMovementSystem(Context &ctx)
     auto &p = ctx.data.player;
     auto &kb = ctx.keyboard;
     float dx = 0.0f, dy = 0.0f;
+
     if (kb.w)
         dy -= 1.0f;
     if (kb.s)
@@ -21,6 +22,10 @@ void playerMovementSystem(Context &ctx)
         dx /= len;
         dy /= len;
     }
-    p.base.position.x[0] += dx * PLAYER_SPEED * ctx.frame.dt;
-    p.base.position.y[0] += dy * PLAYER_SPEED * ctx.frame.dt;
+
+    const float moveX = dx * PLAYER_SPEED * ctx.frame.dt;
+    const float moveY = dy * PLAYER_SPEED * ctx.frame.dt;
+    p.base.position.dirty[0] = moveX != 0.0f || moveY != 0.0f;
+    p.base.position.x[0] += moveX;
+    p.base.position.y[0] += moveY;
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "../../../structs/core/Context.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
-#include "../../../utils/npc/RandomTimer.h"
+#include "../../../utils/timers/RandomTimer.h"
 
 inline void setNpcAiStateIdle(uint32_t n, Context &ctx)
 {

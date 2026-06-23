@@ -13,6 +13,7 @@
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
+#include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -27,16 +28,26 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
+#include "depth/HealthbarDepthSystem.h"
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "projectile/PlayerShootProjectileSystem.h"
-#include "projectile/MoveEffectSystem.h"
-#include "projectile/DestroyEffectSystem.h"
+#include "effects/PlayerShootProjectileSystem.h"
+#include "effects/MoveEffectSystem.h"
+#include "effects/DestroyEffectByDistanceSystem.h"
+#include "npc/DestroyNpcSystem.h"
+#include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
 #include "animation/AnimationSystem.h"
 #include "CollisionSystem.h"
+#include "EffectCollisionSystem.h"
+#include "EffectCollisionResolutionSystem.h"
+#include "ui/healthbar/HealthbarFrameSystem.h"
+#include "ui/healthbar/HealthbarPositionSystem.h"
+#include "ui/healthbar/ShowHealthbarSystem.h"
+#include "tint/DamageTintSystem.h"
+#include "tint/ClearTintSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -92,6 +103,7 @@ int main()
         flipPlayerSystem(*ctx);
         playerDepthSystem(*ctx);
         
+        spawnNpcSystem(*ctx);
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
@@ -114,11 +126,25 @@ int main()
         
         playerShootProjectileSystem(*ctx);
         moveEffectSystem(*ctx);
-        destroyEffectSystem(*ctx);
+        destroyEffectByDistanceSystem(*ctx);
         effectDepthSystem(*ctx);
+        effectCollisionSystem(*ctx);
+        effectCollisionResolutionSystem(*ctx);
+
+        destroyNpcSystem(*ctx);
+
+        showHealthbarSystem(*ctx);
+        healthbarFrameSystem(*ctx);
+        healthbarPositionSystem(*ctx);
+        healthbarDepthSystem(*ctx);
+
+        damageTintSystem(*ctx);
+        clearTintSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
+
+        cleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

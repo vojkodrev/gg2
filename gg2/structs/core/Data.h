@@ -6,6 +6,7 @@
 #include "NPC.h"
 #include "Object.h"
 #include "Effect.h"
+#include "EffectTemplate.h"
 #include "Group.h"
 #include "constants/GroupConstants.h"
 #include "ActionState.h"
@@ -21,6 +22,7 @@ struct Data
     Object object;
     Group<MAX_GROUPS> groups;
     Effect effect;
+    EffectTemplate effectTemplate;
     ActionState action;
     DebugState debug;
 };

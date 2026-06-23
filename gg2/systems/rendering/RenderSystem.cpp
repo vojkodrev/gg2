@@ -26,8 +26,12 @@ void renderSystem(const Context &ctx)
         SDL_FPoint rotationCenter = {rb.rotationCenter.point.x[i], rb.rotationCenter.point.y[i]};
         SDL_FPoint *center = rb.rotationCenter.hasCenter[i] ? &rotationCenter : nullptr;
         SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+        SDL_SetTextureColorModFloat(ctx.texture, rb.tint.r[i], rb.tint.g[i], rb.tint.b[i]);
+        SDL_SetTextureAlphaModFloat(ctx.texture, rb.tint.a[i]);
         SDL_RenderTextureRotated(ctx.renderer, ctx.texture, &src, &dst, rb.src.rotate[i], center, flip);
     }
+    SDL_SetTextureColorModFloat(ctx.texture, 1.0f, 1.0f, 1.0f);
+    SDL_SetTextureAlphaModFloat(ctx.texture, 1.0f);
     debugRenderSystem(ctx);
 
     SDL_RenderPresent(ctx.renderer);

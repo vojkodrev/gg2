@@ -9,4 +9,5 @@ struct EntityPosition
     float initialH[N];
     float w[N];
     float h[N];
+    bool dirty[N];
 };

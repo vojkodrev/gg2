@@ -4,7 +4,7 @@
 #include "MoveColCenterToward.h"
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
-#include "../../../../utils/npc/RandomTimer.h"
+#include "../../../../utils/timers/RandomTimer.h"
 
 void followAStarPathTo(uint32_t n, Context &ctx, SDL_FRect targetCol)
 {

@@ -32,6 +32,10 @@ inline uint32_t fillEntityBaseRenderBuffer(
     rb.group.id[renderIndex] = groupId;
     rb.group.zIndex[renderIndex] = zIndex;
     rb.flipX[renderIndex] = entityBase.facing.flipX[entityIndex];
+    rb.tint.r[renderIndex] = entityBase.tint.r[entityIndex];
+    rb.tint.g[renderIndex] = entityBase.tint.g[entityIndex];
+    rb.tint.b[renderIndex] = entityBase.tint.b[entityIndex];
+    rb.tint.a[renderIndex] = entityBase.tint.a[entityIndex];
 
     return renderIndex;
 }

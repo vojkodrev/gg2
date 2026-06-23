@@ -8,7 +8,6 @@ void moveNpcColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float s
     const SDL_FPoint colCenter = entityColCenter(col);
     const float dx = target.x - colCenter.x;
 
-    npc.base.facing.dirty[n] = false;
     moveEntityColCenterToward(ctx, npc.base, n, target, speed);
 
     FacingDirection facing = npc.base.facing.facing[n];

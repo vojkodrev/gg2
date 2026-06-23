@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.1" name="texture" tilewidth="64" tileheight="64" tilecount="322" columns="14" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="322" columns="14" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
  <image source="../texture/texture.png" width="896" height="1472"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
    <property name="facing" value="right"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="weapon" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
@@ -16,6 +17,7 @@
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
@@ -32,6 +34,7 @@
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
+   <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
@@ -161,5 +164,18 @@
    <object id="1" name="collision" x="21.0821" y="6.00662" width="38.5131" height="37.3353"/>
    <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
   </objectgroup>
+ </tile>
+ <tile id="308">
+  <properties>
+   <property name="type" value="healthbar"/>
+  </properties>
+  <animation>
+   <frame tileid="313" duration="1000"/>
+   <frame tileid="312" duration="1000"/>
+   <frame tileid="311" duration="1000"/>
+   <frame tileid="310" duration="1000"/>
+   <frame tileid="309" duration="1000"/>
+   <frame tileid="308" duration="1000"/>
+  </animation>
  </tile>
 </tileset>

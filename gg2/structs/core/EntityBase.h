@@ -3,6 +3,7 @@
 #include "EntityPosition.h"
 #include "Facing.h"
 #include "Rotation.h"
+#include "Tint.h"
 
 template<int N>
 struct EntityBase
@@ -13,4 +14,5 @@ struct EntityBase
     float scale[N];
     Rotation<N> rotation;
     Facing<N> facing;
+    Tint<N> tint;
 };

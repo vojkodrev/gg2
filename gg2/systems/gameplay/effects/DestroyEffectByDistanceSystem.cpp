@@ -1,13 +1,13 @@
-#include "DestroyEffectSystem.h"
+#include "DestroyEffectByDistanceSystem.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../../../utils/effects/EffectFree.h"
+#include "../projectile/DestroyProjectile.h"
 #include "../../../utils/math/Dist.h"
 #include <cstdint>
 
-void destroyEffectSystem(Context &ctx)
+void destroyEffectByDistanceSystem(Context &ctx)
 {
     for (uint32_t i = 0; i < ctx.data.effect.pool.count; i++)
     {
@@ -27,6 +27,6 @@ void destroyEffectSystem(Context &ctx)
                 ctx.data.effect.start.y[i]);
 
         if (distFromStart >= PROJECTILE_MAX_DISTANCE)
-            effectFree(ctx.data.effect, ctx.data.groups, i);
+            destroyProjectile(ctx, i);
     }
 }

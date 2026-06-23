@@ -4,6 +4,7 @@
 #include "RenderSrc.h"
 #include "RenderDst.h"
 #include "RenderGroup.h"
+#include "RenderTint.h"
 #include "../core/RotationCenter.h"
 #include "../core/Facing.h"
 #include "RenderConstants.h"
@@ -17,6 +18,7 @@ struct RenderBuffer
     RotationCenter<MAX_RENDER_BUFFER> rotationCenter;
     
     RenderGroup group;
+    RenderTint tint;
     
     bool flipX[MAX_RENDER_BUFFER];
 };

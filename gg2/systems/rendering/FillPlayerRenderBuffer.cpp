@@ -1,6 +1,7 @@
 #include "FillPlayerRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
 #include "FillEquipmentRenderBuffer.h"
+#include "FillHealthbarRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillPlayerRenderBuffer(Context &ctx)
@@ -15,4 +16,5 @@ void fillPlayerRenderBuffer(Context &ctx)
         PARENT_Z_INDEX);
 
     fillEquipmentRenderBuffer(rb, player.equipment, 0, player.groupId);
+    fillHealthbarRenderBuffer(rb, player.healthbar, 0, player.groupId);
 }
