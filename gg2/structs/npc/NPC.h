@@ -10,7 +10,7 @@
 
 struct NPC
 {
-    Pool<MAX_NPCS> pool;
+    bool active[MAX_NPCS] = {};
     int groupId[MAX_NPCS] = {};
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;

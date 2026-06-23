@@ -2,20 +2,28 @@
 #include "../../../structs/core/Group.h"
 #include "../../../structs/npc/NPC.h"
 #include "../../../utils/groups/GroupAlloc.h"
-#include "../../../utils/pool/PoolAlloc.h"
-#include "../../../utils/pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>
 inline int npcAlloc(NPC &npc, Group<TGroupCapacity> &groups)
 {
-    int npcIndex = poolAlloc(npc.pool);
+    int npcIndex = -1;
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    {
+        if (npc.active[i])
+            continue;
+
+        npcIndex = (int)i;
+        npc.active[i] = true;
+        break;
+    }
+
     if (npcIndex == -1)
         return -1;
 
     int groupId = groupAlloc(groups);
     if (groupId == -1)
     {
-        poolFree(npc.pool, npcIndex);
+        npc.active[npcIndex] = false;
         return -1;
     }
 

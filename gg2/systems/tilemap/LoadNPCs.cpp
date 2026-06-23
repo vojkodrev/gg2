@@ -17,7 +17,9 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &props = ctx.data.tileMapProps;
     auto &npc = ctx.data.npc;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
-    npc.pool = {};
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
+        npc.active[i] = false;
+
     for (uint32_t i = 0; i < npcTiles.size(); i++)
     {
         if (npcTiles[i].ID == 0)

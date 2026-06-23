@@ -7,9 +7,9 @@ void animationSystem(Context &ctx)
 
     advanceAnimation(ctx.data.player.base.animation, 0, now);
 
-    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
-        if (!ctx.data.npc.pool.active[i])
+        if (!ctx.data.npc.active[i])
             continue;
 
         advanceAnimation(ctx.data.npc.base.animation, i, now);

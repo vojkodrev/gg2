@@ -14,7 +14,7 @@ inline void destroyProjectile(Context &ctx, uint32_t effectIndex)
             ctx.data.player.equipment.weapon.showAmmo[parentId] = true;
             break;
         case ParentType::NPC:
-            if (ctx.data.npc.pool.active[parentId])
+            if (ctx.data.npc.active[parentId])
                 ctx.data.npc.equipment.weapon.showAmmo[parentId] = true;
             break;
     }

@@ -8,9 +8,9 @@ void damageTintSystem(Context &ctx)
     applyDamageTint(ctx.data.player.equipment.weapon.base, ctx.data.player.statistics, 0);
     applyDamageTint(ctx.data.player.equipment.ammo.base, ctx.data.player.statistics, 0);
 
-    for (uint32_t i = 0; i < ctx.data.npc.pool.count; i++)
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
-        if (!ctx.data.npc.pool.active[i])
+        if (!ctx.data.npc.active[i])
             continue;
 
         applyDamageTint(ctx.data.npc.base, ctx.data.npc.statistics, i);

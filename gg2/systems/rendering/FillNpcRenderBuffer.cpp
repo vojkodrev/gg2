@@ -8,9 +8,9 @@ void fillNpcRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &npc = ctx.data.npc;
-    for (uint32_t i = 0; i < npc.pool.count; i++)
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
-        if (!npc.pool.active[i])
+        if (!npc.active[i])
             continue;
 
         int groupId = npc.groupId[i];
