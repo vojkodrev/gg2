@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="322" columns="14" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="896" height="1472"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="368" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1472"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
@@ -13,7 +13,7 @@
    <object id="2" name="anchor" x="35.6864" y="38.5131" width="10.1288" height="9.65771"/>
   </objectgroup>
  </tile>
- <tile id="20">
+ <tile id="22">
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
@@ -30,7 +30,7 @@
    <object id="2" name="anchor" x="18.7265" y="44.5197" width="7.18439" height="6.59551"/>
   </objectgroup>
  </tile>
- <tile id="34">
+ <tile id="38">
   <properties>
    <property name="AI" type="int" value="1"/>
    <property name="facing" value="left"/>
@@ -48,12 +48,12 @@
    <object id="2" name="anchor" x="18.8443" y="39.102" width="9.77549" height="8.95105"/>
   </objectgroup>
  </tile>
- <tile id="38">
+ <tile id="42">
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="10.75" y="29.5" width="29.75" height="18.5"/>
   </objectgroup>
  </tile>
- <tile id="48">
+ <tile id="54">
   <properties>
    <property name="colH" type="int" value="26"/>
    <property name="colOffX" type="int" value="126"/>
@@ -66,7 +66,7 @@
    <property name="y" type="int" value="17"/>
   </properties>
  </tile>
- <tile id="58">
+ <tile id="66">
   <properties>
    <property name="colH" type="int" value="51"/>
    <property name="colOffX" type="int" value="0"/>
@@ -80,7 +80,7 @@
    <property name="y" type="int" value="280"/>
   </properties>
  </tile>
- <tile id="98">
+ <tile id="112">
   <properties>
    <property name="AI" type="int" value="2"/>
    <property name="facing" value="right"/>
@@ -89,26 +89,26 @@
    <object id="3" name="collision" x="16.6667" y="40.6667" width="33.6667" height="15.6667"/>
   </objectgroup>
  </tile>
- <tile id="112">
+ <tile id="128">
   <objectgroup draworder="index" id="3">
    <object id="3" name="collision" x="5.49708" y="44.6784" width="52.5146" height="19.4152"/>
   </objectgroup>
   <animation>
-   <frame tileid="112" duration="100"/>
-   <frame tileid="113" duration="100"/>
-   <frame tileid="114" duration="100"/>
-   <frame tileid="115" duration="100"/>
-   <frame tileid="116" duration="100"/>
-   <frame tileid="117" duration="100"/>
-   <frame tileid="118" duration="100"/>
-   <frame tileid="119" duration="100"/>
-   <frame tileid="120" duration="100"/>
-   <frame tileid="121" duration="100"/>
-   <frame tileid="122" duration="100"/>
-   <frame tileid="123" duration="100"/>
+   <frame tileid="128" duration="100"/>
+   <frame tileid="129" duration="100"/>
+   <frame tileid="130" duration="100"/>
+   <frame tileid="131" duration="100"/>
+   <frame tileid="132" duration="100"/>
+   <frame tileid="133" duration="100"/>
+   <frame tileid="134" duration="100"/>
+   <frame tileid="135" duration="100"/>
+   <frame tileid="136" duration="100"/>
+   <frame tileid="137" duration="100"/>
+   <frame tileid="138" duration="100"/>
+   <frame tileid="139" duration="100"/>
   </animation>
  </tile>
- <tile id="169">
+ <tile id="193">
   <properties>
    <property name="animationAngleStart" type="float" value="-20"/>
    <property name="animationAngleStop" type="float" value="110"/>
@@ -122,7 +122,7 @@
    <object id="3" name="anchor" x="12.3666" y="44.9908" width="5.88885" height="6.59551"/>
   </objectgroup>
  </tile>
- <tile id="170">
+ <tile id="194">
   <properties>
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
@@ -132,7 +132,7 @@
    <object id="4" name="anchor" x="18.491" y="40.6331" width="5.29996" height="5.18219"/>
   </objectgroup>
  </tile>
- <tile id="188">
+ <tile id="214">
   <properties>
    <property name="rotate" type="float" value="45"/>
    <property name="scale" type="float" value="1"/>
@@ -143,7 +143,7 @@
    <object id="2" name="collision" x="39.5771" y="6.34525" width="18.3905" height="19.7886"/>
   </objectgroup>
  </tile>
- <tile id="227">
+ <tile id="259">
   <properties>
    <property name="rotate" type="float" value="-135"/>
    <property name="scale" type="float" value="1"/>
@@ -154,7 +154,7 @@
    <object id="2" name="ammoAnchor" x="30.4357" y="22.4772" width="9.78674" height="9.57164"/>
   </objectgroup>
  </tile>
- <tile id="253">
+ <tile id="289">
   <properties>
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
@@ -165,17 +165,17 @@
    <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
   </objectgroup>
  </tile>
- <tile id="308">
+ <tile id="352">
   <properties>
    <property name="type" value="healthbar"/>
   </properties>
   <animation>
-   <frame tileid="313" duration="1000"/>
-   <frame tileid="312" duration="1000"/>
-   <frame tileid="311" duration="1000"/>
-   <frame tileid="310" duration="1000"/>
-   <frame tileid="309" duration="1000"/>
-   <frame tileid="308" duration="1000"/>
+   <frame tileid="357" duration="1000"/>
+   <frame tileid="356" duration="1000"/>
+   <frame tileid="355" duration="1000"/>
+   <frame tileid="354" duration="1000"/>
+   <frame tileid="353" duration="1000"/>
+   <frame tileid="352" duration="1000"/>
   </animation>
  </tile>
-</tileset>
+ </tileset>

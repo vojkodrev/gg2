@@ -5,9 +5,9 @@ from PIL import Image, ImageDraw, ImageFont
 FONT_FILENAME = "../boldpixels.ttf"
 OUTPUT_FILENAME = "../boldpixels.png"
 
-FONT_SIZE = 16
-GLYPH_W = 8
-GLYPH_H = 16
+FONT_SIZE = 32
+GLYPH_W = 16
+GLYPH_H = 32
 GRID_W = 16
 GLYPH_COUNT = 256
 
