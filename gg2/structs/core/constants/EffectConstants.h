@@ -1,3 +1,3 @@
 #pragma once
 
-const int MAX_EFFECTS = 100;
+const int MAX_EFFECTS = 10000;
