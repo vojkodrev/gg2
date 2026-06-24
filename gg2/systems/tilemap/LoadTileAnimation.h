@@ -31,8 +31,8 @@ void loadTileAnimation(
         for (int f = 0; f < frameCount; f++)
         {
             uint32_t fid = tileData->animation.frames[f].tileID - props.firstGid;
-            animation.frame.src.x[n][f] = fid % props.columns * props.srcTileW;
-            animation.frame.src.y[n][f] = fid / props.columns * props.srcTileH;
+            animation.frame.src.x[n][f] = fid % props.tilesetW * props.srcTileW;
+            animation.frame.src.y[n][f] = fid / props.tilesetW * props.srcTileH;
             animation.frame.src.w[n][f] = props.srcTileW;
             animation.frame.src.h[n][f] = props.srcTileH;
             animation.frame.anchor.initialOffX[n][f] = anchor.x;
@@ -58,8 +58,8 @@ void loadTileAnimation(
     {
         animation.animationType[n] = AnimationType::None;
         animation.frameCount[n] = 1;
-        animation.frame.src.x[n][0] = idx % props.columns * props.srcTileW;
-        animation.frame.src.y[n][0] = idx / props.columns * props.srcTileH;
+        animation.frame.src.x[n][0] = idx % props.tilesetW * props.srcTileW;
+        animation.frame.src.y[n][0] = idx / props.tilesetW * props.srcTileH;
         animation.frame.src.w[n][0] = props.srcTileW;
         animation.frame.src.h[n][0] = props.srcTileH;
         animation.frame.anchor.initialOffX[n][0] = anchor.x;
