@@ -17,18 +17,15 @@ inline void spawnTextEffect(
     uint32_t npcIndex,
     const std::string &text)
 {
-    const float digitScale = 0.75f;
-    const float digitW = FONT_GLYPH_W * digitScale;
-    const float digitH = FONT_GLYPH_H * digitScale;
     const auto &templateBase = ctx.data.effectTemplate.base;
     const SDL_FPoint npcColCenter = entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
     const float totalW =
-        text.size() * digitW +
+        text.size() * FONT_GLYPH_W +
         std::max<int>(0, static_cast<int>(text.size()) - 1) * DAMAGE_NUMBER_DIGIT_SEPARATOR;
     const float startX = npcColCenter.x - totalW * 0.5f;
     const float posY =
         ctx.data.npc.base.position.y[npcIndex] -
-        digitH -
+        FONT_GLYPH_H -
         DAMAGE_NUMBER_DISTANCE_FROM_ENTITY;
 
     for (uint32_t i = 0; i < text.size(); i++)
@@ -55,12 +52,8 @@ inline void spawnTextEffect(
         ctx.data.effect.target.x[effectIndex] = 0.0f;
         ctx.data.effect.target.y[effectIndex] = 0.0f;
         ctx.data.effect.base.position.x[effectIndex] =
-            startX + i * (digitW + DAMAGE_NUMBER_DIGIT_SEPARATOR);
+            startX + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = posY;
-        ctx.data.effect.base.position.w[effectIndex] = digitW;
-        ctx.data.effect.base.position.h[effectIndex] = digitH;
-        ctx.data.effect.base.position.initialW[effectIndex] = digitW;
-        ctx.data.effect.base.position.initialH[effectIndex] = digitH;
         ctx.data.effect.base.tint.r[effectIndex] = DAMAGE_NUMBER_TINT_R;
         ctx.data.effect.base.tint.g[effectIndex] = DAMAGE_NUMBER_TINT_G;
         ctx.data.effect.base.tint.b[effectIndex] = DAMAGE_NUMBER_TINT_B;
