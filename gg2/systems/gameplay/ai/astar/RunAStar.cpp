@@ -19,11 +19,16 @@
 
 static const int MAX_NEIGHBORS = 8;
 
-int runAStar(AStarContext& astar, Context& ctx,
-             int npcIndex, const SDL_FRect& destCol,
-             int* pathOut)
+template<uint32_t N>
+int runAStar(
+    AStarContext<N>& astar, 
+    uint32_t astarIndex, 
+    Context& ctx,
+    int npcIndex, 
+    const SDL_FRect& destCol,
+    int* pathOut)
 {
-    astar.status.store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
+    astar.status[astarIndex].store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
 
     Uint64 startTime = SDL_GetTicks();
 
@@ -35,7 +40,7 @@ int runAStar(AStarContext& astar, Context& ctx,
     SDL_FRect startCol = entityColAABB(ctx.data.npc.base, npcIndex);
     SDL_FPoint startCenter = entityColCenter(startCol);
 
-    astar.generation++;
+    astar.generation[astarIndex]++;
     SDL_FPoint goalCenter = entityColCenter(destCol);
 
     int minX = (int)SDL_min(startCenter.x, goalCenter.x) - ASTAR_SEARCH_PAD;
@@ -43,65 +48,65 @@ int runAStar(AStarContext& astar, Context& ctx,
     int maxX = (int)SDL_max(startCenter.x, goalCenter.x) + ASTAR_SEARCH_PAD;
     int maxY = (int)SDL_max(startCenter.y, goalCenter.y) + ASTAR_SEARCH_PAD;
 
-    astar.searchX = minX;
-    astar.searchY = minY;
-    astar.searchW = maxX - minX + 1;
-    astar.searchH = maxY - minY + 1;
+    astar.searchX[astarIndex] = minX;
+    astar.searchY[astarIndex] = minY;
+    astar.searchW[astarIndex] = maxX - minX + 1;
+    astar.searchH[astarIndex] = maxY - minY + 1;
 
-    int startNode = astarEncode(astar, { (int)startCenter.x, (int)startCenter.y });
+    int startNode = astarEncode(astar, astarIndex, { (int)startCenter.x, (int)startCenter.y });
 
-    astar.fscoreHeap.size = 0;
+    astar.fscoreHeap.size[astarIndex] = 0;
 
-    float h = astarH(astar, startNode, goalCenter);
-    hashMapInsert(astar.gscores,  startNode, astar.generation, 0.0f);
-    minHeapPush(astar.fscoreHeap, startNode, h);
+    float h = astarH(astar, astarIndex, startNode, goalCenter);
+    hashMapInsert(astar.gscores, astarIndex, startNode, astar.generation[astarIndex], 0.0f);
+    minHeapPush(astar.fscoreHeap, astarIndex, startNode, h);
 
-    while (!minHeapEmpty(astar.fscoreHeap))
+    while (!minHeapEmpty(astar.fscoreHeap, astarIndex))
     {
-        int current = minHeapPop(astar.fscoreHeap);
+        int current = minHeapPop(astar.fscoreHeap, astarIndex);
 
-        if (hashMapContains(astar.closed, current, astar.generation))
+        if (hashMapContains(astar.closed, astarIndex, current, astar.generation[astarIndex]))
             continue;
 
-        hashMapInsert(astar.closed, current, astar.generation);
+        hashMapInsert(astar.closed, astarIndex, current, astar.generation[astarIndex]);
 
-        if (isGoalReached(astar, destCol, current))
+        if (isGoalReached(astar, astarIndex, destCol, current))
         {
 #ifndef NDEBUG
             SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
 #endif
-            int length = reconstructPath(astar, current, goalCenter, pathOut);
-            astar.status.store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
+            int length = reconstructPath(astar, astarIndex, current, goalCenter, pathOut);
+            astar.status[astarIndex].store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
             return length;
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, ctx, current, npcIndex, neighbors);
+        int count = getNeighbors(astar, astarIndex, ctx, current, npcIndex, neighbors);
 
         float gCurrent;
-        if (!hashMapTryGet(astar.gscores, current, astar.generation, gCurrent))
+        if (!hashMapTryGet(astar.gscores, astarIndex, current, astar.generation[astarIndex], gCurrent))
             continue;
 
         for (int i = 0; i < count; i++)
         {
             int nb = neighbors[i];
-            if (hashMapContains(astar.closed, nb, astar.generation))
+            if (hashMapContains(astar.closed, astarIndex, nb, astar.generation[astarIndex]))
                 continue;
 
-            float tentativeG = gCurrent + astarD(astar, current, nb);
+            float tentativeG = gCurrent + astarD(astar, astarIndex, current, nb);
 
             float existingG;
-            if (hashMapTryGet(astar.gscores, nb, astar.generation, existingG) &&
+            if (hashMapTryGet(astar.gscores, astarIndex, nb, astar.generation[astarIndex], existingG) &&
                 tentativeG >= existingG)
                 continue;
 
-            hashMapInsert(astar.gscores,  nb, astar.generation, tentativeG);
-            hashMapInsert(astar.cameFrom, nb, astar.generation, current);
-            minHeapPush(astar.fscoreHeap, nb, tentativeG + astarH(astar, nb, goalCenter));
+            hashMapInsert(astar.gscores, astarIndex, nb, astar.generation[astarIndex], tentativeG);
+            hashMapInsert(astar.cameFrom, astarIndex, nb, astar.generation[astarIndex], current);
+            minHeapPush(astar.fscoreHeap, astarIndex, nb, tentativeG + astarH(astar, astarIndex, nb, goalCenter));
         }
     }
 
-    astar.status.store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
+    astar.status[astarIndex].store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
 #ifndef NDEBUG
     SDL_Log("AStar: path not found (%.2f ms)", (float)(SDL_GetTicks() - startTime));
 #endif
