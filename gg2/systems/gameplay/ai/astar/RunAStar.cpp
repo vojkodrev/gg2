@@ -16,6 +16,7 @@
 #include "../../../../utils/hashmap/HashMapInsertVoid.h"
 #include "../../../../utils/hashmap/HashMapContains.h"
 #include "../../../../utils/hashmap/HashMapTryGet.h"
+#include "../../../../utils/collision/spatialhash/CopySpatialHash.h"
 
 static const int MAX_NEIGHBORS = 8;
 
@@ -34,7 +35,7 @@ int runAStar(
 
     {
         std::shared_lock lock(ctx.collision.spatialHashMutex);
-        astar.colHashSnapshot = ctx.collision.spatialHash;
+        copySpatialHash(astar.colHashSnapshot, astarIndex, ctx.collision.spatialHash, 0);
     }
 
     SDL_FRect startCol = entityColAABB(ctx.data.npc.base, npcIndex);
