@@ -9,7 +9,7 @@ void loadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &tileMap = ctx.data.tileMap;
     props.srcTileW = tileset.getTileSize().x;
     props.srcTileH = tileset.getTileSize().y;
-    props.columns = tileset.getColumnCount();
+    props.tilesetW = tileset.getColumnCount();
     props.mapW = map.getTileCount().x;
     props.dstTileW = map.getTileSize().x;
     props.dstTileH = map.getTileSize().y;
@@ -24,8 +24,8 @@ void loadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t n = tileMap.tileCount++;
         uint32_t idx = gid - props.firstGid;
-        tileMap.tiles.srcX[n] = idx % props.columns * props.srcTileW;
-        tileMap.tiles.srcY[n] = idx / props.columns * props.srcTileH;
+        tileMap.tiles.srcX[n] = idx % props.tilesetW * props.srcTileW;
+        tileMap.tiles.srcY[n] = idx / props.tilesetW * props.srcTileH;
         SDL_Point grid = decodeGridIndex(i, props.mapW);
         tileMap.tiles.dstX[n] = grid.x * props.dstTileW;
         tileMap.tiles.dstY[n] = grid.y * props.dstTileH;

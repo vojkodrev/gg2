@@ -63,6 +63,7 @@ images = [
     {"id": 27, "filename": "../healthbars.png", "dx": 3, "dy": 22, "sx": 4 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 28, "filename": "../healthbars.png", "dx": 4, "dy": 22, "sx": 5 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 29, "filename": "../healthbars.png", "dx": 5, "dy": 22, "sx": 6 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 30, "filename": "../font/boldpixels.png", "dx": 12, "dy": 0},
 ]
 
 

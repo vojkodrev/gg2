@@ -1,6 +1,8 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/constants/TintConstants.h"
+#include "../../../structs/effect/DestroyEffectType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
@@ -26,11 +28,17 @@ void playerShootProjectileSystem(Context &ctx)
             return;
 
         ctx.data.effect.type[effectIndex] = EffectType::Projectile;
+        ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::Distance;
+        ctx.data.effect.destroyDistance[effectIndex] = PROJECTILE_MAX_DISTANCE;
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
 
         auto &effectBase = ctx.data.effect.base;
+        effectBase.tint.r[effectIndex] = CLEAR_TINT_R;
+        effectBase.tint.g[effectIndex] = CLEAR_TINT_G;
+        effectBase.tint.b[effectIndex] = CLEAR_TINT_B;
+        effectBase.tint.a[effectIndex] = CLEAR_TINT_A;
         const int frameIndex = effectBase.animation.frameIndex[effectIndex];
         const SDL_FRect originalAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
         const SDL_FPoint originalAnchorCenterWorld =

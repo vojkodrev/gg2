@@ -1,6 +1,5 @@
 #include "DestroyEffectByDistanceSystem.h"
-#include "../../../structs/core/constants/ProjectileConstants.h"
-#include "../../../structs/effect/EffectType.h"
+#include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../projectile/DestroyProjectile.h"
@@ -14,7 +13,7 @@ void destroyEffectByDistanceSystem(Context &ctx)
         if (!ctx.data.effect.pool.active[i])
             continue;
 
-        if (ctx.data.effect.type[i] != EffectType::Projectile)
+        if (ctx.data.effect.destroyType[i] != DestroyEffectType::Distance)
             continue;
 
         const SDL_FPoint effectColCenter =
@@ -26,7 +25,7 @@ void destroyEffectByDistanceSystem(Context &ctx)
                 ctx.data.effect.start.x[i],
                 ctx.data.effect.start.y[i]);
 
-        if (distFromStart >= PROJECTILE_MAX_DISTANCE)
+        if (distFromStart >= ctx.data.effect.destroyDistance[i])
             destroyProjectile(ctx, i);
     }
 }

@@ -21,6 +21,7 @@ add_library(systems_gameplay
     effects/PlayerShootProjectileSystem.cpp
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByDistanceSystem.cpp
+    effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
