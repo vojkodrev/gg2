@@ -1,6 +1,7 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
@@ -34,6 +35,10 @@ void playerShootProjectileSystem(Context &ctx)
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
 
         auto &effectBase = ctx.data.effect.base;
+        effectBase.tint.r[effectIndex] = CLEAR_TINT_R;
+        effectBase.tint.g[effectIndex] = CLEAR_TINT_G;
+        effectBase.tint.b[effectIndex] = CLEAR_TINT_B;
+        effectBase.tint.a[effectIndex] = CLEAR_TINT_A;
         const int frameIndex = effectBase.animation.frameIndex[effectIndex];
         const SDL_FRect originalAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
         const SDL_FPoint originalAnchorCenterWorld =

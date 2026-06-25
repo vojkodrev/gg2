@@ -3,5 +3,6 @@
 enum class EffectType : int
 {
     None,
-    Projectile
+    Projectile,
+    DamageNumber
 };

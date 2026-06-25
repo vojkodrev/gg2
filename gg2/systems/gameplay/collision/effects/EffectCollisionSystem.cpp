@@ -1,5 +1,6 @@
 #include "EffectCollisionSystem.h"
 #include <shared_mutex>
+#include "../../../structs/effect/EffectType.h"
 #include "CollectCollisionPairsForEntity.h"
 #include "EntityColAABB.h"
 #include "ColIdMake.h"
@@ -17,6 +18,9 @@ void effectCollisionSystem(Context &ctx)
             if (!effect.pool.active[i])
                 continue;
 
+            if (effect.type[i] != EffectType::Projectile)
+                continue;
+
             spatialHashInsert(
                 ctx.collision.spatialHash,
                 entityColAABB(effect.base, i),
@@ -28,6 +32,9 @@ void effectCollisionSystem(Context &ctx)
     for (uint32_t i = 0; i < effect.pool.count; i++)
     {
         if (!effect.pool.active[i])
+            continue;
+
+        if (effect.type[i] != EffectType::Projectile)
             continue;
 
         collectCollisionPairsForEntity(
