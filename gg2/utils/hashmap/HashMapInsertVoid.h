@@ -2,11 +2,11 @@
 #include "HashMap.h"
 #include "HashMapFindSlot.h"
 
-template<int Size>
-void hashMapInsert(HashMap<void, Size>& map, int node, int generation)
+template<int N, int Size>
+void hashMapInsert(HashMap<N, Size, void>& map, int index, int node, int generation)
 {
-    int s = hashMapFindSlot(map, node, generation);
+    int s = hashMapFindSlot(map, index, node, generation);
     if (s == -1) return;
-    map.node[s] = node;
-    map.gen[s]  = generation;
+    map.node[index][s] = node;
+    map.gen[index][s]  = generation;
 }

@@ -1,17 +1,24 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "SpatialHash.h"
+#include "SpatialHashConstants.h"
 #include "SpatialHashQueryCell.h"
 
-inline int spatialHashQuery(const SpatialHash &sh, SDL_FRect rect, uint32_t *out, int maxOut)
+template<uint32_t N>
+inline int spatialHashQuery(
+    const SpatialHash<N> &sh,
+    uint32_t index,
+    SDL_FRect rect,
+    uint32_t *out,
+    int maxOut)
 {
-    int minCx = (int)(rect.x / SpatialHash::CELL_SIZE);
-    int minCy = (int)(rect.y / SpatialHash::CELL_SIZE);
-    int maxCx = (int)((rect.x + rect.w) / SpatialHash::CELL_SIZE);
-    int maxCy = (int)((rect.y + rect.h) / SpatialHash::CELL_SIZE);
+    int minCx = (int)(rect.x / SPATIAL_HASH_CELL_SIZE);
+    int minCy = (int)(rect.y / SPATIAL_HASH_CELL_SIZE);
+    int maxCx = (int)((rect.x + rect.w) / SPATIAL_HASH_CELL_SIZE);
+    int maxCy = (int)((rect.y + rect.h) / SPATIAL_HASH_CELL_SIZE);
     int total = 0;
     for (int cy = minCy; cy <= maxCy && total < maxOut; cy++)
         for (int cx = minCx; cx <= maxCx && total < maxOut; cx++)
-            total += spatialHashQueryCell(sh, cx, cy, out + total, maxOut - total);
+            total += spatialHashQueryCell(sh, index, cx, cy, out + total, maxOut - total);
     return total;
 }

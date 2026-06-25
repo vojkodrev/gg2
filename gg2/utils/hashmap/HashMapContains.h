@@ -2,9 +2,9 @@
 #include "HashMap.h"
 #include "HashMapFindSlot.h"
 
-template<typename T, int Size>
-bool hashMapContains(const HashMap<T, Size>& map, int node, int generation)
+template<int N, typename T, int Size>
+bool hashMapContains(const HashMap<N, Size, T>& map, int index, int node, int generation)
 {
-    int s = hashMapFindSlot(map, node, generation);
-    return s != -1 && map.gen[s] == generation && map.node[s] == node;
+    int s = hashMapFindSlot(map, index, node, generation);
+    return s != -1 && map.gen[index][s] == generation && map.node[index][s] == node;
 }
