@@ -7,15 +7,21 @@
 static const int DIR_X[8] = {  1, -1,  0,  0,  1,  1, -1, -1 };
 static const int DIR_Y[8] = {  0,  0,  1, -1,  1, -1,  1, -1 };
 
-int getNeighbors(const AStarContext& astar, const Context& ctx,
-                 int node, int npcIndex, int* neighborsOut)
+template<uint32_t N>
+int getNeighbors(
+    const AStarContext<N>& astar,
+    uint32_t astarIndex,
+    const Context& ctx,
+    int node,
+    int npcIndex,
+    int* neighborsOut)
 {
-    SDL_Point c = astarDecode(astar, node);
+    SDL_Point c = astarDecode(astar, astarIndex, node);
 
-    int minX = astar.searchX;
-    int minY = astar.searchY;
-    int maxX = astar.searchX + astar.searchW - 1;
-    int maxY = astar.searchY + astar.searchH - 1;
+    int minX = astar.searchX[astarIndex];
+    int minY = astar.searchY[astarIndex];
+    int maxX = astar.searchX[astarIndex] + astar.searchW[astarIndex] - 1;
+    int maxY = astar.searchY[astarIndex] + astar.searchH[astarIndex] - 1;
 
     int count = 0;
     for (int d = 0; d < 8; d++)
@@ -26,10 +32,10 @@ int getNeighbors(const AStarContext& astar, const Context& ctx,
         if (nb.x < minX || nb.x > maxX || nb.y < minY || nb.y > maxY)
             continue;
 
-        if (isBlocked(astar, ctx, nb, npcIndex))
+        if (isBlocked(astar, astarIndex, ctx, nb, npcIndex))
             continue;
 
-        neighborsOut[count++] = astarEncode(astar, nb);
+        neighborsOut[count++] = astarEncode(astar, astarIndex, nb);
     }
     return count;
 }

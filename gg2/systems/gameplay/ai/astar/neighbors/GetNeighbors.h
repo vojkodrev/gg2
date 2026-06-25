@@ -2,5 +2,11 @@
 #include "../../../../../structs/gameplay/ai/AStarContext.h"
 #include "../../../../../structs/core/Context.h"
 
-int getNeighbors(const AStarContext& astar, const Context& ctx,
-                 int node, int npcIndex, int* neighborsOut);
+template<uint32_t N>
+int getNeighbors(
+    const AStarContext<N>& astar,
+    uint32_t astarIndex,
+    const Context& ctx,
+    int node,
+    int npcIndex,
+    int* neighborsOut);

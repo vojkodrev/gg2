@@ -2,12 +2,13 @@
 #include "../../../../../utils/hashmap/HashMapTryGet.h"
 #include "../node/AStarEncode.h"
 
-int reconstructPath(AStarContext& ctx, int current, SDL_FPoint goalCenter, int* path)
+template<uint32_t N>
+int reconstructPath(AStarContext<N>& ctx, uint32_t astarIndex, int current, SDL_FPoint goalCenter, int* path)
 {
     int pathLen = 0;
 
     int parent;
-    while (hashMapTryGet(ctx.cameFrom, current, ctx.generation, parent))
+    while (hashMapTryGet(ctx.cameFrom, astarIndex, current, ctx.generation[astarIndex], parent))
     {
         if (pathLen < ASTAR_MAX_PATH)
             path[pathLen++] = current;
@@ -23,7 +24,7 @@ int reconstructPath(AStarContext& ctx, int current, SDL_FPoint goalCenter, int* 
     }
 
     if (pathLen < ASTAR_MAX_PATH)
-        path[pathLen++] = astarEncode(ctx, { (int)goalCenter.x, (int)goalCenter.y });
+        path[pathLen++] = astarEncode(ctx, astarIndex, { (int)goalCenter.x, (int)goalCenter.y });
 
     return pathLen;
 }
