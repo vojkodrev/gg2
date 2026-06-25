@@ -8,8 +8,10 @@
 #include "../../../../utils/Defer.h"
 #include <future>
 
-void requestAStarPath(Context& ctx, int npcIndex,
-                      const SDL_FRect& destCol)
+void requestAStarPath(
+    Context& ctx, 
+    int npcIndex,
+    const SDL_FRect& destCol)
 {
     NPCAi& npcAi = ctx.data.npc.ai;
 
@@ -19,10 +21,10 @@ void requestAStarPath(Context& ctx, int npcIndex,
     if (astarIndex == -1)
         return;
 
-    AStarContext& astar = ctx.astarPool.ctx[astarIndex];
-    astar.status.store(AStarStatus::STARTED, std::memory_order_relaxed);
+    auto& astar = ctx.astarPool.ctx;
+    astar.status[astarIndex].store(AStarStatus::STARTED, std::memory_order_relaxed);
 
-    astar.future = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, destCol]()
+    astar.future[astarIndex] = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, destCol]()
     {
         defer(astarFree(ctx.astarPool, astarIndex));
 
@@ -30,13 +32,13 @@ void requestAStarPath(Context& ctx, int npcIndex,
         npcAi.path.status[npcIndex].store(NPCPathStatus::WAITING_FOR_PATH, std::memory_order_relaxed);
 
         int pathBuffer[ASTAR_MAX_PATH];
-        int length = runAStar(astar, ctx, npcIndex, destCol, pathBuffer);
+        int length = runAStar(astar, astarIndex, ctx, npcIndex, destCol, pathBuffer);
 
         if (length > 0)
         {
             for (int i = 0; i < length; i++)
             {
-                SDL_Point p = astarDecode(astar, pathBuffer[i]);
+                SDL_Point p = astarDecode(astar, astarIndex, pathBuffer[i]);
                 npcAi.path.point.x[npcIndex][i] = p.x;
                 npcAi.path.point.y[npcIndex][i] = p.y;
             }

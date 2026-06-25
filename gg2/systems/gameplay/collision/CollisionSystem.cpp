@@ -18,9 +18,9 @@ void collisionSystem(Context &ctx)
     SDL_FRect pBox = entityColAABB(player.base, 0);
     {
         std::unique_lock lock(ctx.collision.spatialHashMutex);
-        spatialHashClear(ctx.collision.spatialHash);
+        spatialHashClear(ctx.collision.spatialHash, 0);
 
-        spatialHashInsert(ctx.collision.spatialHash, pBox, colIdMake(ColType::Player, 0));
+        spatialHashInsert(ctx.collision.spatialHash, 0, pBox, colIdMake(ColType::Player, 0));
 
         for (uint32_t i = 0; i < MAX_NPCS; i++)
         {
@@ -28,6 +28,7 @@ void collisionSystem(Context &ctx)
                 continue;
             spatialHashInsert(
                 ctx.collision.spatialHash,
+                0,
                 entityColAABB(npc.base, i),
                 colIdMake(ColType::NPC, i));
         }
@@ -35,6 +36,7 @@ void collisionSystem(Context &ctx)
         for (uint32_t i = 0; i < object.objectCount; i++)
             spatialHashInsert(
                 ctx.collision.spatialHash,
+                0,
                 entityColAABB(object.base, i),
                 colIdMake(ColType::Object, i));
     }

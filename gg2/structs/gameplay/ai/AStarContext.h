@@ -7,20 +7,21 @@
 #include <future>
 #include <atomic>
 
+template<uint32_t N>
 struct AStarContext
 {
-    MinHeap<float, ASTAR_HEAP_SIZE>  fscoreHeap;
-    HashMap<void,  ASTAR_HASH_SIZE>  closed;
-    HashMap<float, ASTAR_HASH_SIZE>  gscores;
-    HashMap<int,   ASTAR_HASH_SIZE>  cameFrom;
+    MinHeap<N, ASTAR_HEAP_SIZE, float>  fscoreHeap;
+    HashMap<N, ASTAR_HASH_SIZE, void>   closed;
+    HashMap<N, ASTAR_HASH_SIZE, float>  gscores;
+    HashMap<N, ASTAR_HASH_SIZE, int>    cameFrom;
 
-    SpatialHash  colHashSnapshot;
+    SpatialHash<N>  colHashSnapshot;
 
-    int          generation = 0;
-    int          searchX = 0;
-    int          searchY = 0;
-    int          searchW = 0;
-    int          searchH = 0;
-    std::atomic<AStarStatus>  status;
-    std::future<void> future;
+    int generation[N] = {};
+    int searchX[N] = {};
+    int searchY[N] = {};
+    int searchW[N] = {};
+    int searchH[N] = {};
+    std::atomic<AStarStatus> status[N];
+    std::future<void> future[N];
 };

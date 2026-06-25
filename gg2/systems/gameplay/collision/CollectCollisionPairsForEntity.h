@@ -3,6 +3,7 @@
 #include "Context.h"
 #include "GetEntityColAABB.h"
 #include "spatialhash/SpatialHash.h"
+#include "spatialhash/SpatialHashConstants.h"
 #include "spatialhash/SpatialHashQuery.h"
 #include <SDL3/SDL.h>
 #include <cstdint>
@@ -16,7 +17,7 @@ inline void collectCollisionPairsForEntity(
 {
     const auto &hash = ctx.collision.spatialHash;
     auto *candidates = ctx.collision.candidates;
-    int n = spatialHashQuery(hash, colBox, candidates, SpatialHash::MAX_PER_BUCKET * 4);
+    int n = spatialHashQuery(hash, 0, colBox, candidates, SPATIAL_HASH_MAX_PER_BUCKET * 4);
     for (int k = 0; k < n; k++)
     {
         uint32_t other = candidates[k];

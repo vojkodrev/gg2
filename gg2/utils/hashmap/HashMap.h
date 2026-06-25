@@ -1,16 +1,16 @@
 #pragma once
 
-template<typename T, int Size>
+template<int N, int Size, typename T>
 struct HashMap
 {
-    int node[Size];
-    int gen[Size];
-    T   value[Size];
+    int node[N][Size];
+    int gen[N][Size];
+    T   value[N][Size];
 };
 
-template<int Size>
-struct HashMap<void, Size>
+template<int N, int Size>
+struct HashMap<N, Size, void>
 {
-    int node[Size];
-    int gen[Size];
+    int node[N][Size];
+    int gen[N][Size];
 };

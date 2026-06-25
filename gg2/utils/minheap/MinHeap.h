@@ -1,10 +1,10 @@
 #pragma once
 #include <cstdint>
 
-template<typename TValue, uint32_t TSize>
+template<uint32_t N, uint32_t TSize, typename TValue>
 struct MinHeap
 {
-    int      nodes[TSize];
-    TValue   values[TSize];
-    uint32_t size;
+    int      nodes[N][TSize];
+    TValue   values[N][TSize];
+    uint32_t size[N];
 };
