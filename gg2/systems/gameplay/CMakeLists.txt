@@ -42,15 +42,6 @@ add_library(systems_gameplay
     ai/MoveColCenterToward.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp
-    ai/astar/reconstruct/ReconstructPath.cpp
-    ai/astar/node/AStarEncode.cpp
-    ai/astar/node/AStarDecode.cpp
-    ai/astar/cost/AStarH.cpp
-    ai/astar/cost/AStarD.cpp
-    ai/astar/neighbors/IsBlocked.cpp
-    ai/astar/neighbors/GetNeighbors.cpp
-    ai/astar/goal/IsGoalReached.cpp
-    ai/astar/RunAStar.cpp
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
     collision/effects/EffectCollisionSystem.cpp
