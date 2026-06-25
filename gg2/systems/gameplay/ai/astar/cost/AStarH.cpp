@@ -2,9 +2,10 @@
 #include "../node/AStarDecode.h"
 #include <cmath>
 
-float astarH(const AStarContext& ctx, int node, SDL_FPoint target)
+template<uint32_t N>
+float astarH(const AStarContext<N>& ctx, uint32_t astarIndex, int node, SDL_FPoint target)
 {
-    SDL_Point p = astarDecode(ctx, node);
+    SDL_Point p = astarDecode(ctx, astarIndex, node);
     float dx = target.x - p.x;
     float dy = target.y - p.y;
     return sqrtf(dx * dx + dy * dy);

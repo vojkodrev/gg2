@@ -23,6 +23,7 @@ void effectCollisionSystem(Context &ctx)
 
             spatialHashInsert(
                 ctx.collision.spatialHash,
+                0,
                 entityColAABB(effect.base, i),
                 colIdMake(ColType::Effect, i));
         }

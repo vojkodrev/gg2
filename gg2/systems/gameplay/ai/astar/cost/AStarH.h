@@ -2,4 +2,5 @@
 #include <SDL3/SDL.h>
 #include "../../../../../structs/gameplay/ai/AStarContext.h"
 
-float astarH(const AStarContext& ctx, int node, SDL_FPoint target);
+template<uint32_t N>
+float astarH(const AStarContext<N>& ctx, uint32_t astarIndex, int node, SDL_FPoint target);
