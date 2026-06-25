@@ -5,6 +5,7 @@
 #include "../../effects/SpawnTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
+#include <cstdlib>
 #include <string>
 
 void resolveProjectileEffectCollision(
@@ -28,7 +29,11 @@ void resolveProjectileEffectCollision(
             return;
 
         const int hp = ctx.data.npc.statistics.hp[npcIndex];
-        const int nextHp = std::max(0, hp - PROJECTILE_DAMAGE);
+        const int damageRandom =
+            (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
+            PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
+        const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
+        const int nextHp = std::max(0, hp - projectileDamage);
         const int damage = hp - nextHp;
         ctx.data.npc.statistics.prevHp[npcIndex] = hp;
         ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
