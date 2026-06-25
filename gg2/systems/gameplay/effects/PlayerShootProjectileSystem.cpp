@@ -1,6 +1,7 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/effect/DestroyEffectType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
@@ -26,6 +27,8 @@ void playerShootProjectileSystem(Context &ctx)
             return;
 
         ctx.data.effect.type[effectIndex] = EffectType::Projectile;
+        ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::Distance;
+        ctx.data.effect.destroyDistance[effectIndex] = PROJECTILE_MAX_DISTANCE;
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
