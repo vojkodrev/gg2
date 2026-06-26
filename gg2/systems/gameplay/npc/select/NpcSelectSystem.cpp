@@ -2,7 +2,7 @@
 
 void npcSelectSystem(Context &ctx)
 {
-    if (!ctx.mouse.leftClicked)
+    if (!ctx.data.action.mouseLeftReleased)
         return;
 
     ctx.data.player.previousSelectedNpc = ctx.data.player.selectedNpc;

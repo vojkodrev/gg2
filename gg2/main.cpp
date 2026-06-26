@@ -96,9 +96,9 @@ int main()
         }
 
         keyboardStateSystem(*ctx);
+        mouseStateSystem(*ctx);
         actionStateSystem(*ctx);
         debugStateSystem(*ctx);
-        mouseStateSystem(*ctx);
 
         animationSystem(*ctx);
 
