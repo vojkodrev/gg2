@@ -5,6 +5,9 @@ void npcSelectSystem(Context &ctx)
     if (!ctx.mouse.leftClicked)
         return;
 
+    ctx.data.player.previousSelectedNpc = ctx.data.player.selectedNpc;
+    ctx.data.player.selectedNpc = -1;
+
     for (int i = 0; i < MAX_NPCS; i++)
     {
         if (!ctx.data.npc.active[i])

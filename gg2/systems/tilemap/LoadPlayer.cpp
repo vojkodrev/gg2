@@ -23,6 +23,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.statistics.hpDirty[0] = true;
         ctx.data.player.statistics.maxHp[0] = PLAYER_HP;
         ctx.data.player.selectedNpc = -1;
+        ctx.data.player.previousSelectedNpc = -1;
         ctx.data.player.selectedEffectId = -1;
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
