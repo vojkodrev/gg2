@@ -39,6 +39,7 @@
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
 #include "npc/select/CreateNpcSelectorSystem.h"
+#include "npc/select/DestroyNpcSelectorSystem.h"
 #include "npc/select/NpcSelectSystem.h"
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
@@ -140,6 +141,7 @@ int main()
         destroyNpcSystem(*ctx);
 
         npcSelectSystem(*ctx);
+        destroyNpcSelectorSystem(*ctx);
         createNpcSelectorSystem(*ctx);
 
         showHealthbarSystem(*ctx);

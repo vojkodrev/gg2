@@ -9,6 +9,9 @@
 void createNpcSelectorSystem(Context &ctx)
 {
     auto &player = ctx.data.player;
+    if (player.selectedNpc == -1 || player.selectedEffectId != -1)
+        return;
+
     if (player.previousSelectedNpc == player.selectedNpc)
         return;
 

@@ -23,6 +23,7 @@ add_library(systems_gameplay
     effects/DestroyEffectByDistanceSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
+    npc/select/DestroyNpcSelectorSystem.cpp
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcSelectSystem.cpp
     npc/SpawnNpcSystem.cpp
