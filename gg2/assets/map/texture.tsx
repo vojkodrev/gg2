@@ -180,6 +180,7 @@
  </tile>
  <tile id="358">
   <properties>
+   <property name="scale" type="float" value="2"/>
    <property name="type" value="select"/>
   </properties>
  </tile>
