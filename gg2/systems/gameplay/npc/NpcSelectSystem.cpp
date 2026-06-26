@@ -5,10 +5,6 @@ void npcSelectSystem(Context &ctx)
     if (!ctx.mouse.leftClicked)
         return;
 
-    const SDL_FPoint cameraOff = ctx.data.camera.offset;
-    const float mouseWorldX = ctx.mouse.x - cameraOff.x;
-    const float mouseWorldY = ctx.mouse.y - cameraOff.y;
-
     for (int i = 0; i < MAX_NPCS; i++)
     {
         if (!ctx.data.npc.active[i])
@@ -20,7 +16,7 @@ void npcSelectSystem(Context &ctx)
             ctx.data.npc.base.position.w[i],
             ctx.data.npc.base.position.h[i]
         };
-        const SDL_FPoint point = {mouseWorldX, mouseWorldY};
+        const SDL_FPoint point = {ctx.mouse.worldX, ctx.mouse.worldY};
 
         if (SDL_PointInRectFloat(&point, &rect))
         {

@@ -5,6 +5,7 @@ add_library(systems_core
     input/DebugStateSystem.cpp
     input/KeyboardStateSystem.cpp
     input/MouseStateSystem.cpp
+    input/MouseWorldStateSystem.cpp
 )
 target_include_directories(systems_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

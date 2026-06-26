@@ -46,10 +46,9 @@ void playerShootProjectileSystem(Context &ctx)
         ctx.data.effect.start.x[effectIndex] = originalAnchorCenterWorld.x;
         ctx.data.effect.start.y[effectIndex] = originalAnchorCenterWorld.y;
 
-        const SDL_FPoint cameraOff = ctx.data.camera.offset;
         const SDL_FPoint mouseWorld = {
-            ctx.mouse.x - cameraOff.x,
-            ctx.mouse.y - cameraOff.y
+            ctx.mouse.worldX,
+            ctx.mouse.worldY
         };
         const float aimDx = mouseWorld.x - originalAnchorCenterWorld.x;
         const float aimDy = mouseWorld.y - originalAnchorCenterWorld.y;

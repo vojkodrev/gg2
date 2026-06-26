@@ -13,6 +13,7 @@
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
+#include "MouseWorldStateSystem.h"
 #include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
@@ -118,6 +119,7 @@ int main()
         collisionResolutionSystem(*ctx);
         
         cameraSystem(*ctx);
+        mouseWorldStateSystem(*ctx);
 
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
