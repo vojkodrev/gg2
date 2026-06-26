@@ -40,7 +40,8 @@
 #include "npc/DestroyNpcSystem.h"
 #include "npc/select/CreateNpcSelectorSystem.h"
 #include "npc/select/DestroyNpcSelectorSystem.h"
-#include "npc/select/NpcSelectSystem.h"
+#include "npc/select/NpcMouseSelectSystem.h"
+#include "npc/select/NpcTabSelectSystem.h"
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
@@ -140,7 +141,8 @@ int main()
 
         destroyNpcSystem(*ctx);
 
-        npcSelectSystem(*ctx);
+        npcMouseSelectSystem(*ctx);
+        npcTabSelectSystem(*ctx);
         destroyNpcSelectorSystem(*ctx);
         createNpcSelectorSystem(*ctx);
 

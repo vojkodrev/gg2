@@ -1,6 +1,6 @@
-#include "NpcSelectSystem.h"
+#include "NpcMouseSelectSystem.h"
 
-void npcSelectSystem(Context &ctx)
+void npcMouseSelectSystem(Context &ctx)
 {
     if (!ctx.data.action.mouseLeftReleased)
         return;
