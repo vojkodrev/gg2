@@ -38,7 +38,7 @@
 #include "effects/DestroyEffectByDistanceSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
-#include "npc/NpcSelectSystem.h"
+#include "npc/select/NpcSelectSystem.h"
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
