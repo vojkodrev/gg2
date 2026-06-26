@@ -4,6 +4,7 @@
 void keyboardStateSystem(Context &ctx)
 {
     const bool *keys = SDL_GetKeyboardState(nullptr);
+    ctx.keyboard.tab = keys[SDL_SCANCODE_TAB];
     ctx.keyboard.w = keys[SDL_SCANCODE_W];
     ctx.keyboard.a = keys[SDL_SCANCODE_A];
     ctx.keyboard.s = keys[SDL_SCANCODE_S];

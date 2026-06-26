@@ -178,4 +178,10 @@
    <frame tileid="352" duration="1000"/>
   </animation>
  </tile>
- </tileset>
+ <tile id="358">
+  <properties>
+   <property name="scale" type="float" value="2"/>
+   <property name="type" value="select"/>
+  </properties>
+ </tile>
+</tileset>

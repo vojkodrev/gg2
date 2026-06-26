@@ -13,6 +13,7 @@
 #include "KeyboardStateSystem.h"
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
+#include "MouseWorldStateSystem.h"
 #include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
@@ -37,6 +38,10 @@
 #include "effects/DestroyEffectByDistanceSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
+#include "npc/select/CreateNpcSelectorSystem.h"
+#include "npc/select/DestroyNpcSelectorSystem.h"
+#include "npc/select/NpcMouseSelectSystem.h"
+#include "npc/select/NpcTabSelectSystem.h"
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
@@ -92,9 +97,9 @@ int main()
         }
 
         keyboardStateSystem(*ctx);
+        mouseStateSystem(*ctx);
         actionStateSystem(*ctx);
         debugStateSystem(*ctx);
-        mouseStateSystem(*ctx);
 
         animationSystem(*ctx);
 
@@ -117,6 +122,7 @@ int main()
         collisionResolutionSystem(*ctx);
         
         cameraSystem(*ctx);
+        mouseWorldStateSystem(*ctx);
 
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
@@ -134,6 +140,11 @@ int main()
         effectCollisionResolutionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
+
+        npcMouseSelectSystem(*ctx);
+        npcTabSelectSystem(*ctx);
+        destroyNpcSelectorSystem(*ctx);
+        createNpcSelectorSystem(*ctx);
 
         showHealthbarSystem(*ctx);
         healthbarFrameSystem(*ctx);

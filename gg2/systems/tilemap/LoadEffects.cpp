@@ -1,14 +1,18 @@
 #include "LoadEffects.h"
+#include "LoadEntityBase.h"
+#include "properties/FindTileByType.h"
 #include "../../structs/core/AnimationType.h"
 #include "../../structs/core/constants/FontConstants.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../utils/grid/DecodeGridIndex.h"
+#include <cstdint>
 
 void loadEffects(Context &ctx, const tmx::Tileset &tileset)
 {
     auto &effectTemplate = ctx.data.effectTemplate;
     auto &props = ctx.data.tileMapProps;
     effectTemplate.fontOffset = 0;
+    effectTemplate.selectOffset = FONT_GLYPH_COUNT;
 
     const SDL_Point fontGrid = decodeGridIndex(FONT_GRID_ID, (int)props.tilesetW);
     const int fontBaseX = fontGrid.x * (int)props.srcTileW;
@@ -42,7 +46,14 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         effectTemplate.base.tint.clearTimer[i] = 0.0f;
     }
 
-    for (const auto &tile : tileset.getTiles())
+    uint32_t selectTileIdx = 0;
+    if (findTileByType(tileset, "select", selectTileIdx))
     {
+        loadEntityBase(
+            effectTemplate.base,
+            (uint32_t)effectTemplate.selectOffset,
+            tileset,
+            selectTileIdx,
+            props);
     }
 }
