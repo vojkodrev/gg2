@@ -1,6 +1,7 @@
 #include "MoveEffectSystem.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/EffectType.h"
+#include "../npc/select/PlaceNpcSelector.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
 #include <cstdint>
 
@@ -20,6 +21,12 @@ void moveEffectSystem(Context &ctx)
                 ctx.data.effect.target,
                 i,
                 PROJECTILE_SPEED);
+        }
+        else if (ctx.data.effect.type[i] == EffectType::Selector)
+        {
+            const int npcIndex = ctx.data.effect.parent.id[i];
+            if (ctx.data.npc.base.position.dirty[npcIndex])
+                placeNpcSelector(ctx, (int)i, npcIndex);
         }
     }
 }

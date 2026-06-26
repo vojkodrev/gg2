@@ -4,6 +4,7 @@
 #include "../../../../structs/effect/ParentType.h"
 #include "../../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../effects/EffectAlloc.h"
+#include "PlaceNpcSelector.h"
 
 void createNpcSelectorSystem(Context &ctx)
 {
@@ -33,13 +34,7 @@ void createNpcSelectorSystem(Context &ctx)
     ctx.data.effect.start.y[effectIndex] = 0.0f;
     ctx.data.effect.target.x[effectIndex] = 0.0f;
     ctx.data.effect.target.y[effectIndex] = 0.0f;
-    ctx.data.effect.base.position.x[effectIndex] =
-        ctx.data.npc.base.position.x[npcIndex] +
-        (ctx.data.npc.base.position.w[npcIndex] - ctx.data.effect.base.position.w[effectIndex]) * 0.5f;
-    ctx.data.effect.base.position.y[effectIndex] =
-        ctx.data.npc.base.position.y[npcIndex] -
-        (ctx.data.effect.base.position.h[effectIndex] - ctx.data.npc.base.position.h[npcIndex]) * 0.5f;
-    ctx.data.effect.base.position.dirty[effectIndex] = true;
+    placeNpcSelector(ctx, effectIndex, npcIndex);
     ctx.data.effect.base.depthY[effectIndex] = ctx.data.npc.base.depthY[npcIndex];
 
     player.selectedEffectId = effectIndex;
