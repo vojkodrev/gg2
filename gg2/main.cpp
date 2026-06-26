@@ -38,6 +38,7 @@
 #include "effects/DestroyEffectByDistanceSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
+#include "npc/select/CreateNpcSelectorSystem.h"
 #include "npc/select/NpcSelectSystem.h"
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
@@ -137,7 +138,9 @@ int main()
         effectCollisionResolutionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
+
         npcSelectSystem(*ctx);
+        createNpcSelectorSystem(*ctx);
 
         showHealthbarSystem(*ctx);
         healthbarFrameSystem(*ctx);

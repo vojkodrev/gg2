@@ -12,10 +12,9 @@ void fillEffectRenderBuffer(Context &ctx)
         if (!effect.pool.active[i])
             continue;
 
-        const int zIndex =
-            effect.type[i] == EffectType::DamageNumber
-                ? EFFECT_DAMAGE_NUMBER_Z_INDEX
-                : EFFECT_Z_INDEX;
+        int zIndex = EFFECT_Z_INDEX;
+        if (effect.type[i] == EffectType::DamageNumber)
+            zIndex = EFFECT_DAMAGE_NUMBER_Z_INDEX;
 
         fillEntityBaseRenderBuffer(
             rb,
