@@ -1,4 +1,5 @@
 #include "NpcTabSelectSystem.h"
+#include "SetSelectedNpc.h"
 #include "../../../../structs/npc/NPCAiType.h"
 
 void npcTabSelectSystem(Context &ctx)
@@ -7,8 +8,7 @@ void npcTabSelectSystem(Context &ctx)
         return;
 
     const int currentNpc = ctx.data.player.selectedNpc;
-    ctx.data.player.previousSelectedNpc = currentNpc;
-    ctx.data.player.selectedNpc = -1;
+    setSelectedNpc(ctx, -1);
 
     for (int step = 1; step <= MAX_NPCS; step++)
     {
@@ -18,7 +18,7 @@ void npcTabSelectSystem(Context &ctx)
         if (ctx.data.npc.ai.type[i] == NPCAiType::Pet)
             continue;
 
-        ctx.data.player.selectedNpc = i;
+        setSelectedNpc(ctx, i);
         return;
     }
 }

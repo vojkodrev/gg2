@@ -1,12 +1,12 @@
 #include "NpcMouseSelectSystem.h"
+#include "SetSelectedNpc.h"
 
 void npcMouseSelectSystem(Context &ctx)
 {
     if (!ctx.data.action.mouseLeftReleased)
         return;
 
-    ctx.data.player.previousSelectedNpc = ctx.data.player.selectedNpc;
-    ctx.data.player.selectedNpc = -1;
+    setSelectedNpc(ctx, -1);
 
     for (int i = 0; i < MAX_NPCS; i++)
     {
@@ -23,7 +23,7 @@ void npcMouseSelectSystem(Context &ctx)
 
         if (SDL_PointInRectFloat(&point, &rect))
         {
-            ctx.data.player.selectedNpc = i;
+            setSelectedNpc(ctx, i);
             return;
         }
     }

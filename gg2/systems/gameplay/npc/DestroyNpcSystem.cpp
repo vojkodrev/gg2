@@ -1,5 +1,6 @@
 #include "DestroyNpcSystem.h"
 #include "../../../structs/core/constants/NpcConstants.h"
+#include "select/SetSelectedNpc.h"
 
 void destroyNpcSystem(Context &ctx)
 {
@@ -10,6 +11,12 @@ void destroyNpcSystem(Context &ctx)
 
         if (ctx.data.npc.statistics.hp[i] > 0)
             continue;
+
+        if (ctx.data.player.selectedNpc == static_cast<int>(i))
+        {
+            setSelectedNpc(ctx, -1);
+            ctx.data.player.autoAttack.active = false;
+        }
 
         ctx.data.npc.active[i] = false;
         ctx.data.npc.inactiveTimer[i] = NPC_INACTIVE_TIME;

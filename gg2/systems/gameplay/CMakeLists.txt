@@ -28,6 +28,7 @@ add_library(systems_gameplay
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcMouseSelectSystem.cpp
     npc/select/NpcTabSelectSystem.cpp
+    npc/select/SetSelectedNpc.cpp
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
