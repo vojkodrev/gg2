@@ -3,6 +3,5 @@
 enum class DestroyEffectType : int
 {
     None,
-    Distance,
     Timer
 };

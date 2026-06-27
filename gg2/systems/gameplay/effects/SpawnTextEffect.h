@@ -43,7 +43,6 @@ inline void spawnTextEffect(
 
         ctx.data.effect.type[effectIndex] = EffectType::DamageNumber;
         ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::Timer;
-        ctx.data.effect.destroyDistance[effectIndex] = 0.0f;
         ctx.data.effect.destroyTimer[effectIndex] = DAMAGE_NUMBER_DESTROY_TIME;
         ctx.data.effect.parent.type[effectIndex] = ParentType::NPC;
         ctx.data.effect.parent.id[effectIndex] = npcIndex;

@@ -20,7 +20,6 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     effects/PlayerShootProjectileSystem.cpp
     effects/MoveEffectSystem.cpp
-    effects/DestroyEffectByDistanceSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp

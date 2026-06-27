@@ -28,8 +28,7 @@ void playerShootProjectileSystem(Context &ctx)
             return;
 
         ctx.data.effect.type[effectIndex] = EffectType::Projectile;
-        ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::Distance;
-        ctx.data.effect.destroyDistance[effectIndex] = PROJECTILE_MAX_DISTANCE;
+        ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
         ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);

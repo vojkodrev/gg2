@@ -14,7 +14,6 @@ struct Effect
     int groupId[MAX_EFFECTS] = {};
     EffectType type[MAX_EFFECTS] = {};
     DestroyEffectType destroyType[MAX_EFFECTS] = {};
-    float destroyDistance[MAX_EFFECTS] = {};
     float destroyTimer[MAX_EFFECTS] = {};
     Parent<MAX_EFFECTS> parent;
     EntityBase<MAX_EFFECTS> base;

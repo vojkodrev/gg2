@@ -29,7 +29,6 @@ void createNpcSelectorSystem(Context &ctx)
 
     ctx.data.effect.type[effectIndex] = EffectType::Selector;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
-    ctx.data.effect.destroyDistance[effectIndex] = 0.0f;
     ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = ParentType::NPC;
     ctx.data.effect.parent.id[effectIndex] = npcIndex;
