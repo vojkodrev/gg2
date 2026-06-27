@@ -1,6 +1,7 @@
 #pragma once
 #include "FillEntityBaseRenderBuffer.h"
 #include "../../structs/equipment/Equipment.h"
+#include "../../structs/equipment/WeaponType.h"
 #include "../../structs/core/constants/RenderConstants.h"
 #include <cstdint>
 
@@ -17,7 +18,7 @@ inline void fillEquipmentRenderBuffer(
         entityIndex,
         groupId,
         WEAPON_Z_INDEX);
-    if (equipment.weapon.hasAmmo[entityIndex] && equipment.weapon.showAmmo[entityIndex])
+    if (equipment.weapon.type[entityIndex] == WeaponType::Ranged && equipment.weapon.showAmmo[entityIndex])
     {
         fillEntityBaseRenderBuffer(
             rb,

@@ -18,15 +18,17 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
+    attack/PlayerAutoAttackTimerSystem.cpp
+    attack/TogglePlayerAutoAttackSystem.cpp
     effects/PlayerShootProjectileSystem.cpp
     effects/MoveEffectSystem.cpp
-    effects/DestroyEffectByDistanceSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcMouseSelectSystem.cpp
     npc/select/NpcTabSelectSystem.cpp
+    npc/select/SetSelectedNpc.cpp
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp

@@ -1,6 +1,6 @@
 #pragma once
 #include "../../../structs/core/Context.h"
-#include "../../../structs/effect/ParentType.h"
+#include "../../../structs/core/EntityType.h"
 #include "../effects/EffectFree.h"
 #include <cstdint>
 
@@ -10,10 +10,10 @@ inline void destroyProjectile(Context &ctx, uint32_t effectIndex)
 
     switch (ctx.data.effect.parent.type[effectIndex])
     {
-        case ParentType::Player:
+        case EntityType::Player:
             ctx.data.player.equipment.weapon.showAmmo[parentId] = true;
             break;
-        case ParentType::NPC:
+        case EntityType::NPC:
             if (ctx.data.npc.active[parentId])
                 ctx.data.npc.equipment.weapon.showAmmo[parentId] = true;
             break;

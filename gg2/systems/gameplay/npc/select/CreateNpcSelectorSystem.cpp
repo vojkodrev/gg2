@@ -1,7 +1,7 @@
 #include "CreateNpcSelectorSystem.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
-#include "../../../../structs/effect/ParentType.h"
+#include "../../../../structs/core/EntityType.h"
 #include "../../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../effects/EffectAlloc.h"
 #include "PlaceNpcSelector.h"
@@ -29,14 +29,9 @@ void createNpcSelectorSystem(Context &ctx)
 
     ctx.data.effect.type[effectIndex] = EffectType::Selector;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
-    ctx.data.effect.destroyDistance[effectIndex] = 0.0f;
     ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
-    ctx.data.effect.parent.type[effectIndex] = ParentType::NPC;
+    ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
     ctx.data.effect.parent.id[effectIndex] = npcIndex;
-    ctx.data.effect.start.x[effectIndex] = 0.0f;
-    ctx.data.effect.start.y[effectIndex] = 0.0f;
-    ctx.data.effect.target.x[effectIndex] = 0.0f;
-    ctx.data.effect.target.y[effectIndex] = 0.0f;
     placeNpcSelector(ctx, effectIndex, npcIndex);
     ctx.data.effect.base.depthY[effectIndex] = ctx.data.npc.base.depthY[npcIndex];
 

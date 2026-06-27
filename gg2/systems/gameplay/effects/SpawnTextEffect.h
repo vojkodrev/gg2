@@ -4,7 +4,7 @@
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
-#include "../../../structs/effect/ParentType.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
@@ -43,14 +43,9 @@ inline void spawnTextEffect(
 
         ctx.data.effect.type[effectIndex] = EffectType::DamageNumber;
         ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::Timer;
-        ctx.data.effect.destroyDistance[effectIndex] = 0.0f;
         ctx.data.effect.destroyTimer[effectIndex] = DAMAGE_NUMBER_DESTROY_TIME;
-        ctx.data.effect.parent.type[effectIndex] = ParentType::NPC;
+        ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
         ctx.data.effect.parent.id[effectIndex] = npcIndex;
-        ctx.data.effect.start.x[effectIndex] = 0.0f;
-        ctx.data.effect.start.y[effectIndex] = 0.0f;
-        ctx.data.effect.target.x[effectIndex] = 0.0f;
-        ctx.data.effect.target.y[effectIndex] = 0.0f;
         ctx.data.effect.base.position.x[effectIndex] =
             startX + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = posY;

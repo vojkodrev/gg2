@@ -1,12 +1,13 @@
 #pragma once
 #include "../core/Anchor.h"
 #include "../core/EntityBase.h"
+#include "WeaponType.h"
 
 template<int N>
 struct Weapon
 {
     EntityBase<N> base;
     Anchor<N, 1> ammoAnchor;
-    bool hasAmmo[N] = {};
+    WeaponType type[N] = {};
     bool showAmmo[N] = {};
 };

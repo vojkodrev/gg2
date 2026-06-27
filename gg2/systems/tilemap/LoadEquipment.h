@@ -1,6 +1,8 @@
 #pragma once
 #include "../../structs/equipment/Equipment.h"
+#include "../../structs/equipment/WeaponType.h"
 #include "../../structs/tilemap/TileMapProperties.h"
+#include "ParseWeaponType.h"
 #include "GetAnchor.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
@@ -16,10 +18,12 @@ inline void loadEquipment(
     uint32_t parentEntityTileIndex, 
     const TileMapProperties &props)
 {
-    std::string weaponType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
+    std::string weaponAssetType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
-    bool hasWeapon = !weaponType.empty() && findTileByType(tileset, weaponType.c_str(), weaponIdx);
-    if (hasWeapon)
+    bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
+    equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
+    equipmentData.weapon.showAmmo[parentEntityIdx] = false;
+    if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
         loadEntityBase(equipmentData.weapon.base, parentEntityIdx, tileset, weaponIdx, props);
 
@@ -39,9 +43,10 @@ inline void loadEquipment(
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;
     bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
-    equipmentData.weapon.hasAmmo[parentEntityIdx] = hasAmmo;
-    if (hasAmmo)
+    if (hasWeapon && equipmentData.weapon.type[parentEntityIdx] == WeaponType::Ranged)
     {
+        if (!hasAmmo)
+            return;
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
         equipmentData.weapon.showAmmo[parentEntityIdx] = true;
     }

@@ -1,7 +1,10 @@
 #include "MoveEffectSystem.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../npc/select/PlaceNpcSelector.h"
+#include "../../../utils/collision/EntityColAABB.h"
+#include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
 #include <cstdint>
 
@@ -23,12 +26,12 @@ void moveEffectSystem(Context &ctx)
 
         if (ctx.data.effect.type[i] == EffectType::Projectile)
         {
+            const int npcIndex = ctx.data.effect.target.id[i];
             moveEntityColCenterToward(
                 ctx,
                 ctx.data.effect.base,
                 i,
-                ctx.data.effect.target,
-                i,
+                entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex)),
                 PROJECTILE_SPEED);
         }
     }
