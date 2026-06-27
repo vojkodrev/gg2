@@ -1,5 +1,4 @@
 #include "TogglePlayerAutoAttackSystem.h"
-#include "../../../structs/core/constants/PlayerConstants.h"
 
 void togglePlayerAutoAttackSystem(Context &ctx)
 {
@@ -8,5 +7,4 @@ void togglePlayerAutoAttackSystem(Context &ctx)
 
     auto &autoAttack = ctx.data.player.autoAttack;
     autoAttack.active = !autoAttack.active;
-    autoAttack.attackTimer = PLAYER_AUTO_ATTACK_DELAY;
 }

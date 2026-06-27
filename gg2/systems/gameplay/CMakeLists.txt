@@ -18,6 +18,7 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
+    attack/PlayerAutoAttackTimerSystem.cpp
     attack/TogglePlayerAutoAttackSystem.cpp
     effects/PlayerShootProjectileSystem.cpp
     effects/MoveEffectSystem.cpp
