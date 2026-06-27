@@ -1,14 +1,17 @@
 #include "PlayerShootProjectileSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
+#include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/equipment/WeaponType.h"
+#include "../../../structs/npc/NPCAiType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
+#include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/collision/EntityColCenterWorld.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
@@ -18,8 +21,16 @@
 
 void playerShootProjectileSystem(Context &ctx)
 {
-    if (ctx.data.action.digit1Released)
+    if (ctx.data.player.autoAttack.active && ctx.data.player.autoAttack.attackTimer == 0.0f)
     {
+        const int npcIndex = ctx.data.player.selectedNpc;
+        if (npcIndex == -1)
+            return;
+        if (!ctx.data.npc.active[npcIndex])
+            return;
+        if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
+            return;
+
         const auto &playerAmmo = ctx.data.player.equipment.ammo.base;
         const auto &playerWeapon = ctx.data.player.equipment.weapon;
         if (playerWeapon.type[0] != WeaponType::Ranged)
@@ -33,6 +44,9 @@ void playerShootProjectileSystem(Context &ctx)
         ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
         ctx.data.effect.parent.type[effectIndex] = EntityType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
+        ctx.data.effect.target.type[effectIndex] = EntityType::NPC;
+        ctx.data.effect.target.id[effectIndex] = npcIndex;
+        ctx.data.player.autoAttack.attackTimer = PLAYER_AUTO_ATTACK_DELAY;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
 
         auto &effectBase = ctx.data.effect.base;
@@ -45,12 +59,10 @@ void playerShootProjectileSystem(Context &ctx)
         const SDL_FPoint originalAnchorCenterWorld =
             entityColCenterWorld(originalAnchor, effectBase.position, effectIndex);
 
-        const SDL_FPoint mouseWorld = {
-            ctx.mouse.worldX,
-            ctx.mouse.worldY
-        };
-        const float aimDx = mouseWorld.x - originalAnchorCenterWorld.x;
-        const float aimDy = mouseWorld.y - originalAnchorCenterWorld.y;
+        const SDL_FPoint targetColCenter =
+            entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
+        const float aimDx = targetColCenter.x - originalAnchorCenterWorld.x;
+        const float aimDy = targetColCenter.y - originalAnchorCenterWorld.y;
 
         resetEntityBaseAnimationToInitial(effectBase, effectIndex);
         mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);
@@ -67,8 +79,8 @@ void playerShootProjectileSystem(Context &ctx)
                 collisionCenterLocal.x - resetAnchorCenterLocal.x) * RAD_TO_DEG;
         const float aimAngle =
             std::atan2(
-                mouseWorld.y - originalAnchorCenterWorld.y,
-                mouseWorld.x - originalAnchorCenterWorld.x) * RAD_TO_DEG;
+                targetColCenter.y - originalAnchorCenterWorld.y,
+                targetColCenter.x - originalAnchorCenterWorld.x) * RAD_TO_DEG;
 
         alignEntityToAnchorCenter(effectBase, resetAnchor, originalAnchorCenterWorld, effectIndex);
 

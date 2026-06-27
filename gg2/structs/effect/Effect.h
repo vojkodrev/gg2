@@ -15,5 +15,6 @@ struct Effect
     DestroyEffectType destroyType[MAX_EFFECTS] = {};
     float destroyTimer[MAX_EFFECTS] = {};
     EntityReference<MAX_EFFECTS> parent;
+    EntityReference<MAX_EFFECTS> target;
     EntityBase<MAX_EFFECTS> base;
 };
