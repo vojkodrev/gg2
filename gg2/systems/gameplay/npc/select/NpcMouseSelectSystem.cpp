@@ -6,7 +6,7 @@ void npcMouseSelectSystem(Context &ctx)
     if (!ctx.data.action.mouseLeftReleased)
         return;
 
-    setSelectedNpc(ctx, -1);
+    int nextSelectedNpc = -1;
 
     for (int i = 0; i < MAX_NPCS; i++)
     {
@@ -23,8 +23,10 @@ void npcMouseSelectSystem(Context &ctx)
 
         if (SDL_PointInRectFloat(&point, &rect))
         {
-            setSelectedNpc(ctx, i);
-            return;
+            nextSelectedNpc = i;
+            break;
         }
     }
+
+    setSelectedNpc(ctx, nextSelectedNpc);
 }

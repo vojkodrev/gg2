@@ -8,7 +8,7 @@ void npcTabSelectSystem(Context &ctx)
         return;
 
     const int currentNpc = ctx.data.player.selectedNpc;
-    setSelectedNpc(ctx, -1);
+    int nextSelectedNpc = -1;
 
     for (int step = 1; step <= MAX_NPCS; step++)
     {
@@ -18,7 +18,9 @@ void npcTabSelectSystem(Context &ctx)
         if (ctx.data.npc.ai.type[i] == NPCAiType::Pet)
             continue;
 
-        setSelectedNpc(ctx, i);
-        return;
+        nextSelectedNpc = i;
+        break;
     }
+
+    setSelectedNpc(ctx, nextSelectedNpc);
 }
