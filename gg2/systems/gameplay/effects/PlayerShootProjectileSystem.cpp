@@ -2,6 +2,7 @@
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../effects/EffectAlloc.h"
@@ -30,7 +31,7 @@ void playerShootProjectileSystem(Context &ctx)
 
         ctx.data.effect.type[effectIndex] = EffectType::Projectile;
         ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
-        ctx.data.effect.parent.type[effectIndex] = ParentType::Player;
+        ctx.data.effect.parent.type[effectIndex] = EntityType::Player;
         ctx.data.effect.parent.id[effectIndex] = 0;
         copyEntityBaseSlot(playerAmmo, 0, ctx.data.effect.base, effectIndex);
 

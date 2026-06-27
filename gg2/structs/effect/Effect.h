@@ -1,10 +1,10 @@
 #pragma once
 #include <cstdint>
 #include "../core/EntityBase.h"
+#include "../core/EntityReference.h"
 #include "DestroyEffectType.h"
 #include "EffectConstants.h"
 #include "EffectType.h"
-#include "Parent.h"
 #include "../../utils/pool/Pool.h"
 
 struct Effect
@@ -14,6 +14,6 @@ struct Effect
     EffectType type[MAX_EFFECTS] = {};
     DestroyEffectType destroyType[MAX_EFFECTS] = {};
     float destroyTimer[MAX_EFFECTS] = {};
-    Parent<MAX_EFFECTS> parent;
+    EntityReference<MAX_EFFECTS> parent;
     EntityBase<MAX_EFFECTS> base;
 };

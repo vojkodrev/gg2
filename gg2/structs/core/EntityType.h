@@ -1,6 +1,6 @@
 #pragma once
 
-enum class ParentType : int
+enum class EntityType : int
 {
     Player,
     NPC
