@@ -13,10 +13,7 @@ void destroyNpcSystem(Context &ctx)
             continue;
 
         if (ctx.data.player.selectedNpc == static_cast<int>(i))
-        {
             setSelectedNpc(ctx, -1);
-            ctx.data.player.autoAttack.active = false;
-        }
 
         ctx.data.npc.active[i] = false;
         ctx.data.npc.inactiveTimer[i] = NPC_INACTIVE_TIME;
