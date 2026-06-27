@@ -131,6 +131,7 @@ int main()
         equipmentDepthSystem(*ctx);
         
         playerShootProjectileSystem(*ctx);
+
         moveEffectSystem(*ctx);
         destroyEffectByTimerSystem(*ctx);
         effectDepthSystem(*ctx);

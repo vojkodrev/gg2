@@ -32,10 +32,6 @@ void createNpcSelectorSystem(Context &ctx)
     ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = ParentType::NPC;
     ctx.data.effect.parent.id[effectIndex] = npcIndex;
-    ctx.data.effect.start.x[effectIndex] = 0.0f;
-    ctx.data.effect.start.y[effectIndex] = 0.0f;
-    ctx.data.effect.target.x[effectIndex] = 0.0f;
-    ctx.data.effect.target.y[effectIndex] = 0.0f;
     placeNpcSelector(ctx, effectIndex, npcIndex);
     ctx.data.effect.base.depthY[effectIndex] = ctx.data.npc.base.depthY[npcIndex];
 
