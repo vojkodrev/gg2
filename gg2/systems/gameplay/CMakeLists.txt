@@ -58,7 +58,7 @@ add_library(systems_gameplay
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp
     tint/DamageTintSystem.cpp
-    tint/ClearTintSystem.cpp
+    tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )

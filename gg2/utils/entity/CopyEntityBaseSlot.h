@@ -65,5 +65,6 @@ inline void copyEntityBaseSlot(
     to.tint.g[toIndex] = from.tint.g[fromIndex];
     to.tint.b[toIndex] = from.tint.b[fromIndex];
     to.tint.a[toIndex] = from.tint.a[fromIndex];
-    to.tint.clearTimer[toIndex] = from.tint.clearTimer[fromIndex];
+    to.tint.damageTimer[toIndex] = from.tint.damageTimer[fromIndex];
+    to.tint.poisonTimer[toIndex] = from.tint.poisonTimer[fromIndex];
 }
