@@ -3,6 +3,7 @@
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
+#include "../../../structs/equipment/WeaponType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
@@ -20,7 +21,7 @@ void playerShootProjectileSystem(Context &ctx)
     {
         const auto &playerAmmo = ctx.data.player.equipment.ammo.base;
         const auto &playerWeapon = ctx.data.player.equipment.weapon;
-        if (!playerWeapon.hasAmmo[0])
+        if (playerWeapon.type[0] != WeaponType::Ranged)
             return;
 
         int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);

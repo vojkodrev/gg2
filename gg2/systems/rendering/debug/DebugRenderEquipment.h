@@ -3,6 +3,7 @@
 #include "DebugRenderEntityBase.h"
 #include "RenderColBox.h"
 #include "../../../structs/equipment/Equipment.h"
+#include "../../../structs/equipment/WeaponType.h"
 
 template<int N>
 inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipment, uint32_t i)
@@ -25,6 +26,9 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
         }
     }
 
-    if (ctx.data.debug.showAmmoCollision && equipment.weapon.hasAmmo[i] && equipment.weapon.showAmmo[i])
+    if (
+        ctx.data.debug.showAmmoCollision &&
+        equipment.weapon.type[i] == WeaponType::Ranged &&
+        equipment.weapon.showAmmo[i])
         debugRenderEntityBase(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});
 }
