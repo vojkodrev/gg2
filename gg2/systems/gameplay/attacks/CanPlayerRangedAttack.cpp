@@ -1,8 +1,8 @@
-#include "CanPlayerRangedAutoAttack.h"
+#include "CanPlayerRangedAttack.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/npc/NPCAiType.h"
 
-bool canPlayerRangedAutoAttack(Context &ctx)
+bool canPlayerRangedAttack(Context &ctx)
 {
     const int npcIndex = ctx.data.player.selectedNpc;
     if (npcIndex == -1)

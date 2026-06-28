@@ -19,7 +19,8 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     attacks/AttackTimerSystem.cpp
-    attacks/CanPlayerRangedAutoAttack.cpp
+    attacks/CanPlayerRangedAttack.cpp
+    attacks/PlayerSerpentStingSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp

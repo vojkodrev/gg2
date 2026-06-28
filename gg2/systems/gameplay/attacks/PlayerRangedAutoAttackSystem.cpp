@@ -1,5 +1,5 @@
 #include "PlayerRangedAutoAttackSystem.h"
-#include "CanPlayerRangedAutoAttack.h"
+#include "CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
@@ -8,7 +8,7 @@ void playerRangedAutoAttackSystem(Context &ctx)
 {
     if (ctx.data.player.autoAttack.active && ctx.data.player.autoAttack.attackTimer == 0.0f)
     {
-        if (!canPlayerRangedAutoAttack(ctx))
+        if (!canPlayerRangedAttack(ctx))
             return;
 
         const int npcIndex = ctx.data.player.selectedNpc;
