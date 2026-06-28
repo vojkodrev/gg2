@@ -19,6 +19,7 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     attacks/PlayerAutoAttackTimerSystem.cpp
+    attacks/CanPlayerRangedAutoAttack.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
@@ -54,6 +55,7 @@ add_library(systems_gameplay
     collision/effects/EffectCollisionResolutionSystem.cpp
     collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
+    projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/healthbar/ShowHealthbarSystem.cpp
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp

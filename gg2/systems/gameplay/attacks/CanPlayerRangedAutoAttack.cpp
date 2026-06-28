@@ -1,0 +1,20 @@
+#include "CanPlayerRangedAutoAttack.h"
+#include "../../../structs/equipment/WeaponType.h"
+#include "../../../structs/npc/NPCAiType.h"
+
+bool canPlayerRangedAutoAttack(Context &ctx)
+{
+    const int npcIndex = ctx.data.player.selectedNpc;
+    if (npcIndex == -1)
+        return false;
+    if (!ctx.data.npc.active[npcIndex])
+        return false;
+    if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
+        return false;
+
+    const auto &playerWeapon = ctx.data.player.equipment.weapon;
+    if (playerWeapon.type[0] != WeaponType::Ranged)
+        return false;
+
+    return true;
+}
