@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/AutoAttack.h"
+#include "../attacks/AutoAttack.h"
 #include "../core/EntityBase.h"
 #include "../core/Statistics.h"
 #include "../equipment/Equipment.h"

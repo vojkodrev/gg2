@@ -4,7 +4,7 @@
 #include "../core/EntityBase.h"
 #include "../core/Statistics.h"
 #include "../equipment/Equipment.h"
-#include "../serpentSting/SerpentStingDebuff.h"
+#include "../attacks/SerpentStingDebuff.h"
 #include "../ui/Healthbar.h"
 #include "NpcConstants.h"
 #include "NPCAi.h"
