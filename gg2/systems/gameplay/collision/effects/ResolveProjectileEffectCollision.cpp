@@ -1,6 +1,6 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
-#include "../../statistics/SetHp.h"
+#include "../../statistics/SetHpDamage.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
@@ -32,14 +32,14 @@ void resolveProjectileEffectCollision(
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {
-            const int hp = ctx.data.npc.statistics.hp[npcIndex];
             const int damageRandom =
                 (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
                 PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
             const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
-            const int nextHp = std::max(0, hp - projectileDamage);
-            const int damage = hp - nextHp;
-            setHp(ctx.data.npc.statistics, npcIndex, nextHp);
+            const int damage = setHpDamage(
+                ctx.data.npc.statistics,
+                npcIndex,
+                projectileDamage);
             if (damage > 0)
                 spawnNpcTextEffect(ctx, npcIndex, std::to_string(damage));
         }
