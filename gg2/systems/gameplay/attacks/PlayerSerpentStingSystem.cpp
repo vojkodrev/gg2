@@ -3,6 +3,7 @@
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../../../structs/effect/ProjectileType.h"
 #include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
 
 void playerSerpentStingSystem(Context &ctx)
@@ -18,6 +19,7 @@ void playerSerpentStingSystem(Context &ctx)
     const int effectIndex = spawnPlayerTargetedProjectileEffect(
         ctx,
         ctx.data.player.equipment.ammo.base,
+        ProjectileType::SerpentSting,
         npcIndex,
         POISON_TINT_R,
         POISON_TINT_G,

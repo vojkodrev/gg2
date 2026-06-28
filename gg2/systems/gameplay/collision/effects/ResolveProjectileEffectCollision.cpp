@@ -28,18 +28,22 @@ void resolveProjectileEffectCollision(
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        const int hp = ctx.data.npc.statistics.hp[npcIndex];
-        const int damageRandom =
-            (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
-            PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
-        const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
-        const int nextHp = std::max(0, hp - projectileDamage);
-        const int damage = hp - nextHp;
-        ctx.data.npc.statistics.prevHp[npcIndex] = hp;
-        ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
-        ctx.data.npc.statistics.hp[npcIndex] = nextHp;
-        if (damage > 0)
-            spawnTextEffect(ctx, npcIndex, std::to_string(damage));
+        if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
+        {
+            const int hp = ctx.data.npc.statistics.hp[npcIndex];
+            const int damageRandom =
+                (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
+                PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
+            const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
+            const int nextHp = std::max(0, hp - projectileDamage);
+            const int damage = hp - nextHp;
+            ctx.data.npc.statistics.prevHp[npcIndex] = hp;
+            ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
+            ctx.data.npc.statistics.hp[npcIndex] = nextHp;
+            if (damage > 0)
+                spawnTextEffect(ctx, npcIndex, std::to_string(damage));
+        }
+
         destroyProjectile(ctx, effectIndex);
     }
 }

@@ -17,6 +17,7 @@
 int spawnPlayerTargetedProjectileEffect(
     Context &ctx,
     const EntityBase<1> &projectileBase,
+    ProjectileType projectileType,
     int npcIndex,
     float tintR,
     float tintG,
@@ -29,6 +30,7 @@ int spawnPlayerTargetedProjectileEffect(
         return -1;
 
     ctx.data.effect.type[effectIndex] = EffectType::Projectile;
+    ctx.data.effect.projectileType[effectIndex] = projectileType;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
     ctx.data.effect.parent.type[effectIndex] = EntityType::Player;
     ctx.data.effect.parent.id[effectIndex] = 0;

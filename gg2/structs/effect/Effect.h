@@ -5,6 +5,7 @@
 #include "DestroyEffectType.h"
 #include "EffectConstants.h"
 #include "EffectType.h"
+#include "ProjectileType.h"
 #include "../../utils/pool/Pool.h"
 
 struct Effect
@@ -12,6 +13,7 @@ struct Effect
     Pool<MAX_EFFECTS> pool;
     int groupId[MAX_EFFECTS] = {};
     EffectType type[MAX_EFFECTS] = {};
+    ProjectileType projectileType[MAX_EFFECTS] = {};
     DestroyEffectType destroyType[MAX_EFFECTS] = {};
     float destroyTimer[MAX_EFFECTS] = {};
     EntityReference<MAX_EFFECTS> parent;

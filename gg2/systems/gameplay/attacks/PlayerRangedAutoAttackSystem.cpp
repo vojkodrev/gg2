@@ -2,6 +2,7 @@
 #include "CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../../../structs/effect/ProjectileType.h"
 #include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
 
 void playerRangedAutoAttackSystem(Context &ctx)
@@ -15,6 +16,7 @@ void playerRangedAutoAttackSystem(Context &ctx)
         const int effectIndex = spawnPlayerTargetedProjectileEffect(
             ctx,
             ctx.data.player.equipment.ammo.base,
+            ProjectileType::AutoAttack,
             npcIndex,
             CLEAR_TINT_R,
             CLEAR_TINT_G,
