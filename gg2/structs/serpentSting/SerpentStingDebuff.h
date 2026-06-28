@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../npc/NpcConstants.h"
+#include "../core/constants/NpcConstants.h"
 
 struct SerpentStingDebuff
 {
