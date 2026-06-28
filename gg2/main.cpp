@@ -33,7 +33,7 @@
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "attacks/PlayerAutoAttackTimerSystem.h"
+#include "attacks/AttackTimerSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
 #include "attacks/PlayerRangedAutoAttackSystem.h"
 #include "effects/MoveEffectSystem.h"
@@ -132,7 +132,7 @@ int main()
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
-        playerAutoAttackTimerSystem(*ctx);
+        attackTimerSystem(*ctx);
         togglePlayerAutoAttackSystem(*ctx);
         
         playerRangedAutoAttackSystem(*ctx);
