@@ -4,6 +4,7 @@
 #include "../core/EntityBase.h"
 #include "../core/Statistics.h"
 #include "../equipment/Equipment.h"
+#include "../serpentSting/SerpentStingDebuff.h"
 #include "../ui/Healthbar.h"
 #include "NpcConstants.h"
 #include "NPCAi.h"
@@ -19,6 +20,7 @@ struct NPC
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
+    SerpentStingDebuff serpentStingDebuff;
 
     NPC()
     {
