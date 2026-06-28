@@ -35,7 +35,7 @@
 #include "equipment/MoveEquipmentSystem.h"
 #include "attack/PlayerAutoAttackTimerSystem.h"
 #include "attack/TogglePlayerAutoAttackSystem.h"
-#include "effects/PlayerShootProjectileSystem.h"
+#include "effects/PlayerRangedAutoAttackSystem.h"
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
@@ -135,7 +135,7 @@ int main()
         playerAutoAttackTimerSystem(*ctx);
         togglePlayerAutoAttackSystem(*ctx);
         
-        playerShootProjectileSystem(*ctx);
+        playerRangedAutoAttackSystem(*ctx);
 
         moveEffectSystem(*ctx);
         destroyEffectByTimerSystem(*ctx);

@@ -20,7 +20,7 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     attack/PlayerAutoAttackTimerSystem.cpp
     attack/TogglePlayerAutoAttackSystem.cpp
-    effects/PlayerShootProjectileSystem.cpp
+    effects/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp

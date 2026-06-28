@@ -1,4 +1,4 @@
-#include "PlayerShootProjectileSystem.h"
+#include "PlayerRangedAutoAttackSystem.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
@@ -19,7 +19,7 @@
 #include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
 #include <cmath>
 
-void playerShootProjectileSystem(Context &ctx)
+void playerRangedAutoAttackSystem(Context &ctx)
 {
     if (ctx.data.player.autoAttack.active && ctx.data.player.autoAttack.attackTimer == 0.0f)
     {
