@@ -34,7 +34,8 @@
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
 #include "attacks/AttackTimerSystem.h"
-#include "attacks/PlayerSerpentStingSystem.h"
+#include "attacks/PlayerSerpentStingAttackSystem.h"
+#include "attacks/SerpentStingDebuffSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
 #include "attacks/PlayerRangedAutoAttackSystem.h"
 #include "effects/MoveEffectSystem.h"
@@ -137,7 +138,9 @@ int main()
         togglePlayerAutoAttackSystem(*ctx);
         
         playerRangedAutoAttackSystem(*ctx);
-        playerSerpentStingSystem(*ctx);
+        playerSerpentStingAttackSystem(*ctx);
+
+        serpentStingDebuffSystem(*ctx);
 
         moveEffectSystem(*ctx);
         destroyEffectByTimerSystem(*ctx);

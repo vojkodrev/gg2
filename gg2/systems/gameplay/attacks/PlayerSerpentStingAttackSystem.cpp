@@ -1,4 +1,4 @@
-#include "PlayerSerpentStingSystem.h"
+#include "PlayerSerpentStingAttackSystem.h"
 #include "CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
@@ -6,7 +6,7 @@
 #include "../../../structs/effect/ProjectileType.h"
 #include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
 
-void playerSerpentStingSystem(Context &ctx)
+void playerSerpentStingAttackSystem(Context &ctx)
 {
     if (!ctx.data.action.digit2Released)
         return;

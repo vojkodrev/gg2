@@ -20,7 +20,8 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     attacks/AttackTimerSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
-    attacks/PlayerSerpentStingSystem.cpp
+    attacks/PlayerSerpentStingAttackSystem.cpp
+    attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
