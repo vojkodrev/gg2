@@ -1,7 +1,7 @@
-#include "CleanupSystem.h"
+#include "DirtyCleanupSystem.h"
 #include <cstring>
 
-void cleanupSystem(Context &ctx)
+void dirtyCleanupSystem(Context &ctx)
 {
     std::memset(ctx.data.player.base.position.dirty, 0, sizeof(ctx.data.player.base.position.dirty));
     std::memset(ctx.data.player.base.facing.dirty, 0, sizeof(ctx.data.player.base.facing.dirty));

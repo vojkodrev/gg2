@@ -14,7 +14,7 @@
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
-#include "cleanup/CleanupSystem.h"
+#include "cleanup/DirtyCleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -163,7 +163,7 @@ int main()
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
 
-        cleanupSystem(*ctx);
+        dirtyCleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

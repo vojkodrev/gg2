@@ -1,5 +1,5 @@
 add_library(systems_gameplay
-    cleanup/CleanupSystem.cpp
+    cleanup/DirtyCleanupSystem.cpp
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
