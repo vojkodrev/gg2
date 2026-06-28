@@ -12,10 +12,6 @@ inline void calculateEntityBaseTint(
     if (entityBase.tint.damageTimer[i] < 0.0f)
         entityBase.tint.damageTimer[i] = 0.0f;
 
-    entityBase.tint.poisonTimer[i] -= dt;
-    if (entityBase.tint.poisonTimer[i] < 0.0f)
-        entityBase.tint.poisonTimer[i] = 0.0f;
-
     float tintR = 0.0f;
     float tintG = 0.0f;
     float tintB = 0.0f;
@@ -35,7 +31,7 @@ inline void calculateEntityBaseTint(
     };
 
     addTint(entityBase.tint.damageTimer[i] > 0.0f, DAMAGE_TINT_R, DAMAGE_TINT_G, DAMAGE_TINT_B, DAMAGE_TINT_A);
-    addTint(entityBase.tint.poisonTimer[i] > 0.0f, POISON_TINT_R, POISON_TINT_G, POISON_TINT_B, POISON_TINT_A);
+    addTint(entityBase.tint.isPoisoned[i], POISON_TINT_R, POISON_TINT_G, POISON_TINT_B, POISON_TINT_A);
 
     if (tintCount == 0)
     {

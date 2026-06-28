@@ -37,7 +37,7 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.base.tint.b[i] = CLEAR_TINT_B;
             ctx.data.npc.base.tint.a[i] = CLEAR_TINT_A;
             ctx.data.npc.base.tint.damageTimer[i] = 0.0f;
-            ctx.data.npc.base.tint.poisonTimer[i] = 0.0f;
+            ctx.data.npc.base.tint.isPoisoned[i] = false;
             ctx.data.npc.base.position.x[i] = ctx.data.npc.ai.spawn.x[i];
             ctx.data.npc.base.position.y[i] = ctx.data.npc.ai.spawn.y[i];
             ctx.data.npc.base.position.dirty[i] = true;
