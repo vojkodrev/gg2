@@ -1,4 +1,5 @@
 #include "SpawnNpcSystem.h"
+#include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../ai/SetNpcAiStateIdle.h"
@@ -24,9 +25,7 @@ void spawnNpcSystem(Context &ctx)
         else
         {
             ctx.data.npc.active[i] = true;
-            ctx.data.npc.statistics.prevHp[i] = ctx.data.npc.statistics.maxHp[i];
-            ctx.data.npc.statistics.hp[i] = ctx.data.npc.statistics.maxHp[i];
-            ctx.data.npc.statistics.hpDirty[i] = true;
+            setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.maxHp[i]);
             ctx.data.npc.serpentStingDebuff.debuffTimer[i] = 0.0f;
             setNpcAiStateIdle(i, ctx);
             ctx.data.npc.ai.path.length[i] = 0;

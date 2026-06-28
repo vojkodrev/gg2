@@ -5,6 +5,7 @@
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
+#include "../gameplay/statistics/SetHp.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
@@ -44,9 +45,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, i);
-        npc.statistics.prevHp[n] = NPC_HP;
-        npc.statistics.hp[n] = NPC_HP;
-        npc.statistics.hpDirty[n] = true;
+        setHp(npc.statistics, n, NPC_HP);
         npc.statistics.maxHp[n] = NPC_HP;
         npc.serpentStingDebuff.debuffTimer[n] = 0.0f;
         npc.ai.spawn.x[n] = npc.base.position.x[n];

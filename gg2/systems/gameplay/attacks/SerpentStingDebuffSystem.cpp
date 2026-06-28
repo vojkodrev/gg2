@@ -1,5 +1,6 @@
 #include "SerpentStingDebuffSystem.h"
-#include "../effects/SpawnTextEffect.h"
+#include "../statistics/SetHp.h"
+#include "../effects/SpawnNpcTextEffect.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
 #include <string>
@@ -34,10 +35,8 @@ void serpentStingDebuffSystem(Context &ctx)
         const int hp = npc.statistics.hp[i];
         const int damage = SERPENT_STING_DAMAGE * tickCount;
         const int nextHp = std::max(0, hp - damage);
-        npc.statistics.prevHp[i] = hp;
-        npc.statistics.hp[i] = nextHp;
-        npc.statistics.hpDirty[i] = hp != nextHp;
+        setHp(npc.statistics, i, nextHp);
         if (damage > 0)
-            spawnTextEffect(ctx, i, std::to_string(damage));
+            spawnNpcTextEffect(ctx, i, std::to_string(damage));
     }
 }

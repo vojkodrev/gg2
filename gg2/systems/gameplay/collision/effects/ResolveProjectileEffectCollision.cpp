@@ -1,9 +1,10 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
+#include "../../statistics/SetHp.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../effects/SpawnTextEffect.h"
+#include "../../effects/SpawnNpcTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 #include <cstdlib>
@@ -38,11 +39,9 @@ void resolveProjectileEffectCollision(
             const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
             const int nextHp = std::max(0, hp - projectileDamage);
             const int damage = hp - nextHp;
-            ctx.data.npc.statistics.prevHp[npcIndex] = hp;
-            ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
-            ctx.data.npc.statistics.hp[npcIndex] = nextHp;
+            setHp(ctx.data.npc.statistics, npcIndex, nextHp);
             if (damage > 0)
-                spawnTextEffect(ctx, npcIndex, std::to_string(damage));
+                spawnNpcTextEffect(ctx, npcIndex, std::to_string(damage));
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {
