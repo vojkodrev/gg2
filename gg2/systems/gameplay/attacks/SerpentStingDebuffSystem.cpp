@@ -17,12 +17,12 @@ void serpentStingDebuffSystem(Context &ctx)
         if (!npc.active[i])
             continue;
 
-        const float prevTimer = npc.serpentStingDebuff.debuffTimer[i];
+        const float prevTimer = npc.serpentStingDebuffTimer[i];
         if (prevTimer <= 0.0f)
             continue;
 
         const float nextTimer = std::max(0.0f, prevTimer - dt);
-        npc.serpentStingDebuff.debuffTimer[i] = nextTimer;
+        npc.serpentStingDebuffTimer[i] = nextTimer;
 
         const int prevTicks =
             (int)((SERPENT_STING_DEBUFF_TIME - prevTimer) / tickTime);

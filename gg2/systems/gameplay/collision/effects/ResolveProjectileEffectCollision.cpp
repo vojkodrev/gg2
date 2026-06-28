@@ -45,7 +45,7 @@ void resolveProjectileEffectCollision(
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {
-            ctx.data.npc.serpentStingDebuff.debuffTimer[npcIndex] =
+            ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
                 SERPENT_STING_DEBUFF_TIME;
         }
 

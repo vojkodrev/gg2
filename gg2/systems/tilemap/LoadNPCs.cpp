@@ -47,7 +47,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         setHp(npc.statistics, n, NPC_HP);
         npc.statistics.maxHp[n] = NPC_HP;
-        npc.serpentStingDebuff.debuffTimer[n] = 0.0f;
+        npc.serpentStingDebuffTimer[n] = 0.0f;
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;
