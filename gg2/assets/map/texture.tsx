@@ -187,11 +187,13 @@
  <tile id="360">
   <properties>
    <property name="icon" value="serpentSting"/>
+   <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
  <tile id="361">
   <properties>
    <property name="icon" value="rangedAutoAttack"/>
+   <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
 </tileset>
