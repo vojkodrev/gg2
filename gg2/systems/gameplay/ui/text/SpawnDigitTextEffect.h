@@ -49,6 +49,7 @@ inline void spawnDigitTextEffect(
         ctx.data.effect.base.position.x[effectIndex] =
             startX + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = pos.y;
+        ctx.data.effect.base.position.absolute[effectIndex] = parentType == EntityType::ActionBarIcon;
         ctx.data.effect.base.tint.r[effectIndex] = tint.r;
         ctx.data.effect.base.tint.g[effectIndex] = tint.g;
         ctx.data.effect.base.tint.b[effectIndex] = tint.b;
