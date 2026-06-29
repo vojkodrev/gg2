@@ -1,5 +1,5 @@
 add_library(systems_gameplay
-    cleanup/CleanupSystem.cpp
+    cleanup/DirtyCleanupSystem.cpp
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
@@ -18,9 +18,12 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
-    attack/PlayerAutoAttackTimerSystem.cpp
-    attack/TogglePlayerAutoAttackSystem.cpp
-    effects/PlayerShootProjectileSystem.cpp
+    attacks/AttackTimerSystem.cpp
+    attacks/CanPlayerRangedAttack.cpp
+    attacks/PlayerSerpentStingAttackSystem.cpp
+    attacks/SerpentStingDebuffSystem.cpp
+    attacks/TogglePlayerAutoAttackSystem.cpp
+    attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
@@ -54,11 +57,12 @@ add_library(systems_gameplay
     collision/effects/EffectCollisionResolutionSystem.cpp
     collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
+    projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/healthbar/ShowHealthbarSystem.cpp
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp
     tint/DamageTintSystem.cpp
-    tint/ClearTintSystem.cpp
+    tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
 )

@@ -1,4 +1,5 @@
 #include "SpawnNpcSystem.h"
+#include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../ai/SetNpcAiStateIdle.h"
@@ -24,9 +25,8 @@ void spawnNpcSystem(Context &ctx)
         else
         {
             ctx.data.npc.active[i] = true;
-            ctx.data.npc.statistics.prevHp[i] = ctx.data.npc.statistics.maxHp[i];
-            ctx.data.npc.statistics.hp[i] = ctx.data.npc.statistics.maxHp[i];
-            ctx.data.npc.statistics.hpDirty[i] = true;
+            setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.maxHp[i]);
+            ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
             setNpcAiStateIdle(i, ctx);
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;
@@ -36,7 +36,8 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.base.tint.g[i] = CLEAR_TINT_G;
             ctx.data.npc.base.tint.b[i] = CLEAR_TINT_B;
             ctx.data.npc.base.tint.a[i] = CLEAR_TINT_A;
-            ctx.data.npc.base.tint.clearTimer[i] = 0.0f;
+            ctx.data.npc.base.tint.damageTimer[i] = 0.0f;
+            ctx.data.npc.base.tint.isPoisoned[i] = false;
             ctx.data.npc.base.position.x[i] = ctx.data.npc.ai.spawn.x[i];
             ctx.data.npc.base.position.y[i] = ctx.data.npc.ai.spawn.y[i];
             ctx.data.npc.base.position.dirty[i] = true;

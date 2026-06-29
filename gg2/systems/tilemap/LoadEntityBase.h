@@ -97,5 +97,6 @@ inline void loadEntityBase(
     entityData.tint.g[entityIdx] = CLEAR_TINT_G;
     entityData.tint.b[entityIdx] = CLEAR_TINT_B;
     entityData.tint.a[entityIdx] = CLEAR_TINT_A;
-    entityData.tint.clearTimer[entityIdx] = 0.0f;
+    entityData.tint.damageTimer[entityIdx] = 0.0f;
+    entityData.tint.isPoisoned[entityIdx] = false;
 }

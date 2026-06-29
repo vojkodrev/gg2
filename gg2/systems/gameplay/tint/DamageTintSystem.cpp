@@ -13,8 +13,12 @@ void damageTintSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
+        const bool isPoisoned = ctx.data.npc.serpentStingDebuffTimer[i] > 0.0f;
         applyDamageTint(ctx.data.npc.base, ctx.data.npc.statistics, i);
         applyDamageTint(ctx.data.npc.equipment.weapon.base, ctx.data.npc.statistics, i);
         applyDamageTint(ctx.data.npc.equipment.ammo.base, ctx.data.npc.statistics, i);
+        ctx.data.npc.base.tint.isPoisoned[i] = isPoisoned;
+        ctx.data.npc.equipment.weapon.base.tint.isPoisoned[i] = isPoisoned;
+        ctx.data.npc.equipment.ammo.base.tint.isPoisoned[i] = isPoisoned;
     }
 }

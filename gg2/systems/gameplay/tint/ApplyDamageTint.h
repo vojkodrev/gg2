@@ -12,9 +12,5 @@ inline void applyDamageTint(
     if (!statistics.hpDirty[i] || statistics.hp[i] >= statistics.prevHp[i])
         return;
 
-    entityBase.tint.r[i] = DAMAGE_TINT_R;
-    entityBase.tint.g[i] = DAMAGE_TINT_G;
-    entityBase.tint.b[i] = DAMAGE_TINT_B;
-    entityBase.tint.a[i] = DAMAGE_TINT_A;
-    entityBase.tint.clearTimer[i] = DAMAGE_TINT_CLEAR_TIME;
+    entityBase.tint.damageTimer[i] = DAMAGE_TINT_CLEAR_TIME;
 }

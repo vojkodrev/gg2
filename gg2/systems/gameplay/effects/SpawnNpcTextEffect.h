@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <string>
 
-inline void spawnTextEffect(
+inline void spawnNpcTextEffect(
     Context &ctx,
     uint32_t npcIndex,
     const std::string &text)

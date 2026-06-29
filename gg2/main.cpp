@@ -14,7 +14,7 @@
 #include "DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
-#include "cleanup/CleanupSystem.h"
+#include "cleanup/DirtyCleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -33,9 +33,11 @@
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "attack/PlayerAutoAttackTimerSystem.h"
-#include "attack/TogglePlayerAutoAttackSystem.h"
-#include "effects/PlayerShootProjectileSystem.h"
+#include "attacks/AttackTimerSystem.h"
+#include "attacks/PlayerSerpentStingAttackSystem.h"
+#include "attacks/SerpentStingDebuffSystem.h"
+#include "attacks/TogglePlayerAutoAttackSystem.h"
+#include "attacks/PlayerRangedAutoAttackSystem.h"
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
@@ -54,7 +56,7 @@
 #include "ui/healthbar/HealthbarPositionSystem.h"
 #include "ui/healthbar/ShowHealthbarSystem.h"
 #include "tint/DamageTintSystem.h"
-#include "tint/ClearTintSystem.h"
+#include "tint/CalculateTintSystem.h"
 #include "CollisionResolutionSystem.h"
 
 int main()
@@ -132,10 +134,13 @@ int main()
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
-        playerAutoAttackTimerSystem(*ctx);
+        attackTimerSystem(*ctx);
         togglePlayerAutoAttackSystem(*ctx);
         
-        playerShootProjectileSystem(*ctx);
+        playerRangedAutoAttackSystem(*ctx);
+        playerSerpentStingAttackSystem(*ctx);
+
+        serpentStingDebuffSystem(*ctx);
 
         moveEffectSystem(*ctx);
         destroyEffectByTimerSystem(*ctx);
@@ -156,12 +161,12 @@ int main()
         healthbarDepthSystem(*ctx);
 
         damageTintSystem(*ctx);
-        clearTintSystem(*ctx);
+        calculateTintSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
 
-        cleanupSystem(*ctx);
+        dirtyCleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

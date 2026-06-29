@@ -7,5 +7,6 @@ struct Tint
     float g[N];
     float b[N];
     float a[N];
-    float clearTimer[N];
+    float damageTimer[N];
+    bool isPoisoned[N];
 };

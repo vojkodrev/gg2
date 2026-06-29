@@ -1,8 +1,10 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
+#include "../../statistics/SetHpDamage.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../effects/SpawnTextEffect.h"
+#include "../../effects/SpawnNpcTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 #include <cstdlib>
@@ -28,18 +30,25 @@ void resolveProjectileEffectCollision(
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        const int hp = ctx.data.npc.statistics.hp[npcIndex];
-        const int damageRandom =
-            (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
-            PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
-        const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
-        const int nextHp = std::max(0, hp - projectileDamage);
-        const int damage = hp - nextHp;
-        ctx.data.npc.statistics.prevHp[npcIndex] = hp;
-        ctx.data.npc.statistics.hpDirty[npcIndex] = hp != nextHp;
-        ctx.data.npc.statistics.hp[npcIndex] = nextHp;
-        if (damage > 0)
-            spawnTextEffect(ctx, npcIndex, std::to_string(damage));
+        if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
+        {
+            const int damageRandom =
+                (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
+                PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
+            const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
+            const int damage = setHpDamage(
+                ctx.data.npc.statistics,
+                npcIndex,
+                projectileDamage);
+            if (damage > 0)
+                spawnNpcTextEffect(ctx, npcIndex, std::to_string(damage));
+        }
+        else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
+        {
+            ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
+                SERPENT_STING_DEBUFF_TIME;
+        }
+
         destroyProjectile(ctx, effectIndex);
     }
 }

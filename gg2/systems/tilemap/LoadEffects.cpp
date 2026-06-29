@@ -43,7 +43,8 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         effectTemplate.base.tint.g[i] = CLEAR_TINT_G;
         effectTemplate.base.tint.b[i] = CLEAR_TINT_B;
         effectTemplate.base.tint.a[i] = CLEAR_TINT_A;
-        effectTemplate.base.tint.clearTimer[i] = 0.0f;
+        effectTemplate.base.tint.damageTimer[i] = 0.0f;
+        effectTemplate.base.tint.isPoisoned[i] = false;
     }
 
     uint32_t selectTileIdx = 0;

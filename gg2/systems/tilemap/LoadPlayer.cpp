@@ -3,6 +3,7 @@
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
+#include "../gameplay/statistics/SetHp.h"
 #include "../../structs/core/constants/PlayerConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include <tmxlite/TileLayer.hpp>
@@ -18,9 +19,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             continue;
         uint32_t idx = playerTiles[i].ID - props.firstGid;
         loadEntityBase(ctx.data.player.base, 0, tileset, idx, props, (uint32_t)i);
-        ctx.data.player.statistics.prevHp[0] = PLAYER_HP;
-        ctx.data.player.statistics.hp[0] = PLAYER_HP;
-        ctx.data.player.statistics.hpDirty[0] = true;
+        setHp(ctx.data.player.statistics, 0, PLAYER_HP);
         ctx.data.player.statistics.maxHp[0] = PLAYER_HP;
         ctx.data.player.selectedNpc = -1;
         ctx.data.player.previousSelectedNpc = -1;
