@@ -19,10 +19,7 @@ int spawnPlayerTargetedProjectileEffect(
     const EntityBase<1> &projectileBase,
     ProjectileType projectileType,
     int npcIndex,
-    float tintR,
-    float tintG,
-    float tintB,
-    float tintA)
+    SDL_FColor tint)
 {
     const int effectIndex =
         effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);
@@ -39,10 +36,10 @@ int spawnPlayerTargetedProjectileEffect(
     copyEntityBaseSlot(projectileBase, 0, ctx.data.effect.base, effectIndex);
 
     auto &effectBase = ctx.data.effect.base;
-    effectBase.tint.r[effectIndex] = tintR;
-    effectBase.tint.g[effectIndex] = tintG;
-    effectBase.tint.b[effectIndex] = tintB;
-    effectBase.tint.a[effectIndex] = tintA;
+    effectBase.tint.r[effectIndex] = tint.r;
+    effectBase.tint.g[effectIndex] = tint.g;
+    effectBase.tint.b[effectIndex] = tint.b;
+    effectBase.tint.a[effectIndex] = tint.a;
     const int frameIndex = effectBase.animation.frameIndex[effectIndex];
     const SDL_FRect originalAnchor = anchorOrCollision(effectBase.animation, effectIndex, frameIndex);
     const SDL_FPoint originalAnchorCenterWorld =
