@@ -1,5 +1,5 @@
 #pragma once
-#include "../actionbar/ActionBar.h"
+#include "../ui/actionbar/ActionBar.h"
 #include "TileMapProperties.h"
 #include "TileMap.h"
 #include "Player.h"
@@ -10,8 +10,8 @@
 #include "EffectTemplate.h"
 #include "Group.h"
 #include "constants/GroupConstants.h"
-#include "ActionState.h"
-#include "DebugState.h"
+#include "../input/ActionState.h"
+#include "../debug/DebugState.h"
 
 struct Data
 {

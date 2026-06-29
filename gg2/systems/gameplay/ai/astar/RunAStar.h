@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../structs/gameplay/ai/AStarContext.h"
+#include "../../../../structs/ai/AStarContext.h"
 #include "../../../../structs/core/Context.h"
 #include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"

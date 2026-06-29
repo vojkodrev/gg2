@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/gameplay/ai/AStarContext.h"
+#include "../../../../../structs/ai/AStarContext.h"
 #include "../../../../../utils/hashmap/HashMapTryGet.h"
 #include "../node/AStarEncode.h"
 #include <SDL3/SDL.h>

@@ -1,6 +1,6 @@
 #include "DebugRenderAstar.h"
-#include "../../../structs/gameplay/ai/AStarPool.h"
-#include "../../../structs/gameplay/ai/AStarStatus.h"
+#include "../../../structs/ai/AStarPool.h"
+#include "../../../structs/ai/AStarStatus.h"
 
 void debugRenderAstar(const Context &ctx)
 {

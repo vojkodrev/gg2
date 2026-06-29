@@ -3,10 +3,10 @@
 #include "FrameState.h"
 #include "Data.h"
 #include "RenderBuffer.h"
-#include "KeyboardState.h"
-#include "MouseState.h"
+#include "../ai/AStarPool.h"
+#include "../input/KeyboardState.h"
+#include "../input/MouseState.h"
 #include "../collision/CollisionContext.h"
-#include "../gameplay/ai/AStarPool.h"
 
 struct Context
 {

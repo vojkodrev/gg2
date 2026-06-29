@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/EntityBase.h"
+#include "../../core/EntityBase.h"
 
 struct ActionBarIcon
 {

@@ -53,7 +53,9 @@ htmlcov/
 .vscode/tasks.json
 .vscode/*.code-workspace
 
-# Keep source debug rendering code tracked
+# Keep source debug code tracked
+!gg2/structs/debug/
+!gg2/structs/debug/**
 !gg2/systems/core/debug/
 !gg2/systems/core/debug/**
 !gg2/systems/rendering/debug/
