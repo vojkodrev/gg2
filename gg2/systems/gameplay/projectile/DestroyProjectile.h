@@ -17,6 +17,8 @@ inline void destroyProjectile(Context &ctx, uint32_t effectIndex)
             if (ctx.data.npc.active[parentId])
                 ctx.data.npc.equipment.weapon.showAmmo[parentId] = true;
             break;
+        default:
+            break;
     }
 
     effectFree(ctx.data.effect, ctx.data.groups, effectIndex);

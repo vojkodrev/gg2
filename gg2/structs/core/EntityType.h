@@ -3,5 +3,6 @@
 enum class EntityType : int
 {
     Player,
-    NPC
+    NPC,
+    ActionBarIcon
 };

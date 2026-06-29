@@ -13,15 +13,18 @@ void playerRangedAutoAttackSystem(Context &ctx)
             return;
 
         const int npcIndex = ctx.data.player.selectedNpc;
+        const SDL_FColor tint = {
+            CLEAR_TINT_R,
+            CLEAR_TINT_G,
+            CLEAR_TINT_B,
+            CLEAR_TINT_A
+        };
         const int effectIndex = spawnPlayerTargetedProjectileEffect(
             ctx,
             ctx.data.player.equipment.ammo.base,
             ProjectileType::AutoAttack,
             npcIndex,
-            CLEAR_TINT_R,
-            CLEAR_TINT_G,
-            CLEAR_TINT_B,
-            CLEAR_TINT_A);
+            tint);
         if (effectIndex == -1)
             return;
         ctx.data.player.autoAttack.attackTimer = PLAYER_AUTO_ATTACK_DELAY;

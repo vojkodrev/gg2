@@ -1,3 +1,13 @@
 #pragma once
 
 const float GLOBAL_COOLDOWN_DELAY = 1.5f;
+
+const float AUTO_ATTACK_ACTION_BAR_TINT_R = 1.0f;
+const float AUTO_ATTACK_ACTION_BAR_TINT_G = 0.0f;
+const float AUTO_ATTACK_ACTION_BAR_TINT_B = 0.0f;
+const float AUTO_ATTACK_ACTION_BAR_TINT_A = 1.0f;
+
+const float GLOBAL_COOLDOWN_ACTION_BAR_TINT_R = 0.5f;
+const float GLOBAL_COOLDOWN_ACTION_BAR_TINT_G = 0.5f;
+const float GLOBAL_COOLDOWN_ACTION_BAR_TINT_B = 0.5f;
+const float GLOBAL_COOLDOWN_ACTION_BAR_TINT_A = 1.0f;

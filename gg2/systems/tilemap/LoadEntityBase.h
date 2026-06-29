@@ -20,7 +20,7 @@ inline void loadEntityBase(
     const TileMapProperties &props,
     uint32_t tileArrayIdx = UINT32_MAX)
 {
-    entityData.scale[entityIdx] = getTileFloatProp(tileset, entityTileIdx, "scale", 1.0f);
+    entityData.scale.value[entityIdx] = getTileFloatProp(tileset, entityTileIdx, "scale", 1.0f);
 
     bool marker = tileArrayIdx != UINT32_MAX && isMarker(tileset, entityTileIdx);
     if (marker)
@@ -51,8 +51,8 @@ inline void loadEntityBase(
         entityData.animation.frame.collision.initialH[entityIdx][0] = colH;
         entityData.animation.frame.collision.offX[entityIdx][0] = colOffX;
         entityData.animation.frame.collision.offY[entityIdx][0] = colOffY;
-        entityData.animation.frame.collision.w[entityIdx][0] = colW * entityData.scale[entityIdx];
-        entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale[entityIdx];
+        entityData.animation.frame.collision.w[entityIdx][0] = colW * entityData.scale.value[entityIdx];
+        entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale.value[entityIdx];
         entityData.animation.animationType[entityIdx] = AnimationType::None;
         entityData.animation.frameCount[entityIdx] = 1;
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
@@ -68,7 +68,7 @@ inline void loadEntityBase(
             tileset,
             entityTileIdx,
             props,
-            entityData.scale[entityIdx]);
+            entityData.scale.value[entityIdx]);
         if (tileArrayIdx != UINT32_MAX)
         {
             SDL_Point grid = decodeGridIndex((int)tileArrayIdx, props.mapW);
@@ -81,8 +81,8 @@ inline void loadEntityBase(
         entityData.position.h[entityIdx] = entityData.position.initialH[entityIdx];
     }
 
-    entityData.position.w[entityIdx] = entityData.position.initialW[entityIdx] * entityData.scale[entityIdx];
-    entityData.position.h[entityIdx] = entityData.position.initialH[entityIdx] * entityData.scale[entityIdx];
+    entityData.position.w[entityIdx] = entityData.position.initialW[entityIdx] * entityData.scale.value[entityIdx];
+    entityData.position.h[entityIdx] = entityData.position.initialH[entityIdx] * entityData.scale.value[entityIdx];
     entityData.position.dirty[entityIdx] = true;
 
     entityData.rotation.initialRotate[entityIdx] = getTileFloatProp(tileset, entityTileIdx, "rotate", 0.0f);

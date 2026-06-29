@@ -19,6 +19,12 @@ void effectDepthSystem(Context &ctx)
                 ctx.data.effect.base.depthY[i] =
                     ctx.data.npc.base.depthY[ctx.data.effect.parent.id[i]];
                 break;
+            case EntityType::ActionBarIcon:
+                ctx.data.effect.base.depthY[i] =
+                    ctx.data.actionBar.rangedAutoAttack.base.depthY[0];
+                break;
+            default:
+                break;
         }
     }
 }

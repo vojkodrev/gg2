@@ -16,15 +16,18 @@ void playerSerpentStingAttackSystem(Context &ctx)
         return;
 
     const int npcIndex = ctx.data.player.selectedNpc;
+    const SDL_FColor tint = {
+        POISON_TINT_R,
+        POISON_TINT_G,
+        POISON_TINT_B,
+        POISON_TINT_A
+    };
     const int effectIndex = spawnPlayerTargetedProjectileEffect(
         ctx,
         ctx.data.player.equipment.ammo.base,
         ProjectileType::SerpentSting,
         npcIndex,
-        POISON_TINT_R,
-        POISON_TINT_G,
-        POISON_TINT_B,
-        POISON_TINT_A);
+        tint);
     if (effectIndex == -1)
         return;
 

@@ -1,4 +1,5 @@
 add_library(systems_rendering
+    FillActionBarRenderBuffer.cpp
     FillRenderBufferSystem.cpp
     FillPlayerRenderBuffer.cpp
     FillNpcRenderBuffer.cpp

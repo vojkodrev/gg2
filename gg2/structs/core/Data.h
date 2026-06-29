@@ -1,4 +1,5 @@
 #pragma once
+#include "../actionbar/ActionBar.h"
 #include "TileMapProperties.h"
 #include "TileMap.h"
 #include "Player.h"
@@ -14,6 +15,7 @@
 
 struct Data
 {
+    ActionBar actionBar;
     TileMapProperties tileMapProps;
     TileMap tileMap;
     Player player;

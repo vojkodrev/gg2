@@ -55,6 +55,7 @@
 #include "ui/healthbar/HealthbarFrameSystem.h"
 #include "ui/healthbar/HealthbarPositionSystem.h"
 #include "ui/healthbar/ShowHealthbarSystem.h"
+#include "ui/actionbar/ActionBarTintSystem.h"
 #include "tint/DamageTintSystem.h"
 #include "tint/CalculateTintSystem.h"
 #include "CollisionResolutionSystem.h"
@@ -69,7 +70,6 @@ int main()
 
     SDL_Surface *surface = IMG_Load("assets/texture/texture.png");
     ctx->texture = SDL_CreateTextureFromSurface(ctx->renderer, surface);
-    SDL_SetTextureScaleMode(ctx->texture, SDL_SCALEMODE_NEAREST);
     SDL_DestroySurface(surface);
 
     tmx::Map map;
@@ -159,6 +159,7 @@ int main()
         healthbarFrameSystem(*ctx);
         healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
+        actionBarTintSystem(*ctx);
 
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);

@@ -13,8 +13,8 @@ void fillEffectRenderBuffer(Context &ctx)
             continue;
 
         int zIndex = EFFECT_Z_INDEX;
-        if (effect.type[i] == EffectType::DamageNumber)
-            zIndex = EFFECT_DAMAGE_NUMBER_Z_INDEX;
+        if (effect.type[i] == EffectType::Digit)
+            zIndex = EFFECT_DIGIT_Z_INDEX;
 
         fillEntityBaseRenderBuffer(
             rb,

@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include "Context.h"
 #include "../../../structs/effect/ProjectileType.h"
 
@@ -7,7 +8,4 @@ int spawnPlayerTargetedProjectileEffect(
     const EntityBase<1> &projectileBase,
     ProjectileType projectileType,
     int npcIndex,
-    float tintR,
-    float tintG,
-    float tintB,
-    float tintA);
+    SDL_FColor tint);

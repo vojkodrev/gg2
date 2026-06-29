@@ -51,7 +51,7 @@ inline void copyEntityBaseSlot(
     to.position.h[toIndex] = from.position.h[fromIndex];
     to.position.dirty[toIndex] = from.position.dirty[fromIndex];
 
-    to.scale[toIndex] = from.scale[fromIndex];
+    to.scale.value[toIndex] = from.scale.value[fromIndex];
 
     to.rotation.rotate[toIndex] = from.rotation.rotate[fromIndex];
     to.rotation.initialRotate[toIndex] = from.rotation.initialRotate[fromIndex];
