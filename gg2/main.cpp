@@ -159,8 +159,8 @@ int main()
         healthbarFrameSystem(*ctx);
         healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
-        actionBarTintSystem(*ctx);
 
+        actionBarTintSystem(*ctx);
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 

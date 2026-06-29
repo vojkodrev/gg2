@@ -9,6 +9,7 @@ void keyboardStateSystem(Context &ctx)
     ctx.keyboard.a = keys[SDL_SCANCODE_A];
     ctx.keyboard.s = keys[SDL_SCANCODE_S];
     ctx.keyboard.d = keys[SDL_SCANCODE_D];
+    ctx.keyboard.f = keys[SDL_SCANCODE_F];
     ctx.keyboard.ctrl = keys[SDL_SCANCODE_LCTRL] || keys[SDL_SCANCODE_RCTRL];
     ctx.keyboard.shift = keys[SDL_SCANCODE_LSHIFT] || keys[SDL_SCANCODE_RSHIFT];
     ctx.keyboard.alt = keys[SDL_SCANCODE_LALT] || keys[SDL_SCANCODE_RALT];
