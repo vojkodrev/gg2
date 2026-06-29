@@ -37,7 +37,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         effectTemplate.base.position.initialH[i] = FONT_GLYPH_H;
         effectTemplate.base.position.w[i] = FONT_GLYPH_W;
         effectTemplate.base.position.h[i] = FONT_GLYPH_H;
-        effectTemplate.base.scale[i] = 1.0f;
+        effectTemplate.base.scale.value[i] = 1.0f;
 
         effectTemplate.base.tint.r[i] = CLEAR_TINT_R;
         effectTemplate.base.tint.g[i] = CLEAR_TINT_G;

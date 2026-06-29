@@ -8,7 +8,7 @@ inline void scaleEntityBaseLocations(EntityBase<N> &entityBase, uint32_t i)
 {
     for (int f = 0; f < entityBase.animation.frameCount[i]; f++)
     {
-        scaleAnchorLocation(entityBase.animation.frame.anchor, entityBase.scale[i], i, f);
-        scaleAnchorLocation(entityBase.animation.frame.collision, entityBase.scale[i], i, f);
+        scaleAnchorLocation(entityBase.animation.frame.anchor, entityBase.scale.value[i], i, f);
+        scaleAnchorLocation(entityBase.animation.frame.collision, entityBase.scale.value[i], i, f);
     }
 }

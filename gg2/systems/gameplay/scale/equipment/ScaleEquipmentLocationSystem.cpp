@@ -24,7 +24,7 @@ void scaleEquipmentLocationSystem(Context &ctx)
     {
         scaleAnchorLocation(
             ctx.data.player.equipment.weapon.ammoAnchor,
-            ctx.data.player.equipment.weapon.base.scale[0],
+            ctx.data.player.equipment.weapon.base.scale.value[0],
             0,
             0);
     }
@@ -39,7 +39,7 @@ void scaleEquipmentLocationSystem(Context &ctx)
 
         scaleAnchorLocation(
             ctx.data.npc.equipment.weapon.ammoAnchor,
-            ctx.data.npc.equipment.weapon.base.scale[i],
+            ctx.data.npc.equipment.weapon.base.scale.value[i],
             i,
             0);
     }

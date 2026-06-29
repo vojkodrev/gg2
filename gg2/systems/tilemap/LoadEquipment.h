@@ -35,9 +35,9 @@ inline void loadEquipment(
         equipmentData.weapon.ammoAnchor.offX[parentEntityIdx][0] = ammoAnchor.x;
         equipmentData.weapon.ammoAnchor.offY[parentEntityIdx][0] = ammoAnchor.y;
         equipmentData.weapon.ammoAnchor.w[parentEntityIdx][0] =
-            equipmentData.weapon.ammoAnchor.initialW[parentEntityIdx][0] * equipmentData.weapon.base.scale[parentEntityIdx];
+            equipmentData.weapon.ammoAnchor.initialW[parentEntityIdx][0] * equipmentData.weapon.base.scale.value[parentEntityIdx];
         equipmentData.weapon.ammoAnchor.h[parentEntityIdx][0] =
-            equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] * equipmentData.weapon.base.scale[parentEntityIdx];
+            equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] * equipmentData.weapon.base.scale.value[parentEntityIdx];
     }
 
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
