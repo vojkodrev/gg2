@@ -19,6 +19,8 @@ void effectDepthSystem(Context &ctx)
                 ctx.data.effect.base.depthY[i] =
                     ctx.data.npc.base.depthY[ctx.data.effect.parent.id[i]];
                 break;
+            default:
+                break;
         }
     }
 }
