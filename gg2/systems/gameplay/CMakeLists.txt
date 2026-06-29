@@ -58,6 +58,7 @@ add_library(systems_gameplay
     collision/effects/ResolveProjectileEffectCollision.cpp
     collision/CollisionResolutionSystem.cpp
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
+    ui/actionbar/ActionBarTintSystem.cpp
     ui/healthbar/ShowHealthbarSystem.cpp
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp
@@ -83,6 +84,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
     ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
     ${CMAKE_CURRENT_SOURCE_DIR}/tint
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/actionbar
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/healthbar
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)
