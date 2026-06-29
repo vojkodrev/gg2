@@ -65,6 +65,8 @@ images = [
     {"id": 29, "filename": "../healthbars.png", "dx": 5, "dy": 22, "sx": 6 * 48, "sy": 8 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 30, "filename": "../font/boldpixels.png", "dx": 12, "dy": 0},
     {"id": 31, "filename": "../pixel ui pack 3-7.png", "dx": 6, "dy": 22, "sx": 3 * 32, "sy": 176, "sw": 32, "sh": 32},
+    {"id": 32, "filename": "../icons/Ability_Hunter_Quickshot.png", "dx": 8, "dy": 22},
+    {"id": 33, "filename": "../icons/INV_Weapon_Bow_02.png", "dx": 9, "dy": 22},
 ]
 
 
