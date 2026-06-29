@@ -69,7 +69,6 @@ int main()
 
     SDL_Surface *surface = IMG_Load("assets/texture/texture.png");
     ctx->texture = SDL_CreateTextureFromSurface(ctx->renderer, surface);
-    SDL_SetTextureScaleMode(ctx->texture, SDL_SCALEMODE_NEAREST);
     SDL_DestroySurface(surface);
 
     tmx::Map map;

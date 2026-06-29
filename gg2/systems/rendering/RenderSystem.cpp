@@ -8,6 +8,7 @@ void renderSystem(const Context &ctx)
     auto &tileMap = ctx.data.tileMap;
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;
+    SDL_SetTextureScaleMode(ctx.texture, SDL_SCALEMODE_NEAREST);
     SDL_SetRenderDrawColor(ctx.renderer, 0, 0, 0, 255);
     SDL_RenderClear(ctx.renderer);
     for (uint32_t i = 0; i < tileMap.tileCount; i++)
