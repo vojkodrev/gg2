@@ -3,11 +3,13 @@
 #include "properties/FindTileByIcon.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
+#include "../../utils/groups/GroupAlloc.h"
 
 void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
     auto &actionBar = ctx.data.actionBar;
+    actionBar.groupId = groupAlloc(ctx.data.groups);
 
     uint32_t serpentStingTileIdx = 0;
     if (findTileByIcon(tileset, "serpentSting", serpentStingTileIdx))
