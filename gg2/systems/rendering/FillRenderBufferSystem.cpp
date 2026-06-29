@@ -1,5 +1,5 @@
 #include "FillRenderBufferSystem.h"
-#include "CompactVisibleRenderEntries.h"
+#include "ProjectAndCompactVisibleRenderEntries.h"
 #include "FillActionBarRenderBuffer.h"
 #include "FillPlayerRenderBuffer.h"
 #include "FillNpcRenderBuffer.h"
@@ -17,6 +17,6 @@ void fillRenderBufferSystem(Context &ctx)
     fillEffectRenderBuffer(ctx);
     fillActionBarRenderBuffer(ctx);
 
-    compactVisibleRenderEntries(ctx);
+    projectAndCompactVisibleRenderEntries(ctx);
     sortRenderBuffer(ctx);
 }

@@ -3,7 +3,7 @@
 #include "RenderBufferOps.h"
 #include <SDL3/SDL.h>
 
-inline void compactVisibleRenderEntries(Context &ctx)
+inline void projectAndCompactVisibleRenderEntries(Context &ctx)
 {
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;
