@@ -11,7 +11,7 @@
 #include "FrameRateLimitSystem.h"
 #include "ActionStateSystem.h"
 #include "KeyboardStateSystem.h"
-#include "DebugStateSystem.h"
+#include "debug/DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
 #include "cleanup/DirtyCleanupSystem.h"
