@@ -8,4 +8,5 @@ struct RenderDst
     float w[MAX_RENDER_BUFFER];
     float h[MAX_RENDER_BUFFER];
     float depthY[MAX_RENDER_BUFFER];
+    bool absolute[MAX_RENDER_BUFFER];
 };

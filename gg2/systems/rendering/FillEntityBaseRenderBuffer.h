@@ -28,6 +28,7 @@ inline uint32_t fillEntityBaseRenderBuffer(
     rb.dst.w[renderIndex] = entityBase.position.w[entityIndex];
     rb.dst.h[renderIndex] = entityBase.position.h[entityIndex];
     rb.dst.depthY[renderIndex] = entityBase.depthY[entityIndex];
+    rb.dst.absolute[renderIndex] = entityBase.position.absolute[entityIndex];
 
     rb.group.id[renderIndex] = groupId;
     rb.group.zIndex[renderIndex] = zIndex;

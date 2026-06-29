@@ -2,12 +2,14 @@ add_library(systems_tilemap
     FindLayer.cpp
     GetAnchor.cpp
     IsMarker.cpp
+    LoadActionBar.cpp
     LoadEffects.cpp
     LoadGround.cpp
     LoadNPCs.cpp
     LoadObjects.cpp
     LoadPlayer.cpp
     LoadTileMap.cpp
+    properties/FindTileByIcon.cpp
     properties/FindTileByType.cpp
     properties/GetTileFloatProp.cpp
     properties/GetTileIntProp.cpp

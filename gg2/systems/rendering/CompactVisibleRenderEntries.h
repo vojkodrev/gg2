@@ -11,7 +11,12 @@ inline void compactVisibleRenderEntries(Context &ctx)
     uint32_t visible = 0;
     for (uint32_t i = 0; i < rb.count; i++)
     {
-        SDL_FRect dst = {rb.dst.x[i] + off.x, rb.dst.y[i] + off.y, rb.dst.w[i], rb.dst.h[i]};
+        SDL_FRect dst = {
+            rb.dst.absolute[i] ? rb.dst.x[i] : rb.dst.x[i] + off.x,
+            rb.dst.absolute[i] ? rb.dst.y[i] : rb.dst.y[i] + off.y,
+            rb.dst.w[i],
+            rb.dst.h[i]
+        };
         if (!SDL_HasRectIntersectionFloat(&dst, &screen))
             continue;
         copyRenderEntry(rb, visible++, i, &dst);

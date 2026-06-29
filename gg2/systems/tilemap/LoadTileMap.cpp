@@ -4,6 +4,7 @@
 #include "LoadPlayer.h"
 #include "LoadNPCs.h"
 #include "LoadObjects.h"
+#include "LoadActionBar.h"
 
 void loadTileMap(Context &ctx, const tmx::Map &map)
 {
@@ -13,4 +14,5 @@ void loadTileMap(Context &ctx, const tmx::Map &map)
     loadPlayer(ctx, map, tileset);
     loadNPCs(ctx, map, tileset);
     loadObjects(ctx, map, tileset);
+    loadActionBar(ctx, tileset);
 }
