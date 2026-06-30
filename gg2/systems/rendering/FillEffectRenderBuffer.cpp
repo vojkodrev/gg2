@@ -13,8 +13,8 @@ void fillEffectRenderBuffer(Context &ctx)
             continue;
 
         int zIndex = EFFECT_Z_INDEX;
-        if (effect.type[i] == EffectType::Digit)
-            zIndex = EFFECT_DIGIT_Z_INDEX;
+        if (effect.type[i] == EffectType::Character)
+            zIndex = EFFECT_CHARACTER_Z_INDEX;
 
         fillEntityBaseRenderBuffer(
             rb,

@@ -1,14 +1,17 @@
 add_library(systems_core
+    debug/ClearDebugFpsEffects.cpp
+    debug/DebugFpsSystem.cpp
+    debug/DebugStateSystem.cpp
     frame/FrameRateLimitSystem.cpp
     frame/RefreshFrameTiming.cpp
     input/ActionStateSystem.cpp
-    input/DebugStateSystem.cpp
     input/KeyboardStateSystem.cpp
     input/MouseStateSystem.cpp
     input/MouseWorldStateSystem.cpp
 )
 target_include_directories(systems_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/debug
     ${CMAKE_CURRENT_SOURCE_DIR}/frame
     ${CMAKE_CURRENT_SOURCE_DIR}/input
 )

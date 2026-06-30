@@ -1,9 +1,9 @@
 #pragma once
 #include "AStarStatus.h"
-#include "../../../utils/hashmap/HashMap.h"
-#include "../../../utils/minheap/MinHeap.h"
-#include "AStarConstants.h"
-#include "spatialhash/SpatialHash.h"
+#include "../../utils/hashmap/HashMap.h"
+#include "../../utils/minheap/MinHeap.h"
+#include "../core/constants/AStarConstants.h"
+#include "../../utils/collision/spatialhash/SpatialHash.h"
 #include <future>
 #include <atomic>
 

@@ -11,7 +11,8 @@
 #include "FrameRateLimitSystem.h"
 #include "ActionStateSystem.h"
 #include "KeyboardStateSystem.h"
-#include "DebugStateSystem.h"
+#include "debug/DebugFpsSystem.h"
+#include "debug/DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
 #include "cleanup/DirtyCleanupSystem.h"
@@ -104,6 +105,8 @@ int main()
         actionStateSystem(*ctx);
         debugStateSystem(*ctx);
 
+        debugFpsSystem(*ctx);
+
         animationSystem(*ctx);
 
         playerMovementSystem(*ctx);
@@ -159,8 +162,8 @@ int main()
         healthbarFrameSystem(*ctx);
         healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
-        actionBarTintSystem(*ctx);
 
+        actionBarTintSystem(*ctx);
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 

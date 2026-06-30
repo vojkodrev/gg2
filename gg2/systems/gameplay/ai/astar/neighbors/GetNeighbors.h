@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/gameplay/ai/AStarContext.h"
+#include "../../../../../structs/ai/AStarContext.h"
 #include "../../../../../structs/core/Context.h"
 #include "../node/AStarDecode.h"
 #include "../node/AStarEncode.h"

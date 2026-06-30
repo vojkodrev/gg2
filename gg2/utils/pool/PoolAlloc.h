@@ -9,6 +9,9 @@ int poolAlloc(Pool<TCapacity>& pool)
     if (!queueEmpty(pool.freeQueue))
     {
         int index = queueDequeue(pool.freeQueue);
+        if (pool.active[index])
+            return -1;
+
         pool.active[index] = true;
         if ((uint32_t)(index + 1) > pool.count)
             pool.count = (uint32_t)(index + 1);

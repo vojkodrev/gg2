@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/gameplay/ai/AStarContext.h"
+#include "../../../../../structs/ai/AStarContext.h"
 #include "../../../../../utils/grid/DecodeGridIndex.h"
 #include "NpcMonsterConstants.h"
 

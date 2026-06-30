@@ -1,5 +1,5 @@
 #include "RequestAStarPath.h"
-#include "../../../../structs/gameplay/ai/AStarStatus.h"
+#include "../../../../structs/ai/AStarStatus.h"
 #include "../../../../structs/npc/NPCPathStatus.h"
 #include "pool/AStarAlloc.h"
 #include "pool/AStarFree.h"

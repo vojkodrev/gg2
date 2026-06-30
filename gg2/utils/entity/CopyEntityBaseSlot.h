@@ -49,12 +49,18 @@ inline void copyEntityBaseSlot(
     to.position.initialH[toIndex] = from.position.initialH[fromIndex];
     to.position.w[toIndex] = from.position.w[fromIndex];
     to.position.h[toIndex] = from.position.h[fromIndex];
+    to.position.absolute[toIndex] = from.position.absolute[fromIndex];
     to.position.dirty[toIndex] = from.position.dirty[fromIndex];
+
+    to.depthY[toIndex] = from.depthY[fromIndex];
 
     to.scale.value[toIndex] = from.scale.value[fromIndex];
 
     to.rotation.rotate[toIndex] = from.rotation.rotate[fromIndex];
     to.rotation.initialRotate[toIndex] = from.rotation.initialRotate[fromIndex];
+    to.rotation.center.point.x[toIndex] = from.rotation.center.point.x[fromIndex];
+    to.rotation.center.point.y[toIndex] = from.rotation.center.point.y[fromIndex];
+    to.rotation.center.hasCenter[toIndex] = from.rotation.center.hasCenter[fromIndex];
 
     to.facing.facing[toIndex] = from.facing.facing[fromIndex];
     to.facing.initialFacing[toIndex] = from.facing.initialFacing[fromIndex];

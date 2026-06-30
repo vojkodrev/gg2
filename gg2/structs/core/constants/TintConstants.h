@@ -16,7 +16,7 @@ const float CLEAR_TINT_G = 1.0f;
 const float CLEAR_TINT_B = 1.0f;
 const float CLEAR_TINT_A = 1.0f;
 
-const float DAMAGE_NUMBER_TINT_R = 0.0f;
-const float DAMAGE_NUMBER_TINT_G = 0.0f;
-const float DAMAGE_NUMBER_TINT_B = 0.0f;
-const float DAMAGE_NUMBER_TINT_A = 1.0f;
+const float CHARACTER_TINT_R = 0.0f;
+const float CHARACTER_TINT_G = 0.0f;
+const float CHARACTER_TINT_B = 0.0f;
+const float CHARACTER_TINT_A = 1.0f;

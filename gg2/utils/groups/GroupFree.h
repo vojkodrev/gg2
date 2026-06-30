@@ -6,6 +6,9 @@
 template<uint32_t TGroupCapacity>
 void groupFree(Group<TGroupCapacity> &group, int groupId)
 {
+    if (!group.pool.active[groupId] || group.count[groupId] == 0)
+        return;
+
     group.count[groupId]--;
 
     if (group.count[groupId] == 0)

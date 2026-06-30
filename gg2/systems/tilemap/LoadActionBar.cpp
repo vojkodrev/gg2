@@ -1,7 +1,7 @@
 #include "LoadActionBar.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByIcon.h"
-#include "../gameplay/ui/text/SpawnDigitTextEffect.h"
+#include "../gameplay/ui/text/SpawnTextEffect.h"
 #include "../../structs/core/EntityType.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
@@ -51,7 +51,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         CLEAR_TINT_B,
         CLEAR_TINT_A
     };
-    spawnDigitTextEffect(
+    spawnTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
@@ -60,11 +60,11 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         0.0f,
         "1",
         SDL_FPoint{
-            actionBar.rangedAutoAttack.base.position.x[0] + ACTION_BAR_DIGIT_PADDING + FONT_GLYPH_W * 0.5f,
+            actionBar.rangedAutoAttack.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
             actionBar.rangedAutoAttack.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
-    spawnDigitTextEffect(
+    spawnTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
@@ -73,7 +73,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         0.0f,
         "2",
         SDL_FPoint{
-            actionBar.serpentSting.base.position.x[0] + ACTION_BAR_DIGIT_PADDING + FONT_GLYPH_W * 0.5f,
+            actionBar.serpentSting.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
             actionBar.serpentSting.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
