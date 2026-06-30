@@ -105,6 +105,8 @@ int main()
         actionStateSystem(*ctx);
         debugStateSystem(*ctx);
 
+        debugFpsSystem(*ctx);
+
         animationSystem(*ctx);
 
         playerMovementSystem(*ctx);
@@ -169,7 +171,6 @@ int main()
         renderSystem(*ctx);
 
         dirtyCleanupSystem(*ctx);
-        debugFpsSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }
