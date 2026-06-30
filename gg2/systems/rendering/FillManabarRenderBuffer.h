@@ -1,22 +1,22 @@
 #pragma once
 #include "FillEntityBaseRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
-#include "../../structs/ui/Healthbar.h"
+#include "../../structs/ui/Manabar.h"
 #include <cstdint>
 
 template<int N>
-inline void fillHealthbarRenderBuffer(
+inline void fillManabarRenderBuffer(
     RenderBuffer &rb,
-    const Healthbar<N> &healthbar,
+    const Manabar<N> &manabar,
     uint32_t entityIndex,
     uint32_t groupId)
 {
-    if (!healthbar.show[entityIndex])
+    if (!manabar.show[entityIndex])
         return;
 
     fillEntityBaseRenderBuffer(
         rb,
-        healthbar.base,
+        manabar.base,
         entityIndex,
         groupId,
         HP_MANA_BAR_Z_INDEX);
