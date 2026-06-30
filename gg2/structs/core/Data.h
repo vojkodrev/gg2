@@ -11,6 +11,7 @@
 #include "Group.h"
 #include "constants/GroupConstants.h"
 #include "../input/ActionState.h"
+#include "../debug/DebugFps.h"
 #include "../debug/DebugState.h"
 
 struct Data
@@ -26,5 +27,6 @@ struct Data
     Effect effect;
     EffectTemplate effectTemplate;
     ActionState action;
+    DebugFps fps;
     DebugState debug;
 };

@@ -5,7 +5,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../ui/text/SpawnDigitTextEffect.h"
+#include "../ui/text/SpawnTextEffect.h"
 #include <string>
 
 inline void spawnNpcTextEffect(
@@ -27,7 +27,7 @@ inline void spawnNpcTextEffect(
         DAMAGE_NUMBER_TINT_A
     };
 
-    spawnDigitTextEffect(
+    spawnTextEffect(
         ctx,
         ctx.data.npc.groupId[npcIndex],
         EntityType::NPC,

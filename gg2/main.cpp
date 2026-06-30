@@ -11,6 +11,7 @@
 #include "FrameRateLimitSystem.h"
 #include "ActionStateSystem.h"
 #include "KeyboardStateSystem.h"
+#include "debug/DebugFpsSystem.h"
 #include "debug/DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
@@ -168,6 +169,7 @@ int main()
         renderSystem(*ctx);
 
         dirtyCleanupSystem(*ctx);
+        debugFpsSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

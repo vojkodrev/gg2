@@ -6,12 +6,15 @@
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
 #include "../../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../../../utils/queue/Queue.h"
+#include "../../../../utils/queue/QueueEnqueue.h"
 #include "../../effects/EffectAlloc.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
 #include <string>
 
-inline void spawnDigitTextEffect(
+template<uint32_t TQueueSize>
+inline void spawnTextEffect(
     Context &ctx,
     int groupId,
     EntityType parentType,
@@ -20,7 +23,8 @@ inline void spawnDigitTextEffect(
     float destroyTimer,
     const std::string &text,
     SDL_FPoint pos,
-    SDL_FColor tint)
+    SDL_FColor tint,
+    Queue<int, TQueueSize> *effectIdsQueue)
 {
     const auto &templateBase = ctx.data.effectTemplate.base;
     const float totalW =
@@ -34,6 +38,9 @@ inline void spawnDigitTextEffect(
         const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, groupId);
         if (effectIndex == -1)
             return;
+
+        if (effectIdsQueue != nullptr)
+            queueEnqueue(*effectIdsQueue, effectIndex);
 
         copyEntityBaseSlot(
             templateBase,
@@ -49,10 +56,35 @@ inline void spawnDigitTextEffect(
         ctx.data.effect.base.position.x[effectIndex] =
             startX + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = pos.y;
-        ctx.data.effect.base.position.absolute[effectIndex] = parentType == EntityType::ActionBarIcon;
+        ctx.data.effect.base.position.absolute[effectIndex] =
+            parentType == EntityType::ActionBarIcon || parentType == EntityType::Window;
         ctx.data.effect.base.tint.r[effectIndex] = tint.r;
         ctx.data.effect.base.tint.g[effectIndex] = tint.g;
         ctx.data.effect.base.tint.b[effectIndex] = tint.b;
         ctx.data.effect.base.tint.a[effectIndex] = tint.a;
     }
+}
+
+inline void spawnTextEffect(
+    Context &ctx,
+    int groupId,
+    EntityType parentType,
+    int parentId,
+    DestroyEffectType destroyType,
+    float destroyTimer,
+    const std::string &text,
+    SDL_FPoint pos,
+    SDL_FColor tint)
+{
+    spawnTextEffect(
+        ctx,
+        groupId,
+        parentType,
+        parentId,
+        destroyType,
+        destroyTimer,
+        text,
+        pos,
+        tint,
+        static_cast<Queue<int, 1> *>(nullptr));
 }

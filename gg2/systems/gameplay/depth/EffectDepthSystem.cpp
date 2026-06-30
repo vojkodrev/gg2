@@ -23,6 +23,10 @@ void effectDepthSystem(Context &ctx)
                 ctx.data.effect.base.depthY[i] =
                     ctx.data.actionBar.rangedAutoAttack.base.depthY[0];
                 break;
+            case EntityType::Window:
+                ctx.data.effect.base.depthY[i] =
+                    ctx.data.actionBar.rangedAutoAttack.base.depthY[0];
+                break;
             default:
                 break;
         }
