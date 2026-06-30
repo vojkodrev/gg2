@@ -43,13 +43,13 @@ inline void spawnTextEffect(
             ctx.data.effect.base,
             effectIndex);
 
-        ctx.data.effect.type[effectIndex] = EffectType::Digit;
+        ctx.data.effect.type[effectIndex] = EffectType::Character;
         ctx.data.effect.destroyType[effectIndex] = destroyType;
         ctx.data.effect.destroyTimer[effectIndex] = destroyTimer;
         ctx.data.effect.parent.type[effectIndex] = parentType;
         ctx.data.effect.parent.id[effectIndex] = parentId;
         ctx.data.effect.base.position.x[effectIndex] =
-            pos.x + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
+            pos.x + i * (FONT_GLYPH_W + CHARACTER_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = pos.y;
         ctx.data.effect.base.position.absolute[effectIndex] =
             parentType == EntityType::ActionBarIcon || parentType == EntityType::Window;

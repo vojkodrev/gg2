@@ -47,7 +47,7 @@ void debugFpsSystem(Context &ctx)
             DEBUG_FPS_TOP_PADDING
         },
         tint,
-        &ctx.data.fps.digitEffectIds);
+        &ctx.data.fps.characterEffectIds);
     spawnTextEffect(
         ctx,
         groupId,
@@ -61,5 +61,5 @@ void debugFpsSystem(Context &ctx)
             DEBUG_FPS_TOP_PADDING + FONT_GLYPH_H
         },
         tint,
-        &ctx.data.fps.digitEffectIds);
+        &ctx.data.fps.characterEffectIds);
 }

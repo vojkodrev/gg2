@@ -6,4 +6,4 @@ const int WEAPON_Z_INDEX = 1;
 const int AMMO_Z_INDEX = 2;
 const int EFFECT_Z_INDEX = 3;
 const int HEALTHBAR_Z_INDEX = 4;
-const int EFFECT_DIGIT_Z_INDEX = 5;
+const int EFFECT_CHARACTER_Z_INDEX = 5;

@@ -7,5 +7,5 @@ struct DebugFps
 {
     int groupId = -1;
     Uint64 astarTime = 0;
-    Queue<int, DEBUG_FPS_DIGIT_EFFECT_QUEUE_SIZE> digitEffectIds = {};
+    Queue<int, DEBUG_FPS_CHARACTER_EFFECT_QUEUE_SIZE> characterEffectIds = {};
 };

@@ -16,19 +16,19 @@ inline void spawnNpcTextEffect(
 {
     const float totalW =
         text.size() * FONT_GLYPH_W +
-        std::max<int>(0, static_cast<int>(text.size()) - 1) * DAMAGE_NUMBER_DIGIT_SEPARATOR;
+        std::max<int>(0, static_cast<int>(text.size()) - 1) * CHARACTER_SEPARATOR;
     const SDL_FPoint npcColCenter = entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
     const SDL_FPoint pos = {
         npcColCenter.x - totalW * 0.5f,
         ctx.data.npc.base.position.y[npcIndex] -
         FONT_GLYPH_H -
-        DAMAGE_NUMBER_DISTANCE_FROM_ENTITY
+        CHARACTER_DISTANCE_FROM_ENTITY
     };
     const SDL_FColor tint = {
-        DAMAGE_NUMBER_TINT_R,
-        DAMAGE_NUMBER_TINT_G,
-        DAMAGE_NUMBER_TINT_B,
-        DAMAGE_NUMBER_TINT_A
+        CHARACTER_TINT_R,
+        CHARACTER_TINT_G,
+        CHARACTER_TINT_B,
+        CHARACTER_TINT_A
     };
 
     spawnTextEffect(
@@ -37,7 +37,7 @@ inline void spawnNpcTextEffect(
         EntityType::NPC,
         npcIndex,
         DestroyEffectType::Timer,
-        DAMAGE_NUMBER_DESTROY_TIME,
+        CHARACTER_DESTROY_TIME,
         text,
         pos,
         tint);

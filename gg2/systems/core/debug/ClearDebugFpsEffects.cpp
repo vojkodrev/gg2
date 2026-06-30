@@ -5,7 +5,7 @@
 
 void clearDebugFpsEffects(Context &ctx)
 {
-    auto &queue = ctx.data.fps.digitEffectIds;
+    auto &queue = ctx.data.fps.characterEffectIds;
     while (!queueEmpty(queue))
     {
         const int effectIndex = queueDequeue(queue);
