@@ -30,7 +30,7 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
-#include "depth/HealthbarDepthSystem.h"
+#include "depth/BarDepthSystem.h"
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -161,7 +161,7 @@ int main()
         showBarSystem(*ctx);
         barFrameSystem(*ctx);
         barPositionSystem(*ctx);
-        healthbarDepthSystem(*ctx);
+        barDepthSystem(*ctx);
 
         actionBarTintSystem(*ctx);
         damageTintSystem(*ctx);
