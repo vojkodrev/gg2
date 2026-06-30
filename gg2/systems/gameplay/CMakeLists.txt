@@ -60,7 +60,7 @@ add_library(systems_gameplay
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
     ui/bars/ShowBarSystem.cpp
-    ui/bars/HealthbarFrameSystem.cpp
+    ui/bars/BarFrameSystem.cpp
     ui/bars/HealthbarPositionSystem.cpp
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp

@@ -53,7 +53,7 @@
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
-#include "ui/bars/HealthbarFrameSystem.h"
+#include "ui/bars/BarFrameSystem.h"
 #include "ui/bars/HealthbarPositionSystem.h"
 #include "ui/bars/ShowBarSystem.h"
 #include "ui/actionbar/ActionBarTintSystem.h"
@@ -159,7 +159,7 @@ int main()
         createNpcSelectorSystem(*ctx);
 
         showBarSystem(*ctx);
-        healthbarFrameSystem(*ctx);
+        barFrameSystem(*ctx);
         healthbarPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
 
