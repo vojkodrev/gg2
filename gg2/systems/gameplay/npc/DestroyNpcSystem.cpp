@@ -12,7 +12,7 @@ void destroyNpcSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        if (ctx.data.npc.statistics.hp[i] > 0)
+        if (ctx.data.npc.statistics.health.hp[i] > 0)
             continue;
 
         if (ctx.data.player.selectedNpc == static_cast<int>(i))

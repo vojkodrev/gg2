@@ -4,7 +4,7 @@
 void showHealthbarSystem(Context &ctx)
 {
     ctx.data.player.healthbar.show[0] =
-        ctx.data.player.statistics.hp[0] < ctx.data.player.statistics.maxHp[0];
+        ctx.data.player.statistics.health.hp[0] < ctx.data.player.statistics.health.maxHp[0];
 
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
@@ -12,6 +12,6 @@ void showHealthbarSystem(Context &ctx)
             continue;
 
         ctx.data.npc.healthbar.show[i] =
-            ctx.data.npc.statistics.hp[i] < ctx.data.npc.statistics.maxHp[i];
+            ctx.data.npc.statistics.health.hp[i] < ctx.data.npc.statistics.health.maxHp[i];
     }
 }

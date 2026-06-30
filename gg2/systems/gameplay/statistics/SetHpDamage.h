@@ -9,7 +9,7 @@ inline int setHpDamage(
     uint32_t i,
     int damage)
 {
-    const int hp = statistics.hp[i];
+    const int hp = statistics.health.hp[i];
     const int nextHp = std::max(0, hp - damage);
     setHp(statistics, i, nextHp);
     return hp - nextHp;

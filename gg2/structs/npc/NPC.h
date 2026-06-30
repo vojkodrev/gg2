@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "../core/Group.h"
 #include "../core/EntityBase.h"
-#include "../core/Statistics.h"
+#include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
 #include "../ui/Healthbar.h"
 #include "NpcConstants.h"

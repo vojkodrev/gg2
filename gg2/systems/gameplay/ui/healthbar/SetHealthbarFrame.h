@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/Statistics.h"
+#include "../../../structs/statistics/Statistics.h"
 #include "../../../structs/ui/Healthbar.h"
 #include <algorithm>
 #include <cstdint>
@@ -11,8 +11,8 @@ inline void setHealthbarFrame(
     uint32_t index)
 {
     const int frameCount = healthbar.base.animation.frameCount[index];
-    const int maxHp = statistics.maxHp[index];
-    const int hp = std::clamp(statistics.hp[index], 0, maxHp);
+    const int maxHp = statistics.health.maxHp[index];
+    const int hp = std::clamp(statistics.health.hp[index], 0, maxHp);
 
     if (frameCount <= 0)
         return;
