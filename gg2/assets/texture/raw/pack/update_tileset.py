@@ -1,4 +1,5 @@
 import os
+from io import StringIO
 import xml.etree.ElementTree as ET
 
 
@@ -19,12 +20,21 @@ def update_tileset(base_dir, settings, images, meta):
     tsx_path = os.path.join(base_dir, settings["tileset"])
     tree = ET.parse(tsx_path)
     root = tree.getroot()
-    columns = max((img["dx"] for img in images), default=-1) + 1
+    columns = meta["columns"]
+
+    root.set("tilecount", str(meta["tilecount"]))
+    root.set("columns", str(columns))
+
+    image_el = root.find("image")
+    if image_el is None:
+        image_el = ET.SubElement(root, "image")
+    image_el.set("width", str(meta["width"]))
+    image_el.set("height", str(meta["height"]))
 
     for img in images:
         if "markerFor" not in img:
             continue
-        marker_meta = meta[img["markerFor"]]
+        marker_meta = meta["tiles"][img["markerFor"]]
         tile_id = str(img["dy"] * columns + img["dx"])
         tile_el = next((t for t in root.findall("tile") if t.get("id") == tile_id), None)
         if tile_el is None:
@@ -46,4 +56,10 @@ def update_tileset(base_dir, settings, images, meta):
             set_prop(props_el, "colH", "int", round(img["colH"] * scale))
 
     ET.indent(tree, space=" ")
-    tree.write(tsx_path, encoding="unicode", xml_declaration=True)
+    buffer = StringIO()
+    tree.write(buffer, encoding="unicode", xml_declaration=False)
+    xml_text = buffer.getvalue().replace(" />", "/>")
+    with open(tsx_path, "w", encoding="UTF-8", newline="\n") as tsx_file:
+        tsx_file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+        tsx_file.write(xml_text)
+        tsx_file.write("\n")

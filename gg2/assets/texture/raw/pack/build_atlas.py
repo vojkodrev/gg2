@@ -6,7 +6,7 @@ from PIL import Image
 def build_atlas(base_dir, settings, images):
     tile_w = settings["tileW"]
     tile_h = settings["tileH"]
-    meta = {}
+    tiles = {}
     prepared = []
     atlas_tiles_w = 0
     atlas_tiles_h = 0
@@ -43,7 +43,7 @@ def build_atlas(base_dir, settings, images):
         off_y = (tiles_h * tile_h - src.height) // 2
         paste_x = img["dx"] * tile_w + off_x
         paste_y = img["dy"] * tile_h + off_y
-        meta[img["id"]] = {
+        tiles[img["id"]] = {
             "x": paste_x,
             "y": paste_y,
             "w": src.width,
@@ -54,4 +54,11 @@ def build_atlas(base_dir, settings, images):
         }
         atlas.paste(src, (paste_x, paste_y))
     atlas.save(os.path.join(base_dir, settings["output"]))
-    return meta
+    return {
+        "tiles": tiles,
+        "columns": atlas_tiles_w,
+        "rows": atlas_tiles_h,
+        "width": atlas_tiles_w * tile_w,
+        "height": atlas_tiles_h * tile_h,
+        "tilecount": atlas_tiles_w * atlas_tiles_h,
+    }

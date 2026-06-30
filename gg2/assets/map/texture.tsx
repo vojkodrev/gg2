@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="368" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="1024" height="1472"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="384" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1536"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
@@ -195,5 +195,18 @@
    <property name="icon" value="rangedAutoAttack"/>
    <property name="scale" type="float" value="0.75"/>
   </properties>
+ </tile>
+ <tile id="368">
+  <properties>
+   <property name="type" value="manabar"/>
+  </properties>
+  <animation>
+   <frame tileid="373" duration="1000"/>
+   <frame tileid="372" duration="1000"/>
+   <frame tileid="371" duration="1000"/>
+   <frame tileid="370" duration="1000"/>
+   <frame tileid="369" duration="1000"/>
+   <frame tileid="368" duration="1000"/>
+  </animation>
  </tile>
 </tileset>
