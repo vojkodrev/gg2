@@ -22,6 +22,8 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadEntityBase(ctx.data.player.base, 0, tileset, idx, props, (uint32_t)i);
         setHp(ctx.data.player.statistics, 0, PLAYER_HP);
         ctx.data.player.statistics.health.maxHp[0] = PLAYER_HP;
+        ctx.data.player.statistics.mana.mana[0] = PLAYER_MANA;
+        ctx.data.player.statistics.mana.maxMana[0] = PLAYER_MANA;
         ctx.data.player.selectedNpc = -1;
         ctx.data.player.previousSelectedNpc = -1;
         ctx.data.player.selectedEffectId = -1;

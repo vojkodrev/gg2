@@ -59,7 +59,7 @@ add_library(systems_gameplay
     collision/CollisionResolutionSystem.cpp
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
-    ui/healthbar/ShowHealthbarSystem.cpp
+    ui/healthbar/ShowBarSystem.cpp
     ui/healthbar/HealthbarFrameSystem.cpp
     ui/healthbar/HealthbarPositionSystem.cpp
     tint/DamageTintSystem.cpp
