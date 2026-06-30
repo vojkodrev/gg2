@@ -12,6 +12,7 @@
 #include "../../../../utils/minheap/MinHeapPop.h"
 #include "../../../../utils/minheap/MinHeapPush.h"
 #include "../../../../utils/Defer.h"
+#include "../../../../utils/math/CalcEma.h"
 #include "cost/AStarD.h"
 #include "cost/AStarH.h"
 #include "goal/IsGoalReached.h"
@@ -34,7 +35,10 @@ int runAStar(
     static const int MAX_NEIGHBORS = 8;
 
     Uint64 startTime = SDL_GetTicks();
-    defer(ctx.data.fps.astarTime = SDL_GetTicks() - startTime);
+    defer({
+        ctx.data.fps.astarTime = SDL_GetTicks() - startTime;
+        calcEma(ctx.data.fps.astarTime, ctx.data.fps.avgAstarTime);
+    });
     astar.status[astarIndex].store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
 
     {
