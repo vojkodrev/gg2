@@ -1,5 +1,6 @@
 #include "DebugFpsSystem.h"
 #include "ClearDebugFpsEffects.h"
+#include "FormatDebugTime.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/DebugConstants.h"
 #include "../../../structs/core/constants/FontConstants.h"
@@ -28,8 +29,8 @@ void debugFpsSystem(Context &ctx)
     if (ctx.data.fps.groupId == -1)
         ctx.data.fps.groupId = groupAlloc(ctx.data.groups);
 
-    const std::string frameText = std::to_string(ctx.data.fps.avgFrameTime);
-    const std::string astarText = std::to_string(ctx.data.fps.avgAstarTime);
+    const std::string frameText = formatDebugTime(ctx.data.fps.avgFrameTime);
+    const std::string astarText = formatDebugTime(ctx.data.fps.avgAstarTime);
     const int groupId = ctx.data.fps.groupId;
     const SDL_FColor tint = {
         DEBUG_FPS_TINT_R,
