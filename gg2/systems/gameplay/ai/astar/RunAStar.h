@@ -11,6 +11,7 @@
 #include "../../../../utils/minheap/MinHeapEmpty.h"
 #include "../../../../utils/minheap/MinHeapPop.h"
 #include "../../../../utils/minheap/MinHeapPush.h"
+#include "../../../../utils/Defer.h"
 #include "cost/AStarD.h"
 #include "cost/AStarH.h"
 #include "goal/IsGoalReached.h"
@@ -32,9 +33,9 @@ int runAStar(
 {
     static const int MAX_NEIGHBORS = 8;
 
-    astar.status[astarIndex].store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
-
     Uint64 startTime = SDL_GetTicks();
+    defer(ctx.data.fps.astarTime = SDL_GetTicks() - startTime);
+    astar.status[astarIndex].store(AStarStatus::CALCULATING_PATH, std::memory_order_relaxed);
 
     {
         std::shared_lock lock(ctx.collision.spatialHashMutex);
@@ -76,9 +77,6 @@ int runAStar(
 
         if (isGoalReached(astar, astarIndex, destCol, current))
         {
-#ifndef NDEBUG
-            SDL_Log("AStar: %.2f ms", (float)(SDL_GetTicks() - startTime));
-#endif
             int length = reconstructPath(astar, astarIndex, current, goalCenter, pathOut);
             astar.status[astarIndex].store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
             return length;
@@ -111,8 +109,5 @@ int runAStar(
     }
 
     astar.status[astarIndex].store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
-#ifndef NDEBUG
-    SDL_Log("AStar: path not found (%.2f ms)", (float)(SDL_GetTicks() - startTime));
-#endif
     return -1;
 }

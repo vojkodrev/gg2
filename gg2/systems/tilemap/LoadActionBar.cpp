@@ -60,7 +60,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         0.0f,
         "1",
         SDL_FPoint{
-            actionBar.rangedAutoAttack.base.position.x[0] + ACTION_BAR_DIGIT_PADDING + FONT_GLYPH_W * 0.5f,
+            actionBar.rangedAutoAttack.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
             actionBar.rangedAutoAttack.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
@@ -73,7 +73,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         0.0f,
         "2",
         SDL_FPoint{
-            actionBar.serpentSting.base.position.x[0] + ACTION_BAR_DIGIT_PADDING + FONT_GLYPH_W * 0.5f,
+            actionBar.serpentSting.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
             actionBar.serpentSting.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);

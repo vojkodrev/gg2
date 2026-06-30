@@ -1,4 +1,5 @@
 add_library(systems_core
+    debug/ClearDebugFpsEffects.cpp
     debug/DebugFpsSystem.cpp
     debug/DebugStateSystem.cpp
     frame/FrameRateLimitSystem.cpp

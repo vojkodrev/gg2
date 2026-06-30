@@ -10,7 +10,6 @@
 #include "../../../../utils/queue/QueueEnqueue.h"
 #include "../../effects/EffectAlloc.h"
 #include <SDL3/SDL.h>
-#include <algorithm>
 #include <string>
 
 template<uint32_t TQueueSize>
@@ -27,10 +26,6 @@ inline void spawnTextEffect(
     Queue<int, TQueueSize> *effectIdsQueue)
 {
     const auto &templateBase = ctx.data.effectTemplate.base;
-    const float totalW =
-        text.size() * FONT_GLYPH_W +
-        std::max<int>(0, static_cast<int>(text.size()) - 1) * DAMAGE_NUMBER_DIGIT_SEPARATOR;
-    const float startX = pos.x - totalW * 0.5f;
 
     for (uint32_t i = 0; i < text.size(); i++)
     {
@@ -54,7 +49,7 @@ inline void spawnTextEffect(
         ctx.data.effect.parent.type[effectIndex] = parentType;
         ctx.data.effect.parent.id[effectIndex] = parentId;
         ctx.data.effect.base.position.x[effectIndex] =
-            startX + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
+            pos.x + i * (FONT_GLYPH_W + DAMAGE_NUMBER_DIGIT_SEPARATOR);
         ctx.data.effect.base.position.y[effectIndex] = pos.y;
         ctx.data.effect.base.position.absolute[effectIndex] =
             parentType == EntityType::ActionBarIcon || parentType == EntityType::Window;

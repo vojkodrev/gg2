@@ -6,6 +6,7 @@
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../ui/text/SpawnTextEffect.h"
+#include <algorithm>
 #include <string>
 
 inline void spawnNpcTextEffect(
@@ -13,9 +14,12 @@ inline void spawnNpcTextEffect(
     uint32_t npcIndex,
     const std::string &text)
 {
+    const float totalW =
+        text.size() * FONT_GLYPH_W +
+        std::max<int>(0, static_cast<int>(text.size()) - 1) * DAMAGE_NUMBER_DIGIT_SEPARATOR;
     const SDL_FPoint npcColCenter = entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
     const SDL_FPoint pos = {
-        npcColCenter.x,
+        npcColCenter.x - totalW * 0.5f,
         ctx.data.npc.base.position.y[npcIndex] -
         FONT_GLYPH_H -
         DAMAGE_NUMBER_DISTANCE_FROM_ENTITY
