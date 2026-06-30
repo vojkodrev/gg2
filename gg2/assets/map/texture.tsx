@@ -6,6 +6,7 @@
    <property name="ammo" value="arrow1"/>
    <property name="facing" value="right"/>
    <property name="healthbar" value="healthbar"/>
+   <property name="manabar" value="manabar"/>
    <property name="weapon" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
