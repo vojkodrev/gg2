@@ -54,7 +54,7 @@
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
 #include "ui/bars/BarFrameSystem.h"
-#include "ui/bars/HealthbarPositionSystem.h"
+#include "ui/bars/BarPositionSystem.h"
 #include "ui/bars/ShowBarSystem.h"
 #include "ui/actionbar/ActionBarTintSystem.h"
 #include "tint/DamageTintSystem.h"
@@ -160,7 +160,7 @@ int main()
 
         showBarSystem(*ctx);
         barFrameSystem(*ctx);
-        healthbarPositionSystem(*ctx);
+        barPositionSystem(*ctx);
         healthbarDepthSystem(*ctx);
 
         actionBarTintSystem(*ctx);

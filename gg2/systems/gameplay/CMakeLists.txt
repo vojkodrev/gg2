@@ -61,7 +61,7 @@ add_library(systems_gameplay
     ui/actionbar/ActionBarTintSystem.cpp
     ui/bars/ShowBarSystem.cpp
     ui/bars/BarFrameSystem.cpp
-    ui/bars/HealthbarPositionSystem.cpp
+    ui/bars/BarPositionSystem.cpp
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
