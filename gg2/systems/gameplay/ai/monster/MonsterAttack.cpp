@@ -4,7 +4,7 @@
 #include "EntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "SetNpcAiStateReturnToSpawn.h"
-#include "SetNpcAiStateChasePlayer.h"
+#include "SetNpcAiStatePursuePlayer.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
 {
@@ -15,5 +15,5 @@ void monsterAttack(uint32_t n, Context &ctx)
     }
     SDL_FRect playerCol = entityColAABB(ctx.data.player.base, 0);
     if (!areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
-        setNpcAiStateChasePlayer(n, ctx);
+        setNpcAiStatePursuePlayer(n, ctx);
 }

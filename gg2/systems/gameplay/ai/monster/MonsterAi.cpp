@@ -13,7 +13,7 @@ void monsterAi(uint32_t n, Context &ctx)
     {
     case NPCAiState::Idle:          monsterIdle(n, ctx);            break;
     case NPCAiState::Patrolling:    monsterPatrol(n, ctx);          break;
-    case NPCAiState::ChasePlayer:   monsterChasePlayer(n, ctx);     break;
+    case NPCAiState::PursuePlayer:  monsterChasePlayer(n, ctx);     break;
     case NPCAiState::Attack:        monsterAttack(n, ctx);          break;
     case NPCAiState::ReturnToSpawn: monsterReturnToSpawn(n, ctx);   break;
     }
