@@ -1,11 +1,11 @@
-#include "HandlePetFollowPlayer.h"
+#include "PetFollowPlayer.h"
 #include "EntityColAABB.h"
 #include "AreColBoxesNear.h"
 #include "SetNpcAiStateIdle.h"
 #include "NpcMonsterConstants.h"
 #include "astar/FollowAStarPathTo.h"
 
-void handlePetFollowPlayer(uint32_t n, Context &ctx)
+void petFollowPlayer(uint32_t n, Context &ctx)
 {
     SDL_FRect playerCol = entityColAABB(ctx.data.player.base, 0);
 

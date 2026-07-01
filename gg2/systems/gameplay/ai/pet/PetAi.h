@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void handleMonsterAttack(uint32_t n, Context &ctx);
+void petAi(uint32_t n, Context &ctx);

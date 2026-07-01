@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void handlePetFollowPlayer(uint32_t n, Context &ctx);
+void petFollowPlayer(uint32_t n, Context &ctx);

@@ -38,15 +38,15 @@ add_library(systems_gameplay
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
-    ai/monster/RunMonsterAi.cpp
-    ai/monster/HandleMonsterIdle.cpp
-    ai/monster/HandleMonsterPatrol.cpp
-    ai/monster/HandleMonsterChasePlayer.cpp
-    ai/monster/HandleMonsterAttack.cpp
-    ai/monster/HandleMonsterReturnToSpawn.cpp
-    ai/pet/RunPetAi.cpp
-    ai/pet/HandlePetIdle.cpp
-    ai/pet/HandlePetFollowPlayer.cpp
+    ai/monster/MonsterAi.cpp
+    ai/monster/MonsterIdle.cpp
+    ai/monster/MonsterPatrol.cpp
+    ai/monster/MonsterChasePlayer.cpp
+    ai/monster/MonsterAttack.cpp
+    ai/monster/MonsterReturnToSpawn.cpp
+    ai/pet/PetAi.cpp
+    ai/pet/PetIdle.cpp
+    ai/pet/PetFollowPlayer.cpp
     ai/DistToPlayer.cpp
     ai/DistToNpcSpawn.cpp
     ai/HasReachedRect.cpp

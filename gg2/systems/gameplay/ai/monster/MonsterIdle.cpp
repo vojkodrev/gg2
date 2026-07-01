@@ -1,10 +1,10 @@
-#include "HandleMonsterIdle.h"
+#include "MonsterIdle.h"
 #include "DistToPlayer.h"
 #include "NpcMonsterConstants.h"
 #include "SetNpcAiStateGoToPlayer.h"
 #include "SetNpcAiStatePatrolling.h"
 
-void handleMonsterIdle(uint32_t n, Context &ctx)
+void monsterIdle(uint32_t n, Context &ctx)
 {
     auto &ai = ctx.data.npc.ai;
     float dt = ctx.frame.dt;

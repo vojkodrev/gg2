@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void handleMonsterIdle(uint32_t n, Context &ctx);
+void monsterReturnToSpawn(uint32_t n, Context &ctx);

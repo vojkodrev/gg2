@@ -1,4 +1,4 @@
-#include "HandleMonsterPatrol.h"
+#include "MonsterPatrol.h"
 #include "DistToPlayer.h"
 #include "HasReachedRect.h"
 #include "../../../utils/rect/CenteredRect.h"
@@ -7,7 +7,7 @@
 #include "SetNpcAiStateGoToPlayer.h"
 #include "SetNpcAiStateIdle.h"
 
-void handleMonsterPatrol(uint32_t n, Context &ctx)
+void monsterPatrol(uint32_t n, Context &ctx)
 {
     auto &ai = ctx.data.npc.ai;
 
