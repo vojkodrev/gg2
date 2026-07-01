@@ -30,7 +30,7 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
-#include "depth/HealthbarDepthSystem.h"
+#include "depth/BarDepthSystem.h"
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -53,9 +53,9 @@
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
-#include "ui/healthbar/HealthbarFrameSystem.h"
-#include "ui/healthbar/HealthbarPositionSystem.h"
-#include "ui/healthbar/ShowHealthbarSystem.h"
+#include "ui/bars/BarFrameSystem.h"
+#include "ui/bars/BarPositionSystem.h"
+#include "ui/bars/ShowBarSystem.h"
 #include "ui/actionbar/ActionBarTintSystem.h"
 #include "tint/DamageTintSystem.h"
 #include "tint/CalculateTintSystem.h"
@@ -158,19 +158,19 @@ int main()
         destroyNpcSelectorSystem(*ctx);
         createNpcSelectorSystem(*ctx);
 
-        showHealthbarSystem(*ctx);
-        healthbarFrameSystem(*ctx);
-        healthbarPositionSystem(*ctx);
-        healthbarDepthSystem(*ctx);
+        showBarSystem(*ctx);
+        barFrameSystem(*ctx);
+        barPositionSystem(*ctx);
+        barDepthSystem(*ctx);
 
         actionBarTintSystem(*ctx);
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 
+        dirtyCleanupSystem(*ctx);
+
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
-
-        dirtyCleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

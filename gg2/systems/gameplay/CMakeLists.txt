@@ -10,7 +10,7 @@ add_library(systems_gameplay
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
     depth/EquipmentDepthSystem.cpp
-    depth/HealthbarDepthSystem.cpp
+    depth/BarDepthSystem.cpp
     depth/EffectDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
@@ -59,9 +59,9 @@ add_library(systems_gameplay
     collision/CollisionResolutionSystem.cpp
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
-    ui/healthbar/ShowHealthbarSystem.cpp
-    ui/healthbar/HealthbarFrameSystem.cpp
-    ui/healthbar/HealthbarPositionSystem.cpp
+    ui/bars/ShowBarSystem.cpp
+    ui/bars/BarFrameSystem.cpp
+    ui/bars/BarPositionSystem.cpp
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
@@ -85,6 +85,6 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
     ${CMAKE_CURRENT_SOURCE_DIR}/tint
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/actionbar
-    ${CMAKE_CURRENT_SOURCE_DIR}/ui/healthbar
+    ${CMAKE_CURRENT_SOURCE_DIR}/ui/bars
 )
 target_link_libraries(systems_gameplay PUBLIC gg2_common)

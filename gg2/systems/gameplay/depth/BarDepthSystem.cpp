@@ -1,9 +1,10 @@
-#include "HealthbarDepthSystem.h"
+#include "BarDepthSystem.h"
 #include <cstdint>
 
-void healthbarDepthSystem(Context &ctx)
+void barDepthSystem(Context &ctx)
 {
     ctx.data.player.healthbar.base.depthY[0] = ctx.data.player.base.depthY[0];
+    ctx.data.player.manabar.base.depthY[0] = ctx.data.player.base.depthY[0];
 
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {

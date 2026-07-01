@@ -25,7 +25,7 @@ void spawnNpcSystem(Context &ctx)
         else
         {
             ctx.data.npc.active[i] = true;
-            setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.maxHp[i]);
+            setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.health.maxHp[i]);
             ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
             setNpcAiStateIdle(i, ctx);
             ctx.data.npc.ai.path.length[i] = 0;

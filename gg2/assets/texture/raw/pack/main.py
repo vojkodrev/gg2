@@ -67,10 +67,16 @@ images = [
     {"id": 31, "filename": "../pixel ui pack 3-7.png", "dx": 6, "dy": 22, "sx": 3 * 32, "sy": 176, "sw": 32, "sh": 32},
     {"id": 32, "filename": "../icons/Ability_Hunter_Quickshot.png", "dx": 8, "dy": 22},
     {"id": 33, "filename": "../icons/INV_Weapon_Bow_02.png", "dx": 9, "dy": 22},
+    {"id": 34, "filename": "../healthbars.png", "dx": 0, "dy": 23, "sx": 1 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 35, "filename": "../healthbars.png", "dx": 1, "dy": 23, "sx": 2 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 36, "filename": "../healthbars.png", "dx": 2, "dy": 23, "sx": 3 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 37, "filename": "../healthbars.png", "dx": 3, "dy": 23, "sx": 4 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 38, "filename": "../healthbars.png", "dx": 4, "dy": 23, "sx": 5 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 39, "filename": "../healthbars.png", "dx": 5, "dy": 23, "sx": 6 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64}, 
 ]
 
 
 if __name__ == "__main__":
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    meta = build_atlas(base_dir, settings, images)
-    update_tileset(base_dir, settings, images, meta)
+    atlas_meta = build_atlas(base_dir, settings, images)
+    update_tileset(base_dir, settings, images, atlas_meta)

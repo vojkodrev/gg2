@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/Statistics.h"
+#include "../../../structs/statistics/Statistics.h"
 #include <cstdint>
 
 template<int N>
@@ -8,7 +8,8 @@ inline void setHp(
     uint32_t i,
     int hp)
 {
-    statistics.prevHp[i] = statistics.hp[i];
-    statistics.hp[i] = hp;
-    statistics.hpDirty[i] = statistics.prevHp[i] != statistics.hp[i];
+    statistics.health.prevHp[i] = statistics.health.hp[i];
+    statistics.health.hp[i] = hp;
+    statistics.health.dirty[i] =
+        statistics.health.prevHp[i] != statistics.health.hp[i];
 }

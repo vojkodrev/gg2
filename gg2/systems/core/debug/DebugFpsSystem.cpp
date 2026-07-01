@@ -1,10 +1,12 @@
 #include "DebugFpsSystem.h"
 #include "ClearDebugFpsEffects.h"
+#include "FormatDebugTime.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/DebugConstants.h"
 #include "../../../structs/core/constants/FontConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../utils/groups/GroupAlloc.h"
+#include "../../../utils/math/CalcEma.h"
 #include "../../gameplay/ui/text/SpawnTextEffect.h"
 #include <SDL3/SDL.h>
 #include <string>
@@ -17,6 +19,8 @@ void debugFpsSystem(Context &ctx)
         return;
     }
 
+    calcEma(ctx.frame.frameTime, ctx.data.fps.avgFrameTime);
+
     if (ctx.frame.frameCount % DEBUG_FPS_UPDATE_FRAME_INTERVAL != 0)
         return;
 
@@ -25,8 +29,8 @@ void debugFpsSystem(Context &ctx)
     if (ctx.data.fps.groupId == -1)
         ctx.data.fps.groupId = groupAlloc(ctx.data.groups);
 
-    const std::string frameText = std::to_string(ctx.frame.frameTime);
-    const std::string astarText = std::to_string(ctx.data.fps.astarTime);
+    const std::string frameText = formatDebugTime(ctx.data.fps.avgFrameTime);
+    const std::string astarText = formatDebugTime(ctx.data.fps.avgAstarTime);
     const int groupId = ctx.data.fps.groupId;
     const SDL_FColor tint = {
         DEBUG_FPS_TINT_R,

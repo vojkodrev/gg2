@@ -46,7 +46,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t idx = npcTiles[i].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         setHp(npc.statistics, n, NPC_HP);
-        npc.statistics.maxHp[n] = NPC_HP;
+        npc.statistics.health.maxHp[n] = NPC_HP;
         npc.serpentStingDebuffTimer[n] = 0.0f;
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];

@@ -26,6 +26,7 @@ inline void spawnTextEffect(
     Queue<int, TQueueSize> *effectIdsQueue)
 {
     const auto &templateBase = ctx.data.effectTemplate.base;
+    float x = pos.x;
 
     for (uint32_t i = 0; i < text.size(); i++)
     {
@@ -48,8 +49,7 @@ inline void spawnTextEffect(
         ctx.data.effect.destroyTimer[effectIndex] = destroyTimer;
         ctx.data.effect.parent.type[effectIndex] = parentType;
         ctx.data.effect.parent.id[effectIndex] = parentId;
-        ctx.data.effect.base.position.x[effectIndex] =
-            pos.x + i * (FONT_GLYPH_W + CHARACTER_SEPARATOR);
+        ctx.data.effect.base.position.x[effectIndex] = x;
         ctx.data.effect.base.position.y[effectIndex] = pos.y;
         ctx.data.effect.base.position.absolute[effectIndex] =
             parentType == EntityType::ActionBarIcon || parentType == EntityType::Window;
@@ -57,6 +57,12 @@ inline void spawnTextEffect(
         ctx.data.effect.base.tint.g[effectIndex] = tint.g;
         ctx.data.effect.base.tint.b[effectIndex] = tint.b;
         ctx.data.effect.base.tint.a[effectIndex] = tint.a;
+
+        const float separator =
+            text[i] == '.'
+            ? CHARACTER_ADVANCE_AFTER_NARROW_CHAR
+            : CHARACTER_SEPARATOR;
+        x += FONT_GLYPH_W + separator;
     }
 }
 
