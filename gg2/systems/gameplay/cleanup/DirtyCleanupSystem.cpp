@@ -11,6 +11,8 @@ void dirtyCleanupSystem(Context &ctx)
     std::memset(ctx.data.player.equipment.ammo.base.facing.dirty, 0, sizeof(ctx.data.player.equipment.ammo.base.facing.dirty));
     std::memset(ctx.data.player.healthbar.base.position.dirty, 0, sizeof(ctx.data.player.healthbar.base.position.dirty));
     std::memset(ctx.data.player.healthbar.base.facing.dirty, 0, sizeof(ctx.data.player.healthbar.base.facing.dirty));
+    std::memset(ctx.data.player.healthbar.dirty, 0, sizeof(ctx.data.player.healthbar.dirty));
+    std::memset(ctx.data.player.manabar.dirty, 0, sizeof(ctx.data.player.manabar.dirty));
     std::memset(ctx.data.player.statistics.health.dirty, 0, sizeof(ctx.data.player.statistics.health.dirty));
     std::memset(ctx.data.player.statistics.mana.dirty, 0, sizeof(ctx.data.player.statistics.mana.dirty));
 
@@ -22,6 +24,7 @@ void dirtyCleanupSystem(Context &ctx)
     std::memset(ctx.data.npc.equipment.ammo.base.facing.dirty, 0, sizeof(ctx.data.npc.equipment.ammo.base.facing.dirty));
     std::memset(ctx.data.npc.healthbar.base.position.dirty, 0, sizeof(ctx.data.npc.healthbar.base.position.dirty));
     std::memset(ctx.data.npc.healthbar.base.facing.dirty, 0, sizeof(ctx.data.npc.healthbar.base.facing.dirty));
+    std::memset(ctx.data.npc.healthbar.dirty, 0, sizeof(ctx.data.npc.healthbar.dirty));
     std::memset(ctx.data.npc.statistics.health.dirty, 0, sizeof(ctx.data.npc.statistics.health.dirty));
 
     std::memset(ctx.data.object.base.position.dirty, 0, sizeof(ctx.data.object.base.position.dirty));

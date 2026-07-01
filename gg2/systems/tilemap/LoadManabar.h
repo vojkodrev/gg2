@@ -19,6 +19,7 @@ inline void loadManabar(
     uint32_t manabarIdx = 0;
     bool hasManabar = !manabarType.empty() && findTileByType(tileset, manabarType.c_str(), manabarIdx);
     manabarData.show[parentEntityIdx] = false;
+    manabarData.dirty[parentEntityIdx] = false;
     if (!hasManabar)
         return;
 
