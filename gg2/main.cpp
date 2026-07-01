@@ -34,7 +34,9 @@
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "attacks/AttackTimerSystem.h"
+#include "attacks/AutoAttackTimerSystem.h"
+#include "attacks/ConcussiveShotCooldownTimerSystem.h"
+#include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerSerpentStingAttackSystem.h"
 #include "attacks/SerpentStingDebuffSystem.h"
@@ -138,9 +140,12 @@ int main()
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
-        attackTimerSystem(*ctx);
+        autoAttackTimerSystem(*ctx);
+        globalCooldownTimerSystem(*ctx);
+        concussiveShotCooldownTimerSystem(*ctx);
+
         togglePlayerAutoAttackSystem(*ctx);
-        
+
         playerRangedAutoAttackSystem(*ctx);
         playerConcussiveShotAttackSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);

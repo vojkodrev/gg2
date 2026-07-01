@@ -11,6 +11,8 @@ void playerConcussiveShotAttackSystem(Context &ctx)
 {
     if (!ctx.data.action.digit3Released)
         return;
+    if (ctx.data.player.concussiveShotCooldownTimer > 0.0f)
+        return;
     if (ctx.data.player.globalCooldownTimer > 0.0f)
         return;
     if (!canPlayerRangedAttack(ctx))
@@ -36,6 +38,7 @@ void playerConcussiveShotAttackSystem(Context &ctx)
 
     ctx.data.player.statistics.mana.mana[0] -= CONCUSSIVE_SHOT_MANA_COST;
     ctx.data.player.statistics.mana.dirty[0] = true;
+    ctx.data.player.concussiveShotCooldownTimer = CONCUSSIVE_SHOT_COOLDOWN_TIME;
     ctx.data.player.globalCooldownTimer = GLOBAL_COOLDOWN_DELAY;
     ctx.data.player.equipment.weapon.showAmmo[0] = false;
 }

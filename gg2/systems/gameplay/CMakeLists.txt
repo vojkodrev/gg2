@@ -18,8 +18,10 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
-    attacks/AttackTimerSystem.cpp
+    attacks/AutoAttackTimerSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
+    attacks/ConcussiveShotCooldownTimerSystem.cpp
+    attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerSerpentStingAttackSystem.cpp
     attacks/SerpentStingDebuffSystem.cpp

@@ -19,6 +19,7 @@ struct NPC
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
+    float concussiveShotDebuffTimer[MAX_NPCS] = {};
     float serpentStingDebuffTimer[MAX_NPCS] = {};
 
     NPC()
