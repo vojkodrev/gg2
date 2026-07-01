@@ -9,4 +9,5 @@ struct Tint
     float a[N];
     float damageTimer[N];
     bool isPoisoned[N];
+    bool isSlowed[N];
 };

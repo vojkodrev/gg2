@@ -2,6 +2,7 @@
 #include <atomic>
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
+#include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 #include "../../../../utils/timers/RandomTimer.h"
@@ -40,7 +41,11 @@ void followAStarPathTo(uint32_t n, Context &ctx, SDL_FRect targetCol)
             ai.repathTimer[n] = randomTimer(NPC_REPATH_TIME_MIN, NPC_REPATH_TIME_MAX);
 
         SDL_FPoint target = { (float)ai.path.point.x[n][i], (float)ai.path.point.y[n][i] };
-        moveNpcColCenterToward(ctx, n, target, NPC_MONSTER_SPEED);
+        const bool isConcussed = ctx.data.npc.concussiveShotDebuffTimer[n] > 0.0f;
+        const float moveSpeed = isConcussed ?
+            NPC_MONSTER_SPEED * CONCUSSIVE_SHOT_SPEED_MULTIPLIER :
+            NPC_MONSTER_SPEED;
+        moveNpcColCenterToward(ctx, n, target, moveSpeed);
 
         if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
             ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);

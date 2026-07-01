@@ -1,6 +1,7 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
 #include "../../statistics/SetHpDamage.h"
+#include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
@@ -47,6 +48,11 @@ void resolveProjectileEffectCollision(
         {
             ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
                 SERPENT_STING_DEBUFF_TIME;
+        }
+        else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
+        {
+            ctx.data.npc.concussiveShotDebuffTimer[npcIndex] =
+                CONCUSSIVE_SHOT_DEBUFF_TIME;
         }
 
         destroyProjectile(ctx, effectIndex);

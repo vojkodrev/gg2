@@ -14,11 +14,15 @@ void damageTintSystem(Context &ctx)
             continue;
 
         const bool isPoisoned = ctx.data.npc.serpentStingDebuffTimer[i] > 0.0f;
+        const bool isSlowed = ctx.data.npc.concussiveShotDebuffTimer[i] > 0.0f;
         applyDamageTint(ctx.data.npc.base, ctx.data.npc.statistics, i);
         applyDamageTint(ctx.data.npc.equipment.weapon.base, ctx.data.npc.statistics, i);
         applyDamageTint(ctx.data.npc.equipment.ammo.base, ctx.data.npc.statistics, i);
         ctx.data.npc.base.tint.isPoisoned[i] = isPoisoned;
         ctx.data.npc.equipment.weapon.base.tint.isPoisoned[i] = isPoisoned;
         ctx.data.npc.equipment.ammo.base.tint.isPoisoned[i] = isPoisoned;
+        ctx.data.npc.base.tint.isSlowed[i] = isSlowed;
+        ctx.data.npc.equipment.weapon.base.tint.isSlowed[i] = isSlowed;
+        ctx.data.npc.equipment.ammo.base.tint.isSlowed[i] = isSlowed;
     }
 }
