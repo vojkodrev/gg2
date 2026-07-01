@@ -1,5 +1,6 @@
 #include "ActionBarTintSystem.h"
 #include "../../../../structs/core/constants/AttackConstants.h"
+#include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 
@@ -32,4 +33,21 @@ void actionBarTintSystem(Context &ctx)
     actionBar.serpentSting.base.tint.a[0] =
         onGlobalCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A :
         hasEnoughManaForSerpentSting ? CLEAR_TINT_A : NO_MANA_TINT_A;
+
+    const bool concussiveShotOnCooldown =
+        onGlobalCooldown || player.concussiveShotCooldownTimer > 0.0f;
+    const bool hasEnoughManaForConcussiveShot =
+        player.statistics.mana.mana[0] >= CONCUSSIVE_SHOT_MANA_COST;
+    actionBar.concussiveShot.base.tint.r[0] =
+        concussiveShotOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R :
+        hasEnoughManaForConcussiveShot ? CLEAR_TINT_R : NO_MANA_TINT_R;
+    actionBar.concussiveShot.base.tint.g[0] =
+        concussiveShotOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G :
+        hasEnoughManaForConcussiveShot ? CLEAR_TINT_G : NO_MANA_TINT_G;
+    actionBar.concussiveShot.base.tint.b[0] =
+        concussiveShotOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B :
+        hasEnoughManaForConcussiveShot ? CLEAR_TINT_B : NO_MANA_TINT_B;
+    actionBar.concussiveShot.base.tint.a[0] =
+        concussiveShotOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A :
+        hasEnoughManaForConcussiveShot ? CLEAR_TINT_A : NO_MANA_TINT_A;
 }
