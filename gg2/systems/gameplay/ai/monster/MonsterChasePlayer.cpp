@@ -4,14 +4,14 @@
 #include "EntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "astar/FollowAStarPathTo.h"
-#include "SetNpcAiStateGoToSpawn.h"
+#include "SetNpcAiStateReturnToSpawn.h"
 #include "SetNpcAiStateAttack.h"
 
 void monsterChasePlayer(uint32_t n, Context &ctx)
 {
     if (distToNpcSpawn(ctx, n) > NPC_LEASH_RADIUS)
     {
-        setNpcAiStateGoToSpawn(n, ctx);
+        setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
 

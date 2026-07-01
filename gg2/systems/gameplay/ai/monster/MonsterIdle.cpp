@@ -1,7 +1,7 @@
 #include "MonsterIdle.h"
 #include "DistToPlayer.h"
 #include "NpcMonsterConstants.h"
-#include "SetNpcAiStateGoToPlayer.h"
+#include "SetNpcAiStateChasePlayer.h"
 #include "SetNpcAiStatePatrolling.h"
 
 void monsterIdle(uint32_t n, Context &ctx)
@@ -12,7 +12,7 @@ void monsterIdle(uint32_t n, Context &ctx)
     ai.idleTimer[n] -= dt;
     if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStateGoToPlayer(n, ctx);
+        setNpcAiStateChasePlayer(n, ctx);
     }
     else if (ai.idleTimer[n] <= 0.0f)
     {

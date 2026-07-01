@@ -4,7 +4,7 @@
 #include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"
 #include "astar/FollowAStarPathTo.h"
-#include "SetNpcAiStateGoToPlayer.h"
+#include "SetNpcAiStateChasePlayer.h"
 #include "SetNpcAiStateIdle.h"
 
 void monsterPatrol(uint32_t n, Context &ctx)
@@ -13,7 +13,7 @@ void monsterPatrol(uint32_t n, Context &ctx)
 
     if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStateGoToPlayer(n, ctx);
+        setNpcAiStateChasePlayer(n, ctx);
         return;
     }
     if (ai.patrol.count[n] == 0)
