@@ -35,6 +35,7 @@
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
 #include "attacks/AttackTimerSystem.h"
+#include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerSerpentStingAttackSystem.h"
 #include "attacks/SerpentStingDebuffSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
@@ -141,6 +142,7 @@ int main()
         togglePlayerAutoAttackSystem(*ctx);
         
         playerRangedAutoAttackSystem(*ctx);
+        playerConcussiveShotAttackSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
