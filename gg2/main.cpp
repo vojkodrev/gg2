@@ -167,10 +167,10 @@ int main()
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 
+        dirtyCleanupSystem(*ctx);
+
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);
-
-        dirtyCleanupSystem(*ctx);
 
         frameRateLimitSystem(*ctx);
     }

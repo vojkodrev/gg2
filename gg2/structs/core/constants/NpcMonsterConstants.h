@@ -7,5 +7,5 @@ const float NPC_ATTACK_REACH     = 10.0f;
 const float NPC_LEASH_RADIUS     = 400.0f;
 const float NPC_IDLE_TIME_MIN    = 1.0f;
 const float NPC_IDLE_TIME_MAX    = 3.0f;
-const float NPC_REPATH_TIME_MIN  = 3.0f;
-const float NPC_REPATH_TIME_MAX  = 5.0f;
+const float NPC_REPATH_TIME_MIN  = 1.5f;
+const float NPC_REPATH_TIME_MAX  = 3.0f;
