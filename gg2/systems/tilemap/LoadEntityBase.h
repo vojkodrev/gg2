@@ -57,6 +57,7 @@ inline void loadEntityBase(
         entityData.animation.frameCount[entityIdx] = 1;
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
         entityData.animation.frameIndex[entityIdx] = 0;
+        entityData.animation.cycleDuration[entityIdx] = 0;
         entityData.animation.animationStartTime[entityIdx] = 0;
     }
     else

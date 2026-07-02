@@ -28,6 +28,7 @@ void loadTileAnimation(
         if (frameCount > MAX_ANIMATION_FRAMES) frameCount = MAX_ANIMATION_FRAMES;
         animation.animationType[n] = AnimationType::Sprite;
         animation.frameCount[n] = frameCount;
+        animation.cycleDuration[n] = 0;
         for (int f = 0; f < frameCount; f++)
         {
             uint32_t fid = tileData->animation.frames[f].tileID - props.firstGid;
@@ -52,12 +53,14 @@ void loadTileAnimation(
             animation.frame.collision.w[n][f] = col.w * scale;
             animation.frame.collision.h[n][f] = col.h * scale;
             animation.frame.frameDuration[n][f] = tileData->animation.frames[f].duration;
+            animation.cycleDuration[n] += animation.frame.frameDuration[n][f];
         }
     }
     else
     {
         animation.animationType[n] = AnimationType::None;
         animation.frameCount[n] = 1;
+        animation.cycleDuration[n] = 0;
         animation.frame.src.x[n][0] = idx % props.tilesetW * props.srcTileW;
         animation.frame.src.y[n][0] = idx / props.tilesetW * props.srcTileH;
         animation.frame.src.w[n][0] = props.srcTileW;

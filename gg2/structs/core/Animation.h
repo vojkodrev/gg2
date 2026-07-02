@@ -10,5 +10,6 @@ struct Animation
     AnimationFrame<N> frame;
     int frameCount[N];
     int frameIndex[N];
+    uint64_t cycleDuration[N];
     uint64_t animationStartTime[N];
 };

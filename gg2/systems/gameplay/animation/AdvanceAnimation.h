@@ -12,10 +12,7 @@ void advanceAnimation(
     if (fc <= 1)
         return;
 
-    uint64_t cycleDuration = 0;
-    for (int f = 0; f < fc; f++)
-        cycleDuration += anim.frame.frameDuration[i][f];
-
+    uint64_t cycleDuration = anim.cycleDuration[i];
     if (cycleDuration == 0)
         return;
 

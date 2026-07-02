@@ -12,6 +12,7 @@ inline void copyEntityBaseSlot(
     to.animation.animationType[toIndex] = from.animation.animationType[fromIndex];
     to.animation.frameCount[toIndex] = from.animation.frameCount[fromIndex];
     to.animation.frameIndex[toIndex] = from.animation.frameIndex[fromIndex];
+    to.animation.cycleDuration[toIndex] = from.animation.cycleDuration[fromIndex];
     to.animation.animationStartTime[toIndex] = from.animation.animationStartTime[fromIndex];
 
     for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
