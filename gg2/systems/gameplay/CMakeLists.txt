@@ -30,6 +30,7 @@ add_library(systems_gameplay
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
+    npc/NpcAiTimerSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcMouseSelectSystem.cpp
