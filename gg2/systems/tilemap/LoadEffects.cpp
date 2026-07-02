@@ -24,10 +24,13 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         const SDL_Point glyphGrid = decodeGridIndex(i, FONT_GLYPH_GRID_W);
 
         effectTemplate.base.animation.animationType[i] = AnimationType::None;
+        effectTemplate.base.animation.animationState[i] = AnimationState::Idle;
         effectTemplate.base.animation.frameCount[i] = 1;
         effectTemplate.base.animation.frameIndex[i] = 0;
         effectTemplate.base.animation.cycleDuration[i] = 0;
         effectTemplate.base.animation.animationStartTime[i] = SDL_GetTicks();
+        effectTemplate.base.animation.rotationStartAngle[i] = 0.0f;
+        effectTemplate.base.animation.rotationStopAngle[i] = 0.0f;
         effectTemplate.base.animation.frame.src.x[i][0] = fontBaseX + glyphGrid.x * FONT_GLYPH_W;
         effectTemplate.base.animation.frame.src.y[i][0] = fontBaseY + glyphGrid.y * FONT_GLYPH_H;
         effectTemplate.base.animation.frame.src.w[i][0] = FONT_GLYPH_W;

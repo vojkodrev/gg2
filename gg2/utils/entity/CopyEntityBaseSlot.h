@@ -10,10 +10,13 @@ inline void copyEntityBaseSlot(
     int toIndex)
 {
     to.animation.animationType[toIndex] = from.animation.animationType[fromIndex];
+    to.animation.animationState[toIndex] = from.animation.animationState[fromIndex];
     to.animation.frameCount[toIndex] = from.animation.frameCount[fromIndex];
     to.animation.frameIndex[toIndex] = from.animation.frameIndex[fromIndex];
     to.animation.cycleDuration[toIndex] = from.animation.cycleDuration[fromIndex];
     to.animation.animationStartTime[toIndex] = from.animation.animationStartTime[fromIndex];
+    to.animation.rotationStartAngle[toIndex] = from.animation.rotationStartAngle[fromIndex];
+    to.animation.rotationStopAngle[toIndex] = from.animation.rotationStopAngle[fromIndex];
 
     for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
     {

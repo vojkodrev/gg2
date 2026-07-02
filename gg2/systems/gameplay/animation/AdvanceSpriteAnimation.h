@@ -3,11 +3,13 @@
 #include "Animation.h"
 
 template<int N>
-void advanceAnimation(
+void advanceSpriteAnimation(
     Animation<N> &anim,
     uint32_t i,
     uint64_t now)
 {
+    anim.animationState[i] = AnimationState::Running;
+
     int fc = anim.frameCount[i];
     if (fc <= 1)
         return;

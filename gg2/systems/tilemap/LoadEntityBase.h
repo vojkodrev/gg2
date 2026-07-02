@@ -55,11 +55,14 @@ inline void loadEntityBase(
         entityData.animation.frame.collision.w[entityIdx][0] = colW * entityData.scale.value[entityIdx];
         entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale.value[entityIdx];
         entityData.animation.animationType[entityIdx] = AnimationType::None;
+        entityData.animation.animationState[entityIdx] = AnimationState::Idle;
         entityData.animation.frameCount[entityIdx] = 1;
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
         entityData.animation.frameIndex[entityIdx] = 0;
         entityData.animation.cycleDuration[entityIdx] = 0;
         entityData.animation.animationStartTime[entityIdx] = SDL_GetTicks();
+        entityData.animation.rotationStartAngle[entityIdx] = 0.0f;
+        entityData.animation.rotationStopAngle[entityIdx] = 0.0f;
     }
     else
     {
