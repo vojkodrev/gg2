@@ -17,17 +17,14 @@ void advanceAnimation(
         return;
 
     uint64_t elapsed = (now - anim.animationStartTime[i]) % cycleDuration;
+    int frameIndex = 0;
+    uint64_t accumulated = anim.frame.frameDuration[i][frameIndex];
 
-    uint64_t accumulated = 0;
-    for (int f = 0; f < fc; f++)
+    while (frameIndex + 1 < fc && elapsed >= accumulated)
     {
-        accumulated += anim.frame.frameDuration[i][f];
-        if (elapsed < accumulated)
-        {
-            anim.frameIndex[i] = f;
-            break;
-        }
-        if (f == fc - 1)
-            anim.frameIndex[i] = f;
+        frameIndex++;
+        accumulated += anim.frame.frameDuration[i][frameIndex];
     }
+
+    anim.frameIndex[i] = frameIndex;
 }
