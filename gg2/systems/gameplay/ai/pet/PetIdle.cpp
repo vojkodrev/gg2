@@ -1,8 +1,8 @@
 #include "PetIdle.h"
-#include "DistToEntity.h"
 #include "SetNpcAiStatePursueTarget.h"
 #include "NpcPetConstants.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../utils/collision/DistToEntity.h"
 
 void petIdle(uint32_t n, Context &ctx)
 {

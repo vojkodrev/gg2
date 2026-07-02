@@ -1,7 +1,7 @@
 #include "DistToEntity.h"
 #include "GetEntityColAABB.h"
-#include "../../../utils/collision/EntityColCenter.h"
-#include "../../../utils/math/Dist.h"
+#include "EntityColCenter.h"
+#include "../math/Dist.h"
 
 float distToEntity(Context &ctx, uint32_t n, EntityType targetType, int targetId)
 {

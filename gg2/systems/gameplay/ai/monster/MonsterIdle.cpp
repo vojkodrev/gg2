@@ -1,9 +1,9 @@
 #include "MonsterIdle.h"
-#include "DistToEntity.h"
 #include "NpcMonsterConstants.h"
 #include "SetNpcAiStatePursueTarget.h"
 #include "SetNpcAiStatePatrolling.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../utils/collision/DistToEntity.h"
 
 void monsterIdle(uint32_t n, Context &ctx)
 {

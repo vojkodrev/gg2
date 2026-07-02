@@ -48,7 +48,6 @@ add_library(systems_gameplay
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
     ai/pet/PetFollowPlayer.cpp
-    ai/DistToEntity.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
@@ -69,6 +68,7 @@ add_library(systems_gameplay
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
     animation/AnimationSystem.cpp
+    ../../utils/collision/DistToEntity.cpp
 )
 target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

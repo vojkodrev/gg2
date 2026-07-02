@@ -1,5 +1,4 @@
 #include "MonsterPatrol.h"
-#include "DistToEntity.h"
 #include "HasReachedRect.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"
@@ -7,6 +6,7 @@
 #include "SetNpcAiStatePursueTarget.h"
 #include "SetNpcAiStateIdle.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../utils/collision/DistToEntity.h"
 
 void monsterPatrol(uint32_t n, Context &ctx)
 {
