@@ -157,12 +157,17 @@
  </tile>
  <tile id="289">
   <properties>
+   <property name="angle" type="float" value="45"/>
+   <property name="animationStartAngle" type="float" value="10"/>
+   <property name="animationStopAngle" type="float" value="170"/>
+   <property name="animationTime" type="float" value="500"/>
+   <property name="animationType" value="rotate"/>
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
    <property name="type" value="sword1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="21.0821" y="6.00662" width="38.5131" height="37.3353"/>
+   <object id="1" name="collision" x="33.7169" y="12.792" width="13.4774" height="15.5753"/>
    <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
   </objectgroup>
  </tile>
