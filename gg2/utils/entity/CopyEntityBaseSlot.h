@@ -15,6 +15,7 @@ inline void copyEntityBaseSlot(
     to.animation.frameIndex[toIndex] = from.animation.frameIndex[fromIndex];
     to.animation.cycleDuration[toIndex] = from.animation.cycleDuration[fromIndex];
     to.animation.animationStartTime[toIndex] = from.animation.animationStartTime[fromIndex];
+    to.animation.rotate[toIndex] = from.animation.rotate[fromIndex];
     to.animation.rotationStartAngle[toIndex] = from.animation.rotationStartAngle[fromIndex];
     to.animation.rotationStopAngle[toIndex] = from.animation.rotationStopAngle[fromIndex];
 

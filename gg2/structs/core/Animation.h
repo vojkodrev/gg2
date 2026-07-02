@@ -18,4 +18,5 @@ struct Animation
 
     float rotationStartAngle[N];
     float rotationStopAngle[N];
+    float rotate[N];
 };

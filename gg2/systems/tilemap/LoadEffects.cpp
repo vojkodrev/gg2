@@ -36,6 +36,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         effectTemplate.base.animation.frame.src.w[i][0] = FONT_GLYPH_W;
         effectTemplate.base.animation.frame.src.h[i][0] = FONT_GLYPH_H;
         effectTemplate.base.animation.frame.frameDuration[i][0] = 0;
+        effectTemplate.base.animation.rotate[i] = 0.0f;
 
         effectTemplate.base.position.initialW[i] = FONT_GLYPH_W;
         effectTemplate.base.position.initialH[i] = FONT_GLYPH_H;

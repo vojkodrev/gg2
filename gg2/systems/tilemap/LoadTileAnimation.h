@@ -25,6 +25,7 @@ void loadTileAnimation(
     SDL_FRect col = getAnchor(tileset, idx, "collision");
     SDL_FRect anchor = getAnchor(tileset, idx, "anchor");
     float animationTime = getTileFloatProp(tileset, idx, "animationTime", 0.0f);
+    animation.rotate[n] = 0.0f;
     animation.rotationStartAngle[n] = getTileFloatProp(tileset, idx, "animationStartAngle", 0.0f);
     animation.rotationStopAngle[n] = getTileFloatProp(tileset, idx, "animationStopAngle", 0.0f);
     animation.animationState[n] = AnimationState::Idle;
