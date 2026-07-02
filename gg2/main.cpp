@@ -53,7 +53,7 @@
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
-#include "animation/AnimationSystem.h"
+#include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
@@ -111,7 +111,7 @@ int main()
 
         debugFpsSystem(*ctx);
 
-        animationSystem(*ctx);
+        spriteAnimationSystem(*ctx);
 
         playerMovementSystem(*ctx);
         playerFacingSystem(*ctx);

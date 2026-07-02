@@ -1,7 +1,7 @@
-#include "AnimationSystem.h"
+#include "SpriteAnimationSystem.h"
 #include "AdvanceSpriteAnimation.h"
 
-void animationSystem(Context &ctx)
+void spriteAnimationSystem(Context &ctx)
 {
     uint64_t now = ctx.frame.now;
 
