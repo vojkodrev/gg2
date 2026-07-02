@@ -16,9 +16,6 @@ void advanceAnimation(
     if (cycleDuration == 0)
         return;
 
-    if (anim.animationStartTime[i] == 0)
-        anim.animationStartTime[i] = now;
-
     uint64_t elapsed = (now - anim.animationStartTime[i]) % cycleDuration;
 
     uint64_t accumulated = 0;

@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include "../../structs/core/EntityBase.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
@@ -58,7 +59,7 @@ inline void loadEntityBase(
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
         entityData.animation.frameIndex[entityIdx] = 0;
         entityData.animation.cycleDuration[entityIdx] = 0;
-        entityData.animation.animationStartTime[entityIdx] = 0;
+        entityData.animation.animationStartTime[entityIdx] = SDL_GetTicks();
     }
     else
     {

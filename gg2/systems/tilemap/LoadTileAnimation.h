@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 #include "../../structs/core/Animation.h"
@@ -85,5 +86,5 @@ void loadTileAnimation(
     }
 
     animation.frameIndex[n] = 0;
-    animation.animationStartTime[n] = 0;
+    animation.animationStartTime[n] = SDL_GetTicks();
 }
