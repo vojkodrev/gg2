@@ -11,5 +11,4 @@ struct Animation
     int frameCount[N];
     int frameIndex[N];
     uint64_t animationStartTime[N];
-    uint64_t animationStopTime[N];
 };

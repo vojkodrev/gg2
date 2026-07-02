@@ -83,5 +83,4 @@ void loadTileAnimation(
 
     animation.frameIndex[n] = 0;
     animation.animationStartTime[n] = 0;
-    animation.animationStopTime[n] = 0;
 }
