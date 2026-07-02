@@ -49,7 +49,6 @@ add_library(systems_gameplay
     ai/pet/PetIdle.cpp
     ai/pet/PetFollowPlayer.cpp
     ai/DistToEntity.cpp
-    ai/DistToNpcSpawn.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp

@@ -30,6 +30,7 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.concussiveShotDebuffTimer[i] = 0.0f;
             ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
             setNpcAiStateIdle(i, ctx);
+            ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;
             ctx.data.npc.ai.repathTimer[i] = 0.0f;

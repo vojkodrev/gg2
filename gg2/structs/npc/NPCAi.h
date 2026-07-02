@@ -21,6 +21,7 @@ struct NPCAi
 
     NPCPath path;
 
+    float attackedTimer[MAX_NPCS];
     float idleTimer[MAX_NPCS];
     float repathTimer[MAX_NPCS];
 };

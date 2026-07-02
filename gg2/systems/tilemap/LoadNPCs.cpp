@@ -55,6 +55,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.patrol.index[n] = 0;
         npc.ai.state[n] = NPCAiState::Idle;
         clearNpcAiTarget(n, ctx);
+        npc.ai.attackedTimer[n] = 0.0f;
         npc.ai.idleTimer[n] = randomTimer(NPC_IDLE_TIME_MIN, NPC_IDLE_TIME_MAX);
         npc.ai.repathTimer[n] = 0.0f;
 

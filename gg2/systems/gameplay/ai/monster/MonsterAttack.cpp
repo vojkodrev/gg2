@@ -1,15 +1,13 @@
 #include "MonsterAttack.h"
-#include "DistToNpcSpawn.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
-#include "NpcMonsterConstants.h"
 #include "SetNpcAiStateReturnToSpawn.h"
 #include "SetNpcAiStatePursueTarget.h"
 #include "CanMonsterAttackTarget.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
 {
-    if (distToNpcSpawn(ctx, n) > NPC_LEASH_RADIUS)
+    if (ctx.data.npc.ai.attackedTimer[n] <= 0.0f)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;

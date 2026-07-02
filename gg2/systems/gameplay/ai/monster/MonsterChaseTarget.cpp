@@ -1,5 +1,4 @@
 #include "MonsterChaseTarget.h"
-#include "DistToNpcSpawn.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -10,7 +9,7 @@
 
 void monsterChaseTarget(uint32_t n, Context &ctx)
 {
-    if (distToNpcSpawn(ctx, n) > NPC_LEASH_RADIUS)
+    if (ctx.data.npc.ai.attackedTimer[n] <= 0.0f)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
