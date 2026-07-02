@@ -9,15 +9,18 @@ void rotateEquipmentSystem(Context &ctx)
     if (playerWeapon.base.facing.dirty[0])
     {
         rotateEntityBase(playerWeapon.base, 0);
-        rotateAnchorAroundEntityCenter(
-            playerWeapon.ammoAnchor,
-            playerWeapon.base,
-            0,
-            0);
+        if (playerWeapon.type[0] == WeaponType::Ranged)
+            rotateAnchorAroundEntityCenter(
+                playerWeapon.ammoAnchor,
+                playerWeapon.base,
+                0,
+                0);
     }
 
     auto &playerAmmo = ctx.data.player.equipment.ammo;
-    if (playerAmmo.base.facing.dirty[0])
+    if (
+        playerAmmo.base.facing.dirty[0] &&
+        playerWeapon.type[0] == WeaponType::Ranged)
         rotateEntityBase(playerAmmo.base, 0);
 
     auto &npcAmmo = ctx.data.npc.equipment.ammo;
@@ -30,13 +33,16 @@ void rotateEquipmentSystem(Context &ctx)
         if (npcWeapon.base.facing.dirty[i])
         {
             rotateEntityBase(npcWeapon.base, i);
-            rotateAnchorAroundEntityCenter(
-                npcWeapon.ammoAnchor,
-                npcWeapon.base,
-                i,
-                0);
+            if (npcWeapon.type[i] == WeaponType::Ranged)
+                rotateAnchorAroundEntityCenter(
+                    npcWeapon.ammoAnchor,
+                    npcWeapon.base,
+                    i,
+                    0);
         }
-        if (npcAmmo.base.facing.dirty[i])
+        if (
+            npcAmmo.base.facing.dirty[i] &&
+            npcWeapon.type[i] == WeaponType::Ranged)
             rotateEntityBase(npcAmmo.base, i);
     }
 }

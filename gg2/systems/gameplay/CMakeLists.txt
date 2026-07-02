@@ -67,7 +67,8 @@ add_library(systems_gameplay
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
-    animation/AnimationSystem.cpp
+    animation/RotationAnimationSystem.cpp
+    animation/SpriteAnimationSystem.cpp
     ../../utils/collision/DistToEntity.cpp
 )
 target_include_directories(systems_gameplay PUBLIC
