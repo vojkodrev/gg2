@@ -41,13 +41,13 @@ add_library(systems_gameplay
     ai/monster/MonsterAi.cpp
     ai/monster/MonsterIdle.cpp
     ai/monster/MonsterPatrol.cpp
-    ai/monster/MonsterChasePlayer.cpp
+    ai/monster/MonsterChaseTarget.cpp
     ai/monster/MonsterAttack.cpp
     ai/monster/MonsterReturnToSpawn.cpp
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
     ai/pet/PetFollowPlayer.cpp
-    ai/DistToPlayer.cpp
+    ai/DistToEntity.cpp
     ai/DistToNpcSpawn.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp

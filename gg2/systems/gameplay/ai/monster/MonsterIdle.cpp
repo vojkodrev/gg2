@@ -1,8 +1,9 @@
 #include "MonsterIdle.h"
-#include "DistToPlayer.h"
+#include "DistToEntity.h"
 #include "NpcMonsterConstants.h"
-#include "SetNpcAiStatePursuePlayer.h"
+#include "SetNpcAiStatePursueTarget.h"
 #include "SetNpcAiStatePatrolling.h"
+#include "../../../structs/core/EntityType.h"
 
 void monsterIdle(uint32_t n, Context &ctx)
 {
@@ -10,9 +11,9 @@ void monsterIdle(uint32_t n, Context &ctx)
     float dt = ctx.frame.dt;
 
     ai.idleTimer[n] -= dt;
-    if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
+    if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStatePursuePlayer(n, ctx);
+        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0);
     }
     else if (ai.idleTimer[n] <= 0.0f)
     {

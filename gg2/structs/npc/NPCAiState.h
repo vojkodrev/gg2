@@ -4,7 +4,7 @@ enum class NPCAiState : int
 {
     Idle,
     Patrolling,
-    PursuePlayer,
+    PursueTarget,
     Attack,
     ReturnToSpawn
 };

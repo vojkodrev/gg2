@@ -1,19 +1,20 @@
 #include "MonsterPatrol.h"
-#include "DistToPlayer.h"
+#include "DistToEntity.h"
 #include "HasReachedRect.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"
 #include "astar/FollowAStarPathTo.h"
-#include "SetNpcAiStatePursuePlayer.h"
+#include "SetNpcAiStatePursueTarget.h"
 #include "SetNpcAiStateIdle.h"
+#include "../../../structs/core/EntityType.h"
 
 void monsterPatrol(uint32_t n, Context &ctx)
 {
     auto &ai = ctx.data.npc.ai;
 
-    if (distToPlayer(ctx, n) < NPC_DETECT_RADIUS)
+    if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStatePursuePlayer(n, ctx);
+        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0);
         return;
     }
     if (ai.patrol.count[n] == 0)
