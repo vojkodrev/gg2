@@ -3,8 +3,10 @@
 #include "../../statistics/SetHpDamage.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
+#include "../../ai/SetNpcAiStatePursueTarget.h"
 #include "../../effects/SpawnNpcTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
@@ -30,6 +32,9 @@ void resolveProjectileEffectCollision(
         const uint32_t npcIndex = colIdIndex(otherId);
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
+
+        if (effect.parent.type[effectIndex] == EntityType::Player)
+            setNpcAiStatePursueTarget(npcIndex, ctx, EntityType::Player, 0);
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {
