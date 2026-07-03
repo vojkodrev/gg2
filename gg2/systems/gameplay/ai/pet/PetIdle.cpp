@@ -1,4 +1,5 @@
 #include "PetIdle.h"
+#include "SetNpcAiTarget.h"
 #include "SetNpcAiStatePursueTarget.h"
 #include "NpcPetConstants.h"
 #include "../../../structs/core/EntityType.h"

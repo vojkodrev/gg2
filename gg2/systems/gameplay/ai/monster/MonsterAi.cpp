@@ -1,6 +1,7 @@
 #include "MonsterAi.h"
 #include "MonsterIdle.h"
 #include "MonsterPatrol.h"
+#include "MonsterPursuingTarget.h"
 #include "MonsterChaseTarget.h"
 #include "MonsterAttack.h"
 #include "MonsterReturnToSpawn.h"
@@ -13,6 +14,7 @@ void monsterAi(uint32_t n, Context &ctx)
     {
     case NPCAiState::Idle:          monsterIdle(n, ctx);            break;
     case NPCAiState::Patrolling:    monsterPatrol(n, ctx);          break;
+    case NPCAiState::PursuingTarget: monsterPursuingTarget(n, ctx); break;
     case NPCAiState::PursueTarget:  monsterChaseTarget(n, ctx);     break;
     case NPCAiState::Attack:        monsterAttack(n, ctx);          break;
     case NPCAiState::ReturnToSpawn: monsterReturnToSpawn(n, ctx);   break;
