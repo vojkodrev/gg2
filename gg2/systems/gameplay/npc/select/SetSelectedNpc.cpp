@@ -7,7 +7,7 @@ void setSelectedNpc(Context &ctx, int selectedNpc)
     ctx.data.player.selectedNpc = selectedNpc;
 
     if (selectedNpc == -1)
-        ctx.data.player.autoAttack.active = false;
+        ctx.data.player.autoAttack.active[0] = false;
     else if (ctx.data.npc.ai.type[selectedNpc] == NPCAiType::Pet)
-        ctx.data.player.autoAttack.active = false;
+        ctx.data.player.autoAttack.active[0] = false;
 }

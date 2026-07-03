@@ -10,13 +10,13 @@ void actionBarTintSystem(Context &ctx)
     auto &actionBar = ctx.data.actionBar;
 
     actionBar.rangedAutoAttack.base.tint.r[0] =
-        player.autoAttack.active ? AUTO_ATTACK_ACTION_BAR_TINT_R : CLEAR_TINT_R;
+        player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_R : CLEAR_TINT_R;
     actionBar.rangedAutoAttack.base.tint.g[0] =
-        player.autoAttack.active ? AUTO_ATTACK_ACTION_BAR_TINT_G : CLEAR_TINT_G;
+        player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_G : CLEAR_TINT_G;
     actionBar.rangedAutoAttack.base.tint.b[0] =
-        player.autoAttack.active ? AUTO_ATTACK_ACTION_BAR_TINT_B : CLEAR_TINT_B;
+        player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_B : CLEAR_TINT_B;
     actionBar.rangedAutoAttack.base.tint.a[0] =
-        player.autoAttack.active ? AUTO_ATTACK_ACTION_BAR_TINT_A : CLEAR_TINT_A;
+        player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_A : CLEAR_TINT_A;
 
     const bool onGlobalCooldown = player.globalCooldownTimer > 0.0f;
     const bool hasEnoughManaForSerpentSting =

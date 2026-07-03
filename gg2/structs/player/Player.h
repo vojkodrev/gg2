@@ -14,7 +14,7 @@ struct Player
     int selectedEffectId = -1;
     float globalCooldownTimer = 0.0f;
     float concussiveShotCooldownTimer = 0.0f;
-    AutoAttack autoAttack;
+    AutoAttack<1> autoAttack;
     EntityBase<1> base;
     Statistics<1> statistics;
     Equipment<1> equipment;
