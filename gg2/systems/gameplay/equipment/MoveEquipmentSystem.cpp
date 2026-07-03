@@ -1,10 +1,16 @@
 #include "MoveEquipmentSystem.h"
 #include "AlignAmmoToWeaponAnchor.h"
+#include "../rotation/IsRotationAnimationRunning.h"
 #include "../../../utils/rect/AlignEntityToParentAnchor.h"
 
 void moveEquipmentSystem(Context &ctx)
 {
-    if (ctx.data.player.base.position.dirty[0] || ctx.data.player.base.facing.dirty[0])
+    const bool playerWeaponRotationRunning =
+        isRotationAnimationRunning(ctx.data.player.equipment.weapon.base, 0);
+    if (
+        ctx.data.player.base.position.dirty[0] ||
+        ctx.data.player.base.facing.dirty[0] ||
+        playerWeaponRotationRunning)
     {
         alignEntityToParentAnchor(
             ctx.data.player.equipment.weapon.base,
@@ -24,7 +30,12 @@ void moveEquipmentSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        if (!ctx.data.npc.base.position.dirty[i] && !ctx.data.npc.base.facing.dirty[i])
+        const bool npcWeaponRotationRunning =
+            isRotationAnimationRunning(ctx.data.npc.equipment.weapon.base, i);
+        if (
+            !ctx.data.npc.base.position.dirty[i] &&
+            !ctx.data.npc.base.facing.dirty[i] &&
+            !npcWeaponRotationRunning)
             continue;
 
         alignEntityToParentAnchor(
