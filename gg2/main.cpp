@@ -113,7 +113,6 @@ int main()
         debugFpsSystem(*ctx);
 
         spriteAnimationSystem(*ctx);
-        rotationAnimationSystem(*ctx);
 
         playerMovementSystem(*ctx);
         playerFacingSystem(*ctx);
@@ -140,6 +139,7 @@ int main()
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
+        rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);

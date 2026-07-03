@@ -16,9 +16,6 @@ inline void animateWeaponRotation(EntityBase<N> &entityBase, uint32_t i, uint64_
     uint64_t duration = animation.cycleDuration[i];
     if (duration == 0)
     {
-        animation.rotate[i] =
-            entityBase.rotation.initialAngle[i] +
-            animation.rotationStopAngle[i];
         animation.animationState[i] = AnimationState::Idle;
         return;
     }
@@ -30,17 +27,19 @@ inline void animateWeaponRotation(EntityBase<N> &entityBase, uint32_t i, uint64_
     }
 
     uint64_t elapsed = now - animation.animationStartTime[i];
-    if (elapsed > duration)
+    const bool finished = elapsed >= duration;
+    if (finished)
         elapsed = duration;
 
     const float progress = (float)elapsed / (float)duration;
-    const float angle =
-        entityBase.rotation.initialAngle[i] +
+    const float authoredAngle =
         animation.rotationStartAngle[i] +
         (animation.rotationStopAngle[i] - animation.rotationStartAngle[i]) * progress;
 
-    animation.rotate[i] = angle;
+    animation.rotate[i] = entityBase.facing.flipX[i]
+        ? 360.0f - authoredAngle + entityBase.rotation.initialAngle[i]
+        : authoredAngle - entityBase.rotation.initialAngle[i];
 
-    if (elapsed == duration)
+    if (finished)
         animation.animationState[i] = AnimationState::Idle;
 }
