@@ -15,7 +15,7 @@
 #include "debug/DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
-#include "cleanup/DirtyCleanupSystem.h"
+#include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -178,7 +178,7 @@ int main()
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 
-        dirtyCleanupSystem(*ctx);
+        cleanupSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);

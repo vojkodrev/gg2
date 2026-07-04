@@ -10,13 +10,13 @@ inline void animateWeaponRotation(EntityBase<N> &entityBase, uint32_t i, uint64_
         return;
 
     const AnimationState state = animation.animationState[i];
-    if (state == AnimationState::Idle)
+    if (state == AnimationState::Idle || state == AnimationState::Finished)
         return;
 
     uint64_t duration = animation.cycleDuration[i];
     if (duration == 0)
     {
-        animation.animationState[i] = AnimationState::Idle;
+        animation.animationState[i] = AnimationState::Finished;
         return;
     }
 
@@ -41,5 +41,5 @@ inline void animateWeaponRotation(EntityBase<N> &entityBase, uint32_t i, uint64_
         : authoredAngle - entityBase.rotation.initialAngle[i];
 
     if (finished)
-        animation.animationState[i] = AnimationState::Idle;
+        animation.animationState[i] = AnimationState::Finished;
 }

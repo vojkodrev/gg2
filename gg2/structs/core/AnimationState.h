@@ -4,5 +4,6 @@ enum class AnimationState
 {
     Idle,
     Starting,
-    Running
+    Running,
+    Finished
 };

@@ -1,7 +1,8 @@
-#include "DirtyCleanupSystem.h"
+#include "CleanupSystem.h"
+#include "../../../structs/core/AnimationState.h"
 #include <cstring>
 
-void dirtyCleanupSystem(Context &ctx)
+void cleanupSystem(Context &ctx)
 {
     std::memset(ctx.data.player.base.position.dirty, 0, sizeof(ctx.data.player.base.position.dirty));
     std::memset(ctx.data.player.base.facing.dirty, 0, sizeof(ctx.data.player.base.facing.dirty));
@@ -32,4 +33,13 @@ void dirtyCleanupSystem(Context &ctx)
 
     std::memset(ctx.data.effect.base.position.dirty, 0, sizeof(ctx.data.effect.base.position.dirty));
     std::memset(ctx.data.effect.base.facing.dirty, 0, sizeof(ctx.data.effect.base.facing.dirty));
+
+    if (ctx.data.player.equipment.weapon.base.animation.animationState[0] == AnimationState::Finished)
+        ctx.data.player.equipment.weapon.base.animation.animationState[0] = AnimationState::Idle;
+
+    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    {
+        if (ctx.data.npc.equipment.weapon.base.animation.animationState[i] == AnimationState::Finished)
+            ctx.data.npc.equipment.weapon.base.animation.animationState[i] = AnimationState::Idle;
+    }
 }

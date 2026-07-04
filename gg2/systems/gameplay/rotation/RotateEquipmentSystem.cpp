@@ -1,4 +1,5 @@
 #include "RotateEquipmentSystem.h"
+#include "IsRotationAnimationFinished.h"
 #include "IsRotationAnimationRunning.h"
 #include "RotateEntityBase.h"
 #include "../../../utils/rect/RotateRectCenter.h"
@@ -7,7 +8,10 @@
 void rotateEquipmentSystem(Context &ctx)
 {
     auto &playerWeapon = ctx.data.player.equipment.weapon;
-    if (playerWeapon.base.facing.dirty[0] || isRotationAnimationRunning(playerWeapon.base, 0))
+    if (
+        playerWeapon.base.facing.dirty[0] ||
+        isRotationAnimationRunning(playerWeapon.base, 0) ||
+        isRotationAnimationFinished(playerWeapon.base, 0))
     {
         rotateEntityBase(playerWeapon.base, 0);
         if (playerWeapon.type[0] == WeaponType::Ranged)
@@ -22,9 +26,7 @@ void rotateEquipmentSystem(Context &ctx)
     }
 
     auto &playerAmmo = ctx.data.player.equipment.ammo;
-    if (
-        (playerAmmo.base.facing.dirty[0] || isRotationAnimationRunning(playerAmmo.base, 0)) &&
-        playerWeapon.type[0] == WeaponType::Ranged)
+    if (playerAmmo.base.facing.dirty[0] && playerWeapon.type[0] == WeaponType::Ranged)
         rotateEntityBase(playerAmmo.base, 0);
 
     auto &npcAmmo = ctx.data.npc.equipment.ammo;
@@ -34,7 +36,10 @@ void rotateEquipmentSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        if (npcWeapon.base.facing.dirty[i] || isRotationAnimationRunning(npcWeapon.base, i))
+        if (
+            npcWeapon.base.facing.dirty[i] ||
+            isRotationAnimationRunning(npcWeapon.base, i) ||
+            isRotationAnimationFinished(npcWeapon.base, i))
         {
             rotateEntityBase(npcWeapon.base, i);
             if (npcWeapon.type[i] == WeaponType::Ranged)
@@ -47,9 +52,7 @@ void rotateEquipmentSystem(Context &ctx)
                     npcWeapon.base.position.h[i] * 0.5f,
                     npcWeapon.base.rotation.rotate[i]);
         }
-        if (
-            (npcAmmo.base.facing.dirty[i] || isRotationAnimationRunning(npcAmmo.base, i)) &&
-            npcWeapon.type[i] == WeaponType::Ranged)
+        if (npcAmmo.base.facing.dirty[i] && npcWeapon.type[i] == WeaponType::Ranged)
             rotateEntityBase(npcAmmo.base, i);
     }
 }

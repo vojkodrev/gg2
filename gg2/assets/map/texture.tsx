@@ -158,9 +158,9 @@
  <tile id="289">
   <properties>
    <property name="angle" type="float" value="45"/>
-   <property name="animationStartAngle" type="float" value="10"/>
-   <property name="animationStopAngle" type="float" value="170"/>
-   <property name="animationTime" type="float" value="500"/>
+   <property name="animationStartAngle" type="float" value="-20"/>
+   <property name="animationStopAngle" type="float" value="150"/>
+   <property name="animationTime" type="float" value="300"/>
    <property name="animationType" value="rotation"/>
    <property name="facing" value="right"/>
    <property name="scale" type="float" value="1"/>
