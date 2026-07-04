@@ -9,7 +9,7 @@ void petAi(uint32_t n, Context &ctx)
     switch (ai.state[n])
     {
     case NPCAiState::Idle:          petIdle(n, ctx);            break;
-    case NPCAiState::PursueTarget:  petFollowPlayer(n, ctx);    break;
+    case NPCAiState::PursuingTarget:  petFollowPlayer(n, ctx);  break;
     default: break;
     }
 }

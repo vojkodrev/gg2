@@ -3,7 +3,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/npc/NPCAiState.h"
 #include "RefreshNpcAttackedTimer.h"
-#include "SetNpcAiStatePursuingTarget.h"
+#include "SetNpcAiStatePursueTarget.h"
 
 inline void refreshNpcAttackedTimerOrPursuingTarget(
     uint32_t n,
@@ -14,7 +14,7 @@ inline void refreshNpcAttackedTimerOrPursuingTarget(
     const NPCAiState aiState = ctx.data.npc.ai.state[n];
     if (aiState == NPCAiState::Idle || aiState == NPCAiState::Patrolling)
     {
-        setNpcAiStatePursuingTarget(n, ctx, targetType, targetId);
+        setNpcAiStatePursueTarget(n, ctx, targetType, targetId);
     }
     else
     {

@@ -3,7 +3,7 @@
 #include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"
 #include "astar/FollowAStarPathTo.h"
-#include "SetNpcAiStatePursuingTarget.h"
+#include "SetNpcAiStatePursueTarget.h"
 #include "SetNpcAiStateIdle.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/DistToEntity.h"
@@ -14,7 +14,7 @@ void monsterPatrol(uint32_t n, Context &ctx)
 
     if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStatePursuingTarget(n, ctx, EntityType::Player, 0);
+        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0);
         return;
     }
     if (ai.patrol.count[n] == 0)

@@ -5,7 +5,7 @@
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "SetNpcAiStateReturnToSpawn.h"
-#include "SetNpcAiStatePursueTarget.h"
+#include "SetNpcAiStatePursuingTarget.h"
 #include "CanMonsterAttackTarget.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
@@ -21,7 +21,7 @@ void monsterAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursueTarget(n, ctx, target.type[n], target.id[n]);
+        setNpcAiStatePursuingTarget(n, ctx, target.type[n], target.id[n]);
         return;
     }
 
