@@ -17,7 +17,10 @@ void monsterPursuingTarget(uint32_t n, Context &ctx)
 
     const auto &target = ctx.data.npc.ai.target;
     if (!canMonsterAttackTarget(target.type[n]))
+    {
+        setNpcAiStateReturnToSpawn(n, ctx);
         return;
+    }
     const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
 
     if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
