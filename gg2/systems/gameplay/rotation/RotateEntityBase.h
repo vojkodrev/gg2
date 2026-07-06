@@ -6,17 +6,34 @@
 #include <cstdint>
 
 template<int N>
-inline void rotateEntityBase(EntityBase<N> &entityBase, uint32_t i)
+inline void rotateEntityBase(
+    EntityBase<N> &entityBase,
+    uint32_t i,
+    bool useRotationAnimationStart = false)
 {
     if (entityBase.animation.frameCount[i] == 0)
         return;
 
     const bool useAnimatedRotation = isRotationAnimationRunning(entityBase, i);
-    entityBase.rotation.rotate[i] = useAnimatedRotation
-        ? entityBase.animation.rotate[i]
-        : entityBase.facing.flipX[i]
+    if (useAnimatedRotation)
+    {
+        entityBase.rotation.rotate[i] = entityBase.animation.rotate[i];
+    }
+    else if (useRotationAnimationStart)
+    {
+        entityBase.rotation.rotate[i] = entityBase.facing.flipX[i]
+            ? 360.0f -
+                entityBase.animation.rotationStartAngle[i] +
+                entityBase.rotation.initialAngle[i]
+            : entityBase.animation.rotationStartAngle[i] -
+                entityBase.rotation.initialAngle[i];
+    }
+    else
+    {
+        entityBase.rotation.rotate[i] = entityBase.facing.flipX[i]
             ? -entityBase.rotation.initialRotate[i]
             : entityBase.rotation.initialRotate[i];
+    }
 
     if (useAnimatedRotation)
     {

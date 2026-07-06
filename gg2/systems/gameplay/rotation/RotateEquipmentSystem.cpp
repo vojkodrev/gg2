@@ -2,6 +2,7 @@
 #include "IsRotationAnimationFinished.h"
 #include "IsRotationAnimationRunning.h"
 #include "RotateEntityBase.h"
+#include "ShouldUseRotationAnimationStart.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include <cstdint>
 
@@ -36,12 +37,18 @@ void rotateEquipmentSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
+        const bool npcWeaponRotationRunning = isRotationAnimationRunning(npcWeapon.base, i);
+        const bool npcWeaponRotationFinished = isRotationAnimationFinished(npcWeapon.base, i);
+        const bool useRotationAnimationStart =
+            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+
         if (
             npcWeapon.base.facing.dirty[i] ||
-            isRotationAnimationRunning(npcWeapon.base, i) ||
-            isRotationAnimationFinished(npcWeapon.base, i))
+            npcWeaponRotationRunning ||
+            npcWeaponRotationFinished ||
+            useRotationAnimationStart)
         {
-            rotateEntityBase(npcWeapon.base, i);
+            rotateEntityBase(npcWeapon.base, i, useRotationAnimationStart);
             if (npcWeapon.type[i] == WeaponType::Ranged)
                 rotateRectCenter(
                     npcWeapon.ammoAnchor.offX[i][0],
