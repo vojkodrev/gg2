@@ -1,5 +1,5 @@
 #include "CanPlayerRangedAttack.h"
-#include "../../../structs/core/constants/AttackConstants.h"
+#include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../../utils/collision/DistToEntity.h"

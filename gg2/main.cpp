@@ -35,6 +35,7 @@
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
 #include "attacks/AutoAttackTimerSystem.h"
+#include "attacks/NpcAutoAttackSystem.h"
 #include "attacks/ConcussiveShotCooldownTimerSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
@@ -141,6 +142,7 @@ int main()
         flipEquipmentSystem(*ctx);
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
+        npcAutoAttackSystem(*ctx);
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);
 

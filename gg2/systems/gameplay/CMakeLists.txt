@@ -19,6 +19,7 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     attacks/AutoAttackTimerSystem.cpp
+    attacks/NpcAutoAttackSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
     attacks/ConcussiveShotCooldownTimerSystem.cpp
     attacks/GlobalCooldownTimerSystem.cpp

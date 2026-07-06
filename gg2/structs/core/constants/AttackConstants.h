@@ -1,7 +1,6 @@
 #pragma once
 
 const float GLOBAL_COOLDOWN_DELAY = 1.5f;
-const float PLAYER_RANGED_ATTACK_MIN_DISTANCE = 150.0f;
 
 const float AUTO_ATTACK_ACTION_BAR_TINT_R = 1.0f;
 const float AUTO_ATTACK_ACTION_BAR_TINT_G = 0.0f;
