@@ -1,6 +1,7 @@
 #include "FlipEquipmentSystem.h"
 #include "MirrorAnchorOffsetX.h"
 #include "MirrorEntityAnchorsAndCollisionOffsets.h"
+#include "../rotation/ShouldClearRotationAnimationStart.h"
 #include "../rotation/IsRotationAnimationFinished.h"
 #include "../rotation/IsRotationAnimationRunning.h"
 #include "../rotation/ShouldUseRotationAnimationStart.h"
@@ -42,7 +43,8 @@ void flipEquipmentSystem(Context &ctx)
             npcWeapon.base.facing.dirty[i] ||
             isRotationAnimationRunning(npcWeapon.base, i) ||
             isRotationAnimationFinished(npcWeapon.base, i) ||
-            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
+            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
         if (npcWeaponNeedsMirror && npcWeapon.base.facing.flipX[i])
         {
             mirrorEntityAnchorsAndCollisionOffsets(

@@ -1,4 +1,5 @@
 #include "RotateEquipmentSystem.h"
+#include "ShouldClearRotationAnimationStart.h"
 #include "IsRotationAnimationFinished.h"
 #include "IsRotationAnimationRunning.h"
 #include "RotateEntityBase.h"
@@ -46,7 +47,8 @@ void rotateEquipmentSystem(Context &ctx)
             npcWeapon.base.facing.dirty[i] ||
             npcWeaponRotationRunning ||
             npcWeaponRotationFinished ||
-            useRotationAnimationStart)
+            useRotationAnimationStart ||
+            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i))
         {
             rotateEntityBase(npcWeapon.base, i, useRotationAnimationStart);
             if (npcWeapon.type[i] == WeaponType::Ranged)

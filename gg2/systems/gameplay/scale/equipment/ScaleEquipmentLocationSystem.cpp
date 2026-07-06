@@ -1,4 +1,5 @@
 #include "ScaleEquipmentLocationSystem.h"
+#include "../../rotation/ShouldClearRotationAnimationStart.h"
 #include "../../rotation/IsRotationAnimationFinished.h"
 #include "../../rotation/IsRotationAnimationRunning.h"
 #include "../../rotation/ShouldUseRotationAnimationStart.h"
@@ -27,7 +28,8 @@ void scaleEquipmentLocationSystem(Context &ctx)
             npcWeapon.base.facing.dirty[i] ||
             isRotationAnimationRunning(npcWeapon.base, i) ||
             isRotationAnimationFinished(npcWeapon.base, i) ||
-            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
+            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
         if (npcWeaponNeedsReset)
             scaleEntityBaseLocations(npcWeapon.base, i);
         if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
@@ -51,7 +53,8 @@ void scaleEquipmentLocationSystem(Context &ctx)
             npcWeapon.base.facing.dirty[i] ||
             isRotationAnimationRunning(npcWeapon.base, i) ||
             isRotationAnimationFinished(npcWeapon.base, i) ||
-            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
+            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
         if (!npcWeaponNeedsReset)
             continue;
 

@@ -35,7 +35,7 @@ inline void rotateEntityBase(
             : entityBase.rotation.initialRotate[i];
     }
 
-    if (useAnimatedRotation)
+    if (useAnimatedRotation || useRotationAnimationStart)
     {
         const int frameIndex = entityBase.animation.frameIndex[i];
         const SDL_FPoint center =
@@ -53,10 +53,10 @@ inline void rotateEntityBase(
     const float entityCenterY = entityBase.position.h[i] * 0.5f;
     for (int f = 0; f < entityBase.animation.frameCount[i]; f++)
     {
-        const SDL_FPoint center = useAnimatedRotation
+        const SDL_FPoint center = (useAnimatedRotation || useRotationAnimationStart)
             ? entityColCenter(entityBase.animation.frame.anchor, i, f)
             : SDL_FPoint{entityCenterX, entityCenterY};
-        if (!useAnimatedRotation)
+        if (!(useAnimatedRotation || useRotationAnimationStart))
             rotateRectCenter(
                 entityBase.animation.frame.anchor.offX[i][f],
                 entityBase.animation.frame.anchor.offY[i][f],
