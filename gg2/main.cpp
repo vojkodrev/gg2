@@ -40,6 +40,7 @@
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerPetAttackSystem.h"
+#include "attacks/PlayerPetFollowSystem.h"
 #include "attacks/PlayerSerpentStingAttackSystem.h"
 #include "attacks/SerpentStingDebuffSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
@@ -156,6 +157,7 @@ int main()
         playerRangedAutoAttackSystem(*ctx);
         playerConcussiveShotAttackSystem(*ctx);
         playerPetAttackSystem(*ctx);
+        playerPetFollowSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);

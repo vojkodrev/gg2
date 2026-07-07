@@ -18,5 +18,6 @@ void monsterAi(uint32_t n, Context &ctx)
     case NPCAiState::PursuingTarget: monsterPursuingTarget(n, ctx); break;
     case NPCAiState::Attack:        monsterAttack(n, ctx);          break;
     case NPCAiState::ReturnToSpawn: monsterReturnToSpawn(n, ctx);   break;
+    default: break;
     }
 }
