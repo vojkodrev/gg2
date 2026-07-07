@@ -9,6 +9,7 @@
 struct Player
 {
     int groupId = -1;
+    int petId = -1;
     int selectedNpc = -1;
     int previousSelectedNpc = -1;
     int selectedEffectId = -1;

@@ -6,12 +6,20 @@
 #include "SetNpcAiStateAttack.h"
 #include "astar/FollowAStarPathTo.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../structs/npc/NPCAiType.h"
 
 void petPursuingTarget(uint32_t n, Context &ctx)
 {
     const auto &target = ctx.data.npc.ai.target;
 
     if (target.type[n] == EntityType::None)
+    {
+        setNpcAiStateIdle(n, ctx);
+        return;
+    }
+
+    if (target.type[n] != EntityType::NPC ||
+        ctx.data.npc.ai.type[target.id[n]] != NPCAiType::Monster)
     {
         setNpcAiStateIdle(n, ctx);
         return;

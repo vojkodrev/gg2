@@ -25,6 +25,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.statistics.mana.mana[0] = PLAYER_MANA;
         ctx.data.player.statistics.mana.maxMana[0] = PLAYER_MANA;
         ctx.data.player.statistics.mana.dirty[0] = true;
+        ctx.data.player.petId = -1;
         ctx.data.player.selectedNpc = -1;
         ctx.data.player.previousSelectedNpc = -1;
         ctx.data.player.selectedEffectId = -1;
