@@ -4,5 +4,6 @@ enum class ProjectileType : int
 {
     None,
     AutoAttack,
-    SerpentSting
+    SerpentSting,
+    ConcussiveShot
 };

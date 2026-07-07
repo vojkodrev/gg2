@@ -7,8 +7,8 @@ void togglePlayerAutoAttackSystem(Context &ctx)
 
     auto &autoAttack = ctx.data.player.autoAttack;
     const int npcIndex = ctx.data.player.selectedNpc;
-    if (!autoAttack.active && npcIndex == -1)
+    if (!autoAttack.active[0] && npcIndex == -1)
         return;
 
-    autoAttack.active = !autoAttack.active;
+    autoAttack.active[0] = !autoAttack.active[0];
 }

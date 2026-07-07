@@ -1,6 +1,6 @@
 #include "NPCAiSystem.h"
-#include "monster/RunMonsterAi.h"
-#include "pet/RunPetAi.h"
+#include "monster/MonsterAi.h"
+#include "pet/PetAi.h"
 
 void npcAiSystem(Context &ctx)
 {
@@ -12,8 +12,8 @@ void npcAiSystem(Context &ctx)
             continue;
 
         if (npc.ai.type[n] == NPCAiType::Monster)
-            runMonsterAi(n, ctx);
+            monsterAi(n, ctx);
         else if (npc.ai.type[n] == NPCAiType::Pet)
-            runPetAi(n, ctx);
+            petAi(n, ctx);
     }
 }

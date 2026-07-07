@@ -1,5 +1,5 @@
 add_library(systems_gameplay
-    cleanup/DirtyCleanupSystem.cpp
+    cleanup/CleanupSystem.cpp
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
@@ -18,8 +18,12 @@ add_library(systems_gameplay
     flipx/FlipEquipmentSystem.cpp
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
-    attacks/AttackTimerSystem.cpp
+    attacks/AutoAttackTimerSystem.cpp
+    attacks/NpcAutoAttackSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
+    attacks/ConcussiveShotCooldownTimerSystem.cpp
+    attacks/GlobalCooldownTimerSystem.cpp
+    attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerSerpentStingAttackSystem.cpp
     attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
@@ -27,6 +31,7 @@ add_library(systems_gameplay
     effects/MoveEffectSystem.cpp
     effects/DestroyEffectByTimerSystem.cpp
     npc/DestroyNpcSystem.cpp
+    npc/NpcAiTimerSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcMouseSelectSystem.cpp
@@ -35,17 +40,16 @@ add_library(systems_gameplay
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
-    ai/monster/RunMonsterAi.cpp
-    ai/monster/HandleMonsterIdle.cpp
-    ai/monster/HandleMonsterPatrol.cpp
-    ai/monster/HandleMonsterChasePlayer.cpp
-    ai/monster/HandleMonsterAttack.cpp
-    ai/monster/HandleMonsterReturnToSpawn.cpp
-    ai/pet/RunPetAi.cpp
-    ai/pet/HandlePetIdle.cpp
-    ai/pet/HandlePetFollowPlayer.cpp
-    ai/DistToPlayer.cpp
-    ai/DistToNpcSpawn.cpp
+    ai/monster/MonsterAi.cpp
+    ai/monster/MonsterIdle.cpp
+    ai/monster/MonsterPatrol.cpp
+    ai/monster/MonsterPursueTarget.cpp
+    ai/monster/MonsterPursuingTarget.cpp
+    ai/monster/MonsterAttack.cpp
+    ai/monster/MonsterReturnToSpawn.cpp
+    ai/pet/PetAi.cpp
+    ai/pet/PetIdle.cpp
+    ai/pet/PetFollowPlayer.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
@@ -65,7 +69,9 @@ add_library(systems_gameplay
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp
-    animation/AnimationSystem.cpp
+    animation/RotationAnimationSystem.cpp
+    animation/SpriteAnimationSystem.cpp
+    ../../utils/collision/DistToEntity.cpp
 )
 target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

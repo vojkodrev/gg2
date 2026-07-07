@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "../attacks/AutoAttack.h"
 #include "../core/Group.h"
 #include "../core/EntityBase.h"
 #include "../statistics/Statistics.h"
@@ -16,9 +17,11 @@ struct NPC
     int groupId[MAX_NPCS];
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;
+    AutoAttack<MAX_NPCS> autoAttack;
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
+    float concussiveShotDebuffTimer[MAX_NPCS] = {};
     float serpentStingDebuffTimer[MAX_NPCS] = {};
 
     NPC()

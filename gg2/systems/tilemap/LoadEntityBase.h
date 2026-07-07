@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include "../../structs/core/EntityBase.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
@@ -54,11 +55,14 @@ inline void loadEntityBase(
         entityData.animation.frame.collision.w[entityIdx][0] = colW * entityData.scale.value[entityIdx];
         entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale.value[entityIdx];
         entityData.animation.animationType[entityIdx] = AnimationType::None;
+        entityData.animation.animationState[entityIdx] = AnimationState::Idle;
         entityData.animation.frameCount[entityIdx] = 1;
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
         entityData.animation.frameIndex[entityIdx] = 0;
-        entityData.animation.animationStartTime[entityIdx] = 0;
-        entityData.animation.animationStopTime[entityIdx] = 0;
+        entityData.animation.cycleDuration[entityIdx] = 0;
+        entityData.animation.animationStartTime[entityIdx] = SDL_GetTicks();
+        entityData.animation.rotationStartAngle[entityIdx] = 0.0f;
+        entityData.animation.rotationStopAngle[entityIdx] = 0.0f;
     }
     else
     {
@@ -85,6 +89,7 @@ inline void loadEntityBase(
     entityData.position.h[entityIdx] = entityData.position.initialH[entityIdx] * entityData.scale.value[entityIdx];
     entityData.position.dirty[entityIdx] = true;
 
+    entityData.rotation.initialAngle[entityIdx] = getTileFloatProp(tileset, entityTileIdx, "angle", 0.0f);
     entityData.rotation.initialRotate[entityIdx] = getTileFloatProp(tileset, entityTileIdx, "rotate", 0.0f);
     entityData.rotation.rotate[entityIdx] = entityData.rotation.initialRotate[entityIdx];
 
@@ -99,4 +104,5 @@ inline void loadEntityBase(
     entityData.tint.a[entityIdx] = CLEAR_TINT_A;
     entityData.tint.damageTimer[entityIdx] = 0.0f;
     entityData.tint.isPoisoned[entityIdx] = false;
+    entityData.tint.isSlowed[entityIdx] = false;
 }

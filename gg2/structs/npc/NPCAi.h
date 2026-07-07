@@ -6,12 +6,14 @@
 #include "NPCSpawn.h"
 #include "NPCAiState.h"
 #include "NPCAiType.h"
+#include "../core/EntityReference.h"
 
 struct NPCAi
 {
     NPCAiType type[MAX_NPCS];
 
     NPCAiState state[MAX_NPCS];
+    EntityReference<MAX_NPCS> target;
 
     NPCSpawn spawn;
 
@@ -19,6 +21,7 @@ struct NPCAi
 
     NPCPath path;
 
+    float attackedTimer[MAX_NPCS];
     float idleTimer[MAX_NPCS];
     float repathTimer[MAX_NPCS];
 };

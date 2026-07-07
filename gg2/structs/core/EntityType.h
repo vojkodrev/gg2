@@ -2,6 +2,7 @@
 
 enum class EntityType : int
 {
+    None,
     Player,
     NPC,
     ActionBarIcon,

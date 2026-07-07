@@ -15,7 +15,7 @@
 #include "debug/DebugStateSystem.h"
 #include "MouseStateSystem.h"
 #include "MouseWorldStateSystem.h"
-#include "cleanup/DirtyCleanupSystem.h"
+#include "cleanup/CleanupSystem.h"
 #include "PlayerMovementSystem.h"
 #include "PlayerFacingSystem.h"
 #include "scale/ScalePlayerLocationSystem.h"
@@ -34,7 +34,11 @@
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
-#include "attacks/AttackTimerSystem.h"
+#include "attacks/AutoAttackTimerSystem.h"
+#include "attacks/NpcAutoAttackSystem.h"
+#include "attacks/ConcussiveShotCooldownTimerSystem.h"
+#include "attacks/GlobalCooldownTimerSystem.h"
+#include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerSerpentStingAttackSystem.h"
 #include "attacks/SerpentStingDebuffSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
@@ -42,6 +46,7 @@
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectByTimerSystem.h"
 #include "npc/DestroyNpcSystem.h"
+#include "npc/NpcAiTimerSystem.h"
 #include "npc/select/CreateNpcSelectorSystem.h"
 #include "npc/select/DestroyNpcSelectorSystem.h"
 #include "npc/select/NpcMouseSelectSystem.h"
@@ -49,7 +54,8 @@
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
-#include "animation/AnimationSystem.h"
+#include "animation/RotationAnimationSystem.h"
+#include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
 #include "EffectCollisionSystem.h"
 #include "EffectCollisionResolutionSystem.h"
@@ -107,7 +113,7 @@ int main()
 
         debugFpsSystem(*ctx);
 
-        animationSystem(*ctx);
+        spriteAnimationSystem(*ctx);
 
         playerMovementSystem(*ctx);
         playerFacingSystem(*ctx);
@@ -116,6 +122,7 @@ int main()
         playerDepthSystem(*ctx);
         
         spawnNpcSystem(*ctx);
+        npcAiTimerSystem(*ctx);
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);
@@ -133,14 +140,20 @@ int main()
         equipmentFacingSystem(*ctx);
         scaleEquipmentLocationSystem(*ctx);
         flipEquipmentSystem(*ctx);
+        rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
+        npcAutoAttackSystem(*ctx);
         moveEquipmentSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
-        attackTimerSystem(*ctx);
+        autoAttackTimerSystem(*ctx);
+        globalCooldownTimerSystem(*ctx);
+        concussiveShotCooldownTimerSystem(*ctx);
+
         togglePlayerAutoAttackSystem(*ctx);
-        
+
         playerRangedAutoAttackSystem(*ctx);
+        playerConcussiveShotAttackSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
@@ -167,7 +180,7 @@ int main()
         damageTintSystem(*ctx);
         calculateTintSystem(*ctx);
 
-        dirtyCleanupSystem(*ctx);
+        cleanupSystem(*ctx);
 
         fillRenderBufferSystem(*ctx);
         renderSystem(*ctx);

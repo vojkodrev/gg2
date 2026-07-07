@@ -7,7 +7,7 @@
 
 void playerRangedAutoAttackSystem(Context &ctx)
 {
-    if (ctx.data.player.autoAttack.active && ctx.data.player.autoAttack.attackTimer == 0.0f)
+    if (ctx.data.player.autoAttack.active[0] && ctx.data.player.autoAttack.attackTimer[0] == 0.0f)
     {
         if (!canPlayerRangedAttack(ctx))
             return;
@@ -27,7 +27,7 @@ void playerRangedAutoAttackSystem(Context &ctx)
             tint);
         if (effectIndex == -1)
             return;
-        ctx.data.player.autoAttack.attackTimer = PLAYER_AUTO_ATTACK_DELAY;
+        ctx.data.player.autoAttack.attackTimer[0] = PLAYER_AUTO_ATTACK_DELAY;
         ctx.data.player.equipment.weapon.showAmmo[0] = false;
     }
 }

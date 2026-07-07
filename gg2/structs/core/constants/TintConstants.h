@@ -11,6 +11,11 @@ const float POISON_TINT_G = 1.0f;
 const float POISON_TINT_B = 0.0f;
 const float POISON_TINT_A = 1.0f;
 
+const float SLOWED_TINT_R = 0.0f;
+const float SLOWED_TINT_G = 0.0f;
+const float SLOWED_TINT_B = 1.0f;
+const float SLOWED_TINT_A = 1.0f;
+
 const float NO_MANA_TINT_R = 0.0f;
 const float NO_MANA_TINT_G = 0.0f;
 const float NO_MANA_TINT_B = 1.0f;

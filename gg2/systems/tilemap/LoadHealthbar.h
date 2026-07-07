@@ -19,6 +19,7 @@ inline void loadHealthbar(
     uint32_t healthbarIdx = 0;
     bool hasHealthbar = !healthbarType.empty() && findTileByType(tileset, healthbarType.c_str(), healthbarIdx);
     healthbarData.show[parentEntityIdx] = false;
+    healthbarData.dirty[parentEntityIdx] = false;
     if (!hasHealthbar)
         return;
 

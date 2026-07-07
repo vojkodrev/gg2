@@ -73,6 +73,7 @@ images = [
     {"id": 37, "filename": "../healthbars.png", "dx": 3, "dy": 23, "sx": 4 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 38, "filename": "../healthbars.png", "dx": 4, "dy": 23, "sx": 5 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 39, "filename": "../healthbars.png", "dx": 5, "dy": 23, "sx": 6 * 48, "sy": 9 * 16, "sw": 50, "sh": 16, "w": 64}, 
+    {"id": 40, "filename": "../icons/Spell_Frost_Stun.png", "dx": 10, "dy": 22},
 ]
 
 

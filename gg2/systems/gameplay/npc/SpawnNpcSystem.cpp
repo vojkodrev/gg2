@@ -2,6 +2,7 @@
 #include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../ai/ClearNpcAiTarget.h"
 #include "../ai/SetNpcAiStateIdle.h"
 
 void spawnNpcSystem(Context &ctx)
@@ -26,12 +27,17 @@ void spawnNpcSystem(Context &ctx)
         {
             ctx.data.npc.active[i] = true;
             setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.health.maxHp[i]);
+            ctx.data.npc.concussiveShotDebuffTimer[i] = 0.0f;
             ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
+            ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
+            ctx.data.npc.autoAttack.active[i] = false;
             setNpcAiStateIdle(i, ctx);
+            ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;
             ctx.data.npc.ai.repathTimer[i] = 0.0f;
             ctx.data.npc.ai.patrol.index[i] = 0;
+            clearNpcAiTarget(i, ctx);
             ctx.data.npc.base.tint.r[i] = CLEAR_TINT_R;
             ctx.data.npc.base.tint.g[i] = CLEAR_TINT_G;
             ctx.data.npc.base.tint.b[i] = CLEAR_TINT_B;

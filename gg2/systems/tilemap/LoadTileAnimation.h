@@ -1,10 +1,13 @@
 #pragma once
+#include <SDL3/SDL.h>
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 #include "../../structs/core/Animation.h"
 #include "AnimationConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "GetAnchor.h"
+#include "properties/GetTileFloatProp.h"
+#include "properties/GetTileStringProp.h"
 
 template<int N>
 void loadTileAnimation(
@@ -21,6 +24,11 @@ void loadTileAnimation(
 
     SDL_FRect col = getAnchor(tileset, idx, "collision");
     SDL_FRect anchor = getAnchor(tileset, idx, "anchor");
+    float animationTime = getTileFloatProp(tileset, idx, "animationTime", 0.0f);
+    animation.rotate[n] = 0.0f;
+    animation.rotationStartAngle[n] = getTileFloatProp(tileset, idx, "animationStartAngle", 0.0f);
+    animation.rotationStopAngle[n] = getTileFloatProp(tileset, idx, "animationStopAngle", 0.0f);
+    animation.animationState[n] = AnimationState::Idle;
 
     if (tileData && !tileData->animation.frames.empty())
     {
@@ -28,6 +36,7 @@ void loadTileAnimation(
         if (frameCount > MAX_ANIMATION_FRAMES) frameCount = MAX_ANIMATION_FRAMES;
         animation.animationType[n] = AnimationType::Sprite;
         animation.frameCount[n] = frameCount;
+        animation.cycleDuration[n] = 0;
         for (int f = 0; f < frameCount; f++)
         {
             uint32_t fid = tileData->animation.frames[f].tileID - props.firstGid;
@@ -52,12 +61,18 @@ void loadTileAnimation(
             animation.frame.collision.w[n][f] = col.w * scale;
             animation.frame.collision.h[n][f] = col.h * scale;
             animation.frame.frameDuration[n][f] = tileData->animation.frames[f].duration;
+            animation.cycleDuration[n] += animation.frame.frameDuration[n][f];
         }
+        if (animationTime > 0.0f)
+            animation.cycleDuration[n] = (uint64_t)animationTime;
     }
     else
     {
-        animation.animationType[n] = AnimationType::None;
+        animation.animationType[n] = getTileStringProp(tileset, idx, "animationType") == "rotation"
+            ? AnimationType::Rotation
+            : AnimationType::None;
         animation.frameCount[n] = 1;
+        animation.cycleDuration[n] = animationTime > 0.0f ? (uint64_t)animationTime : 0;
         animation.frame.src.x[n][0] = idx % props.tilesetW * props.srcTileW;
         animation.frame.src.y[n][0] = idx / props.tilesetW * props.srcTileH;
         animation.frame.src.w[n][0] = props.srcTileW;
@@ -82,6 +97,5 @@ void loadTileAnimation(
     }
 
     animation.frameIndex[n] = 0;
-    animation.animationStartTime[n] = 0;
-    animation.animationStopTime[n] = 0;
+    animation.animationStartTime[n] = SDL_GetTicks();
 }
