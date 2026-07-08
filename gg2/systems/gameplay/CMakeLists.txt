@@ -31,7 +31,8 @@ add_library(systems_gameplay
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
-    effects/DestroyEffectByTimerSystem.cpp
+    effects/EffectTimerSystem.cpp
+    effects/DestroyEffectSystem.cpp
     npc/DestroyNpcSystem.cpp
     npc/NpcAiTimerSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
