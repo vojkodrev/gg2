@@ -5,5 +5,6 @@ enum class EffectType : int
     None,
     Projectile,
     Character,
+    BloodSplatter,
     Selector
 };

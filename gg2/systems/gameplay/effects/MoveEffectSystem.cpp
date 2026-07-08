@@ -6,6 +6,8 @@
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
+#include "../../../utils/rect/CenteredRect.h"
+#include "../../../utils/rect/EntityPositionCenter.h"
 #include <cstdint>
 
 void moveEffectSystem(Context &ctx)
@@ -33,6 +35,19 @@ void moveEffectSystem(Context &ctx)
                 i,
                 entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex)),
                 PROJECTILE_SPEED);
+        }
+        else if (
+            ctx.data.effect.type[i] == EffectType::BloodSplatter &&
+            ctx.data.effect.parent.type[i] == EntityType::NPC)
+        {
+            const int npcIndex = ctx.data.effect.parent.id[i];
+            const SDL_FRect effectRect = centeredRect(
+                entityPositionCenter(ctx.data.npc.base.position, npcIndex),
+                ctx.data.effect.base.position.w[i],
+                ctx.data.effect.base.position.h[i]);
+            ctx.data.effect.base.position.x[i] = effectRect.x;
+            ctx.data.effect.base.position.y[i] = effectRect.y;
+            ctx.data.effect.base.position.dirty[i] = true;
         }
     }
 }
