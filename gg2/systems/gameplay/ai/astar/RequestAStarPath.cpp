@@ -11,7 +11,8 @@
 void requestAStarPath(
     Context& ctx, 
     int npcIndex,
-    const SDL_FRect& destCol)
+    const SDL_FRect& destCol,
+    int targetNpcIndex)
 {
     NPCAi& npcAi = ctx.data.npc.ai;
 
@@ -24,7 +25,7 @@ void requestAStarPath(
     auto& astar = ctx.astarPool.ctx;
     astar.status[astarIndex].store(AStarStatus::STARTED, std::memory_order_relaxed);
 
-    astar.future[astarIndex] = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, destCol]()
+    astar.future[astarIndex] = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, destCol, targetNpcIndex]()
     {
         defer(astarFree(ctx.astarPool, astarIndex));
 
@@ -32,7 +33,7 @@ void requestAStarPath(
         npcAi.path.status[npcIndex].store(NPCPathStatus::WAITING_FOR_PATH, std::memory_order_relaxed);
 
         int pathBuffer[ASTAR_MAX_PATH];
-        int length = runAStar(astar, astarIndex, ctx, npcIndex, destCol, pathBuffer);
+        int length = runAStar(astar, astarIndex, ctx, npcIndex, destCol, targetNpcIndex, pathBuffer);
 
         if (length > 0)
         {

@@ -11,21 +11,23 @@
 void petPursuingTarget(uint32_t n, Context &ctx)
 {
     const auto &target = ctx.data.npc.ai.target;
+    const EntityType targetType = target.type[n];
+    const int targetId = target.id[n];
 
-    if (target.type[n] == EntityType::None)
+    if (targetType == EntityType::None)
     {
         setNpcAiStateIdle(n, ctx);
         return;
     }
 
-    if (target.type[n] != EntityType::NPC ||
-        ctx.data.npc.ai.type[target.id[n]] != NPCAiType::Monster)
+    if (targetType != EntityType::NPC ||
+        ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
     {
         setNpcAiStateIdle(n, ctx);
         return;
     }
 
-    const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
+    const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
     if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
@@ -33,5 +35,6 @@ void petPursuingTarget(uint32_t n, Context &ctx)
         return;
     }
 
-    followAStarPathTo(n, ctx, targetCol);
+    const int targetNpcIndex = targetType == EntityType::NPC ? targetId : -1;
+    followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
 }

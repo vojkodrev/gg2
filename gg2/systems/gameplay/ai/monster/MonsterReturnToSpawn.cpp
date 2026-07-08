@@ -11,7 +11,7 @@ void monsterReturnToSpawn(uint32_t n, Context &ctx)
 
     SDL_FPoint spawnPt = { ai.spawn.x[n], ai.spawn.y[n] };
     SDL_FRect spawnCol = centeredRect(spawnPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
-    followAStarPathTo(n, ctx, spawnCol);
+    followAStarPathTo(n, ctx, spawnCol, -1);
     if (hasReachedRect(ctx, n, spawnCol))
         setNpcAiStateIdle(n, ctx);
 }

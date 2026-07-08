@@ -6,7 +6,11 @@
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 
-void followAStarPathTo(uint32_t n, Context &ctx, SDL_FRect targetCol)
+void followAStarPathTo(
+    uint32_t n, 
+    Context &ctx, 
+    SDL_FRect targetCol, 
+    int targetNpcIndex)
 {
     auto &ai = ctx.data.npc.ai;
 
@@ -17,7 +21,7 @@ void followAStarPathTo(uint32_t n, Context &ctx, SDL_FRect targetCol)
         pathStatus == NPCPathStatus::CALCULATION_FAILED)
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
-        requestAStarPath(ctx, n, targetCol);
+        requestAStarPath(ctx, n, targetCol, targetNpcIndex);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {

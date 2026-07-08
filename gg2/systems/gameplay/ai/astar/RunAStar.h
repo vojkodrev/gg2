@@ -30,6 +30,7 @@ int runAStar(
     Context& ctx,
     int npcIndex,
     const SDL_FRect& destCol,
+    int targetNpcIndex,
     int* pathOut)
 {
     static const int MAX_NEIGHBORS = 8;
@@ -87,7 +88,7 @@ int runAStar(
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, astarIndex, ctx, current, npcIndex, neighbors);
+        int count = getNeighbors(astar, astarIndex, ctx, current, npcIndex, targetNpcIndex, neighbors);
 
         float gCurrent;
         if (!hashMapTryGet(astar.gscores, astarIndex, current, astar.generation[astarIndex], gCurrent))

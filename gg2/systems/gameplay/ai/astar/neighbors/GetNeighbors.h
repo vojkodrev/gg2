@@ -13,6 +13,7 @@ int getNeighbors(
     const Context& ctx,
     int node,
     int npcIndex,
+    int targetNpcIndex,
     int* neighborsOut)
 {
     static const int DIR_X[8] = { 1, -1, 0, 0, 1, 1, -1, -1 };
@@ -34,7 +35,7 @@ int getNeighbors(
         if (nb.x < minX || nb.x > maxX || nb.y < minY || nb.y > maxY)
             continue;
 
-        if (isBlocked(astar, astarIndex, ctx, nb, npcIndex))
+        if (isBlocked(astar, astarIndex, ctx, nb, npcIndex, targetNpcIndex))
             continue;
 
         neighborsOut[count++] = astarEncode(astar, astarIndex, nb);

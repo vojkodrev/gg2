@@ -9,7 +9,13 @@
 #include "../../../../../utils/collision/ColIdType.h"
 
 template<uint32_t N>
-bool isBlocked(const AStarContext<N>& astar, uint32_t astarIndex, const Context& ctx, SDL_Point node, int npcIndex)
+bool isBlocked(
+    const AStarContext<N>& astar, 
+    uint32_t astarIndex, 
+    const Context& ctx, 
+    SDL_Point node, 
+    int npcIndex,
+    int targetNpcIndex)
 {
     SDL_FRect npcCol = entityColAABB(ctx.data.npc.base, npcIndex);
     SDL_FRect moverBox = centeredRect({ (float)node.x, (float)node.y }, npcCol.w, npcCol.h);
@@ -24,7 +30,9 @@ bool isBlocked(const AStarContext<N>& astar, uint32_t astarIndex, const Context&
         SDL_FRect box;
         if (type == ColType::Object)
             box = entityColAABB(ctx.data.object.base, colIdIndex(id));
-        else if (type == ColType::NPC && (int)colIdIndex(id) != npcIndex)
+        else if (type == ColType::NPC &&
+            (int)colIdIndex(id) != npcIndex &&
+            (int)colIdIndex(id) != targetNpcIndex)
             box = entityColAABB(ctx.data.npc.base, colIdIndex(id));
         else
             continue;

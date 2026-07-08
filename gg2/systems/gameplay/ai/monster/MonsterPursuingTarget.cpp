@@ -6,6 +6,7 @@
 #include "SetNpcAiStateReturnToSpawn.h"
 #include "SetNpcAiStateAttack.h"
 #include "CanMonsterAttackTarget.h"
+#include "../../../structs/core/EntityType.h"
 
 void monsterPursuingTarget(uint32_t n, Context &ctx)
 {
@@ -16,12 +17,14 @@ void monsterPursuingTarget(uint32_t n, Context &ctx)
     }
 
     const auto &target = ctx.data.npc.ai.target;
-    if (!canMonsterAttackTarget(target.type[n]))
+    const EntityType targetType = target.type[n];
+    const int targetId = target.id[n];
+    if (!canMonsterAttackTarget(targetType))
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
-    const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
+    const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
     if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
@@ -29,5 +32,6 @@ void monsterPursuingTarget(uint32_t n, Context &ctx)
         return;
     }
 
-    followAStarPathTo(n, ctx, targetCol);
+    const int targetNpcIndex = targetType == EntityType::NPC ? targetId : -1;
+    followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
 }
