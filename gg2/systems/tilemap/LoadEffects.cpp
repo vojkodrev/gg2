@@ -26,6 +26,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
 
         effectTemplate.base.animation.animationType[i] = AnimationType::None;
         effectTemplate.base.animation.animationState[i] = AnimationState::Idle;
+        effectTemplate.base.animation.animationStop[i] = AnimationStop::None;
         effectTemplate.base.animation.frameCount[i] = 1;
         effectTemplate.base.animation.frameIndex[i] = 0;
         effectTemplate.base.animation.cycleDuration[i] = 0;

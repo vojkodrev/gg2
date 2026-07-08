@@ -11,6 +11,7 @@ inline void copyEntityBaseSlot(
 {
     to.animation.animationType[toIndex] = from.animation.animationType[fromIndex];
     to.animation.animationState[toIndex] = from.animation.animationState[fromIndex];
+    to.animation.animationStop[toIndex] = from.animation.animationStop[fromIndex];
     to.animation.frameCount[toIndex] = from.animation.frameCount[fromIndex];
     to.animation.frameIndex[toIndex] = from.animation.frameIndex[fromIndex];
     to.animation.cycleDuration[toIndex] = from.animation.cycleDuration[fromIndex];

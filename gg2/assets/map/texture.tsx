@@ -223,6 +223,7 @@
  </tile>
  <tile id="374">
   <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
    <property name="type" value="bloodSplatter"/>
   </properties>
   <animation>

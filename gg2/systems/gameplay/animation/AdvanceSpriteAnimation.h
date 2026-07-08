@@ -8,8 +8,6 @@ void advanceSpriteAnimation(
     uint32_t i,
     uint64_t now)
 {
-    anim.animationState[i] = AnimationState::Running;
-
     int fc = anim.frameCount[i];
     if (fc <= 1)
         return;
@@ -18,7 +16,18 @@ void advanceSpriteAnimation(
     if (cycleDuration == 0)
         return;
 
-    uint64_t elapsed = (now - anim.animationStartTime[i]) % cycleDuration;
+    uint64_t totalElapsed = now - anim.animationStartTime[i];
+    if (anim.animationStop[i] == AnimationStop::AfterFirstCycle &&
+        totalElapsed >= cycleDuration)
+    {
+        anim.animationState[i] = AnimationState::Finished;
+        anim.frameIndex[i] = fc - 1;
+        return;
+    }
+
+    anim.animationState[i] = AnimationState::Running;
+
+    uint64_t elapsed = totalElapsed % cycleDuration;
     int frameIndex = 0;
     uint64_t accumulated = anim.frame.frameDuration[i][frameIndex];
 

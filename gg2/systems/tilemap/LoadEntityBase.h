@@ -56,6 +56,7 @@ inline void loadEntityBase(
         entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale.value[entityIdx];
         entityData.animation.animationType[entityIdx] = AnimationType::None;
         entityData.animation.animationState[entityIdx] = AnimationState::Idle;
+        entityData.animation.animationStop[entityIdx] = AnimationStop::None;
         entityData.animation.frameCount[entityIdx] = 1;
         entityData.animation.frame.frameDuration[entityIdx][0] = 0;
         entityData.animation.frameIndex[entityIdx] = 0;
