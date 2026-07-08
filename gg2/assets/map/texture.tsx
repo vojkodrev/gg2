@@ -221,4 +221,14 @@
    <frame tileid="368" duration="1000"/>
   </animation>
  </tile>
+ <tile id="374">
+  <properties>
+   <property name="type" value="bloodSplatter"/>
+  </properties>
+  <animation>
+   <frame tileid="374" duration="125"/>
+   <frame tileid="375" duration="125"/>
+   <frame tileid="376" duration="125"/>
+  </animation>
+ </tile>
 </tileset>

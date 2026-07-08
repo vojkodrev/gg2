@@ -14,6 +14,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
     auto &props = ctx.data.tileMapProps;
     effectTemplate.fontOffset = 0;
     effectTemplate.selectOffset = FONT_GLYPH_COUNT;
+    effectTemplate.bloodSplatterOffset = effectTemplate.selectOffset + 1;
 
     const SDL_Point fontGrid = decodeGridIndex(FONT_GRID_ID, (int)props.tilesetW);
     const int fontBaseX = fontGrid.x * (int)props.srcTileW;
@@ -60,6 +61,17 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
             (uint32_t)effectTemplate.selectOffset,
             tileset,
             selectTileIdx,
+            props);
+    }
+
+    uint32_t bloodSplatterTileIdx = 0;
+    if (findTileByType(tileset, "bloodSplatter", bloodSplatterTileIdx))
+    {
+        loadEntityBase(
+            effectTemplate.base,
+            (uint32_t)effectTemplate.bloodSplatterOffset,
+            tileset,
+            bloodSplatterTileIdx,
             props);
     }
 }
