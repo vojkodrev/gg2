@@ -52,6 +52,9 @@ void petAttack(uint32_t n, Context &ctx)
         ctx,
         EntityType::NPC,
         targetId,
+        ctx.data.npc.statistics,
+        ctx.data.npc.group,
+        ctx.data.npc.base,
         PET_DAMAGE,
         PET_DAMAGE_RANDOM_RANGE);
 

@@ -34,12 +34,33 @@ void npcAutoAttackSystem(Context &ctx)
             target.type[i] != EntityType::NPC)
             continue;
 
-        applyAttackDamage(
-            ctx,
-            target.type[i],
-            static_cast<uint32_t>(target.id[i]),
-            NPC_MELEE_AUTO_ATTACK_DAMAGE,
-            NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
+        const uint32_t targetId = static_cast<uint32_t>(target.id[i]);
+        if (target.type[i] == EntityType::Player)
+        {
+            applyAttackDamage(
+                ctx,
+                target.type[i],
+                targetId,
+                ctx.data.player.statistics,
+                ctx.data.player.group,
+                ctx.data.player.base,
+                NPC_MELEE_AUTO_ATTACK_DAMAGE,
+                NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
+        }
+        else if (target.type[i] == EntityType::NPC)
+        {
+            applyAttackDamage(
+                ctx,
+                target.type[i],
+                targetId,
+                ctx.data.npc.statistics,
+                ctx.data.npc.group,
+                ctx.data.npc.base,
+                NPC_MELEE_AUTO_ATTACK_DAMAGE,
+                NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
+        }
+        else
+            continue;
 
         npc.autoAttack.hitTimer[i] = NPC_MELEE_AUTO_ATTACK_DELAY;
     }

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <cstdint>
-
-template<uint32_t TCapacity>
+template<int TCapacity>
 struct Group
 {
     int id[TCapacity] = {};

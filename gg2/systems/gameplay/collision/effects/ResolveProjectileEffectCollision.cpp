@@ -43,6 +43,9 @@ void resolveProjectileEffectCollision(
                 ctx,
                 EntityType::NPC,
                 npcIndex,
+                ctx.data.npc.statistics,
+                ctx.data.npc.group,
+                ctx.data.npc.base,
                 PROJECTILE_DAMAGE,
                 PROJECTILE_DAMAGE_RANDOM_RANGE);
         }
