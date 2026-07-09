@@ -9,20 +9,38 @@
 #include <algorithm>
 #include <string>
 
-inline void spawnNpcTextEffect(
+inline void createEntityTextEffect(
     Context &ctx,
-    uint32_t npcIndex,
+    EntityType type,
+    uint32_t entityIndex,
     const std::string &text)
 {
+    int groupId = -1;
+    float entityY = 0.0f;
+    SDL_FPoint entityCenter = {};
+
+    switch (type)
+    {
+    case EntityType::Player:
+        groupId = ctx.data.player.groupId;
+        entityY = ctx.data.player.base.position.y[entityIndex];
+        entityCenter = entityColCenter(entityColAABB(ctx.data.player.base, entityIndex));
+        break;
+    case EntityType::NPC:
+        groupId = ctx.data.npc.groupId[entityIndex];
+        entityY = ctx.data.npc.base.position.y[entityIndex];
+        entityCenter = entityColCenter(entityColAABB(ctx.data.npc.base, entityIndex));
+        break;
+    default:
+        return;
+    }
+
     const float totalW =
         text.size() * FONT_GLYPH_W +
         std::max<int>(0, static_cast<int>(text.size()) - 1) * CHARACTER_SEPARATOR;
-    const SDL_FPoint npcColCenter = entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
     const SDL_FPoint pos = {
-        npcColCenter.x - totalW * 0.5f,
-        ctx.data.npc.base.position.y[npcIndex] -
-        FONT_GLYPH_H -
-        CHARACTER_DISTANCE_FROM_ENTITY
+        entityCenter.x - totalW * 0.5f,
+        entityY - FONT_GLYPH_H - CHARACTER_DISTANCE_FROM_ENTITY
     };
     const SDL_FColor tint = {
         CHARACTER_TINT_R,
@@ -33,9 +51,9 @@ inline void spawnNpcTextEffect(
 
     spawnTextEffect(
         ctx,
-        ctx.data.npc.groupId[npcIndex],
-        EntityType::NPC,
-        npcIndex,
+        groupId,
+        type,
+        static_cast<int>(entityIndex),
         DestroyEffectType::Timer,
         CHARACTER_DESTROY_TIME,
         text,

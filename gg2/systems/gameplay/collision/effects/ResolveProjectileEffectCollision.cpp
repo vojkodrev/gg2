@@ -7,7 +7,7 @@
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../ai/monster/RefreshNpcAttackedTimerOrPursuingTarget.h"
-#include "../../effects/SpawnNpcTextEffect.h"
+#include "../../effects/CreateEntityTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 #include <cstdlib>
@@ -51,7 +51,7 @@ void resolveProjectileEffectCollision(
                 npcIndex,
                 projectileDamage);
             if (damage > 0)
-                spawnNpcTextEffect(ctx, npcIndex, std::to_string(damage));
+                createEntityTextEffect(ctx, EntityType::NPC, npcIndex, std::to_string(damage));
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {

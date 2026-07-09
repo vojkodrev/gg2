@@ -1,10 +1,13 @@
 #include "NpcAutoAttackSystem.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/GetEntityColAABB.h"
+#include "../effects/CreateEntityTextEffect.h"
 #include "../rotation/HasMeleeWeaponRotationAnimation.h"
 #include "../rotation/IsRotationAnimationRunning.h"
 #include "../statistics/SetHpDamage.h"
 #include <SDL3/SDL.h>
+#include <string>
 
 void npcAutoAttackSystem(Context &ctx)
 {
@@ -32,11 +35,33 @@ void npcAutoAttackSystem(Context &ctx)
         switch (target.type[i])
         {
         case EntityType::Player:
-            setHpDamage(ctx.data.player.statistics, static_cast<uint32_t>(target.id[i]), NPC_MELEE_AUTO_ATTACK_DAMAGE);
+        {
+            const int damage = setHpDamage(
+                ctx.data.player.statistics,
+                static_cast<uint32_t>(target.id[i]),
+                NPC_MELEE_AUTO_ATTACK_DAMAGE);
+            if (damage > 0)
+                createEntityTextEffect(
+                    ctx,
+                    EntityType::Player,
+                    static_cast<uint32_t>(target.id[i]),
+                    std::to_string(damage));
             break;
+        }
         case EntityType::NPC:
-            setHpDamage(ctx.data.npc.statistics, static_cast<uint32_t>(target.id[i]), NPC_MELEE_AUTO_ATTACK_DAMAGE);
+        {
+            const int damage = setHpDamage(
+                ctx.data.npc.statistics,
+                static_cast<uint32_t>(target.id[i]),
+                NPC_MELEE_AUTO_ATTACK_DAMAGE);
+            if (damage > 0)
+                createEntityTextEffect(
+                    ctx,
+                    EntityType::NPC,
+                    static_cast<uint32_t>(target.id[i]),
+                    std::to_string(damage));
             break;
+        }
         default:
             continue;
         }
