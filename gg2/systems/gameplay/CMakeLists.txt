@@ -25,7 +25,6 @@ add_library(systems_gameplay
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerPetAttackSystem.cpp
-    attacks/PlayerPetFollowSystem.cpp
     attacks/PlayerSerpentStingAttackSystem.cpp
     attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
