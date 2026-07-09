@@ -1,17 +1,14 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
-#include "../../statistics/SetHpDamage.h"
+#include "../../attacks/ApplyAttackDamage.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../ai/monster/RefreshNpcAttackedTimerOrPursuingTarget.h"
-#include "../../effects/SpawnNpcTextEffect.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
-#include <cstdlib>
-#include <string>
 
 void resolveProjectileEffectCollision(
     Context &ctx,
@@ -42,16 +39,12 @@ void resolveProjectileEffectCollision(
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {
-            const int damageRandom =
-                (rand() % (PROJECTILE_DAMAGE_RANDOM_RANGE + 1)) -
-                PROJECTILE_DAMAGE_RANDOM_RANGE / 2;
-            const int projectileDamage = PROJECTILE_DAMAGE - damageRandom;
-            const int damage = setHpDamage(
-                ctx.data.npc.statistics,
+            applyAttackDamage(
+                ctx,
+                EntityType::NPC,
                 npcIndex,
-                projectileDamage);
-            if (damage > 0)
-                spawnNpcTextEffect(ctx, npcIndex, std::to_string(damage));
+                PROJECTILE_DAMAGE,
+                PROJECTILE_DAMAGE_RANDOM_RANGE);
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {

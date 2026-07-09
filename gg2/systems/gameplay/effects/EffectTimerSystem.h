@@ -1,4 +1,4 @@
 #pragma once
 #include "../../../structs/core/Context.h"
 
-void destroyEffectByTimerSystem(Context &ctx);
+void effectTimerSystem(Context &ctx);

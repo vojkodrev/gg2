@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 #include "../../structs/core/Animation.h"
+#include "../../structs/core/AnimationStop.h"
 #include "AnimationConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "GetAnchor.h"
@@ -29,6 +30,9 @@ void loadTileAnimation(
     animation.rotationStartAngle[n] = getTileFloatProp(tileset, idx, "animationStartAngle", 0.0f);
     animation.rotationStopAngle[n] = getTileFloatProp(tileset, idx, "animationStopAngle", 0.0f);
     animation.animationState[n] = AnimationState::Idle;
+    animation.animationStop[n] = getTileStringProp(tileset, idx, "animationStop") == "afterFirstCycle"
+        ? AnimationStop::AfterFirstCycle
+        : AnimationStop::None;
 
     if (tileData && !tileData->animation.frames.empty())
     {

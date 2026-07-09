@@ -15,5 +15,5 @@ void petFollowPlayer(uint32_t n, Context &ctx)
         return;
     }
 
-    followAStarPathTo(n, ctx, playerCol);
+    followAStarPathTo(n, ctx, playerCol, -1);
 }

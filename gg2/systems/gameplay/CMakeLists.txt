@@ -24,12 +24,15 @@ add_library(systems_gameplay
     attacks/ConcussiveShotCooldownTimerSystem.cpp
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
+    attacks/PlayerPetAttackSystem.cpp
+    attacks/PlayerPetFollowSystem.cpp
     attacks/PlayerSerpentStingAttackSystem.cpp
     attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
-    effects/DestroyEffectByTimerSystem.cpp
+    effects/EffectTimerSystem.cpp
+    effects/DestroyEffectSystem.cpp
     npc/DestroyNpcSystem.cpp
     npc/NpcAiTimerSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
@@ -50,6 +53,9 @@ add_library(systems_gameplay
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
     ai/pet/PetFollowPlayer.cpp
+    ai/pet/PetPursueTarget.cpp
+    ai/pet/PetPursuingTarget.cpp
+    ai/pet/PetAttack.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp

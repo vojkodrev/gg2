@@ -1,9 +1,10 @@
 #include "NpcAutoAttackSystem.h"
+#include "ApplyAttackDamage.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/GetEntityColAABB.h"
 #include "../rotation/HasMeleeWeaponRotationAnimation.h"
 #include "../rotation/IsRotationAnimationRunning.h"
-#include "../statistics/SetHpDamage.h"
 #include <SDL3/SDL.h>
 
 void npcAutoAttackSystem(Context &ctx)
@@ -29,17 +30,16 @@ void npcAutoAttackSystem(Context &ctx)
         if (!SDL_HasRectIntersectionFloat(&weaponCol, &targetCol))
             continue;
 
-        switch (target.type[i])
-        {
-        case EntityType::Player:
-            setHpDamage(ctx.data.player.statistics, static_cast<uint32_t>(target.id[i]), NPC_MELEE_AUTO_ATTACK_DAMAGE);
-            break;
-        case EntityType::NPC:
-            setHpDamage(ctx.data.npc.statistics, static_cast<uint32_t>(target.id[i]), NPC_MELEE_AUTO_ATTACK_DAMAGE);
-            break;
-        default:
+        if (target.type[i] != EntityType::Player &&
+            target.type[i] != EntityType::NPC)
             continue;
-        }
+
+        applyAttackDamage(
+            ctx,
+            target.type[i],
+            static_cast<uint32_t>(target.id[i]),
+            NPC_MELEE_AUTO_ATTACK_DAMAGE,
+            NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
 
         npc.autoAttack.hitTimer[i] = NPC_MELEE_AUTO_ATTACK_DELAY;
     }

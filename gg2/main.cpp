@@ -39,12 +39,15 @@
 #include "attacks/ConcussiveShotCooldownTimerSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
+#include "attacks/PlayerPetAttackSystem.h"
+#include "attacks/PlayerPetFollowSystem.h"
 #include "attacks/PlayerSerpentStingAttackSystem.h"
 #include "attacks/SerpentStingDebuffSystem.h"
 #include "attacks/TogglePlayerAutoAttackSystem.h"
 #include "attacks/PlayerRangedAutoAttackSystem.h"
+#include "effects/EffectTimerSystem.h"
 #include "effects/MoveEffectSystem.h"
-#include "effects/DestroyEffectByTimerSystem.h"
+#include "effects/DestroyEffectSystem.h"
 #include "npc/DestroyNpcSystem.h"
 #include "npc/NpcAiTimerSystem.h"
 #include "npc/select/CreateNpcSelectorSystem.h"
@@ -154,12 +157,15 @@ int main()
 
         playerRangedAutoAttackSystem(*ctx);
         playerConcussiveShotAttackSystem(*ctx);
+        playerPetAttackSystem(*ctx);
+        playerPetFollowSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
 
+        effectTimerSystem(*ctx);
         moveEffectSystem(*ctx);
-        destroyEffectByTimerSystem(*ctx);
+        destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
         effectCollisionSystem(*ctx);
         effectCollisionResolutionSystem(*ctx);

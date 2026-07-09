@@ -18,6 +18,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
     auto &npc = ctx.data.npc;
+    auto &player = ctx.data.player;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
@@ -63,6 +64,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
 
         npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
+        if (npc.ai.type[n] == NPCAiType::Pet)
+            player.petId = (int)n;
 
         npc.ai.patrol.count[n] = (uint32_t)getTileIntProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)

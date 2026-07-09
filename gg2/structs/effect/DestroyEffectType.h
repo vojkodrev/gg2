@@ -3,5 +3,6 @@
 enum class DestroyEffectType : int
 {
     None,
-    Timer
+    Timer,
+    AnimationEnd
 };

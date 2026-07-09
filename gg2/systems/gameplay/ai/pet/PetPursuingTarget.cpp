@@ -1,29 +1,32 @@
-#include "MonsterPursuingTarget.h"
+#include "PetPursuingTarget.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
-#include "astar/FollowAStarPathTo.h"
-#include "SetNpcAiStateReturnToSpawn.h"
+#include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStateAttack.h"
-#include "CanMonsterAttackTarget.h"
+#include "astar/FollowAStarPathTo.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../structs/npc/NPCAiType.h"
 
-void monsterPursuingTarget(uint32_t n, Context &ctx)
+void petPursuingTarget(uint32_t n, Context &ctx)
 {
-    if (ctx.data.npc.ai.attackedTimer[n] <= 0.0f)
-    {
-        setNpcAiStateReturnToSpawn(n, ctx);
-        return;
-    }
-
     const auto &target = ctx.data.npc.ai.target;
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
-    if (!canMonsterAttackTarget(targetType))
+
+    if (targetType == EntityType::None)
     {
-        setNpcAiStateReturnToSpawn(n, ctx);
+        setNpcAiStateIdle(n, ctx);
         return;
     }
+
+    if (targetType != EntityType::NPC ||
+        ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
+    {
+        setNpcAiStateIdle(n, ctx);
+        return;
+    }
+
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
     if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))

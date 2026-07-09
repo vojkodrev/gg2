@@ -221,4 +221,15 @@
    <frame tileid="368" duration="1000"/>
   </animation>
  </tile>
+ <tile id="374">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="type" value="bloodSplatter"/>
+  </properties>
+  <animation>
+   <frame tileid="374" duration="100"/>
+   <frame tileid="375" duration="100"/>
+   <frame tileid="376" duration="100"/>
+  </animation>
+ </tile>
 </tileset>
