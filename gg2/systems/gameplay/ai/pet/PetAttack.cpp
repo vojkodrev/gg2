@@ -5,9 +5,11 @@
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStatePursuingTarget.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../attacks/ApplyAttackDamage.h"
 #include "../../effects/EffectAlloc.h"
 #include "../monster/CanMonsterAttackTarget.h"
 
@@ -18,6 +20,11 @@ void petAttack(uint32_t n, Context &ctx)
     const int targetId = target.id[n];
 
     if (!canMonsterAttackTarget(targetType))
+    {
+        setNpcAiStateIdle(n, ctx);
+        return;
+    }
+    if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
     {
         setNpcAiStateIdle(n, ctx);
         return;
@@ -41,6 +48,13 @@ void petAttack(uint32_t n, Context &ctx)
     const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, targetGroupId);
     if (effectIndex == -1)
         return;
+
+    applyAttackDamage(
+        ctx,
+        EntityType::NPC,
+        targetId,
+        PROJECTILE_DAMAGE,
+        PROJECTILE_DAMAGE_RANDOM_RANGE);
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,
