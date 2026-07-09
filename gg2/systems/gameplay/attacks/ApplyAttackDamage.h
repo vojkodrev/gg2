@@ -21,14 +21,26 @@ inline int applyAttackDamage(
     {
         const int damage = setHpDamage(ctx.data.player.statistics, targetId, attackDamage);
         if (damage > 0)
-            createEntityTextEffect(ctx, targetType, targetId, std::to_string(damage));
+            createEntityTextEffect(
+                ctx,
+                ctx.data.player.groupId,
+                targetType,
+                targetId,
+                ctx.data.player.base,
+                std::to_string(damage));
         return damage;
     }
     case EntityType::NPC:
     {
         const int damage = setHpDamage(ctx.data.npc.statistics, targetId, attackDamage);
         if (damage > 0)
-            createEntityTextEffect(ctx, targetType, targetId, std::to_string(damage));
+            createEntityTextEffect(
+                ctx,
+                ctx.data.npc.groupId[targetId],
+                targetType,
+                targetId,
+                ctx.data.npc.base,
+                std::to_string(damage));
         return damage;
     }
     default:

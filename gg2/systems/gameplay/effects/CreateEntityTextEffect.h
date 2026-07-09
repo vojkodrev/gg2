@@ -9,31 +9,18 @@
 #include <algorithm>
 #include <string>
 
+template<int N>
 inline void createEntityTextEffect(
     Context &ctx,
+    int groupId,
     EntityType type,
     uint32_t entityIndex,
+    const EntityBase<N> &entityBase,
     const std::string &text)
 {
-    int groupId = -1;
-    float entityY = 0.0f;
-    SDL_FPoint entityCenter = {};
-
-    switch (type)
-    {
-    case EntityType::Player:
-        groupId = ctx.data.player.groupId;
-        entityY = ctx.data.player.base.position.y[entityIndex];
-        entityCenter = entityColCenter(entityColAABB(ctx.data.player.base, entityIndex));
-        break;
-    case EntityType::NPC:
-        groupId = ctx.data.npc.groupId[entityIndex];
-        entityY = ctx.data.npc.base.position.y[entityIndex];
-        entityCenter = entityColCenter(entityColAABB(ctx.data.npc.base, entityIndex));
-        break;
-    default:
-        return;
-    }
+    const float entityY = entityBase.position.y[entityIndex];
+    const SDL_FPoint entityCenter =
+        entityColCenter(entityColAABB(entityBase, entityIndex));
 
     const float totalW =
         text.size() * FONT_GLYPH_W +

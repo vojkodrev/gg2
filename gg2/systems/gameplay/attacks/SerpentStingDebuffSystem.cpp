@@ -35,6 +35,12 @@ void serpentStingDebuffSystem(Context &ctx)
         const int damage = SERPENT_STING_DAMAGE * tickCount;
         const int appliedDamage = setHpDamage(npc.statistics, i, damage);
         if (appliedDamage > 0)
-            createEntityTextEffect(ctx, EntityType::NPC, i, std::to_string(appliedDamage));
+            createEntityTextEffect(
+                ctx,
+                npc.groupId[i],
+                EntityType::NPC,
+                i,
+                npc.base,
+                std::to_string(appliedDamage));
     }
 }
