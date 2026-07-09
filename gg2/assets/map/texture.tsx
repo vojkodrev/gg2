@@ -208,6 +208,12 @@
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
+ <tile id="363">
+  <properties>
+   <property name="icon" value="petAutoAttack"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
  <tile id="368">
   <properties>
    <property name="type" value="manabar"/>

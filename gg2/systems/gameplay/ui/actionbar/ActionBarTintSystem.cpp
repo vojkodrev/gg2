@@ -8,6 +8,7 @@ void actionBarTintSystem(Context &ctx)
 {
     auto &player = ctx.data.player;
     auto &actionBar = ctx.data.actionBar;
+    const int petId = player.petId;
 
     actionBar.rangedAutoAttack.base.tint.r[0] =
         player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_R : CLEAR_TINT_R;
@@ -17,6 +18,17 @@ void actionBarTintSystem(Context &ctx)
         player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_B : CLEAR_TINT_B;
     actionBar.rangedAutoAttack.base.tint.a[0] =
         player.autoAttack.active[0] ? AUTO_ATTACK_ACTION_BAR_TINT_A : CLEAR_TINT_A;
+
+    const bool petAutoAttackActive =
+        petId != -1 && ctx.data.npc.autoAttack.active[petId];
+    actionBar.petAutoAttack.base.tint.r[0] =
+        petAutoAttackActive ? AUTO_ATTACK_ACTION_BAR_TINT_R : CLEAR_TINT_R;
+    actionBar.petAutoAttack.base.tint.g[0] =
+        petAutoAttackActive ? AUTO_ATTACK_ACTION_BAR_TINT_G : CLEAR_TINT_G;
+    actionBar.petAutoAttack.base.tint.b[0] =
+        petAutoAttackActive ? AUTO_ATTACK_ACTION_BAR_TINT_B : CLEAR_TINT_B;
+    actionBar.petAutoAttack.base.tint.a[0] =
+        petAutoAttackActive ? AUTO_ATTACK_ACTION_BAR_TINT_A : CLEAR_TINT_A;
 
     const bool onGlobalCooldown = player.globalCooldownTimer > 0.0f;
     const bool hasEnoughManaForSerpentSting =

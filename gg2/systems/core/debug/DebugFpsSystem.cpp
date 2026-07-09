@@ -7,7 +7,7 @@
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../utils/groups/GroupAlloc.h"
 #include "../../../utils/math/CalcEma.h"
-#include "../../gameplay/ui/text/SpawnTextEffect.h"
+#include "../../gameplay/ui/text/CreateTextEffect.h"
 #include <SDL3/SDL.h>
 #include <string>
 
@@ -38,7 +38,7 @@ void debugFpsSystem(Context &ctx)
         DEBUG_FPS_TINT_B,
         DEBUG_FPS_TINT_A
     };
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         groupId,
         EntityType::Window,
@@ -52,7 +52,7 @@ void debugFpsSystem(Context &ctx)
         },
         tint,
         &ctx.data.fps.characterEffectIds);
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         groupId,
         EntityType::Window,

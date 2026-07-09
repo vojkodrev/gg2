@@ -13,7 +13,7 @@
 #include <string>
 
 template<uint32_t TQueueSize>
-inline void spawnTextEffect(
+inline void createTextEffect(
     Context &ctx,
     int groupId,
     EntityType parentType,
@@ -66,7 +66,7 @@ inline void spawnTextEffect(
     }
 }
 
-inline void spawnTextEffect(
+inline void createTextEffect(
     Context &ctx,
     int groupId,
     EntityType parentType,
@@ -77,7 +77,7 @@ inline void spawnTextEffect(
     SDL_FPoint pos,
     SDL_FColor tint)
 {
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         groupId,
         parentType,

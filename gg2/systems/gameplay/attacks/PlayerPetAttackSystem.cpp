@@ -18,5 +18,6 @@ void playerPetAttackSystem(Context &ctx)
     if (ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
         return;
 
+    ctx.data.npc.autoAttack.active[petId] = true;
     setNpcAiStatePursueTarget((uint32_t)petId, ctx, EntityType::NPC, targetId);
 }

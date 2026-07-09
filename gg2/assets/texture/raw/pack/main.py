@@ -77,6 +77,7 @@ images = [
     {"id": 41, "filename": "../blood splatter/B100.png", "dx": 6, "dy": 23, "w": 64}, 
     {"id": 42, "filename": "../blood splatter/B101.png", "dx": 7, "dy": 23, "w": 64}, 
     {"id": 43, "filename": "../blood splatter/B102.png", "dx": 8, "dy": 23, "w": 64}, 
+    {"id": 44, "filename": "../icons/Ability_GhoulFrenzy.png", "dx": 11, "dy": 22},
 ]
 
 

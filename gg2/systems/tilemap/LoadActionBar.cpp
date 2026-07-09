@@ -1,7 +1,7 @@
 #include "LoadActionBar.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByIcon.h"
-#include "../gameplay/ui/text/SpawnTextEffect.h"
+#include "../gameplay/ui/text/CreateTextEffect.h"
 #include "../../structs/core/EntityType.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
@@ -19,6 +19,12 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
     if (findTileByIcon(tileset, "rangedAutoAttack", rangedAutoAttackTileIdx))
     {
         loadEntityBase(actionBar.rangedAutoAttack.base, 0, tileset, rangedAutoAttackTileIdx, props);
+    }
+
+    uint32_t petAutoAttackTileIdx = 0;
+    if (findTileByIcon(tileset, "petAutoAttack", petAutoAttackTileIdx))
+    {
+        loadEntityBase(actionBar.petAutoAttack.base, 0, tileset, petAutoAttackTileIdx, props);
     }
 
     uint32_t serpentStingTileIdx = 0;
@@ -39,7 +45,11 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
     const float serpentH = actionBar.serpentSting.base.position.h[0];
     const float concussiveW = actionBar.concussiveShot.base.position.w[0];
     const float concussiveH = actionBar.concussiveShot.base.position.h[0];
-    const float totalW = rangedW + serpentW + concussiveW + ACTION_BAR_ICON_GAP * 2.0f;
+    const float petW = actionBar.petAutoAttack.base.position.w[0];
+    const float petH = actionBar.petAutoAttack.base.position.h[0];
+    const float totalW =
+        rangedW + serpentW + concussiveW + petW +
+        ACTION_BAR_ICON_GAP * 2.0f + ACTION_BAR_PET_SECTION_GAP;
     const float startX = (SCREEN_W - totalW) / 2.0f;
     const float bottomY = SCREEN_H - ACTION_BAR_BOTTOM_PADDING;
 
@@ -59,13 +69,19 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
     actionBar.concussiveShot.base.position.absolute[0] = true;
     actionBar.concussiveShot.base.depthY[0] = ACTION_BAR_DEPTH_Y;
 
+    actionBar.petAutoAttack.base.position.x[0] =
+        actionBar.concussiveShot.base.position.x[0] + concussiveW + ACTION_BAR_PET_SECTION_GAP;
+    actionBar.petAutoAttack.base.position.y[0] = bottomY - petH;
+    actionBar.petAutoAttack.base.position.absolute[0] = true;
+    actionBar.petAutoAttack.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+
     const SDL_FColor whiteTint = {
         CLEAR_TINT_R,
         CLEAR_TINT_G,
         CLEAR_TINT_B,
         CLEAR_TINT_A
     };
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
@@ -78,7 +94,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
             actionBar.rangedAutoAttack.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
@@ -91,7 +107,7 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
             actionBar.serpentSting.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
@@ -102,6 +118,19 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         SDL_FPoint{
             actionBar.concussiveShot.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
             actionBar.concussiveShot.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
+        },
+        whiteTint);
+    createTextEffect(
+        ctx,
+        actionBar.groupId,
+        EntityType::ActionBarIcon,
+        3,
+        DestroyEffectType::None,
+        0.0f,
+        "4",
+        SDL_FPoint{
+            actionBar.petAutoAttack.base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
+            actionBar.petAutoAttack.base.position.y[0] + ACTION_BAR_DIGIT_PADDING
         },
         whiteTint);
 }

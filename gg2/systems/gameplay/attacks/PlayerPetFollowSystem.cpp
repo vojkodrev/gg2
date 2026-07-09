@@ -10,5 +10,6 @@ void playerPetFollowSystem(Context &ctx)
     if (petId == -1)
         return;
 
+    ctx.data.npc.autoAttack.active[petId] = false;
     setNpcAiStateFollowPlayer((uint32_t)petId, ctx);
 }
