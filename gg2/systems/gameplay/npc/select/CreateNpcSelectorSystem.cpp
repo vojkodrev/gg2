@@ -17,7 +17,7 @@ void createNpcSelectorSystem(Context &ctx)
 
     const int npcIndex = player.selectedNpc;
     const int effectIndex =
-        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.npc.groupId[npcIndex]);
+        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.npc.group.id[npcIndex]);
     if (effectIndex == -1)
         return;
 

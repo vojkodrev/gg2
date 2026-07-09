@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../attacks/AutoAttack.h"
+#include "../core/Group.h"
 #include "../core/Groups.h"
 #include "../core/EntityBase.h"
 #include "../statistics/Statistics.h"
@@ -14,7 +15,7 @@ struct NPC
     bool active[MAX_NPCS] = {};
     bool initialized[MAX_NPCS] = {};
     float inactiveTimer[MAX_NPCS] = {};
-    int groupId[MAX_NPCS];
+    Group<MAX_NPCS> group;
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;
     AutoAttack<MAX_NPCS> autoAttack;
@@ -27,6 +28,6 @@ struct NPC
     NPC()
     {
         for (uint32_t i = 0; i < MAX_NPCS; i++)
-            groupId[i] = -1;
+            group.id[i] = -1;
     }
 };

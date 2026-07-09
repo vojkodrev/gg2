@@ -23,7 +23,7 @@ inline int applyAttackDamage(
         if (damage > 0)
             createEntityTextEffect(
                 ctx,
-                ctx.data.player.groupId,
+                ctx.data.player.group.id[0],
                 targetType,
                 targetId,
                 ctx.data.player.base,
@@ -36,7 +36,7 @@ inline int applyAttackDamage(
         if (damage > 0)
             createEntityTextEffect(
                 ctx,
-                ctx.data.npc.groupId[targetId],
+                ctx.data.npc.group.id[targetId],
                 targetType,
                 targetId,
                 ctx.data.npc.base,

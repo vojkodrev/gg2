@@ -1,5 +1,6 @@
 #pragma once
 #include "../attacks/AutoAttack.h"
+#include "../core/Group.h"
 #include "../core/EntityBase.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
@@ -8,7 +9,7 @@
 
 struct Player
 {
-    int groupId = -1;
+    Group<1> group;
     int petId = -1;
     int selectedNpc = -1;
     int previousSelectedNpc = -1;

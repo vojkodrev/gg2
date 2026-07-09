@@ -42,7 +42,7 @@ void petAttack(uint32_t n, Context &ctx)
     if (ctx.data.npc.autoAttack.attackTimer[n] > 0.0f)
         return;
 
-    const int targetGroupId = ctx.data.npc.groupId[targetId];
+    const int targetGroupId = ctx.data.npc.group.id[targetId];
 
     const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, targetGroupId);
     if (effectIndex == -1)

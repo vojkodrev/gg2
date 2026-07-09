@@ -39,10 +39,10 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.active[n] = true;
         npc.initialized[n] = true;
 
-        if (npc.groupId[n] == -1)
-            npc.groupId[n] = groupAlloc(ctx.data.groups);
+        if (npc.group.id[n] == -1)
+            npc.group.id[n] = groupAlloc(ctx.data.groups);
 
-        if (npc.groupId[n] == -1)
+        if (npc.group.id[n] == -1)
             break;
 
         uint32_t idx = npcTiles[i].ID - props.firstGid;

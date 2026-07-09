@@ -37,7 +37,7 @@ void serpentStingDebuffSystem(Context &ctx)
         if (appliedDamage > 0)
             createEntityTextEffect(
                 ctx,
-                npc.groupId[i],
+                npc.group.id[i],
                 EntityType::NPC,
                 i,
                 npc.base,

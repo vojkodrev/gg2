@@ -13,10 +13,10 @@ void fillPlayerRenderBuffer(Context &ctx)
         rb,
         player.base,
         0,
-        player.groupId,
+        player.group.id[0],
         PARENT_Z_INDEX);
 
-    fillEquipmentRenderBuffer(rb, player.equipment, 0, player.groupId);
-    fillHealthbarRenderBuffer(rb, player.healthbar, 0, player.groupId);
-    fillManabarRenderBuffer(rb, player.manabar, 0, player.groupId);
+    fillEquipmentRenderBuffer(rb, player.equipment, 0, player.group.id[0]);
+    fillHealthbarRenderBuffer(rb, player.healthbar, 0, player.group.id[0]);
+    fillManabarRenderBuffer(rb, player.manabar, 0, player.group.id[0]);
 }

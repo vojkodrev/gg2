@@ -13,7 +13,7 @@ void fillNpcRenderBuffer(Context &ctx)
         if (!npc.active[i])
             continue;
 
-        int groupId = npc.groupId[i];
+        int groupId = npc.group.id[i];
         fillEntityBaseRenderBuffer(
             rb,
             npc.base,

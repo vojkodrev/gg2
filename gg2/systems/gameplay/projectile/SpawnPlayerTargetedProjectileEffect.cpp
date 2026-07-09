@@ -22,7 +22,7 @@ int spawnPlayerTargetedProjectileEffect(
     SDL_FColor tint)
 {
     const int effectIndex =
-        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.groupId);
+        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.group.id[0]);
     if (effectIndex == -1)
         return -1;
 

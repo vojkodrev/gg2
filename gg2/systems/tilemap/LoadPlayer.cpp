@@ -32,7 +32,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
         loadManabar(ctx.data.player.manabar, 0, tileset, idx, props);
-        ctx.data.player.groupId = groupAlloc(ctx.data.groups);
+        ctx.data.player.group.id[0] = groupAlloc(ctx.data.groups);
         break;
     }
 }
