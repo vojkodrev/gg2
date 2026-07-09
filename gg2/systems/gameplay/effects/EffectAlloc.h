@@ -1,12 +1,12 @@
 #pragma once
-#include "../../../structs/core/Group.h"
+#include "../../../structs/core/Groups.h"
 #include "../../../structs/effect/Effect.h"
 #include "../../../utils/groups/GroupRetain.h"
 #include "../../../utils/pool/PoolAlloc.h"
 #include "../../../utils/pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>
-int effectAlloc(Effect &effect, Group<TGroupCapacity> &groups, int groupId)
+int effectAlloc(Effect &effect, Groups<TGroupCapacity> &groups, int groupId)
 {
     if (groupId < 0 || !groups.pool.active[groupId])
         return -1;

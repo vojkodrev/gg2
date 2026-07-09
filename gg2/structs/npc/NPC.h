@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include "../attacks/AutoAttack.h"
-#include "../core/Group.h"
+#include "../core/Groups.h"
 #include "../core/EntityBase.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
