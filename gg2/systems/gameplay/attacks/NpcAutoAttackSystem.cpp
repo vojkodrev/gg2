@@ -30,27 +30,16 @@ void npcAutoAttackSystem(Context &ctx)
         if (!SDL_HasRectIntersectionFloat(&weaponCol, &targetCol))
             continue;
 
-        switch (target.type[i])
-        {
-        case EntityType::Player:
-            applyAttackDamage(
-                ctx,
-                EntityType::Player,
-                static_cast<uint32_t>(target.id[i]),
-                NPC_MELEE_AUTO_ATTACK_DAMAGE,
-                NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
-            break;
-        case EntityType::NPC:
-            applyAttackDamage(
-                ctx,
-                EntityType::NPC,
-                static_cast<uint32_t>(target.id[i]),
-                NPC_MELEE_AUTO_ATTACK_DAMAGE,
-                NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
-            break;
-        default:
+        if (target.type[i] != EntityType::Player &&
+            target.type[i] != EntityType::NPC)
             continue;
-        }
+
+        applyAttackDamage(
+            ctx,
+            target.type[i],
+            static_cast<uint32_t>(target.id[i]),
+            NPC_MELEE_AUTO_ATTACK_DAMAGE,
+            NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
 
         npc.autoAttack.hitTimer[i] = NPC_MELEE_AUTO_ATTACK_DELAY;
     }

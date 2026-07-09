@@ -5,7 +5,6 @@
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStatePursuingTarget.h"
 #include "../../../structs/core/EntityType.h"
-#include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
@@ -53,8 +52,8 @@ void petAttack(uint32_t n, Context &ctx)
         ctx,
         EntityType::NPC,
         targetId,
-        PROJECTILE_DAMAGE,
-        PROJECTILE_DAMAGE_RANDOM_RANGE);
+        PET_DAMAGE,
+        PET_DAMAGE_RANDOM_RANGE);
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,
@@ -68,5 +67,5 @@ void petAttack(uint32_t n, Context &ctx)
     ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = targetType;
     ctx.data.effect.parent.id[effectIndex] = targetId;
-    ctx.data.npc.autoAttack.attackTimer[n] = NPC_MELEE_AUTO_ATTACK_DELAY;
+    ctx.data.npc.autoAttack.attackTimer[n] = PET_MELEE_AUTO_ATTACK_DELAY;
 }
