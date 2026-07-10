@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "SpatialHash.h"
-#include "SpatialHashConstants.h"
+#include "../../../structs/core/constants/SpatialHashConstants.h"
 #include "SpatialHashInsertCell.h"
 
 template<uint32_t N>

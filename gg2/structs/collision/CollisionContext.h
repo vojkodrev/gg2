@@ -1,6 +1,6 @@
 #pragma once
 #include "spatialhash/SpatialHash.h"
-#include "spatialhash/SpatialHashConstants.h"
+#include "../core/constants/SpatialHashConstants.h"
 #include "CollisionResult.h"
 #include <shared_mutex>
 

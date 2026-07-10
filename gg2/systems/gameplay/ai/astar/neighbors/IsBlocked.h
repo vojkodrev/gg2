@@ -1,8 +1,8 @@
 #pragma once
 #include "../../../../../structs/ai/AStarContext.h"
 #include "../../../../../structs/core/Context.h"
+#include "../../../../../structs/core/constants/SpatialHashConstants.h"
 #include "../../../../../utils/collision/EntityColAABB.h"
-#include "../../../../../utils/collision/spatialhash/SpatialHashConstants.h"
 #include "../../../../../utils/collision/spatialhash/SpatialHashQuery.h"
 #include "../../../../../utils/rect/CenteredRect.h"
 #include "../../../../../utils/collision/ColIdIndex.h"
