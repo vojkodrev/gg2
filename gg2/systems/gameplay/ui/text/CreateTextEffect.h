@@ -60,7 +60,9 @@ inline void createTextEffect(
 
         const float separator =
             text[i] == '.'
-            ? CHARACTER_ADVANCE_AFTER_NARROW_CHAR
+            ? CHARACTER_ADVANCE_AFTER_PERIOD
+            : text[i] == '(' || text[i] == ')'
+            ? CHARACTER_ADVANCE_AFTER_PARENTHESIS
             : CHARACTER_SEPARATOR;
         x += FONT_GLYPH_W + separator;
     }
