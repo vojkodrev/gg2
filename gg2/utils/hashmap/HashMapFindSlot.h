@@ -1,6 +1,7 @@
 #pragma once
 #include "HashMap.h"
 #include "HashMapSlot.h"
+#include "../../structs/core/constants/IndexConstants.h"
 
 template<int N, typename T, int Size>
 int hashMapFindSlot(const HashMap<N, Size, T>& map, int index, int node, int generation)
@@ -12,5 +13,5 @@ int hashMapFindSlot(const HashMap<N, Size, T>& map, int index, int node, int gen
         if (map.gen[index][s] != generation || map.node[index][s] == node)
             return s;
     }
-    return -1;
+    return INVALID_ID;
 }

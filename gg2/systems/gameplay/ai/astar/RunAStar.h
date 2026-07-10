@@ -1,6 +1,7 @@
 #pragma once
 #include "../../../../structs/ai/AStarContext.h"
 #include "../../../../structs/core/Context.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/collision/spatialhash/CopySpatialHash.h"
@@ -22,7 +23,6 @@
 #include <SDL3/SDL.h>
 #include <shared_mutex>
 
-// Returns path length, or -1 if no path found. Path nodes written to pathOut.
 template<uint32_t N>
 int runAStar(
     AStarContext<N>& astar,
@@ -114,5 +114,5 @@ int runAStar(
     }
 
     astar.status[astarIndex].store(AStarStatus::PATH_NOT_FOUND, std::memory_order_relaxed);
-    return -1;
+    return INVALID_ID;
 }

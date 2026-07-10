@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../structs/core/Groups.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/effect/Effect.h"
 #include "../../../utils/groups/GroupRetain.h"
 #include "../../../utils/pool/PoolAlloc.h"
@@ -9,17 +10,17 @@ template<uint32_t TGroupCapacity>
 int effectAlloc(Effect &effect, Groups<TGroupCapacity> &groups, int groupId)
 {
     if (groupId < 0 || !groups.pool.active[groupId])
-        return -1;
+        return INVALID_ID;
 
     int effectIndex = poolAlloc(effect.pool);
-    if (effectIndex == -1)
-        return -1;
+    if (effectIndex == INVALID_ID)
+        return INVALID_ID;
 
     const int retainedGroupId = groupRetain(groups, groupId);
-    if (retainedGroupId == -1)
+    if (retainedGroupId == INVALID_ID)
     {
         poolFree(effect.pool, effectIndex);
-        return -1;
+        return INVALID_ID;
     }
 
     effect.groupId[effectIndex] = retainedGroupId;

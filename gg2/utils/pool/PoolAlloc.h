@@ -1,5 +1,6 @@
 #pragma once
 #include "Pool.h"
+#include "../../structs/core/constants/IndexConstants.h"
 #include "../queue/QueueDequeue.h"
 #include "../queue/QueueEmpty.h"
 
@@ -10,7 +11,7 @@ int poolAlloc(Pool<TCapacity>& pool)
     {
         int index = queueDequeue(pool.freeQueue);
         if (pool.active[index])
-            return -1;
+            return INVALID_ID;
 
         pool.active[index] = true;
         if ((uint32_t)(index + 1) > pool.count)
@@ -19,7 +20,7 @@ int poolAlloc(Pool<TCapacity>& pool)
     }
 
     if (pool.count >= TCapacity)
-        return -1;
+        return INVALID_ID;
 
     int index = (int)pool.count++;
     pool.active[index] = true;

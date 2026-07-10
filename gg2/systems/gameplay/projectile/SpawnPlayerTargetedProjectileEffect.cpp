@@ -1,4 +1,5 @@
 #include "SpawnPlayerTargetedProjectileEffect.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
@@ -23,8 +24,8 @@ int spawnPlayerTargetedProjectileEffect(
 {
     const int effectIndex =
         effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.group.id[0]);
-    if (effectIndex == -1)
-        return -1;
+    if (effectIndex == INVALID_ID)
+        return INVALID_ID;
 
     ctx.data.effect.type[effectIndex] = EffectType::Projectile;
     ctx.data.effect.projectileType[effectIndex] = projectileType;

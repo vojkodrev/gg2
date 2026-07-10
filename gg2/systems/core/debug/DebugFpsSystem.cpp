@@ -5,6 +5,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/DebugConstants.h"
 #include "../../../structs/core/constants/FontConstants.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../utils/groups/GroupAlloc.h"
 #include "../../../utils/math/CalcEma.h"
@@ -27,7 +28,7 @@ void debugFpsSystem(Context &ctx)
 
     clearDebugFpsEffects(ctx);
 
-    if (ctx.data.fps.groupId == -1)
+    if (ctx.data.fps.groupId == INVALID_ID)
         ctx.data.fps.groupId = groupAlloc(ctx.data.groups);
 
     const std::string frameText = formatDebugFrameTime(ctx.data.fps.avgFrameTime);

@@ -1,4 +1,5 @@
 #include "MonsterPursuingTarget.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -32,6 +33,6 @@ void monsterPursuingTarget(uint32_t n, Context &ctx)
         return;
     }
 
-    const int targetNpcIndex = targetType == EntityType::NPC ? targetId : -1;
+    const int targetNpcIndex = targetType == EntityType::NPC ? targetId : INVALID_ID;
     followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
 }

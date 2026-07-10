@@ -1,4 +1,5 @@
 #include "DestroyNpcSystem.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -16,7 +17,7 @@ void destroyNpcSystem(Context &ctx)
             continue;
 
         if (ctx.data.player.selectedNpc == static_cast<int>(i))
-            setSelectedNpc(ctx, -1);
+            setSelectedNpc(ctx, INVALID_ID);
 
         for (uint32_t effectIndex = 0; effectIndex < ctx.data.effect.pool.count; effectIndex++)
         {

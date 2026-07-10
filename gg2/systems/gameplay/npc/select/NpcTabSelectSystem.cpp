@@ -1,5 +1,6 @@
 #include "NpcTabSelectSystem.h"
 #include "SetSelectedNpc.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/npc/NPCAiType.h"
 
 void npcTabSelectSystem(Context &ctx)
@@ -8,7 +9,7 @@ void npcTabSelectSystem(Context &ctx)
         return;
 
     const int currentNpc = ctx.data.player.selectedNpc;
-    int nextSelectedNpc = -1;
+    int nextSelectedNpc = INVALID_ID;
 
     for (int step = 1; step <= MAX_NPCS; step++)
     {

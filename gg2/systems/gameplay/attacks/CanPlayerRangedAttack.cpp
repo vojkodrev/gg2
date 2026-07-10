@@ -1,4 +1,5 @@
 #include "CanPlayerRangedAttack.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/npc/NPCAiType.h"
@@ -7,7 +8,7 @@
 bool canPlayerRangedAttack(Context &ctx)
 {
     const int npcIndex = ctx.data.player.selectedNpc;
-    if (npcIndex == -1)
+    if (npcIndex == INVALID_ID)
         return false;
     if (!ctx.data.npc.active[npcIndex])
         return false;

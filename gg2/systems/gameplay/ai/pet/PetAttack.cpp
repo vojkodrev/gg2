@@ -1,4 +1,5 @@
 #include "PetAttack.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -45,7 +46,7 @@ void petAttack(uint32_t n, Context &ctx)
     const int targetGroupId = ctx.data.npc.group.id[targetId];
 
     const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, targetGroupId);
-    if (effectIndex == -1)
+    if (effectIndex == INVALID_ID)
         return;
 
     applyAttackDamage(

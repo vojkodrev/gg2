@@ -2,6 +2,7 @@
 #include "../../../../structs/core/Context.h"
 #include "../../../../structs/core/EntityType.h"
 #include "../../../../structs/core/constants/FontConstants.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
@@ -32,7 +33,7 @@ inline void createTextEffect(
     {
         const unsigned char glyph = static_cast<unsigned char>(text[i]);
         const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, groupId);
-        if (effectIndex == -1)
+        if (effectIndex == INVALID_ID)
             return;
 
         if (effectIdsQueue != nullptr)

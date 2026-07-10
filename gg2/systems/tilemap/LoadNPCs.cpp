@@ -9,6 +9,7 @@
 #include "../gameplay/ai/ClearNpcAiTarget.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../structs/core/constants/IndexConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/timers/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
@@ -39,10 +40,10 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.active[n] = true;
         npc.initialized[n] = true;
 
-        if (npc.group.id[n] == -1)
+        if (npc.group.id[n] == INVALID_ID)
             npc.group.id[n] = groupAlloc(ctx.data.groups);
 
-        if (npc.group.id[n] == -1)
+        if (npc.group.id[n] == INVALID_ID)
             break;
 
         uint32_t idx = npcTiles[i].ID - props.firstGid;

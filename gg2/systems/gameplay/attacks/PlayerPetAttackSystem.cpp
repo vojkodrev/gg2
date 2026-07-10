@@ -1,4 +1,5 @@
 #include "PlayerPetAttackSystem.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../ai/SetNpcAiStateIdle.h"
 #include "../ai/monster/SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
@@ -10,7 +11,7 @@ void playerPetAttackSystem(Context &ctx)
         return;
 
     const int petId = ctx.data.player.petId;
-    if (petId == -1)
+    if (petId == INVALID_ID)
         return;
 
     auto &petAutoAttackActive = ctx.data.npc.autoAttack.active[petId];
@@ -22,7 +23,7 @@ void playerPetAttackSystem(Context &ctx)
     }
 
     const int targetId = ctx.data.player.selectedNpc;
-    if (targetId == -1)
+    if (targetId == INVALID_ID)
     {
         petAutoAttackActive = false;
         return;

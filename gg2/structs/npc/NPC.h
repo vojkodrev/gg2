@@ -7,6 +7,7 @@
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
 #include "../ui/Healthbar.h"
+#include "../core/constants/IndexConstants.h"
 #include "NpcConstants.h"
 #include "NPCAi.h"
 
@@ -28,6 +29,6 @@ struct NPC
     NPC()
     {
         for (uint32_t i = 0; i < MAX_NPCS; i++)
-            group.id[i] = -1;
+            group.id[i] = INVALID_ID;
     }
 };
