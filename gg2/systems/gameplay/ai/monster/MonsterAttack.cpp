@@ -2,11 +2,11 @@
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "../../../../structs/core/AnimationState.h"
+#include "../../../../structs/core/EntityType.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "SetNpcAiStateReturnToSpawn.h"
 #include "SetNpcAiStatePursuingTarget.h"
-#include "CanMonsterAttackTarget.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
 {
@@ -16,15 +16,22 @@ void monsterAttack(uint32_t n, Context &ctx)
         return;
     }
     const auto &target = ctx.data.npc.ai.target;
-    if (!canMonsterAttackTarget(target.type[n]))
+    const EntityType targetType = target.type[n];
+    const int targetId = target.id[n];
+    if (targetType != EntityType::Player && targetType != EntityType::NPC)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
-    const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
+    if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
+    {
+        setNpcAiStateReturnToSpawn(n, ctx);
+        return;
+    }
+    const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursuingTarget(n, ctx, target.type[n], target.id[n]);
+        setNpcAiStatePursuingTarget(n, ctx, targetType, targetId);
         return;
     }
 

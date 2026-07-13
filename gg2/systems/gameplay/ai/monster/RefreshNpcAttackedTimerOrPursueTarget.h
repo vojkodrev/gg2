@@ -3,9 +3,9 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/npc/NPCAiState.h"
 #include "RefreshNpcAttackedTimer.h"
-#include "SetNpcAiStatePursueTarget.h"
+#include "../SetNpcAiStatePursueTarget.h"
 
-inline void refreshNpcAttackedTimerOrPursuingTarget(
+inline void refreshNpcAttackedTimerOrPursueTarget(
     uint32_t n,
     Context &ctx,
     EntityType targetType,

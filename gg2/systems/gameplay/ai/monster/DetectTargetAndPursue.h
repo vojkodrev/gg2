@@ -4,7 +4,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "NpcMonsterConstants.h"
-#include "SetNpcAiStatePursueTarget.h"
+#include "../SetNpcAiStatePursueTarget.h"
 #include "../../../utils/collision/DistToEntity.h"
 
 inline bool detectTargetAndPursue(uint32_t n, Context &ctx)

@@ -1,5 +1,6 @@
 #include "PetAttack.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../monster/RefreshNpcAttackedTimerOrPursueTarget.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -39,6 +40,8 @@ void petAttack(uint32_t n, Context &ctx)
     const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, targetGroupId);
     if (effectIndex == INVALID_ID)
         return;
+
+    refreshNpcAttackedTimerOrPursueTarget(targetId, ctx, EntityType::NPC, n);
 
     applyAttackDamage(
         ctx,

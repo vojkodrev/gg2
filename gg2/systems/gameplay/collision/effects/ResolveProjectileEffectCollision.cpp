@@ -6,7 +6,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../ai/monster/RefreshNpcAttackedTimerOrPursuingTarget.h"
+#include "../../ai/monster/RefreshNpcAttackedTimerOrPursueTarget.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 
@@ -31,7 +31,7 @@ void resolveProjectileEffectCollision(
             return;
 
         if (effect.parent.type[effectIndex] == EntityType::Player)
-            refreshNpcAttackedTimerOrPursuingTarget(
+            refreshNpcAttackedTimerOrPursueTarget(
                 npcIndex,
                 ctx,
                 EntityType::Player,

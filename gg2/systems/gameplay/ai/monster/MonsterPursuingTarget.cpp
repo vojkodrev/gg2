@@ -6,7 +6,6 @@
 #include "astar/FollowAStarPathTo.h"
 #include "SetNpcAiStateReturnToSpawn.h"
 #include "SetNpcAiStateAttack.h"
-#include "CanMonsterAttackTarget.h"
 #include "../../../structs/core/EntityType.h"
 
 void monsterPursuingTarget(uint32_t n, Context &ctx)
@@ -20,7 +19,7 @@ void monsterPursuingTarget(uint32_t n, Context &ctx)
     const auto &target = ctx.data.npc.ai.target;
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
-    if (!canMonsterAttackTarget(targetType))
+    if (targetType != EntityType::Player && targetType != EntityType::NPC)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;

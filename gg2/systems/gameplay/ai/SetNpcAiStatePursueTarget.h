@@ -1,8 +1,8 @@
 #pragma once
-#include "../../../structs/core/Context.h"
-#include "../../../structs/core/EntityType.h"
-#include "../SetNpcAiTarget.h"
-#include "RefreshNpcAttackedTimer.h"
+#include "../../structs/core/Context.h"
+#include "../../structs/core/EntityType.h"
+#include "SetNpcAiTarget.h"
+#include "monster/RefreshNpcAttackedTimer.h"
 
 inline void setNpcAiStatePursueTarget(uint32_t n, Context &ctx, EntityType targetType, int targetId)
 {

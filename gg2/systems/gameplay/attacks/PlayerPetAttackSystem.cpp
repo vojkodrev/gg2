@@ -1,7 +1,7 @@
 #include "PlayerPetAttackSystem.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../ai/SetNpcAiStateIdle.h"
-#include "../ai/monster/SetNpcAiStatePursueTarget.h"
+#include "../ai/SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
 
