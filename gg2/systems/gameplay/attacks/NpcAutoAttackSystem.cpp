@@ -2,6 +2,7 @@
 #include "ApplyAttackDamage.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../structs/npc/NPCAiType.h"
 #include "../../../utils/collision/GetEntityColAABB.h"
 #include "../rotation/HasMeleeWeaponRotationAnimation.h"
 #include "../rotation/IsRotationAnimationRunning.h"
@@ -15,6 +16,8 @@ void npcAutoAttackSystem(Context &ctx)
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
         if (!npc.active[i])
+            continue;
+        if (npc.ai.type[i] != NPCAiType::Monster)
             continue;
         if (npc.autoAttack.hitTimer[i] > 0.0f)
             continue;

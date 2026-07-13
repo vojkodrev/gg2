@@ -11,7 +11,6 @@
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../attacks/ApplyAttackDamage.h"
 #include "../../effects/EffectAlloc.h"
-#include "../monster/CanMonsterAttackTarget.h"
 
 void petAttack(uint32_t n, Context &ctx)
 {
@@ -19,11 +18,6 @@ void petAttack(uint32_t n, Context &ctx)
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
 
-    if (!canMonsterAttackTarget(targetType))
-    {
-        setNpcAiStateIdle(n, ctx);
-        return;
-    }
     if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
     {
         setNpcAiStateIdle(n, ctx);
@@ -36,9 +30,6 @@ void petAttack(uint32_t n, Context &ctx)
         setNpcAiStatePursuingTarget(n, ctx, targetType, targetId);
         return;
     }
-
-    if (targetType != EntityType::NPC)
-        return;
 
     if (ctx.data.npc.autoAttack.attackTimer[n] > 0.0f)
         return;
