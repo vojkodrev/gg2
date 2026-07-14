@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void sortAggroTable(Context &ctx, uint32_t n);
+void refreshAggroTableMax(Context &ctx, uint32_t n);
