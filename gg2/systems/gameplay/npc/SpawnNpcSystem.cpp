@@ -2,6 +2,7 @@
 #include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../attacks/aggroTable/ResetAggroTable.h"
 #include "../ai/ClearNpcAiTarget.h"
 #include "../ai/SetNpcAiStateIdle.h"
 
@@ -31,6 +32,7 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
+            resetAggroTable(ctx.data.npc.aggroTable, i);
             setNpcAiStateIdle(i, ctx);
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
