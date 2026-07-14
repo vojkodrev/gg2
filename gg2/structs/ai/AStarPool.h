@@ -6,5 +6,5 @@
 struct AStarPool
 {
     AStarContext<MAX_ASTARS> ctx;
-    Pool<MAX_ASTARS> pool;
+    Pool<1, MAX_ASTARS> pool;
 };

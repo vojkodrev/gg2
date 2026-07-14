@@ -10,7 +10,7 @@
 
 struct Effect
 {
-    Pool<MAX_EFFECTS> pool;
+    Pool<1, MAX_EFFECTS> pool;
     int groupId[MAX_EFFECTS] = {};
     EffectType type[MAX_EFFECTS] = {};
     ProjectileType projectileType[MAX_EFFECTS] = {};

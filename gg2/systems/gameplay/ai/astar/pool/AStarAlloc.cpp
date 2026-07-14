@@ -5,7 +5,7 @@
 
 int astarAlloc(AStarPool& pool)
 {
-    int index = poolAlloc(pool.pool);
+    int index = poolAlloc(pool.pool, 0);
 
     if (index != INVALID_ID)
         pool.ctx.status[index].store(AStarStatus::IDLE, std::memory_order_relaxed);

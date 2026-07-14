@@ -36,7 +36,7 @@ void effectCollisionResolutionSystem(Context &ctx)
             continue;
 
         const uint32_t effectIndex = colIdIndex(effectId);
-        if (!effect.pool.active[effectIndex])
+        if (!effect.pool.active[0][effectIndex])
             continue;
 
         switch (effect.type[effectIndex])

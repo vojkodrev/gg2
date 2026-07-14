@@ -10,5 +10,5 @@ struct DebugFps
     Uint64 astarTime = 0;
     float avgAstarTime = 0.0f;
     float avgFrameTime = 0.0f;
-    Queue<int, DEBUG_FPS_CHARACTER_EFFECT_QUEUE_SIZE> characterEffectIds = {};
+    Queue<int, 1, DEBUG_FPS_CHARACTER_EFFECT_QUEUE_SIZE> characterEffectIds = {};
 };

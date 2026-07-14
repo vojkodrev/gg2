@@ -24,7 +24,7 @@ inline void createTextEffect(
     const std::string &text,
     SDL_FPoint pos,
     SDL_FColor tint,
-    Queue<int, TQueueSize> *effectIdsQueue)
+    Queue<int, 1, TQueueSize> *effectIdsQueue)
 {
     const auto &templateBase = ctx.data.effectTemplate.base;
     float x = pos.x;
@@ -37,7 +37,7 @@ inline void createTextEffect(
             return;
 
         if (effectIdsQueue != nullptr)
-            queueEnqueue(*effectIdsQueue, effectIndex);
+            queueEnqueue(*effectIdsQueue, 0, effectIndex);
 
         copyEntityBaseSlot(
             templateBase,
@@ -90,5 +90,5 @@ inline void createTextEffect(
         text,
         pos,
         tint,
-        static_cast<Queue<int, 1> *>(nullptr));
+        static_cast<Queue<int, 1, 1> *>(nullptr));
 }

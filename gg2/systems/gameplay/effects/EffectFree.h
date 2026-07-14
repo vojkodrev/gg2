@@ -7,9 +7,9 @@
 template<uint32_t TGroupCapacity>
 void effectFree(Effect &effect, Groups<TGroupCapacity> &groups, int effectIndex)
 {
-    if (!effect.pool.active[effectIndex])
+    if (!effect.pool.active[0][effectIndex])
         return;
 
     groupFree(groups, effect.groupId[effectIndex]);
-    poolFree(effect.pool, effectIndex);
+    poolFree(effect.pool, 0, effectIndex);
 }

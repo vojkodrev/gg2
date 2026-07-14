@@ -7,9 +7,9 @@ void effectTimerSystem(Context &ctx)
     const float dt = ctx.frame.dt;
     auto &effect = ctx.data.effect;
 
-    for (uint32_t i = 0; i < effect.pool.count; i++)
+    for (uint32_t i = 0; i < effect.pool.count[0]; i++)
     {
-        if (!effect.pool.active[i])
+        if (!effect.pool.active[0][i])
             continue;
         if (effect.destroyType[i] != DestroyEffectType::Timer)
             continue;

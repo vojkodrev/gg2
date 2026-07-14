@@ -7,7 +7,7 @@
 template<uint32_t TGroupCapacity>
 int groupAlloc(Groups<TGroupCapacity> &groups)
 {
-    int index = poolAlloc(groups.pool);
+    int index = poolAlloc(groups.pool, 0);
     if (index == INVALID_ID)
         return INVALID_ID;
 

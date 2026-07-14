@@ -9,17 +9,17 @@
 template<uint32_t TGroupCapacity>
 int effectAlloc(Effect &effect, Groups<TGroupCapacity> &groups, int groupId)
 {
-    if (groupId < 0 || !groups.pool.active[groupId])
+    if (groupId < 0 || !groups.pool.active[0][groupId])
         return INVALID_ID;
 
-    int effectIndex = poolAlloc(effect.pool);
+    int effectIndex = poolAlloc(effect.pool, 0);
     if (effectIndex == INVALID_ID)
         return INVALID_ID;
 
     const int retainedGroupId = groupRetain(groups, groupId);
     if (retainedGroupId == INVALID_ID)
     {
-        poolFree(effect.pool, effectIndex);
+        poolFree(effect.pool, 0, effectIndex);
         return INVALID_ID;
     }
 

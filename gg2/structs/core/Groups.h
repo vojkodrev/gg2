@@ -5,6 +5,6 @@
 template<uint32_t TCapacity>
 struct Groups
 {
-    Pool<TCapacity> pool;
+    Pool<1, TCapacity> pool;
     uint32_t count[TCapacity] = {};
 };

@@ -13,9 +13,9 @@ void effectCollisionSystem(Context &ctx)
 
     {
         std::unique_lock lock(ctx.collision.spatialHashMutex);
-        for (uint32_t i = 0; i < effect.pool.count; i++)
+        for (uint32_t i = 0; i < effect.pool.count[0]; i++)
         {
-            if (!effect.pool.active[i])
+            if (!effect.pool.active[0][i])
                 continue;
 
             if (effect.type[i] != EffectType::Projectile)
@@ -30,9 +30,9 @@ void effectCollisionSystem(Context &ctx)
     }
 
     std::shared_lock readLock(ctx.collision.spatialHashMutex);
-    for (uint32_t i = 0; i < effect.pool.count; i++)
+    for (uint32_t i = 0; i < effect.pool.count[0]; i++)
     {
-        if (!effect.pool.active[i])
+        if (!effect.pool.active[0][i])
             continue;
 
         if (effect.type[i] != EffectType::Projectile)
