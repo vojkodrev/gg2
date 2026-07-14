@@ -1,4 +1,5 @@
 #include "AddToAggroTableValue.h"
+#include "FindAggroTableSlotByEntityId.h"
 #include "RefreshAggroTableMax.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../utils/pool/PoolAlloc.h"
@@ -6,19 +7,7 @@
 void addToAggroTableValue(Context &ctx, uint32_t n, int entityId, float value)
 {
     auto &aggroTable = ctx.data.npc.aggroTable;
-    int slot = INVALID_ID;
-
-    for (uint32_t i = 0; i < aggroTable.pool.count[n]; i++)
-    {
-        if (!aggroTable.pool.active[n][i])
-            continue;
-
-        if (aggroTable.entityId[n][i] != entityId)
-            continue;
-
-        slot = (int)i;
-        break;
-    }
+    int slot = findAggroTableSlotByEntityId(ctx, n, entityId);
 
     if (slot == INVALID_ID)
     {
