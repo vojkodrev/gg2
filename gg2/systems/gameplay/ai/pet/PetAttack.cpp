@@ -5,7 +5,7 @@
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "SetNpcAiStateIdle.h"
-#include "SetNpcAiStatePursuingTarget.h"
+#include "../SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -28,7 +28,7 @@ void petAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursuingTarget(n, ctx, targetType, targetId);
+        setNpcAiStatePursueTarget(n, ctx, targetType, targetId, false);
         return;
     }
 

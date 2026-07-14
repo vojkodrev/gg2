@@ -14,7 +14,7 @@ inline void refreshNpcAttackedTimerOrPursueTarget(
     const NPCAiState aiState = ctx.data.npc.ai.state[n];
     if (aiState == NPCAiState::Idle || aiState == NPCAiState::Patrolling)
     {
-        setNpcAiStatePursueTarget(n, ctx, targetType, targetId);
+        setNpcAiStatePursueTarget(n, ctx, targetType, targetId, true);
     }
     else
     {

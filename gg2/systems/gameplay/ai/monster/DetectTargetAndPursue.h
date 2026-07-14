@@ -11,7 +11,7 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
 {
     if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0);
+        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0, true);
         return true;
     }
 
@@ -22,6 +22,6 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
     if (distToEntity(ctx, n, EntityType::NPC, petId) >= NPC_DETECT_RADIUS)
         return false;
 
-    setNpcAiStatePursueTarget(n, ctx, EntityType::NPC, petId);
+    setNpcAiStatePursueTarget(n, ctx, EntityType::NPC, petId, true);
     return true;
 }
