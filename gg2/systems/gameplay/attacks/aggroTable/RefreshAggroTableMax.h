@@ -8,6 +8,7 @@ template<int N>
 void refreshAggroTableMax(AggroTable<N> &aggroTable, uint32_t n)
 {
     float maxValue = 0.0f;
+    EntityType maxEntityType = EntityType::None;
     int maxEntityId = INVALID_ID;
 
     for (uint32_t i = 0; i < aggroTable.pool.count[n]; i++)
@@ -19,9 +20,11 @@ void refreshAggroTableMax(AggroTable<N> &aggroTable, uint32_t n)
             continue;
 
         maxValue = aggroTable.value[n][i];
+        maxEntityType = aggroTable.entityType[n][i];
         maxEntityId = aggroTable.entityId[n][i];
     }
 
     aggroTable.maxValue[n] = maxValue;
+    aggroTable.maxEntityType[n] = maxEntityType;
     aggroTable.maxEntityId[n] = maxEntityId;
 }

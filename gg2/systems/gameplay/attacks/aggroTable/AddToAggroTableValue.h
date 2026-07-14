@@ -7,9 +7,14 @@
 #include <cstdint>
 
 template<int N>
-void addToAggroTableValue(AggroTable<N> &aggroTable, uint32_t n, int entityId, float value)
+void addToAggroTableValue(
+    AggroTable<N> &aggroTable,
+    uint32_t n,
+    EntityType entityType,
+    int entityId,
+    float value)
 {
-    int slot = findAggroTableSlotByEntityId(aggroTable, n, entityId);
+    int slot = findAggroTableSlotByEntityId(aggroTable, n, entityType, entityId);
 
     if (slot == INVALID_ID)
     {
@@ -17,16 +22,20 @@ void addToAggroTableValue(AggroTable<N> &aggroTable, uint32_t n, int entityId, f
         if (slot == INVALID_ID)
             return;
 
+        aggroTable.entityType[n][slot] = entityType;
         aggroTable.entityId[n][slot] = entityId;
     }
 
-    const bool replacedMaxEntity = aggroTable.maxEntityId[n] == entityId;
+    const bool replacedMaxEntity =
+        aggroTable.maxEntityType[n] == entityType &&
+        aggroTable.maxEntityId[n] == entityId;
     aggroTable.value[n][slot] += value;
     const float nextValue = aggroTable.value[n][slot];
 
     if (aggroTable.maxEntityId[n] == INVALID_ID || nextValue >= aggroTable.maxValue[n])
     {
         aggroTable.maxValue[n] = nextValue;
+        aggroTable.maxEntityType[n] = entityType;
         aggroTable.maxEntityId[n] = entityId;
         return;
     }

@@ -6,15 +6,22 @@
 #include <cstdint>
 
 template<int N>
-void removeFromAggroTableValue(AggroTable<N> &aggroTable, uint32_t n, int entityId)
+void removeFromAggroTableValue(
+    AggroTable<N> &aggroTable,
+    uint32_t n,
+    EntityType entityType,
+    int entityId)
 {
-    int slot = findAggroTableSlotByEntityId(aggroTable, n, entityId);
+    int slot = findAggroTableSlotByEntityId(aggroTable, n, entityType, entityId);
 
     if (slot == INVALID_ID)
         return;
 
-    const bool removedMaxEntity = aggroTable.maxEntityId[n] == entityId;
+    const bool removedMaxEntity =
+        aggroTable.maxEntityType[n] == entityType &&
+        aggroTable.maxEntityId[n] == entityId;
     aggroTable.value[n][slot] = 0.0f;
+    aggroTable.entityType[n][slot] = EntityType::None;
     aggroTable.entityId[n][slot] = INVALID_ID;
     poolFree(aggroTable.pool, n, slot);
 
