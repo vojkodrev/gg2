@@ -1,6 +1,7 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
 #include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/EntityType.h"
@@ -27,10 +28,12 @@ void resolveProjectileEffectCollision(
     if (otherType == ColType::NPC)
     {
         const uint32_t npcIndex = colIdIndex(otherId);
+        const EntityType parentType = effect.parent.type[effectIndex];
+        const int parentId = effect.parent.id[effectIndex];
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        if (effect.parent.type[effectIndex] == EntityType::Player)
+        if (parentType == EntityType::Player)
             refreshNpcAttackedTimerOrPursueTarget(
                 npcIndex,
                 ctx,
@@ -39,7 +42,7 @@ void resolveProjectileEffectCollision(
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {
-            applyAttackDamage(
+            const int damage = applyAttackDamage(
                 ctx,
                 EntityType::NPC,
                 npcIndex,
@@ -48,16 +51,37 @@ void resolveProjectileEffectCollision(
                 ctx.data.npc.base,
                 PROJECTILE_DAMAGE,
                 PROJECTILE_DAMAGE_RANDOM_RANGE);
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                (float)damage);
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {
             ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
                 SERPENT_STING_DEBUFF_TIME;
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                0.0f);
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
         {
             ctx.data.npc.concussiveShotDebuffTimer[npcIndex] =
                 CONCUSSIVE_SHOT_DEBUFF_TIME;
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                0.0f);
         }
 
         destroyProjectile(ctx, effectIndex);
