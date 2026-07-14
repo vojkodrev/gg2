@@ -29,10 +29,6 @@ add_library(systems_gameplay
     attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
     attacks/PlayerRangedAutoAttackSystem.cpp
-    attacks/aggroTable/AddToAggroTableValue.cpp
-    attacks/aggroTable/FindAggroTableSlotByEntityId.cpp
-    attacks/aggroTable/RemoveFromAggroTableValue.cpp
-    attacks/aggroTable/RefreshAggroTableMax.cpp
     effects/MoveEffectSystem.cpp
     effects/EffectTimerSystem.cpp
     effects/DestroyEffectSystem.cpp
