@@ -1,9 +1,7 @@
 #include "SerpentStingDebuffSystem.h"
-#include "../statistics/SetHpDamage.h"
-#include "../effects/CreateEntityTextEffect.h"
+#include "ApplyAttackDamage.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
-#include <string>
 
 void serpentStingDebuffSystem(Context &ctx)
 {
@@ -32,15 +30,14 @@ void serpentStingDebuffSystem(Context &ctx)
         if (tickCount == 0)
             continue;
 
-        const int damage = SERPENT_STING_DAMAGE * tickCount;
-        const int appliedDamage = setHpDamage(npc.statistics, i, damage);
-        if (appliedDamage > 0)
-            createEntityTextEffect(
-                ctx,
-                npc.group.id[i],
-                EntityType::NPC,
-                i,
-                npc.base,
-                std::to_string(appliedDamage));
+        applyAttackDamage(
+            ctx,
+            EntityType::NPC,
+            i,
+            npc.statistics,
+            npc.group,
+            npc.base,
+            SERPENT_STING_DAMAGE * tickCount,
+            0);
     }
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include "../attacks/AggroTable.h"
 #include "../attacks/AutoAttack.h"
 #include "../core/Group.h"
 #include "../core/Groups.h"
@@ -20,6 +21,7 @@ struct NPC
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;
     AutoAttack<MAX_NPCS> autoAttack;
+    AggroTable<MAX_NPCS> aggroTable;
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
