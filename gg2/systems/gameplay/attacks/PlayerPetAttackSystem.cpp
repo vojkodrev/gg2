@@ -1,5 +1,10 @@
 #include "PlayerPetAttackSystem.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../ai/ClearNpcAiTarget.h"
+#include "../ai/SetNpcAiStateFollowPlayer.h"
+#include "../ai/SetNpcAiStatePursueTarget.h"
+#include "../ai/SetNpcAiTarget.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
 
 void playerPetAttackSystem(Context &ctx)
@@ -14,7 +19,11 @@ void playerPetAttackSystem(Context &ctx)
     auto &petAutoAttackActive = ctx.data.npc.autoAttack.active[petId];
     petAutoAttackActive = !petAutoAttackActive;
     if (!petAutoAttackActive)
+    {
+        setNpcAiStateFollowPlayer((uint32_t)petId, ctx);
+        clearNpcAiTarget((uint32_t)petId, ctx);
         return;
+    }
 
     const int targetId = ctx.data.player.selectedNpc;
     if (targetId == INVALID_ID)
@@ -27,4 +36,7 @@ void playerPetAttackSystem(Context &ctx)
         petAutoAttackActive = false;
         return;
     }
+
+    setNpcAiStatePursueTarget((uint32_t)petId, ctx);
+    setNpcAiTarget((uint32_t)petId, ctx, EntityType::NPC, targetId);
 }

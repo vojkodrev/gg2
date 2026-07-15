@@ -15,13 +15,8 @@ void petPursueTarget(uint32_t n, Context &ctx)
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
 
-    if (targetType == EntityType::None)
-    {
-        setNpcAiStateIdle(n, ctx);
-        return;
-    }
-
     if (targetType != EntityType::NPC ||
+        !ctx.data.npc.active[targetId] ||
         ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
     {
         setNpcAiStateIdle(n, ctx);
