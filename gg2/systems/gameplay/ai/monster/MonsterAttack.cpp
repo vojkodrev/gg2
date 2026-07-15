@@ -15,7 +15,22 @@ void monsterAttack(uint32_t n, Context &ctx)
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
+
     const auto &target = ctx.data.npc.ai.target;
+    const auto &aggroTable = ctx.data.npc.aggroTable;
+    if (aggroTable.pool.count[n] == 0)
+    {
+        setNpcAiStateReturnToSpawn(n, ctx);
+        return;
+    }
+
+    if (target.type[n] != aggroTable.maxEntityType[n] ||
+        target.id[n] != aggroTable.maxEntityId[n])
+    {
+        setNpcAiStatePursueTarget(n, ctx);
+        return;
+    }
+
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
     if (targetType != EntityType::Player && targetType != EntityType::NPC)
