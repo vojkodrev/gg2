@@ -1,6 +1,7 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
 #include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/debuff/AddDebuff.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
@@ -61,8 +62,12 @@ void resolveProjectileEffectCollision(
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {
-            ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
-                SERPENT_STING_DEBUFF_TIME;
+            addDebuff(
+                ctx.data.npc.serpentStingDebuff,
+                npcIndex,
+                parentType,
+                parentId,
+                SERPENT_STING_DEBUFF_TIME);
 
             addToAggroTableValue(
                 ctx.data.npc.aggroTable,
@@ -73,8 +78,12 @@ void resolveProjectileEffectCollision(
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
         {
-            ctx.data.npc.concussiveShotDebuffTimer[npcIndex] =
-                CONCUSSIVE_SHOT_DEBUFF_TIME;
+            addDebuff(
+                ctx.data.npc.concussiveShotDebuff,
+                npcIndex,
+                parentType,
+                parentId,
+                CONCUSSIVE_SHOT_DEBUFF_TIME);
 
             addToAggroTableValue(
                 ctx.data.npc.aggroTable,

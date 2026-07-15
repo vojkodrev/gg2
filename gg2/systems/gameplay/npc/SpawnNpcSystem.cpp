@@ -3,6 +3,7 @@
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../attacks/aggroTable/ResetAggroTable.h"
+#include "../attacks/debuff/ResetDebuff.h"
 #include "../ai/ClearNpcAiTarget.h"
 #include "../ai/SetNpcAiStateIdle.h"
 
@@ -28,8 +29,8 @@ void spawnNpcSystem(Context &ctx)
         {
             ctx.data.npc.active[i] = true;
             setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.health.maxHp[i]);
-            ctx.data.npc.concussiveShotDebuffTimer[i] = 0.0f;
-            ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
+            resetDebuff(ctx.data.npc.concussiveShotDebuff, i);
+            resetDebuff(ctx.data.npc.serpentStingDebuff, i);
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
             resetAggroTable(ctx.data.npc.aggroTable, i);

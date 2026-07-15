@@ -2,6 +2,7 @@
 #include <cstdint>
 #include "../attacks/AggroTable.h"
 #include "../attacks/AutoAttack.h"
+#include "../attacks/Debuff.h"
 #include "../core/Group.h"
 #include "../core/Groups.h"
 #include "../core/EntityBase.h"
@@ -25,8 +26,8 @@ struct NPC
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
     NPCAi ai;
-    float concussiveShotDebuffTimer[MAX_NPCS] = {};
-    float serpentStingDebuffTimer[MAX_NPCS] = {};
+    Debuff<MAX_NPCS> concussiveShotDebuff;
+    Debuff<MAX_NPCS> serpentStingDebuff;
 
     NPC()
     {

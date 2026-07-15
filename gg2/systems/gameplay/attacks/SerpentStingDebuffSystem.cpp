@@ -1,5 +1,6 @@
 #include "SerpentStingDebuffSystem.h"
 #include "ApplyAttackDamage.h"
+#include "debuff/RemoveDebuff.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
 
@@ -15,29 +16,34 @@ void serpentStingDebuffSystem(Context &ctx)
         if (!npc.active[i])
             continue;
 
-        const float prevTimer = npc.serpentStingDebuffTimer[i];
-        if (prevTimer <= 0.0f)
-            continue;
+        auto &debuff = npc.serpentStingDebuff;
+        for (uint32_t j = 0; j < debuff.pool.count[i]; j++)
+        {
+            if (!debuff.pool.active[i][j])
+                continue;
 
-        const float nextTimer = std::max(0.0f, prevTimer - dt);
-        npc.serpentStingDebuffTimer[i] = nextTimer;
+            const float prevTimer = debuff.timer[i][j];
+            const float nextTimer = std::max(0.0f, prevTimer - dt);
+            debuff.timer[i][j] = nextTimer;
 
-        const int prevTicks =
-            (int)((SERPENT_STING_DEBUFF_TIME - prevTimer) / tickTime);
-        const int nextTicks =
-            (int)((SERPENT_STING_DEBUFF_TIME - nextTimer) / tickTime);
-        const int tickCount = std::max(0, nextTicks - prevTicks);
-        if (tickCount == 0)
-            continue;
+            const int prevTicks =
+                (int)((SERPENT_STING_DEBUFF_TIME - prevTimer) / tickTime);
+            const int nextTicks =
+                (int)((SERPENT_STING_DEBUFF_TIME - nextTimer) / tickTime);
+            const int tickCount = std::max(0, nextTicks - prevTicks);
+            if (tickCount > 0)
+                applyAttackDamage(
+                    ctx,
+                    EntityType::NPC,
+                    i,
+                    npc.statistics,
+                    npc.group,
+                    npc.base,
+                    SERPENT_STING_DAMAGE * tickCount,
+                    0);
 
-        applyAttackDamage(
-            ctx,
-            EntityType::NPC,
-            i,
-            npc.statistics,
-            npc.group,
-            npc.base,
-            SERPENT_STING_DAMAGE * tickCount,
-            0);
+            if (nextTimer <= 0.0f)
+                removeDebuff(debuff, i, (int)j);
+        }
     }
 }

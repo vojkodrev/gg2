@@ -6,6 +6,7 @@
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
 #include "../gameplay/statistics/SetHp.h"
+#include "../gameplay/attacks/debuff/ResetDebuff.h"
 #include "../gameplay/ai/ClearNpcAiTarget.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
@@ -50,8 +51,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         setHp(npc.statistics, n, NPC_HP);
         npc.statistics.health.maxHp[n] = NPC_HP;
-        npc.concussiveShotDebuffTimer[n] = 0.0f;
-        npc.serpentStingDebuffTimer[n] = 0.0f;
+        resetDebuff(npc.concussiveShotDebuff, n);
+        resetDebuff(npc.serpentStingDebuff, n);
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;
