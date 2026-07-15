@@ -56,6 +56,7 @@
 #include "npc/SpawnNpcSystem.h"
 #include "camera/CameraSystem.h"
 #include "NPCAiSystem.h"
+#include "ai/MonsterAggroSystem.h"
 #include "animation/RotationAnimationSystem.h"
 #include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
@@ -125,6 +126,7 @@ int main()
         
         spawnNpcSystem(*ctx);
         npcAiTimerSystem(*ctx);
+        monsterAggroSystem(*ctx);
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);

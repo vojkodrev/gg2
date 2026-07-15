@@ -5,7 +5,6 @@
 #include "../attacks/aggroTable/ResetAggroTable.h"
 #include "../attacks/debuff/ResetDebuff.h"
 #include "../ai/ClearNpcAiTarget.h"
-#include "../ai/SetNpcAiStateIdle.h"
 
 void spawnNpcSystem(Context &ctx)
 {
@@ -34,7 +33,6 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
             resetAggroTable(ctx.data.npc.aggroTable, i);
-            setNpcAiStateIdle(i, ctx);
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;

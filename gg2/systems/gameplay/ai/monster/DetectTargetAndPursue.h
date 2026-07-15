@@ -5,23 +5,38 @@
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "NpcMonsterConstants.h"
 #include "../SetNpcAiStatePursueTarget.h"
+#include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../utils/collision/DistToEntity.h"
 
 inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
 {
+    const int petId = ctx.data.player.petId;
+
     if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
     {
-        setNpcAiStatePursueTarget(n, ctx, EntityType::Player, 0, true);
+        addToAggroTableValue(
+            ctx.data.npc.aggroTable,
+            n,
+            EntityType::Player,
+            0,
+            0.0f);
+        setNpcAiStatePursueTarget(n, ctx);
+        return true;
+    }
+    else if (
+        petId != INVALID_ID &&
+        ctx.data.npc.active[petId] &&
+        distToEntity(ctx, n, EntityType::NPC, petId) < NPC_DETECT_RADIUS)
+    {
+        addToAggroTableValue(
+            ctx.data.npc.aggroTable,
+            n,
+            EntityType::NPC,
+            petId,
+            0.0f);
+        setNpcAiStatePursueTarget(n, ctx);
         return true;
     }
 
-    const int petId = ctx.data.player.petId;
-    if (petId == INVALID_ID || !ctx.data.npc.active[petId])
-        return false;
-
-    if (distToEntity(ctx, n, EntityType::NPC, petId) >= NPC_DETECT_RADIUS)
-        return false;
-
-    setNpcAiStatePursueTarget(n, ctx, EntityType::NPC, petId, true);
-    return true;
+    return false;
 }

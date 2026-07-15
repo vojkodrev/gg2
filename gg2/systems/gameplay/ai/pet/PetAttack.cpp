@@ -1,6 +1,6 @@
 #include "PetAttack.h"
 #include "../../../structs/core/constants/IndexConstants.h"
-#include "../monster/RefreshNpcAttackedTimerOrPursueTarget.h"
+#include "../monster/RefreshNpcAttackedTimer.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
@@ -29,7 +29,7 @@ void petAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursueTarget(n, ctx, targetType, targetId, false);
+        setNpcAiStatePursueTarget(n, ctx);
         return;
     }
 
@@ -42,7 +42,7 @@ void petAttack(uint32_t n, Context &ctx)
     if (effectIndex == INVALID_ID)
         return;
 
-    refreshNpcAttackedTimerOrPursueTarget(targetId, ctx, EntityType::NPC, n);
+    refreshNpcAttackedTimer(targetId, ctx);
 
     const int damage = applyAttackDamage(
         ctx,

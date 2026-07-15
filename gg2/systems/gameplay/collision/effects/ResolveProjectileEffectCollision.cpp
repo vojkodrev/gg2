@@ -8,7 +8,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../ai/monster/RefreshNpcAttackedTimerOrPursueTarget.h"
+#include "../../ai/monster/RefreshNpcAttackedTimer.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 
@@ -35,11 +35,7 @@ void resolveProjectileEffectCollision(
             return;
 
         if (parentType == EntityType::Player)
-            refreshNpcAttackedTimerOrPursueTarget(
-                npcIndex,
-                ctx,
-                EntityType::Player,
-                0);
+            refreshNpcAttackedTimer(npcIndex, ctx);
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {

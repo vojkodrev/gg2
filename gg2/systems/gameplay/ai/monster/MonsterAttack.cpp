@@ -31,7 +31,7 @@ void monsterAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursueTarget(n, ctx, targetType, targetId, false);
+        setNpcAiStatePursueTarget(n, ctx);
         return;
     }
 
