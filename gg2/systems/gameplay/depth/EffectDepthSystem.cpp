@@ -4,9 +4,9 @@
 
 void effectDepthSystem(Context &ctx)
 {
-    for (uint32_t i = 0; i < ctx.data.effect.pool.count; i++)
+    for (uint32_t i = 0; i < ctx.data.effect.pool.count[0]; i++)
     {
-        if (!ctx.data.effect.pool.active[i])
+        if (!ctx.data.effect.pool.active[0][i])
             continue;
 
         switch (ctx.data.effect.parent.type[i])

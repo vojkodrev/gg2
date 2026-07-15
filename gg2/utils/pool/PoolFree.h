@@ -2,20 +2,20 @@
 #include "Pool.h"
 #include "../queue/QueueEnqueue.h"
 
-template<uint32_t TCapacity>
-void poolFree(Pool<TCapacity>& pool, int index)
+template<int NItems, uint32_t NSlots>
+void poolFree(Pool<NItems, NSlots>& pool, uint32_t n, int index)
 {
-    if (!pool.active[index])
+    if (!pool.active[n][index])
         return;
 
-    pool.active[index] = false;
+    pool.active[n][index] = false;
 
-    if ((uint32_t)(index + 1) == pool.count)
+    if ((uint32_t)(index + 1) == pool.count[n])
     {
-        while (pool.count > 0 && !pool.active[pool.count - 1])
-            pool.count--;
+        while (pool.count[n] > 0 && !pool.active[n][pool.count[n] - 1])
+            pool.count[n]--;
         return;
     }
 
-    queueEnqueue(pool.freeQueue, index);
+    queueEnqueue(pool.freeQueue, n, index);
 }

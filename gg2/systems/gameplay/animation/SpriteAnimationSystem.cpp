@@ -20,7 +20,7 @@ void spriteAnimationSystem(Context &ctx)
 
     for (uint32_t i = 0; i < MAX_EFFECTS; i++)
     {
-        if (!ctx.data.effect.pool.active[i])
+        if (!ctx.data.effect.pool.active[0][i])
             continue;
 
         advanceSpriteAnimation(ctx.data.effect.base.animation, i, now);

@@ -1,13 +1,14 @@
 #pragma once
 #include <cstdint>
-#include "../../structs/core/Group.h"
+#include "../../structs/core/Groups.h"
+#include "../../structs/core/constants/IndexConstants.h"
 
 template<uint32_t TGroupCapacity>
-int groupRetain(Group<TGroupCapacity> &group, int groupId)
+int groupRetain(Groups<TGroupCapacity> &groups, int groupId)
 {
-    if (groupId < 0 || !group.pool.active[groupId])
-        return -1;
+    if (groupId < 0 || !groups.pool.active[0][groupId])
+        return INVALID_ID;
 
-    group.count[groupId]++;
+    groups.count[groupId]++;
     return groupId;
 }

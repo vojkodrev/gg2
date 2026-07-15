@@ -25,7 +25,6 @@ add_library(systems_gameplay
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerPetAttackSystem.cpp
-    attacks/PlayerPetFollowSystem.cpp
     attacks/PlayerSerpentStingAttackSystem.cpp
     attacks/SerpentStingDebuffSystem.cpp
     attacks/TogglePlayerAutoAttackSystem.cpp
@@ -47,14 +46,12 @@ add_library(systems_gameplay
     ai/monster/MonsterIdle.cpp
     ai/monster/MonsterPatrol.cpp
     ai/monster/MonsterPursueTarget.cpp
-    ai/monster/MonsterPursuingTarget.cpp
     ai/monster/MonsterAttack.cpp
     ai/monster/MonsterReturnToSpawn.cpp
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
     ai/pet/PetFollowPlayer.cpp
     ai/pet/PetPursueTarget.cpp
-    ai/pet/PetPursuingTarget.cpp
     ai/pet/PetAttack.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp

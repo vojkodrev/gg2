@@ -1,5 +1,5 @@
 #pragma once
-#include "SpatialHashConstants.h"
+#include "../../../structs/core/constants/SpatialHashConstants.h"
 
 inline int spatialHashBucketOf(int cx, int cy)
 {

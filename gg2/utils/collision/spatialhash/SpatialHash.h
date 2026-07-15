@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "SpatialHashConstants.h"
+#include "../../../structs/core/constants/SpatialHashConstants.h"
 
 // Flat spatial hash for broad-phase collision.
 // Entities in the same grid cell are collision candidates.

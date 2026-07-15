@@ -2,6 +2,7 @@
 #include "CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"
@@ -33,7 +34,7 @@ void playerConcussiveShotAttackSystem(Context &ctx)
         ProjectileType::ConcussiveShot,
         npcIndex,
         tint);
-    if (effectIndex == -1)
+    if (effectIndex == INVALID_ID)
         return;
 
     ctx.data.player.statistics.mana.mana[0] -= CONCUSSIVE_SHOT_MANA_COST;

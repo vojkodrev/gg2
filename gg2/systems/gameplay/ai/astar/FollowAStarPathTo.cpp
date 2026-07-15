@@ -42,7 +42,10 @@ void followAStarPathTo(
             ai.repathTimer[n] = NPC_REPATH_TIME;
 
         SDL_FPoint target = { (float)ai.path.point.x[n][i], (float)ai.path.point.y[n][i] };
-        const bool isConcussed = ctx.data.npc.concussiveShotDebuffTimer[n] > 0.0f;
+        const auto &debuff = ctx.data.npc.concussiveShotDebuff;
+        bool isConcussed = false;
+        for (uint32_t j = 0; j < MAX_DEBUFF_SLOTS; j++)
+            isConcussed = isConcussed || debuff.pool.active[n][j];
         const float moveSpeed = isConcussed ?
             NPC_MONSTER_SPEED * CONCUSSIVE_SHOT_SPEED_MULTIPLIER :
             NPC_MONSTER_SPEED;

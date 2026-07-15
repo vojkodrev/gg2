@@ -1,10 +1,10 @@
 #pragma once
 #include <cstdint>
 
-template<typename TValue, uint32_t TSize>
+template<typename TValue, int NItems, uint32_t NSlots>
 struct Queue
 {
-    TValue   data[TSize];
-    uint32_t head = 0;
-    uint32_t tail = 0;
+    TValue   data[NItems][NSlots];
+    uint32_t head[NItems] = {};
+    uint32_t tail[NItems] = {};
 };

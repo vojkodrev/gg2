@@ -1,8 +1,8 @@
 #pragma once
 #include "Queue.h"
 
-template<typename TValue, uint32_t TSize>
-bool queueEmpty(const Queue<TValue, TSize>& q)
+template<typename TValue, int NItems, uint32_t NSlots>
+bool queueEmpty(const Queue<TValue, NItems, NSlots>& q, uint32_t n)
 {
-    return q.head == q.tail;
+    return q.head[n] == q.tail[n];
 }

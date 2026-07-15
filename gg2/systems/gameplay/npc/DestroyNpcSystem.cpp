@@ -1,4 +1,5 @@
 #include "DestroyNpcSystem.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -16,11 +17,11 @@ void destroyNpcSystem(Context &ctx)
             continue;
 
         if (ctx.data.player.selectedNpc == static_cast<int>(i))
-            setSelectedNpc(ctx, -1);
+            setSelectedNpc(ctx, INVALID_ID);
 
-        for (uint32_t effectIndex = 0; effectIndex < ctx.data.effect.pool.count; effectIndex++)
+        for (uint32_t effectIndex = 0; effectIndex < ctx.data.effect.pool.count[0]; effectIndex++)
         {
-            if (!ctx.data.effect.pool.active[effectIndex])
+            if (!ctx.data.effect.pool.active[0][effectIndex])
                 continue;
 
             if (ctx.data.effect.type[effectIndex] != EffectType::Projectile)

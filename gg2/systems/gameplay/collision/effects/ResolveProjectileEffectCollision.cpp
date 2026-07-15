@@ -1,12 +1,14 @@
 #include "ResolveProjectileEffectCollision.h"
 #include "ColIdIndex.h"
 #include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/debuff/AddDebuff.h"
+#include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/npc/NPCAiType.h"
-#include "../../ai/monster/RefreshNpcAttackedTimerOrPursuingTarget.h"
+#include "../../ai/monster/RefreshNpcAttackedTimer.h"
 #include "../../projectile/DestroyProjectile.h"
 #include <algorithm>
 
@@ -27,34 +29,64 @@ void resolveProjectileEffectCollision(
     if (otherType == ColType::NPC)
     {
         const uint32_t npcIndex = colIdIndex(otherId);
+        const EntityType parentType = effect.parent.type[effectIndex];
+        const int parentId = effect.parent.id[effectIndex];
         if (ctx.data.npc.ai.type[npcIndex] == NPCAiType::Pet)
             return;
 
-        if (effect.parent.type[effectIndex] == EntityType::Player)
-            refreshNpcAttackedTimerOrPursuingTarget(
-                npcIndex,
-                ctx,
-                EntityType::Player,
-                0);
+        if (parentType == EntityType::Player)
+            refreshNpcAttackedTimer(npcIndex, ctx);
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {
-            applyAttackDamage(
+            const int damage = applyAttackDamage(
                 ctx,
                 EntityType::NPC,
                 npcIndex,
+                ctx.data.npc.statistics,
+                ctx.data.npc.group,
+                ctx.data.npc.base,
                 PROJECTILE_DAMAGE,
                 PROJECTILE_DAMAGE_RANDOM_RANGE);
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                (float)damage);
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
         {
-            ctx.data.npc.serpentStingDebuffTimer[npcIndex] =
-                SERPENT_STING_DEBUFF_TIME;
+            addDebuff(
+                ctx.data.npc.serpentStingDebuff,
+                npcIndex,
+                parentType,
+                parentId,
+                SERPENT_STING_DEBUFF_TIME);
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                0.0f);
         }
         else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
         {
-            ctx.data.npc.concussiveShotDebuffTimer[npcIndex] =
-                CONCUSSIVE_SHOT_DEBUFF_TIME;
+            addDebuff(
+                ctx.data.npc.concussiveShotDebuff,
+                npcIndex,
+                parentType,
+                parentId,
+                CONCUSSIVE_SHOT_DEBUFF_TIME);
+
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                npcIndex,
+                parentType,
+                parentId,
+                CONCUSSIVE_SHOT_AGGRO_VALUE);
         }
 
         destroyProjectile(ctx, effectIndex);

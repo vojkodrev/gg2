@@ -2,8 +2,9 @@
 #include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
+#include "../attacks/aggroTable/ResetAggroTable.h"
+#include "../attacks/debuff/ResetDebuff.h"
 #include "../ai/ClearNpcAiTarget.h"
-#include "../ai/SetNpcAiStateIdle.h"
 
 void spawnNpcSystem(Context &ctx)
 {
@@ -27,11 +28,12 @@ void spawnNpcSystem(Context &ctx)
         {
             ctx.data.npc.active[i] = true;
             setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.health.maxHp[i]);
-            ctx.data.npc.concussiveShotDebuffTimer[i] = 0.0f;
-            ctx.data.npc.serpentStingDebuffTimer[i] = 0.0f;
+            resetDebuff(ctx.data.npc.concussiveShotDebuff, i);
+            resetDebuff(ctx.data.npc.serpentStingDebuff, i);
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
-            setNpcAiStateIdle(i, ctx);
+            resetAggroTable(ctx.data.npc.aggroTable, i);
+            ctx.data.npc.ai.state[i] = NPCAiState::Idle;
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;

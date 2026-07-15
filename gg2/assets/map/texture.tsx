@@ -85,6 +85,7 @@
   <properties>
    <property name="AI" type="int" value="2"/>
    <property name="facing" value="right"/>
+   <property name="healthbar" value="healthbar"/>
   </properties>
   <objectgroup draworder="index" id="3">
    <object id="3" name="collision" x="16.6667" y="40.6667" width="33.6667" height="15.6667"/>
@@ -205,6 +206,12 @@
  <tile id="362">
   <properties>
    <property name="icon" value="concussiveShot"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
+ <tile id="363">
+  <properties>
+   <property name="icon" value="petAutoAttack"/>
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>

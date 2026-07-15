@@ -1,4 +1,5 @@
 #include "PetFollowPlayer.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "EntityColAABB.h"
 #include "AreColBoxesNear.h"
 #include "SetNpcAiStateIdle.h"
@@ -15,5 +16,5 @@ void petFollowPlayer(uint32_t n, Context &ctx)
         return;
     }
 
-    followAStarPathTo(n, ctx, playerCol, -1);
+    followAStarPathTo(n, ctx, playerCol, INVALID_ID);
 }

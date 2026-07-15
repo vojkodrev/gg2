@@ -1,16 +1,18 @@
 #include "PetAttack.h"
+#include "../../../structs/core/constants/IndexConstants.h"
+#include "../monster/RefreshNpcAttackedTimer.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "SetNpcAiStateIdle.h"
-#include "SetNpcAiStatePursuingTarget.h"
+#include "../SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../effects/EffectAlloc.h"
-#include "../monster/CanMonsterAttackTarget.h"
 
 void petAttack(uint32_t n, Context &ctx)
 {
@@ -18,11 +20,6 @@ void petAttack(uint32_t n, Context &ctx)
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
 
-    if (!canMonsterAttackTarget(targetType))
-    {
-        setNpcAiStateIdle(n, ctx);
-        return;
-    }
     if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
     {
         setNpcAiStateIdle(n, ctx);
@@ -32,28 +29,37 @@ void petAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursuingTarget(n, ctx, targetType, targetId);
+        setNpcAiStatePursueTarget(n, ctx);
         return;
     }
-
-    if (targetType != EntityType::NPC)
-        return;
 
     if (ctx.data.npc.autoAttack.attackTimer[n] > 0.0f)
         return;
 
-    const int targetGroupId = ctx.data.npc.groupId[targetId];
+    const int targetGroupId = ctx.data.npc.group.id[targetId];
 
     const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, targetGroupId);
-    if (effectIndex == -1)
+    if (effectIndex == INVALID_ID)
         return;
 
-    applyAttackDamage(
+    refreshNpcAttackedTimer(targetId, ctx);
+
+    const int damage = applyAttackDamage(
         ctx,
         EntityType::NPC,
         targetId,
+        ctx.data.npc.statistics,
+        ctx.data.npc.group,
+        ctx.data.npc.base,
         PET_DAMAGE,
         PET_DAMAGE_RANDOM_RANGE);
+
+    addToAggroTableValue(
+        ctx.data.npc.aggroTable,
+        targetId,
+        EntityType::NPC,
+        (int)n,
+        (float)damage);
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,

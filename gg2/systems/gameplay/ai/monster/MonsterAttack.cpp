@@ -2,11 +2,12 @@
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "../../../../structs/core/AnimationState.h"
+#include "../../../../structs/core/EntityType.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "SetNpcAiStateReturnToSpawn.h"
-#include "SetNpcAiStatePursuingTarget.h"
-#include "CanMonsterAttackTarget.h"
+#include "../SetNpcAiStatePursueTarget.h"
+#include "../../attacks/aggroTable/ClearInactiveAggroTableEntitiesIfMaxInactive.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
 {
@@ -15,16 +16,43 @@ void monsterAttack(uint32_t n, Context &ctx)
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
+
     const auto &target = ctx.data.npc.ai.target;
-    if (!canMonsterAttackTarget(target.type[n]))
+    auto &aggroTable = ctx.data.npc.aggroTable;
+    clearInactiveAggroTableEntitiesIfMaxInactive(
+        aggroTable,
+        n,
+        ctx.data.npc.active);
+
+    if (aggroTable.pool.count[n] == 0)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
         return;
     }
-    const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[n], target.id[n]);
+
+    if (target.type[n] != aggroTable.maxEntityType[n] ||
+        target.id[n] != aggroTable.maxEntityId[n])
+    {
+        setNpcAiStatePursueTarget(n, ctx);
+        return;
+    }
+
+    const EntityType targetType = target.type[n];
+    const int targetId = target.id[n];
+    if (targetType != EntityType::Player && targetType != EntityType::NPC)
+    {
+        setNpcAiStateReturnToSpawn(n, ctx);
+        return;
+    }
+    if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
+    {
+        setNpcAiStateReturnToSpawn(n, ctx);
+        return;
+    }
+    const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursuingTarget(n, ctx, target.type[n], target.id[n]);
+        setNpcAiStatePursueTarget(n, ctx);
         return;
     }
 

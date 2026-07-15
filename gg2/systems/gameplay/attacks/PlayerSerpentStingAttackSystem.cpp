@@ -1,6 +1,7 @@
 #include "PlayerSerpentStingAttackSystem.h"
 #include "CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/AttackConstants.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
@@ -31,7 +32,7 @@ void playerSerpentStingAttackSystem(Context &ctx)
         ProjectileType::SerpentSting,
         npcIndex,
         tint);
-    if (effectIndex == -1)
+    if (effectIndex == INVALID_ID)
         return;
 
     ctx.data.player.statistics.mana.mana[0] -= SERPENT_STING_MANA_COST;

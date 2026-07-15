@@ -1,4 +1,5 @@
 #include "MoveEffectSystem.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -12,7 +13,7 @@
 
 void moveEffectSystem(Context &ctx)
 {
-    if (ctx.data.player.selectedEffectId != -1 && ctx.data.player.selectedNpc != -1)
+    if (ctx.data.player.selectedEffectId != INVALID_ID && ctx.data.player.selectedNpc != INVALID_ID)
     {
         const int effectIndex = ctx.data.player.selectedEffectId;
         const int npcIndex = ctx.data.player.selectedNpc;
@@ -21,9 +22,9 @@ void moveEffectSystem(Context &ctx)
             placeNpcSelector(ctx, effectIndex, npcIndex);
     }
 
-    for (uint32_t i = 0; i < ctx.data.effect.pool.count; i++)
+    for (uint32_t i = 0; i < ctx.data.effect.pool.count[0]; i++)
     {
-        if (!ctx.data.effect.pool.active[i])
+        if (!ctx.data.effect.pool.active[0][i])
             continue;
 
         if (ctx.data.effect.type[i] == EffectType::Projectile)

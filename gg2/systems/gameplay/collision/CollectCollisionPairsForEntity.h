@@ -2,8 +2,8 @@
 #include "CollisionConstants.h"
 #include "Context.h"
 #include "GetEntityColAABB.h"
+#include "../../../structs/core/constants/SpatialHashConstants.h"
 #include "spatialhash/SpatialHash.h"
-#include "spatialhash/SpatialHashConstants.h"
 #include "spatialhash/SpatialHashQuery.h"
 #include <SDL3/SDL.h>
 #include <cstdint>

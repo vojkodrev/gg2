@@ -1,5 +1,5 @@
 #pragma once
 #include "../../../../../structs/ai/AStarPool.h"
+#include "../../../../../structs/core/constants/IndexConstants.h"
 
-// Returns index into pool.ctx, or -1 if full
 int astarAlloc(AStarPool& pool);

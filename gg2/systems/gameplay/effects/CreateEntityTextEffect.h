@@ -5,7 +5,7 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
-#include "../ui/text/SpawnTextEffect.h"
+#include "../ui/text/CreateTextEffect.h"
 #include <algorithm>
 #include <string>
 
@@ -36,7 +36,7 @@ inline void createEntityTextEffect(
         CHARACTER_TINT_A
     };
 
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         groupId,
         type,

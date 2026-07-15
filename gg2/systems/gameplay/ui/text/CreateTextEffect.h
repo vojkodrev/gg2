@@ -2,6 +2,7 @@
 #include "../../../../structs/core/Context.h"
 #include "../../../../structs/core/EntityType.h"
 #include "../../../../structs/core/constants/FontConstants.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
@@ -13,7 +14,7 @@
 #include <string>
 
 template<uint32_t TQueueSize>
-inline void spawnTextEffect(
+inline void createTextEffect(
     Context &ctx,
     int groupId,
     EntityType parentType,
@@ -23,7 +24,7 @@ inline void spawnTextEffect(
     const std::string &text,
     SDL_FPoint pos,
     SDL_FColor tint,
-    Queue<int, TQueueSize> *effectIdsQueue)
+    Queue<int, 1, TQueueSize> *effectIdsQueue)
 {
     const auto &templateBase = ctx.data.effectTemplate.base;
     float x = pos.x;
@@ -32,11 +33,11 @@ inline void spawnTextEffect(
     {
         const unsigned char glyph = static_cast<unsigned char>(text[i]);
         const int effectIndex = effectAlloc(ctx.data.effect, ctx.data.groups, groupId);
-        if (effectIndex == -1)
+        if (effectIndex == INVALID_ID)
             return;
 
         if (effectIdsQueue != nullptr)
-            queueEnqueue(*effectIdsQueue, effectIndex);
+            queueEnqueue(*effectIdsQueue, 0, effectIndex);
 
         copyEntityBaseSlot(
             templateBase,
@@ -60,13 +61,15 @@ inline void spawnTextEffect(
 
         const float separator =
             text[i] == '.'
-            ? CHARACTER_ADVANCE_AFTER_NARROW_CHAR
+            ? CHARACTER_ADVANCE_AFTER_PERIOD
+            : text[i] == '(' || text[i] == ')'
+            ? CHARACTER_ADVANCE_AFTER_PARENTHESIS
             : CHARACTER_SEPARATOR;
         x += FONT_GLYPH_W + separator;
     }
 }
 
-inline void spawnTextEffect(
+inline void createTextEffect(
     Context &ctx,
     int groupId,
     EntityType parentType,
@@ -77,7 +80,7 @@ inline void spawnTextEffect(
     SDL_FPoint pos,
     SDL_FColor tint)
 {
-    spawnTextEffect(
+    createTextEffect(
         ctx,
         groupId,
         parentType,
@@ -87,5 +90,5 @@ inline void spawnTextEffect(
         text,
         pos,
         tint,
-        static_cast<Queue<int, 1> *>(nullptr));
+        static_cast<Queue<int, 1, 1> *>(nullptr));
 }

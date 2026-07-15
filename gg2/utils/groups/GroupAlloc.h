@@ -1,15 +1,16 @@
 #pragma once
 #include <cstdint>
-#include "../../structs/core/Group.h"
+#include "../../structs/core/Groups.h"
+#include "../../structs/core/constants/IndexConstants.h"
 #include "../pool/PoolAlloc.h"
 
 template<uint32_t TGroupCapacity>
-int groupAlloc(Group<TGroupCapacity> &group)
+int groupAlloc(Groups<TGroupCapacity> &groups)
 {
-    int index = poolAlloc(group.pool);
-    if (index == -1)
-        return -1;
+    int index = poolAlloc(groups.pool, 0);
+    if (index == INVALID_ID)
+        return INVALID_ID;
 
-    group.count[index] = 1;
+    groups.count[index] = 1;
     return index;
 }

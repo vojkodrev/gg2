@@ -1,6 +1,8 @@
 #pragma once
 #include "../attacks/AutoAttack.h"
+#include "../core/Group.h"
 #include "../core/EntityBase.h"
+#include "../core/constants/IndexConstants.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
 #include "../ui/Healthbar.h"
@@ -8,11 +10,11 @@
 
 struct Player
 {
-    int groupId = -1;
-    int petId = -1;
-    int selectedNpc = -1;
-    int previousSelectedNpc = -1;
-    int selectedEffectId = -1;
+    Group<1> group;
+    int petId = INVALID_ID;
+    int selectedNpc = INVALID_ID;
+    int previousSelectedNpc = INVALID_ID;
+    int selectedEffectId = INVALID_ID;
     float globalCooldownTimer = 0.0f;
     float concussiveShotCooldownTimer = 0.0f;
     AutoAttack<1> autoAttack;

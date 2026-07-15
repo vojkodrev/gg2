@@ -1,6 +1,6 @@
 #pragma once
 #include "SpatialHash.h"
-#include "SpatialHashConstants.h"
+#include "../../../structs/core/constants/SpatialHashConstants.h"
 #include "SpatialHashBucketOf.h"
 
 template<uint32_t N>

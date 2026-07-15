@@ -7,9 +7,9 @@ void debugRenderEffect(const Context &ctx)
         return;
 
     const auto &effect = ctx.data.effect;
-    for (uint32_t i = 0; i < effect.pool.count; i++)
+    for (uint32_t i = 0; i < effect.pool.count[0]; i++)
     {
-        if (!effect.pool.active[i])
+        if (!effect.pool.active[0][i])
             continue;
 
         debugRenderEntityBase(ctx, effect.base, i, SDL_Color{255, 0, 255, 255});

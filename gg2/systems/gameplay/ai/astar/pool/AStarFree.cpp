@@ -4,9 +4,9 @@
 
 void astarFree(AStarPool& pool, int index)
 {
-    if (!pool.pool.active[index])
+    if (!pool.pool.active[0][index])
         return;
 
     pool.ctx.status[index].store(AStarStatus::IDLE, std::memory_order_relaxed);
-    poolFree(pool.pool, index);
+    poolFree(pool.pool, 0, index);
 }

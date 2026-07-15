@@ -1,4 +1,5 @@
 #include "CreateNpcSelectorSystem.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
 #include "../../../../structs/core/EntityType.h"
@@ -9,7 +10,7 @@
 void createNpcSelectorSystem(Context &ctx)
 {
     auto &player = ctx.data.player;
-    if (player.selectedNpc == -1 || player.selectedEffectId != -1)
+    if (player.selectedNpc == INVALID_ID || player.selectedEffectId != INVALID_ID)
         return;
 
     if (player.previousSelectedNpc == player.selectedNpc)
@@ -17,8 +18,8 @@ void createNpcSelectorSystem(Context &ctx)
 
     const int npcIndex = player.selectedNpc;
     const int effectIndex =
-        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.npc.groupId[npcIndex]);
-    if (effectIndex == -1)
+        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.npc.group.id[npcIndex]);
+    if (effectIndex == INVALID_ID)
         return;
 
     copyEntityBaseSlot(

@@ -1,5 +1,6 @@
 #include "PlayerRangedAutoAttackSystem.h"
 #include "CanPlayerRangedAttack.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"
@@ -25,7 +26,7 @@ void playerRangedAutoAttackSystem(Context &ctx)
             ProjectileType::AutoAttack,
             npcIndex,
             tint);
-        if (effectIndex == -1)
+        if (effectIndex == INVALID_ID)
             return;
         ctx.data.player.autoAttack.attackTimer[0] = PLAYER_AUTO_ATTACK_DELAY;
         ctx.data.player.equipment.weapon.showAmmo[0] = false;

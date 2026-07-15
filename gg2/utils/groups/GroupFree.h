@@ -1,16 +1,16 @@
 #pragma once
 #include <cstdint>
-#include "../../structs/core/Group.h"
+#include "../../structs/core/Groups.h"
 #include "../pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>
-void groupFree(Group<TGroupCapacity> &group, int groupId)
+void groupFree(Groups<TGroupCapacity> &groups, int groupId)
 {
-    if (!group.pool.active[groupId] || group.count[groupId] == 0)
+    if (!groups.pool.active[0][groupId] || groups.count[groupId] == 0)
         return;
 
-    group.count[groupId]--;
+    groups.count[groupId]--;
 
-    if (group.count[groupId] == 0)
-        poolFree(group.pool, groupId);
+    if (groups.count[groupId] == 0)
+        poolFree(groups.pool, 0, groupId);
 }

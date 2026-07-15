@@ -1,4 +1,5 @@
 #include "RequestAStarPath.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/ai/AStarStatus.h"
 #include "../../../../structs/npc/NPCPathStatus.h"
 #include "pool/AStarAlloc.h"
@@ -19,7 +20,7 @@ void requestAStarPath(
     npcAi.path.status[npcIndex].store(NPCPathStatus::PATH_REQUESTED, std::memory_order_relaxed);
 
     int astarIndex = astarAlloc(ctx.astarPool);
-    if (astarIndex == -1)
+    if (astarIndex == INVALID_ID)
         return;
 
     auto& astar = ctx.astarPool.ctx;

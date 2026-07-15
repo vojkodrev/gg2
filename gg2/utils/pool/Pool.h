@@ -2,10 +2,10 @@
 #include <cstdint>
 #include "../queue/Queue.h"
 
-template<uint32_t TCapacity>
+template<int NItems, uint32_t NSlots>
 struct Pool
 {
-    uint32_t count = 0;
-    bool active[TCapacity];
-    Queue<int, TCapacity> freeQueue;
+    uint32_t count[NItems] = {};
+    bool active[NItems][NSlots] = {};
+    Queue<int, NItems, NSlots> freeQueue;
 };

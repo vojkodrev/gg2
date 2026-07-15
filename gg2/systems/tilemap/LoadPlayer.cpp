@@ -5,6 +5,7 @@
 #include "LoadHealthbar.h"
 #include "LoadManabar.h"
 #include "../gameplay/statistics/SetHp.h"
+#include "../../structs/core/constants/IndexConstants.h"
 #include "../../structs/core/constants/PlayerConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include <tmxlite/TileLayer.hpp>
@@ -25,14 +26,14 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.statistics.mana.mana[0] = PLAYER_MANA;
         ctx.data.player.statistics.mana.maxMana[0] = PLAYER_MANA;
         ctx.data.player.statistics.mana.dirty[0] = true;
-        ctx.data.player.petId = -1;
-        ctx.data.player.selectedNpc = -1;
-        ctx.data.player.previousSelectedNpc = -1;
-        ctx.data.player.selectedEffectId = -1;
+        ctx.data.player.petId = INVALID_ID;
+        ctx.data.player.selectedNpc = INVALID_ID;
+        ctx.data.player.previousSelectedNpc = INVALID_ID;
+        ctx.data.player.selectedEffectId = INVALID_ID;
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
         loadManabar(ctx.data.player.manabar, 0, tileset, idx, props);
-        ctx.data.player.groupId = groupAlloc(ctx.data.groups);
+        ctx.data.player.group.id[0] = groupAlloc(ctx.data.groups);
         break;
     }
 }

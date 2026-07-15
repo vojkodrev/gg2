@@ -1,9 +1,9 @@
 #include "SerpentStingDebuffSystem.h"
-#include "../statistics/SetHpDamage.h"
-#include "../effects/CreateEntityTextEffect.h"
+#include "ApplyAttackDamage.h"
+#include "debuff/RemoveDebuff.h"
+#include "aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
-#include <string>
 
 void serpentStingDebuffSystem(Context &ctx)
 {
@@ -17,30 +17,43 @@ void serpentStingDebuffSystem(Context &ctx)
         if (!npc.active[i])
             continue;
 
-        const float prevTimer = npc.serpentStingDebuffTimer[i];
-        if (prevTimer <= 0.0f)
-            continue;
+        auto &debuff = npc.serpentStingDebuff;
+        for (uint32_t j = 0; j < debuff.pool.count[i]; j++)
+        {
+            if (!debuff.pool.active[i][j])
+                continue;
 
-        const float nextTimer = std::max(0.0f, prevTimer - dt);
-        npc.serpentStingDebuffTimer[i] = nextTimer;
+            const float prevTimer = debuff.timer[i][j];
+            const float nextTimer = std::max(0.0f, prevTimer - dt);
+            debuff.timer[i][j] = nextTimer;
 
-        const int prevTicks =
-            (int)((SERPENT_STING_DEBUFF_TIME - prevTimer) / tickTime);
-        const int nextTicks =
-            (int)((SERPENT_STING_DEBUFF_TIME - nextTimer) / tickTime);
-        const int tickCount = std::max(0, nextTicks - prevTicks);
-        if (tickCount == 0)
-            continue;
+            const int prevTicks =
+                (int)((SERPENT_STING_DEBUFF_TIME - prevTimer) / tickTime);
+            const int nextTicks =
+                (int)((SERPENT_STING_DEBUFF_TIME - nextTimer) / tickTime);
+            const int tickCount = std::max(0, nextTicks - prevTicks);
+            if (tickCount > 0)
+            {
+                const int damage = applyAttackDamage(
+                    ctx,
+                    EntityType::NPC,
+                    i,
+                    npc.statistics,
+                    npc.group,
+                    npc.base,
+                    SERPENT_STING_DAMAGE * tickCount,
+                    0);
 
-        const int damage = SERPENT_STING_DAMAGE * tickCount;
-        const int appliedDamage = setHpDamage(npc.statistics, i, damage);
-        if (appliedDamage > 0)
-            createEntityTextEffect(
-                ctx,
-                npc.groupId[i],
-                EntityType::NPC,
-                i,
-                npc.base,
-                std::to_string(appliedDamage));
+                addToAggroTableValue(
+                    npc.aggroTable,
+                    i,
+                    debuff.entityType[i][j],
+                    debuff.entityId[i][j],
+                    (float)damage);
+            }
+
+            if (nextTimer <= 0.0f)
+                removeDebuff(debuff, i, (int)j);
+        }
     }
 }

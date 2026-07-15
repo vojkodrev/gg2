@@ -8,7 +8,7 @@
 #include "Object.h"
 #include "Effect.h"
 #include "EffectTemplate.h"
-#include "Group.h"
+#include "Groups.h"
 #include "constants/GroupConstants.h"
 #include "../input/ActionState.h"
 #include "../debug/DebugFps.h"
@@ -23,7 +23,7 @@ struct Data
     Camera camera;
     NPC npc;
     Object object;
-    Group<MAX_GROUPS> groups;
+    Groups<MAX_GROUPS> groups;
     Effect effect;
     EffectTemplate effectTemplate;
     ActionState action;

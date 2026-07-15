@@ -2,6 +2,7 @@ add_library(systems_core
     debug/ClearDebugFpsEffects.cpp
     debug/DebugFpsSystem.cpp
     debug/DebugStateSystem.cpp
+    debug/FormatDebugFrameTime.cpp
     frame/FrameRateLimitSystem.cpp
     frame/RefreshFrameTiming.cpp
     input/ActionStateSystem.cpp

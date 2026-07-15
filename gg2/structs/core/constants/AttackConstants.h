@@ -1,5 +1,8 @@
 #pragma once
 
+const int MAX_AGGRO_SLOTS = 10;
+const int MAX_DEBUFF_SLOTS = 10;
+
 const float GLOBAL_COOLDOWN_DELAY = 1.5f;
 
 const float AUTO_ATTACK_ACTION_BAR_TINT_R = 1.0f;

@@ -1,12 +1,13 @@
 #include "NpcMouseSelectSystem.h"
 #include "SetSelectedNpc.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
 
 void npcMouseSelectSystem(Context &ctx)
 {
     if (!ctx.data.action.mouseLeftReleased)
         return;
 
-    int nextSelectedNpc = -1;
+    int nextSelectedNpc = INVALID_ID;
 
     for (int i = 0; i < MAX_NPCS; i++)
     {
