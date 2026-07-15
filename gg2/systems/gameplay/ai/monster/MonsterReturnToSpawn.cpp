@@ -8,6 +8,7 @@
 #include "ClearNpcAiTarget.h"
 #include "SetNpcAiStateIdle.h"
 #include "../../attacks/aggroTable/ResetAggroTable.h"
+#include "../../attacks/debuff/ResetDebuff.h"
 
 void monsterReturnToSpawn(uint32_t n, Context &ctx)
 {
@@ -16,6 +17,8 @@ void monsterReturnToSpawn(uint32_t n, Context &ctx)
     {
         clearNpcAiTarget(n, ctx);
         resetAggroTable(ctx.data.npc.aggroTable, n);
+        resetDebuff(ctx.data.npc.concussiveShotDebuff, n);
+        resetDebuff(ctx.data.npc.serpentStingDebuff, n);
     }
 
     SDL_FPoint spawnPt = { ai.spawn.x[n], ai.spawn.y[n] };
