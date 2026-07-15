@@ -33,6 +33,7 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
             resetAggroTable(ctx.data.npc.aggroTable, i);
+            ctx.data.npc.ai.state[i] = NPCAiState::Idle;
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;
