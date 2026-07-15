@@ -11,6 +11,7 @@
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../effects/EffectAlloc.h"
 
 void petAttack(uint32_t n, Context &ctx)
@@ -43,7 +44,7 @@ void petAttack(uint32_t n, Context &ctx)
 
     refreshNpcAttackedTimerOrPursueTarget(targetId, ctx, EntityType::NPC, n);
 
-    applyAttackDamage(
+    const int damage = applyAttackDamage(
         ctx,
         EntityType::NPC,
         targetId,
@@ -52,6 +53,13 @@ void petAttack(uint32_t n, Context &ctx)
         ctx.data.npc.base,
         PET_DAMAGE,
         PET_DAMAGE_RANDOM_RANGE);
+
+    addToAggroTableValue(
+        ctx.data.npc.aggroTable,
+        targetId,
+        EntityType::NPC,
+        (int)n,
+        (float)damage);
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,

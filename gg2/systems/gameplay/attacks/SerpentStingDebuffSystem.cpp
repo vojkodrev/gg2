@@ -1,6 +1,7 @@
 #include "SerpentStingDebuffSystem.h"
 #include "ApplyAttackDamage.h"
 #include "debuff/RemoveDebuff.h"
+#include "aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
 
@@ -32,7 +33,8 @@ void serpentStingDebuffSystem(Context &ctx)
                 (int)((SERPENT_STING_DEBUFF_TIME - nextTimer) / tickTime);
             const int tickCount = std::max(0, nextTicks - prevTicks);
             if (tickCount > 0)
-                applyAttackDamage(
+            {
+                const int damage = applyAttackDamage(
                     ctx,
                     EntityType::NPC,
                     i,
@@ -41,6 +43,14 @@ void serpentStingDebuffSystem(Context &ctx)
                     npc.base,
                     SERPENT_STING_DAMAGE * tickCount,
                     0);
+
+                addToAggroTableValue(
+                    npc.aggroTable,
+                    i,
+                    debuff.entityType[i][j],
+                    debuff.entityId[i][j],
+                    (float)damage);
+            }
 
             if (nextTimer <= 0.0f)
                 removeDebuff(debuff, i, (int)j);

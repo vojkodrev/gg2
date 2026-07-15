@@ -90,7 +90,7 @@ void resolveProjectileEffectCollision(
                 npcIndex,
                 parentType,
                 parentId,
-                0.0f);
+                CONCUSSIVE_SHOT_AGGRO_VALUE);
         }
 
         destroyProjectile(ctx, effectIndex);
