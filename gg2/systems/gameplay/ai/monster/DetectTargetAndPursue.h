@@ -4,7 +4,9 @@
 #include "../../../structs/core/EntityType.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "NpcMonsterConstants.h"
+#include "RefreshNpcAttackedTimer.h"
 #include "../SetNpcAiStatePursueTarget.h"
+#include "../SetNpcAiTarget.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../utils/collision/DistToEntity.h"
 
@@ -20,8 +22,6 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
             EntityType::Player,
             0,
             0.0f);
-        setNpcAiStatePursueTarget(n, ctx);
-        return true;
     }
     else if (
         petId != INVALID_ID &&
@@ -34,9 +34,18 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
             EntityType::NPC,
             petId,
             0.0f);
-        setNpcAiStatePursueTarget(n, ctx);
-        return true;
     }
 
-    return false;
+    const auto &aggroTable = ctx.data.npc.aggroTable;
+    if (aggroTable.maxEntityId[n] == INVALID_ID)
+        return false;
+
+    setNpcAiTarget(
+        n,
+        ctx,
+        aggroTable.maxEntityType[n],
+        aggroTable.maxEntityId[n]);
+    refreshNpcAttackedTimer(n, ctx);
+    setNpcAiStatePursueTarget(n, ctx);
+    return true;
 }

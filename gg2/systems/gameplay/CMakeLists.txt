@@ -40,7 +40,6 @@ add_library(systems_gameplay
     npc/select/NpcTabSelectSystem.cpp
     npc/select/SetSelectedNpc.cpp
     npc/SpawnNpcSystem.cpp
-    ai/MonsterAggroSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/MonsterAi.cpp
