@@ -10,7 +10,8 @@ void removeFromAggroTableValue(
     AggroTable<N> &aggroTable,
     uint32_t n,
     EntityType entityType,
-    int entityId)
+    int entityId,
+    bool manualRefresh = false)
 {
     int slot = findAggroTableSlotByEntityId(aggroTable, n, entityType, entityId);
 
@@ -25,6 +26,6 @@ void removeFromAggroTableValue(
     aggroTable.entityId[n][slot] = INVALID_ID;
     poolFree(aggroTable.pool, n, slot);
 
-    if (removedMaxEntity)
+    if (removedMaxEntity && !manualRefresh)
         refreshAggroTableMax(aggroTable, n);
 }

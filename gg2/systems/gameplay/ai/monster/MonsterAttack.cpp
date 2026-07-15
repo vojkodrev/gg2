@@ -7,6 +7,7 @@
 #include "../../../../structs/equipment/WeaponType.h"
 #include "SetNpcAiStateReturnToSpawn.h"
 #include "../SetNpcAiStatePursueTarget.h"
+#include "../../attacks/aggroTable/ClearInactiveAggroTableEntitiesIfMaxInactive.h"
 
 void monsterAttack(uint32_t n, Context &ctx)
 {
@@ -17,7 +18,12 @@ void monsterAttack(uint32_t n, Context &ctx)
     }
 
     const auto &target = ctx.data.npc.ai.target;
-    const auto &aggroTable = ctx.data.npc.aggroTable;
+    auto &aggroTable = ctx.data.npc.aggroTable;
+    clearInactiveAggroTableEntitiesIfMaxInactive(
+        aggroTable,
+        n,
+        ctx.data.npc.active);
+
     if (aggroTable.pool.count[n] == 0)
     {
         setNpcAiStateReturnToSpawn(n, ctx);
