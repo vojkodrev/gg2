@@ -9,11 +9,11 @@ struct DebugState
     bool showAmmoCollision = false;
     bool showEffectCollision = false;
 
-    bool prevCtrlAltFDown = false;
-    bool prevCtrlAlt0Down = false;
-    bool prevCtrlAlt1Down = false;
-    bool prevCtrlAlt2Down = false;
-    bool prevCtrlAlt3Down = false;
-    bool prevCtrlAlt4Down = false;
-    bool prevCtrlAlt5Down = false;
+    bool ctrlAltFArmed = false;
+    bool ctrlAlt0Armed = false;
+    bool ctrlAlt1Armed = false;
+    bool ctrlAlt2Armed = false;
+    bool ctrlAlt3Armed = false;
+    bool ctrlAlt4Armed = false;
+    bool ctrlAlt5Armed = false;
 };
