@@ -8,7 +8,7 @@
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../effects/EffectAlloc.h"
 
-void executePetAttack(uint32_t n, EntityType targetType, int targetId, Context &ctx)
+void executePetAttack(Context &ctx, uint32_t n, EntityType targetType, int targetId)
 {
     const int targetGroupId = ctx.data.npc.group.id[targetId];
 

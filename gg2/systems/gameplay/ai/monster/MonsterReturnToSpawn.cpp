@@ -25,5 +25,5 @@ void monsterReturnToSpawn(uint32_t n, Context &ctx)
     SDL_FRect spawnCol = centeredRect(spawnPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
     followAStarPathTo(n, ctx, spawnCol, INVALID_ID);
     if (hasReachedRect(ctx, n, spawnCol))
-        setNpcAiStateIdle(n, ctx);
+        setNpcAiStateIdle(ctx, n);
 }

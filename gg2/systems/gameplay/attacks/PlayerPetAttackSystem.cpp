@@ -37,6 +37,6 @@ void playerPetAttackSystem(Context &ctx)
         return;
     }
 
-    setNpcAiStatePursueTarget((uint32_t)petId, ctx);
+    setNpcAiStatePursueTarget(ctx, (uint32_t)petId);
     setNpcAiTarget((uint32_t)petId, ctx, EntityType::NPC, targetId);
 }

@@ -45,7 +45,7 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
         ctx,
         aggroTable.maxEntityType[n],
         aggroTable.maxEntityId[n]);
-    refreshNpcAttackedTimer(n, ctx);
-    setNpcAiStatePursueTarget(n, ctx);
+    refreshNpcAttackedTimer(ctx, n);
+    setNpcAiStatePursueTarget(ctx, n);
     return true;
 }

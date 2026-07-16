@@ -33,7 +33,7 @@ void monsterAttack(uint32_t n, Context &ctx)
     if (target.type[n] != aggroTable.maxEntityType[n] ||
         target.id[n] != aggroTable.maxEntityId[n])
     {
-        setNpcAiStatePursueTarget(n, ctx);
+        setNpcAiStatePursueTarget(ctx, n);
         return;
     }
 
@@ -52,7 +52,7 @@ void monsterAttack(uint32_t n, Context &ctx)
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursueTarget(n, ctx);
+        setNpcAiStatePursueTarget(ctx, n);
         return;
     }
 

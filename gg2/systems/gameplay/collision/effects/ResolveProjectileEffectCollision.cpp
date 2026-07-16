@@ -35,7 +35,7 @@ void resolveProjectileEffectCollision(
             return;
 
         if (parentType == EntityType::Player)
-            refreshNpcAttackedTimer(npcIndex, ctx);
+            refreshNpcAttackedTimer(ctx, npcIndex);
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
         {

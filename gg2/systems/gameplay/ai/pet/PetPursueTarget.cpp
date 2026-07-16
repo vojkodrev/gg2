@@ -19,7 +19,7 @@ void petPursueTarget(uint32_t n, Context &ctx)
         !ctx.data.npc.active[targetId] ||
         ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
     {
-        setNpcAiStateIdle(n, ctx);
+        setNpcAiStateIdle(ctx, n);
         return;
     }
 

@@ -3,4 +3,4 @@
 #include "../../../structs/core/EntityType.h"
 #include <cstdint>
 
-void executePetAttack(uint32_t n, EntityType targetType, int targetId, Context &ctx);
+void executePetAttack(Context &ctx, uint32_t n, EntityType targetType, int targetId);

@@ -17,25 +17,25 @@ void petAttack(uint32_t n, Context &ctx)
 
     if (targetType == EntityType::NPC && !ctx.data.npc.active[targetId])
     {
-        setNpcAiStateIdle(n, ctx);
+        setNpcAiStateIdle(ctx, n);
         return;
     }
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStatePursueTarget(n, ctx);
+        setNpcAiStatePursueTarget(ctx, n);
         return;
     }
 
     if (ctx.data.npc.tauntTimer[n] == 0.0f)
     {
-        refreshNpcAttackedTimer(targetId, ctx);
-        petTaunt(n, ctx);
+        refreshNpcAttackedTimer(ctx, targetId);
+        petTaunt(ctx, n);
     }
     else if (ctx.data.npc.autoAttack.attackTimer[n] == 0.0f)
     {
-        refreshNpcAttackedTimer(targetId, ctx);
-        executePetAttack(n, targetType, targetId, ctx);
+        refreshNpcAttackedTimer(ctx, targetId);
+        executePetAttack(ctx, n, targetType, targetId);
     }
 }

@@ -5,7 +5,7 @@
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../effects/EffectAlloc.h"
 
-void petTaunt(uint32_t n, Context &ctx)
+void petTaunt(Context &ctx, uint32_t n)
 {
     const int targetId = ctx.data.npc.ai.target.id[n];
 

@@ -24,7 +24,7 @@ void monsterPatrol(uint32_t n, Context &ctx)
         ai.patrol.index[n] = (p + 1) % ai.patrol.count[n];
         if ((rand() % 100) + 1 <= 10)
         {
-            setNpcAiStateIdle(n, ctx);
+            setNpcAiStateIdle(ctx, n);
         }
     }
 }
