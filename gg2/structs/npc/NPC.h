@@ -18,6 +18,8 @@ struct NPC
     bool active[MAX_NPCS] = {};
     bool initialized[MAX_NPCS] = {};
     float inactiveTimer[MAX_NPCS] = {};
+    float globalCooldownTimer[MAX_NPCS] = {};
+    float growlTimer[MAX_NPCS] = {};
     Group<MAX_NPCS> group;
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;

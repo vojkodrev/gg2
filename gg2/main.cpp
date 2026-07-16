@@ -36,7 +36,7 @@
 #include "equipment/MoveEquipmentSystem.h"
 #include "attacks/AutoAttackTimerSystem.h"
 #include "attacks/NpcAutoAttackSystem.h"
-#include "attacks/ConcussiveShotCooldownTimerSystem.h"
+#include "attacks/AbilityCooldownTimerSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerPetAttackSystem.h"
@@ -150,7 +150,7 @@ int main()
 
         autoAttackTimerSystem(*ctx);
         globalCooldownTimerSystem(*ctx);
-        concussiveShotCooldownTimerSystem(*ctx);
+        abilityCooldownTimerSystem(*ctx);
 
         togglePlayerAutoAttackSystem(*ctx);
 

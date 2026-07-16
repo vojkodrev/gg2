@@ -1,7 +1,7 @@
-#include "ConcussiveShotCooldownTimerSystem.h"
+#include "AbilityCooldownTimerSystem.h"
 #include "debuff/RemoveDebuff.h"
 
-void concussiveShotCooldownTimerSystem(Context &ctx)
+void abilityCooldownTimerSystem(Context &ctx)
 {
     auto &concussiveShotCooldownTimer = ctx.data.player.concussiveShotCooldownTimer;
     if (concussiveShotCooldownTimer > 0.0f)
@@ -15,6 +15,14 @@ void concussiveShotCooldownTimerSystem(Context &ctx)
     {
         if (!ctx.data.npc.active[npcId])
             continue;
+
+        auto &growlTimer = ctx.data.npc.growlTimer[npcId];
+        if (growlTimer > 0.0f)
+        {
+            growlTimer -= ctx.frame.dt;
+            if (growlTimer < 0.0f)
+                growlTimer = 0.0f;
+        }
 
         auto &debuff = ctx.data.npc.concussiveShotDebuff;
         for (uint32_t debuffIndex = 0; debuffIndex < debuff.pool.count[npcId]; debuffIndex++)
