@@ -21,7 +21,7 @@ void petTaunt(Context &ctx, uint32_t n)
         effectIndex);
     ctx.data.effect.base.animation.animationStartTime[effectIndex] = ctx.frame.now;
 
-    ctx.data.effect.type[effectIndex] = EffectType::Taunt;
+    ctx.data.effect.type[effectIndex] = EffectType::AttachedToEntity;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
     ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;

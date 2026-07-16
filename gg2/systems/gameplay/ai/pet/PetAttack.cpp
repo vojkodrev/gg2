@@ -28,12 +28,12 @@ void petAttack(uint32_t n, Context &ctx)
         return;
     }
 
-    if (ctx.data.npc.tauntTimer[n] == 0.0f)
+    if (ctx.data.npc.tauntTimer[n] <= 0.0f)
     {
         refreshNpcAttackedTimer(ctx, targetId);
         petTaunt(ctx, n);
     }
-    else if (ctx.data.npc.autoAttack.attackTimer[n] == 0.0f)
+    if (ctx.data.npc.autoAttack.attackTimer[n] <= 0.0f)
     {
         refreshNpcAttackedTimer(ctx, targetId);
         executePetAttack(ctx, n, targetType, targetId);
