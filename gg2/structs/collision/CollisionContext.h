@@ -10,5 +10,4 @@ struct CollisionContext
     uint32_t candidates[SPATIAL_HASH_MAX_PER_BUCKET * 4];
     std::shared_mutex spatialHashMutex;
     CollisionResult collisions;
-    CollisionResult effectCollisions;
 };

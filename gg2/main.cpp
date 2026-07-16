@@ -59,8 +59,7 @@
 #include "animation/RotationAnimationSystem.h"
 #include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
-#include "EffectCollisionSystem.h"
-#include "EffectCollisionResolutionSystem.h"
+#include "ProjectileCollisionSystem.h"
 #include "ui/bars/BarFrameSystem.h"
 #include "ui/bars/BarPositionSystem.h"
 #include "ui/bars/ShowBarSystem.h"
@@ -165,8 +164,7 @@ int main()
         moveEffectSystem(*ctx);
         destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
-        effectCollisionSystem(*ctx);
-        effectCollisionResolutionSystem(*ctx);
+        projectileCollisionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
 

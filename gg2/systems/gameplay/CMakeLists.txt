@@ -62,9 +62,7 @@ add_library(systems_gameplay
     ai/astar/pool/AStarFree.cpp
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
-    collision/effects/EffectCollisionSystem.cpp
-    collision/effects/EffectCollisionResolutionSystem.cpp
-    collision/effects/ResolveProjectileEffectCollision.cpp
+    collision/effects/ProjectileCollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
