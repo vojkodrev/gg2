@@ -14,3 +14,4 @@ const float NPC_ATTACKED_TIME    = 5.0f;
 const float NPC_IDLE_TIME_MIN    = 1.0f;
 const float NPC_IDLE_TIME_MAX    = 3.0f;
 const float NPC_REPATH_TIME      = 2.0f;
+const float NPC_TARGET_RANGE_CHECK_TIME = 0.25f;

@@ -24,4 +24,5 @@ struct NPCAi
     float attackedTimer[MAX_NPCS];
     float idleTimer[MAX_NPCS];
     float repathTimer[MAX_NPCS];
+    float targetRangeCheckTimer[MAX_NPCS];
 };

@@ -14,26 +14,32 @@ inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
 {
     const int petId = ctx.data.player.petId;
 
-    if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
+    auto &targetRangeCheckTimer = ctx.data.npc.ai.targetRangeCheckTimer[n];
+    if (targetRangeCheckTimer <= 0.0f)
     {
-        addToAggroTableValue(
-            ctx.data.npc.aggroTable,
-            n,
-            EntityType::Player,
-            0,
-            0.0f);
-    }
-    else if (
-        petId != INVALID_ID &&
-        ctx.data.npc.active[petId] &&
-        distToEntity(ctx, n, EntityType::NPC, petId) < NPC_DETECT_RADIUS)
-    {
-        addToAggroTableValue(
-            ctx.data.npc.aggroTable,
-            n,
-            EntityType::NPC,
-            petId,
-            0.0f);
+        targetRangeCheckTimer = NPC_TARGET_RANGE_CHECK_TIME;
+
+        if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
+        {
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                n,
+                EntityType::Player,
+                0,
+                0.0f);
+        }
+        else if (
+            petId != INVALID_ID &&
+            ctx.data.npc.active[petId] &&
+            distToEntity(ctx, n, EntityType::NPC, petId) < NPC_DETECT_RADIUS)
+        {
+            addToAggroTableValue(
+                ctx.data.npc.aggroTable,
+                n,
+                EntityType::NPC,
+                petId,
+                0.0f);
+        }
     }
 
     const auto &aggroTable = ctx.data.npc.aggroTable;
