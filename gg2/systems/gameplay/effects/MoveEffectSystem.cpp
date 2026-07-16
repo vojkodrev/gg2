@@ -38,7 +38,8 @@ void moveEffectSystem(Context &ctx)
                 PROJECTILE_SPEED);
         }
         else if (
-            ctx.data.effect.type[i] == EffectType::AttachedToEntity &&
+            (ctx.data.effect.type[i] == EffectType::BloodSplatter ||
+             ctx.data.effect.type[i] == EffectType::Taunt) &&
             ctx.data.effect.parent.type[i] == EntityType::NPC)
         {
             const int npcIndex = ctx.data.effect.parent.id[i];
