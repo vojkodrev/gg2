@@ -54,6 +54,7 @@ add_library(systems_gameplay
     ai/pet/PetPursueTarget.cpp
     ai/pet/PetAttack.cpp
     ai/pet/ExecutePetAttack.cpp
+    ai/pet/PetTaunt.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp

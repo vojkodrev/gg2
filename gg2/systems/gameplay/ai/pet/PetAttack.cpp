@@ -4,6 +4,7 @@
 #include "ExecutePetAttack.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
+#include "PetTaunt.h"
 #include "SetNpcAiStateIdle.h"
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
@@ -27,9 +28,14 @@ void petAttack(uint32_t n, Context &ctx)
         return;
     }
 
-    if (ctx.data.npc.autoAttack.attackTimer[n] > 0.0f)
-        return;
-
-    refreshNpcAttackedTimer(targetId, ctx);
-    executePetAttack(n, targetType, targetId, ctx);
+    if (ctx.data.npc.tauntTimer[n] == 0.0f)
+    {
+        refreshNpcAttackedTimer(targetId, ctx);
+        petTaunt(n, ctx);
+    }
+    else if (ctx.data.npc.autoAttack.attackTimer[n] == 0.0f)
+    {
+        refreshNpcAttackedTimer(targetId, ctx);
+        executePetAttack(n, targetType, targetId, ctx);
+    }
 }
