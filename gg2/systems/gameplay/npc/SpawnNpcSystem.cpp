@@ -2,9 +2,7 @@
 #include "../statistics/SetHp.h"
 #include "../../../structs/core/constants/NpcConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
-#include "../attacks/aggroTable/ResetAggroTable.h"
-#include "../attacks/debuff/ResetDebuff.h"
-#include "../ai/ClearNpcAiTarget.h"
+#include "../ai/ResetNpcCombatState.h"
 
 void spawnNpcSystem(Context &ctx)
 {
@@ -28,11 +26,9 @@ void spawnNpcSystem(Context &ctx)
         {
             ctx.data.npc.active[i] = true;
             setHp(ctx.data.npc.statistics, i, ctx.data.npc.statistics.health.maxHp[i]);
-            resetDebuff(ctx.data.npc.concussiveShotDebuff, i);
-            resetDebuff(ctx.data.npc.serpentStingDebuff, i);
+            resetNpcCombatState(ctx, i);
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
-            resetAggroTable(ctx.data.npc.aggroTable, i);
             ctx.data.npc.ai.state[i] = NPCAiState::Idle;
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;
@@ -40,7 +36,6 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.ai.repathTimer[i] = 0.0f;
             ctx.data.npc.ai.targetRangeCheckTimer[i] = 0.0f;
             ctx.data.npc.ai.patrol.index[i] = 0;
-            clearNpcAiTarget(i, ctx);
             ctx.data.npc.base.tint.r[i] = CLEAR_TINT_R;
             ctx.data.npc.base.tint.g[i] = CLEAR_TINT_G;
             ctx.data.npc.base.tint.b[i] = CLEAR_TINT_B;
