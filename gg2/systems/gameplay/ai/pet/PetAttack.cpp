@@ -33,6 +33,7 @@ void petAttack(uint32_t n, Context &ctx)
         refreshNpcAttackedTimer(ctx, targetId);
         petTaunt(ctx, n);
     }
+
     if (ctx.data.npc.autoAttack.attackTimer[n] <= 0.0f)
     {
         refreshNpcAttackedTimer(ctx, targetId);

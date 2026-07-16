@@ -248,6 +248,7 @@
  <tile id="384">
   <properties>
    <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="2"/>
    <property name="type" value="taunt"/>
   </properties>
   <animation>
