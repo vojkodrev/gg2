@@ -16,12 +16,12 @@ void abilityCooldownTimerSystem(Context &ctx)
         if (!ctx.data.npc.active[npcId])
             continue;
 
-        auto &growlTimer = ctx.data.npc.growlTimer[npcId];
-        if (growlTimer > 0.0f)
+        auto &tauntTimer = ctx.data.npc.tauntTimer[npcId];
+        if (tauntTimer > 0.0f)
         {
-            growlTimer -= ctx.frame.dt;
-            if (growlTimer < 0.0f)
-                growlTimer = 0.0f;
+            tauntTimer -= ctx.frame.dt;
+            if (tauntTimer < 0.0f)
+                tauntTimer = 0.0f;
         }
 
         auto &debuff = ctx.data.npc.concussiveShotDebuff;

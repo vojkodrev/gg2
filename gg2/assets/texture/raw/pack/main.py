@@ -78,7 +78,11 @@ images = [
     {"id": 42, "filename": "../blood splatter/B101.png", "dx": 7, "dy": 23, "w": 64}, 
     {"id": 43, "filename": "../blood splatter/B102.png", "dx": 8, "dy": 23, "w": 64}, 
     {"id": 44, "filename": "../icons/Ability_GhoulFrenzy.png", "dx": 11, "dy": 22},
-    {"id": 45, "filename": "../icons/Ability_Physical_Taunt.png", "dx": 12, "dy": 22}
+    {"id": 45, "filename": "../icons/Ability_Physical_Taunt.png", "dx": 12, "dy": 22},
+    {"id": 46, "filename": "../pixel ui pack 3-7.png", "dx": 0, "dy": 24, "sx": 0 * 32, "sy": 208, "sw": 32, "sh": 32},
+    {"id": 47, "filename": "../pixel ui pack 3-7.png", "dx": 1, "dy": 24, "sx": 1 * 32, "sy": 208, "sw": 32, "sh": 32},
+    {"id": 48, "filename": "../pixel ui pack 3-7.png", "dx": 2, "dy": 24, "sx": 2 * 32, "sy": 208, "sw": 32, "sh": 32},
+    {"id": 49, "filename": "../pixel ui pack 3-7.png", "dx": 3, "dy": 24, "sx": 3 * 32, "sy": 208, "sw": 32, "sh": 32},
 ]
 
 

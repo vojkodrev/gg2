@@ -41,7 +41,7 @@ inline void createTextEffect(
 
         copyEntityBaseSlot(
             templateBase,
-            ctx.data.effectTemplate.fontOffset + glyph,
+            ctx.data.effectTemplate.fontIndex + glyph,
             ctx.data.effect.base,
             effectIndex);
 

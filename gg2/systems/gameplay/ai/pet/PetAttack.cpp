@@ -63,7 +63,7 @@ void petAttack(uint32_t n, Context &ctx)
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,
-        ctx.data.effectTemplate.bloodSplatterOffset,
+        ctx.data.effectTemplate.bloodSplatterIndex,
         ctx.data.effect.base,
         effectIndex);
     ctx.data.effect.base.animation.animationStartTime[effectIndex] = ctx.frame.now;
