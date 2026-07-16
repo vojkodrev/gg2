@@ -34,6 +34,7 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.ai.path.length[i] = 0;
             ctx.data.npc.ai.path.index[i] = 0;
             ctx.data.npc.ai.repathTimer[i] = 0.0f;
+            ctx.data.npc.ai.pathTargetCheckTimer[i] = 0.0f;
             ctx.data.npc.ai.targetRangeCheckTimer[i] = 0.0f;
             ctx.data.npc.ai.patrol.index[i] = 0;
             ctx.data.npc.base.tint.r[i] = CLEAR_TINT_R;
