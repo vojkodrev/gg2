@@ -7,6 +7,7 @@ struct ActionBar
     int groupId = INVALID_ID;
     ActionBarIcon rangedAutoAttack;
     ActionBarIcon petAutoAttack;
+    ActionBarIcon petTaunt;
     ActionBarIcon serpentSting;
     ActionBarIcon concussiveShot;
 };
