@@ -16,7 +16,7 @@
  </tile>
  <tile id="22">
   <properties>
-   <property name="AI" type="int" value="1"/>
+   <property name="AI" value="monster"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
@@ -33,7 +33,7 @@
  </tile>
  <tile id="38">
   <properties>
-   <property name="AI" type="int" value="1"/>
+   <property name="AI" value="monster"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
@@ -83,9 +83,10 @@
  </tile>
  <tile id="112">
   <properties>
-   <property name="AI" type="int" value="2"/>
+   <property name="AI" value="pet"/>
    <property name="facing" value="right"/>
    <property name="healthbar" value="healthbar"/>
+   <property name="manabar" value="manabar"/>
   </properties>
   <objectgroup draworder="index" id="3">
    <object id="3" name="collision" x="16.6667" y="40.6667" width="33.6667" height="15.6667"/>

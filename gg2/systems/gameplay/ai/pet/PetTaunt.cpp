@@ -11,6 +11,10 @@
 
 void petTaunt(Context &ctx, uint32_t n)
 {
+    auto &mana = ctx.data.npc.statistics.mana;
+    if (mana.mana[n] < TAUNT_MANA_COST)
+        return;
+
     const int targetId = ctx.data.npc.ai.target.id[n];
 
     const int targetGroupId = ctx.data.npc.group.id[targetId];
@@ -31,6 +35,8 @@ void petTaunt(Context &ctx, uint32_t n)
     ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
     ctx.data.effect.parent.id[effectIndex] = targetId;
     ctx.data.npc.tauntTimer[n] = TAUNT_COOLDOWN_TIME;
+    mana.mana[n] -= TAUNT_MANA_COST;
+    mana.dirty[n] = true;
 
     auto &aggroTable = ctx.data.npc.aggroTable;
     const int petSlot = findAggroTableSlotByEntityId(

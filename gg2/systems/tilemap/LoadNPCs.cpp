@@ -5,10 +5,12 @@
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
+#include "LoadManabar.h"
 #include "../gameplay/statistics/SetHp.h"
 #include "../gameplay/ai/ResetNpcCombatState.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
+#include "../../structs/core/constants/NpcPetConstants.h"
 #include "../../structs/core/constants/IndexConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/timers/RandomTimer.h"
@@ -63,10 +65,17 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
+        loadManabar(npc.manabar, n, tileset, idx, props);
 
-        npc.ai.type[n] = (NPCAiType)(int)getTileIntProp(tileset, idx, "AI");
+        const std::string aiType = getTileStringProp(tileset, idx, "AI");
+        npc.ai.type[n] = aiType == "pet" ? NPCAiType::Pet : NPCAiType::Monster;
         if (npc.ai.type[n] == NPCAiType::Pet)
+        {
             player.petId = (int)n;
+            npc.statistics.mana.mana[n] = NPC_PET_MANA;
+            npc.statistics.mana.maxMana[n] = NPC_PET_MANA;
+            npc.statistics.mana.dirty[n] = true;
+        }
 
         npc.ai.patrol.count[n] = (uint32_t)getTileIntProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)

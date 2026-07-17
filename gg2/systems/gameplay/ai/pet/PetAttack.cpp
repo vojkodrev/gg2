@@ -8,6 +8,7 @@
 #include "SetNpcAiStateIdle.h"
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
+#include "../../../structs/core/constants/TauntConstants.h"
 
 void petAttack(uint32_t n, Context &ctx)
 {
@@ -28,7 +29,8 @@ void petAttack(uint32_t n, Context &ctx)
         return;
     }
 
-    if (ctx.data.npc.tauntTimer[n] <= 0.0f)
+    if (ctx.data.npc.tauntTimer[n] <= 0.0f &&
+        ctx.data.npc.statistics.mana.mana[n] >= TAUNT_MANA_COST)
     {
         refreshNpcAttackedTimer(ctx, targetId);
         petTaunt(ctx, n);

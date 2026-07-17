@@ -3,6 +3,7 @@
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/core/constants/SerpentStingConstants.h"
+#include "../../../../structs/core/constants/TauntConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 
 void actionBarTintSystem(Context &ctx)
@@ -33,14 +34,21 @@ void actionBarTintSystem(Context &ctx)
 
     const bool petTauntOnCooldown =
         petId != INVALID_ID && ctx.data.npc.tauntTimer[petId] > 0.0f;
+    const bool hasEnoughManaForPetTaunt =
+        petId == INVALID_ID ||
+        ctx.data.npc.statistics.mana.mana[petId] >= TAUNT_MANA_COST;
     actionBar.petTaunt.base.tint.r[0] =
-        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R : CLEAR_TINT_R;
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R :
+        hasEnoughManaForPetTaunt ? CLEAR_TINT_R : NO_MANA_TINT_R;
     actionBar.petTaunt.base.tint.g[0] =
-        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G : CLEAR_TINT_G;
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G :
+        hasEnoughManaForPetTaunt ? CLEAR_TINT_G : NO_MANA_TINT_G;
     actionBar.petTaunt.base.tint.b[0] =
-        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B : CLEAR_TINT_B;
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B :
+        hasEnoughManaForPetTaunt ? CLEAR_TINT_B : NO_MANA_TINT_B;
     actionBar.petTaunt.base.tint.a[0] =
-        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A : CLEAR_TINT_A;
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A :
+        hasEnoughManaForPetTaunt ? CLEAR_TINT_A : NO_MANA_TINT_A;
 
     const bool onGlobalCooldown = player.globalCooldownTimer > 0.0f;
     const bool hasEnoughManaForSerpentSting =
