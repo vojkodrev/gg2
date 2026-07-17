@@ -31,6 +31,17 @@ void actionBarTintSystem(Context &ctx)
     actionBar.petAutoAttack.base.tint.a[0] =
         petAutoAttackActive ? AUTO_ATTACK_ACTION_BAR_TINT_A : CLEAR_TINT_A;
 
+    const bool petTauntOnCooldown =
+        petId != INVALID_ID && ctx.data.npc.tauntTimer[petId] > 0.0f;
+    actionBar.petTaunt.base.tint.r[0] =
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R : CLEAR_TINT_R;
+    actionBar.petTaunt.base.tint.g[0] =
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G : CLEAR_TINT_G;
+    actionBar.petTaunt.base.tint.b[0] =
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B : CLEAR_TINT_B;
+    actionBar.petTaunt.base.tint.a[0] =
+        petTauntOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A : CLEAR_TINT_A;
+
     const bool onGlobalCooldown = player.globalCooldownTimer > 0.0f;
     const bool hasEnoughManaForSerpentSting =
         player.statistics.mana.mana[0] >= SERPENT_STING_MANA_COST;

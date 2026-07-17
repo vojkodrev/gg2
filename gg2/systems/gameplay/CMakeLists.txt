@@ -21,7 +21,7 @@ add_library(systems_gameplay
     attacks/AutoAttackTimerSystem.cpp
     attacks/NpcAutoAttackSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
-    attacks/ConcussiveShotCooldownTimerSystem.cpp
+    attacks/AbilityCooldownTimerSystem.cpp
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerPetAttackSystem.cpp
@@ -53,6 +53,8 @@ add_library(systems_gameplay
     ai/pet/PetFollowPlayer.cpp
     ai/pet/PetPursueTarget.cpp
     ai/pet/PetAttack.cpp
+    ai/pet/ExecutePetAttack.cpp
+    ai/pet/PetTaunt.cpp
     ai/HasReachedRect.cpp
     ai/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
@@ -60,9 +62,7 @@ add_library(systems_gameplay
     ai/astar/pool/AStarFree.cpp
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
-    collision/effects/EffectCollisionSystem.cpp
-    collision/effects/EffectCollisionResolutionSystem.cpp
-    collision/effects/ResolveProjectileEffectCollision.cpp
+    collision/effects/ProjectileCollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     projectile/SpawnPlayerTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp

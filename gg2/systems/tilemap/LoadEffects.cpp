@@ -3,6 +3,7 @@
 #include "properties/FindTileByType.h"
 #include "../../structs/core/AnimationType.h"
 #include "../../structs/core/constants/FontConstants.h"
+#include "../../structs/core/constants/TauntConstants.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../utils/grid/DecodeGridIndex.h"
 #include <SDL3/SDL.h>
@@ -12,9 +13,10 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
 {
     auto &effectTemplate = ctx.data.effectTemplate;
     auto &props = ctx.data.tileMapProps;
-    effectTemplate.fontOffset = 0;
-    effectTemplate.selectOffset = FONT_GLYPH_COUNT;
-    effectTemplate.bloodSplatterOffset = effectTemplate.selectOffset + 1;
+    effectTemplate.fontIndex = 0;
+    effectTemplate.selectIndex = FONT_GLYPH_COUNT;
+    effectTemplate.bloodSplatterIndex = effectTemplate.selectIndex + 1;
+    effectTemplate.tauntIndex = effectTemplate.bloodSplatterIndex + 1;
 
     const SDL_Point fontGrid = decodeGridIndex(FONT_GRID_ID, (int)props.tilesetW);
     const int fontBaseX = fontGrid.x * (int)props.srcTileW;
@@ -59,7 +61,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
     {
         loadEntityBase(
             effectTemplate.base,
-            (uint32_t)effectTemplate.selectOffset,
+            (uint32_t)effectTemplate.selectIndex,
             tileset,
             selectTileIdx,
             props);
@@ -70,9 +72,24 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
     {
         loadEntityBase(
             effectTemplate.base,
-            (uint32_t)effectTemplate.bloodSplatterOffset,
+            (uint32_t)effectTemplate.bloodSplatterIndex,
             tileset,
             bloodSplatterTileIdx,
             props);
+    }
+
+    uint32_t tauntTileIdx = 0;
+    if (findTileByType(tileset, "taunt", tauntTileIdx))
+    {
+        loadEntityBase(
+            effectTemplate.base,
+            (uint32_t)effectTemplate.tauntIndex,
+            tileset,
+            tauntTileIdx,
+            props);
+        effectTemplate.base.tint.r[effectTemplate.tauntIndex] = TAUNT_TINT_R;
+        effectTemplate.base.tint.g[effectTemplate.tauntIndex] = TAUNT_TINT_G;
+        effectTemplate.base.tint.b[effectTemplate.tauntIndex] = TAUNT_TINT_B;
+        effectTemplate.base.tint.a[effectTemplate.tauntIndex] = TAUNT_TINT_A;
     }
 }

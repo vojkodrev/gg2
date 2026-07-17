@@ -27,6 +27,12 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
         loadEntityBase(actionBar.petAutoAttack.base, 0, tileset, petAutoAttackTileIdx, props);
     }
 
+    uint32_t petTauntTileIdx = 0;
+    if (findTileByIcon(tileset, "taunt", petTauntTileIdx))
+    {
+        loadEntityBase(actionBar.petTaunt.base, 0, tileset, petTauntTileIdx, props);
+    }
+
     uint32_t serpentStingTileIdx = 0;
     if (findTileByIcon(tileset, "serpentSting", serpentStingTileIdx))
     {
@@ -47,9 +53,11 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
     const float concussiveH = actionBar.concussiveShot.base.position.h[0];
     const float petW = actionBar.petAutoAttack.base.position.w[0];
     const float petH = actionBar.petAutoAttack.base.position.h[0];
+    const float petTauntW = actionBar.petTaunt.base.position.w[0];
+    const float petTauntH = actionBar.petTaunt.base.position.h[0];
     const float totalW =
-        rangedW + serpentW + concussiveW + petW +
-        ACTION_BAR_ICON_GAP * 2.0f + ACTION_BAR_PET_SECTION_GAP;
+        rangedW + serpentW + concussiveW + petW + petTauntW +
+        ACTION_BAR_ICON_GAP * 3.0f + ACTION_BAR_PET_SECTION_GAP;
     const float startX = (SCREEN_W - totalW) / 2.0f;
     const float bottomY = SCREEN_H - ACTION_BAR_BOTTOM_PADDING;
 
@@ -74,6 +82,12 @@ void loadActionBar(Context &ctx, const tmx::Tileset &tileset)
     actionBar.petAutoAttack.base.position.y[0] = bottomY - petH;
     actionBar.petAutoAttack.base.position.absolute[0] = true;
     actionBar.petAutoAttack.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+
+    actionBar.petTaunt.base.position.x[0] =
+        actionBar.petAutoAttack.base.position.x[0] + petW + ACTION_BAR_ICON_GAP;
+    actionBar.petTaunt.base.position.y[0] = bottomY - petTauntH;
+    actionBar.petTaunt.base.position.absolute[0] = true;
+    actionBar.petTaunt.base.depthY[0] = ACTION_BAR_DEPTH_Y;
 
     const SDL_FColor whiteTint = {
         CLEAR_TINT_R,

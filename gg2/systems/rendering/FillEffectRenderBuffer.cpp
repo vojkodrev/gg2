@@ -13,7 +13,11 @@ void fillEffectRenderBuffer(Context &ctx)
             continue;
 
         int zIndex = EFFECT_Z_INDEX;
-        if (effect.type[i] == EffectType::Character)
+        if (effect.type[i] == EffectType::BloodSplatter)
+            zIndex = EFFECT_BLOOD_SPLATTER_Z_INDEX;
+        else if (effect.type[i] == EffectType::Taunt)
+            zIndex = EFFECT_TAUNT_Z_INDEX;
+        else if (effect.type[i] == EffectType::Character)
             zIndex = EFFECT_CHARACTER_Z_INDEX;
 
         fillEntityBaseRenderBuffer(

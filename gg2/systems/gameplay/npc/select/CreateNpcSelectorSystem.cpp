@@ -24,7 +24,7 @@ void createNpcSelectorSystem(Context &ctx)
 
     copyEntityBaseSlot(
         ctx.data.effectTemplate.base,
-        ctx.data.effectTemplate.selectOffset,
+        ctx.data.effectTemplate.selectIndex,
         ctx.data.effect.base,
         effectIndex);
 

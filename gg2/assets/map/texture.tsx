@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="384" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="1024" height="1536"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="400" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1600"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
@@ -215,6 +215,12 @@
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
+ <tile id="364">
+  <properties>
+   <property name="icon" value="taunt"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
  <tile id="368">
   <properties>
    <property name="type" value="manabar"/>
@@ -237,6 +243,19 @@
    <frame tileid="374" duration="100"/>
    <frame tileid="375" duration="100"/>
    <frame tileid="376" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="384">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="2"/>
+   <property name="type" value="taunt"/>
+  </properties>
+  <animation>
+   <frame tileid="387" duration="100"/>
+   <frame tileid="386" duration="100"/>
+   <frame tileid="385" duration="100"/>
+   <frame tileid="384" duration="100"/>
   </animation>
  </tile>
 </tileset>

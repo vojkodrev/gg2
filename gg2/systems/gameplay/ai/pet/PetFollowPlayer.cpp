@@ -12,7 +12,7 @@ void petFollowPlayer(uint32_t n, Context &ctx)
 
     if (areColBoxesNear(ctx, n, playerCol, NPC_ATTACK_REACH))
     {
-        setNpcAiStateIdle(n, ctx);
+        setNpcAiStateIdle(ctx, n);
         return;
     }
 

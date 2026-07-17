@@ -36,7 +36,7 @@
 #include "equipment/MoveEquipmentSystem.h"
 #include "attacks/AutoAttackTimerSystem.h"
 #include "attacks/NpcAutoAttackSystem.h"
-#include "attacks/ConcussiveShotCooldownTimerSystem.h"
+#include "attacks/AbilityCooldownTimerSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerPetAttackSystem.h"
@@ -59,8 +59,7 @@
 #include "animation/RotationAnimationSystem.h"
 #include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
-#include "EffectCollisionSystem.h"
-#include "EffectCollisionResolutionSystem.h"
+#include "ProjectileCollisionSystem.h"
 #include "ui/bars/BarFrameSystem.h"
 #include "ui/bars/BarPositionSystem.h"
 #include "ui/bars/ShowBarSystem.h"
@@ -150,7 +149,7 @@ int main()
 
         autoAttackTimerSystem(*ctx);
         globalCooldownTimerSystem(*ctx);
-        concussiveShotCooldownTimerSystem(*ctx);
+        abilityCooldownTimerSystem(*ctx);
 
         togglePlayerAutoAttackSystem(*ctx);
 
@@ -165,8 +164,7 @@ int main()
         moveEffectSystem(*ctx);
         destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
-        effectCollisionSystem(*ctx);
-        effectCollisionResolutionSystem(*ctx);
+        projectileCollisionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
 

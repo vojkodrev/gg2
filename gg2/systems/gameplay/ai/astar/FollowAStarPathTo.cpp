@@ -3,6 +3,8 @@
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
+#include "../../../../utils/collision/EntityColCenter.h"
+#include "../../../../utils/math/Dist.h"
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 
@@ -21,17 +23,35 @@ void followAStarPathTo(
         pathStatus == NPCPathStatus::CALCULATION_FAILED)
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
+        ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
         requestAStarPath(ctx, n, targetCol, targetNpcIndex);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {
+        const uint32_t len = ai.path.length[n];
+        if (ai.pathTargetCheckTimer[n] <= 0.0f)
+        {
+            ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
+            const SDL_FPoint targetCenter = entityColCenter(targetCol);
+            const uint32_t lastPathIndex = len - 1;
+            if (dist(
+                    (float)ai.path.point.x[n][lastPathIndex],
+                    (float)ai.path.point.y[n][lastPathIndex],
+                    targetCenter.x,
+                    targetCenter.y) >=
+                NPC_PATH_TARGET_MOVE_THRESHOLD)
+            {
+                ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+                return;
+            }
+        }
+
         if (ai.repathTimer[n] <= 0.0f)
         {
             ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
             return;
         }
 
-        uint32_t len = ai.path.length[n];
         uint32_t prevIndex = ai.path.index[n];
         uint32_t i = prevIndex;
 

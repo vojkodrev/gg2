@@ -6,8 +6,7 @@
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
 #include "../gameplay/statistics/SetHp.h"
-#include "../gameplay/attacks/debuff/ResetDebuff.h"
-#include "../gameplay/ai/ClearNpcAiTarget.h"
+#include "../gameplay/ai/ResetNpcCombatState.h"
 #include "../../structs/core/constants/NpcConstants.h"
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../structs/core/constants/IndexConstants.h"
@@ -51,16 +50,16 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadEntityBase(npc.base, n, tileset, idx, props, i);
         setHp(npc.statistics, n, NPC_HP);
         npc.statistics.health.maxHp[n] = NPC_HP;
-        resetDebuff(npc.concussiveShotDebuff, n);
-        resetDebuff(npc.serpentStingDebuff, n);
+        resetNpcCombatState(ctx, n);
         npc.ai.spawn.x[n] = npc.base.position.x[n];
         npc.ai.spawn.y[n] = npc.base.position.y[n];
         npc.ai.patrol.index[n] = 0;
         npc.ai.state[n] = NPCAiState::Idle;
-        clearNpcAiTarget(n, ctx);
         npc.ai.attackedTimer[n] = 0.0f;
         npc.ai.idleTimer[n] = randomTimer(NPC_IDLE_TIME_MIN, NPC_IDLE_TIME_MAX);
         npc.ai.repathTimer[n] = 0.0f;
+        npc.ai.pathTargetCheckTimer[n] = 0.0f;
+        npc.ai.targetRangeCheckTimer[n] = 0.0f;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
