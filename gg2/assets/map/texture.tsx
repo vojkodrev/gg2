@@ -91,6 +91,7 @@
    <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
    <property name="weapon" value="staff1"/>
+   <property name="weaponScale" type="float" value="1.3"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.7256" y="38.7078" width="31.3008" height="19.115"/>

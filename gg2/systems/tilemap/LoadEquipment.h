@@ -6,6 +6,7 @@
 #include "GetAnchor.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
+#include "properties/GetTileFloatProp.h"
 #include "properties/GetTileStringProp.h"
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
@@ -26,6 +27,17 @@ inline void loadEquipment(
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
         loadEntityBase(equipmentData.weapon.base, parentEntityIdx, tileset, weaponIdx, props);
+
+        auto &weaponBase = equipmentData.weapon.base;
+        weaponBase.scale.value[parentEntityIdx] = getTileFloatProp(
+            tileset,
+            parentEntityTileIndex,
+            "weaponScale",
+            weaponBase.scale.value[parentEntityIdx]);
+        weaponBase.position.w[parentEntityIdx] =
+            weaponBase.position.initialW[parentEntityIdx] * weaponBase.scale.value[parentEntityIdx];
+        weaponBase.position.h[parentEntityIdx] =
+            weaponBase.position.initialH[parentEntityIdx] * weaponBase.scale.value[parentEntityIdx];
 
         SDL_FRect ammoAnchor = getAnchor(tileset, weaponIdx, "ammoAnchor");
         equipmentData.weapon.ammoAnchor.initialOffX[parentEntityIdx][0] = ammoAnchor.x;
