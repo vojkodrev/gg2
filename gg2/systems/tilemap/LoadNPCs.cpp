@@ -73,6 +73,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             npc.ai.type[n] = NPCAiType::MonsterMelee;
         else if (aiType == "pet")
             npc.ai.type[n] = NPCAiType::Pet;
+        else if (aiType == "friendly")
+            npc.ai.type[n] = NPCAiType::Friendly;
 
         if (npc.ai.type[n] == NPCAiType::Pet)
         {

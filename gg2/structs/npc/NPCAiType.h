@@ -4,5 +4,6 @@ enum class NPCAiType : int
 {
     None = 0,
     MonsterMelee = 1,
-    Pet = 2
+    Pet = 2,
+    Friendly = 3
 };

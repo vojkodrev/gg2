@@ -1,4 +1,5 @@
 #include "NPCAiSystem.h"
+#include "friendly/FriendlyAi.h"
 #include "monster/MonsterMeleeAi.h"
 #include "pet/PetAi.h"
 
@@ -13,6 +14,8 @@ void npcAiSystem(Context &ctx)
 
         if (npc.ai.type[n] == NPCAiType::MonsterMelee)
             monsterMeleeAi(n, ctx);
+        else if (npc.ai.type[n] == NPCAiType::Friendly)
+            friendlyAi(n, ctx);
         else if (npc.ai.type[n] == NPCAiType::Pet)
             petAi(n, ctx);
     }

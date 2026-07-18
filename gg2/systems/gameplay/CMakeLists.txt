@@ -43,6 +43,9 @@ add_library(systems_gameplay
     ai/NPCAiSystem.cpp
     ai/FollowNpcPatrolPath.cpp
     ai/astar/FollowAStarPathTo.cpp
+    ai/friendly/FriendlyAi.cpp
+    ai/friendly/FriendlyIdle.cpp
+    ai/friendly/FriendlyPatrol.cpp
     ai/monster/MonsterMeleeAi.cpp
     ai/monster/MonsterIdle.cpp
     ai/monster/MonsterPatrol.cpp
