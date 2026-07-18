@@ -68,7 +68,12 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadManabar(npc.manabar, n, tileset, idx, props);
 
         const std::string aiType = getTileStringProp(tileset, idx, "AI");
-        npc.ai.type[n] = aiType == "pet" ? NPCAiType::Pet : NPCAiType::MonsterMelee;
+        npc.ai.type[n] = NPCAiType::None;
+        if (aiType == "monsterMelee")
+            npc.ai.type[n] = NPCAiType::MonsterMelee;
+        else if (aiType == "pet")
+            npc.ai.type[n] = NPCAiType::Pet;
+
         if (npc.ai.type[n] == NPCAiType::Pet)
         {
             player.petId = (int)n;

@@ -83,6 +83,7 @@ images = [
     {"id": 47, "filename": "../pixel ui pack 3-7.png", "dx": 1, "dy": 24, "sx": 1 * 32, "sy": 208, "sw": 32, "sh": 32},
     {"id": 48, "filename": "../pixel ui pack 3-7.png", "dx": 2, "dy": 24, "sx": 2 * 32, "sy": 208, "sw": 32, "sh": 32},
     {"id": 49, "filename": "../pixel ui pack 3-7.png", "dx": 3, "dy": 24, "sx": 3 * 32, "sy": 208, "sw": 32, "sh": 32},
+    {"id": 50, "filename": "../0x72_16x16DungeonTileset.v5.png", "dx": 7, "dy": 6, "sx": 144, "sy": 224, "sw": 16, "sh": 16, "w": 52},
 ]
 
 

@@ -81,6 +81,22 @@
    <property name="y" type="int" value="280"/>
   </properties>
  </tile>
+ <tile id="103">
+  <properties>
+   <property name="AI" value="friendly"/>
+   <property name="facing" value="right"/>
+   <property name="patrol01" value="-50,-50"/>
+   <property name="patrol02" value="70,-75"/>
+   <property name="patrol03" value="70,75"/>
+   <property name="patrol04" value="-70,70"/>
+   <property name="patrolCount" type="int" value="4"/>
+   <property name="weapon" value="staff1"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="16.7256" y="38.7078" width="31.3008" height="19.115"/>
+   <object id="2" name="anchor" x="37.2742" y="39.1857" width="9.31855" height="9.07961"/>
+  </objectgroup>
+ </tile>
  <tile id="112">
   <properties>
    <property name="AI" value="pet"/>
