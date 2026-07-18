@@ -62,6 +62,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.repathTimer[n] = 0.0f;
         npc.ai.pathTargetCheckTimer[n] = 0.0f;
         npc.ai.targetRangeCheckTimer[n] = 0.0f;
+        npc.ai.flipTimer[n] = 0.0f;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);

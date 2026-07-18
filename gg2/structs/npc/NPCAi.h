@@ -26,4 +26,5 @@ struct NPCAi
     float repathTimer[MAX_NPCS];
     float pathTargetCheckTimer[MAX_NPCS];
     float targetRangeCheckTimer[MAX_NPCS];
+    float flipTimer[MAX_NPCS];
 };

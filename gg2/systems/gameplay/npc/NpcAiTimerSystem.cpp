@@ -20,5 +20,8 @@ void npcAiTimerSystem(Context &ctx)
         npc.ai.pathTargetCheckTimer[i] = std::max(
             0.0f,
             npc.ai.pathTargetCheckTimer[i] - dt);
+        npc.ai.flipTimer[i] = std::max(
+            0.0f,
+            npc.ai.flipTimer[i] - dt);
     }
 }
