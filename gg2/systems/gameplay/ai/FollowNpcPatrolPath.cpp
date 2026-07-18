@@ -4,7 +4,7 @@
 #include "astar/FollowAStarPathTo.h"
 #include "NpcMonsterConstants.h"
 #include "IndexConstants.h"
-#include "CenteredRect.h"
+#include "../../../utils/rect/CenteredRect.h"
 
 void followNpcPatrolPath(Context &ctx, uint32_t n)
 {
