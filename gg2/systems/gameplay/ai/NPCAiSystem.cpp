@@ -13,9 +13,9 @@ void npcAiSystem(Context &ctx)
             continue;
 
         if (npc.ai.type[n] == NPCAiType::MonsterMelee)
-            monsterMeleeAi(n, ctx);
+            monsterMeleeAi(ctx, n);
         else if (npc.ai.type[n] == NPCAiType::Friendly)
-            friendlyAi(n, ctx);
+            friendlyAi(ctx, n);
         else if (npc.ai.type[n] == NPCAiType::Pet)
             petAi(n, ctx);
     }

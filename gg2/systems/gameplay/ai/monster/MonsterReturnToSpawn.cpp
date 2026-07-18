@@ -8,7 +8,7 @@
 #include "ResetNpcCombatState.h"
 #include "SetNpcAiStateIdle.h"
 
-void monsterReturnToSpawn(uint32_t n, Context &ctx)
+void monsterReturnToSpawn(Context &ctx, uint32_t n)
 {
     auto &ai = ctx.data.npc.ai;
     if (ai.target.type[n] != EntityType::None)

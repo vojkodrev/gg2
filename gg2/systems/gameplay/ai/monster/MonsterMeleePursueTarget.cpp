@@ -10,7 +10,7 @@
 #include "../../attacks/aggroTable/ClearInactiveAggroTableEntitiesIfMaxInactive.h"
 #include "../../../structs/core/EntityType.h"
 
-void monsterMeleePursueTarget(uint32_t n, Context &ctx)
+void monsterMeleePursueTarget(Context &ctx, uint32_t n)
 {
     if (ctx.data.npc.ai.attackedTimer[n] <= 0.0f)
     {

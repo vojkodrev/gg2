@@ -2,7 +2,7 @@
 #include "DetectTargetAndPursue.h"
 #include "FollowNpcPatrolPath.h"
 
-void monsterPatrol(uint32_t n, Context &ctx)
+void monsterPatrol(Context &ctx, uint32_t n)
 {
     if (detectTargetAndPursue(ctx, n))
         return;

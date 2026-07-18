@@ -1,7 +1,7 @@
 #include "FriendlyPatrol.h"
 #include "FollowNpcPatrolPath.h"
 
-void friendlyPatrol(uint32_t n, Context &ctx)
+void friendlyPatrol(Context &ctx, uint32_t n)
 {
     followNpcPatrolPath(ctx, n);
 }

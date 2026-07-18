@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void friendlyAi(uint32_t n, Context &ctx);
+void friendlyAi(Context &ctx, uint32_t n);

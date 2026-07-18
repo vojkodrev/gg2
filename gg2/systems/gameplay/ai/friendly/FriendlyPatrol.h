@@ -1,4 +1,4 @@
 #pragma once
 #include "Context.h"
 
-void friendlyPatrol(uint32_t n, Context &ctx);
+void friendlyPatrol(Context &ctx, uint32_t n);
