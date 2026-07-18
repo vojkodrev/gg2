@@ -26,7 +26,9 @@ void cleanupSystem(Context &ctx)
     std::memset(ctx.data.npc.healthbar.base.position.dirty, 0, sizeof(ctx.data.npc.healthbar.base.position.dirty));
     std::memset(ctx.data.npc.healthbar.base.facing.dirty, 0, sizeof(ctx.data.npc.healthbar.base.facing.dirty));
     std::memset(ctx.data.npc.healthbar.dirty, 0, sizeof(ctx.data.npc.healthbar.dirty));
+    std::memset(ctx.data.npc.manabar.dirty, 0, sizeof(ctx.data.npc.manabar.dirty));
     std::memset(ctx.data.npc.statistics.health.dirty, 0, sizeof(ctx.data.npc.statistics.health.dirty));
+    std::memset(ctx.data.npc.statistics.mana.dirty, 0, sizeof(ctx.data.npc.statistics.mana.dirty));
 
     std::memset(ctx.data.object.base.position.dirty, 0, sizeof(ctx.data.object.base.position.dirty));
     std::memset(ctx.data.object.base.facing.dirty, 0, sizeof(ctx.data.object.base.facing.dirty));

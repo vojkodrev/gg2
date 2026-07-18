@@ -9,6 +9,7 @@
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
 #include "../ui/Healthbar.h"
+#include "../ui/Manabar.h"
 #include "../core/constants/IndexConstants.h"
 #include "NpcConstants.h"
 #include "NPCAi.h"
@@ -27,6 +28,7 @@ struct NPC
     AggroTable<MAX_NPCS> aggroTable;
     Equipment<MAX_NPCS> equipment;
     Healthbar<MAX_NPCS> healthbar;
+    Manabar<MAX_NPCS> manabar;
     NPCAi ai;
     Debuff<MAX_NPCS> concussiveShotDebuff;
     Debuff<MAX_NPCS> serpentStingDebuff;

@@ -12,5 +12,6 @@ void barDepthSystem(Context &ctx)
             continue;
 
         ctx.data.npc.healthbar.base.depthY[i] = ctx.data.npc.base.depthY[i];
+        ctx.data.npc.manabar.base.depthY[i] = ctx.data.npc.base.depthY[i];
     }
 }

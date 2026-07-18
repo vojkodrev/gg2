@@ -2,6 +2,7 @@
 
 constexpr float TAUNT_COOLDOWN_TIME = 5.0f;
 constexpr float TAUNT_AGGRO_BONUS = 100.0f;
+constexpr int TAUNT_MANA_COST = 200;
 
 const float TAUNT_TINT_R = 1.0f;
 const float TAUNT_TINT_G = 0.5f;

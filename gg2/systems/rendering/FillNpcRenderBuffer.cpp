@@ -2,6 +2,7 @@
 #include "FillEntityBaseRenderBuffer.h"
 #include "FillEquipmentRenderBuffer.h"
 #include "FillHealthbarRenderBuffer.h"
+#include "FillManabarRenderBuffer.h"
 #include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
@@ -23,5 +24,6 @@ void fillNpcRenderBuffer(Context &ctx)
 
         fillEquipmentRenderBuffer(rb, npc.equipment, i, groupId);
         fillHealthbarRenderBuffer(rb, npc.healthbar, i, groupId);
+        fillManabarRenderBuffer(rb, npc.manabar, i, groupId);
     }
 }
