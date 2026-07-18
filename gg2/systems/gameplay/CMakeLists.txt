@@ -41,6 +41,7 @@ add_library(systems_gameplay
     npc/select/SetSelectedNpc.cpp
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
+    ai/FollowNpcPatrolPath.cpp
     ai/astar/FollowAStarPathTo.cpp
     ai/monster/MonsterMeleeAi.cpp
     ai/monster/MonsterIdle.cpp
