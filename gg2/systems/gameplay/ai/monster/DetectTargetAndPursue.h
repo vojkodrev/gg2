@@ -10,7 +10,7 @@
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../../utils/collision/DistToEntity.h"
 
-inline bool detectTargetAndPursue(uint32_t n, Context &ctx)
+inline bool detectTargetAndPursue(Context &ctx, uint32_t n)
 {
     const int petId = ctx.data.player.petId;
 

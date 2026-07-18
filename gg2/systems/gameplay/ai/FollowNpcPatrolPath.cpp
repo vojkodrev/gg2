@@ -6,7 +6,7 @@
 #include "IndexConstants.h"
 #include "CenteredRect.h"
 
-void followNpcPatrolPath(uint32_t n, Context &ctx)
+void followNpcPatrolPath(Context &ctx, uint32_t n)
 {
     auto &ai = ctx.data.npc.ai;
 

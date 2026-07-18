@@ -4,8 +4,8 @@
 
 void monsterPatrol(uint32_t n, Context &ctx)
 {
-    if (detectTargetAndPursue(n, ctx))
+    if (detectTargetAndPursue(ctx, n))
         return;
 
-    followNpcPatrolPath(n, ctx);
+    followNpcPatrolPath(ctx, n);
 }
