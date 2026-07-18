@@ -42,11 +42,11 @@ add_library(systems_gameplay
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
     ai/astar/FollowAStarPathTo.cpp
-    ai/monster/MonsterAi.cpp
+    ai/monster/MonsterMeleeAi.cpp
     ai/monster/MonsterIdle.cpp
     ai/monster/MonsterPatrol.cpp
-    ai/monster/MonsterPursueTarget.cpp
-    ai/monster/MonsterAttack.cpp
+    ai/monster/MonsterMeleePursueTarget.cpp
+    ai/monster/MonsterMeleeAttack.cpp
     ai/monster/MonsterReturnToSpawn.cpp
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp

@@ -17,7 +17,7 @@ void petPursueTarget(uint32_t n, Context &ctx)
 
     if (targetType != EntityType::NPC ||
         !ctx.data.npc.active[targetId] ||
-        ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
+        ctx.data.npc.ai.type[targetId] != NPCAiType::MonsterMelee)
     {
         setNpcAiStateIdle(ctx, n);
         return;

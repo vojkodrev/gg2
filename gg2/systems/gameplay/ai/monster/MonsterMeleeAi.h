@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void monsterAi(uint32_t n, Context &ctx);
+void monsterMeleeAi(uint32_t n, Context &ctx);

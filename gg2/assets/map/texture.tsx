@@ -16,7 +16,7 @@
  </tile>
  <tile id="22">
   <properties>
-   <property name="AI" value="monster"/>
+   <property name="AI" value="monsterMelee"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
@@ -33,7 +33,7 @@
  </tile>
  <tile id="38">
   <properties>
-   <property name="AI" value="monster"/>
+   <property name="AI" value="monsterMelee"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>

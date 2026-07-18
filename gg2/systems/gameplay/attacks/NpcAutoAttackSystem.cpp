@@ -17,7 +17,7 @@ void npcAutoAttackSystem(Context &ctx)
     {
         if (!npc.active[i])
             continue;
-        if (npc.ai.type[i] != NPCAiType::Monster)
+        if (npc.ai.type[i] != NPCAiType::MonsterMelee)
             continue;
         if (npc.autoAttack.hitTimer[i] > 0.0f)
             continue;

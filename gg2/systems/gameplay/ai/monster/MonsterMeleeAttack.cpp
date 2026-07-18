@@ -1,4 +1,4 @@
-#include "MonsterAttack.h"
+#include "MonsterMeleeAttack.h"
 #include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
 #include "../../../../structs/core/AnimationState.h"
@@ -9,7 +9,7 @@
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../../attacks/aggroTable/ClearInactiveAggroTableEntitiesIfMaxInactive.h"
 
-void monsterAttack(uint32_t n, Context &ctx)
+void monsterMeleeAttack(uint32_t n, Context &ctx)
 {
     if (ctx.data.npc.ai.attackedTimer[n] <= 0.0f)
     {

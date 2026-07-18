@@ -1,5 +1,5 @@
 #include "NPCAiSystem.h"
-#include "monster/MonsterAi.h"
+#include "monster/MonsterMeleeAi.h"
 #include "pet/PetAi.h"
 
 void npcAiSystem(Context &ctx)
@@ -11,8 +11,8 @@ void npcAiSystem(Context &ctx)
         if (!npc.active[n])
             continue;
 
-        if (npc.ai.type[n] == NPCAiType::Monster)
-            monsterAi(n, ctx);
+        if (npc.ai.type[n] == NPCAiType::MonsterMelee)
+            monsterMeleeAi(n, ctx);
         else if (npc.ai.type[n] == NPCAiType::Pet)
             petAi(n, ctx);
     }
