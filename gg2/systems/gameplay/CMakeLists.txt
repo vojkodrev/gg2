@@ -51,6 +51,9 @@ add_library(systems_gameplay
     ai/monster/MonsterPatrol.cpp
     ai/monster/MonsterMeleePursueTarget.cpp
     ai/monster/MonsterMeleeAttack.cpp
+    ai/monster/MonsterRangedAi.cpp
+    ai/monster/MonsterRangedPursueTarget.cpp
+    ai/monster/MonsterRangedAttack.cpp
     ai/monster/MonsterReturnToSpawn.cpp
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
