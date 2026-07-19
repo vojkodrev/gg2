@@ -1,11 +1,14 @@
 #include "MonsterMeleeAttack.h"
 #include "AreColBoxesNear.h"
+#include "EntityColAABB.h"
+#include "EntityColCenter.h"
 #include "GetEntityColAABB.h"
 #include "../../../../structs/core/AnimationState.h"
 #include "../../../../structs/core/EntityType.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "SetNpcAiStateReturnToSpawn.h"
+#include "../../SetFacingTowardX.h"
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../../attacks/aggroTable/ClearInactiveAggroTableEntitiesIfMaxInactive.h"
 
@@ -62,6 +65,10 @@ void monsterMeleeAttack(Context &ctx, uint32_t n)
 
     if (npc.autoAttack.attackTimer[n] > 0.0f)
         return;
+
+    const float npcCenterX = entityColCenter(entityColAABB(npc.base, n)).x;
+    const float targetCenterX = entityColCenter(targetCol).x;
+    setFacingTowardX(npc.base.facing, n, npcCenterX, targetCenterX);
 
     npc.autoAttack.attackTimer[n] = NPC_MELEE_AUTO_ATTACK_DELAY;
     npc.equipment.weapon.base.animation.animationState[n] = AnimationState::Starting;

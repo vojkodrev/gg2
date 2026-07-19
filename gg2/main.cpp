@@ -143,8 +143,8 @@ int main()
         flipEquipmentSystem(*ctx);
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
-        npcAutoAttackSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        npcAutoAttackSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
         autoAttackTimerSystem(*ctx);
