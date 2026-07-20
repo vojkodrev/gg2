@@ -17,6 +17,9 @@ void npcAiTimerSystem(Context &ctx)
         npc.ai.targetRangeCheckTimer[i] = std::max(
             0.0f,
             npc.ai.targetRangeCheckTimer[i] - dt);
+        npc.ai.targetVisibleTimer[i] = std::max(
+            0.0f,
+            npc.ai.targetVisibleTimer[i] - dt);
         npc.ai.pathTargetCheckTimer[i] = std::max(
             0.0f,
             npc.ai.pathTargetCheckTimer[i] - dt);

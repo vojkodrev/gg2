@@ -13,7 +13,9 @@ struct NPCAi
     NPCAiType type[MAX_NPCS];
 
     NPCAiState state[MAX_NPCS];
+
     EntityReference<MAX_NPCS> target;
+    bool targetVisible[MAX_NPCS];
 
     NPCSpawn spawn;
 
@@ -26,5 +28,6 @@ struct NPCAi
     float repathTimer[MAX_NPCS];
     float pathTargetCheckTimer[MAX_NPCS];
     float targetRangeCheckTimer[MAX_NPCS];
+    float targetVisibleTimer[MAX_NPCS];
     float flipTimer[MAX_NPCS];
 };
