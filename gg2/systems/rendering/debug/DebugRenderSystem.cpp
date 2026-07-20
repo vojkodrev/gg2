@@ -4,6 +4,7 @@
 #include "DebugRenderObjects.h"
 #include "DebugRenderEffect.h"
 #include "DebugRenderAstar.h"
+#include "DebugRenderRangedDeadZone.h"
 
 void debugRenderSystem(const Context &ctx)
 {
@@ -12,4 +13,5 @@ void debugRenderSystem(const Context &ctx)
     debugRenderNpc(ctx);
     debugRenderEffect(ctx);
     debugRenderAstar(ctx);
+    debugRenderRangedDeadZone(ctx);
 }

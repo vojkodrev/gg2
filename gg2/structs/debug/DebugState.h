@@ -8,6 +8,7 @@ struct DebugState
     bool showWeaponCollision = false;
     bool showAmmoCollision = false;
     bool showEffectCollision = false;
+    bool showRangedDeadZone = false;
 
     bool ctrlAltFArmed = false;
     bool ctrlAlt0Armed = false;
@@ -16,4 +17,5 @@ struct DebugState
     bool ctrlAlt3Armed = false;
     bool ctrlAlt4Armed = false;
     bool ctrlAlt5Armed = false;
+    bool ctrlAlt6Armed = false;
 };
