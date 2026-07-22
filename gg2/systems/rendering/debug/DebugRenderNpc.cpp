@@ -1,6 +1,7 @@
 #include "DebugRenderNpc.h"
 #include "DebugRenderEntityBase.h"
 #include "DebugRenderEquipment.h"
+#include "RenderDebugLine.h"
 
 void debugRenderNpc(const Context &ctx)
 {
@@ -48,7 +49,12 @@ void debugRenderNpc(const Context &ctx)
                 if (SDL_HasRectIntersectionFloat(&pt, &screen))
                     SDL_RenderFillRect(renderer, &pt);
                 if (p + 1 < pathLen)
-                    SDL_RenderLine(renderer, px, py, (float)path.point.x[i][p + 1] + off.x, (float)path.point.y[i][p + 1] + off.y);
+                    renderDebugLine(
+                        ctx,
+                        px,
+                        py,
+                        (float)path.point.x[i][p + 1] + off.x,
+                        (float)path.point.y[i][p + 1] + off.y);
             }
         }
     }

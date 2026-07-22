@@ -1,6 +1,7 @@
 #include "DebugRenderRangedDeadZone.h"
 #include "EntityColAABB.h"
 #include "EntityColCenter.h"
+#include "RenderNpcTargetVisibleLine.h"
 #include "RenderRangedDeadZone.h"
 #include "../../../structs/equipment/WeaponType.h"
 
@@ -26,5 +27,8 @@ void debugRenderRangedDeadZone(const Context &ctx)
         renderRangedDeadZone(
             ctx,
             entityColCenter(entityColAABB(npc.base, i)));
+
+        if (npc.equipment.weapon.showAmmo[i] && npc.ai.targetVisible[i])
+            renderNpcTargetVisibleLine(ctx, i);
     }
 }
