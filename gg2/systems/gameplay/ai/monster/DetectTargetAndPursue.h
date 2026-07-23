@@ -14,10 +14,11 @@ inline bool detectTargetAndPursue(Context &ctx, uint32_t n)
 {
     const int petId = ctx.data.player.petId;
 
-    auto &targetRangeCheckTimer = ctx.data.npc.ai.targetRangeCheckTimer[n];
-    if (targetRangeCheckTimer <= 0.0f)
+    auto &pursueTargetRangeCheckTimer =
+        ctx.data.npc.ai.pursueTargetRangeCheckTimer[n];
+    if (pursueTargetRangeCheckTimer <= 0.0f)
     {
-        targetRangeCheckTimer = NPC_TARGET_RANGE_CHECK_TIME;
+        pursueTargetRangeCheckTimer = NPC_PURSUE_TARGET_RANGE_CHECK_TIME;
 
         if (distToEntity(ctx, n, EntityType::Player, 0) < NPC_DETECT_RADIUS)
         {

@@ -35,7 +35,9 @@ void spawnNpcSystem(Context &ctx)
             ctx.data.npc.ai.path.index[i] = 0;
             ctx.data.npc.ai.repathTimer[i] = 0.0f;
             ctx.data.npc.ai.pathTargetCheckTimer[i] = 0.0f;
-            ctx.data.npc.ai.targetRangeCheckTimer[i] = 0.0f;
+            ctx.data.npc.ai.pursueTargetRangeCheckTimer[i] = 0.0f;
+            ctx.data.npc.ai.rangedAttackTargetTooCloseCheckTimer[i] = 0.0f;
+            ctx.data.npc.ai.targetTooClose[i] = false;
             ctx.data.npc.ai.flipTimer[i] = 0.0f;
             ctx.data.npc.ai.targetVisibleTimer[i] = 0.0f;
             ctx.data.npc.ai.targetVisible[i] = false;

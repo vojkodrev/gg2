@@ -1,4 +1,5 @@
 #include "MonsterRangedAttack.h"
+#include "IsMonsterRangedAttackTargetTooClose.h"
 #include "IsMonsterRangedTargetVisible.h"
 #include "PrepareMonsterAttack.h"
 #include "SetMonsterFacingTowardTarget.h"
@@ -21,6 +22,9 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
     auto &npc = ctx.data.npc;
     if (npc.equipment.weapon.type[n] != WeaponType::Ranged ||
         !npc.equipment.weapon.showAmmo[n])
+        return;
+
+    if (isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
         return;
 
     if (!isMonsterRangedTargetVisible(

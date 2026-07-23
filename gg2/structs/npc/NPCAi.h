@@ -16,6 +16,7 @@ struct NPCAi
 
     EntityReference<MAX_NPCS> target;
     bool targetVisible[MAX_NPCS];
+    bool targetTooClose[MAX_NPCS];
 
     NPCSpawn spawn;
 
@@ -27,7 +28,8 @@ struct NPCAi
     float idleTimer[MAX_NPCS];
     float repathTimer[MAX_NPCS];
     float pathTargetCheckTimer[MAX_NPCS];
-    float targetRangeCheckTimer[MAX_NPCS];
+    float pursueTargetRangeCheckTimer[MAX_NPCS];
+    float rangedAttackTargetTooCloseCheckTimer[MAX_NPCS];
     float targetVisibleTimer[MAX_NPCS];
     float flipTimer[MAX_NPCS];
 };

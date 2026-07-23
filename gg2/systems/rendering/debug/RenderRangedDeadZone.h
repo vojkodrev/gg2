@@ -1,10 +1,10 @@
 #pragma once
 #include "Context.h"
-#include "PlayerConstants.h"
+#include "AttackConstants.h"
 
 inline void renderRangedDeadZone(const Context &ctx, const SDL_FPoint &center)
 {
-    const float radius = PLAYER_RANGED_ATTACK_MIN_DISTANCE;
+    const float radius = RANGED_ATTACK_MIN_DISTANCE;
     SDL_FRect rect = {
         center.x - radius + ctx.data.camera.offset.x,
         center.y - radius + ctx.data.camera.offset.y,

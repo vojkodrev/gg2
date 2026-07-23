@@ -14,9 +14,12 @@ void npcAiTimerSystem(Context &ctx)
         npc.ai.attackedTimer[i] = std::max(0.0f, npc.ai.attackedTimer[i] - dt);
         npc.ai.idleTimer[i] = std::max(0.0f, npc.ai.idleTimer[i] - dt);
         npc.ai.repathTimer[i] = std::max(0.0f, npc.ai.repathTimer[i] - dt);
-        npc.ai.targetRangeCheckTimer[i] = std::max(
+        npc.ai.pursueTargetRangeCheckTimer[i] = std::max(
             0.0f,
-            npc.ai.targetRangeCheckTimer[i] - dt);
+            npc.ai.pursueTargetRangeCheckTimer[i] - dt);
+        npc.ai.rangedAttackTargetTooCloseCheckTimer[i] = std::max(
+            0.0f,
+            npc.ai.rangedAttackTargetTooCloseCheckTimer[i] - dt);
         npc.ai.targetVisibleTimer[i] = std::max(
             0.0f,
             npc.ai.targetVisibleTimer[i] - dt);
