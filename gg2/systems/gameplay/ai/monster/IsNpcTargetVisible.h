@@ -1,6 +1,8 @@
 #pragma once
 #include "Context.h"
+#include "ColIdIndex.h"
 #include "ColIdMake.h"
+#include "ColIdType.h"
 #include "EntityColCenter.h"
 #include "EntityColCenterWorld.h"
 #include "EntityType.h"
@@ -9,6 +11,7 @@
 #include "SpatialHashConstants.h"
 #include "spatialhash/SpatialHashQuery.h"
 #include "../../../../structs/equipment/WeaponType.h"
+#include "../../../../structs/npc/NPCAiType.h"
 #include "../../../../utils/rect/CenteredRect.h"
 #include <algorithm>
 #include <cmath>
@@ -69,10 +72,21 @@ inline bool isNpcTargetVisible(
     else
         return false;
 
+    const bool targetIsPlayer = targetType == EntityType::Player;
+    const bool targetIsPet =
+        targetType == EntityType::NPC &&
+        ctx.data.npc.ai.type[targetId] == NPCAiType::Pet;
+
     for (int i = 0; i < candidateCount; i++)
     {
         const uint32_t candidate = candidates[i];
         if (candidate == npcColId || candidate == targetColId)
+            continue;
+        if (targetIsPlayer &&
+            colIdType(candidate) == ColType::NPC &&
+            ctx.data.npc.ai.type[colIdIndex(candidate)] == NPCAiType::Pet)
+            continue;
+        if (targetIsPet && colIdType(candidate) == ColType::Player)
             continue;
 
         const SDL_FRect obstacle = getEntityColAABB(ctx, candidate);
