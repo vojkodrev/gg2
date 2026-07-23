@@ -71,7 +71,7 @@ add_library(systems_gameplay
     collision/CollisionSystem.cpp
     collision/effects/ProjectileCollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
-    projectile/SpawnPlayerTargetedProjectileEffect.cpp
+    projectile/CreateTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
     ui/bars/ShowBarSystem.cpp
     ui/bars/BarFrameSystem.cpp

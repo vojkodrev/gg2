@@ -6,7 +6,7 @@
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"
-#include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
+#include "../projectile/CreateTargetedProjectileEffect.h"
 
 void playerConcussiveShotAttackSystem(Context &ctx)
 {
@@ -28,11 +28,13 @@ void playerConcussiveShotAttackSystem(Context &ctx)
         SLOWED_TINT_B,
         SLOWED_TINT_A
     };
-    const int effectIndex = spawnPlayerTargetedProjectileEffect(
+    const int effectIndex = createTargetedProjectileEffect(
         ctx,
-        ctx.data.player.equipment.ammo.base,
-        ProjectileType::ConcussiveShot,
+        EntityType::Player,
+        0,
+        EntityType::NPC,
         npcIndex,
+        ProjectileType::ConcussiveShot,
         tint);
     if (effectIndex == INVALID_ID)
         return;
