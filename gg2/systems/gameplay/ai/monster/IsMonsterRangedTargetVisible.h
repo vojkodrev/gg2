@@ -1,6 +1,5 @@
 #pragma once
 #include "Context.h"
-#include "EntityType.h"
 #include "IsNpcTargetVisible.h"
 #include "NpcMonsterConstants.h"
 #include <cstdint>
@@ -8,8 +7,6 @@
 inline bool isMonsterRangedTargetVisible(
     Context &ctx,
     uint32_t n,
-    EntityType targetType,
-    int targetId,
     const SDL_FRect &targetCol)
 {
     auto &npc = ctx.data.npc;
@@ -19,8 +16,6 @@ inline bool isMonsterRangedTargetVisible(
         npc.ai.targetVisible[n] = isNpcTargetVisible(
             ctx,
             n,
-            targetType,
-            static_cast<uint32_t>(targetId),
             targetCol);
     }
 

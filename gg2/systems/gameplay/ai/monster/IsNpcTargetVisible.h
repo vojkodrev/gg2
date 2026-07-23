@@ -1,17 +1,13 @@
 #pragma once
 #include "Context.h"
-#include "ColIdIndex.h"
-#include "ColIdMake.h"
 #include "ColIdType.h"
 #include "EntityColCenter.h"
 #include "EntityColCenterWorld.h"
-#include "EntityType.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "SpatialHashConstants.h"
 #include "spatialhash/SpatialHashQuery.h"
 #include "../../../../structs/equipment/WeaponType.h"
-#include "../../../../structs/npc/NPCAiType.h"
 #include "../../../../utils/rect/CenteredRect.h"
 #include <algorithm>
 #include <cmath>
@@ -20,8 +16,6 @@
 inline bool isNpcTargetVisible(
     Context &ctx,
     uint32_t n,
-    EntityType targetType,
-    uint32_t targetId,
     const SDL_FRect &targetCol)
 {
     const auto &equipment = ctx.data.npc.equipment;
@@ -63,30 +57,10 @@ inline bool isNpcTargetVisible(
             candidates,
             SPATIAL_HASH_TABLE_SIZE);
     }
-    const uint32_t npcColId = colIdMake(ColType::NPC, n);
-    uint32_t targetColId;
-    if (targetType == EntityType::Player)
-        targetColId = colIdMake(ColType::Player, targetId);
-    else if (targetType == EntityType::NPC)
-        targetColId = colIdMake(ColType::NPC, targetId);
-    else
-        return false;
-
-    const bool targetIsPlayer = targetType == EntityType::Player;
-    const bool targetIsPet =
-        targetType == EntityType::NPC &&
-        ctx.data.npc.ai.type[targetId] == NPCAiType::Pet;
-
     for (int i = 0; i < candidateCount; i++)
     {
         const uint32_t candidate = candidates[i];
-        if (candidate == npcColId || candidate == targetColId)
-            continue;
-        if (targetIsPlayer &&
-            colIdType(candidate) == ColType::NPC &&
-            ctx.data.npc.ai.type[colIdIndex(candidate)] == NPCAiType::Pet)
-            continue;
-        if (targetIsPet && colIdType(candidate) == ColType::Player)
+        if (colIdType(candidate) != ColType::Object)
             continue;
 
         const SDL_FRect obstacle = getEntityColAABB(ctx, candidate);

@@ -15,8 +15,6 @@ void monsterRangedPursueTarget(Context &ctx, uint32_t n)
     if (isMonsterRangedTargetVisible(
             ctx,
             n,
-            targetType,
-            targetId,
             targetCol))
     {
         setNpcAiStateAttack(n, ctx);
