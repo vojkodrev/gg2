@@ -25,7 +25,7 @@ void petPursueTarget(uint32_t n, Context &ctx)
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
-    if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
+    if (areColBoxesNear(ctx, n, targetCol, NPC_MELEE_ATTACK_REACH))
     {
         setNpcAiStateAttack(n, ctx);
         return;

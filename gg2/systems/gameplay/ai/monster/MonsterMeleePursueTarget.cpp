@@ -13,7 +13,7 @@ void monsterMeleePursueTarget(Context &ctx, uint32_t n)
     if (!prepareMonsterPursueTarget(ctx, n, targetType, targetId, targetCol))
         return;
 
-    if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
+    if (areColBoxesNear(ctx, n, targetCol, NPC_MELEE_ATTACK_REACH))
     {
         setNpcAiStateAttack(n, ctx);
         return;
