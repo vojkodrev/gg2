@@ -2,6 +2,7 @@
 #include "IsMonsterRangedAttackTargetTooClose.h"
 #include "IsMonsterRangedTargetVisible.h"
 #include "PrepareMonsterAttack.h"
+#include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
@@ -57,4 +58,9 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
     npc.autoAttack.attackTimer[n] = NPC_RANGED_AUTO_ATTACK_DELAY;
     npc.equipment.weapon.showAmmo[n] = false;
+    selectAttackingMonsterIfPlayerHasNoSelection(
+        ctx,
+        n,
+        targetType,
+        targetId);
 }

@@ -1,6 +1,7 @@
 #include "MonsterMeleeAttack.h"
 #include "AreColBoxesNear.h"
 #include "PrepareMonsterAttack.h"
+#include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
 #include "../../../../structs/core/AnimationState.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
@@ -29,4 +30,9 @@ void monsterMeleeAttack(Context &ctx, uint32_t n)
 
     npc.autoAttack.attackTimer[n] = NPC_MELEE_AUTO_ATTACK_DELAY;
     npc.equipment.weapon.base.animation.animationState[n] = AnimationState::Starting;
+    selectAttackingMonsterIfPlayerHasNoSelection(
+        ctx,
+        n,
+        targetType,
+        targetId);
 }
