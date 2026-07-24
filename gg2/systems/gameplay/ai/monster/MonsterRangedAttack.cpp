@@ -4,13 +4,10 @@
 #include "PrepareMonsterAttack.h"
 #include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
-#include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
-#include "../../../../structs/core/constants/TintConstants.h"
-#include "../../../../structs/effect/ProjectileType.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../attacks/TryExecuteConcussiveShot.h"
-#include "../../projectile/CreateTargetedProjectileEffect.h"
+#include "../../attacks/TryExecuteRangedAutoAttack.h"
 #include "../SetNpcAiStatePursueTarget.h"
 
 void monsterRangedAttack(Context &ctx, uint32_t n)
@@ -40,32 +37,25 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);
 
-    tryExecuteConcussiveShot(
+    bool attackExecuted = tryExecuteConcussiveShot(
         ctx,
         EntityType::NPC,
         static_cast<int>(n),
         targetType,
         targetId);
 
-    const SDL_FColor tint = {
-        CLEAR_TINT_R,
-        CLEAR_TINT_G,
-        CLEAR_TINT_B,
-        CLEAR_TINT_A
-    };
-    const int effectIndex = createTargetedProjectileEffect(
+    attackExecuted = tryExecuteRangedAutoAttack(
         ctx,
         EntityType::NPC,
         static_cast<int>(n),
         targetType,
         targetId,
-        ProjectileType::AutoAttack,
-        tint);
-    if (effectIndex == INVALID_ID)
+        npc.autoAttack,
+        npc.equipment.weapon,
+        NPC_RANGED_AUTO_ATTACK_DELAY) || attackExecuted;
+    if (!attackExecuted)
         return;
 
-    npc.autoAttack.attackTimer[n] = NPC_RANGED_AUTO_ATTACK_DELAY;
-    npc.equipment.weapon.showAmmo[n] = false;
     selectAttackingMonsterIfPlayerHasNoSelection(
         ctx,
         n,

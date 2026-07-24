@@ -20,6 +20,7 @@
    <property name="ammo" value="arrow1"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
+   <property name="manabar" value="manabar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>

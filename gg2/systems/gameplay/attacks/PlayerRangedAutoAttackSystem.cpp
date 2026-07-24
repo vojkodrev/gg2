@@ -1,10 +1,7 @@
 #include "PlayerRangedAutoAttackSystem.h"
 #include "CanPlayerRangedAttack.h"
-#include "../../../structs/core/constants/IndexConstants.h"
+#include "TryExecuteRangedAutoAttack.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
-#include "../../../structs/core/constants/TintConstants.h"
-#include "../../../structs/effect/ProjectileType.h"
-#include "../projectile/CreateTargetedProjectileEffect.h"
 
 void playerRangedAutoAttackSystem(Context &ctx)
 {
@@ -13,24 +10,14 @@ void playerRangedAutoAttackSystem(Context &ctx)
         if (!canPlayerRangedAttack(ctx))
             return;
 
-        const int npcIndex = ctx.data.player.selectedNpc;
-        const SDL_FColor tint = {
-            CLEAR_TINT_R,
-            CLEAR_TINT_G,
-            CLEAR_TINT_B,
-            CLEAR_TINT_A
-        };
-        const int effectIndex = createTargetedProjectileEffect(
+        tryExecuteRangedAutoAttack(
             ctx,
             EntityType::Player,
             0,
             EntityType::NPC,
-            npcIndex,
-            ProjectileType::AutoAttack,
-            tint);
-        if (effectIndex == INVALID_ID)
-            return;
-        ctx.data.player.autoAttack.attackTimer[0] = PLAYER_AUTO_ATTACK_DELAY;
-        ctx.data.player.equipment.weapon.showAmmo[0] = false;
+            ctx.data.player.selectedNpc,
+            ctx.data.player.autoAttack,
+            ctx.data.player.equipment.weapon,
+            PLAYER_AUTO_ATTACK_DELAY);
     }
 }
