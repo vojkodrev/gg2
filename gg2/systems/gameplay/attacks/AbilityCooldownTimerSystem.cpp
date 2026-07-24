@@ -1,12 +1,12 @@
 #include "AbilityCooldownTimerSystem.h"
-#include "debuff/RemoveDebuff.h"
 
 void abilityCooldownTimerSystem(Context &ctx)
 {
+    const float dt = ctx.frame.dt;
     auto &concussiveShotCooldownTimer = ctx.data.player.concussiveShotCooldownTimer;
     if (concussiveShotCooldownTimer > 0.0f)
     {
-        concussiveShotCooldownTimer -= ctx.frame.dt;
+        concussiveShotCooldownTimer -= dt;
         if (concussiveShotCooldownTimer < 0.0f)
             concussiveShotCooldownTimer = 0.0f;
     }
@@ -16,23 +16,21 @@ void abilityCooldownTimerSystem(Context &ctx)
         if (!ctx.data.npc.active[npcId])
             continue;
 
+        auto &npcConcussiveShotCooldownTimer =
+            ctx.data.npc.concussiveShotCooldownTimer[npcId];
+        if (npcConcussiveShotCooldownTimer > 0.0f)
+        {
+            npcConcussiveShotCooldownTimer -= dt;
+            if (npcConcussiveShotCooldownTimer < 0.0f)
+                npcConcussiveShotCooldownTimer = 0.0f;
+        }
+
         auto &tauntTimer = ctx.data.npc.tauntTimer[npcId];
         if (tauntTimer > 0.0f)
         {
-            tauntTimer -= ctx.frame.dt;
+            tauntTimer -= dt;
             if (tauntTimer < 0.0f)
                 tauntTimer = 0.0f;
-        }
-
-        auto &debuff = ctx.data.npc.concussiveShotDebuff;
-        for (uint32_t debuffIndex = 0; debuffIndex < debuff.pool.count[npcId]; debuffIndex++)
-        {
-            if (!debuff.pool.active[npcId][debuffIndex])
-                continue;
-
-            debuff.timer[npcId][debuffIndex] -= ctx.frame.dt;
-            if (debuff.timer[npcId][debuffIndex] <= 0.0f)
-                removeDebuff(debuff, npcId, (int)debuffIndex);
         }
     }
 }

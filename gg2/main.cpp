@@ -37,6 +37,7 @@
 #include "attacks/AutoAttackTimerSystem.h"
 #include "attacks/NpcAutoAttackSystem.h"
 #include "attacks/AbilityCooldownTimerSystem.h"
+#include "attacks/ConcussiveShotDebuffSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerPetAttackSystem.h"
@@ -159,6 +160,7 @@ int main()
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
+        concussiveShotDebuffSystem(*ctx);
 
         effectTimerSystem(*ctx);
         moveEffectSystem(*ctx);

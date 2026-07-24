@@ -29,6 +29,7 @@ void spawnNpcSystem(Context &ctx)
             resetNpcCombatState(ctx, i);
             ctx.data.npc.autoAttack.attackTimer[i] = 0.0f;
             ctx.data.npc.autoAttack.active[i] = false;
+            ctx.data.npc.concussiveShotCooldownTimer[i] = 0.0f;
             ctx.data.npc.ai.state[i] = NPCAiState::Idle;
             ctx.data.npc.ai.attackedTimer[i] = 0.0f;
             ctx.data.npc.ai.path.length[i] = 0;

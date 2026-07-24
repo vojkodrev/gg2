@@ -59,7 +59,12 @@ void projectileCollisionSystem(Context &ctx)
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
             resolveSerpentStingProjectile(ctx, targetIndex, parentType, parentId);
         else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
-            resolveConcussiveShotProjectile(ctx, targetIndex, parentType, parentId);
+            resolveConcussiveShotProjectile(
+                ctx,
+                targetType,
+                targetIndex,
+                parentType,
+                parentId);
 
         destroyProjectile(ctx, effectIndex);
     }

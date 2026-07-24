@@ -8,21 +8,32 @@
 
 inline void resolveConcussiveShotProjectile(
     Context &ctx,
-    uint32_t npcIndex,
+    EntityType targetType,
+    uint32_t targetId,
     EntityType parentType,
     int parentId)
 {
-    addDebuff(
-        ctx.data.npc.concussiveShotDebuff,
-        npcIndex,
-        parentType,
-        parentId,
-        CONCUSSIVE_SHOT_DEBUFF_TIME);
+    if (targetType == EntityType::Player)
+        addDebuff(
+            ctx.data.player.concussiveShotDebuff,
+            targetId,
+            parentType,
+            parentId,
+            CONCUSSIVE_SHOT_DEBUFF_TIME);
+    else if (targetType == EntityType::NPC)
+    {
+        addDebuff(
+            ctx.data.npc.concussiveShotDebuff,
+            targetId,
+            parentType,
+            parentId,
+            CONCUSSIVE_SHOT_DEBUFF_TIME);
 
-    addToAggroTableValue(
-        ctx.data.npc.aggroTable,
-        npcIndex,
-        parentType,
-        parentId,
-        CONCUSSIVE_SHOT_AGGRO_VALUE);
+        addToAggroTableValue(
+            ctx.data.npc.aggroTable,
+            targetId,
+            parentType,
+            parentId,
+            CONCUSSIVE_SHOT_AGGRO_VALUE);
+    }
 }

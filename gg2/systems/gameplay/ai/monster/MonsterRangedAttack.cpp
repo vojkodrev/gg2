@@ -9,6 +9,7 @@
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/effect/ProjectileType.h"
 #include "../../../../structs/equipment/WeaponType.h"
+#include "../../attacks/TryExecuteConcussiveShot.h"
 #include "../../projectile/CreateTargetedProjectileEffect.h"
 #include "../SetNpcAiStatePursueTarget.h"
 
@@ -38,6 +39,13 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
     }
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);
+
+    tryExecuteConcussiveShot(
+        ctx,
+        EntityType::NPC,
+        static_cast<int>(n),
+        targetType,
+        targetId);
 
     const SDL_FColor tint = {
         CLEAR_TINT_R,

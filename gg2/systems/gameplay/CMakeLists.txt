@@ -22,6 +22,7 @@ add_library(systems_gameplay
     attacks/NpcAutoAttackSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
     attacks/AbilityCooldownTimerSystem.cpp
+    attacks/ConcussiveShotDebuffSystem.cpp
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerPetAttackSystem.cpp

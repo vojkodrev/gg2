@@ -83,13 +83,20 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         else if (aiType == "friendly")
             npc.ai.type[n] = NPCAiType::Friendly;
 
-        if (npc.ai.type[n] == NPCAiType::Pet)
+        if (npc.ai.type[n] == NPCAiType::MonsterRanged)
+        {
+            npc.statistics.mana.mana[n] = NPC_MANA;
+            npc.statistics.mana.maxMana[n] = NPC_MANA;
+            npc.statistics.mana.dirty[n] = true;
+        }
+        else if (npc.ai.type[n] == NPCAiType::Pet)
         {
             player.petId = (int)n;
             npc.statistics.mana.mana[n] = NPC_PET_MANA;
             npc.statistics.mana.maxMana[n] = NPC_PET_MANA;
             npc.statistics.mana.dirty[n] = true;
         }
+        npc.concussiveShotCooldownTimer[n] = 0.0f;
 
         npc.ai.patrol.count[n] = (uint32_t)getTileIntProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)
