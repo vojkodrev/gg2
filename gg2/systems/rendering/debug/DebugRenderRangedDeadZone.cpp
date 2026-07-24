@@ -31,7 +31,7 @@ void debugRenderRangedDeadZone(const Context &ctx)
         if (npc.ai.type[i] == NPCAiType::MonsterMelee ||
             npc.ai.type[i] == NPCAiType::MonsterRanged)
         {
-            SDL_SetRenderDrawColor(ctx.renderer, 255, 0, 0, 255);
+            SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderMonsterAggroRange(ctx, npcCenter);
         }
 
