@@ -4,6 +4,7 @@
 #include "PrepareMonsterAttack.h"
 #include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
+#include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../attacks/TryExecuteConcussiveShot.h"
@@ -37,14 +38,7 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);
 
-    bool attackExecuted = tryExecuteConcussiveShot(
-        ctx,
-        EntityType::NPC,
-        static_cast<int>(n),
-        targetType,
-        targetId);
-
-    attackExecuted = tryExecuteRangedAutoAttack(
+    const bool rangedAutoAttackExecuted = tryExecuteRangedAutoAttack(
         ctx,
         EntityType::NPC,
         static_cast<int>(n),
@@ -52,8 +46,22 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
         targetId,
         npc.autoAttack,
         npc.equipment.weapon,
-        NPC_RANGED_AUTO_ATTACK_DELAY) || attackExecuted;
-    if (!attackExecuted)
+        NPC_RANGED_AUTO_ATTACK_DELAY);
+    const float concussiveShotOffset = rangedAutoAttackExecuted ?
+        CONCUSSIVE_SHOT_PROJECTILE_OFFSET :
+        0.0f;
+    const bool concussiveShotExecuted = tryExecuteConcussiveShot(
+        ctx,
+        EntityType::NPC,
+        static_cast<int>(n),
+        targetType,
+        targetId,
+        npc.concussiveShotCooldownTimer[n],
+        npc.globalCooldownTimer[n],
+        npc.statistics.mana,
+        npc.equipment.weapon,
+        concussiveShotOffset);
+    if (!rangedAutoAttackExecuted && !concussiveShotExecuted)
         return;
 
     selectAttackingMonsterIfPlayerHasNoSelection(

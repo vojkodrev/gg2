@@ -14,5 +14,9 @@ void playerConcussiveShotAttackSystem(Context &ctx)
         EntityType::Player,
         0,
         EntityType::NPC,
-        ctx.data.player.selectedNpc);
+        ctx.data.player.selectedNpc,
+        ctx.data.player.concussiveShotCooldownTimer,
+        ctx.data.player.globalCooldownTimer,
+        ctx.data.player.statistics.mana,
+        ctx.data.player.equipment.weapon);
 }

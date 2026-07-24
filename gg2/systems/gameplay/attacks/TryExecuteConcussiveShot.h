@@ -6,44 +6,27 @@
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"
+#include "../../../structs/equipment/Weapon.h"
+#include "../../../structs/statistics/Mana.h"
+#include "../projectile/CalculatePerpendicularProjectileOffset.h"
 #include "../projectile/CreateTargetedProjectileEffect.h"
 
+template<int N>
 inline bool tryExecuteConcussiveShot(
     Context &ctx,
     EntityType parentType,
     int parentId,
     EntityType targetType,
-    int targetId)
+    int targetId,
+    float &concussiveShotCooldownTimer,
+    float &globalCooldownTimer,
+    Mana<N> &mana,
+    Weapon<N> &weapon,
+    float projectileOffsetDistance = 0.0f)
 {
-    float *concussiveShotCooldownTimer;
-    float *globalCooldownTimer;
-    int *mana;
-    bool *manaDirty;
-    bool *showAmmo;
-    if (parentType == EntityType::Player)
-    {
-        concussiveShotCooldownTimer =
-            &ctx.data.player.concussiveShotCooldownTimer;
-        globalCooldownTimer = &ctx.data.player.globalCooldownTimer;
-        mana = &ctx.data.player.statistics.mana.mana[parentId];
-        manaDirty = &ctx.data.player.statistics.mana.dirty[parentId];
-        showAmmo = &ctx.data.player.equipment.weapon.showAmmo[parentId];
-    }
-    else if (parentType == EntityType::NPC)
-    {
-        concussiveShotCooldownTimer =
-            &ctx.data.npc.concussiveShotCooldownTimer[parentId];
-        globalCooldownTimer = &ctx.data.npc.globalCooldownTimer[parentId];
-        mana = &ctx.data.npc.statistics.mana.mana[parentId];
-        manaDirty = &ctx.data.npc.statistics.mana.dirty[parentId];
-        showAmmo = &ctx.data.npc.equipment.weapon.showAmmo[parentId];
-    }
-    else
-        return false;
-
-    if (*concussiveShotCooldownTimer > 0.0f ||
-        *globalCooldownTimer > 0.0f ||
-        *mana < CONCUSSIVE_SHOT_MANA_COST)
+    if (concussiveShotCooldownTimer > 0.0f ||
+        globalCooldownTimer > 0.0f ||
+        mana.mana[parentId] < CONCUSSIVE_SHOT_MANA_COST)
         return false;
 
     const SDL_FColor tint = {
@@ -63,10 +46,21 @@ inline bool tryExecuteConcussiveShot(
     if (effectIndex == INVALID_ID)
         return false;
 
-    *mana -= CONCUSSIVE_SHOT_MANA_COST;
-    *manaDirty = true;
-    *concussiveShotCooldownTimer = CONCUSSIVE_SHOT_COOLDOWN_TIME;
-    *globalCooldownTimer = GLOBAL_COOLDOWN_DELAY;
-    *showAmmo = false;
+    const SDL_FPoint projectileOffset =
+        calculatePerpendicularProjectileOffset(
+            ctx,
+            weapon,
+            parentId,
+            targetType,
+            targetId,
+            projectileOffsetDistance);
+    ctx.data.effect.base.position.x[effectIndex] += projectileOffset.x;
+    ctx.data.effect.base.position.y[effectIndex] += projectileOffset.y;
+    ctx.data.effect.base.position.dirty[effectIndex] = true;
+    mana.mana[parentId] -= CONCUSSIVE_SHOT_MANA_COST;
+    mana.dirty[parentId] = true;
+    concussiveShotCooldownTimer = CONCUSSIVE_SHOT_COOLDOWN_TIME;
+    globalCooldownTimer = GLOBAL_COOLDOWN_DELAY;
+    weapon.showAmmo[parentId] = false;
     return true;
 }
