@@ -1,4 +1,5 @@
 #include "FollowAStarPathTo.h"
+#include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
@@ -41,14 +42,14 @@ void followAStarPathTo(
                     targetCenter.y) >=
                 NPC_PATH_TARGET_MOVE_THRESHOLD)
             {
-                ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+                resetNpcFollowPath(ctx, n);
                 return;
             }
         }
 
         if (ai.repathTimer[n] <= 0.0f)
         {
-            ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+            resetNpcFollowPath(ctx, n);
             return;
         }
 
@@ -72,6 +73,6 @@ void followAStarPathTo(
         moveNpcColCenterToward(ctx, n, target, moveSpeed);
 
         if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
-            ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+            resetNpcFollowPath(ctx, n);
     }
 }
