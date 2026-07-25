@@ -22,9 +22,6 @@ inline bool prepareMonsterAttack(
         return false;
     }
 
-    if (npc.autoAttack.attackTimer[n] > 0.0f)
-        return false;
-
     auto &aggroTable = npc.aggroTable;
     clearInactiveAggroTableEntitiesIfMaxInactive(aggroTable, n, npc.active);
     if (aggroTable.pool.count[n] == 0)

@@ -20,6 +20,9 @@ void npcAiTimerSystem(Context &ctx)
         npc.ai.rangedAttackTargetTooCloseCheckTimer[i] = std::max(
             0.0f,
             npc.ai.rangedAttackTargetTooCloseCheckTimer[i] - dt);
+        npc.ai.rangedAttackStaggerTimer[i] = std::max(
+            0.0f,
+            npc.ai.rangedAttackStaggerTimer[i] - dt);
         npc.ai.targetVisibleTimer[i] = std::max(
             0.0f,
             npc.ai.targetVisibleTimer[i] - dt);

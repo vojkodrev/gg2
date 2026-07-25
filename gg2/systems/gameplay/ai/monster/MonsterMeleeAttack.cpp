@@ -16,6 +16,9 @@ void monsterMeleeAttack(Context &ctx, uint32_t n)
     if (!prepareMonsterAttack(ctx, n, targetType, targetId, targetCol))
         return;
 
+    if (ctx.data.npc.autoAttack.attackTimer[n] > 0.0f)
+        return;
+
     if (!areColBoxesNear(ctx, n, targetCol, NPC_MELEE_ATTACK_REACH))
     {
         setNpcAiStatePursueTarget(ctx, n);

@@ -63,6 +63,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.pathTargetCheckTimer[n] = 0.0f;
         npc.ai.pursueTargetRangeCheckTimer[n] = 0.0f;
         npc.ai.rangedAttackTargetTooCloseCheckTimer[n] = 0.0f;
+        npc.ai.rangedAttackStaggerTimer[n] = 0.0f;
         npc.ai.targetTooClose[n] = false;
         npc.ai.flipTimer[n] = 0.0f;
         npc.ai.targetVisibleTimer[n] = 0.0f;

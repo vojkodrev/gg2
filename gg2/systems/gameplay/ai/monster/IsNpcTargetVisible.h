@@ -19,9 +19,7 @@ inline bool isNpcTargetVisible(
     const SDL_FRect &targetCol)
 {
     const auto &equipment = ctx.data.npc.equipment;
-    if (
-        equipment.weapon.type[n] != WeaponType::Ranged ||
-        !equipment.weapon.showAmmo[n])
+    if (equipment.weapon.type[n] != WeaponType::Ranged)
         return false;
 
     const SDL_FRect ammoAnchor = {

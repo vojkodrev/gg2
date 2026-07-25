@@ -20,8 +20,7 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
         return;
 
     auto &npc = ctx.data.npc;
-    if (npc.equipment.weapon.type[n] != WeaponType::Ranged ||
-        !npc.equipment.weapon.showAmmo[n])
+    if (npc.equipment.weapon.type[n] != WeaponType::Ranged)
         return;
 
     if (isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
@@ -38,29 +37,42 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);
 
-    const bool rangedAutoAttackExecuted = tryExecuteRangedAutoAttack(
-        ctx,
-        EntityType::NPC,
-        static_cast<int>(n),
-        targetType,
-        targetId,
-        npc.autoAttack,
-        npc.equipment.weapon,
-        NPC_RANGED_AUTO_ATTACK_DELAY);
-    const float concussiveShotOffset = rangedAutoAttackExecuted ?
-        CONCUSSIVE_SHOT_PROJECTILE_OFFSET :
-        0.0f;
-    const bool concussiveShotExecuted = tryExecuteConcussiveShot(
-        ctx,
-        EntityType::NPC,
-        static_cast<int>(n),
-        targetType,
-        targetId,
-        npc.concussiveShotCooldownTimer[n],
-        npc.globalCooldownTimer[n],
-        npc.statistics.mana,
-        npc.equipment.weapon,
-        concussiveShotOffset);
+    bool rangedAutoAttackExecuted = false;
+    if (npc.ai.rangedAttackStaggerTimer[n] <= 0.0f &&
+        npc.autoAttack.attackTimer[n] <= 0.0f)
+    {
+        rangedAutoAttackExecuted = tryExecuteRangedAutoAttack(
+            ctx,
+            EntityType::NPC,
+            static_cast<int>(n),
+            targetType,
+            targetId,
+            npc.autoAttack,
+            npc.equipment.weapon,
+            NPC_RANGED_AUTO_ATTACK_DELAY);
+        if (rangedAutoAttackExecuted)
+            npc.ai.rangedAttackStaggerTimer[n] =
+                NPC_RANGED_ATTACK_STAGGER_TIME;
+    }
+
+    bool concussiveShotExecuted = false;
+    if (npc.ai.rangedAttackStaggerTimer[n] <= 0.0f)
+    {
+        concussiveShotExecuted = tryExecuteConcussiveShot(
+            ctx,
+            EntityType::NPC,
+            static_cast<int>(n),
+            targetType,
+            targetId,
+            npc.concussiveShotCooldownTimer[n],
+            npc.globalCooldownTimer[n],
+            npc.statistics.mana,
+            npc.equipment.weapon,
+            CONCUSSIVE_SHOT_PROJECTILE_OFFSET);
+        if (concussiveShotExecuted)
+            npc.ai.rangedAttackStaggerTimer[n] =
+                NPC_RANGED_ATTACK_STAGGER_TIME;
+    }
     if (!rangedAutoAttackExecuted && !concussiveShotExecuted)
         return;
 
