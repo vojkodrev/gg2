@@ -18,6 +18,10 @@ struct NPCAi
     bool targetVisible[MAX_NPCS];
     bool targetTooClose[MAX_NPCS];
 
+    bool retreating[MAX_NPCS];
+    float retreatPointX[MAX_NPCS];
+    float retreatPointY[MAX_NPCS];
+
     NPCSpawn spawn;
 
     NPCPatrol patrol;

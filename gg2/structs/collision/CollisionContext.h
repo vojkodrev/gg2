@@ -1,13 +1,13 @@
 #pragma once
 #include "spatialhash/SpatialHash.h"
-#include "../core/constants/SpatialHashConstants.h"
 #include "CollisionResult.h"
+#include "SpatialHashQueryCandidates.h"
 #include <shared_mutex>
 
 struct CollisionContext
 {
     SpatialHash<1> spatialHash;
-    uint32_t candidates[SPATIAL_HASH_MAX_PER_BUCKET * 4];
+    SpatialHashQueryCandidates candidates;
     std::shared_mutex spatialHashMutex;
     CollisionResult collisions;
 };
