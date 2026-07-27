@@ -34,6 +34,7 @@ struct NPCAi
     float pathTargetCheckTimer[MAX_NPCS];
     float pursueTargetRangeCheckTimer[MAX_NPCS];
     float rangedAttackTargetTooCloseCheckTimer[MAX_NPCS];
+    float rangedRetreatPointCheckTimer[MAX_NPCS];
     float rangedAttackStaggerTimer[MAX_NPCS];
     float targetVisibleTimer[MAX_NPCS];
     float flipTimer[MAX_NPCS];

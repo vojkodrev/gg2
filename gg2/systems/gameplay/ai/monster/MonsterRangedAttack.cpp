@@ -31,8 +31,11 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
     if (isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
     {
         auto &ai = npc.ai;
-        if (!ai.retreating[n])
+        if (!ai.retreating[n] &&
+            ai.rangedRetreatPointCheckTimer[n] <= 0.0f)
         {
+            ai.rangedRetreatPointCheckTimer[n] =
+                NPC_RANGED_RETREAT_POINT_CHECK_TIME;
             const SDL_FPoint retreatPoint =
                 getMonsterRangedRetreatPoint(ctx, n, targetCol);
             ai.retreatPointX[n] = retreatPoint.x;

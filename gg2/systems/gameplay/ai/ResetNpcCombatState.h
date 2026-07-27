@@ -12,6 +12,7 @@ inline void resetNpcCombatState(Context &ctx, uint32_t n)
     ctx.data.npc.ai.targetVisible[n] = false;
     ctx.data.npc.ai.targetTooClose[n] = false;
     ctx.data.npc.ai.retreating[n] = false;
+    ctx.data.npc.ai.rangedRetreatPointCheckTimer[n] = 0.0f;
     resetAggroTable(ctx.data.npc.aggroTable, n);
     resetDebuff(ctx.data.npc.concussiveShotDebuff, n);
     resetDebuff(ctx.data.npc.serpentStingDebuff, n);
