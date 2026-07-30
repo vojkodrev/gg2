@@ -1,19 +1,13 @@
 #include "MonsterRangedAttack.h"
-#include "GetMonsterRangedRetreatPoint.h"
+#include "RetreatRangedMonster.h"
 #include "IsMonsterRangedAttackTargetTooClose.h"
-#include "IsMonsterRangedTargetVisible.h"
 #include "PrepareMonsterAttack.h"
 #include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
-#include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../attacks/TryExecuteConcussiveShot.h"
 #include "../../attacks/TryExecuteRangedAutoAttack.h"
-#include "../SetNpcAiStatePursueTarget.h"
-#include "../ResetNpcFollowPath.h"
-#include "../astar/FollowAStarPathTo.h"
-#include "../../../../utils/rect/CenteredRect.h"
 
 void monsterRangedAttack(Context &ctx, uint32_t n)
 {
@@ -27,47 +21,13 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
     if (npc.equipment.weapon.type[n] != WeaponType::Ranged)
         return;
 
-    auto &ai = npc.ai;
-    if (ai.retreating[n] ||
-        isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
-    {
-        if (!ai.retreating[n] &&
-            ai.rangedRetreatPointCheckTimer[n] <= 0.0f)
-        {
-            ai.rangedRetreatPointCheckTimer[n] =
-                NPC_RANGED_RETREAT_POINT_CHECK_TIME;
-            const SDL_FPoint retreatPoint =
-                getMonsterRangedRetreatPoint(ctx, n, targetCol);
-            ai.retreatPointX[n] = retreatPoint.x;
-            ai.retreatPointY[n] = retreatPoint.y;
-            ai.retreating[n] = true;
-            resetNpcFollowPath(ctx, n);
-        }
-
-        const SDL_FRect retreatRect = centeredRect(
-            {ai.retreatPointX[n], ai.retreatPointY[n]},
-            NPC_PATROL_POINT_SIZE,
-            NPC_PATROL_POINT_SIZE);
-        const bool goalReached =
-            followAStarPathTo(n, ctx, retreatRect, INVALID_ID);
-        if (goalReached)
-        {
-            ai.retreating[n] = false;
-            ai.rangedAttackTargetTooCloseCheckTimer[n] = 0.0f;
-        }
-
-        if (!isMonsterRangedTargetVisible(ctx, n, targetCol))
-            return;
-    }
-
-    if (!isMonsterRangedTargetVisible(
+    if (!retreatRangedMonster(
             ctx,
             n,
+            targetType,
+            targetId,
             targetCol))
-    {
-        setNpcAiStatePursueTarget(ctx, n);
         return;
-    }
 
     if (isMonsterRangedAttackTargetTooClose(
             ctx,
