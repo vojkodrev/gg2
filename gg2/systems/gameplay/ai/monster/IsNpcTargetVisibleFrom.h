@@ -9,7 +9,6 @@
 #include "spatialhash/SpatialHashQuery.h"
 #include "../../../../structs/collision/SpatialHashQueryCandidates.h"
 #include "../../../../structs/equipment/WeaponType.h"
-#include "../../../../utils/rect/CenteredRect.h"
 #include <algorithm>
 #include <cmath>
 #include <shared_mutex>
@@ -38,17 +37,33 @@ inline bool isNpcTargetVisibleFrom(
         entityColCenter(entityColAABB(ctx.data.npc.base, n));
     ammoAnchorCenter.x += npcColCenter.x - currentNpcColCenter.x;
     ammoAnchorCenter.y += npcColCenter.y - currentNpcColCenter.y;
-    const SDL_FPoint targetColCenter = entityColCenter(targetCol);
     const SDL_FRect ammoCol = entityColAABB(equipment.ammo.base, n);
     const float visibilityHalfWidth =
         (std::sqrt(ammoCol.w * ammoCol.w + ammoCol.h * ammoCol.h) +
             NPC_TARGET_VISIBLE_AMMO_BUFFER) * 0.5f;
-    const SDL_FRect queryRect = {
-        std::min(ammoAnchorCenter.x, targetColCenter.x) - visibilityHalfWidth,
-        std::min(ammoAnchorCenter.y, targetColCenter.y) - visibilityHalfWidth,
-        std::abs(targetColCenter.x - ammoAnchorCenter.x) + visibilityHalfWidth * 2.0f,
-        std::abs(targetColCenter.y - ammoAnchorCenter.y) + visibilityHalfWidth * 2.0f
+    const SDL_FPoint targetEdgePoint = {
+        std::clamp(
+            ammoAnchorCenter.x,
+            targetCol.x,
+            targetCol.x + targetCol.w),
+        std::clamp(
+            ammoAnchorCenter.y,
+            targetCol.y,
+            targetCol.y + targetCol.h)
     };
+    const SDL_FRect queryRect = {
+        std::min(ammoAnchorCenter.x, targetEdgePoint.x) - visibilityHalfWidth,
+        std::min(ammoAnchorCenter.y, targetEdgePoint.y) - visibilityHalfWidth,
+        std::abs(targetEdgePoint.x - ammoAnchorCenter.x) + visibilityHalfWidth * 2.0f,
+        std::abs(targetEdgePoint.y - ammoAnchorCenter.y) + visibilityHalfWidth * 2.0f
+    };
+    const float lineDx = targetEdgePoint.x - ammoAnchorCenter.x;
+    const float lineDy = targetEdgePoint.y - ammoAnchorCenter.y;
+    const float lineLength = std::sqrt(lineDx * lineDx + lineDy * lineDy);
+    if (lineLength <= 0.001f)
+        return true;
+    const float offsetX = -lineDy / lineLength * visibilityHalfWidth;
+    const float offsetY = lineDx / lineLength * visibilityHalfWidth;
 
     SpatialHashQueryCandidates candidates;
     int candidateCount;
@@ -67,19 +82,24 @@ inline bool isNpcTargetVisibleFrom(
             continue;
 
         const SDL_FRect obstacle = getEntityColAABB(ctx, candidate);
-        // Expanding the obstacle by half the corridor width lets a line test
-        // represent the ammo-sized visibility corridor intersecting the obstacle.
-        const SDL_FRect bufferedObstacle = centeredRect(
-            entityColCenter(obstacle),
-            obstacle.w,
-            obstacle.h,
-            visibilityHalfWidth);
-        float x1 = ammoAnchorCenter.x;
-        float y1 = ammoAnchorCenter.y;
-        float x2 = targetColCenter.x;
-        float y2 = targetColCenter.y;
+        float x1 = ammoAnchorCenter.x + offsetX;
+        float y1 = ammoAnchorCenter.y + offsetY;
+        float x2 = targetEdgePoint.x + offsetX;
+        float y2 = targetEdgePoint.y + offsetY;
         if (SDL_GetRectAndLineIntersectionFloat(
-                &bufferedObstacle,
+                &obstacle,
+                &x1,
+                &y1,
+                &x2,
+                &y2))
+            return false;
+
+        x1 = ammoAnchorCenter.x - offsetX;
+        y1 = ammoAnchorCenter.y - offsetY;
+        x2 = targetEdgePoint.x - offsetX;
+        y2 = targetEdgePoint.y - offsetY;
+        if (SDL_GetRectAndLineIntersectionFloat(
+                &obstacle,
                 &x1,
                 &y1,
                 &x2,

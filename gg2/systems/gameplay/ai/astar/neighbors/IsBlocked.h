@@ -2,6 +2,7 @@
 #include "../../../../../structs/ai/AStarContext.h"
 #include "../../../../../structs/collision/SpatialHashQueryCandidates.h"
 #include "../../../../../structs/core/Context.h"
+#include "../../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../../utils/collision/IsNpcColBlocked.h"
 #include "../../../../../utils/collision/spatialhash/SpatialHashQuery.h"
 #include "../../../../../utils/rect/CenteredRect.h"
@@ -19,7 +20,8 @@ bool isBlocked(
     SDL_FRect nodeMoverBox = centeredRect(
         { (float)node.x, (float)node.y },
         moverBox.w,
-        moverBox.h);
+        moverBox.h,
+        (float)NPC_MONSTER_PATH_STEP);
 
     SpatialHashQueryCandidates candidates;
     int n = spatialHashQuery(
