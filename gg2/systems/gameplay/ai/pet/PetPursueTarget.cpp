@@ -1,8 +1,6 @@
 #include "PetPursueTarget.h"
 #include "../../../structs/core/constants/IndexConstants.h"
-#include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
-#include "NpcMonsterConstants.h"
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStateAttack.h"
 #include "astar/FollowAStarPathTo.h"
@@ -25,12 +23,9 @@ void petPursueTarget(uint32_t n, Context &ctx)
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
-    if (areColBoxesNear(ctx, n, targetCol, NPC_MELEE_ATTACK_REACH))
-    {
-        setNpcAiStateAttack(n, ctx);
-        return;
-    }
-
     const int targetNpcIndex = targetType == EntityType::NPC ? targetId : INVALID_ID;
-    followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    const bool goalReached =
+        followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    if (goalReached)
+        setNpcAiStateAttack(n, ctx);
 }

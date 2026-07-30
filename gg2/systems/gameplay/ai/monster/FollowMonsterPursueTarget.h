@@ -5,7 +5,7 @@
 #include "astar/FollowAStarPathTo.h"
 #include <cstdint>
 
-inline void followMonsterPursueTarget(
+inline bool followMonsterPursueTarget(
     Context &ctx,
     uint32_t n,
     EntityType targetType,
@@ -13,5 +13,7 @@ inline void followMonsterPursueTarget(
     const SDL_FRect &targetCol)
 {
     const int targetNpcIndex = targetType == EntityType::NPC ? targetId : INVALID_ID;
-    followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    const bool goalReached =
+        followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    return goalReached;
 }

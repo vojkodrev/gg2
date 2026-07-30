@@ -10,7 +10,6 @@
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../attacks/TryExecuteConcussiveShot.h"
 #include "../../attacks/TryExecuteRangedAutoAttack.h"
-#include "../HasReachedRect.h"
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../ResetNpcFollowPath.h"
 #include "../astar/FollowAStarPathTo.h"
@@ -48,8 +47,9 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
             {ai.retreatPointX[n], ai.retreatPointY[n]},
             (float)NPC_MONSTER_PATH_STEP,
             (float)NPC_MONSTER_PATH_STEP);
-        followAStarPathTo(n, ctx, retreatRect, INVALID_ID);
-        if (hasReachedRect(ctx, n, retreatRect))
+        const bool goalReached =
+            followAStarPathTo(n, ctx, retreatRect, INVALID_ID);
+        if (goalReached)
         {
             ai.retreating[n] = false;
             ai.rangedAttackTargetTooCloseCheckTimer[n] = 0.0f;

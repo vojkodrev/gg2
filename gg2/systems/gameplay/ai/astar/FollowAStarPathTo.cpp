@@ -11,7 +11,7 @@
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 
-void followAStarPathTo(
+bool followAStarPathTo(
     uint32_t n, 
     Context &ctx, 
     SDL_FRect targetCol, 
@@ -37,7 +37,7 @@ void followAStarPathTo(
     if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
     {
         resetNpcFollowPath(ctx, n);
-        return;
+        return true;
     }
 
     // acquire: pairs with release store in RequestAStarPath, ensures path data is visible
@@ -66,14 +66,14 @@ void followAStarPathTo(
                 NPC_PATH_TARGET_MOVE_THRESHOLD)
             {
                 resetNpcFollowPath(ctx, n);
-                return;
+                return false;
             }
         }
 
         if (ai.repathTimer[n] <= 0.0f)
         {
             resetNpcFollowPath(ctx, n);
-            return;
+            return false;
         }
 
         uint32_t prevIndex = ai.path.index[n];
@@ -98,4 +98,6 @@ void followAStarPathTo(
         if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
             resetNpcFollowPath(ctx, n);
     }
+
+    return false;
 }

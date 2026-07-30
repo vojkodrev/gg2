@@ -1,5 +1,4 @@
 #include "FollowNpcPatrolPath.h"
-#include "HasReachedRect.h"
 #include "SetNpcAiStateIdle.h"
 #include "astar/FollowAStarPathTo.h"
 #include "NpcMonsterConstants.h"
@@ -16,8 +15,9 @@ void followNpcPatrolPath(Context &ctx, uint32_t n)
     uint32_t p = ai.patrol.index[n];
     SDL_FPoint patrolPt = { ai.spawn.x[n] + ai.patrol.point.x[n][p], ai.spawn.y[n] + ai.patrol.point.y[n][p] };
     SDL_FRect patrolCol = centeredRect(patrolPt, (float)NPC_MONSTER_PATH_STEP, (float)NPC_MONSTER_PATH_STEP);
-    followAStarPathTo(n, ctx, patrolCol, INVALID_ID);
-    if (hasReachedRect(ctx, n, patrolCol))
+    const bool goalReached =
+        followAStarPathTo(n, ctx, patrolCol, INVALID_ID);
+    if (goalReached)
     {
         ai.patrol.index[n] = (p + 1) % ai.patrol.count[n];
         if ((rand() % 100) + 1 <= 10)

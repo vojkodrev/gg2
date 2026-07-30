@@ -21,5 +21,12 @@ void monsterRangedPursueTarget(Context &ctx, uint32_t n)
         return;
     }
 
-    followMonsterPursueTarget(ctx, n, targetType, targetId, targetCol);
+    const bool goalReached = followMonsterPursueTarget(
+        ctx,
+        n,
+        targetType,
+        targetId,
+        targetCol);
+    if (goalReached)
+        setNpcAiStateAttack(n, ctx);
 }
