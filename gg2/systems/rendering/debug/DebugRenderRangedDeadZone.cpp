@@ -42,7 +42,7 @@ void debugRenderRangedDeadZone(const Context &ctx)
                 ctx,
                 npcCenter);
 
-            if (npc.equipment.weapon.showAmmo[i] && npc.ai.targetVisible[i])
+            if (npc.ai.targetVisible[i])
                 renderNpcTargetVisibleLine(ctx, i);
         }
     }

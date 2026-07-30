@@ -58,6 +58,18 @@ inline bool retreatRangedMonster(
     if (isMonsterRangedTargetVisible(ctx, n, targetCol))
         return true;
 
+    /*
+     * Resume pursuit when the monster:
+     * - is not currently retreating,
+     * - is not too close to its target, and
+     * - can no longer see its target.
+     *
+     * For example, a ranged monster in the Attack state can lose line of sight
+     * when its target moves behind an obstacle. It must then return to the
+     * PursueTarget state.
+     *
+     * Do not switch to pursuit when visibility is lost during a retreat.
+     */
     if (!shouldRetreat)
         setNpcAiStatePursueTarget(ctx, n);
     return false;
