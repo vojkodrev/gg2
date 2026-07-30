@@ -38,7 +38,9 @@ inline SDL_FPoint getMonsterRangedRetreatPoint(
     }
 
     const float retreatDistance =
-        RANGED_ATTACK_MIN_DISTANCE + NPC_MONSTER_PATH_STEP;
+        RANGED_ATTACK_MIN_DISTANCE +
+        NPC_MONSTER_PATH_STEP +
+        NPC_RANGED_RETREAT_EXTRA_DISTANCE;
 
     for (int i = 0; i < NPC_RANGED_RETREAT_ANGLE_COUNT; i++)
     {

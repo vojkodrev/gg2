@@ -27,9 +27,10 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
     if (npc.equipment.weapon.type[n] != WeaponType::Ranged)
         return;
 
-    if (isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
+    auto &ai = npc.ai;
+    if (ai.retreating[n] ||
+        isMonsterRangedAttackTargetTooClose(ctx, n, targetType, targetId))
     {
-        auto &ai = npc.ai;
         if (!ai.retreating[n] &&
             ai.rangedRetreatPointCheckTimer[n] <= 0.0f)
         {
@@ -57,11 +58,6 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
         if (!isMonsterRangedTargetVisible(ctx, n, targetCol))
             return;
-    }
-    else if (npc.ai.retreating[n])
-    {
-        npc.ai.retreating[n] = false;
-        resetNpcFollowPath(ctx, n);
     }
 
     if (!isMonsterRangedTargetVisible(
