@@ -3,6 +3,7 @@
 const int   NPC_HP               = 1000;
 const float NPC_MONSTER_SPEED    = 100.0f;
 const int   NPC_MONSTER_PATH_STEP = 8;
+const float NPC_PATROL_POINT_SIZE = 1.0f;
 const float NPC_DETECT_RADIUS    = 300.0f;
 const float NPC_MELEE_ATTACK_REACH = 10.0f;
 const float NPC_MELEE_AUTO_ATTACK_DELAY = 1.5f;
