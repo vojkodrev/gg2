@@ -4,6 +4,8 @@
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
+#include "../../../../structs/equipment/WeaponType.h"
+#include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/math/Dist.h"
 #include "NpcMonsterConstants.h"
@@ -16,6 +18,27 @@ void followAStarPathTo(
     int targetNpcIndex)
 {
     auto &ai = ctx.data.npc.ai;
+    auto &npc = ctx.data.npc;
+
+    SDL_FRect moverBox = entityColAABB(npc.base, n);
+    const auto &weapon = npc.equipment.weapon;
+    if (weapon.type[n] == WeaponType::Ranged &&
+        weapon.ammoAnchor.hasAnchor[n][0])
+    {
+        const SDL_FRect ammoAnchor = {
+            weapon.base.position.x[n] + weapon.ammoAnchor.offX[n][0],
+            weapon.base.position.y[n] + weapon.ammoAnchor.offY[n][0],
+            weapon.ammoAnchor.w[n][0],
+            weapon.ammoAnchor.h[n][0]
+        };
+        SDL_GetRectUnionFloat(&moverBox, &ammoAnchor, &moverBox);
+    }
+
+    if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
+    {
+        resetNpcFollowPath(ctx, n);
+        return;
+    }
 
     // acquire: pairs with release store in RequestAStarPath, ensures path data is visible
     auto pathStatus = ai.path.status[n].load(std::memory_order_acquire);
@@ -25,7 +48,7 @@ void followAStarPathTo(
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
         ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
-        requestAStarPath(ctx, n, targetCol, targetNpcIndex);
+        requestAStarPath(ctx, n, moverBox, targetCol, targetNpcIndex);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {

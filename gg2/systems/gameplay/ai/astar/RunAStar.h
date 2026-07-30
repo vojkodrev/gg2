@@ -2,7 +2,6 @@
 #include "../../../../structs/ai/AStarContext.h"
 #include "../../../../structs/core/Context.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
-#include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/collision/spatialhash/CopySpatialHash.h"
 #include "../../../../utils/hashmap/HashMapContains.h"
@@ -29,6 +28,7 @@ int runAStar(
     uint32_t astarIndex,
     Context& ctx,
     int npcIndex,
+    const SDL_FRect& moverBox,
     const SDL_FRect& destCol,
     int targetNpcIndex,
     int* pathOut)
@@ -47,8 +47,7 @@ int runAStar(
         copySpatialHash(astar.colHashSnapshot, astarIndex, ctx.collision.spatialHash, 0);
     }
 
-    SDL_FRect startCol = entityColAABB(ctx.data.npc.base, npcIndex);
-    SDL_FPoint startCenter = entityColCenter(startCol);
+    SDL_FPoint startCenter = entityColCenter(moverBox);
 
     astar.generation[astarIndex]++;
     SDL_FPoint goalCenter = entityColCenter(destCol);
@@ -80,7 +79,7 @@ int runAStar(
 
         hashMapInsert(astar.closed, astarIndex, current, astar.generation[astarIndex]);
 
-        if (isGoalReached(astar, astarIndex, destCol, current))
+        if (isGoalReached(astar, astarIndex, moverBox, destCol, current))
         {
             int length = reconstructPath(astar, astarIndex, current, goalCenter, pathOut);
             astar.status[astarIndex].store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
@@ -88,7 +87,15 @@ int runAStar(
         }
 
         int neighbors[MAX_NEIGHBORS];
-        int count = getNeighbors(astar, astarIndex, ctx, current, npcIndex, targetNpcIndex, neighbors);
+        int count = getNeighbors(
+            astar,
+            astarIndex,
+            ctx,
+            current,
+            moverBox,
+            npcIndex,
+            targetNpcIndex,
+            neighbors);
 
         float gCurrent;
         if (!hashMapTryGet(astar.gscores, astarIndex, current, astar.generation[astarIndex], gCurrent))

@@ -1,12 +1,21 @@
 #pragma once
 #include "../../../../../structs/ai/AStarContext.h"
+#include "../../../../../utils/rect/CenteredRect.h"
 #include "../node/AStarDecode.h"
 #include <SDL3/SDL.h>
 
 template<uint32_t N>
-bool isGoalReached(const AStarContext<N>& astar, uint32_t astarIndex, const SDL_FRect& col, int node)
+bool isGoalReached(
+    const AStarContext<N>& astar,
+    uint32_t astarIndex,
+    const SDL_FRect& moverBox,
+    const SDL_FRect& targetCol,
+    int node)
 {
-    SDL_Point p = astarDecode(astar, astarIndex, node);
-    SDL_FPoint fp = { (float)p.x, (float)p.y };
-    return SDL_PointInRectFloat(&fp, &col);
+    const SDL_Point p = astarDecode(astar, astarIndex, node);
+    const SDL_FRect nodeMoverBox = centeredRect(
+        { (float)p.x, (float)p.y },
+        moverBox.w,
+        moverBox.h);
+    return SDL_HasRectIntersectionFloat(&nodeMoverBox, &targetCol);
 }
