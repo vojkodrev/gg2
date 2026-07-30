@@ -45,8 +45,8 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
 
         const SDL_FRect retreatRect = centeredRect(
             {ai.retreatPointX[n], ai.retreatPointY[n]},
-            (float)NPC_MONSTER_PATH_STEP,
-            (float)NPC_MONSTER_PATH_STEP);
+            NPC_PATROL_POINT_SIZE,
+            NPC_PATROL_POINT_SIZE);
         const bool goalReached =
             followAStarPathTo(n, ctx, retreatRect, INVALID_ID);
         if (goalReached)
@@ -72,6 +72,13 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
         setNpcAiStatePursueTarget(ctx, n);
         return;
     }
+
+    if (isMonsterRangedAttackTargetTooClose(
+            ctx,
+            n,
+            targetType,
+            targetId))
+        return;
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);
 
