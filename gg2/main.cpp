@@ -68,6 +68,7 @@
 #include "tint/DamageTintSystem.h"
 #include "tint/CalculateTintSystem.h"
 #include "CollisionResolutionSystem.h"
+#include "collision/RangedNpcAmmoAnchorCollisionSystem.h"
 
 int main()
 {
@@ -144,6 +145,8 @@ int main()
         flipEquipmentSystem(*ctx);
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
+        moveEquipmentSystem(*ctx);
+        rangedNpcAmmoAnchorCollisionSystem(*ctx);
         moveEquipmentSystem(*ctx);
         npcAutoAttackSystem(*ctx);
         equipmentDepthSystem(*ctx);

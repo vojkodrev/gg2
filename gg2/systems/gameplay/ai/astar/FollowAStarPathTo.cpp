@@ -1,11 +1,10 @@
 #include "FollowAStarPathTo.h"
+#include "../../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
-#include "../../../../structs/equipment/WeaponType.h"
-#include "../../../../utils/collision/EntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "../../../../utils/math/Dist.h"
 #include "NpcMonsterConstants.h"
@@ -20,19 +19,8 @@ bool followAStarPathTo(
     auto &ai = ctx.data.npc.ai;
     auto &npc = ctx.data.npc;
 
-    SDL_FRect moverBox = entityColAABB(npc.base, n);
-    const auto &weapon = npc.equipment.weapon;
-    if (weapon.type[n] == WeaponType::Ranged &&
-        weapon.ammoAnchor.hasAnchor[n][0])
-    {
-        const SDL_FRect ammoAnchor = {
-            weapon.base.position.x[n] + weapon.ammoAnchor.offX[n][0],
-            weapon.base.position.y[n] + weapon.ammoAnchor.offY[n][0],
-            weapon.ammoAnchor.w[n][0],
-            weapon.ammoAnchor.h[n][0]
-        };
-        SDL_GetRectUnionFloat(&moverBox, &ammoAnchor, &moverBox);
-    }
+    const SDL_FRect moverBox =
+        getRangedAmmoAnchorNpcColAABB(ctx, n);
 
     if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
     {
