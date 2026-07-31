@@ -45,8 +45,7 @@ void projectileCollisionSystem(Context &ctx)
 
         const EntityType parentType = effect.parent.type[effectIndex];
         const int parentId = effect.parent.id[effectIndex];
-        if (targetType == EntityType::NPC &&
-            parentType == EntityType::Player)
+        if (targetType == EntityType::NPC)
             refreshNpcAttackedTimer(ctx, targetIndex);
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
