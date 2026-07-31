@@ -40,6 +40,10 @@ inline bool prepareMonsterPursueTarget(
             aggroTable.maxEntityType[n],
             aggroTable.maxEntityId[n]);
         npc.ai.targetVisibleTimer[n] = 0.0f;
+        npc.ai.rangedAttackTargetTooCloseCheckTimer[n] = 0.0f;
+        npc.ai.targetTooClose[n] = false;
+        npc.ai.retreating[n] = false;
+        npc.ai.rangedRetreatPointCheckTimer[n] = 0.0f;
     }
 
     targetType = target.type[n];

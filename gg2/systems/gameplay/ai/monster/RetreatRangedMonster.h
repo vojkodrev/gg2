@@ -45,8 +45,10 @@ inline bool retreatRangedMonster(
         {ai.retreatPointX[n], ai.retreatPointY[n]},
         NPC_PATROL_POINT_SIZE,
         NPC_PATROL_POINT_SIZE);
+    const int targetNpcIndex =
+        targetType == EntityType::NPC ? targetId : INVALID_ID;
     const bool goalReached =
-        followAStarPathTo(n, ctx, retreatRect, INVALID_ID);
+        followAStarPathTo(n, ctx, retreatRect, targetNpcIndex);
     if (goalReached)
     {
         ai.retreating[n] = false;
