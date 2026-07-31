@@ -1,6 +1,7 @@
 #include "MonsterRangedAttack.h"
 #include "RetreatRangedMonster.h"
 #include "IsMonsterRangedAttackTargetTooClose.h"
+#include "IsMonsterRangedTargetVisible.h"
 #include "PrepareMonsterAttack.h"
 #include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
@@ -8,6 +9,7 @@
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../attacks/TryExecuteConcussiveShot.h"
 #include "../../attacks/TryExecuteRangedAutoAttack.h"
+#include "../SetNpcAiStatePursueTarget.h"
 
 void monsterRangedAttack(Context &ctx, uint32_t n)
 {
@@ -28,6 +30,15 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
             targetId,
             targetCol))
         return;
+
+    if (!isMonsterRangedTargetVisible(
+            ctx,
+            n,
+            targetCol))
+    {
+        setNpcAiStatePursueTarget(ctx, n);
+        return;
+    }
 
     if (isMonsterRangedAttackTargetTooClose(
             ctx,
