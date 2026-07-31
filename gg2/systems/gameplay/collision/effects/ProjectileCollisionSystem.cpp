@@ -39,14 +39,15 @@ void projectileCollisionSystem(Context &ctx)
         if (!SDL_HasRectIntersectionFloat(&projectileCol, &targetCol))
             continue;
 
-        if (targetType == EntityType::NPC &&
-            ctx.data.npc.ai.type[targetId] == NPCAiType::Pet)
-            continue;
-
         const EntityType parentType = effect.parent.type[effectIndex];
         const int parentId = effect.parent.id[effectIndex];
         if (targetType == EntityType::NPC)
-            refreshNpcAttackedTimer(ctx, targetIndex);
+        {
+            const NPCAiType targetAiType = ctx.data.npc.ai.type[targetIndex];
+            if (targetAiType == NPCAiType::MonsterMelee ||
+                targetAiType == NPCAiType::MonsterRanged)
+                refreshNpcAttackedTimer(ctx, targetIndex);
+        }
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
             resolveAutoAttackProjectile(
