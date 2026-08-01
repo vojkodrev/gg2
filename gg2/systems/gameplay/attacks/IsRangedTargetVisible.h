@@ -5,42 +5,47 @@
 #include "EntityColCenter.h"
 #include "EntityColCenterWorld.h"
 #include "GetEntityColAABB.h"
-#include "NpcMonsterConstants.h"
 #include "spatialhash/SpatialHashQuery.h"
-#include "../../../../structs/collision/SpatialHashQueryCandidates.h"
-#include "../../../../structs/equipment/WeaponType.h"
+#include "../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../structs/core/constants/AttackConstants.h"
+#include "../../../structs/equipment/Equipment.h"
+#include "../../../structs/equipment/WeaponType.h"
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 #include <shared_mutex>
 
-inline bool isNpcTargetVisibleFrom(
+template<int N>
+inline bool isRangedTargetVisible(
     Context &ctx,
-    uint32_t n,
+    const Equipment<N> &equipment,
+    const EntityBase<N> &entityBase,
+    uint32_t entityIndex,
     const SDL_FRect &targetCol,
-    const SDL_FPoint &npcColCenter)
+    const SDL_FPoint &entityColCenterFrom)
 {
-    const auto &equipment = ctx.data.npc.equipment;
-    if (equipment.weapon.type[n] != WeaponType::Ranged)
+    if (equipment.weapon.type[entityIndex] != WeaponType::Ranged)
         return false;
 
     const SDL_FRect ammoAnchor = {
-        equipment.weapon.ammoAnchor.offX[n][0],
-        equipment.weapon.ammoAnchor.offY[n][0],
-        equipment.weapon.ammoAnchor.w[n][0],
-        equipment.weapon.ammoAnchor.h[n][0]
+        equipment.weapon.ammoAnchor.offX[entityIndex][0],
+        equipment.weapon.ammoAnchor.offY[entityIndex][0],
+        equipment.weapon.ammoAnchor.w[entityIndex][0],
+        equipment.weapon.ammoAnchor.h[entityIndex][0]
     };
     SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,
         equipment.weapon.base.position,
-        n);
-    const SDL_FPoint currentNpcColCenter =
-        entityColCenter(entityColAABB(ctx.data.npc.base, n));
-    ammoAnchorCenter.x += npcColCenter.x - currentNpcColCenter.x;
-    ammoAnchorCenter.y += npcColCenter.y - currentNpcColCenter.y;
-    const SDL_FRect ammoCol = entityColAABB(equipment.ammo.base, n);
+        entityIndex);
+    const SDL_FPoint currentEntityColCenter =
+        entityColCenter(entityColAABB(entityBase, entityIndex));
+    ammoAnchorCenter.x += entityColCenterFrom.x - currentEntityColCenter.x;
+    ammoAnchorCenter.y += entityColCenterFrom.y - currentEntityColCenter.y;
+    const SDL_FRect ammoCol =
+        entityColAABB(equipment.ammo.base, entityIndex);
     const float visibilityHalfWidth =
         (std::sqrt(ammoCol.w * ammoCol.w + ammoCol.h * ammoCol.h) +
-            NPC_TARGET_VISIBLE_AMMO_BUFFER) * 0.5f;
+            RANGED_TARGET_VISIBLE_AMMO_BUFFER) * 0.5f;
     const SDL_FPoint targetEdgePoint = {
         std::clamp(
             ammoAnchorCenter.x,
@@ -54,8 +59,10 @@ inline bool isNpcTargetVisibleFrom(
     const SDL_FRect queryRect = {
         std::min(ammoAnchorCenter.x, targetEdgePoint.x) - visibilityHalfWidth,
         std::min(ammoAnchorCenter.y, targetEdgePoint.y) - visibilityHalfWidth,
-        std::abs(targetEdgePoint.x - ammoAnchorCenter.x) + visibilityHalfWidth * 2.0f,
-        std::abs(targetEdgePoint.y - ammoAnchorCenter.y) + visibilityHalfWidth * 2.0f
+        std::abs(targetEdgePoint.x - ammoAnchorCenter.x) +
+            visibilityHalfWidth * 2.0f,
+        std::abs(targetEdgePoint.y - ammoAnchorCenter.y) +
+            visibilityHalfWidth * 2.0f
     };
     const float lineDx = targetEdgePoint.x - ammoAnchorCenter.x;
     const float lineDy = targetEdgePoint.y - ammoAnchorCenter.y;

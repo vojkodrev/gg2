@@ -1,5 +1,9 @@
 #include "CanPlayerRangedAttack.h"
 #include "IsRangedAttackTargetTooClose.h"
+#include "IsRangedTargetVisible.h"
+#include "../../../utils/collision/EntityColAABB.h"
+#include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/collision/GetEntityColAABB.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/npc/NPCAiType.h"
@@ -23,6 +27,15 @@ bool canPlayerRangedAttack(Context &ctx)
             npcIndex,
             EntityType::Player,
             0))
+        return false;
+
+    if (!isRangedTargetVisible(
+            ctx,
+            ctx.data.player.equipment,
+            ctx.data.player.base,
+            0,
+            getEntityColAABB(ctx, EntityType::NPC, npcIndex),
+            entityColCenter(entityColAABB(ctx.data.player.base, 0))))
         return false;
 
     return true;

@@ -3,7 +3,7 @@
 #include "EntityColAABB.h"
 #include "EntityColCenter.h"
 #include "IsMonsterRetreatPointClear.h"
-#include "IsNpcTargetVisibleFrom.h"
+#include "../../attacks/IsRangedTargetVisible.h"
 #include "../../../../structs/core/constants/AttackConstants.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../utils/math/Dist.h"
@@ -57,7 +57,13 @@ inline SDL_FPoint getMonsterRangedRetreatPoint(
         };
 
         if (isMonsterRetreatPointClear(ctx, n, candidateColCenter) &&
-            isNpcTargetVisibleFrom(ctx, n, targetCol, candidateColCenter))
+            isRangedTargetVisible(
+                ctx,
+                ctx.data.npc.equipment,
+                ctx.data.npc.base,
+                n,
+                targetCol,
+                candidateColCenter))
             return candidateColCenter;
     }
 
