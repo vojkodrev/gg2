@@ -49,7 +49,7 @@
 #include "effects/MoveEffectSystem.h"
 #include "effects/DestroyEffectSystem.h"
 #include "npc/DestroyNpcSystem.h"
-#include "npc/NpcAiTimerSystem.h"
+#include "GeneralTimerSystem.h"
 #include "npc/select/CreateNpcSelectorSystem.h"
 #include "npc/select/DestroyNpcSelectorSystem.h"
 #include "npc/select/NpcMouseSelectSystem.h"
@@ -125,7 +125,7 @@ int main()
         playerDepthSystem(*ctx);
         
         spawnNpcSystem(*ctx);
-        npcAiTimerSystem(*ctx);
+        generalTimerSystem(*ctx);
         npcAiSystem(*ctx);
         scaleNpcLocationSystem(*ctx);
         flipNpcSystem(*ctx);

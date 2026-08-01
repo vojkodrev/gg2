@@ -30,6 +30,8 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.selectedNpc = INVALID_ID;
         ctx.data.player.previousSelectedNpc = INVALID_ID;
         ctx.data.player.selectedEffectId = INVALID_ID;
+        ctx.data.player.targetVisibleTimer = 0.0f;
+        ctx.data.player.targetVisible = false;
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
         loadManabar(ctx.data.player.manabar, 0, tileset, idx, props);

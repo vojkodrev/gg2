@@ -1,11 +1,15 @@
-#include "NpcAiTimerSystem.h"
+#include "GeneralTimerSystem.h"
 #include <algorithm>
 
-void npcAiTimerSystem(Context &ctx)
+void generalTimerSystem(Context &ctx)
 {
     const float dt = ctx.frame.dt;
-    auto &npc = ctx.data.npc;
+    auto &player = ctx.data.player;
+    player.targetVisibleTimer = std::max(
+        0.0f,
+        player.targetVisibleTimer - dt);
 
+    auto &npc = ctx.data.npc;
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
         if (!npc.active[i])

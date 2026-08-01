@@ -6,6 +6,8 @@ void setSelectedNpc(Context &ctx, int selectedNpc)
 {
     ctx.data.player.previousSelectedNpc = ctx.data.player.selectedNpc;
     ctx.data.player.selectedNpc = selectedNpc;
+    ctx.data.player.targetVisibleTimer = 0.0f;
+    ctx.data.player.targetVisible = false;
 
     if (selectedNpc == INVALID_ID)
         ctx.data.player.autoAttack.active[0] = false;
