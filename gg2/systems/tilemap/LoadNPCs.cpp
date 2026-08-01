@@ -61,21 +61,43 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.idleTimer[n] = randomTimer(NPC_IDLE_TIME_MIN, NPC_IDLE_TIME_MAX);
         npc.ai.repathTimer[n] = 0.0f;
         npc.ai.pathTargetCheckTimer[n] = 0.0f;
-        npc.ai.targetRangeCheckTimer[n] = 0.0f;
+        npc.ai.pursueTargetRangeCheckTimer[n] = 0.0f;
+        npc.ai.rangedAttackTargetTooCloseCheckTimer[n] = 0.0f;
+        npc.ai.rangedAttackStaggerTimer[n] = 0.0f;
+        npc.ai.targetTooClose[n] = false;
+        npc.ai.flipTimer[n] = 0.0f;
+        npc.ai.targetVisibleTimer[n] = 0.0f;
+        npc.ai.targetVisible[n] = false;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
         loadManabar(npc.manabar, n, tileset, idx, props);
 
         const std::string aiType = getTileStringProp(tileset, idx, "AI");
-        npc.ai.type[n] = aiType == "pet" ? NPCAiType::Pet : NPCAiType::Monster;
-        if (npc.ai.type[n] == NPCAiType::Pet)
+        npc.ai.type[n] = NPCAiType::None;
+        if (aiType == "monsterMelee")
+            npc.ai.type[n] = NPCAiType::MonsterMelee;
+        else if (aiType == "monsterRanged")
+            npc.ai.type[n] = NPCAiType::MonsterRanged;
+        else if (aiType == "pet")
+            npc.ai.type[n] = NPCAiType::Pet;
+        else if (aiType == "friendly")
+            npc.ai.type[n] = NPCAiType::Friendly;
+
+        if (npc.ai.type[n] == NPCAiType::MonsterRanged)
+        {
+            npc.statistics.mana.mana[n] = NPC_MANA;
+            npc.statistics.mana.maxMana[n] = NPC_MANA;
+            npc.statistics.mana.dirty[n] = true;
+        }
+        else if (npc.ai.type[n] == NPCAiType::Pet)
         {
             player.petId = (int)n;
             npc.statistics.mana.mana[n] = NPC_PET_MANA;
             npc.statistics.mana.maxMana[n] = NPC_PET_MANA;
             npc.statistics.mana.dirty[n] = true;
         }
+        npc.concussiveShotCooldownTimer[n] = 0.0f;
 
         npc.ai.patrol.count[n] = (uint32_t)getTileIntProp(tileset, idx, "patrolCount");
         for (uint32_t p = 0; p < npc.ai.patrol.count[n] && p < MAX_PATROL_POINTS; p++)

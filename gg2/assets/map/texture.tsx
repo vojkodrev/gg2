@@ -16,15 +16,17 @@
  </tile>
  <tile id="22">
   <properties>
-   <property name="AI" value="monster"/>
+   <property name="AI" value="monsterRanged"/>
+   <property name="ammo" value="arrow1"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
+   <property name="manabar" value="manabar"/>
    <property name="patrol01" value="-50,-50"/>
    <property name="patrol02" value="70,-75"/>
    <property name="patrol03" value="70,75"/>
    <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
-   <property name="weapon" value="staff1"/>
+   <property name="weapon" value="bow2"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="18.1711" y="44.0307" width="31.5" height="13.1769"/>
@@ -33,7 +35,7 @@
  </tile>
  <tile id="38">
   <properties>
-   <property name="AI" value="monster"/>
+   <property name="AI" value="monsterMelee"/>
    <property name="facing" value="left"/>
    <property name="healthbar" value="healthbar"/>
    <property name="patrol01" value="-50,-50"/>
@@ -81,6 +83,23 @@
    <property name="y" type="int" value="280"/>
   </properties>
  </tile>
+ <tile id="103">
+  <properties>
+   <property name="AI" value="friendly"/>
+   <property name="facing" value="right"/>
+   <property name="patrol01" value="-50,-50"/>
+   <property name="patrol02" value="70,-75"/>
+   <property name="patrol03" value="70,75"/>
+   <property name="patrol04" value="-70,70"/>
+   <property name="patrolCount" type="int" value="4"/>
+   <property name="weapon" value="staff1"/>
+   <property name="weaponScale" type="float" value="1.3"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="16.7256" y="38.7078" width="31.3008" height="19.115"/>
+   <object id="2" name="anchor" x="37.2742" y="39.1857" width="9.31855" height="9.07961"/>
+  </objectgroup>
+ </tile>
  <tile id="112">
   <properties>
    <property name="AI" value="pet"/>
@@ -110,6 +129,17 @@
    <frame tileid="138" duration="100"/>
    <frame tileid="139" duration="100"/>
   </animation>
+ </tile>
+ <tile id="163">
+  <properties>
+   <property name="rotate" type="float" value="-135"/>
+   <property name="scale" type="float" value="1"/>
+   <property name="type" value="bow2"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="ammoAnchor" x="29.3939" y="25.8463" width="6.08149" height="6.58828"/>
+   <object id="2" name="anchor" x="28.8871" y="8.10866" width="10.6426" height="5.5747"/>
+  </objectgroup>
  </tile>
  <tile id="193">
   <properties>

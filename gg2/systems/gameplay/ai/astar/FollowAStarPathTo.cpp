@@ -1,4 +1,6 @@
 #include "FollowAStarPathTo.h"
+#include "../../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
+#include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "HasReachedRect.h"
 #include "MoveColCenterToward.h"
@@ -8,13 +10,23 @@
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
 
-void followAStarPathTo(
+bool followAStarPathTo(
     uint32_t n, 
     Context &ctx, 
     SDL_FRect targetCol, 
     int targetNpcIndex)
 {
     auto &ai = ctx.data.npc.ai;
+    auto &npc = ctx.data.npc;
+
+    const SDL_FRect moverBox =
+        getRangedAmmoAnchorNpcColAABB(ctx, n);
+
+    if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
+    {
+        resetNpcFollowPath(ctx, n);
+        return true;
+    }
 
     // acquire: pairs with release store in RequestAStarPath, ensures path data is visible
     auto pathStatus = ai.path.status[n].load(std::memory_order_acquire);
@@ -24,7 +36,7 @@ void followAStarPathTo(
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
         ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
-        requestAStarPath(ctx, n, targetCol, targetNpcIndex);
+        requestAStarPath(ctx, n, moverBox, targetCol, targetNpcIndex);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {
@@ -41,15 +53,15 @@ void followAStarPathTo(
                     targetCenter.y) >=
                 NPC_PATH_TARGET_MOVE_THRESHOLD)
             {
-                ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-                return;
+                resetNpcFollowPath(ctx, n);
+                return false;
             }
         }
 
         if (ai.repathTimer[n] <= 0.0f)
         {
-            ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
-            return;
+            resetNpcFollowPath(ctx, n);
+            return false;
         }
 
         uint32_t prevIndex = ai.path.index[n];
@@ -72,6 +84,8 @@ void followAStarPathTo(
         moveNpcColCenterToward(ctx, n, target, moveSpeed);
 
         if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
-            ai.path.status[n].store(NPCPathStatus::IDLE, std::memory_order_relaxed);
+            resetNpcFollowPath(ctx, n);
     }
+
+    return false;
 }

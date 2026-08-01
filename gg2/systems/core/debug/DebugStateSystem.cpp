@@ -12,6 +12,7 @@ void debugStateSystem(Context &ctx)
     const bool ctrlAlt3Down = ctrlAlt && ctx.keyboard.digit3;
     const bool ctrlAlt4Down = ctrlAlt && ctx.keyboard.digit4;
     const bool ctrlAlt5Down = ctrlAlt && ctx.keyboard.digit5;
+    const bool ctrlAlt6Down = ctrlAlt && ctx.keyboard.digit6;
 
     if (debug.ctrlAltFArmed && !ctrlAltFDown)
     {
@@ -28,6 +29,7 @@ void debugStateSystem(Context &ctx)
         debug.showWeaponCollision = nextShow;
         debug.showAmmoCollision = nextShow;
         debug.showEffectCollision = nextShow;
+        debug.showRangedDeadZone = nextShow;
         debug.ctrlAlt0Armed = false;
     }
 
@@ -61,6 +63,12 @@ void debugStateSystem(Context &ctx)
         debug.ctrlAlt5Armed = false;
     }
 
+    if (debug.ctrlAlt6Armed && !ctrlAlt6Down)
+    {
+        debug.showRangedDeadZone = !debug.showRangedDeadZone;
+        debug.ctrlAlt6Armed = false;
+    }
+
     debug.ctrlAltFArmed = debug.ctrlAltFArmed || ctrlAltFDown;
     debug.ctrlAlt0Armed = debug.ctrlAlt0Armed || ctrlAlt0Down;
     debug.ctrlAlt1Armed = debug.ctrlAlt1Armed || ctrlAlt1Down;
@@ -68,4 +76,5 @@ void debugStateSystem(Context &ctx)
     debug.ctrlAlt3Armed = debug.ctrlAlt3Armed || ctrlAlt3Down;
     debug.ctrlAlt4Armed = debug.ctrlAlt4Armed || ctrlAlt4Down;
     debug.ctrlAlt5Armed = debug.ctrlAlt5Armed || ctrlAlt5Down;
+    debug.ctrlAlt6Armed = debug.ctrlAlt6Armed || ctrlAlt6Down;
 }

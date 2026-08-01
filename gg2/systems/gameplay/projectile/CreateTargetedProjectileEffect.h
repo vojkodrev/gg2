@@ -1,11 +1,14 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "Context.h"
+#include "../../../structs/core/EntityType.h"
 #include "../../../structs/effect/ProjectileType.h"
 
-int spawnPlayerTargetedProjectileEffect(
+int createTargetedProjectileEffect(
     Context &ctx,
-    const EntityBase<1> &projectileBase,
+    EntityType parentType,
+    int parentId,
+    EntityType targetType,
+    int targetId,
     ProjectileType projectileType,
-    int npcIndex,
     SDL_FColor tint);

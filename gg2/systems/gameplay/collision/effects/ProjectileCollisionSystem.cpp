@@ -1,5 +1,6 @@
 #include "ProjectileCollisionSystem.h"
 #include "EntityColAABB.h"
+#include "GetEntityColAABB.h"
 #include "ResolveAutoAttackProjectile.h"
 #include "ResolveConcussiveShotProjectile.h"
 #include "ResolveSerpentStingProjectile.h"
@@ -20,33 +21,50 @@ void projectileCollisionSystem(Context &ctx)
             effect.type[effectIndex] != EffectType::Projectile)
             continue;
 
-        if (effect.target.type[effectIndex] != EntityType::NPC)
-            continue;
-
+        const EntityType targetType = effect.target.type[effectIndex];
         const int targetId = effect.target.id[effectIndex];
-        if (targetId < 0 || targetId >= MAX_NPCS || !ctx.data.npc.active[targetId])
+        const bool playerTargetIsValid =
+            targetType == EntityType::Player && targetId == 0;
+        const bool npcTargetIsValid =
+            targetType == EntityType::NPC &&
+            targetId >= 0 &&
+            targetId < MAX_NPCS &&
+            ctx.data.npc.active[targetId];
+        if (!playerTargetIsValid && !npcTargetIsValid)
             continue;
-        const uint32_t npcIndex = (uint32_t)targetId;
+        const uint32_t targetIndex = static_cast<uint32_t>(targetId);
 
         const SDL_FRect projectileCol = entityColAABB(effect.base, effectIndex);
-        const SDL_FRect targetCol = entityColAABB(ctx.data.npc.base, targetId);
+        const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
         if (!SDL_HasRectIntersectionFloat(&projectileCol, &targetCol))
-            continue;
-
-        if (ctx.data.npc.ai.type[targetId] == NPCAiType::Pet)
             continue;
 
         const EntityType parentType = effect.parent.type[effectIndex];
         const int parentId = effect.parent.id[effectIndex];
-        if (parentType == EntityType::Player)
-            refreshNpcAttackedTimer(ctx, npcIndex);
+        if (targetType == EntityType::NPC)
+        {
+            const NPCAiType targetAiType = ctx.data.npc.ai.type[targetIndex];
+            if (targetAiType == NPCAiType::MonsterMelee ||
+                targetAiType == NPCAiType::MonsterRanged)
+                refreshNpcAttackedTimer(ctx, targetIndex);
+        }
 
         if (effect.projectileType[effectIndex] == ProjectileType::AutoAttack)
-            resolveAutoAttackProjectile(ctx, npcIndex, parentType, parentId);
+            resolveAutoAttackProjectile(
+                ctx,
+                targetType,
+                targetIndex,
+                parentType,
+                parentId);
         else if (effect.projectileType[effectIndex] == ProjectileType::SerpentSting)
-            resolveSerpentStingProjectile(ctx, npcIndex, parentType, parentId);
+            resolveSerpentStingProjectile(ctx, targetIndex, parentType, parentId);
         else if (effect.projectileType[effectIndex] == ProjectileType::ConcussiveShot)
-            resolveConcussiveShotProjectile(ctx, npcIndex, parentType, parentId);
+            resolveConcussiveShotProjectile(
+                ctx,
+                targetType,
+                targetIndex,
+                parentType,
+                parentId);
 
         destroyProjectile(ctx, effectIndex);
     }

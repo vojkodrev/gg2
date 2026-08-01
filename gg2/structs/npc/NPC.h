@@ -20,6 +20,7 @@ struct NPC
     bool initialized[MAX_NPCS] = {};
     float inactiveTimer[MAX_NPCS] = {};
     float globalCooldownTimer[MAX_NPCS] = {};
+    float concussiveShotCooldownTimer[MAX_NPCS] = {};
     float tauntTimer[MAX_NPCS] = {};
     Group<MAX_NPCS> group;
     EntityBase<MAX_NPCS> base;

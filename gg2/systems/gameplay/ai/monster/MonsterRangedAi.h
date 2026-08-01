@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void monsterAttack(uint32_t n, Context &ctx);
+void monsterRangedAi(Context &ctx, uint32_t n);

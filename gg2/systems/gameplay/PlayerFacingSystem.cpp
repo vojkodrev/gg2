@@ -1,17 +1,19 @@
 #include "PlayerFacingSystem.h"
+#include "SetFacingTowardX.h"
+#include "../../structs/core/constants/IndexConstants.h"
+#include "../../utils/collision/EntityColAABB.h"
+#include "../../utils/collision/EntityColCenter.h"
 #include "../../utils/rect/EntityPositionCenter.h"
 
 void playerFacingSystem(Context &ctx)
 {
     auto &p = ctx.data.player;
-    SDL_FPoint center = entityPositionCenter(p.base.position, 0);
-    FacingDirection facing = p.base.facing.facing[0];
+    const SDL_FPoint center = entityPositionCenter(p.base.position, 0);
+    float facingTargetX = ctx.mouse.worldX;
 
-    if (ctx.mouse.worldX < center.x)
-        facing = FacingDirection::Left;
-    else if (ctx.mouse.worldX > center.x)
-        facing = FacingDirection::Right;
+    const int selectedNpc = p.selectedNpc;
+    if (selectedNpc != INVALID_ID && ctx.data.npc.active[selectedNpc])
+        facingTargetX = entityColCenter(entityColAABB(ctx.data.npc.base, selectedNpc)).x;
 
-    p.base.facing.dirty[0] = p.base.facing.facing[0] != facing;
-    p.base.facing.facing[0] = facing;
+    setFacingTowardX(p.base.facing, 0, center.x, facingTargetX);
 }

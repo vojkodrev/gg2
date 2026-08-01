@@ -16,5 +16,6 @@ static void renderColBox(const Context &ctx, SDL_FRect col)
     SDL_FPoint center = entityColCenter(col);
     SDL_RenderRect(renderer, &col);
     SDL_FRect pt = {center.x - 1, center.y - 1, 2, 2};
-    SDL_RenderFillRect(renderer, &pt);
+    if (SDL_HasRectIntersectionFloat(&pt, &screen))
+        SDL_RenderFillRect(renderer, &pt);
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "../attacks/Debuff.h"
 #include "../attacks/AutoAttack.h"
 #include "../core/Group.h"
 #include "../core/EntityBase.h"
@@ -23,4 +24,5 @@ struct Player
     Equipment<1> equipment;
     Healthbar<1> healthbar;
     Manabar<1> manabar;
+    Debuff<1> concussiveShotDebuff;
 };

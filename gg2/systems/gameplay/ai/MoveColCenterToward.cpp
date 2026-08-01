@@ -1,4 +1,6 @@
 #include "MoveColCenterToward.h"
+#include "NpcConstants.h"
+#include "../SetFacingTowardX.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
 
 void moveNpcColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float speed)
@@ -6,16 +8,17 @@ void moveNpcColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float s
     auto &npc = ctx.data.npc;
     const SDL_FRect col = entityColAABB(npc.base, n);
     const SDL_FPoint colCenter = entityColCenter(col);
-    const float dx = target.x - colCenter.x;
 
     moveEntityColCenterToward(ctx, npc.base, n, target, speed);
 
-    FacingDirection facing = npc.base.facing.facing[n];
-    if (dx < 0.0f)
-        facing = FacingDirection::Left;
-    else if (dx > 0.0f)
-        facing = FacingDirection::Right;
+    if (npc.ai.flipTimer[n] > 0.0f)
+        return;
 
-    npc.base.facing.dirty[n] = npc.base.facing.facing[n] != facing;
-    npc.base.facing.facing[n] = facing;
+    const bool facingChanged = setFacingTowardX(
+        npc.base.facing,
+        n,
+        colCenter.x,
+        target.x);
+    if (facingChanged)
+        npc.ai.flipTimer[n] = NPC_FLIP_COOLDOWN_TIME;
 }

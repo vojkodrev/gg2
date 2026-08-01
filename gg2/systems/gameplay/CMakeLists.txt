@@ -22,6 +22,7 @@ add_library(systems_gameplay
     attacks/NpcAutoAttackSystem.cpp
     attacks/CanPlayerRangedAttack.cpp
     attacks/AbilityCooldownTimerSystem.cpp
+    attacks/ConcussiveShotDebuffSystem.cpp
     attacks/GlobalCooldownTimerSystem.cpp
     attacks/PlayerConcussiveShotAttackSystem.cpp
     attacks/PlayerPetAttackSystem.cpp
@@ -41,12 +42,19 @@ add_library(systems_gameplay
     npc/select/SetSelectedNpc.cpp
     npc/SpawnNpcSystem.cpp
     ai/NPCAiSystem.cpp
+    ai/FollowNpcPatrolPath.cpp
     ai/astar/FollowAStarPathTo.cpp
-    ai/monster/MonsterAi.cpp
+    ai/friendly/FriendlyAi.cpp
+    ai/friendly/FriendlyIdle.cpp
+    ai/friendly/FriendlyPatrol.cpp
+    ai/monster/MonsterMeleeAi.cpp
     ai/monster/MonsterIdle.cpp
     ai/monster/MonsterPatrol.cpp
-    ai/monster/MonsterPursueTarget.cpp
-    ai/monster/MonsterAttack.cpp
+    ai/monster/MonsterMeleePursueTarget.cpp
+    ai/monster/MonsterMeleeAttack.cpp
+    ai/monster/MonsterRangedAi.cpp
+    ai/monster/MonsterRangedPursueTarget.cpp
+    ai/monster/MonsterRangedAttack.cpp
     ai/monster/MonsterReturnToSpawn.cpp
     ai/pet/PetAi.cpp
     ai/pet/PetIdle.cpp
@@ -64,7 +72,8 @@ add_library(systems_gameplay
     collision/CollisionSystem.cpp
     collision/effects/ProjectileCollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
-    projectile/SpawnPlayerTargetedProjectileEffect.cpp
+    collision/RangedNpcAmmoAnchorCollisionSystem.cpp
+    projectile/CreateTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
     ui/bars/ShowBarSystem.cpp
     ui/bars/BarFrameSystem.cpp

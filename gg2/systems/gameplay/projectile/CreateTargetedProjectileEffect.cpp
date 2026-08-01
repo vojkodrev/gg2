@@ -1,4 +1,4 @@
-#include "SpawnPlayerTargetedProjectileEffect.h"
+#include "CreateTargetedProjectileEffect.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/core/EntityType.h"
@@ -10,31 +10,53 @@
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/collision/EntityColCenterWorld.h"
+#include "../../../utils/collision/GetEntityColAABB.h"
 #include "../../../utils/rect/AlignEntityToAnchorCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include "../flipx/MirrorEntityAnchorsAndCollisionOffsets.h"
 #include <cmath>
 
-int spawnPlayerTargetedProjectileEffect(
+int createTargetedProjectileEffect(
     Context &ctx,
-    const EntityBase<1> &projectileBase,
+    EntityType parentType,
+    int parentId,
+    EntityType targetType,
+    int targetId,
     ProjectileType projectileType,
-    int npcIndex,
     SDL_FColor tint)
 {
+    int parentGroupId;
+    if (parentType == EntityType::Player)
+        parentGroupId = ctx.data.player.group.id[parentId];
+    else if (parentType == EntityType::NPC)
+        parentGroupId = ctx.data.npc.group.id[parentId];
+    else
+        return INVALID_ID;
+
     const int effectIndex =
-        effectAlloc(ctx.data.effect, ctx.data.groups, ctx.data.player.group.id[0]);
+        effectAlloc(ctx.data.effect, ctx.data.groups, parentGroupId);
     if (effectIndex == INVALID_ID)
         return INVALID_ID;
 
     ctx.data.effect.type[effectIndex] = EffectType::Projectile;
     ctx.data.effect.projectileType[effectIndex] = projectileType;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
-    ctx.data.effect.parent.type[effectIndex] = EntityType::Player;
-    ctx.data.effect.parent.id[effectIndex] = 0;
-    ctx.data.effect.target.type[effectIndex] = EntityType::NPC;
-    ctx.data.effect.target.id[effectIndex] = npcIndex;
-    copyEntityBaseSlot(projectileBase, 0, ctx.data.effect.base, effectIndex);
+    ctx.data.effect.parent.type[effectIndex] = parentType;
+    ctx.data.effect.parent.id[effectIndex] = parentId;
+    ctx.data.effect.target.type[effectIndex] = targetType;
+    ctx.data.effect.target.id[effectIndex] = targetId;
+    if (parentType == EntityType::Player)
+        copyEntityBaseSlot(
+            ctx.data.player.equipment.ammo.base,
+            parentId,
+            ctx.data.effect.base,
+            effectIndex);
+    else
+        copyEntityBaseSlot(
+            ctx.data.npc.equipment.ammo.base,
+            parentId,
+            ctx.data.effect.base,
+            effectIndex);
 
     auto &effectBase = ctx.data.effect.base;
     effectBase.tint.r[effectIndex] = tint.r;
@@ -47,7 +69,7 @@ int spawnPlayerTargetedProjectileEffect(
         entityColCenterWorld(originalAnchor, effectBase.position, effectIndex);
 
     const SDL_FPoint targetColCenter =
-        entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex));
+        entityColCenter(getEntityColAABB(ctx, targetType, targetId));
 
     resetEntityBaseAnimationToInitial(effectBase, effectIndex);
     mirrorEntityAnchorsAndCollisionOffsets(effectBase, effectIndex);

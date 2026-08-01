@@ -2,10 +2,10 @@
 #include "SetNpcAiStatePatrolling.h"
 #include "DetectTargetAndPursue.h"
 
-void monsterIdle(uint32_t n, Context &ctx)
+void monsterIdle(Context &ctx, uint32_t n)
 {
     auto &ai = ctx.data.npc.ai;
-    if (detectTargetAndPursue(n, ctx))
+    if (detectTargetAndPursue(ctx, n))
         return;
 
     if (ai.idleTimer[n] <= 0.0f)

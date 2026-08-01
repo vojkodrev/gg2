@@ -11,6 +11,17 @@ void damageTintSystem(Context &ctx)
         ctx.data.player.equipment.weapon.base.tint.damageTimer[0] = DAMAGE_TINT_CLEAR_TIME;
         ctx.data.player.equipment.ammo.base.tint.damageTimer[0] = DAMAGE_TINT_CLEAR_TIME;
     }
+    const auto &playerConcussiveShotDebuff =
+        ctx.data.player.concussiveShotDebuff;
+    bool playerIsSlowed = false;
+    for (uint32_t debuffIndex = 0;
+         debuffIndex < MAX_DEBUFF_SLOTS;
+         debuffIndex++)
+        playerIsSlowed = playerIsSlowed ||
+            playerConcussiveShotDebuff.pool.active[0][debuffIndex];
+    ctx.data.player.base.tint.isSlowed[0] = playerIsSlowed;
+    ctx.data.player.equipment.weapon.base.tint.isSlowed[0] = playerIsSlowed;
+    ctx.data.player.equipment.ammo.base.tint.isSlowed[0] = playerIsSlowed;
 
     for (uint32_t npcId = 0; npcId < MAX_NPCS; npcId++)
     {

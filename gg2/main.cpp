@@ -37,6 +37,7 @@
 #include "attacks/AutoAttackTimerSystem.h"
 #include "attacks/NpcAutoAttackSystem.h"
 #include "attacks/AbilityCooldownTimerSystem.h"
+#include "attacks/ConcussiveShotDebuffSystem.h"
 #include "attacks/GlobalCooldownTimerSystem.h"
 #include "attacks/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/PlayerPetAttackSystem.h"
@@ -67,6 +68,7 @@
 #include "tint/DamageTintSystem.h"
 #include "tint/CalculateTintSystem.h"
 #include "CollisionResolutionSystem.h"
+#include "collision/RangedNpcAmmoAnchorCollisionSystem.h"
 
 int main()
 {
@@ -143,8 +145,10 @@ int main()
         flipEquipmentSystem(*ctx);
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
-        npcAutoAttackSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        rangedNpcAmmoAnchorCollisionSystem(*ctx);
+        moveEquipmentSystem(*ctx);
+        npcAutoAttackSystem(*ctx);
         equipmentDepthSystem(*ctx);
 
         autoAttackTimerSystem(*ctx);
@@ -159,6 +163,7 @@ int main()
         playerSerpentStingAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
+        concussiveShotDebuffSystem(*ctx);
 
         effectTimerSystem(*ctx);
         moveEffectSystem(*ctx);

@@ -13,7 +13,14 @@ struct NPCAi
     NPCAiType type[MAX_NPCS];
 
     NPCAiState state[MAX_NPCS];
+
     EntityReference<MAX_NPCS> target;
+    bool targetVisible[MAX_NPCS];
+    bool targetTooClose[MAX_NPCS];
+
+    bool retreating[MAX_NPCS];
+    float retreatPointX[MAX_NPCS];
+    float retreatPointY[MAX_NPCS];
 
     NPCSpawn spawn;
 
@@ -25,5 +32,10 @@ struct NPCAi
     float idleTimer[MAX_NPCS];
     float repathTimer[MAX_NPCS];
     float pathTargetCheckTimer[MAX_NPCS];
-    float targetRangeCheckTimer[MAX_NPCS];
+    float pursueTargetRangeCheckTimer[MAX_NPCS];
+    float rangedAttackTargetTooCloseCheckTimer[MAX_NPCS];
+    float rangedRetreatPointCheckTimer[MAX_NPCS];
+    float rangedAttackStaggerTimer[MAX_NPCS];
+    float targetVisibleTimer[MAX_NPCS];
+    float flipTimer[MAX_NPCS];
 };

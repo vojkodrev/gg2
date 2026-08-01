@@ -5,6 +5,7 @@
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
 #include "PetTaunt.h"
+#include "SetPetIdleIfOffScreen.h"
 #include "SetNpcAiStateIdle.h"
 #include "../SetNpcAiStatePursueTarget.h"
 #include "../../../structs/core/EntityType.h"
@@ -12,6 +13,9 @@
 
 void petAttack(uint32_t n, Context &ctx)
 {
+    if (setPetIdleIfOffScreen(ctx, n))
+        return;
+
     const auto &target = ctx.data.npc.ai.target;
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
@@ -23,7 +27,7 @@ void petAttack(uint32_t n, Context &ctx)
     }
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
-    if (!areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
+    if (!areColBoxesNear(ctx, n, targetCol, NPC_MELEE_ATTACK_REACH))
     {
         setNpcAiStatePursueTarget(ctx, n);
         return;

@@ -23,8 +23,12 @@ void loadTileAnimation(
     for (auto &t : tileset.getTiles())
         if (t.ID == idx) { tileData = &t; break; }
 
-    SDL_FRect col = getAnchor(tileset, idx, "collision");
-    SDL_FRect anchor = getAnchor(tileset, idx, "anchor");
+    SDL_FRect col;
+    const bool collisionFound =
+        getAnchor(tileset, idx, "collision", col);
+    SDL_FRect anchor;
+    const bool anchorFound =
+        getAnchor(tileset, idx, "anchor", anchor);
     float animationTime = getTileFloatProp(tileset, idx, "animationTime", 0.0f);
     animation.rotate[n] = 0.0f;
     animation.rotationStartAngle[n] = getTileFloatProp(tileset, idx, "animationStartAngle", 0.0f);
@@ -48,6 +52,7 @@ void loadTileAnimation(
             animation.frame.src.y[n][f] = fid / props.tilesetW * props.srcTileH;
             animation.frame.src.w[n][f] = props.srcTileW;
             animation.frame.src.h[n][f] = props.srcTileH;
+            animation.frame.anchor.hasAnchor[n][f] = anchorFound;
             animation.frame.anchor.initialOffX[n][f] = anchor.x;
             animation.frame.anchor.initialOffY[n][f] = anchor.y;
             animation.frame.anchor.initialW[n][f] = anchor.w;
@@ -56,6 +61,7 @@ void loadTileAnimation(
             animation.frame.anchor.offY[n][f] = anchor.y;
             animation.frame.anchor.w[n][f] = anchor.w * scale;
             animation.frame.anchor.h[n][f] = anchor.h * scale;
+            animation.frame.collision.hasAnchor[n][f] = collisionFound;
             animation.frame.collision.initialOffX[n][f] = col.x;
             animation.frame.collision.initialOffY[n][f] = col.y;
             animation.frame.collision.initialW[n][f] = col.w;
@@ -81,6 +87,7 @@ void loadTileAnimation(
         animation.frame.src.y[n][0] = idx / props.tilesetW * props.srcTileH;
         animation.frame.src.w[n][0] = props.srcTileW;
         animation.frame.src.h[n][0] = props.srcTileH;
+        animation.frame.anchor.hasAnchor[n][0] = anchorFound;
         animation.frame.anchor.initialOffX[n][0] = anchor.x;
         animation.frame.anchor.initialOffY[n][0] = anchor.y;
         animation.frame.anchor.initialW[n][0] = anchor.w;
@@ -89,6 +96,7 @@ void loadTileAnimation(
         animation.frame.anchor.offY[n][0] = anchor.y;
         animation.frame.anchor.w[n][0] = anchor.w * scale;
         animation.frame.anchor.h[n][0] = anchor.h * scale;
+        animation.frame.collision.hasAnchor[n][0] = collisionFound;
         animation.frame.collision.initialOffX[n][0] = col.x;
         animation.frame.collision.initialOffY[n][0] = col.y;
         animation.frame.collision.initialW[n][0] = col.w;

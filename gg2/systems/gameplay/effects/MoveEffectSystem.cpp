@@ -6,6 +6,7 @@
 #include "../npc/select/PlaceNpcSelector.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/collision/GetEntityColAABB.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "../../../utils/rect/EntityPositionCenter.h"
@@ -29,12 +30,14 @@ void moveEffectSystem(Context &ctx)
 
         if (ctx.data.effect.type[i] == EffectType::Projectile)
         {
-            const int npcIndex = ctx.data.effect.target.id[i];
             moveEntityColCenterToward(
                 ctx,
                 ctx.data.effect.base,
                 i,
-                entityColCenter(entityColAABB(ctx.data.npc.base, npcIndex)),
+                entityColCenter(getEntityColAABB(
+                    ctx,
+                    ctx.data.effect.target.type[i],
+                    ctx.data.effect.target.id[i])),
                 PROJECTILE_SPEED);
         }
         else if (

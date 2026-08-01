@@ -2,4 +2,4 @@
 #include "Context.h"
 #include <cstdint>
 
-void monsterPursueTarget(uint32_t n, Context &ctx);
+void monsterRangedAttack(Context &ctx, uint32_t n);

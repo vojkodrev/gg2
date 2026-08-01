@@ -6,7 +6,7 @@
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"
-#include "../projectile/SpawnPlayerTargetedProjectileEffect.h"
+#include "../projectile/CreateTargetedProjectileEffect.h"
 
 void playerSerpentStingAttackSystem(Context &ctx)
 {
@@ -26,11 +26,13 @@ void playerSerpentStingAttackSystem(Context &ctx)
         POISON_TINT_B,
         POISON_TINT_A
     };
-    const int effectIndex = spawnPlayerTargetedProjectileEffect(
+    const int effectIndex = createTargetedProjectileEffect(
         ctx,
-        ctx.data.player.equipment.ammo.base,
-        ProjectileType::SerpentSting,
+        EntityType::Player,
+        0,
+        EntityType::NPC,
         npcIndex,
+        ProjectileType::SerpentSting,
         tint);
     if (effectIndex == INVALID_ID)
         return;

@@ -12,6 +12,7 @@ int getNeighbors(
     uint32_t astarIndex,
     const Context& ctx,
     int node,
+    const SDL_FRect& moverBox,
     int npcIndex,
     int targetNpcIndex,
     int* neighborsOut)
@@ -35,7 +36,14 @@ int getNeighbors(
         if (nb.x < minX || nb.x > maxX || nb.y < minY || nb.y > maxY)
             continue;
 
-        if (isBlocked(astar, astarIndex, ctx, nb, npcIndex, targetNpcIndex))
+        if (isBlocked(
+                astar,
+                astarIndex,
+                ctx,
+                nb,
+                moverBox,
+                npcIndex,
+                targetNpcIndex))
             continue;
 
         neighborsOut[count++] = astarEncode(astar, astarIndex, nb);

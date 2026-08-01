@@ -11,5 +11,6 @@ inline void syncFlipFromParentFacingAndMarkDirty(
 {
     bool entityFlipX = entityFacing.flipX[i];
     syncFlipFromParentFacing(parentFacing, entityFacing, i);
-    entityFacing.dirty[i] = entityFacing.flipX[i] != entityFlipX;
+    entityFacing.dirty[i] =
+        entityFacing.dirty[i] || entityFacing.flipX[i] != entityFlipX;
 }

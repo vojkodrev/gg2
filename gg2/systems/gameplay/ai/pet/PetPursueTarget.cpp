@@ -1,8 +1,7 @@
 #include "PetPursueTarget.h"
 #include "../../../structs/core/constants/IndexConstants.h"
-#include "AreColBoxesNear.h"
 #include "GetEntityColAABB.h"
-#include "NpcMonsterConstants.h"
+#include "SetPetIdleIfOffScreen.h"
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStateAttack.h"
 #include "astar/FollowAStarPathTo.h"
@@ -11,13 +10,23 @@
 
 void petPursueTarget(uint32_t n, Context &ctx)
 {
+    if (setPetIdleIfOffScreen(ctx, n))
+        return;
+
     const auto &target = ctx.data.npc.ai.target;
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
 
     if (targetType != EntityType::NPC ||
-        !ctx.data.npc.active[targetId] ||
-        ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
+        !ctx.data.npc.active[targetId])
+    {
+        setNpcAiStateIdle(ctx, n);
+        return;
+    }
+
+    const NPCAiType targetAiType = ctx.data.npc.ai.type[targetId];
+    if (targetAiType != NPCAiType::MonsterMelee &&
+        targetAiType != NPCAiType::MonsterRanged)
     {
         setNpcAiStateIdle(ctx, n);
         return;
@@ -25,12 +34,9 @@ void petPursueTarget(uint32_t n, Context &ctx)
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
 
-    if (areColBoxesNear(ctx, n, targetCol, NPC_ATTACK_REACH))
-    {
-        setNpcAiStateAttack(n, ctx);
-        return;
-    }
-
     const int targetNpcIndex = targetType == EntityType::NPC ? targetId : INVALID_ID;
-    followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    const bool goalReached =
+        followAStarPathTo(n, ctx, targetCol, targetNpcIndex);
+    if (goalReached)
+        setNpcAiStateAttack(n, ctx);
 }

@@ -1,7 +1,12 @@
 #include "GetAnchor.h"
 
-SDL_FRect getAnchor(const tmx::Tileset &tileset, uint32_t tileIdx, const char *name)
+bool getAnchor(
+    const tmx::Tileset &tileset,
+    uint32_t tileIdx,
+    const char *name,
+    SDL_FRect &anchor)
 {
+    anchor = {};
     for (auto &tile : tileset.getTiles())
     {
         if (tile.ID != tileIdx)
@@ -12,9 +17,10 @@ SDL_FRect getAnchor(const tmx::Tileset &tileset, uint32_t tileIdx, const char *n
             if (obj.getName() != name)
                 continue;
             auto &aabb = obj.getAABB();
-            return { aabb.left, aabb.top, aabb.width, aabb.height };
+            anchor = {aabb.left, aabb.top, aabb.width, aabb.height};
+            return true;
         }
-        return { 0.0f, 0.0f, 0.0f, 0.0f };
+        return false;
     }
-    return { 0.0f, 0.0f, 0.0f, 0.0f };
+    return false;
 }

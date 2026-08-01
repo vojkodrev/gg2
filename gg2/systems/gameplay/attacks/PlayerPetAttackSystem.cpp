@@ -31,7 +31,9 @@ void playerPetAttackSystem(Context &ctx)
         petAutoAttackActive = false;
         return;
     }
-    if (ctx.data.npc.ai.type[targetId] != NPCAiType::Monster)
+    const NPCAiType targetAiType = ctx.data.npc.ai.type[targetId];
+    if (targetAiType != NPCAiType::MonsterMelee &&
+        targetAiType != NPCAiType::MonsterRanged)
     {
         petAutoAttackActive = false;
         return;

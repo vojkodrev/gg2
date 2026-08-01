@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "SpatialHash.h"
+#include "../../../structs/collision/SpatialHashQueryCandidates.h"
 #include "../../../structs/core/constants/SpatialHashConstants.h"
 #include "SpatialHashQueryCell.h"
 
@@ -9,9 +10,9 @@ inline int spatialHashQuery(
     const SpatialHash<N> &sh,
     uint32_t index,
     SDL_FRect rect,
-    uint32_t *out,
-    int maxOut)
+    SpatialHashQueryCandidates &out)
 {
+    const int maxOut = SPATIAL_HASH_MAX_QUERY_RESULTS;
     int minCx = (int)(rect.x / SPATIAL_HASH_CELL_SIZE);
     int minCy = (int)(rect.y / SPATIAL_HASH_CELL_SIZE);
     int maxCx = (int)((rect.x + rect.w) / SPATIAL_HASH_CELL_SIZE);
