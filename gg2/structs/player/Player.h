@@ -18,6 +18,8 @@ struct Player
     int selectedEffectId = INVALID_ID;
     float globalCooldownTimer = 0.0f;
     float concussiveShotCooldownTimer = 0.0f;
+    float targetVisibleTimer = 0.0f;
+    bool targetVisible = false;
     AutoAttack<1> autoAttack;
     EntityBase<1> base;
     Statistics<1> statistics;

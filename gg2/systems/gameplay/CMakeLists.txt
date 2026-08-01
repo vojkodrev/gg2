@@ -2,6 +2,7 @@ add_library(systems_gameplay
     cleanup/CleanupSystem.cpp
     PlayerMovementSystem.cpp
     PlayerFacingSystem.cpp
+    GeneralTimerSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
     scale/ScaleNpcLocationSystem.cpp
     scale/ScaleObjectLocationSystem.cpp
@@ -34,7 +35,6 @@ add_library(systems_gameplay
     effects/EffectTimerSystem.cpp
     effects/DestroyEffectSystem.cpp
     npc/DestroyNpcSystem.cpp
-    npc/NpcAiTimerSystem.cpp
     npc/select/DestroyNpcSelectorSystem.cpp
     npc/select/CreateNpcSelectorSystem.cpp
     npc/select/NpcMouseSelectSystem.cpp

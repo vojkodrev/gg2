@@ -3,6 +3,7 @@
 #include "EntityColCenter.h"
 #include "RenderMonsterAggroRange.h"
 #include "RenderNpcTargetVisibleLine.h"
+#include "RenderPlayerTargetVisibleLine.h"
 #include "RenderRangedDeadZone.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/npc/NPCAiType.h"
@@ -16,9 +17,17 @@ void debugRenderRangedDeadZone(const Context &ctx)
 
     const auto &player = ctx.data.player;
     if (player.equipment.weapon.type[0] == WeaponType::Ranged)
+    {
         renderRangedDeadZone(
             ctx,
             entityColCenter(entityColAABB(player.base, 0)));
+
+        if (player.autoAttack.active[0] && player.targetVisible)
+        {
+            SDL_SetRenderDrawColor(ctx.renderer, 0, 255, 255, 255);
+            renderPlayerTargetVisibleLine(ctx);
+        }
+    }
 
     const auto &npc = ctx.data.npc;
     for (uint32_t i = 0; i < MAX_NPCS; i++)
@@ -35,7 +44,8 @@ void debugRenderRangedDeadZone(const Context &ctx)
             renderMonsterAggroRange(ctx, npcCenter);
         }
 
-        if (npc.equipment.weapon.type[i] == WeaponType::Ranged)
+        if (npc.ai.type[i] == NPCAiType::MonsterRanged &&
+            npc.equipment.weapon.type[i] == WeaponType::Ranged)
         {
             SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderRangedDeadZone(
@@ -43,7 +53,10 @@ void debugRenderRangedDeadZone(const Context &ctx)
                 npcCenter);
 
             if (npc.ai.targetVisible[i])
+            {
+                SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
                 renderNpcTargetVisibleLine(ctx, i);
+            }
         }
     }
 }
