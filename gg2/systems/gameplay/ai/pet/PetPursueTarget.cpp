@@ -1,6 +1,7 @@
 #include "PetPursueTarget.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "GetEntityColAABB.h"
+#include "SetPetIdleIfOffScreen.h"
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStateAttack.h"
 #include "astar/FollowAStarPathTo.h"
@@ -9,6 +10,9 @@
 
 void petPursueTarget(uint32_t n, Context &ctx)
 {
+    if (setPetIdleIfOffScreen(ctx, n))
+        return;
+
     const auto &target = ctx.data.npc.ai.target;
     const EntityType targetType = target.type[n];
     const int targetId = target.id[n];
