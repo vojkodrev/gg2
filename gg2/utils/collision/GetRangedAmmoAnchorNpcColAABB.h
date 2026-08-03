@@ -12,15 +12,16 @@ inline SDL_FRect getRangedAmmoAnchorNpcColAABB(
     const auto &npc = ctx.data.npc;
     SDL_FRect moverBox = entityColAABB(npc.base, n);
     const auto &weapon = npc.equipment.weapon;
+    const int frameIndex = weapon.base.animation.frameIndex[n];
     if (weapon.type[n] != WeaponType::Ranged ||
-        !weapon.ammoAnchor.hasAnchor[n][0])
+        !weapon.ammoAnchor.hasAnchor[n][frameIndex])
         return moverBox;
 
     const SDL_FRect ammoAnchor = {
-        weapon.base.position.x[n] + weapon.ammoAnchor.offX[n][0],
-        weapon.base.position.y[n] + weapon.ammoAnchor.offY[n][0],
-        weapon.ammoAnchor.w[n][0],
-        weapon.ammoAnchor.h[n][0]
+        weapon.base.position.x[n] + weapon.ammoAnchor.offX[n][frameIndex],
+        weapon.base.position.y[n] + weapon.ammoAnchor.offY[n][frameIndex],
+        weapon.ammoAnchor.w[n][frameIndex],
+        weapon.ammoAnchor.h[n][frameIndex]
     };
     SDL_GetRectUnionFloat(&moverBox, &ammoAnchor, &moverBox);
     return moverBox;

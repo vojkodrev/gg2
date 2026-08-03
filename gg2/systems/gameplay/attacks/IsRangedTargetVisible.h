@@ -27,11 +27,13 @@ inline bool isRangedTargetVisible(
     if (equipment.weapon.type[entityIndex] != WeaponType::Ranged)
         return false;
 
+    const int frameIndex =
+        equipment.weapon.base.animation.frameIndex[entityIndex];
     const SDL_FRect ammoAnchor = {
-        equipment.weapon.ammoAnchor.offX[entityIndex][0],
-        equipment.weapon.ammoAnchor.offY[entityIndex][0],
-        equipment.weapon.ammoAnchor.w[entityIndex][0],
-        equipment.weapon.ammoAnchor.h[entityIndex][0]
+        equipment.weapon.ammoAnchor.offX[entityIndex][frameIndex],
+        equipment.weapon.ammoAnchor.offY[entityIndex][frameIndex],
+        equipment.weapon.ammoAnchor.w[entityIndex][frameIndex],
+        equipment.weapon.ammoAnchor.h[entityIndex][frameIndex]
     };
     SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,

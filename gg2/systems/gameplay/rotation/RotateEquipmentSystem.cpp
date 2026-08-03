@@ -17,14 +17,15 @@ void rotateEquipmentSystem(Context &ctx)
     {
         rotateEntityBase(playerWeapon.base, 0);
         if (playerWeapon.type[0] == WeaponType::Ranged)
-            rotateRectCenter(
-                playerWeapon.ammoAnchor.offX[0][0],
-                playerWeapon.ammoAnchor.offY[0][0],
-                playerWeapon.ammoAnchor.w[0][0],
-                playerWeapon.ammoAnchor.h[0][0],
-                playerWeapon.base.position.w[0] * 0.5f,
-                playerWeapon.base.position.h[0] * 0.5f,
-                playerWeapon.base.rotation.rotate[0]);
+            for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+                rotateRectCenter(
+                    playerWeapon.ammoAnchor.offX[0][f],
+                    playerWeapon.ammoAnchor.offY[0][f],
+                    playerWeapon.ammoAnchor.w[0][f],
+                    playerWeapon.ammoAnchor.h[0][f],
+                    playerWeapon.base.position.w[0] * 0.5f,
+                    playerWeapon.base.position.h[0] * 0.5f,
+                    playerWeapon.base.rotation.rotate[0]);
     }
 
     auto &playerAmmo = ctx.data.player.equipment.ammo;
@@ -52,14 +53,15 @@ void rotateEquipmentSystem(Context &ctx)
         {
             rotateEntityBase(npcWeapon.base, i, useRotationAnimationStart);
             if (npcWeapon.type[i] == WeaponType::Ranged)
-                rotateRectCenter(
-                    npcWeapon.ammoAnchor.offX[i][0],
-                    npcWeapon.ammoAnchor.offY[i][0],
-                    npcWeapon.ammoAnchor.w[i][0],
-                    npcWeapon.ammoAnchor.h[i][0],
-                    npcWeapon.base.position.w[i] * 0.5f,
-                    npcWeapon.base.position.h[i] * 0.5f,
-                    npcWeapon.base.rotation.rotate[i]);
+                for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
+                    rotateRectCenter(
+                        npcWeapon.ammoAnchor.offX[i][f],
+                        npcWeapon.ammoAnchor.offY[i][f],
+                        npcWeapon.ammoAnchor.w[i][f],
+                        npcWeapon.ammoAnchor.h[i][f],
+                        npcWeapon.base.position.w[i] * 0.5f,
+                        npcWeapon.base.position.h[i] * 0.5f,
+                        npcWeapon.base.rotation.rotate[i]);
         }
         if (npcAmmo.base.facing.dirty[i] && npcWeapon.type[i] == WeaponType::Ranged)
             rotateEntityBase(npcAmmo.base, i);

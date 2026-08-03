@@ -12,11 +12,12 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
     {
         debugRenderEntityBase(ctx, equipment.weapon.base, i, SDL_Color{0, 255, 255, 255});
 
+        const int frameIndex = equipment.weapon.base.animation.frameIndex[i];
         SDL_FRect ammoAnchor = {
-            equipment.weapon.base.position.x[i] + equipment.weapon.ammoAnchor.offX[i][0],
-            equipment.weapon.base.position.y[i] + equipment.weapon.ammoAnchor.offY[i][0],
-            equipment.weapon.ammoAnchor.w[i][0],
-            equipment.weapon.ammoAnchor.h[i][0]
+            equipment.weapon.base.position.x[i] + equipment.weapon.ammoAnchor.offX[i][frameIndex],
+            equipment.weapon.base.position.y[i] + equipment.weapon.ammoAnchor.offY[i][frameIndex],
+            equipment.weapon.ammoAnchor.w[i][frameIndex],
+            equipment.weapon.ammoAnchor.h[i][frameIndex]
         };
 
         if (ammoAnchor.w > 0.0f && ammoAnchor.h > 0.0f)

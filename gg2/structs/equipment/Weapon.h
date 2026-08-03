@@ -7,7 +7,7 @@ template<int N>
 struct Weapon
 {
     EntityBase<N> base;
-    Anchor<N, 1> ammoAnchor;
+    Anchor<N, MAX_ANIMATION_FRAMES> ammoAnchor;
     WeaponType type[N] = {};
     bool showAmmo[N] = {};
 };

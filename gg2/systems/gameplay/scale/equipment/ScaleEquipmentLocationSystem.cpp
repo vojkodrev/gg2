@@ -37,11 +37,12 @@ void scaleEquipmentLocationSystem(Context &ctx)
     }
 
     if (playerWeaponNeedsReset)
-        scaleAnchorLocation(
-            playerWeapon.ammoAnchor,
-            playerWeapon.base.scale.value[0],
-            0,
-            0);
+        for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+            scaleAnchorLocation(
+                playerWeapon.ammoAnchor,
+                playerWeapon.base.scale.value[0],
+                0,
+                f);
 
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
@@ -58,10 +59,11 @@ void scaleEquipmentLocationSystem(Context &ctx)
         if (!npcWeaponNeedsReset)
             continue;
 
-        scaleAnchorLocation(
-            npcWeapon.ammoAnchor,
-            npcWeapon.base.scale.value[i],
-            i,
-            0);
+        for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
+            scaleAnchorLocation(
+                npcWeapon.ammoAnchor,
+                npcWeapon.base.scale.value[i],
+                i,
+                f);
     }
 }

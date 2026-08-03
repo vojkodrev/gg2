@@ -20,11 +20,12 @@ void flipEquipmentSystem(Context &ctx)
             playerWeapon.base,
             0);
         if (playerWeapon.type[0] == WeaponType::Ranged)
-            mirrorAnchorOffsetX(
-                playerWeapon.ammoAnchor,
-                playerWeapon.base.position.w[0],
-                0,
-                0);
+            for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+                mirrorAnchorOffsetX(
+                    playerWeapon.ammoAnchor,
+                    playerWeapon.base.position.w[0],
+                    0,
+                    f);
     }
     if (ctx.data.player.equipment.ammo.base.facing.dirty[0])
     {
@@ -51,11 +52,12 @@ void flipEquipmentSystem(Context &ctx)
                 npcWeapon.base,
                 i);
             if (npcWeapon.type[i] == WeaponType::Ranged)
-                mirrorAnchorOffsetX(
-                    npcWeapon.ammoAnchor,
-                    npcWeapon.base.position.w[i],
-                    i,
-                    0);
+                for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
+                    mirrorAnchorOffsetX(
+                        npcWeapon.ammoAnchor,
+                        npcWeapon.base.position.w[i],
+                        i,
+                        f);
         }
         if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
         {
