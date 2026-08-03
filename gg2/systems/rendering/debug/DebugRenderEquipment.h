@@ -2,7 +2,6 @@
 #include "Context.h"
 #include "DebugRenderEntityBase.h"
 #include "RenderColBox.h"
-#include "RenderColCenter.h"
 #include "../../../structs/equipment/Equipment.h"
 #include "../../../structs/equipment/WeaponType.h"
 
@@ -25,32 +24,6 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
         {
             SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderColBox(ctx, ammoAnchor);
-        }
-    }
-
-    if (
-        ctx.data.debug.showRangedWeaponCollision &&
-        equipment.weapon.type[i] == WeaponType::Ranged)
-    {
-        const int frameIndex = equipment.weapon.base.animation.frameIndex[i];
-        const auto &ranged = equipment.weapon.ranged;
-        if (ranged.entityCollision.hasAnchor[i][frameIndex])
-        {
-            const SDL_FRect collision = {
-                equipment.weapon.base.position.x[i] + ranged.entityCollision.offX[i][frameIndex],
-                equipment.weapon.base.position.y[i] + ranged.entityCollision.offY[i][frameIndex],
-                ranged.entityCollision.w[i][frameIndex],
-                ranged.entityCollision.h[i][frameIndex]
-            };
-            SDL_SetRenderDrawColor(ctx.renderer, 0, 255, 128, 255);
-            renderColBox(ctx, collision);
-
-            const SDL_FPoint center = {
-                collision.x + ranged.entityCollisionCenter.x[i][frameIndex],
-                collision.y + ranged.entityCollisionCenter.y[i][frameIndex]
-            };
-            SDL_SetRenderDrawColor(ctx.renderer, 255, 64, 64, 255);
-            renderColCenter(ctx, center, 4.0f);
         }
     }
 

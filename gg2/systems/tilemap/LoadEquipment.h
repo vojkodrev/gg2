@@ -8,7 +8,6 @@
 #include "properties/FindTileByType.h"
 #include "properties/GetTileFloatProp.h"
 #include "properties/GetTileStringProp.h"
-#include "../../utils/collision/EntityColCenter.h"
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
 
@@ -28,7 +27,6 @@ inline void loadEquipment(
     for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
     {
         equipmentData.weapon.ranged.ammoAnchor.hasAnchor[parentEntityIdx][f] = false;
-        equipmentData.weapon.ranged.entityCollision.hasAnchor[parentEntityIdx][f] = false;
     }
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
@@ -50,18 +48,6 @@ inline void loadEquipment(
             if (tile.ID == weaponIdx) { weaponTile = &tile; break; }
 
         auto &ammoAnchor = equipmentData.weapon.ranged.ammoAnchor;
-        auto &entityRangedCollision =
-            equipmentData.weapon.ranged.entityCollision;
-        auto &entityRangedCollisionCenter =
-            equipmentData.weapon.ranged.entityCollisionCenter;
-        SDL_FRect entityCollision;
-        const bool hasEntityCollision = getAnchor(
-            tileset,
-            parentEntityTileIndex,
-            "collision",
-            entityCollision);
-        const SDL_FPoint entityCollisionCenter =
-            entityColCenter(entityCollision);
         const int frameCount = weaponBase.animation.frameCount[parentEntityIdx];
         for (int f = 0; f < frameCount; f++)
         {
@@ -82,33 +68,6 @@ inline void loadEquipment(
                 frameAmmoAnchor.w * weaponBase.scale.value[parentEntityIdx];
             ammoAnchor.h[parentEntityIdx][f] =
                 frameAmmoAnchor.h * weaponBase.scale.value[parentEntityIdx];
-
-            SDL_FRect rangedCollision = entityCollision;
-            if (hasEntityCollision && ammoAnchor.hasAnchor[parentEntityIdx][f])
-                SDL_GetRectUnionFloat(
-                    &entityCollision,
-                    &frameAmmoAnchor,
-                    &rangedCollision);
-            else if (ammoAnchor.hasAnchor[parentEntityIdx][f])
-                rangedCollision = frameAmmoAnchor;
-            entityRangedCollision.hasAnchor[parentEntityIdx][f] =
-                hasEntityCollision || ammoAnchor.hasAnchor[parentEntityIdx][f];
-            entityRangedCollision.initialOffX[parentEntityIdx][f] =
-                rangedCollision.x;
-            entityRangedCollision.initialOffY[parentEntityIdx][f] =
-                rangedCollision.y;
-            entityRangedCollision.initialW[parentEntityIdx][f] =
-                rangedCollision.w;
-            entityRangedCollision.initialH[parentEntityIdx][f] =
-                rangedCollision.h;
-            entityRangedCollision.offX[parentEntityIdx][f] = rangedCollision.x;
-            entityRangedCollision.offY[parentEntityIdx][f] = rangedCollision.y;
-            entityRangedCollision.w[parentEntityIdx][f] = rangedCollision.w;
-            entityRangedCollision.h[parentEntityIdx][f] = rangedCollision.h;
-            entityRangedCollisionCenter.x[parentEntityIdx][f] =
-                entityCollisionCenter.x - rangedCollision.x;
-            entityRangedCollisionCenter.y[parentEntityIdx][f] =
-                entityCollisionCenter.y - rangedCollision.y;
         }
     }
 

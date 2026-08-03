@@ -4,17 +4,23 @@
 #include "RenderColCenter.h"
 #include "../../../utils/collision/EntityColCenter.h"
 
-static void renderColBox(const Context &ctx, SDL_FRect col)
+static void renderColBox(
+    const Context &ctx,
+    SDL_FRect col,
+    bool renderCenter = true)
 {
     SDL_Renderer *renderer = ctx.renderer;
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;
 
-    const SDL_FPoint center = entityColCenter(col);
+    SDL_FPoint center;
+    if (renderCenter)
+        center = entityColCenter(col);
     col.x += off.x;
     col.y += off.y;
     if (!SDL_HasRectIntersectionFloat(&col, &screen))
         return;
     SDL_RenderRect(renderer, &col);
-    renderColCenter(ctx, center);
+    if (renderCenter)
+        renderColCenter(ctx, center);
 }
