@@ -40,8 +40,8 @@ inline void rotateEntityBase(
         const int frameIndex = entityBase.animation.frameIndex[i];
         const SDL_FPoint center =
             entityColCenter(entityBase.animation.frame.anchor, i, frameIndex);
-        entityBase.rotation.center.point.x[i] = center.x;
-        entityBase.rotation.center.point.y[i] = center.y;
+        entityBase.rotation.center.point.x[i][0] = center.x;
+        entityBase.rotation.center.point.y[i][0] = center.y;
         entityBase.rotation.center.hasCenter[i] = true;
     }
     else

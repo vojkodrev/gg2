@@ -64,8 +64,8 @@ inline void copyEntityBaseSlot(
     to.rotation.initialAngle[toIndex] = from.rotation.initialAngle[fromIndex];
     to.rotation.rotate[toIndex] = from.rotation.rotate[fromIndex];
     to.rotation.initialRotate[toIndex] = from.rotation.initialRotate[fromIndex];
-    to.rotation.center.point.x[toIndex] = from.rotation.center.point.x[fromIndex];
-    to.rotation.center.point.y[toIndex] = from.rotation.center.point.y[fromIndex];
+    to.rotation.center.point.x[toIndex][0] = from.rotation.center.point.x[fromIndex][0];
+    to.rotation.center.point.y[toIndex][0] = from.rotation.center.point.y[fromIndex][0];
     to.rotation.center.hasCenter[toIndex] = from.rotation.center.hasCenter[fromIndex];
 
     to.facing.facing[toIndex] = from.facing.facing[fromIndex];

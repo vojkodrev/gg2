@@ -91,8 +91,8 @@ int createTargetedProjectileEffect(
 
     alignEntityToAnchorCenter(effectBase, resetAnchor, originalAnchorCenterWorld, effectIndex);
 
-    effectBase.rotation.center.point.x[effectIndex] = resetAnchorCenterLocal.x;
-    effectBase.rotation.center.point.y[effectIndex] = resetAnchorCenterLocal.y;
+    effectBase.rotation.center.point.x[effectIndex][0] = resetAnchorCenterLocal.x;
+    effectBase.rotation.center.point.y[effectIndex][0] = resetAnchorCenterLocal.y;
     effectBase.rotation.center.hasCenter[effectIndex] = true;
     effectBase.rotation.rotate[effectIndex] = aimAngle - initialAngle;
 

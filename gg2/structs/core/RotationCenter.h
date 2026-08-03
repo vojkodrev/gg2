@@ -4,6 +4,6 @@
 template<int N>
 struct RotationCenter
 {
-    AnchorPoint<N> point;
+    AnchorPoint<N, 1> point;
     bool hasCenter[N];
 };
