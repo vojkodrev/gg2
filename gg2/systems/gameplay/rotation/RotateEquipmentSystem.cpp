@@ -19,10 +19,10 @@ void rotateEquipmentSystem(Context &ctx)
         if (playerWeapon.type[0] == WeaponType::Ranged)
             for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
                 rotateRectCenter(
-                    playerWeapon.ammoAnchor.offX[0][f],
-                    playerWeapon.ammoAnchor.offY[0][f],
-                    playerWeapon.ammoAnchor.w[0][f],
-                    playerWeapon.ammoAnchor.h[0][f],
+                    playerWeapon.ranged.ammoAnchor.offX[0][f],
+                    playerWeapon.ranged.ammoAnchor.offY[0][f],
+                    playerWeapon.ranged.ammoAnchor.w[0][f],
+                    playerWeapon.ranged.ammoAnchor.h[0][f],
                     playerWeapon.base.position.w[0] * 0.5f,
                     playerWeapon.base.position.h[0] * 0.5f,
                     playerWeapon.base.rotation.rotate[0]);
@@ -55,10 +55,10 @@ void rotateEquipmentSystem(Context &ctx)
             if (npcWeapon.type[i] == WeaponType::Ranged)
                 for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
                     rotateRectCenter(
-                        npcWeapon.ammoAnchor.offX[i][f],
-                        npcWeapon.ammoAnchor.offY[i][f],
-                        npcWeapon.ammoAnchor.w[i][f],
-                        npcWeapon.ammoAnchor.h[i][f],
+                        npcWeapon.ranged.ammoAnchor.offX[i][f],
+                        npcWeapon.ranged.ammoAnchor.offY[i][f],
+                        npcWeapon.ranged.ammoAnchor.w[i][f],
+                        npcWeapon.ranged.ammoAnchor.h[i][f],
                         npcWeapon.base.position.w[i] * 0.5f,
                         npcWeapon.base.position.h[i] * 0.5f,
                         npcWeapon.base.rotation.rotate[i]);

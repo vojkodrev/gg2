@@ -18,7 +18,7 @@ inline void fillEquipmentRenderBuffer(
         entityIndex,
         groupId,
         WEAPON_Z_INDEX);
-    if (equipment.weapon.type[entityIndex] == WeaponType::Ranged && equipment.weapon.showAmmo[entityIndex])
+    if (equipment.weapon.type[entityIndex] == WeaponType::Ranged && equipment.weapon.ranged.showAmmo[entityIndex])
     {
         fillEntityBaseRenderBuffer(
             rb,

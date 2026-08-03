@@ -22,7 +22,7 @@ void rangedNpcAmmoAnchorCollisionSystem(Context &ctx)
         const int frameIndex = weapon.base.animation.frameIndex[i];
         if (!npc.active[i] ||
             weapon.type[i] != WeaponType::Ranged ||
-            !weapon.ammoAnchor.hasAnchor[i][frameIndex])
+            !weapon.ranged.ammoAnchor.hasAnchor[i][frameIndex])
             continue;
 
         SDL_FRect moverBox =

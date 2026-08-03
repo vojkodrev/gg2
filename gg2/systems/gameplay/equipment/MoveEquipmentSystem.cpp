@@ -18,7 +18,7 @@ void moveEquipmentSystem(Context &ctx)
             0);
         alignAmmoToWeaponAnchor(
             ctx.data.player.equipment.ammo.base,
-            ctx.data.player.equipment.weapon.ammoAnchor,
+            ctx.data.player.equipment.weapon.ranged.ammoAnchor,
             ctx.data.player.equipment.weapon.base,
             ctx.data.player.base,
             0);
@@ -46,7 +46,7 @@ void moveEquipmentSystem(Context &ctx)
             i);
         alignAmmoToWeaponAnchor(
             ctx.data.npc.equipment.ammo.base,
-            ctx.data.npc.equipment.weapon.ammoAnchor,
+            ctx.data.npc.equipment.weapon.ranged.ammoAnchor,
             ctx.data.npc.equipment.weapon.base,
             ctx.data.npc.base,
             i);

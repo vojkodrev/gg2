@@ -39,7 +39,7 @@ void scaleEquipmentLocationSystem(Context &ctx)
     if (playerWeaponNeedsReset)
         for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
             scaleAnchorLocation(
-                playerWeapon.ammoAnchor,
+                playerWeapon.ranged.ammoAnchor,
                 playerWeapon.base.scale.value[0],
                 0,
                 f);
@@ -61,7 +61,7 @@ void scaleEquipmentLocationSystem(Context &ctx)
 
         for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
             scaleAnchorLocation(
-                npcWeapon.ammoAnchor,
+                npcWeapon.ranged.ammoAnchor,
                 npcWeapon.base.scale.value[i],
                 i,
                 f);

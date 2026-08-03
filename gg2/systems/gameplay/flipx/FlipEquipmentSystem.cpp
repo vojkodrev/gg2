@@ -22,7 +22,7 @@ void flipEquipmentSystem(Context &ctx)
         if (playerWeapon.type[0] == WeaponType::Ranged)
             for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
                 mirrorAnchorOffsetX(
-                    playerWeapon.ammoAnchor,
+                    playerWeapon.ranged.ammoAnchor,
                     playerWeapon.base.position.w[0],
                     0,
                     f);
@@ -54,7 +54,7 @@ void flipEquipmentSystem(Context &ctx)
             if (npcWeapon.type[i] == WeaponType::Ranged)
                 for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
                     mirrorAnchorOffsetX(
-                        npcWeapon.ammoAnchor,
+                        npcWeapon.ranged.ammoAnchor,
                         npcWeapon.base.position.w[i],
                         i,
                         f);

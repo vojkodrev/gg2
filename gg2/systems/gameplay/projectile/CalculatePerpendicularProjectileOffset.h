@@ -21,10 +21,10 @@ inline SDL_FPoint calculatePerpendicularProjectileOffset(
 
     const int frameIndex = weapon.base.animation.frameIndex[parentId];
     const SDL_FRect ammoAnchor = {
-        weapon.ammoAnchor.offX[parentId][frameIndex],
-        weapon.ammoAnchor.offY[parentId][frameIndex],
-        weapon.ammoAnchor.w[parentId][frameIndex],
-        weapon.ammoAnchor.h[parentId][frameIndex]
+        weapon.ranged.ammoAnchor.offX[parentId][frameIndex],
+        weapon.ranged.ammoAnchor.offY[parentId][frameIndex],
+        weapon.ranged.ammoAnchor.w[parentId][frameIndex],
+        weapon.ranged.ammoAnchor.h[parentId][frameIndex]
     };
     const SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,

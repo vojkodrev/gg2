@@ -61,6 +61,6 @@ inline bool tryExecuteConcussiveShot(
     mana.dirty[parentId] = true;
     concussiveShotCooldownTimer = CONCUSSIVE_SHOT_COOLDOWN_TIME;
     globalCooldownTimer = GLOBAL_COOLDOWN_DELAY;
-    weapon.showAmmo[parentId] = false;
+    weapon.ranged.showAmmo[parentId] = false;
     return true;
 }

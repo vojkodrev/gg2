@@ -24,11 +24,11 @@ inline void loadEquipment(
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
     equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
-    equipmentData.weapon.showAmmo[parentEntityIdx] = false;
+    equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
     for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
     {
-        equipmentData.weapon.ammoAnchor.hasAnchor[parentEntityIdx][f] = false;
-        equipmentData.weapon.entityRangedCollision.hasAnchor[parentEntityIdx][f] = false;
+        equipmentData.weapon.ranged.ammoAnchor.hasAnchor[parentEntityIdx][f] = false;
+        equipmentData.weapon.ranged.entityCollision.hasAnchor[parentEntityIdx][f] = false;
     }
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
@@ -49,11 +49,11 @@ inline void loadEquipment(
         for (const auto &tile : tileset.getTiles())
             if (tile.ID == weaponIdx) { weaponTile = &tile; break; }
 
-        auto &ammoAnchor = equipmentData.weapon.ammoAnchor;
+        auto &ammoAnchor = equipmentData.weapon.ranged.ammoAnchor;
         auto &entityRangedCollision =
-            equipmentData.weapon.entityRangedCollision;
+            equipmentData.weapon.ranged.entityCollision;
         auto &entityRangedCollisionCenter =
-            equipmentData.weapon.entityRangedCollisionCenter;
+            equipmentData.weapon.ranged.entityCollisionCenter;
         SDL_FRect entityCollision;
         const bool hasEntityCollision = getAnchor(
             tileset,
@@ -120,6 +120,6 @@ inline void loadEquipment(
         if (!hasAmmo)
             return;
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
-        equipmentData.weapon.showAmmo[parentEntityIdx] = true;
+        equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = true;
     }
 }
