@@ -13,6 +13,7 @@ void debugStateSystem(Context &ctx)
     const bool ctrlAlt4Down = ctrlAlt && ctx.keyboard.digit4;
     const bool ctrlAlt5Down = ctrlAlt && ctx.keyboard.digit5;
     const bool ctrlAlt6Down = ctrlAlt && ctx.keyboard.digit6;
+    const bool ctrlAlt7Down = ctrlAlt && ctx.keyboard.digit7;
 
     if (debug.ctrlAltFArmed && !ctrlAltFDown)
     {
@@ -27,6 +28,7 @@ void debugStateSystem(Context &ctx)
         debug.showNavigation = nextShow;
         debug.showCollision = nextShow;
         debug.showWeaponCollision = nextShow;
+        debug.showRangedWeaponCollision = nextShow;
         debug.showAmmoCollision = nextShow;
         debug.showEffectCollision = nextShow;
         debug.showRangedDeadZone = nextShow;
@@ -53,20 +55,26 @@ void debugStateSystem(Context &ctx)
 
     if (debug.ctrlAlt4Armed && !ctrlAlt4Down)
     {
-        debug.showAmmoCollision = !debug.showAmmoCollision;
+        debug.showRangedWeaponCollision = !debug.showRangedWeaponCollision;
         debug.ctrlAlt4Armed = false;
     }
 
     if (debug.ctrlAlt5Armed && !ctrlAlt5Down)
     {
-        debug.showEffectCollision = !debug.showEffectCollision;
+        debug.showAmmoCollision = !debug.showAmmoCollision;
         debug.ctrlAlt5Armed = false;
     }
 
     if (debug.ctrlAlt6Armed && !ctrlAlt6Down)
     {
-        debug.showRangedDeadZone = !debug.showRangedDeadZone;
+        debug.showEffectCollision = !debug.showEffectCollision;
         debug.ctrlAlt6Armed = false;
+    }
+
+    if (debug.ctrlAlt7Armed && !ctrlAlt7Down)
+    {
+        debug.showRangedDeadZone = !debug.showRangedDeadZone;
+        debug.ctrlAlt7Armed = false;
     }
 
     debug.ctrlAltFArmed = debug.ctrlAltFArmed || ctrlAltFDown;
@@ -77,4 +85,5 @@ void debugStateSystem(Context &ctx)
     debug.ctrlAlt4Armed = debug.ctrlAlt4Armed || ctrlAlt4Down;
     debug.ctrlAlt5Armed = debug.ctrlAlt5Armed || ctrlAlt5Down;
     debug.ctrlAlt6Armed = debug.ctrlAlt6Armed || ctrlAlt6Down;
+    debug.ctrlAlt7Armed = debug.ctrlAlt7Armed || ctrlAlt7Down;
 }
