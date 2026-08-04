@@ -9,13 +9,14 @@ bool isGoalReached(
     const AStarContext<N>& astar,
     uint32_t astarIndex,
     const SDL_FRect& moverBox,
+    const SDL_FPoint& moverCenter,
     const SDL_FRect& targetCol,
     int node)
 {
     const SDL_Point p = astarDecode(astar, astarIndex, node);
     const SDL_FRect nodeMoverBox = centeredRect(
         { (float)p.x, (float)p.y },
-        moverBox.w,
-        moverBox.h);
+        moverBox,
+        moverCenter);
     return SDL_HasRectIntersectionFloat(&nodeMoverBox, &targetCol);
 }

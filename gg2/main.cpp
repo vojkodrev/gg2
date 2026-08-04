@@ -147,9 +147,9 @@ int main()
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        calculateRangedCollisionSystem(*ctx);
         rangedNpcAmmoAnchorCollisionSystem(*ctx);
         moveEquipmentSystem(*ctx);
-        calculateRangedCollisionSystem(*ctx);
         npcAutoAttackSystem(*ctx);
         equipmentDepthSystem(*ctx);
 

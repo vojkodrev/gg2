@@ -1,5 +1,7 @@
 #include "FollowAStarPathTo.h"
 #include "../../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
+#include "../../../../structs/equipment/WeaponType.h"
+#include "../../../../utils/collision/EntityColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "HasReachedRect.h"
@@ -19,8 +21,24 @@ bool followAStarPathTo(
     auto &ai = ctx.data.npc.ai;
     auto &npc = ctx.data.npc;
 
-    const SDL_FRect moverBox =
-        getRangedAmmoAnchorNpcColAABB(ctx, n);
+    const auto &weapon = npc.equipment.weapon;
+    const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
+    SDL_FRect moverBox;
+    SDL_FPoint moverCenter;
+    if (weapon.type[n] == WeaponType::Ranged)
+    {
+        moverBox = getRangedAmmoAnchorNpcColAABB(ctx, n);
+        const auto &center = npc.rangedCollision.center;
+        moverCenter = {
+            moverBox.x + center.x[n][weaponFrameIndex],
+            moverBox.y + center.y[n][weaponFrameIndex]
+        };
+    }
+    else
+    {
+        moverBox = entityColAABB(npc.base, n);
+        moverCenter = entityColCenter(moverBox);
+    }
 
     if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
     {
@@ -36,7 +54,13 @@ bool followAStarPathTo(
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
         ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
-        requestAStarPath(ctx, n, moverBox, targetCol, targetNpcIndex);
+        requestAStarPath(
+            ctx,
+            n,
+            moverBox,
+            moverCenter,
+            targetCol,
+            targetNpcIndex);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {

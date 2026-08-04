@@ -13,6 +13,7 @@ int getNeighbors(
     const Context& ctx,
     int node,
     const SDL_FRect& moverBox,
+    const SDL_FPoint& moverCenter,
     int npcIndex,
     int targetNpcIndex,
     int* neighborsOut)
@@ -42,6 +43,7 @@ int getNeighbors(
                 ctx,
                 nb,
                 moverBox,
+                moverCenter,
                 npcIndex,
                 targetNpcIndex))
             continue;

@@ -1,7 +1,5 @@
 #pragma once
 #include "../../structs/core/Context.h"
-#include "../../structs/equipment/WeaponType.h"
-#include "EntityColAABB.h"
 #include <SDL3/SDL.h>
 #include <cstdint>
 
@@ -10,19 +8,13 @@ inline SDL_FRect getRangedAmmoAnchorNpcColAABB(
     uint32_t n)
 {
     const auto &npc = ctx.data.npc;
-    SDL_FRect moverBox = entityColAABB(npc.base, n);
     const auto &weapon = npc.equipment.weapon;
     const int frameIndex = weapon.base.animation.frameIndex[n];
-    if (weapon.type[n] != WeaponType::Ranged ||
-        !weapon.ranged.ammoAnchor.hasAnchor[n][frameIndex])
-        return moverBox;
-
-    const SDL_FRect ammoAnchor = {
-        weapon.base.position.x[n] + weapon.ranged.ammoAnchor.offX[n][frameIndex],
-        weapon.base.position.y[n] + weapon.ranged.ammoAnchor.offY[n][frameIndex],
-        weapon.ranged.ammoAnchor.w[n][frameIndex],
-        weapon.ranged.ammoAnchor.h[n][frameIndex]
+    const auto &anchor = npc.rangedCollision.anchor;
+    return {
+        npc.base.position.x[n] + anchor.offX[n][frameIndex],
+        npc.base.position.y[n] + anchor.offY[n][frameIndex],
+        anchor.w[n][frameIndex],
+        anchor.h[n][frameIndex]
     };
-    SDL_GetRectUnionFloat(&moverBox, &ammoAnchor, &moverBox);
-    return moverBox;
 }

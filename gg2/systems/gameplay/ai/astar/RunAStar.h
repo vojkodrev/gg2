@@ -29,6 +29,7 @@ int runAStar(
     Context& ctx,
     int npcIndex,
     const SDL_FRect& moverBox,
+    const SDL_FPoint& moverCenter,
     const SDL_FRect& destCol,
     int targetNpcIndex,
     int* pathOut)
@@ -47,7 +48,7 @@ int runAStar(
         copySpatialHash(astar.colHashSnapshot, astarIndex, ctx.collision.spatialHash, 0);
     }
 
-    SDL_FPoint startCenter = entityColCenter(moverBox);
+    SDL_FPoint startCenter = moverCenter;
 
     astar.generation[astarIndex]++;
     SDL_FPoint goalCenter = entityColCenter(destCol);
@@ -79,7 +80,13 @@ int runAStar(
 
         hashMapInsert(astar.closed, astarIndex, current, astar.generation[astarIndex]);
 
-        if (isGoalReached(astar, astarIndex, moverBox, destCol, current))
+        if (isGoalReached(
+                astar,
+                astarIndex,
+                moverBox,
+                moverCenter,
+                destCol,
+                current))
         {
             int length = reconstructPath(astar, astarIndex, current, goalCenter, pathOut);
             astar.status[astarIndex].store(AStarStatus::FINISHED_CALCULATING, std::memory_order_relaxed);
@@ -93,6 +100,7 @@ int runAStar(
             ctx,
             current,
             moverBox,
+            moverCenter,
             npcIndex,
             targetNpcIndex,
             neighbors);

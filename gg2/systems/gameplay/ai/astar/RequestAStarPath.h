@@ -5,5 +5,6 @@
 void requestAStarPath(
     Context& ctx, int npcIndex,
     const SDL_FRect& moverBox,
+    const SDL_FPoint& moverCenter,
     const SDL_FRect& destCol,
     int targetNpcIndex);
