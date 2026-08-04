@@ -15,7 +15,8 @@ bool isBlocked(
     const SDL_FRect& moverBox,
     const SDL_FPoint& moverCenter,
     int npcIndex,
-    int targetNpcIndex)
+    int targetNpcIndex,
+    bool isPlayerBlocking)
 {
     SDL_FRect nodeMoverBox = centeredRect(
         { (float)node.x, (float)node.y },
@@ -36,5 +37,5 @@ bool isBlocked(
         n,
         npcIndex,
         targetNpcIndex,
-        false);
+        isPlayerBlocking);
 }

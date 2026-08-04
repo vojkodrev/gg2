@@ -15,7 +15,8 @@ void requestAStarPath(
     const SDL_FRect& moverBox,
     const SDL_FPoint& moverCenter,
     const SDL_FRect& destCol,
-    int targetNpcIndex)
+    int targetNpcIndex,
+    bool isPlayerBlocking)
 {
     NPCAi& npcAi = ctx.data.npc.ai;
 
@@ -28,7 +29,7 @@ void requestAStarPath(
     auto& astar = ctx.astarPool.ctx;
     astar.status[astarIndex].store(AStarStatus::STARTED, std::memory_order_relaxed);
 
-    astar.future[astarIndex] = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, moverBox, moverCenter, destCol, targetNpcIndex]()
+    astar.future[astarIndex] = std::async(std::launch::async, [&ctx, &astar, astarIndex, npcIndex, moverBox, moverCenter, destCol, targetNpcIndex, isPlayerBlocking]()
     {
         defer(astarFree(ctx.astarPool, astarIndex));
 
@@ -45,6 +46,7 @@ void requestAStarPath(
             moverCenter,
             destCol,
             targetNpcIndex,
+            isPlayerBlocking,
             pathBuffer);
 
         if (length > 0)

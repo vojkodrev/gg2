@@ -32,6 +32,7 @@ int runAStar(
     const SDL_FPoint& moverCenter,
     const SDL_FRect& destCol,
     int targetNpcIndex,
+    bool isPlayerBlocking,
     int* pathOut)
 {
     static const int MAX_NEIGHBORS = 8;
@@ -103,6 +104,7 @@ int runAStar(
             moverCenter,
             npcIndex,
             targetNpcIndex,
+            isPlayerBlocking,
             neighbors);
 
         float gCurrent;

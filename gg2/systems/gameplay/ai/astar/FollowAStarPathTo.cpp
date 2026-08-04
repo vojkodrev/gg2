@@ -1,6 +1,8 @@
 #include "FollowAStarPathTo.h"
 #include "../../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
 #include "../../../../structs/equipment/WeaponType.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
+#include "../../../../structs/npc/NPCAiType.h"
 #include "../../../../utils/collision/EntityColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
@@ -20,6 +22,8 @@ bool followAStarPathTo(
 {
     auto &ai = ctx.data.npc.ai;
     auto &npc = ctx.data.npc;
+    const bool isPlayerBlocking =
+        ai.type[n] == NPCAiType::Pet && targetNpcIndex != INVALID_ID;
 
     const auto &weapon = npc.equipment.weapon;
     const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
@@ -60,7 +64,8 @@ bool followAStarPathTo(
             moverBox,
             moverCenter,
             targetCol,
-            targetNpcIndex);
+            targetNpcIndex,
+            isPlayerBlocking);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {
