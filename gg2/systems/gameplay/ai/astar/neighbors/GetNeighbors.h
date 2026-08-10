@@ -14,6 +14,7 @@ int getNeighbors(
     int node,
     const SDL_FRect& moverBox,
     const SDL_FPoint& moverCenter,
+    float moverBoxBuffer,
     int npcIndex,
     int targetNpcIndex,
     bool isPlayerBlocking,
@@ -45,6 +46,7 @@ int getNeighbors(
                 nb,
                 moverBox,
                 moverCenter,
+                moverBoxBuffer,
                 npcIndex,
                 targetNpcIndex,
                 isPlayerBlocking))

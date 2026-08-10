@@ -29,9 +29,11 @@ bool followAStarPathTo(
     const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
     SDL_FRect moverBox;
     SDL_FPoint moverCenter;
+    float moverBoxBuffer = 0.0f;
     if (weapon.type[n] == WeaponType::Ranged)
     {
         moverBox = getRangedAmmoAnchorNpcColAABB(ctx, n);
+        moverBoxBuffer = NPC_RANGED_PATH_MOVER_BOX_BUFFER;
         const auto &center = npc.rangedCollision.center;
         moverCenter = {
             moverBox.x + center.x[n][weaponFrameIndex],
@@ -63,6 +65,7 @@ bool followAStarPathTo(
             n,
             moverBox,
             moverCenter,
+            moverBoxBuffer,
             targetCol,
             targetNpcIndex,
             isPlayerBlocking);

@@ -14,6 +14,7 @@ bool isBlocked(
     SDL_Point node, 
     const SDL_FRect& moverBox,
     const SDL_FPoint& moverCenter,
+    float moverBoxBuffer,
     int npcIndex,
     int targetNpcIndex,
     bool isPlayerBlocking)
@@ -21,7 +22,8 @@ bool isBlocked(
     SDL_FRect nodeMoverBox = centeredRect(
         { (float)node.x, (float)node.y },
         moverBox,
-        moverCenter);
+        moverCenter,
+        moverBoxBuffer);
 
     SpatialHashQueryCandidates candidates;
     int n = spatialHashQuery(
