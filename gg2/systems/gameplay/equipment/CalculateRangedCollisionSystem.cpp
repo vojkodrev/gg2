@@ -2,6 +2,7 @@
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
+#include <algorithm>
 #include <cstdint>
 
 void calculateRangedCollisionSystem(Context &ctx)
@@ -26,11 +27,20 @@ void calculateRangedCollisionSystem(Context &ctx)
         SDL_FRect rangedCollisionWorld = npcCollisionWorld;
         if (ammoAnchor.hasAnchor[i][frameIndex])
         {
+            const float ammoAnchorTop =
+                weapon.base.position.y[i] + ammoAnchor.offY[i][frameIndex];
+            float ammoTop = ammoAnchorTop;
+            if (npc.equipment.ammo.exists[i])
+            {
+                const SDL_FRect ammoColBoxWorld =
+                    entityColAABB(npc.equipment.ammo.base, i);
+                ammoTop = std::min(ammoColBoxWorld.y, ammoAnchorTop);
+            }
             const SDL_FRect ammoCollisionWorld = {
                 weapon.base.position.x[i] + ammoAnchor.offX[i][frameIndex],
-                weapon.base.position.y[i] + ammoAnchor.offY[i][frameIndex],
+                ammoTop,
                 ammoAnchor.w[i][frameIndex],
-                ammoAnchor.h[i][frameIndex]
+                ammoAnchorTop + ammoAnchor.h[i][frameIndex] - ammoTop
             };
             SDL_GetRectUnionFloat(
                 &npcCollisionWorld,

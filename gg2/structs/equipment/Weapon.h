@@ -9,4 +9,5 @@ struct Weapon
     EntityBase<N> base;
     RangedWeapon<N> ranged;
     WeaponType type[N] = {};
+    bool exists[N] = {};
 };

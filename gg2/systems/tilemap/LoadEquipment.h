@@ -19,6 +19,8 @@ inline void loadEquipment(
     uint32_t parentEntityTileIndex, 
     const TileMapProperties &props)
 {
+    equipmentData.ammo.exists[parentEntityIdx] = false;
+    equipmentData.weapon.exists[parentEntityIdx] = false;
     std::string weaponAssetType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
@@ -31,6 +33,7 @@ inline void loadEquipment(
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
         loadEntityBase(equipmentData.weapon.base, parentEntityIdx, tileset, weaponIdx, props);
+        equipmentData.weapon.exists[parentEntityIdx] = true;
 
         auto &weaponBase = equipmentData.weapon.base;
         weaponBase.scale.value[parentEntityIdx] = getTileFloatProp(
@@ -79,6 +82,7 @@ inline void loadEquipment(
         if (!hasAmmo)
             return;
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
+        equipmentData.ammo.exists[parentEntityIdx] = true;
         equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = true;
     }
 }
