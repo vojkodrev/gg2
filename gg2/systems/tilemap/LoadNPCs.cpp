@@ -30,7 +30,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.active[i] = false;
         npc.initialized[i] = false;
         for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
-            npc.rangedCollision.anchor.hasAnchor[i][f] = false;
+            npc.rangedCollision.anchor.exists[i][f] = false;
     }
 
     uint32_t npcCount = 0;

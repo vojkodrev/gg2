@@ -17,7 +17,7 @@ void calculateRangedCollisionSystem(Context &ctx)
         const int frameIndex = weapon.base.animation.frameIndex[i];
         auto &rangedCollision = npc.rangedCollision;
         auto &anchor = rangedCollision.anchor;
-        if (!anchor.hasAnchor[i][frameIndex])
+        if (!anchor.exists[i][frameIndex])
             continue;
 
         const SDL_FRect npcCollisionWorld = entityColAABB(npc.base, i);
@@ -25,7 +25,7 @@ void calculateRangedCollisionSystem(Context &ctx)
             entityColCenter(npcCollisionWorld);
         const auto &ammoAnchor = weapon.ranged.ammoAnchor;
         SDL_FRect rangedCollisionWorld = npcCollisionWorld;
-        if (ammoAnchor.hasAnchor[i][frameIndex])
+        if (ammoAnchor.exists[i][frameIndex])
         {
             const float ammoAnchorTop =
                 weapon.base.position.y[i] + ammoAnchor.offY[i][frameIndex];

@@ -3,7 +3,7 @@
 template<int NItems, int NSlots>
 struct Anchor
 {
-    bool hasAnchor[NItems][NSlots] = {};
+    bool exists[NItems][NSlots] = {};
     float initialOffX[NItems][NSlots];
     float initialOffY[NItems][NSlots];
     float initialW[NItems][NSlots];

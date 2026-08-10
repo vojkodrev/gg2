@@ -28,7 +28,7 @@ inline void loadEquipment(
     equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
     for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
     {
-        equipmentData.weapon.ranged.ammoAnchor.hasAnchor[parentEntityIdx][f] = false;
+        equipmentData.weapon.ranged.ammoAnchor.exists[parentEntityIdx][f] = false;
     }
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
@@ -59,7 +59,7 @@ inline void loadEquipment(
                 ? weaponTile->animation.frames[f].tileID - props.firstGid
                 : weaponIdx;
             SDL_FRect frameAmmoAnchor;
-            ammoAnchor.hasAnchor[parentEntityIdx][f] =
+            ammoAnchor.exists[parentEntityIdx][f] =
                 getAnchor(tileset, frameTileIdx, "ammoAnchor", frameAmmoAnchor);
             ammoAnchor.initialOffX[parentEntityIdx][f] = frameAmmoAnchor.x;
             ammoAnchor.initialOffY[parentEntityIdx][f] = frameAmmoAnchor.y;

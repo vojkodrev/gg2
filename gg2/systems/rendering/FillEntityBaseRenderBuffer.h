@@ -21,7 +21,7 @@ inline uint32_t fillEntityBaseRenderBuffer(
     rb.src.rotate[renderIndex] = entityBase.rotation.rotate[entityIndex];
     rb.rotationCenter.point.x[renderIndex][0] = entityBase.rotation.center.point.x[entityIndex][0];
     rb.rotationCenter.point.y[renderIndex][0] = entityBase.rotation.center.point.y[entityIndex][0];
-    rb.rotationCenter.hasCenter[renderIndex] = entityBase.rotation.center.hasCenter[entityIndex];
+    rb.rotationCenter.exists[renderIndex] = entityBase.rotation.center.exists[entityIndex];
 
     rb.dst.x[renderIndex] = entityBase.position.x[entityIndex];
     rb.dst.y[renderIndex] = entityBase.position.y[entityIndex];

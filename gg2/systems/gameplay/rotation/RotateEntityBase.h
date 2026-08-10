@@ -42,11 +42,11 @@ inline void rotateEntityBase(
             entityColCenter(entityBase.animation.frame.anchor, i, frameIndex);
         entityBase.rotation.center.point.x[i][0] = center.x;
         entityBase.rotation.center.point.y[i][0] = center.y;
-        entityBase.rotation.center.hasCenter[i] = true;
+        entityBase.rotation.center.exists[i] = true;
     }
     else
     {
-        entityBase.rotation.center.hasCenter[i] = false;
+        entityBase.rotation.center.exists[i] = false;
     }
 
     const float entityCenterX = entityBase.position.w[i] * 0.5f;

@@ -11,7 +11,7 @@ inline void swapRenderEntry(RenderBuffer &rb, int a, int b)
     std::swap(rb.src.rotate[a], rb.src.rotate[b]);
     std::swap(rb.rotationCenter.point.x[a][0], rb.rotationCenter.point.x[b][0]);
     std::swap(rb.rotationCenter.point.y[a][0], rb.rotationCenter.point.y[b][0]);
-    std::swap(rb.rotationCenter.hasCenter[a], rb.rotationCenter.hasCenter[b]);
+    std::swap(rb.rotationCenter.exists[a], rb.rotationCenter.exists[b]);
     std::swap(rb.dst.x[a], rb.dst.x[b]);
     std::swap(rb.dst.y[a], rb.dst.y[b]);
     std::swap(rb.dst.w[a], rb.dst.w[b]);
@@ -36,7 +36,7 @@ inline void copyRenderEntry(RenderBuffer &rb, int dst, int src, const SDL_FRect 
     rb.src.rotate[dst] = rb.src.rotate[src];
     rb.rotationCenter.point.x[dst][0] = rb.rotationCenter.point.x[src][0];
     rb.rotationCenter.point.y[dst][0] = rb.rotationCenter.point.y[src][0];
-    rb.rotationCenter.hasCenter[dst] = rb.rotationCenter.hasCenter[src];
+    rb.rotationCenter.exists[dst] = rb.rotationCenter.exists[src];
     rb.dst.x[dst] = dstOverride ? dstOverride->x : rb.dst.x[src];
     rb.dst.y[dst] = dstOverride ? dstOverride->y : rb.dst.y[src];
     rb.dst.w[dst] = dstOverride ? dstOverride->w : rb.dst.w[src];

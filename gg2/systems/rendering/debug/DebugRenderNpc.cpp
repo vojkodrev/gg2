@@ -34,7 +34,7 @@ void debugRenderNpc(const Context &ctx)
         const auto &rangedCollisionAnchor = rangedCollision.anchor;
         if (
             ctx.data.debug.showRangedWeaponCollision &&
-            rangedCollisionAnchor.hasAnchor[i][weaponFrameIndex])
+            rangedCollisionAnchor.exists[i][weaponFrameIndex])
         {
             const SDL_FRect collision = {
                 ctx.data.npc.base.position.x[i] +
