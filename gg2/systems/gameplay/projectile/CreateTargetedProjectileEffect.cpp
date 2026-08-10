@@ -27,9 +27,17 @@ int createTargetedProjectileEffect(
 {
     int parentGroupId;
     if (parentType == EntityType::Player)
+    {
+        if (!ctx.data.player.equipment.ammo.exists[parentId])
+            return INVALID_ID;
         parentGroupId = ctx.data.player.group.id[parentId];
+    }
     else if (parentType == EntityType::NPC)
+    {
+        if (!ctx.data.npc.equipment.ammo.exists[parentId])
+            return INVALID_ID;
         parentGroupId = ctx.data.npc.group.id[parentId];
+    }
     else
         return INVALID_ID;
 
