@@ -8,6 +8,9 @@
 template<int N>
 inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipment, uint32_t i)
 {
+    if (!equipment.weapon.exists[i])
+        return;
+
     if (ctx.data.debug.showWeaponCollision)
     {
         debugRenderEntityBase(ctx, equipment.weapon.base, i, SDL_Color{0, 255, 255, 255});
@@ -29,6 +32,7 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
 
     if (
         ctx.data.debug.showAmmoCollision &&
+        equipment.ammo.exists[i] &&
         equipment.weapon.type[i] == WeaponType::Ranged &&
         equipment.weapon.ranged.showAmmo[i])
         debugRenderEntityBase(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});

@@ -26,12 +26,12 @@ bool followAStarPathTo(
         ai.type[n] == NPCAiType::Pet && targetNpcIndex != INVALID_ID;
 
     const auto &weapon = npc.equipment.weapon;
-    const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
     SDL_FRect moverBox;
     SDL_FPoint moverCenter;
     float moverBoxBuffer = 0.0f;
-    if (weapon.type[n] == WeaponType::Ranged)
+    if (weapon.exists[n] && weapon.type[n] == WeaponType::Ranged)
     {
+        const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
         moverBox = getRangedAmmoAnchorNpcColAABB(ctx, n);
         moverBoxBuffer = NPC_RANGED_PATH_MOVER_BOX_BUFFER;
         const auto &center = npc.rangedCollision.center;

@@ -21,6 +21,7 @@ void rangedNpcAmmoAnchorCollisionSystem(Context &ctx)
         const auto &weapon = npc.equipment.weapon;
         const int frameIndex = weapon.base.animation.frameIndex[i];
         if (!npc.active[i] ||
+            !weapon.exists[i] ||
             weapon.type[i] != WeaponType::Ranged ||
             !weapon.ranged.ammoAnchor.exists[i][frameIndex])
             continue;

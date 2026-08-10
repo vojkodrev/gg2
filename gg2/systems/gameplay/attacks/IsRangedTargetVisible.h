@@ -24,7 +24,9 @@ inline bool isRangedTargetVisible(
     const SDL_FRect &targetCol,
     const SDL_FPoint &entityColCenterFrom)
 {
-    if (equipment.weapon.type[entityIndex] != WeaponType::Ranged)
+    if (!equipment.weapon.exists[entityIndex] ||
+        !equipment.ammo.exists[entityIndex] ||
+        equipment.weapon.type[entityIndex] != WeaponType::Ranged)
         return false;
 
     const int frameIndex =

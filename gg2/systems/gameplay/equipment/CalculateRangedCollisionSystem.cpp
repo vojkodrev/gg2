@@ -11,7 +11,9 @@ void calculateRangedCollisionSystem(Context &ctx)
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
         const auto &weapon = npc.equipment.weapon;
-        if (!npc.active[i] || weapon.type[i] != WeaponType::Ranged)
+        if (!npc.active[i] ||
+            !weapon.exists[i] ||
+            weapon.type[i] != WeaponType::Ranged)
             continue;
 
         const int frameIndex = weapon.base.animation.frameIndex[i];
