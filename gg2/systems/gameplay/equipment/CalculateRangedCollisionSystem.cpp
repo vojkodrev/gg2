@@ -1,4 +1,6 @@
 #include "CalculateRangedCollisionSystem.h"
+#include "../rotation/IsRotationAnimationFinished.h"
+#include "../rotation/IsRotationAnimationRunning.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
@@ -14,6 +16,10 @@ void calculateRangedCollisionSystem(Context &ctx)
         if (!npc.active[i] ||
             !weapon.exists[i] ||
             weapon.type[i] != WeaponType::Ranged)
+            continue;
+        if (!weapon.base.facing.dirty[i] &&
+            !isRotationAnimationRunning(weapon.base, i) &&
+            !isRotationAnimationFinished(weapon.base, i))
             continue;
 
         const int frameIndex = weapon.base.animation.frameIndex[i];
