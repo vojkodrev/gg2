@@ -1,4 +1,4 @@
 #pragma once
-#include "../../../../../structs/ai/AStarPool.h"
+#include "../../../../../structs/astar/AStarPool.h"
 
 void astarFree(AStarPool& pool, int index);

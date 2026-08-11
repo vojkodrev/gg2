@@ -1,7 +1,7 @@
 #include "LoadEffects.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
-#include "../../structs/core/AnimationType.h"
+#include "../../structs/animation/AnimationType.h"
 #include "../../structs/core/constants/FontConstants.h"
 #include "../../structs/core/constants/TauntConstants.h"
 #include "../../structs/core/constants/TintConstants.h"

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../../structs/core/Groups.h"
+#include "../../structs/groups/Groups.h"
 #include "../../structs/core/constants/IndexConstants.h"
 
 template<uint32_t TGroupCapacity>

@@ -1,6 +1,6 @@
 #include "AStarFree.h"
 #include "../../../../utils/pool/PoolFree.h"
-#include "../../../../structs/ai/AStarStatus.h"
+#include "../../../../structs/astar/AStarStatus.h"
 
 void astarFree(AStarPool& pool, int index)
 {

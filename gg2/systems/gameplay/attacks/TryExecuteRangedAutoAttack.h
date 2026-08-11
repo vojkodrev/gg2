@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
 #include "../../../structs/effect/ProjectileType.h"

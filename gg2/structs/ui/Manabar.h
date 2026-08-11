@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/EntityBase.h"
+#include "../entity/EntityBase.h"
 
 template<int N>
 struct Manabar

@@ -1,5 +1,5 @@
 #include "EffectDepthSystem.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include <cstdint>
 
 void effectDepthSystem(Context &ctx)

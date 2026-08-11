@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/Anchor.h"
+#include "../../../structs/anchors/Anchor.h"
 #include <cstdint>
 
 template<int NItems, int NSlots>

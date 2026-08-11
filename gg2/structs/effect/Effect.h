@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
-#include "../core/EntityBase.h"
-#include "../core/EntityReference.h"
+#include "../entity/EntityBase.h"
+#include "../entity/EntityReference.h"
 #include "DestroyEffectType.h"
 #include "EffectConstants.h"
 #include "EffectType.h"

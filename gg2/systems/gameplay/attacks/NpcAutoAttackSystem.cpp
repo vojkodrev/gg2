@@ -1,7 +1,7 @@
 #include "NpcAutoAttackSystem.h"
 #include "ApplyAttackDamage.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include "../../../utils/collision/GetEntityColAABB.h"
 #include "../rotation/HasMeleeWeaponRotationAnimation.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityBase.h"
 #include "../../../utils/collision/EntityColCenter.h"
 
 template<int N>

@@ -2,7 +2,7 @@
 #include "Context.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../attacks/debuff/AddDebuff.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include <cstdint>
 

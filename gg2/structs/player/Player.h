@@ -1,8 +1,8 @@
 #pragma once
 #include "../attacks/Debuff.h"
 #include "../attacks/AutoAttack.h"
-#include "../core/Group.h"
-#include "../core/EntityBase.h"
+#include "../groups/Group.h"
+#include "../entity/EntityBase.h"
 #include "../core/constants/IndexConstants.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"

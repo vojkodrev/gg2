@@ -1,7 +1,7 @@
 #include "MoveEffectSystem.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/ProjectileConstants.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../npc/select/PlaceNpcSelector.h"
 #include "../../../utils/collision/EntityColAABB.h"

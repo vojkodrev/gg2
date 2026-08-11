@@ -8,7 +8,7 @@
 #include "SetPetIdleIfOffScreen.h"
 #include "SetNpcAiStateIdle.h"
 #include "../SetNpcAiStatePursueTarget.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/TauntConstants.h"
 
 void petAttack(uint32_t n, Context &ctx)

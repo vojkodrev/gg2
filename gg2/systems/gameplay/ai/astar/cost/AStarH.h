@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../../../../structs/ai/AStarContext.h"
+#include "../../../../../structs/astar/AStarContext.h"
 #include "../node/AStarDecode.h"
 #include <cmath>
 

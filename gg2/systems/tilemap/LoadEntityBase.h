@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../structs/core/EntityBase.h"
+#include "../../structs/entity/EntityBase.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "DecodeGridIndex.h"

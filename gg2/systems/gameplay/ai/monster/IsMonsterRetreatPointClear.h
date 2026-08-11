@@ -3,7 +3,7 @@
 #include "EntityColAABB.h"
 #include "IsNpcColBlocked.h"
 #include "spatialhash/SpatialHashQuery.h"
-#include "../../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../utils/rect/CenteredRect.h"
 #include <shared_mutex>

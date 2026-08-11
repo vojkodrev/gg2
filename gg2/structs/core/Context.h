@@ -3,7 +3,7 @@
 #include "FrameState.h"
 #include "Data.h"
 #include "RenderBuffer.h"
-#include "../ai/AStarPool.h"
+#include "../astar/AStarPool.h"
 #include "../input/KeyboardState.h"
 #include "../input/MouseState.h"
 #include "../collision/CollisionContext.h"

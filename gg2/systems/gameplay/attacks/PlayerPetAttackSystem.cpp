@@ -4,7 +4,7 @@
 #include "../ai/SetNpcAiStateFollowPlayer.h"
 #include "../ai/SetNpcAiStatePursueTarget.h"
 #include "../ai/SetNpcAiTarget.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
 
 void playerPetAttackSystem(Context &ctx)

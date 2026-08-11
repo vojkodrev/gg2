@@ -5,8 +5,8 @@
 #include "RenderDst.h"
 #include "RenderGroup.h"
 #include "RenderTint.h"
-#include "../core/RotationCenter.h"
-#include "../core/Facing.h"
+#include "../rotation/RotationCenter.h"
+#include "../facing/Facing.h"
 #include "RenderConstants.h"
 
 struct RenderBuffer

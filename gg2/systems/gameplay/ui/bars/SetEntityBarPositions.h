@@ -1,6 +1,6 @@
 #pragma once
 #include "SetBarPosition.h"
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityBase.h"
 #include "../../../structs/core/constants/HealthbarConstants.h"
 #include "../../../structs/statistics/Statistics.h"
 #include "../../../structs/ui/Healthbar.h"

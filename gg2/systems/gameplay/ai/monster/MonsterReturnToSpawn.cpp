@@ -1,5 +1,5 @@
 #include "MonsterReturnToSpawn.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "NpcMonsterConstants.h"

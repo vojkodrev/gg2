@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "../core/constants/AttackConstants.h"
 #include "../core/constants/IndexConstants.h"
-#include "../core/EntityType.h"
+#include "../entity/EntityType.h"
 #include "../../utils/pool/Pool.h"
 
 template<int N>

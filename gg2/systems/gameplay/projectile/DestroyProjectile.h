@@ -1,6 +1,6 @@
 #pragma once
 #include "../../../structs/core/Context.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../effects/EffectFree.h"
 #include <cstdint>
 

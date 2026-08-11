@@ -1,7 +1,7 @@
 #include "CreateTargetedProjectileEffect.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/MathConstants.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../effects/EffectAlloc.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"

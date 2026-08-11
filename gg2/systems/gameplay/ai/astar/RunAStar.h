@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../structs/ai/AStarContext.h"
+#include "../../../../structs/astar/AStarContext.h"
 #include "../../../../structs/core/Context.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../utils/collision/EntityColCenter.h"

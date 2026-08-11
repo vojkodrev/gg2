@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../structs/core/constants/IndexConstants.h"

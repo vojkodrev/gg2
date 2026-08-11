@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/EntityType.h"
+#include "../entity/EntityType.h"
 #include "../core/constants/AttackConstants.h"
 #include "../core/constants/IndexConstants.h"
 #include "../../utils/pool/Pool.h"

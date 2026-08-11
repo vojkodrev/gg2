@@ -2,7 +2,7 @@
 #include "../../../structs/core/Context.h"
 #include "../../../structs/core/constants/FontConstants.h"
 #include "../../../structs/core/constants/TintConstants.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../ui/text/CreateTextEffect.h"

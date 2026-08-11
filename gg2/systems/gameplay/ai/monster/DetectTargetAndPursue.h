@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../structs/core/Context.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "NpcMonsterConstants.h"
 #include "RefreshNpcAttackedTimer.h"

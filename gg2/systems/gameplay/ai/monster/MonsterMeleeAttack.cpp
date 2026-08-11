@@ -3,7 +3,7 @@
 #include "PrepareMonsterAttack.h"
 #include "SelectAttackingMonsterIfPlayerHasNoSelection.h"
 #include "SetMonsterFacingTowardTarget.h"
-#include "../../../../structs/core/AnimationState.h"
+#include "../../../../structs/animation/AnimationState.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../SetNpcAiStatePursueTarget.h"

@@ -6,7 +6,7 @@
 #include "NPCSpawn.h"
 #include "NPCAiState.h"
 #include "NPCAiType.h"
-#include "../core/EntityReference.h"
+#include "../entity/EntityReference.h"
 
 struct NPCAi
 {

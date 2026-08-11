@@ -1,6 +1,6 @@
 #pragma once
-#include "../../../../../structs/ai/AStarContext.h"
-#include "../../../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../../../structs/astar/AStarContext.h"
+#include "../../../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include "../../../../../structs/core/Context.h"
 #include "../../../../../utils/collision/IsNpcColBlocked.h"
 #include "../../../../../utils/collision/spatialhash/SpatialHashQuery.h"
