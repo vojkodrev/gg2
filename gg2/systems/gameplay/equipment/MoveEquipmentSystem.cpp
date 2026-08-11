@@ -6,49 +6,55 @@
 
 void moveEquipmentSystem(Context &ctx)
 {
+    auto &playerEquipment = ctx.data.player.equipment;
     if (
-        ctx.data.player.base.position.dirty[0] ||
-        ctx.data.player.base.facing.dirty[0] ||
-        isRotationAnimationRunning(ctx.data.player.equipment.weapon.base, 0))
+        playerEquipment.weapon.exists[0] &&
+        (ctx.data.player.base.position.dirty[0] ||
+         ctx.data.player.base.facing.dirty[0] ||
+         isRotationAnimationRunning(playerEquipment.weapon.base, 0)))
     {
         alignEntityToParentAnchor(
-            ctx.data.player.equipment.weapon.base,
+            playerEquipment.weapon.base,
             ctx.data.player.base.animation,
             ctx.data.player.base.position,
             0);
-        alignAmmoToWeaponAnchor(
-            ctx.data.player.equipment.ammo.base,
-            ctx.data.player.equipment.weapon.ammoAnchor,
-            ctx.data.player.equipment.weapon.base,
-            ctx.data.player.base,
-            0);
+        if (playerEquipment.ammo.exists[0])
+            alignAmmoToWeaponAnchor(
+                playerEquipment.ammo.base,
+                playerEquipment.weapon.ranged.ammoAnchor,
+                playerEquipment.weapon.base,
+                ctx.data.player.base,
+                0);
     }
 
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
-        if (!ctx.data.npc.active[i])
+        auto &npcEquipment = ctx.data.npc.equipment;
+        if (!ctx.data.npc.active[i] ||
+            !npcEquipment.weapon.exists[i])
             continue;
 
         if (
             !ctx.data.npc.base.position.dirty[i] &&
             !ctx.data.npc.base.facing.dirty[i] &&
-            !isRotationAnimationRunning(ctx.data.npc.equipment.weapon.base, i) &&
+            !isRotationAnimationRunning(npcEquipment.weapon.base, i) &&
             !shouldUseRotationAnimationStart(
                 ctx.data.npc.ai,
-                ctx.data.npc.equipment.weapon,
+                npcEquipment.weapon,
                 i))
             continue;
 
         alignEntityToParentAnchor(
-            ctx.data.npc.equipment.weapon.base,
+            npcEquipment.weapon.base,
             ctx.data.npc.base.animation,
             ctx.data.npc.base.position,
             i);
-        alignAmmoToWeaponAnchor(
-            ctx.data.npc.equipment.ammo.base,
-            ctx.data.npc.equipment.weapon.ammoAnchor,
-            ctx.data.npc.equipment.weapon.base,
-            ctx.data.npc.base,
-            i);
+        if (npcEquipment.ammo.exists[i])
+            alignAmmoToWeaponAnchor(
+                npcEquipment.ammo.base,
+                npcEquipment.weapon.ranged.ammoAnchor,
+                npcEquipment.weapon.base,
+                ctx.data.npc.base,
+                i);
     }
 }

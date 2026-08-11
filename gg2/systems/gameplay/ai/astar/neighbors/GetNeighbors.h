@@ -13,8 +13,11 @@ int getNeighbors(
     const Context& ctx,
     int node,
     const SDL_FRect& moverBox,
+    const SDL_FPoint& moverCenter,
+    float moverBoxBuffer,
     int npcIndex,
     int targetNpcIndex,
+    bool isPlayerBlocking,
     int* neighborsOut)
 {
     static const int DIR_X[8] = { 1, -1, 0, 0, 1, 1, -1, -1 };
@@ -42,8 +45,11 @@ int getNeighbors(
                 ctx,
                 nb,
                 moverBox,
+                moverCenter,
+                moverBoxBuffer,
                 npcIndex,
-                targetNpcIndex))
+                targetNpcIndex,
+                isPlayerBlocking))
             continue;
 
         neighborsOut[count++] = astarEncode(astar, astarIndex, nb);

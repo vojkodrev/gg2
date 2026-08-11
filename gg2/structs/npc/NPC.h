@@ -6,6 +6,8 @@
 #include "../core/Group.h"
 #include "../core/Groups.h"
 #include "../core/EntityBase.h"
+#include "../core/CenteredAnchor.h"
+#include "../core/constants/AnimationConstants.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
 #include "../ui/Healthbar.h"
@@ -28,6 +30,7 @@ struct NPC
     AutoAttack<MAX_NPCS> autoAttack;
     AggroTable<MAX_NPCS> aggroTable;
     Equipment<MAX_NPCS> equipment;
+    CenteredAnchor<MAX_NPCS, MAX_ANIMATION_FRAMES> rangedCollision;
     Healthbar<MAX_NPCS> healthbar;
     Manabar<MAX_NPCS> manabar;
     NPCAi ai;

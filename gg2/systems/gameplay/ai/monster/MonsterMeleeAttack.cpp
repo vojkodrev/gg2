@@ -26,7 +26,8 @@ void monsterMeleeAttack(Context &ctx, uint32_t n)
     }
 
     auto &npc = ctx.data.npc;
-    if (npc.equipment.weapon.type[n] != WeaponType::Melee)
+    if (!npc.equipment.weapon.exists[n] ||
+        npc.equipment.weapon.type[n] != WeaponType::Melee)
         return;
 
     setMonsterFacingTowardTarget(ctx, n, targetCol);

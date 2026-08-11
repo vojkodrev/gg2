@@ -1,8 +1,8 @@
 #pragma once
 
-template<int N>
+template<int NItems, int NSlots>
 struct AnchorPoint
 {
-    float x[N];
-    float y[N];
+    float x[NItems][NSlots];
+    float y[NItems][NSlots];
 };

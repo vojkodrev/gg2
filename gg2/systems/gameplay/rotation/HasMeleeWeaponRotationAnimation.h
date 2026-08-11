@@ -6,6 +6,7 @@ template<int N>
 inline bool hasMeleeWeaponRotationAnimation(const Weapon<N> &weapon, uint32_t i)
 {
     return
+        weapon.exists[i] &&
         weapon.type[i] == WeaponType::Melee &&
         weapon.base.animation.animationType[i] == AnimationType::Rotation;
 }

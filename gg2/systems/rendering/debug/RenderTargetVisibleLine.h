@@ -13,11 +13,13 @@ inline void renderTargetVisibleLine(
     uint32_t entityIndex,
     const SDL_FRect &targetCol)
 {
+    const int frameIndex =
+        equipment.weapon.base.animation.frameIndex[entityIndex];
     const SDL_FRect ammoAnchor = {
-        equipment.weapon.ammoAnchor.offX[entityIndex][0],
-        equipment.weapon.ammoAnchor.offY[entityIndex][0],
-        equipment.weapon.ammoAnchor.w[entityIndex][0],
-        equipment.weapon.ammoAnchor.h[entityIndex][0]
+        equipment.weapon.ranged.ammoAnchor.offX[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.offY[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.w[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.h[entityIndex][frameIndex]
     };
     const SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,

@@ -19,15 +19,21 @@ inline void loadEquipment(
     uint32_t parentEntityTileIndex, 
     const TileMapProperties &props)
 {
+    equipmentData.ammo.exists[parentEntityIdx] = false;
+    equipmentData.weapon.exists[parentEntityIdx] = false;
     std::string weaponAssetType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
     equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
-    equipmentData.weapon.showAmmo[parentEntityIdx] = false;
-    equipmentData.weapon.ammoAnchor.hasAnchor[parentEntityIdx][0] = false;
+    equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
+    for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
+    {
+        equipmentData.weapon.ranged.ammoAnchor.exists[parentEntityIdx][f] = false;
+    }
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
         loadEntityBase(equipmentData.weapon.base, parentEntityIdx, tileset, weaponIdx, props);
+        equipmentData.weapon.exists[parentEntityIdx] = true;
 
         auto &weaponBase = equipmentData.weapon.base;
         weaponBase.scale.value[parentEntityIdx] = getTileFloatProp(
@@ -40,19 +46,32 @@ inline void loadEquipment(
         weaponBase.position.h[parentEntityIdx] =
             weaponBase.position.initialH[parentEntityIdx] * weaponBase.scale.value[parentEntityIdx];
 
-        SDL_FRect ammoAnchor;
-        equipmentData.weapon.ammoAnchor.hasAnchor[parentEntityIdx][0] =
-            getAnchor(tileset, weaponIdx, "ammoAnchor", ammoAnchor);
-        equipmentData.weapon.ammoAnchor.initialOffX[parentEntityIdx][0] = ammoAnchor.x;
-        equipmentData.weapon.ammoAnchor.initialOffY[parentEntityIdx][0] = ammoAnchor.y;
-        equipmentData.weapon.ammoAnchor.initialW[parentEntityIdx][0] = ammoAnchor.w;
-        equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] = ammoAnchor.h;
-        equipmentData.weapon.ammoAnchor.offX[parentEntityIdx][0] = ammoAnchor.x;
-        equipmentData.weapon.ammoAnchor.offY[parentEntityIdx][0] = ammoAnchor.y;
-        equipmentData.weapon.ammoAnchor.w[parentEntityIdx][0] =
-            equipmentData.weapon.ammoAnchor.initialW[parentEntityIdx][0] * equipmentData.weapon.base.scale.value[parentEntityIdx];
-        equipmentData.weapon.ammoAnchor.h[parentEntityIdx][0] =
-            equipmentData.weapon.ammoAnchor.initialH[parentEntityIdx][0] * equipmentData.weapon.base.scale.value[parentEntityIdx];
+        const tmx::Tileset::Tile *weaponTile = nullptr;
+        for (const auto &tile : tileset.getTiles())
+            if (tile.ID == weaponIdx) { weaponTile = &tile; break; }
+
+        auto &ammoAnchor = equipmentData.weapon.ranged.ammoAnchor;
+        const int frameCount = weaponBase.animation.frameCount[parentEntityIdx];
+        for (int f = 0; f < frameCount; f++)
+        {
+            const uint32_t frameTileIdx =
+                weaponTile && !weaponTile->animation.frames.empty()
+                ? weaponTile->animation.frames[f].tileID - props.firstGid
+                : weaponIdx;
+            SDL_FRect frameAmmoAnchor;
+            ammoAnchor.exists[parentEntityIdx][f] =
+                getAnchor(tileset, frameTileIdx, "ammoAnchor", frameAmmoAnchor);
+            ammoAnchor.initialOffX[parentEntityIdx][f] = frameAmmoAnchor.x;
+            ammoAnchor.initialOffY[parentEntityIdx][f] = frameAmmoAnchor.y;
+            ammoAnchor.initialW[parentEntityIdx][f] = frameAmmoAnchor.w;
+            ammoAnchor.initialH[parentEntityIdx][f] = frameAmmoAnchor.h;
+            ammoAnchor.offX[parentEntityIdx][f] = frameAmmoAnchor.x;
+            ammoAnchor.offY[parentEntityIdx][f] = frameAmmoAnchor.y;
+            ammoAnchor.w[parentEntityIdx][f] =
+                frameAmmoAnchor.w * weaponBase.scale.value[parentEntityIdx];
+            ammoAnchor.h[parentEntityIdx][f] =
+                frameAmmoAnchor.h * weaponBase.scale.value[parentEntityIdx];
+        }
     }
 
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
@@ -63,6 +82,7 @@ inline void loadEquipment(
         if (!hasAmmo)
             return;
         loadEntityBase(equipmentData.ammo.base, parentEntityIdx, tileset, ammoIdx, props);
-        equipmentData.weapon.showAmmo[parentEntityIdx] = true;
+        equipmentData.ammo.exists[parentEntityIdx] = true;
+        equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = true;
     }
 }

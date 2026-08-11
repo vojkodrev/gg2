@@ -24,14 +24,18 @@ inline bool isRangedTargetVisible(
     const SDL_FRect &targetCol,
     const SDL_FPoint &entityColCenterFrom)
 {
-    if (equipment.weapon.type[entityIndex] != WeaponType::Ranged)
+    if (!equipment.weapon.exists[entityIndex] ||
+        !equipment.ammo.exists[entityIndex] ||
+        equipment.weapon.type[entityIndex] != WeaponType::Ranged)
         return false;
 
+    const int frameIndex =
+        equipment.weapon.base.animation.frameIndex[entityIndex];
     const SDL_FRect ammoAnchor = {
-        equipment.weapon.ammoAnchor.offX[entityIndex][0],
-        equipment.weapon.ammoAnchor.offY[entityIndex][0],
-        equipment.weapon.ammoAnchor.w[entityIndex][0],
-        equipment.weapon.ammoAnchor.h[entityIndex][0]
+        equipment.weapon.ranged.ammoAnchor.offX[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.offY[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.w[entityIndex][frameIndex],
+        equipment.weapon.ranged.ammoAnchor.h[entityIndex][frameIndex]
     };
     SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,

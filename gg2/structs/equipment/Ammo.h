@@ -5,4 +5,5 @@ template<int N>
 struct Ammo
 {
     EntityBase<N> base;
+    bool exists[N] = {};
 };

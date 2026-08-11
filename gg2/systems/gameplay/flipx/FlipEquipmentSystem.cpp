@@ -11,22 +11,25 @@ void flipEquipmentSystem(Context &ctx)
 {
     auto &playerWeapon = ctx.data.player.equipment.weapon;
     const bool playerWeaponNeedsMirror =
-        playerWeapon.base.facing.dirty[0] ||
-        isRotationAnimationRunning(playerWeapon.base, 0) ||
-        isRotationAnimationFinished(playerWeapon.base, 0);
+        playerWeapon.exists[0] &&
+        (playerWeapon.base.facing.dirty[0] ||
+         isRotationAnimationRunning(playerWeapon.base, 0) ||
+         isRotationAnimationFinished(playerWeapon.base, 0));
     if (playerWeaponNeedsMirror && playerWeapon.base.facing.flipX[0])
     {
         mirrorEntityAnchorsAndCollisionOffsets(
             playerWeapon.base,
             0);
         if (playerWeapon.type[0] == WeaponType::Ranged)
-            mirrorAnchorOffsetX(
-                playerWeapon.ammoAnchor,
-                playerWeapon.base.position.w[0],
-                0,
-                0);
+            for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+                mirrorAnchorOffsetX(
+                    playerWeapon.ranged.ammoAnchor,
+                    playerWeapon.base.position.w[0],
+                    0,
+                    f);
     }
-    if (ctx.data.player.equipment.ammo.base.facing.dirty[0])
+    if (ctx.data.player.equipment.ammo.exists[0] &&
+        ctx.data.player.equipment.ammo.base.facing.dirty[0])
     {
         mirrorEntityAnchorsAndCollisionOffsets(
             ctx.data.player.equipment.ammo.base,
@@ -40,24 +43,27 @@ void flipEquipmentSystem(Context &ctx)
 
         auto &npcWeapon = ctx.data.npc.equipment.weapon;
         const bool npcWeaponNeedsMirror =
-            npcWeapon.base.facing.dirty[i] ||
-            isRotationAnimationRunning(npcWeapon.base, i) ||
-            isRotationAnimationFinished(npcWeapon.base, i) ||
-            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
-            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+            npcWeapon.exists[i] &&
+            (npcWeapon.base.facing.dirty[i] ||
+             isRotationAnimationRunning(npcWeapon.base, i) ||
+             isRotationAnimationFinished(npcWeapon.base, i) ||
+             shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
+             shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i));
         if (npcWeaponNeedsMirror && npcWeapon.base.facing.flipX[i])
         {
             mirrorEntityAnchorsAndCollisionOffsets(
                 npcWeapon.base,
                 i);
             if (npcWeapon.type[i] == WeaponType::Ranged)
-                mirrorAnchorOffsetX(
-                    npcWeapon.ammoAnchor,
-                    npcWeapon.base.position.w[i],
-                    i,
-                    0);
+                for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
+                    mirrorAnchorOffsetX(
+                        npcWeapon.ranged.ammoAnchor,
+                        npcWeapon.base.position.w[i],
+                        i,
+                        f);
         }
-        if (ctx.data.npc.equipment.ammo.base.facing.dirty[i])
+        if (ctx.data.npc.equipment.ammo.exists[i] &&
+            ctx.data.npc.equipment.ammo.base.facing.dirty[i])
         {
             mirrorEntityAnchorsAndCollisionOffsets(
                 ctx.data.npc.equipment.ammo.base,

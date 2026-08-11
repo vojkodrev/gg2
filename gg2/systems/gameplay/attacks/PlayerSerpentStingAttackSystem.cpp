@@ -40,5 +40,5 @@ void playerSerpentStingAttackSystem(Context &ctx)
     ctx.data.player.statistics.mana.mana[0] -= SERPENT_STING_MANA_COST;
     ctx.data.player.statistics.mana.dirty[0] = true;
     ctx.data.player.globalCooldownTimer = GLOBAL_COOLDOWN_DELAY;
-    ctx.data.player.equipment.weapon.showAmmo[0] = false;
+    ctx.data.player.equipment.weapon.ranged.showAmmo[0] = false;
 }

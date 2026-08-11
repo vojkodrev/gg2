@@ -20,7 +20,8 @@ bool canPlayerRangedAttack(Context &ctx)
         return false;
 
     const auto &playerWeapon = ctx.data.player.equipment.weapon;
-    if (playerWeapon.type[0] != WeaponType::Ranged)
+    if (!playerWeapon.exists[0] ||
+        playerWeapon.type[0] != WeaponType::Ranged)
         return false;
 
     if (isRangedAttackTargetTooClose(

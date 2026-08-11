@@ -4,6 +4,7 @@
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
+#include "LoadRangedCollision.h"
 #include "LoadHealthbar.h"
 #include "LoadManabar.h"
 #include "../gameplay/statistics/SetHp.h"
@@ -12,6 +13,7 @@
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../structs/core/constants/NpcPetConstants.h"
 #include "../../structs/core/constants/IndexConstants.h"
+#include "../../structs/equipment/WeaponType.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/timers/RandomTimer.h"
 #include <tmxlite/TileLayer.hpp>
@@ -27,6 +29,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     {
         npc.active[i] = false;
         npc.initialized[i] = false;
+        for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
+            npc.rangedCollision.anchor.exists[i][f] = false;
     }
 
     uint32_t npcCount = 0;
@@ -70,6 +74,12 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         npc.ai.targetVisible[n] = false;
 
         loadEquipment(npc.equipment, n, tileset, idx, props);
+        if (npc.equipment.weapon.type[n] == WeaponType::Ranged)
+            loadRangedCollision(
+                npc.rangedCollision,
+                npc.base,
+                n,
+                npc.equipment.weapon.base.animation.frameCount[n]);
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
         loadManabar(npc.manabar, n, tileset, idx, props);
 

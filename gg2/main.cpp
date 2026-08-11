@@ -34,6 +34,7 @@
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
+#include "equipment/CalculateRangedCollisionSystem.h"
 #include "attacks/AutoAttackTimerSystem.h"
 #include "attacks/NpcAutoAttackSystem.h"
 #include "attacks/AbilityCooldownTimerSystem.h"
@@ -146,6 +147,7 @@ int main()
         rotationAnimationSystem(*ctx);
         rotateEquipmentSystem(*ctx);
         moveEquipmentSystem(*ctx);
+        calculateRangedCollisionSystem(*ctx);
         rangedNpcAmmoAnchorCollisionSystem(*ctx);
         moveEquipmentSystem(*ctx);
         npcAutoAttackSystem(*ctx);

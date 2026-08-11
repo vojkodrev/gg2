@@ -6,6 +6,7 @@ struct DebugState
     bool showNavigation = false;
     bool showCollision = false;
     bool showWeaponCollision = false;
+    bool showRangedWeaponCollision = false;
     bool showAmmoCollision = false;
     bool showEffectCollision = false;
     bool showRangedDeadZone = false;
@@ -18,4 +19,5 @@ struct DebugState
     bool ctrlAlt4Armed = false;
     bool ctrlAlt5Armed = false;
     bool ctrlAlt6Armed = false;
+    bool ctrlAlt7Armed = false;
 };

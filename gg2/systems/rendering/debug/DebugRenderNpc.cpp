@@ -2,6 +2,8 @@
 #include "DebugRenderEntityBase.h"
 #include "DebugRenderEquipment.h"
 #include "RenderDebugLine.h"
+#include "RenderColBox.h"
+#include "RenderColCenter.h"
 
 void debugRenderNpc(const Context &ctx)
 {
@@ -25,6 +27,33 @@ void debugRenderNpc(const Context &ctx)
                 SDL_Color{0, 255, 0, 255});
 
         debugRenderEquipment(ctx, ctx.data.npc.equipment, i);
+
+        const int weaponFrameIndex =
+            ctx.data.npc.equipment.weapon.base.animation.frameIndex[i];
+        const auto &rangedCollision = ctx.data.npc.rangedCollision;
+        const auto &rangedCollisionAnchor = rangedCollision.anchor;
+        if (
+            ctx.data.debug.showRangedWeaponCollision &&
+            rangedCollisionAnchor.exists[i][weaponFrameIndex])
+        {
+            const SDL_FRect collision = {
+                ctx.data.npc.base.position.x[i] +
+                    rangedCollisionAnchor.offX[i][weaponFrameIndex],
+                ctx.data.npc.base.position.y[i] +
+                    rangedCollisionAnchor.offY[i][weaponFrameIndex],
+                rangedCollisionAnchor.w[i][weaponFrameIndex],
+                rangedCollisionAnchor.h[i][weaponFrameIndex]
+            };
+            SDL_SetRenderDrawColor(renderer, 0, 255, 128, 255);
+            renderColBox(ctx, collision, false);
+
+            const SDL_FPoint center = {
+                collision.x + rangedCollision.center.x[i][weaponFrameIndex],
+                collision.y + rangedCollision.center.y[i][weaponFrameIndex]
+            };
+            SDL_SetRenderDrawColor(renderer, 255, 64, 64, 255);
+            renderColCenter(ctx, center, 4.0f);
+        }
 
         if (showNavigation)
         {

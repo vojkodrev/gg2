@@ -12,13 +12,18 @@ inline void fillEquipmentRenderBuffer(
     uint32_t entityIndex,
     uint32_t groupId)
 {
+    if (!equipment.weapon.exists[entityIndex])
+        return;
+
     fillEntityBaseRenderBuffer(
         rb,
         equipment.weapon.base,
         entityIndex,
         groupId,
         WEAPON_Z_INDEX);
-    if (equipment.weapon.type[entityIndex] == WeaponType::Ranged && equipment.weapon.showAmmo[entityIndex])
+    if (equipment.ammo.exists[entityIndex] &&
+        equipment.weapon.type[entityIndex] == WeaponType::Ranged &&
+        equipment.weapon.ranged.showAmmo[entityIndex])
     {
         fillEntityBaseRenderBuffer(
             rb,

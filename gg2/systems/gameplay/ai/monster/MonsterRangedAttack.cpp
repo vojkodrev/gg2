@@ -20,7 +20,8 @@ void monsterRangedAttack(Context &ctx, uint32_t n)
         return;
 
     auto &npc = ctx.data.npc;
-    if (npc.equipment.weapon.type[n] != WeaponType::Ranged)
+    if (!npc.equipment.weapon.exists[n] ||
+        npc.equipment.weapon.type[n] != WeaponType::Ranged)
         return;
 
     if (!retreatRangedMonster(

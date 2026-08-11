@@ -29,19 +29,22 @@ inline void moveEntityColCenterToward(
     base.position.y[index] += moveY;
 }
 
-template<int NBase, int NTarget>
+template<int NBase, int NTargetItems, int NTargetSlots>
 inline void moveEntityColCenterToward(
     Context &ctx,
     EntityBase<NBase> &base,
     uint32_t baseIndex,
-    const AnchorPoint<NTarget> &target,
+    const AnchorPoint<NTargetItems, NTargetSlots> &target,
     uint32_t targetIndex,
+    int targetSlot,
     float speed)
 {
     moveEntityColCenterToward(
         ctx,
         base,
         baseIndex,
-        SDL_FPoint{target.x[targetIndex], target.y[targetIndex]},
+        SDL_FPoint{
+            target.x[targetIndex][targetSlot],
+            target.y[targetIndex][targetSlot]},
         speed);
 }

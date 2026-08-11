@@ -1,5 +1,9 @@
 #include "FollowAStarPathTo.h"
 #include "../../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
+#include "../../../../structs/equipment/WeaponType.h"
+#include "../../../../structs/core/constants/IndexConstants.h"
+#include "../../../../structs/npc/NPCAiType.h"
+#include "../../../../utils/collision/EntityColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "HasReachedRect.h"
@@ -18,9 +22,29 @@ bool followAStarPathTo(
 {
     auto &ai = ctx.data.npc.ai;
     auto &npc = ctx.data.npc;
+    const bool isPlayerBlocking =
+        ai.type[n] == NPCAiType::Pet && targetNpcIndex != INVALID_ID;
 
-    const SDL_FRect moverBox =
-        getRangedAmmoAnchorNpcColAABB(ctx, n);
+    const auto &weapon = npc.equipment.weapon;
+    SDL_FRect moverBox;
+    SDL_FPoint moverCenter;
+    float moverBoxBuffer = 0.0f;
+    if (weapon.exists[n] && weapon.type[n] == WeaponType::Ranged)
+    {
+        const int weaponFrameIndex = weapon.base.animation.frameIndex[n];
+        moverBox = getRangedAmmoAnchorNpcColAABB(ctx, n);
+        moverBoxBuffer = NPC_RANGED_PATH_MOVER_BOX_BUFFER;
+        const auto &center = npc.rangedCollision.center;
+        moverCenter = {
+            moverBox.x + center.x[n][weaponFrameIndex],
+            moverBox.y + center.y[n][weaponFrameIndex]
+        };
+    }
+    else
+    {
+        moverBox = entityColAABB(npc.base, n);
+        moverCenter = entityColCenter(moverBox);
+    }
 
     if (SDL_HasRectIntersectionFloat(&moverBox, &targetCol))
     {
@@ -36,7 +60,15 @@ bool followAStarPathTo(
     {
         ai.repathTimer[n] = NPC_REPATH_TIME;
         ai.pathTargetCheckTimer[n] = NPC_PATH_TARGET_CHECK_TIME;
-        requestAStarPath(ctx, n, moverBox, targetCol, targetNpcIndex);
+        requestAStarPath(
+            ctx,
+            n,
+            moverBox,
+            moverCenter,
+            moverBoxBuffer,
+            targetCol,
+            targetNpcIndex,
+            isPlayerBlocking);
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {

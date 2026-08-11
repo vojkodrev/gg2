@@ -37,6 +37,6 @@ inline bool tryExecuteRangedAutoAttack(
         return false;
 
     autoAttack.attackTimer[parentId] = attackDelay;
-    weapon.showAmmo[parentId] = false;
+    weapon.ranged.showAmmo[parentId] = false;
     return true;
 }

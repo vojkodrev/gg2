@@ -35,8 +35,10 @@ void renderSystem(const Context &ctx)
             rb.dst.w[i],
             rb.dst.h[i]
         };
-        SDL_FPoint rotationCenter = {rb.rotationCenter.point.x[i], rb.rotationCenter.point.y[i]};
-        SDL_FPoint *center = rb.rotationCenter.hasCenter[i] ? &rotationCenter : nullptr;
+        SDL_FPoint rotationCenter = {
+            rb.rotationCenter.point.x[i][0],
+            rb.rotationCenter.point.y[i][0]};
+        SDL_FPoint *center = rb.rotationCenter.exists[i] ? &rotationCenter : nullptr;
         SDL_FlipMode flip = rb.flipX[i] ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
         SDL_SetTextureColorModFloat(ctx.texture, rb.tint.r[i], rb.tint.g[i], rb.tint.b[i]);
         SDL_SetTextureAlphaModFloat(ctx.texture, rb.tint.a[i]);

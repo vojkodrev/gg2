@@ -11,11 +11,11 @@ inline void destroyProjectile(Context &ctx, uint32_t effectIndex)
     switch (ctx.data.effect.parent.type[effectIndex])
     {
         case EntityType::Player:
-            ctx.data.player.equipment.weapon.showAmmo[parentId] = true;
+            ctx.data.player.equipment.weapon.ranged.showAmmo[parentId] = true;
             break;
         case EntityType::NPC:
             if (ctx.data.npc.active[parentId])
-                ctx.data.npc.equipment.weapon.showAmmo[parentId] = true;
+                ctx.data.npc.equipment.weapon.ranged.showAmmo[parentId] = true;
             break;
         default:
             break;
