@@ -1,5 +1,5 @@
 #include "NpcAutoAttackSystem.h"
-#include "ApplyAttackDamage.h"
+#include "../damage/ApplyAttackDamage.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../structs/entity/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"

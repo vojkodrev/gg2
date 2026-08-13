@@ -1,5 +1,5 @@
 #include "PlayerSerpentStingAttackSystem.h"
-#include "CanPlayerRangedAttack.h"
+#include "../ranged/CanPlayerRangedAttack.h"
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"

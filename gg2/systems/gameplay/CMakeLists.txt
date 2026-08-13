@@ -20,18 +20,18 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     equipment/CalculateRangedCollisionSystem.cpp
-    attacks/AutoAttackTimerSystem.cpp
-    attacks/NpcAutoAttackSystem.cpp
-    attacks/CanPlayerRangedAttack.cpp
-    attacks/AbilityCooldownTimerSystem.cpp
-    attacks/ConcussiveShotDebuffSystem.cpp
-    attacks/GlobalCooldownTimerSystem.cpp
-    attacks/PlayerConcussiveShotAttackSystem.cpp
-    attacks/PlayerPetAttackSystem.cpp
-    attacks/PlayerSerpentStingAttackSystem.cpp
-    attacks/SerpentStingDebuffSystem.cpp
-    attacks/TogglePlayerAutoAttackSystem.cpp
-    attacks/PlayerRangedAutoAttackSystem.cpp
+    attacks/timers/AutoAttackTimerSystem.cpp
+    attacks/autoAttack/NpcAutoAttackSystem.cpp
+    attacks/ranged/CanPlayerRangedAttack.cpp
+    attacks/timers/AbilityCooldownTimerSystem.cpp
+    attacks/concussiveShot/ConcussiveShotDebuffSystem.cpp
+    attacks/timers/GlobalCooldownTimerSystem.cpp
+    attacks/concussiveShot/PlayerConcussiveShotAttackSystem.cpp
+    attacks/autoAttack/PlayerPetAttackSystem.cpp
+    attacks/serpentSting/PlayerSerpentStingAttackSystem.cpp
+    attacks/serpentSting/SerpentStingDebuffSystem.cpp
+    attacks/autoAttack/TogglePlayerAutoAttackSystem.cpp
+    attacks/autoAttack/PlayerRangedAutoAttackSystem.cpp
     effects/MoveEffectSystem.cpp
     effects/EffectTimerSystem.cpp
     effects/DestroyEffectSystem.cpp
@@ -64,8 +64,8 @@ add_library(systems_gameplay
     ai/pet/PetAttack.cpp
     ai/pet/ExecutePetAttack.cpp
     ai/pet/PetTaunt.cpp
-    ai/HasReachedRect.cpp
-    ai/AreColBoxesNear.cpp
+    ../../utils/collision/HasReachedRect.cpp
+    ../../utils/collision/AreColBoxesNear.cpp
     ai/MoveColCenterToward.cpp
     ai/astar/pool/AStarAlloc.cpp
     ai/astar/pool/AStarFree.cpp

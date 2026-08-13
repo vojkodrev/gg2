@@ -6,7 +6,7 @@
 #include "../../../../utils/collision/EntityColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
-#include "HasReachedRect.h"
+#include "../../../../utils/collision/HasReachedRect.h"
 #include "MoveColCenterToward.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../utils/collision/EntityColCenter.h"

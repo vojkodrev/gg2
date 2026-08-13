@@ -1,6 +1,6 @@
 #include "PetAttack.h"
 #include "../monster/RefreshNpcAttackedTimer.h"
-#include "AreColBoxesNear.h"
+#include "../../../../utils/collision/AreColBoxesNear.h"
 #include "ExecutePetAttack.h"
 #include "GetEntityColAABB.h"
 #include "NpcMonsterConstants.h"
