@@ -7,11 +7,24 @@
 
 void debugRenderNpc(const Context &ctx)
 {
+    const auto &debug = ctx.data.debug;
+    if (
+        !debug.showCollision &&
+        !debug.showNavigation &&
+        !debug.showWeaponCollision &&
+        !debug.showRangedWeaponCollision &&
+        !debug.showAmmoCollision)
+        return;
+
     SDL_Renderer *renderer = ctx.renderer;
     const SDL_FPoint off = ctx.data.camera.offset;
     const SDL_FRect screen = ctx.data.camera.screen;
-    const bool showCollision = ctx.data.debug.showCollision;
-    const bool showNavigation = ctx.data.debug.showNavigation;
+    const bool showCollision = debug.showCollision;
+    const bool showNavigation = debug.showNavigation;
+    const bool showEquipmentCollision =
+        debug.showWeaponCollision || debug.showAmmoCollision;
+    const bool showRangedWeaponCollision =
+        debug.showRangedWeaponCollision;
 
     for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
@@ -26,33 +39,35 @@ void debugRenderNpc(const Context &ctx)
                 SDL_Color{255, 0, 0, 255},
                 SDL_Color{0, 255, 0, 255});
 
-        debugRenderEquipment(ctx, ctx.data.npc.equipment, i);
+        if (showEquipmentCollision)
+            debugRenderEquipment(ctx, ctx.data.npc.equipment, i);
 
-        const int weaponFrameIndex =
-            ctx.data.npc.equipment.weapon.base.animation.frameIndex[i];
-        const auto &rangedCollision = ctx.data.npc.rangedCollision;
-        const auto &rangedCollisionAnchor = rangedCollision.anchor;
-        if (
-            ctx.data.debug.showRangedWeaponCollision &&
-            rangedCollisionAnchor.exists[i][weaponFrameIndex])
+        if (showRangedWeaponCollision)
         {
-            const SDL_FRect collision = {
-                ctx.data.npc.base.position.x[i] +
-                    rangedCollisionAnchor.offX[i][weaponFrameIndex],
-                ctx.data.npc.base.position.y[i] +
-                    rangedCollisionAnchor.offY[i][weaponFrameIndex],
-                rangedCollisionAnchor.w[i][weaponFrameIndex],
-                rangedCollisionAnchor.h[i][weaponFrameIndex]
-            };
-            SDL_SetRenderDrawColor(renderer, 0, 255, 128, 255);
-            renderColBox(ctx, collision, false);
+            const int weaponFrameIndex =
+                ctx.data.npc.equipment.weapon.base.animation.frameIndex[i];
+            const auto &rangedCollision = ctx.data.npc.rangedCollision;
+            const auto &rangedCollisionAnchor = rangedCollision.anchor;
+            if (rangedCollisionAnchor.exists[i][weaponFrameIndex])
+            {
+                const SDL_FRect collision = {
+                    ctx.data.npc.base.position.x[i] +
+                        rangedCollisionAnchor.offX[i][weaponFrameIndex],
+                    ctx.data.npc.base.position.y[i] +
+                        rangedCollisionAnchor.offY[i][weaponFrameIndex],
+                    rangedCollisionAnchor.w[i][weaponFrameIndex],
+                    rangedCollisionAnchor.h[i][weaponFrameIndex]
+                };
+                SDL_SetRenderDrawColor(renderer, 0, 255, 128, 255);
+                renderColBox(ctx, collision, false);
 
-            const SDL_FPoint center = {
-                collision.x + rangedCollision.center.x[i][weaponFrameIndex],
-                collision.y + rangedCollision.center.y[i][weaponFrameIndex]
-            };
-            SDL_SetRenderDrawColor(renderer, 255, 64, 64, 255);
-            renderColCenter(ctx, center, 4.0f);
+                const SDL_FPoint center = {
+                    collision.x + rangedCollision.center.x[i][weaponFrameIndex],
+                    collision.y + rangedCollision.center.y[i][weaponFrameIndex]
+                };
+                SDL_SetRenderDrawColor(renderer, 255, 64, 64, 255);
+                renderColCenter(ctx, center, 4.0f);
+            }
         }
 
         if (showNavigation)
