@@ -56,6 +56,16 @@ void calculateRangedCollisionSystem(Context &ctx)
                 &rangedCollisionWorld);
         }
 
+        const float leftExtent =
+            npcCollisionCenterWorld.x - rangedCollisionWorld.x;
+        const float rightExtent =
+            rangedCollisionWorld.x + rangedCollisionWorld.w -
+            npcCollisionCenterWorld.x;
+        const float horizontalExtent = std::max(leftExtent, rightExtent);
+        rangedCollisionWorld.x =
+            npcCollisionCenterWorld.x - horizontalExtent;
+        rangedCollisionWorld.w = horizontalExtent * 2.0f;
+
         anchor.offX[i][frameIndex] =
             rangedCollisionWorld.x - npc.base.position.x[i];
         anchor.offY[i][frameIndex] =
