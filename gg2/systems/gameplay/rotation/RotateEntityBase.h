@@ -1,6 +1,6 @@
 #pragma once
 #include "IsRotationAnimationRunning.h"
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityBase.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/rect/RotateRectCenter.h"
 #include <cstdint>

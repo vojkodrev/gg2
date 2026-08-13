@@ -2,7 +2,7 @@
 #include "ClearDebugFpsEffects.h"
 #include "FormatDebugFrameTime.h"
 #include "FormatDebugTime.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/DebugConstants.h"
 #include "../../../structs/core/constants/FontConstants.h"
 #include "../../../structs/core/constants/IndexConstants.h"

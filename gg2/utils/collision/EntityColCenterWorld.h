@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../structs/core/EntityPosition.h"
+#include "../../structs/entity/EntityPosition.h"
 #include "EntityColCenter.h"
 
 inline SDL_FPoint entityColCenterWorld(const SDL_FRect &r, float x, float y)

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../../structs/core/Groups.h"
+#include "../../structs/groups/Groups.h"
 #include "../pool/PoolFree.h"
 
 template<uint32_t TGroupCapacity>

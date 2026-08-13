@@ -6,7 +6,7 @@
 #include "ResolveSerpentStingProjectile.h"
 #include "../../ai/monster/RefreshNpcAttackedTimer.h"
 #include "../../projectile/DestroyProjectile.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../structs/npc/NPCAiType.h"
 #include <SDL3/SDL.h>

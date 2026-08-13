@@ -1,8 +1,8 @@
 #pragma once
 #include "Context.h"
-#include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/damage/ApplyAttackDamage.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 #include <cstdint>

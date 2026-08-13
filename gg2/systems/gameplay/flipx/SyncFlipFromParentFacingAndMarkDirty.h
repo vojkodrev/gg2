@@ -1,6 +1,6 @@
 #pragma once
 #include "SyncFlipFromParentFacing.h"
-#include "../../../structs/core/Facing.h"
+#include "../../../structs/facing/Facing.h"
 #include <cstdint>
 
 template<int N>

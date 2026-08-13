@@ -1,6 +1,6 @@
 #include "MoveColCenterToward.h"
 #include "NpcConstants.h"
-#include "../SetFacingTowardX.h"
+#include "../facing/SetFacingTowardX.h"
 #include "../../../utils/entity/MoveEntityColCenterToward.h"
 
 void moveNpcColCenterToward(Context &ctx, uint32_t n, SDL_FPoint target, float speed)

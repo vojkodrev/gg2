@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../structs/core/EntityBase.h"
+#include "../../structs/entity/EntityBase.h"
 
 template<int N>
 inline SDL_FRect entityAnchorAABB(const EntityBase<N> &base, uint32_t i, float buffer = 0.0f)

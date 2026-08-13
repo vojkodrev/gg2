@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-#include "../../structs/core/Anchor.h"
+#include "../../structs/anchors/Anchor.h"
 
 inline SDL_FPoint entityColCenter(const SDL_FRect &r)
 {

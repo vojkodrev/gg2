@@ -7,8 +7,8 @@
 #include "SetMonsterFacingTowardTarget.h"
 #include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../structs/equipment/WeaponType.h"
-#include "../../attacks/TryExecuteConcussiveShot.h"
-#include "../../attacks/TryExecuteRangedAutoAttack.h"
+#include "../../attacks/concussiveShot/TryExecuteConcussiveShot.h"
+#include "../../attacks/autoAttack/TryExecuteRangedAutoAttack.h"
 #include "../SetNpcAiStatePursueTarget.h"
 
 void monsterRangedAttack(Context &ctx, uint32_t n)

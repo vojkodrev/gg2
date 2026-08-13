@@ -1,5 +1,5 @@
 #pragma once
-#include "../../structs/core/EntityPosition.h"
+#include "../../structs/entity/EntityPosition.h"
 #include <SDL3/SDL.h>
 
 template<int N>

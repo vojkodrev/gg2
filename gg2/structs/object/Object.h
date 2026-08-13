@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "../core/EntityBase.h"
+#include "../entity/EntityBase.h"
 #include "ObjectConstants.h"
 
 struct Object

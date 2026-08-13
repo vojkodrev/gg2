@@ -1,7 +1,7 @@
 #pragma once
 #include "spatialhash/SpatialHash.h"
 #include "CollisionResult.h"
-#include "SpatialHashQueryCandidates.h"
+#include "../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include <shared_mutex>
 
 struct CollisionContext

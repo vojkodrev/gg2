@@ -1,7 +1,7 @@
 #pragma once
 #include "MirrorEntityAnchorsAndCollisionOffsets.h"
 #include "SyncFlipFromFacing.h"
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityBase.h"
 #include <cstdint>
 
 template<int N>

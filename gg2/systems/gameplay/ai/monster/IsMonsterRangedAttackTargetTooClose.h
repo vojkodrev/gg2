@@ -2,7 +2,7 @@
 #include "Context.h"
 #include "EntityType.h"
 #include "NpcMonsterConstants.h"
-#include "../../attacks/IsRangedAttackTargetTooClose.h"
+#include "../../attacks/ranged/IsRangedAttackTargetTooClose.h"
 #include <cstdint>
 
 inline bool isMonsterRangedAttackTargetTooClose(

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/Groups.h"
+#include "../../../structs/groups/Groups.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/effect/Effect.h"
 #include "../../../utils/groups/GroupRetain.h"

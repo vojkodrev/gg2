@@ -1,7 +1,7 @@
 #include "SerpentStingDebuffSystem.h"
-#include "ApplyAttackDamage.h"
-#include "debuff/RemoveDebuff.h"
-#include "aggroTable/AddToAggroTableValue.h"
+#include "../damage/ApplyAttackDamage.h"
+#include "../debuff/RemoveDebuff.h"
+#include "../aggroTable/AddToAggroTableValue.h"
 #include "../../../structs/core/constants/SerpentStingConstants.h"
 #include <algorithm>
 

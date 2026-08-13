@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/ai/AStarContext.h"
+#include "../../../../../structs/astar/AStarContext.h"
 #include "../../../../../utils/grid/DecodeGridIndex.h"
 #include <SDL3/SDL.h>
 

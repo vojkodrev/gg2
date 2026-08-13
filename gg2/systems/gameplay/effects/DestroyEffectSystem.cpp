@@ -1,5 +1,5 @@
 #include "DestroyEffectSystem.h"
-#include "../../../structs/core/AnimationState.h"
+#include "../../../structs/animation/AnimationState.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "EffectFree.h"
 #include <cstdint>

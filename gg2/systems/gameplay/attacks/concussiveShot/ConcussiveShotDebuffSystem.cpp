@@ -1,5 +1,5 @@
 #include "ConcussiveShotDebuffSystem.h"
-#include "debuff/RemoveDebuff.h"
+#include "../debuff/RemoveDebuff.h"
 
 void concussiveShotDebuffSystem(Context &ctx)
 {

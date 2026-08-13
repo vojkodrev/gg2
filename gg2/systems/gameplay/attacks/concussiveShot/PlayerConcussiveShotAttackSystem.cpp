@@ -1,5 +1,5 @@
 #include "PlayerConcussiveShotAttackSystem.h"
-#include "CanPlayerRangedAttack.h"
+#include "../ranged/CanPlayerRangedAttack.h"
 #include "TryExecuteConcussiveShot.h"
 
 void playerConcussiveShotAttackSystem(Context &ctx)

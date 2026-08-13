@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL3/SDL.h>
 #include "SpatialHash.h"
-#include "../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include "../../../structs/core/constants/SpatialHashConstants.h"
 #include "SpatialHashQueryCell.h"
 

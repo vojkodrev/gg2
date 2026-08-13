@@ -1,5 +1,5 @@
 #include "CleanupSystem.h"
-#include "../../../structs/core/AnimationState.h"
+#include "../../../structs/animation/AnimationState.h"
 #include <cstring>
 
 void cleanupSystem(Context &ctx)

@@ -6,7 +6,7 @@
 #include "EntityColCenterWorld.h"
 #include "GetEntityColAABB.h"
 #include "spatialhash/SpatialHashQuery.h"
-#include "../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/equipment/Equipment.h"
 #include "../../../structs/equipment/WeaponType.h"

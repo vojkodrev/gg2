@@ -1,11 +1,11 @@
 #pragma once
 #include "CalculateAttackDamage.h"
-#include "../effects/CreateEntityTextEffect.h"
+#include "../../ui/text/CreateEntityTextEffect.h"
 #include "../statistics/SetHpDamage.h"
 #include "../../../structs/core/Context.h"
-#include "../../../structs/core/EntityType.h"
-#include "../../../structs/core/Group.h"
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityType.h"
+#include "../../../structs/groups/Group.h"
+#include "../../../structs/entity/EntityBase.h"
 #include "../../../structs/statistics/Statistics.h"
 #include <string>
 

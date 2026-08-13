@@ -1,7 +1,7 @@
 #include "AStarAlloc.h"
 #include "AStarConstants.h"
 #include "../../../../utils/pool/PoolAlloc.h"
-#include "../../../../structs/ai/AStarStatus.h"
+#include "../../../../structs/astar/AStarStatus.h"
 
 int astarAlloc(AStarPool& pool)
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "../core/Anchor.h"
+#include "../anchors/Anchor.h"
 #include "../core/constants/AnimationConstants.h"
 
 template<int N>

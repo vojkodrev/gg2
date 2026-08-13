@@ -3,7 +3,7 @@
 #include "EntityColAABB.h"
 #include "EntityColCenter.h"
 #include "IsMonsterRetreatPointClear.h"
-#include "../../attacks/IsRangedTargetVisible.h"
+#include "../../attacks/ranged/IsRangedTargetVisible.h"
 #include "../../../../structs/core/constants/AttackConstants.h"
 #include "../../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../../utils/math/Dist.h"

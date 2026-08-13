@@ -2,7 +2,7 @@
 #include "LoadEntityBase.h"
 #include "properties/FindTileByIcon.h"
 #include "../gameplay/ui/text/CreateTextEffect.h"
-#include "../../structs/core/EntityType.h"
+#include "../../structs/entity/EntityType.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
 #include "../../structs/core/constants/TintConstants.h"

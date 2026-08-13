@@ -4,7 +4,7 @@
 #include "ColIdIndex.h"
 #include "ColIdType.h"
 #include "EntityColAABB.h"
-#include "../../structs/core/EntityType.h"
+#include "../../structs/entity/EntityType.h"
 
 inline SDL_FRect getEntityColAABB(Context &ctx, uint32_t id)
 {

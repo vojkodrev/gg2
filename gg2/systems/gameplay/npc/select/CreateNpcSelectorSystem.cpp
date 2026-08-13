@@ -2,7 +2,7 @@
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
-#include "../../../../structs/core/EntityType.h"
+#include "../../../../structs/entity/EntityType.h"
 #include "../../../../utils/entity/CopyEntityBaseSlot.h"
 #include "../../effects/EffectAlloc.h"
 #include "PlaceNpcSelector.h"

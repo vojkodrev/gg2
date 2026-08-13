@@ -1,7 +1,7 @@
 #include "DestroyNpcSystem.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/NpcConstants.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../effects/EffectFree.h"
 #include "select/SetSelectedNpc.h"

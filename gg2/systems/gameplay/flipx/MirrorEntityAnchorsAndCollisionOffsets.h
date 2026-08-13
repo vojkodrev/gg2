@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../structs/core/EntityBase.h"
+#include "../../../structs/entity/EntityBase.h"
 #include "MirrorAnchorOffsetX.h"
 #include <cstdint>
 

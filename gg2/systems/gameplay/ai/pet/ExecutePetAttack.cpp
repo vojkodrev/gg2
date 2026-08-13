@@ -4,7 +4,7 @@
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../utils/entity/CopyEntityBaseSlot.h"
-#include "../../attacks/ApplyAttackDamage.h"
+#include "../../attacks/damage/ApplyAttackDamage.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../effects/EffectAlloc.h"
 

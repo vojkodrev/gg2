@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../../../structs/ai/AStarContext.h"
+#include "../../../../../structs/astar/AStarContext.h"
 #include "../../../../../utils/rect/CenteredRect.h"
 #include "../node/AStarDecode.h"
 #include <SDL3/SDL.h>

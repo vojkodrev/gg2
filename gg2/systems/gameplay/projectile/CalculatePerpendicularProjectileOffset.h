@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/equipment/Weapon.h"
 #include "../../../utils/collision/EntityColCenter.h"
 #include "../../../utils/collision/EntityColCenterWorld.h"

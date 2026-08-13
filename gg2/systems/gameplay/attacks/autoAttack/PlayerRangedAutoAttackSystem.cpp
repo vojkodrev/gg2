@@ -1,5 +1,5 @@
 #include "PlayerRangedAutoAttackSystem.h"
-#include "CanPlayerRangedAttack.h"
+#include "../ranged/CanPlayerRangedAttack.h"
 #include "TryExecuteRangedAutoAttack.h"
 #include "../../../structs/core/constants/PlayerConstants.h"
 

@@ -1,6 +1,6 @@
 #include "RangedNpcAmmoAnchorCollisionSystem.h"
 #include "../../../utils/collision/GetRangedAmmoAnchorNpcColAABB.h"
-#include "../../../structs/collision/SpatialHashQueryCandidates.h"
+#include "../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../utils/collision/ColIdIndex.h"
 #include "../../../utils/collision/ColIdType.h"

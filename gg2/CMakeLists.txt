@@ -11,8 +11,15 @@ find_package(SDL3_image REQUIRED CONFIG)
 add_library(gg2_common INTERFACE)
 target_link_libraries(gg2_common INTERFACE SDL3::SDL3 SDL3_image::SDL3_image)
 target_include_directories(gg2_common INTERFACE
+    ${CMAKE_SOURCE_DIR}/gg2/structs/anchors
+    ${CMAKE_SOURCE_DIR}/gg2/structs/animation
+    ${CMAKE_SOURCE_DIR}/gg2/structs/astar
     ${CMAKE_SOURCE_DIR}/gg2/structs/core
     ${CMAKE_SOURCE_DIR}/gg2/structs/core/constants
+    ${CMAKE_SOURCE_DIR}/gg2/structs/entity
+    ${CMAKE_SOURCE_DIR}/gg2/structs/facing
+    ${CMAKE_SOURCE_DIR}/gg2/structs/groups
+    ${CMAKE_SOURCE_DIR}/gg2/structs/rotation
     ${CMAKE_SOURCE_DIR}/gg2/structs/tilemap
     ${CMAKE_SOURCE_DIR}/gg2/structs/npc
     ${CMAKE_SOURCE_DIR}/gg2/structs/object

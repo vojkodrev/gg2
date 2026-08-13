@@ -5,7 +5,7 @@
 #include "SetNpcAiStateIdle.h"
 #include "SetNpcAiStateAttack.h"
 #include "astar/FollowAStarPathTo.h"
-#include "../../../structs/core/EntityType.h"
+#include "../../../structs/entity/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
 
 void petPursueTarget(uint32_t n, Context &ctx)

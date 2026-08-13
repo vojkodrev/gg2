@@ -1,6 +1,6 @@
 #include "RequestAStarPath.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
-#include "../../../../structs/ai/AStarStatus.h"
+#include "../../../../structs/astar/AStarStatus.h"
 #include "../../../../structs/npc/NPCPathStatus.h"
 #include "pool/AStarAlloc.h"
 #include "pool/AStarFree.h"

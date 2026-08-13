@@ -1,6 +1,6 @@
 #pragma once
-#include "../../structs/core/CenteredAnchor.h"
-#include "../../structs/core/EntityBase.h"
+#include "../../structs/anchors/CenteredAnchor.h"
+#include "../../structs/entity/EntityBase.h"
 #include <cstdint>
 
 template<int N>

@@ -2,8 +2,8 @@
 #include <SDL3/SDL.h>
 #include <cstdint>
 #include <tmxlite/Tileset.hpp>
-#include "../../structs/core/Animation.h"
-#include "../../structs/core/AnimationStop.h"
+#include "../../structs/animation/Animation.h"
+#include "../../structs/animation/AnimationStop.h"
 #include "AnimationConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "GetAnchor.h"
