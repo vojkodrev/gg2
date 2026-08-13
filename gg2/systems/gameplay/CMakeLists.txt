@@ -1,8 +1,8 @@
 add_library(systems_gameplay
     cleanup/CleanupSystem.cpp
-    PlayerMovementSystem.cpp
-    PlayerFacingSystem.cpp
-    GeneralTimerSystem.cpp
+    player/PlayerMovementSystem.cpp
+    facing/PlayerFacingSystem.cpp
+    timers/GeneralTimerSystem.cpp
     scale/ScalePlayerLocationSystem.cpp
     scale/ScaleNpcLocationSystem.cpp
     scale/ScaleObjectLocationSystem.cpp

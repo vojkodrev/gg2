@@ -1,6 +1,6 @@
 #pragma once
 #include "CalculateAttackDamage.h"
-#include "../effects/CreateEntityTextEffect.h"
+#include "../../ui/text/CreateEntityTextEffect.h"
 #include "../statistics/SetHpDamage.h"
 #include "../../../structs/core/Context.h"
 #include "../../../structs/entity/EntityType.h"

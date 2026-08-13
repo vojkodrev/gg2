@@ -1,9 +1,9 @@
 #include "PlayerFacingSystem.h"
 #include "SetFacingTowardX.h"
-#include "../../structs/core/constants/IndexConstants.h"
-#include "../../utils/collision/EntityColAABB.h"
-#include "../../utils/collision/EntityColCenter.h"
-#include "../../utils/rect/EntityPositionCenter.h"
+#include "../../../structs/core/constants/IndexConstants.h"
+#include "../../../utils/collision/EntityColAABB.h"
+#include "../../../utils/collision/EntityColCenter.h"
+#include "../../../utils/rect/EntityPositionCenter.h"
 
 void playerFacingSystem(Context &ctx)
 {

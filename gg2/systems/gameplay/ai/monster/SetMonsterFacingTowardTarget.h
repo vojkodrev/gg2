@@ -2,7 +2,7 @@
 #include "Context.h"
 #include "EntityColAABB.h"
 #include "EntityColCenter.h"
-#include "../../SetFacingTowardX.h"
+#include "../../facing/SetFacingTowardX.h"
 #include <cstdint>
 
 inline void setMonsterFacingTowardTarget(
