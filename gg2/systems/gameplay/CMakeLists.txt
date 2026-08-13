@@ -6,7 +6,7 @@ add_library(systems_gameplay
     scale/ScalePlayerLocationSystem.cpp
     scale/ScaleNpcLocationSystem.cpp
     scale/ScaleObjectLocationSystem.cpp
-    scale/equipment/ScaleEquipmentLocationSystem.cpp
+    scale/ScaleEquipmentLocationSystem.cpp
     depth/PlayerDepthSystem.cpp
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
@@ -101,7 +101,7 @@ target_include_directories(systems_gameplay PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/camera
     ${CMAKE_CURRENT_SOURCE_DIR}/animation
     ${CMAKE_CURRENT_SOURCE_DIR}/rotation
-    ${CMAKE_CURRENT_SOURCE_DIR}/scale/equipment
+    ${CMAKE_CURRENT_SOURCE_DIR}/scale
     ${CMAKE_CURRENT_SOURCE_DIR}/tint
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/actionbar
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/bars

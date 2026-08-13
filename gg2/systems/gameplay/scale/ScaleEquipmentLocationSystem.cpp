@@ -1,10 +1,10 @@
 #include "ScaleEquipmentLocationSystem.h"
-#include "../../rotation/ShouldClearRotationAnimationStart.h"
-#include "../../rotation/IsRotationAnimationFinished.h"
-#include "../../rotation/IsRotationAnimationRunning.h"
-#include "../../rotation/ShouldUseRotationAnimationStart.h"
-#include "../ScaleAnchorLocation.h"
-#include "../ScaleEntityBaseLocations.h"
+#include "../rotation/ShouldClearRotationAnimationStart.h"
+#include "../rotation/IsRotationAnimationFinished.h"
+#include "../rotation/IsRotationAnimationRunning.h"
+#include "../rotation/ShouldUseRotationAnimationStart.h"
+#include "ScaleAnchorLocation.h"
+#include "ScaleEntityBaseLocations.h"
 
 void scaleEquipmentLocationSystem(Context &ctx)
 {

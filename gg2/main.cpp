@@ -21,7 +21,7 @@
 #include "scale/ScalePlayerLocationSystem.h"
 #include "scale/ScaleNpcLocationSystem.h"
 #include "scale/ScaleObjectLocationSystem.h"
-#include "scale/equipment/ScaleEquipmentLocationSystem.h"
+#include "scale/ScaleEquipmentLocationSystem.h"
 #include "flipx/FlipPlayerSystem.h"
 #include "depth/PlayerDepthSystem.h"
 #include "flipx/FlipNpcSystem.h"
