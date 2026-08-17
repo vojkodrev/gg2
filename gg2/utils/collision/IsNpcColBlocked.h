@@ -1,7 +1,7 @@
 #pragma once
 #include "ColIdIndex.h"
 #include "ColIdType.h"
-#include "EntityColAABB.h"
+#include "IsEntityColBlocked.h"
 #include "../../structs/core/Context.h"
 #include <cstdint>
 
@@ -14,29 +14,40 @@ inline bool isNpcColBlocked(
     int targetNpcIndex,
     bool isPlayerBlocking)
 {
-    for (int i = 0; i < candidateCount; i++)
+    for (int candidateIndex = 0;
+        candidateIndex < candidateCount;
+        candidateIndex++)
     {
-        const uint32_t id = candidates[i];
+        const uint32_t id = candidates[candidateIndex];
         const ColType type = colIdType(id);
-        SDL_FRect obstacle;
+        const uint32_t entityIndex = colIdIndex(id);
 
         if (type == ColType::Object)
-            obstacle = entityColAABB(
-                ctx.data.object.base,
-                colIdIndex(id));
+        {
+            if (isEntityColBlocked(
+                    ctx.data.object.base,
+                    entityIndex,
+                    moverBox))
+                return true;
+        }
         else if (type == ColType::NPC &&
-            (int)colIdIndex(id) != npcIndex &&
-            (int)colIdIndex(id) != targetNpcIndex)
-            obstacle = entityColAABB(
-                ctx.data.npc.base,
-                colIdIndex(id));
+            static_cast<int>(entityIndex) != npcIndex &&
+            static_cast<int>(entityIndex) != targetNpcIndex)
+        {
+            if (isEntityColBlocked(
+                    ctx.data.npc.base,
+                    entityIndex,
+                    moverBox))
+                return true;
+        }
         else if (type == ColType::Player && isPlayerBlocking)
-            obstacle = entityColAABB(ctx.data.player.base, 0);
-        else
-            continue;
-
-        if (SDL_HasRectIntersectionFloat(&moverBox, &obstacle))
-            return true;
+        {
+            if (isEntityColBlocked(
+                    ctx.data.player.base,
+                    0,
+                    moverBox))
+                return true;
+        }
     }
 
     return false;

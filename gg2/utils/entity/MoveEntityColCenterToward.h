@@ -1,6 +1,6 @@
 #pragma once
 #include "../../structs/core/Context.h"
-#include "../collision/EntityColAABB.h"
+#include "../collision/MainEntityColAABB.h"
 #include "../collision/EntityColCenter.h"
 #include <cstdint>
 #include <cmath>
@@ -10,12 +10,11 @@ inline void moveEntityColCenterToward(
     Context &ctx,
     EntityBase<N> &base,
     uint32_t index,
+    const SDL_FPoint &colCenter,
     SDL_FPoint target,
     float speed)
 {
     const float dt = ctx.frame.dt;
-    const SDL_FRect col = entityColAABB(base, index);
-    const SDL_FPoint colCenter = entityColCenter(col);
     const float dx = target.x - colCenter.x;
     const float dy = target.y - colCenter.y;
     const float d = sqrtf(dx * dx + dy * dy);
@@ -27,6 +26,25 @@ inline void moveEntityColCenterToward(
     base.position.dirty[index] = moveX != 0.0f || moveY != 0.0f;
     base.position.x[index] += moveX;
     base.position.y[index] += moveY;
+}
+
+template<int N>
+inline void moveEntityColCenterToward(
+    Context &ctx,
+    EntityBase<N> &base,
+    uint32_t index,
+    SDL_FPoint target,
+    float speed)
+{
+    const SDL_FRect col = mainEntityColAABB(base, index);
+    const SDL_FPoint colCenter = entityColCenter(col);
+    moveEntityColCenterToward(
+        ctx,
+        base,
+        index,
+        colCenter,
+        target,
+        speed);
 }
 
 template<int NBase, int NTargetItems, int NTargetSlots>

@@ -2,17 +2,22 @@
 #include <SDL3/SDL.h>
 #include "../../structs/entity/EntityBase.h"
 
-template<int N>
-inline SDL_FRect entityAnchorAABB(const EntityBase<N> &base, uint32_t i, float buffer = 0.0f)
+template<int NEntities>
+inline SDL_FRect entityAnchorAABB(
+    const EntityBase<NEntities> &base,
+    uint32_t entityIndex,
+    float buffer = 0.0f)
 {
-    if (base.animation.frameCount[i] == 0)
+    if (base.animation.frameCount[entityIndex] == 0)
         return {0, 0, 0, 0};
 
-    int f = base.animation.frameIndex[i];
+    const int frameIndex = base.animation.frameIndex[entityIndex];
     return {
-        base.position.x[i] + base.animation.frame.anchor.offX[i][f] - buffer,
-        base.position.y[i] + base.animation.frame.anchor.offY[i][f] - buffer,
-        base.animation.frame.anchor.w[i][f] + buffer * 2,
-        base.animation.frame.anchor.h[i][f] + buffer * 2
+        base.position.x[entityIndex] +
+            base.animation.frame.anchor.offX[entityIndex][frameIndex][0] - buffer,
+        base.position.y[entityIndex] +
+            base.animation.frame.anchor.offY[entityIndex][frameIndex][0] - buffer,
+        base.animation.frame.anchor.w[entityIndex][frameIndex][0] + buffer * 2,
+        base.animation.frame.anchor.h[entityIndex][frameIndex][0] + buffer * 2
     };
 }

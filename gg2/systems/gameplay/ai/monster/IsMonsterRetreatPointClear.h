@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "IsNpcColBlocked.h"
 #include "spatialhash/SpatialHashQuery.h"
 #include "../../../../utils/collision/spatialhash/SpatialHashQueryCandidates.h"
@@ -13,7 +13,8 @@ inline bool isMonsterRetreatPointClear(
     uint32_t npcIndex,
     const SDL_FPoint &point)
 {
-    const SDL_FRect currentCol = entityColAABB(ctx.data.npc.base, npcIndex);
+    const SDL_FRect currentCol =
+        mainEntityColAABB(ctx.data.npc.base, npcIndex);
     const SDL_FRect candidateCol =
         centeredRect(point, currentCol.w, currentCol.h);
     SpatialHashQueryCandidates candidates;

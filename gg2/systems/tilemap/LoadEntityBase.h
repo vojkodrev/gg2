@@ -46,14 +46,20 @@ inline void loadEntityBase(
         entityData.position.initialH[entityIdx] = h;
         entityData.position.w[entityIdx] = entityData.position.initialW[entityIdx];
         entityData.position.h[entityIdx] = entityData.position.initialH[entityIdx];
-        entityData.animation.frame.collision.initialOffX[entityIdx][0] = colOffX;
-        entityData.animation.frame.collision.initialOffY[entityIdx][0] = colOffY;
-        entityData.animation.frame.collision.initialW[entityIdx][0] = colW;
-        entityData.animation.frame.collision.initialH[entityIdx][0] = colH;
-        entityData.animation.frame.collision.offX[entityIdx][0] = colOffX;
-        entityData.animation.frame.collision.offY[entityIdx][0] = colOffY;
-        entityData.animation.frame.collision.w[entityIdx][0] = colW * entityData.scale.value[entityIdx];
-        entityData.animation.frame.collision.h[entityIdx][0] = colH * entityData.scale.value[entityIdx];
+        for (int collisionIndex = 0;
+            collisionIndex < MAX_FRAME_COLLISIONS;
+            collisionIndex++)
+            entityData.animation.frame.collision
+                .exists[entityIdx][0][collisionIndex] = false;
+        entityData.animation.frame.collision.exists[entityIdx][0][0] = true;
+        entityData.animation.frame.collision.initialOffX[entityIdx][0][0] = colOffX;
+        entityData.animation.frame.collision.initialOffY[entityIdx][0][0] = colOffY;
+        entityData.animation.frame.collision.initialW[entityIdx][0][0] = colW;
+        entityData.animation.frame.collision.initialH[entityIdx][0][0] = colH;
+        entityData.animation.frame.collision.offX[entityIdx][0][0] = colOffX;
+        entityData.animation.frame.collision.offY[entityIdx][0][0] = colOffY;
+        entityData.animation.frame.collision.w[entityIdx][0][0] = colW * entityData.scale.value[entityIdx];
+        entityData.animation.frame.collision.h[entityIdx][0][0] = colH * entityData.scale.value[entityIdx];
         entityData.animation.animationType[entityIdx] = AnimationType::None;
         entityData.animation.animationState[entityIdx] = AnimationState::Idle;
         entityData.animation.animationStop[entityIdx] = AnimationStop::None;

@@ -1,5 +1,5 @@
 #include "ProjectileCollisionSystem.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "GetEntityColAABB.h"
 #include "ResolveAutoAttackProjectile.h"
 #include "ResolveConcussiveShotProjectile.h"
@@ -34,7 +34,8 @@ void projectileCollisionSystem(Context &ctx)
             continue;
         const uint32_t targetIndex = static_cast<uint32_t>(targetId);
 
-        const SDL_FRect projectileCol = entityColAABB(effect.base, effectIndex);
+        const SDL_FRect projectileCol =
+            mainEntityColAABB(effect.base, effectIndex);
         const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
         if (!SDL_HasRectIntersectionFloat(&projectileCol, &targetCol))
             continue;

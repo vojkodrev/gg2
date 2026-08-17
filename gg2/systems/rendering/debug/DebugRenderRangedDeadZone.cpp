@@ -1,5 +1,5 @@
 #include "DebugRenderRangedDeadZone.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "EntityColCenter.h"
 #include "RenderMonsterAggroRange.h"
 #include "RenderNpcTargetVisibleLine.h"
@@ -20,7 +20,7 @@ void debugRenderRangedDeadZone(const Context &ctx)
     {
         renderRangedDeadZone(
             ctx,
-            entityColCenter(entityColAABB(player.base, 0)));
+            entityColCenter(mainEntityColAABB(player.base, 0)));
 
         if (player.autoAttack.active[0] && player.targetVisible)
         {
@@ -30,32 +30,32 @@ void debugRenderRangedDeadZone(const Context &ctx)
     }
 
     const auto &npc = ctx.data.npc;
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
-        if (!npc.active[i])
+        if (!npc.active[entityIndex])
             continue;
 
         const SDL_FPoint npcCenter =
-            entityColCenter(entityColAABB(npc.base, i));
-        if (npc.ai.type[i] == NPCAiType::MonsterMelee ||
-            npc.ai.type[i] == NPCAiType::MonsterRanged)
+            entityColCenter(mainEntityColAABB(npc.base, entityIndex));
+        if (npc.ai.type[entityIndex] == NPCAiType::MonsterMelee ||
+            npc.ai.type[entityIndex] == NPCAiType::MonsterRanged)
         {
             SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderMonsterAggroRange(ctx, npcCenter);
         }
 
-        if (npc.ai.type[i] == NPCAiType::MonsterRanged &&
-            npc.equipment.weapon.type[i] == WeaponType::Ranged)
+        if (npc.ai.type[entityIndex] == NPCAiType::MonsterRanged &&
+            npc.equipment.weapon.type[entityIndex] == WeaponType::Ranged)
         {
             SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderRangedDeadZone(
                 ctx,
                 npcCenter);
 
-            if (npc.ai.targetVisible[i])
+            if (npc.ai.targetVisible[entityIndex])
             {
                 SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
-                renderNpcTargetVisibleLine(ctx, i);
+                renderNpcTargetVisibleLine(ctx, entityIndex);
             }
         }
     }

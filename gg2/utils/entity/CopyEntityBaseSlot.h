@@ -20,32 +20,85 @@ inline void copyEntityBaseSlot(
     to.animation.rotationStartAngle[toIndex] = from.animation.rotationStartAngle[fromIndex];
     to.animation.rotationStopAngle[toIndex] = from.animation.rotationStopAngle[fromIndex];
 
-    for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
+    for (int frameIndex = 0;
+        frameIndex < MAX_ANIMATION_FRAMES;
+        frameIndex++)
     {
-        to.animation.frame.src.x[toIndex][f] = from.animation.frame.src.x[fromIndex][f];
-        to.animation.frame.src.y[toIndex][f] = from.animation.frame.src.y[fromIndex][f];
-        to.animation.frame.src.w[toIndex][f] = from.animation.frame.src.w[fromIndex][f];
-        to.animation.frame.src.h[toIndex][f] = from.animation.frame.src.h[fromIndex][f];
+        to.animation.frame.src.x[toIndex][frameIndex] =
+            from.animation.frame.src.x[fromIndex][frameIndex];
+        to.animation.frame.src.y[toIndex][frameIndex] =
+            from.animation.frame.src.y[fromIndex][frameIndex];
+        to.animation.frame.src.w[toIndex][frameIndex] =
+            from.animation.frame.src.w[fromIndex][frameIndex];
+        to.animation.frame.src.h[toIndex][frameIndex] =
+            from.animation.frame.src.h[fromIndex][frameIndex];
 
-        to.animation.frame.anchor.initialOffX[toIndex][f] = from.animation.frame.anchor.initialOffX[fromIndex][f];
-        to.animation.frame.anchor.initialOffY[toIndex][f] = from.animation.frame.anchor.initialOffY[fromIndex][f];
-        to.animation.frame.anchor.initialW[toIndex][f] = from.animation.frame.anchor.initialW[fromIndex][f];
-        to.animation.frame.anchor.initialH[toIndex][f] = from.animation.frame.anchor.initialH[fromIndex][f];
-        to.animation.frame.anchor.offX[toIndex][f] = from.animation.frame.anchor.offX[fromIndex][f];
-        to.animation.frame.anchor.offY[toIndex][f] = from.animation.frame.anchor.offY[fromIndex][f];
-        to.animation.frame.anchor.w[toIndex][f] = from.animation.frame.anchor.w[fromIndex][f];
-        to.animation.frame.anchor.h[toIndex][f] = from.animation.frame.anchor.h[fromIndex][f];
+        to.animation.frame.anchor.exists[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.exists[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.initialOffX[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.initialOffX[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.initialOffY[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.initialOffY[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.initialW[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.initialW[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.initialH[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.initialH[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.offX[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.offX[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.offY[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.offY[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.w[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.w[fromIndex][frameIndex][0];
+        to.animation.frame.anchor.h[toIndex][frameIndex][0] =
+            from.animation.frame.anchor.h[fromIndex][frameIndex][0];
 
-        to.animation.frame.collision.initialOffX[toIndex][f] = from.animation.frame.collision.initialOffX[fromIndex][f];
-        to.animation.frame.collision.initialOffY[toIndex][f] = from.animation.frame.collision.initialOffY[fromIndex][f];
-        to.animation.frame.collision.initialW[toIndex][f] = from.animation.frame.collision.initialW[fromIndex][f];
-        to.animation.frame.collision.initialH[toIndex][f] = from.animation.frame.collision.initialH[fromIndex][f];
-        to.animation.frame.collision.offX[toIndex][f] = from.animation.frame.collision.offX[fromIndex][f];
-        to.animation.frame.collision.offY[toIndex][f] = from.animation.frame.collision.offY[fromIndex][f];
-        to.animation.frame.collision.w[toIndex][f] = from.animation.frame.collision.w[fromIndex][f];
-        to.animation.frame.collision.h[toIndex][f] = from.animation.frame.collision.h[fromIndex][f];
+        for (int collisionIndex = 0;
+            collisionIndex < MAX_FRAME_COLLISIONS;
+            collisionIndex++)
+        {
+            to.animation.frame.collision
+                .exists[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .exists[fromIndex][frameIndex][collisionIndex];
+            if (!from.animation.frame.collision
+                    .exists[fromIndex][frameIndex][collisionIndex])
+                continue;
+            to.animation.frame.collision
+                .initialOffX[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .initialOffX[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .initialOffY[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .initialOffY[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .initialW[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .initialW[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .initialH[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .initialH[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .offX[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .offX[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .offY[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .offY[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .w[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .w[fromIndex][frameIndex][collisionIndex];
+            to.animation.frame.collision
+                .h[toIndex][frameIndex][collisionIndex] =
+                from.animation.frame.collision
+                    .h[fromIndex][frameIndex][collisionIndex];
+        }
 
-        to.animation.frame.frameDuration[toIndex][f] = from.animation.frame.frameDuration[fromIndex][f];
+        to.animation.frame.frameDuration[toIndex][frameIndex] =
+            from.animation.frame.frameDuration[fromIndex][frameIndex];
     }
 
     to.position.x[toIndex] = from.position.x[fromIndex];

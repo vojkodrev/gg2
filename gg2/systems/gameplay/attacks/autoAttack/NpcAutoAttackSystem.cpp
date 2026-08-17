@@ -3,6 +3,7 @@
 #include "../../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../../structs/entity/EntityType.h"
 #include "../../../structs/npc/NPCAiType.h"
+#include "../../../utils/collision/EntityColAABB.h"
 #include "../../../utils/collision/GetEntityColAABB.h"
 #include "../rotation/HasMeleeWeaponRotationAnimation.h"
 #include "../rotation/IsRotationAnimationRunning.h"
@@ -13,36 +14,54 @@ void npcAutoAttackSystem(Context &ctx)
     auto &npc = ctx.data.npc;
     const auto &target = npc.ai.target;
 
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
-        if (!npc.active[i])
+        if (!npc.active[entityIndex])
             continue;
-        if (npc.ai.type[i] != NPCAiType::MonsterMelee)
+        if (npc.ai.type[entityIndex] != NPCAiType::MonsterMelee)
             continue;
-        if (npc.autoAttack.hitTimer[i] > 0.0f)
+        if (npc.autoAttack.hitTimer[entityIndex] > 0.0f)
             continue;
 
         auto &weapon = npc.equipment.weapon;
-        if (!hasMeleeWeaponRotationAnimation(weapon, i))
+        if (!hasMeleeWeaponRotationAnimation(weapon, entityIndex))
             continue;
-        if (!isRotationAnimationRunning(weapon.base, i))
-            continue;
-
-        const SDL_FRect targetCol = getEntityColAABB(ctx, target.type[i], target.id[i]);
-        const SDL_FRect weaponCol = entityColAABB(weapon.base, i);
-        if (!SDL_HasRectIntersectionFloat(&weaponCol, &targetCol))
+        if (!isRotationAnimationRunning(weapon.base, entityIndex))
             continue;
 
-        if (target.type[i] != EntityType::Player &&
-            target.type[i] != EntityType::NPC)
+        const SDL_FRect targetCol = getEntityColAABB(
+            ctx,
+            target.type[entityIndex],
+            target.id[entityIndex]);
+        bool targetHit = false;
+        for (int collisionIndex = 0;
+            collisionIndex < MAX_FRAME_COLLISIONS;
+            collisionIndex++)
+        {
+            const SDL_FRect weaponCol = entityColAABB(
+                weapon.base,
+                entityIndex,
+                collisionIndex);
+            if (SDL_HasRectIntersectionFloat(&weaponCol, &targetCol))
+            {
+                targetHit = true;
+                break;
+            }
+        }
+        if (!targetHit)
             continue;
 
-        const uint32_t targetId = static_cast<uint32_t>(target.id[i]);
-        if (target.type[i] == EntityType::Player)
+        if (target.type[entityIndex] != EntityType::Player &&
+            target.type[entityIndex] != EntityType::NPC)
+            continue;
+
+        const uint32_t targetId =
+            static_cast<uint32_t>(target.id[entityIndex]);
+        if (target.type[entityIndex] == EntityType::Player)
         {
             applyAttackDamage(
                 ctx,
-                target.type[i],
+                target.type[entityIndex],
                 targetId,
                 ctx.data.player.statistics,
                 ctx.data.player.group,
@@ -50,11 +69,11 @@ void npcAutoAttackSystem(Context &ctx)
                 NPC_MELEE_AUTO_ATTACK_DAMAGE,
                 NPC_MELEE_AUTO_ATTACK_DAMAGE_RANDOM_RANGE);
         }
-        else if (target.type[i] == EntityType::NPC)
+        else if (target.type[entityIndex] == EntityType::NPC)
         {
             applyAttackDamage(
                 ctx,
-                target.type[i],
+                target.type[entityIndex],
                 targetId,
                 ctx.data.npc.statistics,
                 ctx.data.npc.group,
@@ -65,6 +84,6 @@ void npcAutoAttackSystem(Context &ctx)
         else
             continue;
 
-        npc.autoAttack.hitTimer[i] = NPC_MELEE_AUTO_ATTACK_DELAY;
+        npc.autoAttack.hitTimer[entityIndex] = NPC_MELEE_AUTO_ATTACK_DELAY;
     }
 }

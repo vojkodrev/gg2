@@ -13,9 +13,9 @@ inline void loadRangedCollision(
     const auto &entityCollisionAnchor = npcBase.animation.frame.collision;
 
     for (int frameIndex = 0; frameIndex < MAX_ANIMATION_FRAMES; frameIndex++)
-        rangedCollision.anchor.exists[entityIndex][frameIndex] = false;
+        rangedCollision.anchor.exists[entityIndex][frameIndex][0] = false;
 
     for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
-        rangedCollision.anchor.exists[entityIndex][frameIndex] =
-            entityCollisionAnchor.exists[entityIndex][frameIndex];
+        rangedCollision.anchor.exists[entityIndex][frameIndex][0] =
+            entityCollisionAnchor.exists[entityIndex][frameIndex][0];
 }

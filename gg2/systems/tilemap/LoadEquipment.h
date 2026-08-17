@@ -3,7 +3,7 @@
 #include "../../structs/equipment/WeaponType.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "ParseWeaponType.h"
-#include "GetAnchor.h"
+#include "LoadAnchors.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
 #include "properties/GetTileFloatProp.h"
@@ -26,9 +26,12 @@ inline void loadEquipment(
     bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
     equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
     equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
-    for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
+    for (int frameIndex = 0;
+        frameIndex < MAX_ANIMATION_FRAMES;
+        frameIndex++)
     {
-        equipmentData.weapon.ranged.ammoAnchor.exists[parentEntityIdx][f] = false;
+        equipmentData.weapon.ranged.ammoAnchor
+            .exists[parentEntityIdx][frameIndex][0] = false;
     }
     if (hasWeapon && parseWeaponType(weaponAssetType, equipmentData.weapon.type[parentEntityIdx]))
     {
@@ -52,25 +55,21 @@ inline void loadEquipment(
 
         auto &ammoAnchor = equipmentData.weapon.ranged.ammoAnchor;
         const int frameCount = weaponBase.animation.frameCount[parentEntityIdx];
-        for (int f = 0; f < frameCount; f++)
+        for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
         {
             const uint32_t frameTileIdx =
                 weaponTile && !weaponTile->animation.frames.empty()
-                ? weaponTile->animation.frames[f].tileID - props.firstGid
+                ? weaponTile->animation.frames[frameIndex].tileID -
+                    props.firstGid
                 : weaponIdx;
-            SDL_FRect frameAmmoAnchor;
-            ammoAnchor.exists[parentEntityIdx][f] =
-                getAnchor(tileset, frameTileIdx, "ammoAnchor", frameAmmoAnchor);
-            ammoAnchor.initialOffX[parentEntityIdx][f] = frameAmmoAnchor.x;
-            ammoAnchor.initialOffY[parentEntityIdx][f] = frameAmmoAnchor.y;
-            ammoAnchor.initialW[parentEntityIdx][f] = frameAmmoAnchor.w;
-            ammoAnchor.initialH[parentEntityIdx][f] = frameAmmoAnchor.h;
-            ammoAnchor.offX[parentEntityIdx][f] = frameAmmoAnchor.x;
-            ammoAnchor.offY[parentEntityIdx][f] = frameAmmoAnchor.y;
-            ammoAnchor.w[parentEntityIdx][f] =
-                frameAmmoAnchor.w * weaponBase.scale.value[parentEntityIdx];
-            ammoAnchor.h[parentEntityIdx][f] =
-                frameAmmoAnchor.h * weaponBase.scale.value[parentEntityIdx];
+            loadAnchors(
+                ammoAnchor,
+                parentEntityIdx,
+                frameIndex,
+                tileset,
+                frameTileIdx,
+                "ammoAnchor",
+                weaponBase.scale.value[parentEntityIdx]);
         }
     }
 

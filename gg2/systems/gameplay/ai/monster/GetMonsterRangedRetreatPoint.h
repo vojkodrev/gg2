@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "EntityColCenter.h"
 #include "IsMonsterRetreatPointClear.h"
 #include "../../attacks/ranged/IsRangedTargetVisible.h"
@@ -16,7 +16,7 @@ inline SDL_FPoint getMonsterRangedRetreatPoint(
 {
     const auto &ai = ctx.data.npc.ai;
     const SDL_FPoint monsterColCenter =
-        entityColCenter(entityColAABB(ctx.data.npc.base, n));
+        entityColCenter(mainEntityColAABB(ctx.data.npc.base, n));
     const SDL_FPoint targetColCenter = entityColCenter(targetCol);
     float awayX = monsterColCenter.x - targetColCenter.x;
     float awayY = monsterColCenter.y - targetColCenter.y;
@@ -42,9 +42,11 @@ inline SDL_FPoint getMonsterRangedRetreatPoint(
         NPC_MONSTER_PATH_STEP +
         NPC_RANGED_RETREAT_EXTRA_DISTANCE;
 
-    for (int i = 0; i < NPC_RANGED_RETREAT_ANGLE_COUNT; i++)
+    for (int angleIndex = 0;
+        angleIndex < NPC_RANGED_RETREAT_ANGLE_COUNT;
+        angleIndex++)
     {
-        const float angle = NPC_RANGED_RETREAT_ANGLES[i];
+        const float angle = NPC_RANGED_RETREAT_ANGLES[angleIndex];
         const float cosAngle = std::cos(angle);
         const float sinAngle = std::sin(angle);
         const SDL_FPoint direction = {

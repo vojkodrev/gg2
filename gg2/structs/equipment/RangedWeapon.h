@@ -5,6 +5,6 @@
 template<int N>
 struct RangedWeapon
 {
-    Anchor<N, MAX_ANIMATION_FRAMES> ammoAnchor;
+    Anchor<N, MAX_ANIMATION_FRAMES, 1> ammoAnchor;
     bool showAmmo[N] = {};
 };

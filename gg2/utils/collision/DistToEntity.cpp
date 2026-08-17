@@ -5,7 +5,8 @@
 
 float distToEntity(Context &ctx, uint32_t n, EntityType targetType, int targetId)
 {
-    const SDL_FPoint npcColCenter = entityColCenter(entityColAABB(ctx.data.npc.base, n));
+    const SDL_FPoint npcColCenter =
+        entityColCenter(mainEntityColAABB(ctx.data.npc.base, n));
 
     const SDL_FRect targetCol = getEntityColAABB(ctx, targetType, targetId);
     if (targetType != EntityType::Player && targetType != EntityType::NPC)

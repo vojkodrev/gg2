@@ -199,8 +199,12 @@
    <property name="type" value="sword1"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="33.7169" y="12.792" width="13.4774" height="15.5753"/>
    <object id="2" name="anchor" x="11.3066" y="46.8752" width="4.12219" height="6.83106"/>
+   <object id="11" name="collision" x="21.2223" y="37.139" width="5.47137" height="6.63196"/>
+   <object id="13" name="collision" x="26.8594" y="25.533" width="9.11894" height="10.7769"/>
+   <object id="17" name="collision" x="36.31" y="14.9219" width="9.78214" height="10.7769"/>
+   <object id="19" name="collision" x="46.0921" y="7.12936" width="7.79255" height="9.61634"/>
+   <object id="20" name="collision" x="54.0505" y="5.30557" width="6.13456" height="6.96356"/>
   </objectgroup>
  </tile>
  <tile id="352">

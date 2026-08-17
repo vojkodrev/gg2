@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "EntityColCenter.h"
 #include "../../facing/SetFacingTowardX.h"
 #include <cstdint>
@@ -11,7 +11,8 @@ inline void setMonsterFacingTowardTarget(
     const SDL_FRect &targetCol)
 {
     auto &npc = ctx.data.npc;
-    const float npcCenterX = entityColCenter(entityColAABB(npc.base, n)).x;
+    const float npcCenterX =
+        entityColCenter(mainEntityColAABB(npc.base, n)).x;
     const float targetCenterX = entityColCenter(targetCol).x;
     setFacingTowardX(npc.base.facing, n, npcCenterX, targetCenterX);
 }

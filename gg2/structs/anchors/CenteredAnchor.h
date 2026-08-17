@@ -2,9 +2,9 @@
 #include "Anchor.h"
 #include "AnchorPoint.h"
 
-template<int NItems, int NSlots>
+template<int NEntities, int NSlots>
 struct CenteredAnchor
 {
-    Anchor<NItems, NSlots> anchor;
-    AnchorPoint<NItems, NSlots> center;
+    Anchor<NEntities, NSlots, 1> anchor;
+    AnchorPoint<NEntities, NSlots> center;
 };
