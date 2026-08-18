@@ -1,7 +1,7 @@
 #pragma once
 #include "Context.h"
 #include "ColIdType.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "EntityColCenter.h"
 #include "EntityColCenterWorld.h"
 #include "GetEntityColAABB.h"
@@ -32,21 +32,21 @@ inline bool isRangedTargetVisible(
     const int frameIndex =
         equipment.weapon.base.animation.frameIndex[entityIndex];
     const SDL_FRect ammoAnchor = {
-        equipment.weapon.ranged.ammoAnchor.offX[entityIndex][frameIndex],
-        equipment.weapon.ranged.ammoAnchor.offY[entityIndex][frameIndex],
-        equipment.weapon.ranged.ammoAnchor.w[entityIndex][frameIndex],
-        equipment.weapon.ranged.ammoAnchor.h[entityIndex][frameIndex]
+        equipment.weapon.ranged.ammoAnchor.offX[entityIndex][frameIndex][0],
+        equipment.weapon.ranged.ammoAnchor.offY[entityIndex][frameIndex][0],
+        equipment.weapon.ranged.ammoAnchor.w[entityIndex][frameIndex][0],
+        equipment.weapon.ranged.ammoAnchor.h[entityIndex][frameIndex][0]
     };
     SDL_FPoint ammoAnchorCenter = entityColCenterWorld(
         ammoAnchor,
         equipment.weapon.base.position,
         entityIndex);
     const SDL_FPoint currentEntityColCenter =
-        entityColCenter(entityColAABB(entityBase, entityIndex));
+        entityColCenter(mainEntityColAABB(entityBase, entityIndex));
     ammoAnchorCenter.x += entityColCenterFrom.x - currentEntityColCenter.x;
     ammoAnchorCenter.y += entityColCenterFrom.y - currentEntityColCenter.y;
     const SDL_FRect ammoCol =
-        entityColAABB(equipment.ammo.base, entityIndex);
+        mainEntityColAABB(equipment.ammo.base, entityIndex);
     const float visibilityHalfWidth =
         (std::sqrt(ammoCol.w * ammoCol.w + ammoCol.h * ammoCol.h) +
             RANGED_TARGET_VISIBLE_AMMO_BUFFER) * 0.5f;
@@ -86,9 +86,11 @@ inline bool isRangedTargetVisible(
             queryRect,
             candidates);
     }
-    for (int i = 0; i < candidateCount; i++)
+    for (int candidateIndex = 0;
+        candidateIndex < candidateCount;
+        candidateIndex++)
     {
-        const uint32_t candidate = candidates[i];
+        const uint32_t candidate = candidates[candidateIndex];
         if (colIdType(candidate) != ColType::Object)
             continue;
 

@@ -3,7 +3,7 @@
 #include "../../../../structs/equipment/WeaponType.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
 #include "../../../../structs/npc/NPCAiType.h"
-#include "../../../../utils/collision/EntityColAABB.h"
+#include "../../../../utils/collision/MainEntityColAABB.h"
 #include "../ResetNpcFollowPath.h"
 #include <atomic>
 #include "../../../../utils/collision/HasReachedRect.h"
@@ -42,7 +42,7 @@ bool followAStarPathTo(
     }
     else
     {
-        moverBox = entityColAABB(npc.base, n);
+        moverBox = mainEntityColAABB(npc.base, n);
         moverCenter = entityColCenter(moverBox);
     }
 
@@ -97,15 +97,26 @@ bool followAStarPathTo(
         }
 
         uint32_t prevIndex = ai.path.index[n];
-        uint32_t i = prevIndex;
+        uint32_t pathIndex = prevIndex;
 
-        while (i + 1 < len && hasReachedRect(ctx, n, { (float)ai.path.point.x[n][i], (float)ai.path.point.y[n][i], 1, 1 }))
-            i++;
-        ai.path.index[n] = i;
-        if (i != prevIndex)
+        while (pathIndex + 1 < len && hasReachedRect(
+                ctx,
+                n,
+                {
+                    (float)ai.path.point.x[n][pathIndex],
+                    (float)ai.path.point.y[n][pathIndex],
+                    1,
+                    1
+                }))
+            pathIndex++;
+        ai.path.index[n] = pathIndex;
+        if (pathIndex != prevIndex)
             ai.repathTimer[n] = NPC_REPATH_TIME;
 
-        SDL_FPoint target = { (float)ai.path.point.x[n][i], (float)ai.path.point.y[n][i] };
+        SDL_FPoint target = {
+            (float)ai.path.point.x[n][pathIndex],
+            (float)ai.path.point.y[n][pathIndex]
+        };
         const auto &debuff = ctx.data.npc.concussiveShotDebuff;
         bool isConcussed = false;
         for (uint32_t j = 0; j < MAX_DEBUFF_SLOTS; j++)
@@ -113,9 +124,15 @@ bool followAStarPathTo(
         const float moveSpeed = isConcussed ?
             NPC_MONSTER_SPEED * CONCUSSIVE_SHOT_SPEED_MULTIPLIER :
             NPC_MONSTER_SPEED;
-        moveNpcColCenterToward(ctx, n, target, moveSpeed);
+        moveNpcColCenterToward(
+            ctx,
+            n,
+            moverCenter,
+            target,
+            moveSpeed);
 
-        if (i + 1 >= len && hasReachedRect(ctx, n, { target.x, target.y, 1, 1 }))
+        if (pathIndex + 1 >= len &&
+            hasReachedRect(ctx, n, {target.x, target.y, 1, 1}))
             resetNpcFollowPath(ctx, n);
     }
 

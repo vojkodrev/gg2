@@ -18,12 +18,14 @@ void rotateEquipmentSystem(Context &ctx)
     {
         rotateEntityBase(playerWeapon.base, 0);
         if (playerWeapon.type[0] == WeaponType::Ranged)
-            for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+            for (int frameIndex = 0;
+                frameIndex < playerWeapon.base.animation.frameCount[0];
+                frameIndex++)
                 rotateRectCenter(
-                    playerWeapon.ranged.ammoAnchor.offX[0][f],
-                    playerWeapon.ranged.ammoAnchor.offY[0][f],
-                    playerWeapon.ranged.ammoAnchor.w[0][f],
-                    playerWeapon.ranged.ammoAnchor.h[0][f],
+                    playerWeapon.ranged.ammoAnchor.offX[0][frameIndex][0],
+                    playerWeapon.ranged.ammoAnchor.offY[0][frameIndex][0],
+                    playerWeapon.ranged.ammoAnchor.w[0][frameIndex][0],
+                    playerWeapon.ranged.ammoAnchor.h[0][frameIndex][0],
                     playerWeapon.base.position.w[0] * 0.5f,
                     playerWeapon.base.position.h[0] * 0.5f,
                     playerWeapon.base.rotation.rotate[0]);
@@ -37,38 +39,57 @@ void rotateEquipmentSystem(Context &ctx)
 
     auto &npcAmmo = ctx.data.npc.equipment.ammo;
     auto &npcWeapon = ctx.data.npc.equipment.weapon;
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
-        if (!ctx.data.npc.active[i] || !npcWeapon.exists[i])
+        if (!ctx.data.npc.active[entityIndex] ||
+            !npcWeapon.exists[entityIndex])
             continue;
 
-        const bool npcWeaponRotationRunning = isRotationAnimationRunning(npcWeapon.base, i);
-        const bool npcWeaponRotationFinished = isRotationAnimationFinished(npcWeapon.base, i);
+        const bool npcWeaponRotationRunning =
+            isRotationAnimationRunning(npcWeapon.base, entityIndex);
+        const bool npcWeaponRotationFinished =
+            isRotationAnimationFinished(npcWeapon.base, entityIndex);
         const bool useRotationAnimationStart =
-            shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i);
+            shouldUseRotationAnimationStart(
+                ctx.data.npc.ai,
+                npcWeapon,
+                entityIndex);
 
         if (
-            npcWeapon.base.facing.dirty[i] ||
+            npcWeapon.base.facing.dirty[entityIndex] ||
             npcWeaponRotationRunning ||
             npcWeaponRotationFinished ||
             useRotationAnimationStart ||
-            shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i))
+            shouldClearRotationAnimationStart(
+                ctx.data.npc.ai,
+                npcWeapon,
+                entityIndex))
         {
-            rotateEntityBase(npcWeapon.base, i, useRotationAnimationStart);
-            if (npcWeapon.type[i] == WeaponType::Ranged)
-                for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
+            rotateEntityBase(
+                npcWeapon.base,
+                entityIndex,
+                useRotationAnimationStart);
+            if (npcWeapon.type[entityIndex] == WeaponType::Ranged)
+                for (int frameIndex = 0;
+                    frameIndex <
+                        npcWeapon.base.animation.frameCount[entityIndex];
+                    frameIndex++)
                     rotateRectCenter(
-                        npcWeapon.ranged.ammoAnchor.offX[i][f],
-                        npcWeapon.ranged.ammoAnchor.offY[i][f],
-                        npcWeapon.ranged.ammoAnchor.w[i][f],
-                        npcWeapon.ranged.ammoAnchor.h[i][f],
-                        npcWeapon.base.position.w[i] * 0.5f,
-                        npcWeapon.base.position.h[i] * 0.5f,
-                        npcWeapon.base.rotation.rotate[i]);
+                        npcWeapon.ranged.ammoAnchor
+                            .offX[entityIndex][frameIndex][0],
+                        npcWeapon.ranged.ammoAnchor
+                            .offY[entityIndex][frameIndex][0],
+                        npcWeapon.ranged.ammoAnchor
+                            .w[entityIndex][frameIndex][0],
+                        npcWeapon.ranged.ammoAnchor
+                            .h[entityIndex][frameIndex][0],
+                        npcWeapon.base.position.w[entityIndex] * 0.5f,
+                        npcWeapon.base.position.h[entityIndex] * 0.5f,
+                        npcWeapon.base.rotation.rotate[entityIndex]);
         }
-        if (npcAmmo.exists[i] &&
-            npcAmmo.base.facing.dirty[i] &&
-            npcWeapon.type[i] == WeaponType::Ranged)
-            rotateEntityBase(npcAmmo.base, i);
+        if (npcAmmo.exists[entityIndex] &&
+            npcAmmo.base.facing.dirty[entityIndex] &&
+            npcWeapon.type[entityIndex] == WeaponType::Ranged)
+            rotateEntityBase(npcAmmo.base, entityIndex);
     }
 }

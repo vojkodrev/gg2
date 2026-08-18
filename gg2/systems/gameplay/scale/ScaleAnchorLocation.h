@@ -2,13 +2,16 @@
 #include "../../../structs/anchors/Anchor.h"
 #include <cstdint>
 
-template<int NItems, int NSlots>
+template<int NEntities, int NSlots, int NAnchors>
 inline void scaleAnchorLocation(
-    Anchor<NItems, NSlots> &anchor,
+    Anchor<NEntities, NSlots, NAnchors> &anchor,
     float scale,
-    uint32_t i,
-    int slot)
+    uint32_t entityIndex,
+    int frameIndex,
+    int anchorIndex)
 {
-    anchor.offX[i][slot] = anchor.initialOffX[i][slot] * scale;
-    anchor.offY[i][slot] = anchor.initialOffY[i][slot] * scale;
+    anchor.offX[entityIndex][frameIndex][anchorIndex] =
+        anchor.initialOffX[entityIndex][frameIndex][anchorIndex] * scale;
+    anchor.offY[entityIndex][frameIndex][anchorIndex] =
+        anchor.initialOffY[entityIndex][frameIndex][anchorIndex] * scale;
 }

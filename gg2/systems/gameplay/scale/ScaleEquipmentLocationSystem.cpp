@@ -15,60 +15,60 @@ void scaleEquipmentLocationSystem(Context &ctx)
          isRotationAnimationRunning(playerWeapon.base, 0) ||
          isRotationAnimationFinished(playerWeapon.base, 0));
     if (playerWeaponNeedsReset)
-        scaleEntityBaseLocations(playerWeapon.base, 0);
-    if (ctx.data.player.equipment.ammo.exists[0] &&
-        ctx.data.player.equipment.ammo.base.facing.dirty[0])
-        scaleEntityBaseLocations(ctx.data.player.equipment.ammo.base, 0);
-
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
     {
-        if (!ctx.data.npc.active[i])
-            continue;
+        scaleEntityBaseLocations(playerWeapon.base, 0);
 
-        auto &npcWeapon = ctx.data.npc.equipment.weapon;
-        const bool npcWeaponNeedsReset =
-            npcWeapon.exists[i] &&
-            (npcWeapon.base.facing.dirty[i] ||
-             isRotationAnimationRunning(npcWeapon.base, i) ||
-             isRotationAnimationFinished(npcWeapon.base, i) ||
-             shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
-             shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i));
-        if (npcWeaponNeedsReset)
-            scaleEntityBaseLocations(npcWeapon.base, i);
-        if (ctx.data.npc.equipment.ammo.exists[i] &&
-            ctx.data.npc.equipment.ammo.base.facing.dirty[i])
-            scaleEntityBaseLocations(ctx.data.npc.equipment.ammo.base, i);
-    }
-
-    if (playerWeaponNeedsReset)
-        for (int f = 0; f < playerWeapon.base.animation.frameCount[0]; f++)
+        for (int frameIndex = 0;
+            frameIndex < playerWeapon.base.animation.frameCount[0];
+            frameIndex++)
             scaleAnchorLocation(
                 playerWeapon.ranged.ammoAnchor,
                 playerWeapon.base.scale.value[0],
                 0,
-                f);
+                frameIndex,
+                0);
+    }
+    if (ctx.data.player.equipment.ammo.exists[0] &&
+        ctx.data.player.equipment.ammo.base.facing.dirty[0])
+        scaleEntityBaseLocations(ctx.data.player.equipment.ammo.base, 0);
 
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
-        if (!ctx.data.npc.active[i])
+        if (!ctx.data.npc.active[entityIndex])
             continue;
 
         auto &npcWeapon = ctx.data.npc.equipment.weapon;
         const bool npcWeaponNeedsReset =
-            npcWeapon.exists[i] &&
-            (npcWeapon.base.facing.dirty[i] ||
-             isRotationAnimationRunning(npcWeapon.base, i) ||
-             isRotationAnimationFinished(npcWeapon.base, i) ||
-             shouldUseRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i) ||
-             shouldClearRotationAnimationStart(ctx.data.npc.ai, npcWeapon, i));
-        if (!npcWeaponNeedsReset)
-            continue;
+            npcWeapon.exists[entityIndex] &&
+            (npcWeapon.base.facing.dirty[entityIndex] ||
+             isRotationAnimationRunning(npcWeapon.base, entityIndex) ||
+             isRotationAnimationFinished(npcWeapon.base, entityIndex) ||
+             shouldUseRotationAnimationStart(
+                ctx.data.npc.ai,
+                npcWeapon,
+                entityIndex) ||
+             shouldClearRotationAnimationStart(
+                ctx.data.npc.ai,
+                npcWeapon,
+                entityIndex));
+        if (npcWeaponNeedsReset)
+        {
+            scaleEntityBaseLocations(npcWeapon.base, entityIndex);
 
-        for (int f = 0; f < npcWeapon.base.animation.frameCount[i]; f++)
-            scaleAnchorLocation(
-                npcWeapon.ranged.ammoAnchor,
-                npcWeapon.base.scale.value[i],
-                i,
-                f);
+            for (int frameIndex = 0;
+                frameIndex < npcWeapon.base.animation.frameCount[entityIndex];
+                frameIndex++)
+                scaleAnchorLocation(
+                    npcWeapon.ranged.ammoAnchor,
+                    npcWeapon.base.scale.value[entityIndex],
+                    entityIndex,
+                    frameIndex,
+                    0);
+        }
+        if (ctx.data.npc.equipment.ammo.exists[entityIndex] &&
+            ctx.data.npc.equipment.ammo.base.facing.dirty[entityIndex])
+            scaleEntityBaseLocations(
+                ctx.data.npc.equipment.ammo.base,
+                entityIndex);
     }
 }

@@ -6,21 +6,35 @@
 #include "../../../structs/equipment/WeaponType.h"
 
 template<int N>
-inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipment, uint32_t i)
+inline void debugRenderEquipment(
+    const Context &ctx,
+    const Equipment<N> &equipment,
+    uint32_t entityIndex)
 {
-    if (!equipment.weapon.exists[i])
+    if (!equipment.weapon.exists[entityIndex])
         return;
 
     if (ctx.data.debug.showWeaponCollision)
     {
-        debugRenderEntityBase(ctx, equipment.weapon.base, i, SDL_Color{0, 255, 255, 255});
+        debugRenderEntityBase(
+            ctx,
+            equipment.weapon.base,
+            entityIndex,
+            SDL_Color{0, 255, 255, 255});
 
-        const int frameIndex = equipment.weapon.base.animation.frameIndex[i];
+        const int frameIndex =
+            equipment.weapon.base.animation.frameIndex[entityIndex];
         SDL_FRect ammoAnchor = {
-            equipment.weapon.base.position.x[i] + equipment.weapon.ranged.ammoAnchor.offX[i][frameIndex],
-            equipment.weapon.base.position.y[i] + equipment.weapon.ranged.ammoAnchor.offY[i][frameIndex],
-            equipment.weapon.ranged.ammoAnchor.w[i][frameIndex],
-            equipment.weapon.ranged.ammoAnchor.h[i][frameIndex]
+            equipment.weapon.base.position.x[entityIndex] +
+                equipment.weapon.ranged.ammoAnchor
+                    .offX[entityIndex][frameIndex][0],
+            equipment.weapon.base.position.y[entityIndex] +
+                equipment.weapon.ranged.ammoAnchor
+                    .offY[entityIndex][frameIndex][0],
+            equipment.weapon.ranged.ammoAnchor
+                .w[entityIndex][frameIndex][0],
+            equipment.weapon.ranged.ammoAnchor
+                .h[entityIndex][frameIndex][0]
         };
 
         if (ammoAnchor.w > 0.0f && ammoAnchor.h > 0.0f)
@@ -32,8 +46,12 @@ inline void debugRenderEquipment(const Context &ctx, const Equipment<N> &equipme
 
     if (
         ctx.data.debug.showAmmoCollision &&
-        equipment.ammo.exists[i] &&
-        equipment.weapon.type[i] == WeaponType::Ranged &&
-        equipment.weapon.ranged.showAmmo[i])
-        debugRenderEntityBase(ctx, equipment.ammo.base, i, SDL_Color{255, 255, 0, 255});
+        equipment.ammo.exists[entityIndex] &&
+        equipment.weapon.type[entityIndex] == WeaponType::Ranged &&
+        equipment.weapon.ranged.showAmmo[entityIndex])
+        debugRenderEntityBase(
+            ctx,
+            equipment.ammo.base,
+            entityIndex,
+            SDL_Color{255, 255, 0, 255});
 }

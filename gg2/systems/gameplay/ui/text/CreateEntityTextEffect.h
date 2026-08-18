@@ -3,7 +3,7 @@
 #include "../../../../structs/core/constants/FontConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/entity/EntityType.h"
-#include "../../../../utils/collision/EntityColAABB.h"
+#include "../../../../utils/collision/MainEntityColAABB.h"
 #include "../../../../utils/collision/EntityColCenter.h"
 #include "CreateTextEffect.h"
 #include <algorithm>
@@ -20,7 +20,7 @@ inline void createEntityTextEffect(
 {
     const float entityY = entityBase.position.y[entityIndex];
     const SDL_FPoint entityCenter =
-        entityColCenter(entityColAABB(entityBase, entityIndex));
+        entityColCenter(mainEntityColAABB(entityBase, entityIndex));
 
     const float totalW =
         text.size() * FONT_GLYPH_W +

@@ -4,7 +4,7 @@
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../utils/collision/ColIdIndex.h"
 #include "../../../utils/collision/ColIdType.h"
-#include "../../../utils/collision/EntityColAABB.h"
+#include "../../../utils/collision/MainEntityColAABB.h"
 #include "../../../utils/collision/spatialhash/SpatialHashQuery.h"
 #include <algorithm>
 #include <shared_mutex>
@@ -16,18 +16,19 @@ void rangedNpcAmmoAnchorCollisionSystem(Context &ctx)
     const auto &spatialHash = ctx.collision.spatialHash;
     std::shared_lock lock(ctx.collision.spatialHashMutex);
 
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
         const auto &weapon = npc.equipment.weapon;
-        const int frameIndex = weapon.base.animation.frameIndex[i];
-        if (!npc.active[i] ||
-            !weapon.exists[i] ||
-            weapon.type[i] != WeaponType::Ranged ||
-            !weapon.ranged.ammoAnchor.exists[i][frameIndex])
+        const int frameIndex =
+            weapon.base.animation.frameIndex[entityIndex];
+        if (!npc.active[entityIndex] ||
+            !weapon.exists[entityIndex] ||
+            weapon.type[entityIndex] != WeaponType::Ranged ||
+            !weapon.ranged.ammoAnchor.exists[entityIndex][frameIndex][0])
             continue;
 
         SDL_FRect moverBox =
-            getRangedAmmoAnchorNpcColAABB(ctx, i);
+            getRangedAmmoAnchorNpcColAABB(ctx, entityIndex);
         SpatialHashQueryCandidates candidates;
         const int candidateCount =
             spatialHashQuery(spatialHash, 0, moverBox, candidates);
@@ -38,7 +39,7 @@ void rangedNpcAmmoAnchorCollisionSystem(Context &ctx)
                 continue;
 
             const SDL_FRect obstacle =
-                entityColAABB(object.base, colIdIndex(id));
+                mainEntityColAABB(object.base, colIdIndex(id));
             const float overlapX =
                 std::min(moverBox.x + moverBox.w, obstacle.x + obstacle.w) -
                 std::max(moverBox.x, obstacle.x);
@@ -54,9 +55,9 @@ void rangedNpcAmmoAnchorCollisionSystem(Context &ctx)
             else
                 offset.y = moverBox.y < obstacle.y ? -overlapY : overlapY;
 
-            npc.base.position.x[i] += offset.x;
-            npc.base.position.y[i] += offset.y;
-            npc.base.position.dirty[i] = true;
+            npc.base.position.x[entityIndex] += offset.x;
+            npc.base.position.y[entityIndex] += offset.y;
+            npc.base.position.dirty[entityIndex] = true;
             moverBox.x += offset.x;
             moverBox.y += offset.y;
         }

@@ -105,10 +105,10 @@ int createTargetedProjectileEffect(
     effectBase.rotation.rotate[effectIndex] = aimAngle - initialAngle;
 
     rotateRectCenter(
-        effectBase.animation.frame.collision.offX[effectIndex][frameIndex],
-        effectBase.animation.frame.collision.offY[effectIndex][frameIndex],
-        effectBase.animation.frame.collision.w[effectIndex][frameIndex],
-        effectBase.animation.frame.collision.h[effectIndex][frameIndex],
+        effectBase.animation.frame.collision.offX[effectIndex][frameIndex][0],
+        effectBase.animation.frame.collision.offY[effectIndex][frameIndex][0],
+        effectBase.animation.frame.collision.w[effectIndex][frameIndex][0],
+        effectBase.animation.frame.collision.h[effectIndex][frameIndex][0],
         resetAnchorCenterLocal.x,
         resetAnchorCenterLocal.y,
         effectBase.rotation.rotate[effectIndex]);

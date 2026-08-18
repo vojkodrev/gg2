@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "RenderTargetVisibleLine.h"
 
 inline void renderPlayerTargetVisibleLine(const Context &ctx)
@@ -15,7 +15,7 @@ inline void renderPlayerTargetVisibleLine(const Context &ctx)
         ctx,
         player.equipment,
         0,
-        entityColAABB(
+        mainEntityColAABB(
             ctx.data.npc.base,
             static_cast<uint32_t>(targetId)));
 }

@@ -4,11 +4,11 @@
 #include "SpriteSrc.h"
 #include "Anchor.h"
 
-template<int N>
+template<int NEntities>
 struct AnimationFrame
 {
-    SpriteSrc<N, MAX_ANIMATION_FRAMES> src;
-    Anchor<N, MAX_ANIMATION_FRAMES> anchor;
-    Anchor<N, MAX_ANIMATION_FRAMES> collision;
-    uint32_t frameDuration[N][MAX_ANIMATION_FRAMES];
+    SpriteSrc<NEntities, MAX_ANIMATION_FRAMES> src;
+    Anchor<NEntities, MAX_ANIMATION_FRAMES, 1> anchor;
+    Anchor<NEntities, MAX_ANIMATION_FRAMES, MAX_FRAME_COLLISIONS> collision;
+    uint32_t frameDuration[NEntities][MAX_ANIMATION_FRAMES];
 };

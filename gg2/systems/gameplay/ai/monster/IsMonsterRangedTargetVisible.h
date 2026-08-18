@@ -1,6 +1,6 @@
 #pragma once
 #include "Context.h"
-#include "EntityColAABB.h"
+#include "MainEntityColAABB.h"
 #include "EntityColCenter.h"
 #include "../../attacks/ranged/IsRangedTargetVisible.h"
 #include "../../../../structs/core/constants/AttackConstants.h"
@@ -21,7 +21,7 @@ inline bool isMonsterRangedTargetVisible(
             npc.base,
             n,
             targetCol,
-            entityColCenter(entityColAABB(npc.base, n)));
+            entityColCenter(mainEntityColAABB(npc.base, n)));
     }
 
     return npc.ai.targetVisible[n];

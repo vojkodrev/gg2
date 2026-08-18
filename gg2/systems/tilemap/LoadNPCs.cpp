@@ -25,18 +25,23 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     auto &npc = ctx.data.npc;
     auto &player = ctx.data.player;
     auto &npcTiles = findLayer(map, "NPC")->getLayerAs<tmx::TileLayer>().getTiles();
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
-        npc.active[i] = false;
-        npc.initialized[i] = false;
-        for (int f = 0; f < MAX_ANIMATION_FRAMES; f++)
-            npc.rangedCollision.anchor.exists[i][f] = false;
+        npc.active[entityIndex] = false;
+        npc.initialized[entityIndex] = false;
+        for (int frameIndex = 0;
+            frameIndex < MAX_ANIMATION_FRAMES;
+            frameIndex++)
+            npc.rangedCollision.anchor
+                .exists[entityIndex][frameIndex][0] = false;
     }
 
     uint32_t npcCount = 0;
-    for (uint32_t i = 0; i < npcTiles.size(); i++)
+    for (uint32_t tileIndex = 0;
+        tileIndex < npcTiles.size();
+        tileIndex++)
     {
-        if (npcTiles[i].ID == 0)
+        if (npcTiles[tileIndex].ID == 0)
             continue;
 
         if (npcCount >= MAX_NPCS)
@@ -52,8 +57,8 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (npc.group.id[n] == INVALID_ID)
             break;
 
-        uint32_t idx = npcTiles[i].ID - props.firstGid;
-        loadEntityBase(npc.base, n, tileset, idx, props, i);
+        uint32_t idx = npcTiles[tileIndex].ID - props.firstGid;
+        loadEntityBase(npc.base, n, tileset, idx, props, tileIndex);
         setHp(npc.statistics, n, NPC_HP);
         npc.statistics.health.maxHp[n] = NPC_HP;
         resetNpcCombatState(ctx, n);

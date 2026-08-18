@@ -1,6 +1,6 @@
 add_library(systems_tilemap
     FindLayer.cpp
-    GetAnchor.cpp
+    GetAnchors.cpp
     IsMarker.cpp
     LoadActionBar.cpp
     LoadEffects.cpp

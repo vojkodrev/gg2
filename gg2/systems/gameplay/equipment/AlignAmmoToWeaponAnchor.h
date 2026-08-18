@@ -4,28 +4,28 @@
 template<int N>
 inline void alignAmmoToWeaponAnchor(
     EntityBase<N> &ammoBase,
-    Anchor<N, MAX_ANIMATION_FRAMES> &weaponAmmoAnchor,
+    Anchor<N, MAX_ANIMATION_FRAMES, 1> &weaponAmmoAnchor,
     const EntityBase<N> &weaponBase,
     const EntityBase<N> &parentBase,
-    uint32_t i)
+    uint32_t entityIndex)
 {
-    const int frameIndex = weaponBase.animation.frameIndex[i];
+    const int frameIndex = weaponBase.animation.frameIndex[entityIndex];
     SDL_FRect anchor = {
-        weaponAmmoAnchor.offX[i][frameIndex],
-        weaponAmmoAnchor.offY[i][frameIndex],
-        weaponAmmoAnchor.w[i][frameIndex],
-        weaponAmmoAnchor.h[i][frameIndex]};
+        weaponAmmoAnchor.offX[entityIndex][frameIndex][0],
+        weaponAmmoAnchor.offY[entityIndex][frameIndex][0],
+        weaponAmmoAnchor.w[entityIndex][frameIndex][0],
+        weaponAmmoAnchor.h[entityIndex][frameIndex][0]};
 
     if (anchor.w > 0.0f && anchor.h > 0.0f)
         alignEntityToParentAnchor(
             ammoBase,
             anchor,
             weaponBase.position,
-            i);
+            entityIndex);
     else
         alignEntityToParentAnchor(
             ammoBase,
             parentBase.animation,
             parentBase.position,
-            i);
+            entityIndex);
 }
