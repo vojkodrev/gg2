@@ -182,6 +182,9 @@
    <property name="scale" type="float" value="1.3"/>
    <property name="type" value="staff2"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="anchor" x="18.9089" y="38.9046" width="4.99891" height="6.30298"/>
+  </objectgroup>
  </tile>
  <tile id="259">
   <properties>
