@@ -17,6 +17,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
     effectTemplate.selectIndex = FONT_GLYPH_COUNT;
     effectTemplate.bloodSplatterIndex = effectTemplate.selectIndex + 1;
     effectTemplate.tauntIndex = effectTemplate.bloodSplatterIndex + 1;
+    effectTemplate.frostNovaIndex = effectTemplate.tauntIndex + 1;
 
     const SDL_Point fontGrid = decodeGridIndex(FONT_GRID_ID, (int)props.tilesetW);
     const int fontBaseX = fontGrid.x * (int)props.srcTileW;
@@ -91,5 +92,16 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
         effectTemplate.base.tint.g[effectTemplate.tauntIndex] = TAUNT_TINT_G;
         effectTemplate.base.tint.b[effectTemplate.tauntIndex] = TAUNT_TINT_B;
         effectTemplate.base.tint.a[effectTemplate.tauntIndex] = TAUNT_TINT_A;
+    }
+
+    uint32_t frostNovaTileIdx = 0;
+    if (findTileByType(tileset, "frostNova", frostNovaTileIdx))
+    {
+        loadEntityBase(
+            effectTemplate.base,
+            (uint32_t)effectTemplate.frostNovaIndex,
+            tileset,
+            frostNovaTileIdx,
+            props);
     }
 }
