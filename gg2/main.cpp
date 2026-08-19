@@ -41,9 +41,9 @@
 #include "attacks/concussiveShot/ConcussiveShotDebuffSystem.h"
 #include "attacks/timers/GlobalCooldownTimerSystem.h"
 #include "attacks/concussiveShot/PlayerConcussiveShotAttackSystem.h"
-#include "attacks/autoAttack/PlayerPetAttackSystem.h"
 #include "attacks/serpentSting/PlayerSerpentStingAttackSystem.h"
 #include "attacks/serpentSting/SerpentStingDebuffSystem.h"
+#include "attacks/autoAttack/PlayerPetAttackSystem.h"
 #include "attacks/autoAttack/TogglePlayerAutoAttackSystem.h"
 #include "attacks/autoAttack/PlayerRangedAutoAttackSystem.h"
 #include "effects/EffectTimerSystem.h"
@@ -161,8 +161,8 @@ int main()
 
         playerRangedAutoAttackSystem(*ctx);
         playerConcussiveShotAttackSystem(*ctx);
-        playerPetAttackSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
+        playerPetAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
         concussiveShotDebuffSystem(*ctx);
