@@ -1,5 +1,6 @@
 #include "LoadPlayer.h"
 #include "FindLayer.h"
+#include "GetTileIndex.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
 #include "LoadHealthbar.h"
@@ -19,7 +20,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
     {
         if (playerTiles[i].ID == 0)
             continue;
-        uint32_t idx = playerTiles[i].ID - props.firstGid;
+        uint32_t idx = getTileIndex(playerTiles[i].ID, props);
         loadEntityBase(ctx.data.player.base, 0, tileset, idx, props, (uint32_t)i);
         setHp(ctx.data.player.statistics, 0, PLAYER_HP);
         ctx.data.player.statistics.health.maxHp[0] = PLAYER_HP;

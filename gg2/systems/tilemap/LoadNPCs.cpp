@@ -1,5 +1,6 @@
 #include "LoadNPCs.h"
 #include "FindLayer.h"
+#include "GetTileIndex.h"
 #include "properties/GetTileIntProp.h"
 #include "properties/GetTileStringProp.h"
 #include "LoadEntityBase.h"
@@ -47,7 +48,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (npcCount >= MAX_NPCS)
             break;
 
-        const uint32_t idx = npcTiles[tileIndex].ID - props.firstGid;
+        const uint32_t idx = getTileIndex(npcTiles[tileIndex].ID, props);
         const std::string aiType = getTileStringProp(tileset, idx, "AI");
         if (aiType == "pet" &&
             player.equipment.weapon.type[0] == WeaponType::Magic)

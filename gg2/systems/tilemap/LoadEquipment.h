@@ -3,6 +3,7 @@
 #include "../../structs/equipment/WeaponType.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "ParseWeaponType.h"
+#include "GetTileIndex.h"
 #include "LoadAnchors.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
@@ -59,8 +60,9 @@ inline void loadEquipment(
         {
             const uint32_t frameTileIdx =
                 weaponTile && !weaponTile->animation.frames.empty()
-                ? weaponTile->animation.frames[frameIndex].tileID -
-                    props.firstGid
+                ? getTileIndex(
+                    weaponTile->animation.frames[frameIndex].tileID,
+                    props)
                 : weaponIdx;
             loadAnchors(
                 ammoAnchor,

@@ -1,5 +1,6 @@
 #include "LoadGround.h"
 #include "FindLayer.h"
+#include "GetTileIndex.h"
 #include "DecodeGridIndex.h"
 #include <tmxlite/TileLayer.hpp>
 
@@ -23,7 +24,7 @@ void loadGround(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (gid == 0)
             continue;
         uint32_t n = tileMap.tileCount++;
-        uint32_t idx = gid - props.firstGid;
+        uint32_t idx = getTileIndex(gid, props);
         tileMap.tiles.srcX[n] = idx % props.tilesetW * props.srcTileW;
         tileMap.tiles.srcY[n] = idx / props.tilesetW * props.srcTileH;
         SDL_Point grid = decodeGridIndex(i, props.mapW);
