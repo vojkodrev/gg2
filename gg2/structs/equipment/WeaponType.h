@@ -4,4 +4,5 @@ enum class WeaponType
 {
     Melee,
     Ranged,
+    Magic,
 };
