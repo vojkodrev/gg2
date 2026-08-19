@@ -7,7 +7,8 @@
    <property name="facing" value="right"/>
    <property name="healthbar" value="healthbar"/>
    <property name="manabar" value="manabar"/>
-   <property name="weapon" value="bow1"/>
+   <property name="weapon" value="staff2"/>
+   <property name="weapon2" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
@@ -93,7 +94,6 @@
    <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
    <property name="weapon" value="staff1"/>
-   <property name="weaponScale" type="float" value="1.3"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.7256" y="38.7078" width="31.3008" height="19.115"/>
@@ -158,7 +158,7 @@
  <tile id="194">
   <properties>
    <property name="facing" value="right"/>
-   <property name="scale" type="float" value="1"/>
+   <property name="scale" type="float" value="1.3"/>
    <property name="type" value="staff1"/>
   </properties>
   <objectgroup draworder="index" id="4">
@@ -175,6 +175,13 @@
    <object id="1" name="anchor" x="10.1847" y="50.8033" width="5.53552" height="5.18219"/>
    <object id="2" name="collision" x="39.5771" y="6.34525" width="18.3905" height="19.7886"/>
   </objectgroup>
+ </tile>
+ <tile id="242">
+  <properties>
+   <property name="facing" value="right"/>
+   <property name="scale" type="float" value="1.3"/>
+   <property name="type" value="staff2"/>
+  </properties>
  </tile>
  <tile id="259">
   <properties>
