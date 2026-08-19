@@ -84,6 +84,15 @@ images = [
     {"id": 48, "filename": "../pixel ui pack 3-7.png", "dx": 2, "dy": 24, "sx": 2 * 32, "sy": 208, "sw": 32, "sh": 32},
     {"id": 49, "filename": "../pixel ui pack 3-7.png", "dx": 3, "dy": 24, "sx": 3 * 32, "sy": 208, "sw": 32, "sh": 32},
     {"id": 50, "filename": "../0x72_16x16DungeonTileset.v5.png", "dx": 7, "dy": 6, "sx": 144, "sy": 224, "sw": 16, "sh": 16, "w": 52},
+    {"id": 51, "filename": "../frostnova.png", "dx": 4, "dy": 24, "sx": 0 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 52, "filename": "../frostnova.png", "dx": 5, "dy": 24, "sx": 1 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 53, "filename": "../frostnova.png", "dx": 6, "dy": 24, "sx": 2 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 54, "filename": "../frostnova.png", "dx": 7, "dy": 24, "sx": 3 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 55, "filename": "../frostnova.png", "dx": 8, "dy": 24, "sx": 4 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 56, "filename": "../frostnova.png", "dx": 9, "dy": 24, "sx": 5 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 57, "filename": "../frostnova.png", "dx": 10, "dy": 24, "sx": 6 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 58, "filename": "../frostnova.png", "dx": 11, "dy": 24, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 59, "filename": "../frostnova.png", "dx": 12, "dy": 24, "sx": 8 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
 ]
 
 

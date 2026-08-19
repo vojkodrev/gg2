@@ -293,4 +293,17 @@
    <frame tileid="384" duration="100"/>
   </animation>
  </tile>
+ <tile id="388">
+  <animation>
+   <frame tileid="388" duration="100"/>
+   <frame tileid="389" duration="100"/>
+   <frame tileid="390" duration="100"/>
+   <frame tileid="391" duration="100"/>
+   <frame tileid="392" duration="100"/>
+   <frame tileid="393" duration="100"/>
+   <frame tileid="394" duration="100"/>
+   <frame tileid="395" duration="100"/>
+   <frame tileid="396" duration="100"/>
+  </animation>
+ </tile>
 </tileset>
