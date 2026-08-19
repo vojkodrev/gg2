@@ -47,6 +47,12 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (npcCount >= MAX_NPCS)
             break;
 
+        const uint32_t idx = npcTiles[tileIndex].ID - props.firstGid;
+        const std::string aiType = getTileStringProp(tileset, idx, "AI");
+        if (aiType == "pet" &&
+            player.equipment.weapon.type[0] == WeaponType::Magic)
+            continue;
+
         uint32_t n = npcCount++;
         npc.active[n] = true;
         npc.initialized[n] = true;
@@ -57,7 +63,6 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (npc.group.id[n] == INVALID_ID)
             break;
 
-        uint32_t idx = npcTiles[tileIndex].ID - props.firstGid;
         loadEntityBase(npc.base, n, tileset, idx, props, tileIndex);
         setHp(npc.statistics, n, NPC_HP);
         npc.statistics.health.maxHp[n] = NPC_HP;
@@ -88,7 +93,6 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadHealthbar(npc.healthbar, n, tileset, idx, props);
         loadManabar(npc.manabar, n, tileset, idx, props);
 
-        const std::string aiType = getTileStringProp(tileset, idx, "AI");
         npc.ai.type[n] = NPCAiType::None;
         if (aiType == "monsterMelee")
             npc.ai.type[n] = NPCAiType::MonsterMelee;
