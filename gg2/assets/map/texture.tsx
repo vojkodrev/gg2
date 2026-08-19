@@ -294,6 +294,10 @@
   </animation>
  </tile>
  <tile id="388">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="type" value="frostNova"/>
+  </properties>
   <animation>
    <frame tileid="388" duration="100"/>
    <frame tileid="389" duration="100"/>
