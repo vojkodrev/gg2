@@ -7,5 +7,6 @@ enum class EffectType : int
     Character,
     BloodSplatter,
     Taunt,
+    FrostNova,
     Selector
 };

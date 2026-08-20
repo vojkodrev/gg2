@@ -41,6 +41,7 @@
 #include "attacks/concussiveShot/ConcussiveShotDebuffSystem.h"
 #include "attacks/timers/GlobalCooldownTimerSystem.h"
 #include "attacks/concussiveShot/PlayerConcussiveShotAttackSystem.h"
+#include "attacks/frostNova/PlayerFrostNovaAttackSystem.h"
 #include "attacks/serpentSting/PlayerSerpentStingAttackSystem.h"
 #include "attacks/serpentSting/SerpentStingDebuffSystem.h"
 #include "attacks/autoAttack/PlayerPetAttackSystem.h"
@@ -163,6 +164,7 @@ int main()
         playerConcussiveShotAttackSystem(*ctx);
         playerSerpentStingAttackSystem(*ctx);
         playerPetAttackSystem(*ctx);
+        playerFrostNovaAttackSystem(*ctx);
 
         serpentStingDebuffSystem(*ctx);
         concussiveShotDebuffSystem(*ctx);

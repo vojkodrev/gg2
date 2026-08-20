@@ -306,6 +306,7 @@
  <tile id="388">
   <properties>
    <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="3"/>
    <property name="type" value="frostNova"/>
   </properties>
   <animation>
