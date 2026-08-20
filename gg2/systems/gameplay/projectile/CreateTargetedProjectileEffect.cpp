@@ -2,9 +2,8 @@
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/core/constants/MathConstants.h"
 #include "../../../structs/entity/EntityType.h"
-#include "../../../structs/effect/DestroyEffectType.h"
 #include "../effects/EffectAlloc.h"
-#include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../effects/CopyEffect.h"
 #include "../../../utils/entity/ResetEntityBaseAnimationToInitial.h"
 #include "../../../utils/animation/AnchorOrCollision.h"
 #include "../../../utils/collision/EntityColAABB.h"
@@ -46,25 +45,25 @@ int createTargetedProjectileEffect(
     if (effectIndex == INVALID_ID)
         return INVALID_ID;
 
+    if (parentType == EntityType::Player)
+        copyEffect(
+            ctx,
+            ctx.data.player.equipment.ammo.base,
+            parentId,
+            effectIndex);
+    else
+        copyEffect(
+            ctx,
+            ctx.data.npc.equipment.ammo.base,
+            parentId,
+            effectIndex);
+
     ctx.data.effect.type[effectIndex] = EffectType::Projectile;
     ctx.data.effect.projectileType[effectIndex] = projectileType;
-    ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
     ctx.data.effect.parent.type[effectIndex] = parentType;
     ctx.data.effect.parent.id[effectIndex] = parentId;
     ctx.data.effect.target.type[effectIndex] = targetType;
     ctx.data.effect.target.id[effectIndex] = targetId;
-    if (parentType == EntityType::Player)
-        copyEntityBaseSlot(
-            ctx.data.player.equipment.ammo.base,
-            parentId,
-            ctx.data.effect.base,
-            effectIndex);
-    else
-        copyEntityBaseSlot(
-            ctx.data.npc.equipment.ammo.base,
-            parentId,
-            ctx.data.effect.base,
-            effectIndex);
 
     auto &effectBase = ctx.data.effect.base;
     effectBase.tint.r[effectIndex] = tint.r;

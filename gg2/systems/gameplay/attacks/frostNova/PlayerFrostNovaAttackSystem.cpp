@@ -4,7 +4,7 @@
 #include "../../../structs/effect/EffectType.h"
 #include "../../../structs/entity/EntityType.h"
 #include "../../../structs/equipment/WeaponType.h"
-#include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../effects/CopyEffect.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "../../../utils/rect/EntityPositionCenter.h"
 #include "../../effects/EffectAlloc.h"
@@ -26,10 +26,10 @@ void playerFrostNovaAttackSystem(Context &ctx)
         return;
 
     auto &effect = ctx.data.effect;
-    copyEntityBaseSlot(
+    copyEffect(
+        ctx,
         ctx.data.effectTemplate.base,
         ctx.data.effectTemplate.frostNovaIndex,
-        effect.base,
         effectIndex);
 
     const SDL_FRect effectRect = centeredRect(
@@ -39,11 +39,9 @@ void playerFrostNovaAttackSystem(Context &ctx)
     effect.base.position.x[effectIndex] = effectRect.x;
     effect.base.position.y[effectIndex] = effectRect.y;
     effect.base.position.dirty[effectIndex] = true;
-    effect.base.animation.animationStartTime[effectIndex] = ctx.frame.now;
 
     effect.type[effectIndex] = EffectType::FrostNova;
     effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
-    effect.destroyTimer[effectIndex] = 0.0f;
     effect.parent.type[effectIndex] = EntityType::Player;
     effect.parent.id[effectIndex] = 0;
 }

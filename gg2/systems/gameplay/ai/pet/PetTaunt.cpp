@@ -3,7 +3,7 @@
 #include "../../../structs/core/constants/TauntConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
-#include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../effects/CopyEffect.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../attacks/aggroTable/FindAggroTableSlotByEntityId.h"
 #include "../../attacks/aggroTable/FindNextHighestAggroTableValue.h"
@@ -22,16 +22,14 @@ void petTaunt(Context &ctx, uint32_t n)
     if (effectIndex == INVALID_ID)
         return;
 
-    copyEntityBaseSlot(
+    copyEffect(
+        ctx,
         ctx.data.effectTemplate.base,
         ctx.data.effectTemplate.tauntIndex,
-        ctx.data.effect.base,
         effectIndex);
-    ctx.data.effect.base.animation.animationStartTime[effectIndex] = ctx.frame.now;
 
     ctx.data.effect.type[effectIndex] = EffectType::Taunt;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
-    ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
     ctx.data.effect.parent.id[effectIndex] = targetId;
     ctx.data.npc.tauntTimer[n] = TAUNT_COOLDOWN_TIME;
