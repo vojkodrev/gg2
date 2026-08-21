@@ -24,8 +24,9 @@ void playerMovementSystem(Context &ctx)
         dy /= len;
     }
 
-    const float moveSpeed = getEntityMovementSpeed(
-        p.concussiveShotDebuff,
+    const float moveSpeed = getEntityMovementSpeed<1>(
+        &p.concussiveShotDebuff,
+        nullptr,
         0,
         PLAYER_SPEED);
     const float moveX = dx * moveSpeed * ctx.frame.dt;

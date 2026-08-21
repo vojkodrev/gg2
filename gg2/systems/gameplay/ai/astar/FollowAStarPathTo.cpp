@@ -72,6 +72,14 @@ bool followAStarPathTo(
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {
+        const float moveSpeed = getEntityMovementSpeed(
+            &npc.concussiveShotDebuff,
+            &npc.frostNovaDebuff,
+            n,
+            NPC_MONSTER_SPEED);
+        if (moveSpeed == 0.0f)
+            return false;
+
         const uint32_t len = ai.path.length[n];
         if (ai.pathTargetCheckTimer[n] <= 0.0f)
         {
@@ -117,10 +125,6 @@ bool followAStarPathTo(
             (float)ai.path.point.x[n][pathIndex],
             (float)ai.path.point.y[n][pathIndex]
         };
-        const float moveSpeed = getEntityMovementSpeed(
-            npc.concussiveShotDebuff,
-            n,
-            NPC_MONSTER_SPEED);
         moveNpcColCenterToward(
             ctx,
             n,

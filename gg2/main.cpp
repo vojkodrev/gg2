@@ -42,6 +42,8 @@
 #include "attacks/timers/GlobalCooldownTimerSystem.h"
 #include "attacks/concussiveShot/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/frostNova/PlayerFrostNovaAttackSystem.h"
+#include "attacks/frostNova/FrostNovaCollisionSystem.h"
+#include "attacks/frostNova/FrostNovaDebuffSystem.h"
 #include "attacks/serpentSting/PlayerSerpentStingAttackSystem.h"
 #include "attacks/serpentSting/SerpentStingDebuffSystem.h"
 #include "attacks/autoAttack/PlayerPetAttackSystem.h"
@@ -168,12 +170,14 @@ int main()
 
         serpentStingDebuffSystem(*ctx);
         concussiveShotDebuffSystem(*ctx);
+        frostNovaDebuffSystem(*ctx);
 
         effectTimerSystem(*ctx);
         moveEffectSystem(*ctx);
         destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
         projectileCollisionSystem(*ctx);
+        frostNovaCollisionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
 
