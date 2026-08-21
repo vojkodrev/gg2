@@ -6,6 +6,7 @@
 #include "../../../structs/entity/EntityType.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../effects/CopyEffect.h"
+#include "../../scale/ScaleEntityBaseLocations.h"
 #include "../../../utils/rect/CenteredRect.h"
 #include "../../../utils/rect/EntityPositionCenter.h"
 #include "../../effects/EffectAlloc.h"
@@ -33,6 +34,7 @@ void playerFrostNovaAttackSystem(Context &ctx)
         ctx.data.effectTemplate.base,
         ctx.data.effectTemplate.frostNovaIndex,
         effectIndex);
+    scaleEntityBaseLocations(effect.base, effectIndex);
 
     const SDL_FRect effectRect = centeredRect(
         entityPositionCenter(player.base.position, 0),
