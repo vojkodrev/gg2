@@ -12,19 +12,28 @@
 struct Player
 {
     Group<1> group;
+    EntityBase<1> base;
+    
     int petId = INVALID_ID;
-    int selectedNpc = INVALID_ID;
     int previousSelectedNpc = INVALID_ID;
+    
+    int selectedNpc = INVALID_ID;
     int selectedEffectId = INVALID_ID;
+    
     float globalCooldownTimer = 0.0f;
     float concussiveShotCooldownTimer = 0.0f;
+    float frostNovaCooldownTimer = 0.0f;
     float targetVisibleTimer = 0.0f;
+    
     bool targetVisible = false;
-    AutoAttack<1> autoAttack;
-    EntityBase<1> base;
+    
     Statistics<1> statistics;
     Equipment<1> equipment;
+    
     Healthbar<1> healthbar;
     Manabar<1> manabar;
+    
+    AutoAttack<1> autoAttack;
+    
     Debuff<1> concussiveShotDebuff;
 };

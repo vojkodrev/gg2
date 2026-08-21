@@ -1,4 +1,5 @@
 #include "PlayerFrostNovaAttackSystem.h"
+#include "../../../structs/core/constants/FrostNovaConstants.h"
 #include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -14,6 +15,7 @@ void playerFrostNovaAttackSystem(Context &ctx)
     auto &player = ctx.data.player;
     const auto &weapon = player.equipment.weapon;
     if (!ctx.data.action.digit2Released ||
+        player.frostNovaCooldownTimer > 0.0f ||
         !weapon.exists[0] ||
         weapon.type[0] != WeaponType::Magic)
         return;
@@ -44,4 +46,6 @@ void playerFrostNovaAttackSystem(Context &ctx)
     effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
     effect.parent.type[effectIndex] = EntityType::Player;
     effect.parent.id[effectIndex] = 0;
+
+    player.frostNovaCooldownTimer = FROST_NOVA_COOLDOWN_TIME;
 }

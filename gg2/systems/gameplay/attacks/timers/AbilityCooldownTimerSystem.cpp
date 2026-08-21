@@ -11,6 +11,14 @@ void abilityCooldownTimerSystem(Context &ctx)
             concussiveShotCooldownTimer = 0.0f;
     }
 
+    auto &frostNovaCooldownTimer = ctx.data.player.frostNovaCooldownTimer;
+    if (frostNovaCooldownTimer > 0.0f)
+    {
+        frostNovaCooldownTimer -= dt;
+        if (frostNovaCooldownTimer < 0.0f)
+            frostNovaCooldownTimer = 0.0f;
+    }
+
     for (uint32_t npcId = 0; npcId < MAX_NPCS; npcId++)
     {
         if (!ctx.data.npc.active[npcId])
