@@ -42,7 +42,7 @@
 #include "attacks/timers/GlobalCooldownTimerSystem.h"
 #include "attacks/concussiveShot/PlayerConcussiveShotAttackSystem.h"
 #include "attacks/frostNova/PlayerFrostNovaAttackSystem.h"
-#include "attacks/frostNova/FrostNovaCollisionSystem.h"
+#include "collision/effects/AoeEffectCollisionSystem.h"
 #include "attacks/frostNova/FrostNovaDebuffSystem.h"
 #include "attacks/serpentSting/PlayerSerpentStingAttackSystem.h"
 #include "attacks/serpentSting/SerpentStingDebuffSystem.h"
@@ -177,7 +177,7 @@ int main()
         destroyEffectSystem(*ctx);
         effectDepthSystem(*ctx);
         projectileCollisionSystem(*ctx);
-        frostNovaCollisionSystem(*ctx);
+        aoeEffectCollisionSystem(*ctx);
 
         destroyNpcSystem(*ctx);
 
