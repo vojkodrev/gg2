@@ -1,4 +1,5 @@
 #include "FrostNovaCollisionSystem.h"
+#include "../damage/ApplyAttackDamage.h"
 #include "../debuff/AddDebuff.h"
 #include "../debuff/RemoveDebuff.h"
 #include "../../../structs/core/constants/FrostNovaConstants.h"
@@ -67,6 +68,16 @@ void frostNovaCollisionSystem(Context &ctx)
                 effect.parent.type[effectIndex],
                 effect.parent.id[effectIndex],
                 FROST_NOVA_DEBUFF_TIME);
+
+            applyAttackDamage(
+                ctx,
+                EntityType::NPC,
+                npcIndex,
+                npc.statistics,
+                npc.group,
+                npc.base,
+                FROST_NOVA_DAMAGE,
+                0);
         }
     }
 }
