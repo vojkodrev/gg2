@@ -3,7 +3,7 @@
 #include "NpcMonsterConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
-#include "../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../effects/CopyEffect.h"
 #include "../../attacks/damage/ApplyAttackDamage.h"
 #include "../../attacks/aggroTable/AddToAggroTableValue.h"
 #include "../../effects/EffectAlloc.h"
@@ -33,16 +33,14 @@ void executePetAttack(Context &ctx, uint32_t n, EntityType targetType, int targe
         (int)n,
         (float)damage);
 
-    copyEntityBaseSlot(
+    copyEffect(
+        ctx,
         ctx.data.effectTemplate.base,
         ctx.data.effectTemplate.bloodSplatterIndex,
-        ctx.data.effect.base,
         effectIndex);
-    ctx.data.effect.base.animation.animationStartTime[effectIndex] = ctx.frame.now;
 
     ctx.data.effect.type[effectIndex] = EffectType::BloodSplatter;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
-    ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = targetType;
     ctx.data.effect.parent.id[effectIndex] = targetId;
     ctx.data.npc.autoAttack.attackTimer[n] = PET_MELEE_AUTO_ATTACK_DELAY;

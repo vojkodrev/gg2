@@ -8,5 +8,6 @@ struct EffectTemplate
     int selectIndex = 0;
     int bloodSplatterIndex = 0;
     int tauntIndex = 0;
+    int frostNovaIndex = 0;
     EntityBase<MAX_EFFECTS> base;
 };

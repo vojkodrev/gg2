@@ -8,8 +8,8 @@
 #include <atomic>
 #include "../../../../utils/collision/HasReachedRect.h"
 #include "MoveColCenterToward.h"
-#include "../../../../structs/core/constants/ConcussiveShotConstants.h"
 #include "../../../../utils/collision/EntityColCenter.h"
+#include "../../../../utils/entity/GetEntityMovementSpeed.h"
 #include "../../../../utils/math/Dist.h"
 #include "NpcMonsterConstants.h"
 #include "RequestAStarPath.h"
@@ -72,6 +72,14 @@ bool followAStarPathTo(
     }
     else if (pathStatus == NPCPathStatus::CALCULATION_FINISHED)
     {
+        const float moveSpeed = getEntityMovementSpeed(
+            &npc.concussiveShotDebuff,
+            &npc.frostNovaDebuff,
+            n,
+            NPC_MONSTER_SPEED);
+        if (moveSpeed == 0.0f)
+            return false;
+
         const uint32_t len = ai.path.length[n];
         if (ai.pathTargetCheckTimer[n] <= 0.0f)
         {
@@ -117,13 +125,6 @@ bool followAStarPathTo(
             (float)ai.path.point.x[n][pathIndex],
             (float)ai.path.point.y[n][pathIndex]
         };
-        const auto &debuff = ctx.data.npc.concussiveShotDebuff;
-        bool isConcussed = false;
-        for (uint32_t j = 0; j < MAX_DEBUFF_SLOTS; j++)
-            isConcussed = isConcussed || debuff.pool.active[n][j];
-        const float moveSpeed = isConcussed ?
-            NPC_MONSTER_SPEED * CONCUSSIVE_SHOT_SPEED_MULTIPLIER :
-            NPC_MONSTER_SPEED;
         moveNpcColCenterToward(
             ctx,
             n,

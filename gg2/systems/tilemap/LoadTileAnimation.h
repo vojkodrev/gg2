@@ -6,6 +6,7 @@
 #include "../../structs/animation/AnimationStop.h"
 #include "AnimationConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
+#include "GetTileIndex.h"
 #include "LoadAnimationFrameAnchors.h"
 #include "properties/GetTileFloatProp.h"
 #include "properties/GetTileStringProp.h"
@@ -46,8 +47,9 @@ void loadTileAnimation(
         animation.cycleDuration[entityIndex] = 0;
         for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
         {
-            uint32_t frameTileIndex =
-                tileData->animation.frames[frameIndex].tileID - props.firstGid;
+            uint32_t frameTileIndex = getTileIndex(
+                tileData->animation.frames[frameIndex].tileID,
+                props);
             animation.frame.src.x[entityIndex][frameIndex] =
                 frameTileIndex % props.tilesetW * props.srcTileW;
             animation.frame.src.y[entityIndex][frameIndex] =

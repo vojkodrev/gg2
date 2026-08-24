@@ -6,7 +6,7 @@
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
-#include "../../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../effects/CopyEffect.h"
 #include "../../../../utils/queue/Queue.h"
 #include "../../../../utils/queue/QueueEnqueue.h"
 #include "../../effects/EffectAlloc.h"
@@ -39,10 +39,10 @@ inline void createTextEffect(
         if (effectIdsQueue != nullptr)
             queueEnqueue(*effectIdsQueue, 0, effectIndex);
 
-        copyEntityBaseSlot(
+        copyEffect(
+            ctx,
             templateBase,
             ctx.data.effectTemplate.fontIndex + glyph,
-            ctx.data.effect.base,
             effectIndex);
 
         ctx.data.effect.type[effectIndex] = EffectType::Character;

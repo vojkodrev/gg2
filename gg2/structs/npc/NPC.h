@@ -35,6 +35,7 @@ struct NPC
     Manabar<MAX_NPCS> manabar;
     NPCAi ai;
     Debuff<MAX_NPCS> concussiveShotDebuff;
+    Debuff<MAX_NPCS> frostNovaDebuff;
     Debuff<MAX_NPCS> serpentStingDebuff;
 
     NPC()

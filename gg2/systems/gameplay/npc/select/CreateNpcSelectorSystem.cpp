@@ -1,9 +1,8 @@
 #include "CreateNpcSelectorSystem.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
-#include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
 #include "../../../../structs/entity/EntityType.h"
-#include "../../../../utils/entity/CopyEntityBaseSlot.h"
+#include "../../effects/CopyEffect.h"
 #include "../../effects/EffectAlloc.h"
 #include "PlaceNpcSelector.h"
 
@@ -22,15 +21,13 @@ void createNpcSelectorSystem(Context &ctx)
     if (effectIndex == INVALID_ID)
         return;
 
-    copyEntityBaseSlot(
+    copyEffect(
+        ctx,
         ctx.data.effectTemplate.base,
         ctx.data.effectTemplate.selectIndex,
-        ctx.data.effect.base,
         effectIndex);
 
     ctx.data.effect.type[effectIndex] = EffectType::Selector;
-    ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::None;
-    ctx.data.effect.destroyTimer[effectIndex] = 0.0f;
     ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
     ctx.data.effect.parent.id[effectIndex] = npcIndex;
     placeNpcSelector(ctx, effectIndex, npcIndex);

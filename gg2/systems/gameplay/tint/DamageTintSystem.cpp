@@ -16,7 +16,7 @@ void damageTintSystem(Context &ctx)
     bool playerIsSlowed = false;
     for (uint32_t debuffIndex = 0;
          debuffIndex < MAX_DEBUFF_SLOTS;
-         debuffIndex++)
+        debuffIndex++)
         playerIsSlowed = playerIsSlowed ||
             playerConcussiveShotDebuff.pool.active[0][debuffIndex];
     ctx.data.player.base.tint.isSlowed[0] = playerIsSlowed;
@@ -31,12 +31,15 @@ void damageTintSystem(Context &ctx)
         const auto &npcHealth = ctx.data.npc.statistics.health;
         const auto &serpentStingDebuff = ctx.data.npc.serpentStingDebuff;
         const auto &concussiveShotDebuff = ctx.data.npc.concussiveShotDebuff;
+        const auto &frostNovaDebuff = ctx.data.npc.frostNovaDebuff;
         bool isPoisoned = false;
         bool isSlowed = false;
         for (uint32_t debuffIndex = 0; debuffIndex < MAX_DEBUFF_SLOTS; debuffIndex++)
         {
             isPoisoned = isPoisoned || serpentStingDebuff.pool.active[npcId][debuffIndex];
-            isSlowed = isSlowed || concussiveShotDebuff.pool.active[npcId][debuffIndex];
+            isSlowed = isSlowed ||
+                concussiveShotDebuff.pool.active[npcId][debuffIndex] ||
+                frostNovaDebuff.pool.active[npcId][debuffIndex];
         }
         if (npcHealth.dirty[npcId] && npcHealth.hp[npcId] < npcHealth.prevHp[npcId])
         {

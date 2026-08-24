@@ -7,7 +7,8 @@
    <property name="facing" value="right"/>
    <property name="healthbar" value="healthbar"/>
    <property name="manabar" value="manabar"/>
-   <property name="weapon" value="bow1"/>
+   <property name="weapon" value="staff2"/>
+   <property name="weapon2" value="bow1"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.2675" y="38.405" width="31.5205" height="18.25"/>
@@ -93,7 +94,6 @@
    <property name="patrol04" value="-70,70"/>
    <property name="patrolCount" type="int" value="4"/>
    <property name="weapon" value="staff1"/>
-   <property name="weaponScale" type="float" value="1.3"/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="16.7256" y="38.7078" width="31.3008" height="19.115"/>
@@ -158,7 +158,7 @@
  <tile id="194">
   <properties>
    <property name="facing" value="right"/>
-   <property name="scale" type="float" value="1"/>
+   <property name="scale" type="float" value="1.3"/>
    <property name="type" value="staff1"/>
   </properties>
   <objectgroup draworder="index" id="4">
@@ -174,6 +174,16 @@
   <objectgroup draworder="index" id="2">
    <object id="1" name="anchor" x="10.1847" y="50.8033" width="5.53552" height="5.18219"/>
    <object id="2" name="collision" x="39.5771" y="6.34525" width="18.3905" height="19.7886"/>
+  </objectgroup>
+ </tile>
+ <tile id="242">
+  <properties>
+   <property name="facing" value="right"/>
+   <property name="scale" type="float" value="1.3"/>
+   <property name="type" value="staff2"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="anchor" x="18.9089" y="38.9046" width="4.99891" height="6.30298"/>
   </objectgroup>
  </tile>
  <tile id="259">
@@ -292,5 +302,66 @@
    <frame tileid="385" duration="100"/>
    <frame tileid="384" duration="100"/>
   </animation>
+ </tile>
+ <tile id="388">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="3"/>
+   <property name="type" value="frostNova"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="16.4937" y="16.5421" width="30.5735" height="29.1971"/>
+  </objectgroup>
+  <animation>
+   <frame tileid="388" duration="100"/>
+   <frame tileid="389" duration="100"/>
+   <frame tileid="390" duration="100"/>
+   <frame tileid="391" duration="100"/>
+   <frame tileid="392" duration="100"/>
+   <frame tileid="393" duration="100"/>
+   <frame tileid="394" duration="100"/>
+   <frame tileid="395" duration="100"/>
+   <frame tileid="396" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="389">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="6.95501" y="9.12845" width="49.1198" height="44.3382"/>
+  </objectgroup>
+ </tile>
+ <tile id="390">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="4.34688" y="4.34688" width="55.4227" height="54.1187"/>
+  </objectgroup>
+ </tile>
+ <tile id="391">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="1.30406" y="2.39078" width="60.639" height="58.0309"/>
+  </objectgroup>
+ </tile>
+ <tile id="392">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="0" y="0.869376" width="63.8992" height="63.2471"/>
+  </objectgroup>
+ </tile>
+ <tile id="393">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="-6.13397" y="-7.51045" width="76.3604" height="77.4228"/>
+  </objectgroup>
+ </tile>
+ <tile id="394">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="-11.181" y="-10.1428" width="86.165" height="83.7014"/>
+  </objectgroup>
+ </tile>
+ <tile id="395">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="-11.9772" y="-10.0692" width="86.165" height="83.7014"/>
+  </objectgroup>
+ </tile>
+ <tile id="396">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="-12.3153" y="-9.39305" width="86.165" height="83.7014"/>
+  </objectgroup>
  </tile>
 </tileset>

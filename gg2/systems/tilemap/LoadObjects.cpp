@@ -1,5 +1,6 @@
 #include "LoadObjects.h"
 #include "FindLayer.h"
+#include "GetTileIndex.h"
 #include "LoadEntityBase.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include <tmxlite/TileLayer.hpp>
@@ -15,7 +16,7 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         if (objectTiles[i].ID == 0)
             continue;
         uint32_t n = object.objectCount++;
-        uint32_t idx = objectTiles[i].ID - props.firstGid;
+        uint32_t idx = getTileIndex(objectTiles[i].ID, props);
         loadEntityBase(object.base, n, tileset, idx, props, i);
         object.groupId[n] = groupAlloc(ctx.data.groups);
     }

@@ -27,6 +27,8 @@ add_library(systems_gameplay
     attacks/concussiveShot/ConcussiveShotDebuffSystem.cpp
     attacks/timers/GlobalCooldownTimerSystem.cpp
     attacks/concussiveShot/PlayerConcussiveShotAttackSystem.cpp
+    attacks/frostNova/PlayerFrostNovaAttackSystem.cpp
+    attacks/frostNova/FrostNovaDebuffSystem.cpp
     attacks/autoAttack/PlayerPetAttackSystem.cpp
     attacks/serpentSting/PlayerSerpentStingAttackSystem.cpp
     attacks/serpentSting/SerpentStingDebuffSystem.cpp
@@ -72,6 +74,7 @@ add_library(systems_gameplay
     ai/astar/RequestAStarPath.cpp
     collision/CollisionSystem.cpp
     collision/effects/ProjectileCollisionSystem.cpp
+    collision/effects/AoeEffectCollisionSystem.cpp
     collision/CollisionResolutionSystem.cpp
     collision/RangedNpcAmmoAnchorCollisionSystem.cpp
     projectile/CreateTargetedProjectileEffect.cpp

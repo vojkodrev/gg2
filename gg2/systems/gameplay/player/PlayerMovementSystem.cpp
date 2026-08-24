@@ -1,7 +1,6 @@
 #include "PlayerMovementSystem.h"
-#include "AttackConstants.h"
-#include "ConcussiveShotConstants.h"
 #include "PlayerConstants.h"
+#include "../../../utils/entity/GetEntityMovementSpeed.h"
 #include <cmath>
 
 void playerMovementSystem(Context &ctx)
@@ -25,13 +24,11 @@ void playerMovementSystem(Context &ctx)
         dy /= len;
     }
 
-    const auto &debuff = p.concussiveShotDebuff;
-    bool isConcussed = false;
-    for (uint32_t i = 0; i < MAX_DEBUFF_SLOTS; i++)
-        isConcussed = isConcussed || debuff.pool.active[0][i];
-    const float moveSpeed = isConcussed ?
-        PLAYER_SPEED * CONCUSSIVE_SHOT_SPEED_MULTIPLIER :
-        PLAYER_SPEED;
+    const float moveSpeed = getEntityMovementSpeed<1>(
+        &p.concussiveShotDebuff,
+        nullptr,
+        0,
+        PLAYER_SPEED);
     const float moveX = dx * moveSpeed * ctx.frame.dt;
     const float moveY = dy * moveSpeed * ctx.frame.dt;
     p.base.position.dirty[0] = moveX != 0.0f || moveY != 0.0f;
