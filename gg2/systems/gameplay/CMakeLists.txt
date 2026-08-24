@@ -79,6 +79,8 @@ add_library(systems_gameplay
     collision/RangedNpcAmmoAnchorCollisionSystem.cpp
     projectile/CreateTargetedProjectileEffect.cpp
     ui/actionbar/ActionBarTintSystem.cpp
+    ui/actionbar/SetMagicActionBarIconsTint.cpp
+    ui/actionbar/SetRangedActionBarIconsTint.cpp
     ui/bars/ShowBarSystem.cpp
     ui/bars/BarFrameSystem.cpp
     ui/bars/BarPositionSystem.cpp

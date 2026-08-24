@@ -4,10 +4,16 @@
 void fillActionBarRenderBuffer(Context &ctx)
 {
     auto &actionBar = ctx.data.actionBar;
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.rangedAutoAttack.base, 0, 0, 0);
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.petAutoAttack.base, 0, 0, 0);
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.petTaunt.base, 0, 0, 0);
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.serpentSting.base, 0, 0, 0);
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.concussiveShot.base, 0, 0, 0);
-    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.frostNova.base, 0, 0, 0);
+    auto &base = actionBar.icon.base;
+    for (int iconIndex = 0; iconIndex < MAX_ACTION_BAR_ICONS; iconIndex++)
+    {
+        if (!actionBar.icon.active[iconIndex])
+            continue;
+        fillEntityBaseRenderBuffer(
+            ctx.renderBuffer,
+            base,
+            iconIndex,
+            0,
+            0);
+    }
 }

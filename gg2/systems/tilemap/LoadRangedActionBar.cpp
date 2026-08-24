@@ -13,70 +13,89 @@ void loadRangedActionBar(Context &ctx, const tmx::Tileset &tileset)
 {
     auto &props = ctx.data.tileMapProps;
     auto &actionBar = ctx.data.actionBar;
+    auto &base = actionBar.icon.base;
+    actionBar.rangedAutoAttackIndex = 0;
+    actionBar.serpentStingIndex = 1;
+    actionBar.concussiveShotIndex = 2;
+    actionBar.petAutoAttackIndex = 3;
+    actionBar.petTauntIndex = 4;
 
-    uint32_t rangedAutoAttackTileIdx = 0;
-    if (findTileByIcon(tileset, "rangedAutoAttack", rangedAutoAttackTileIdx))
-        loadEntityBase(actionBar.rangedAutoAttack.base, 0, tileset, rangedAutoAttackTileIdx, props);
+    uint32_t tileIndex = 0;
+    if (findTileByIcon(tileset, "rangedAutoAttack", tileIndex))
+    {
+        loadEntityBase(base, actionBar.rangedAutoAttackIndex, tileset, tileIndex, props);
+        actionBar.icon.active[actionBar.rangedAutoAttackIndex] = true;
+    }
+    if (findTileByIcon(tileset, "serpentSting", tileIndex))
+    {
+        loadEntityBase(base, actionBar.serpentStingIndex, tileset, tileIndex, props);
+        actionBar.icon.active[actionBar.serpentStingIndex] = true;
+    }
+    if (findTileByIcon(tileset, "concussiveShot", tileIndex))
+    {
+        loadEntityBase(base, actionBar.concussiveShotIndex, tileset, tileIndex, props);
+        actionBar.icon.active[actionBar.concussiveShotIndex] = true;
+    }
+    if (findTileByIcon(tileset, "petAutoAttack", tileIndex))
+    {
+        loadEntityBase(base, actionBar.petAutoAttackIndex, tileset, tileIndex, props);
+        actionBar.icon.active[actionBar.petAutoAttackIndex] = true;
+    }
+    if (findTileByIcon(tileset, "taunt", tileIndex))
+    {
+        loadEntityBase(base, actionBar.petTauntIndex, tileset, tileIndex, props);
+        actionBar.icon.active[actionBar.petTauntIndex] = true;
+    }
 
-    uint32_t petAutoAttackTileIdx = 0;
-    if (findTileByIcon(tileset, "petAutoAttack", petAutoAttackTileIdx))
-        loadEntityBase(actionBar.petAutoAttack.base, 0, tileset, petAutoAttackTileIdx, props);
-
-    uint32_t petTauntTileIdx = 0;
-    if (findTileByIcon(tileset, "taunt", petTauntTileIdx))
-        loadEntityBase(actionBar.petTaunt.base, 0, tileset, petTauntTileIdx, props);
-
-    uint32_t serpentStingTileIdx = 0;
-    if (findTileByIcon(tileset, "serpentSting", serpentStingTileIdx))
-        loadEntityBase(actionBar.serpentSting.base, 0, tileset, serpentStingTileIdx, props);
-
-    uint32_t concussiveShotTileIdx = 0;
-    if (findTileByIcon(tileset, "concussiveShot", concussiveShotTileIdx))
-        loadEntityBase(actionBar.concussiveShot.base, 0, tileset, concussiveShotTileIdx, props);
-
-    const float rangedW = actionBar.rangedAutoAttack.base.position.w[0];
-    const float rangedH = actionBar.rangedAutoAttack.base.position.h[0];
-    const float serpentW = actionBar.serpentSting.base.position.w[0];
-    const float serpentH = actionBar.serpentSting.base.position.h[0];
-    const float concussiveW = actionBar.concussiveShot.base.position.w[0];
-    const float concussiveH = actionBar.concussiveShot.base.position.h[0];
-    const float petW = actionBar.petAutoAttack.base.position.w[0];
-    const float petH = actionBar.petAutoAttack.base.position.h[0];
-    const float petTauntW = actionBar.petTaunt.base.position.w[0];
-    const float petTauntH = actionBar.petTaunt.base.position.h[0];
+    const int rangedIndex = actionBar.rangedAutoAttackIndex;
+    const int serpentIndex = actionBar.serpentStingIndex;
+    const int concussiveIndex = actionBar.concussiveShotIndex;
+    const int petIndex = actionBar.petAutoAttackIndex;
+    const int petTauntIndex = actionBar.petTauntIndex;
+    const float rangedW = base.position.w[rangedIndex];
+    const float rangedH = base.position.h[rangedIndex];
+    const float serpentW = base.position.w[serpentIndex];
+    const float serpentH = base.position.h[serpentIndex];
+    const float concussiveW = base.position.w[concussiveIndex];
+    const float concussiveH = base.position.h[concussiveIndex];
+    const float petW = base.position.w[petIndex];
+    const float petH = base.position.h[petIndex];
+    const float petTauntW = base.position.w[petTauntIndex];
+    const float petTauntH = base.position.h[petTauntIndex];
     const float totalW =
         rangedW + serpentW + concussiveW + petW + petTauntW +
         ACTION_BAR_ICON_GAP * 3.0f + ACTION_BAR_PET_SECTION_GAP;
     const float startX = (SCREEN_W - totalW) / 2.0f;
     const float bottomY = SCREEN_H - ACTION_BAR_BOTTOM_PADDING;
 
-    actionBar.rangedAutoAttack.base.position.x[0] = startX;
-    actionBar.rangedAutoAttack.base.position.y[0] = bottomY - rangedH;
-    actionBar.rangedAutoAttack.base.position.absolute[0] = true;
-    actionBar.rangedAutoAttack.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    base.position.x[rangedIndex] = startX;
+    base.position.y[rangedIndex] = bottomY - rangedH;
+    base.position.absolute[rangedIndex] = true;
+    base.depthY[rangedIndex] = ACTION_BAR_DEPTH_Y;
 
-    actionBar.serpentSting.base.position.x[0] = startX + rangedW + ACTION_BAR_ICON_GAP;
-    actionBar.serpentSting.base.position.y[0] = bottomY - serpentH;
-    actionBar.serpentSting.base.position.absolute[0] = true;
-    actionBar.serpentSting.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    base.position.x[serpentIndex] = startX + rangedW + ACTION_BAR_ICON_GAP;
+    base.position.y[serpentIndex] = bottomY - serpentH;
+    base.position.absolute[serpentIndex] = true;
+    base.depthY[serpentIndex] = ACTION_BAR_DEPTH_Y;
 
-    actionBar.concussiveShot.base.position.x[0] =
-        actionBar.serpentSting.base.position.x[0] + serpentW + ACTION_BAR_ICON_GAP;
-    actionBar.concussiveShot.base.position.y[0] = bottomY - concussiveH;
-    actionBar.concussiveShot.base.position.absolute[0] = true;
-    actionBar.concussiveShot.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    base.position.x[concussiveIndex] =
+        base.position.x[serpentIndex] + serpentW + ACTION_BAR_ICON_GAP;
+    base.position.y[concussiveIndex] = bottomY - concussiveH;
+    base.position.absolute[concussiveIndex] = true;
+    base.depthY[concussiveIndex] = ACTION_BAR_DEPTH_Y;
 
-    actionBar.petAutoAttack.base.position.x[0] =
-        actionBar.concussiveShot.base.position.x[0] + concussiveW + ACTION_BAR_PET_SECTION_GAP;
-    actionBar.petAutoAttack.base.position.y[0] = bottomY - petH;
-    actionBar.petAutoAttack.base.position.absolute[0] = true;
-    actionBar.petAutoAttack.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    base.position.x[petIndex] =
+        base.position.x[concussiveIndex] + concussiveW +
+        ACTION_BAR_PET_SECTION_GAP;
+    base.position.y[petIndex] = bottomY - petH;
+    base.position.absolute[petIndex] = true;
+    base.depthY[petIndex] = ACTION_BAR_DEPTH_Y;
 
-    actionBar.petTaunt.base.position.x[0] =
-        actionBar.petAutoAttack.base.position.x[0] + petW + ACTION_BAR_ICON_GAP;
-    actionBar.petTaunt.base.position.y[0] = bottomY - petTauntH;
-    actionBar.petTaunt.base.position.absolute[0] = true;
-    actionBar.petTaunt.base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    base.position.x[petTauntIndex] =
+        base.position.x[petIndex] + petW + ACTION_BAR_ICON_GAP;
+    base.position.y[petTauntIndex] = bottomY - petTauntH;
+    base.position.absolute[petTauntIndex] = true;
+    base.depthY[petTauntIndex] = ACTION_BAR_DEPTH_Y;
 
     const SDL_FColor whiteTint = {
         CLEAR_TINT_R,
@@ -84,24 +103,27 @@ void loadRangedActionBar(Context &ctx, const tmx::Tileset &tileset)
         CLEAR_TINT_B,
         CLEAR_TINT_A
     };
-    const ActionBarIcon *numberedIcons[] = {
-        &actionBar.rangedAutoAttack,
-        &actionBar.serpentSting,
-        &actionBar.concussiveShot,
-        &actionBar.petAutoAttack
+    const int numberedIconIndexes[] = {
+        rangedIndex,
+        serpentIndex,
+        concussiveIndex,
+        petIndex
     };
     for (int i = 0; i < 4; i++)
+    {
+        const int iconIndex = numberedIconIndexes[i];
         createTextEffect(
             ctx,
             actionBar.groupId,
             EntityType::ActionBarIcon,
-            i,
+            iconIndex,
             DestroyEffectType::None,
             0.0f,
             std::to_string(i + 1),
             SDL_FPoint{
-                numberedIcons[i]->base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
-                numberedIcons[i]->base.position.y[0] + ACTION_BAR_DIGIT_PADDING
+                base.position.x[iconIndex] + ACTION_BAR_DIGIT_PADDING,
+                base.position.y[iconIndex] + ACTION_BAR_DIGIT_PADDING
             },
             whiteTint);
+    }
 }

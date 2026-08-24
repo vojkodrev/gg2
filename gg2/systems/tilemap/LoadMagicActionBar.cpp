@@ -14,32 +14,42 @@ void loadMagicActionBar(Context &ctx, const tmx::Tileset &tileset)
     uint32_t frostNovaTileIdx = 0;
     if (!findTileByIcon(tileset, "frostNova", frostNovaTileIdx))
         return;
+    actionBar.frostNovaIndex = 0;
 
     loadEntityBase(
-        actionBar.frostNova.base,
-        0,
+        actionBar.icon.base,
+        actionBar.frostNovaIndex,
         tileset,
         frostNovaTileIdx,
         ctx.data.tileMapProps);
+    actionBar.icon.active[actionBar.frostNovaIndex] = true;
 
-    auto &base = actionBar.frostNova.base;
-    base.position.x[0] = (SCREEN_W - base.position.w[0]) / 2.0f;
-    base.position.y[0] =
-        SCREEN_H - ACTION_BAR_BOTTOM_PADDING - base.position.h[0];
-    base.position.absolute[0] = true;
-    base.depthY[0] = ACTION_BAR_DEPTH_Y;
+    auto &base = actionBar.icon.base;
+    const int iconIndex = actionBar.frostNovaIndex;
+    base.position.x[iconIndex] =
+        (SCREEN_W - base.position.w[iconIndex]) / 2.0f;
+    base.position.y[iconIndex] =
+        SCREEN_H - ACTION_BAR_BOTTOM_PADDING - base.position.h[iconIndex];
+    base.position.absolute[iconIndex] = true;
+    base.depthY[iconIndex] = ACTION_BAR_DEPTH_Y;
 
+    const SDL_FColor whiteTint = {
+        CLEAR_TINT_R,
+        CLEAR_TINT_G,
+        CLEAR_TINT_B,
+        CLEAR_TINT_A
+    };
     createTextEffect(
         ctx,
         actionBar.groupId,
         EntityType::ActionBarIcon,
-        1,
+        iconIndex,
         DestroyEffectType::None,
         0.0f,
-        "2",
+        "1",
         SDL_FPoint{
-            base.position.x[0] + ACTION_BAR_DIGIT_PADDING,
-            base.position.y[0] + ACTION_BAR_DIGIT_PADDING
+            base.position.x[iconIndex] + ACTION_BAR_DIGIT_PADDING,
+            base.position.y[iconIndex] + ACTION_BAR_DIGIT_PADDING
         },
-        SDL_FColor{CLEAR_TINT_R, CLEAR_TINT_G, CLEAR_TINT_B, CLEAR_TINT_A});
+        whiteTint);
 }
