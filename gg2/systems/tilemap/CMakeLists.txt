@@ -3,6 +3,8 @@ add_library(systems_tilemap
     GetAnchors.cpp
     IsMarker.cpp
     LoadActionBar.cpp
+    LoadMagicActionBar.cpp
+    LoadRangedActionBar.cpp
     LoadEffects.cpp
     LoadGround.cpp
     LoadNPCs.cpp

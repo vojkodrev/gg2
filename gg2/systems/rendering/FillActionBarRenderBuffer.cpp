@@ -9,4 +9,5 @@ void fillActionBarRenderBuffer(Context &ctx)
     fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.petTaunt.base, 0, 0, 0);
     fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.serpentSting.base, 0, 0, 0);
     fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.concussiveShot.base, 0, 0, 0);
+    fillEntityBaseRenderBuffer(ctx.renderBuffer, actionBar.frostNova.base, 0, 0, 0);
 }

@@ -10,4 +10,5 @@ struct ActionBar
     ActionBarIcon petTaunt;
     ActionBarIcon serpentSting;
     ActionBarIcon concussiveShot;
+    ActionBarIcon frostNova;
 };

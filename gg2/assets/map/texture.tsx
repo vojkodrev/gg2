@@ -266,6 +266,12 @@
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
+ <tile id="365">
+  <properties>
+   <property name="icon" value="frostNova"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
  <tile id="368">
   <properties>
    <property name="type" value="manabar"/>
