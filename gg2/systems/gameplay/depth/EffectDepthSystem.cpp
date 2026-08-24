@@ -1,4 +1,6 @@
 #include "EffectDepthSystem.h"
+#include "../../../structs/core/constants/ActionBarConstants.h"
+#include "../../../structs/core/constants/WindowConstants.h"
 #include "../../../structs/entity/EntityType.h"
 #include <cstdint>
 
@@ -21,11 +23,11 @@ void effectDepthSystem(Context &ctx)
                 break;
             case EntityType::ActionBarIcon:
                 ctx.data.effect.base.depthY[i] =
-                    ctx.data.actionBar.rangedAutoAttack.base.depthY[0];
+                    ctx.data.actionBar.icon.base.depthY[
+                        ctx.data.effect.parent.id[i]];
                 break;
             case EntityType::Window:
-                ctx.data.effect.base.depthY[i] =
-                    ctx.data.actionBar.rangedAutoAttack.base.depthY[0];
+                ctx.data.effect.base.depthY[i] = WINDOW_DEPTH_Y;
                 break;
             default:
                 break;

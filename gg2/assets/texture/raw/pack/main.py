@@ -93,6 +93,7 @@ images = [
     {"id": 57, "filename": "../frostnova.png", "dx": 10, "dy": 24, "sx": 6 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 58, "filename": "../frostnova.png", "dx": 11, "dy": 24, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 59, "filename": "../frostnova.png", "dx": 12, "dy": 24, "sx": 8 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 61, "filename": "../icons/Spell_Frost_FrostNova.png", "dx": 13, "dy": 22},
 ]
 
 
