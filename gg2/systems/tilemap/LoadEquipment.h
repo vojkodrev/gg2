@@ -1,6 +1,7 @@
 #pragma once
 #include "../../structs/equipment/Equipment.h"
 #include "../../structs/equipment/WeaponType.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "ParseWeaponType.h"
 #include "GetTileIndex.h"
@@ -22,6 +23,8 @@ inline void loadEquipment(
 {
     equipmentData.ammo.exists[parentEntityIdx] = false;
     equipmentData.weapon.exists[parentEntityIdx] = false;
+    equipmentData.ammo.zIndex[parentEntityIdx] = AMMO_Z_INDEX;
+    equipmentData.weapon.zIndex[parentEntityIdx] = WEAPON_Z_INDEX;
     std::string weaponAssetType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
     bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);

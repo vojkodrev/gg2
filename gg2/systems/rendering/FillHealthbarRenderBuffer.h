@@ -1,6 +1,5 @@
 #pragma once
 #include "FillEntityBaseRenderBuffer.h"
-#include "../../structs/core/constants/RenderConstants.h"
 #include "../../structs/ui/Healthbar.h"
 #include <cstdint>
 
@@ -19,5 +18,5 @@ inline void fillHealthbarRenderBuffer(
         healthbar.base,
         entityIndex,
         groupId,
-        HP_MANA_BAR_Z_INDEX);
+        healthbar.zIndex[entityIndex]);
 }

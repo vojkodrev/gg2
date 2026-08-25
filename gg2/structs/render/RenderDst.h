@@ -1,5 +1,5 @@
 #pragma once
-#include "RenderConstants.h"
+#include "RenderBufferConstants.h"
 
 struct RenderDst
 {

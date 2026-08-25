@@ -2,6 +2,7 @@
 #include "../../../structs/core/constants/AttackConstants.h"
 #include "../../../structs/core/constants/FrostNovaConstants.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../../../structs/core/constants/ZIndexConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../structs/entity/EntityType.h"
@@ -47,6 +48,7 @@ void playerFrostNovaAttackSystem(Context &ctx)
     effect.base.position.dirty[effectIndex] = true;
 
     effect.type[effectIndex] = EffectType::FrostNova;
+    effect.zIndex[effectIndex] = AOE_PARENT_SPELL_Z_INDEX;
     effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
     effect.parent.type[effectIndex] = EntityType::Player;
     effect.parent.id[effectIndex] = 0;

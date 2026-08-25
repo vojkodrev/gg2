@@ -25,6 +25,7 @@ struct NPC
     float concussiveShotCooldownTimer[MAX_NPCS] = {};
     float tauntTimer[MAX_NPCS] = {};
     Group<MAX_NPCS> group;
+    int zIndex[MAX_NPCS] = {};
     EntityBase<MAX_NPCS> base;
     Statistics<MAX_NPCS> statistics;
     AutoAttack<MAX_NPCS> autoAttack;

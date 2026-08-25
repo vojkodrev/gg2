@@ -7,6 +7,7 @@
 #include "LoadManabar.h"
 #include "../gameplay/statistics/SetHp.h"
 #include "../../structs/core/constants/IndexConstants.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/core/constants/PlayerConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include <tmxlite/TileLayer.hpp>
@@ -37,6 +38,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
         loadManabar(ctx.data.player.manabar, 0, tileset, idx, props);
         ctx.data.player.group.id[0] = groupAlloc(ctx.data.groups);
+        ctx.data.player.zIndex[0] = PARENT_Z_INDEX;
         break;
     }
 }

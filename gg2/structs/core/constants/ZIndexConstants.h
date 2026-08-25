@@ -1,7 +1,7 @@
 #pragma once
 
-const int MAX_RENDER_BUFFER = 1000;
 const int AOE_PARENT_SPELL_Z_INDEX = 0;
+const int ACTION_BAR_ICON_Z_INDEX = 0;
 const int PARENT_Z_INDEX = 1;
 const int WEAPON_Z_INDEX = 2;
 const int AMMO_Z_INDEX = 3;

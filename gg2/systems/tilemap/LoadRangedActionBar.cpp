@@ -4,6 +4,7 @@
 #include "../gameplay/ui/text/CreateTextEffect.h"
 #include "../../structs/entity/EntityType.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/effect/DestroyEffectType.h"
@@ -25,26 +26,36 @@ void loadRangedActionBar(Context &ctx, const tmx::Tileset &tileset)
     {
         loadEntityBase(base, actionBar.rangedAutoAttackIndex, tileset, tileIndex, props);
         actionBar.icon.active[actionBar.rangedAutoAttackIndex] = true;
+        actionBar.icon.zIndex[actionBar.rangedAutoAttackIndex] =
+            ACTION_BAR_ICON_Z_INDEX;
     }
     if (findTileByIcon(tileset, "serpentSting", tileIndex))
     {
         loadEntityBase(base, actionBar.serpentStingIndex, tileset, tileIndex, props);
         actionBar.icon.active[actionBar.serpentStingIndex] = true;
+        actionBar.icon.zIndex[actionBar.serpentStingIndex] =
+            ACTION_BAR_ICON_Z_INDEX;
     }
     if (findTileByIcon(tileset, "concussiveShot", tileIndex))
     {
         loadEntityBase(base, actionBar.concussiveShotIndex, tileset, tileIndex, props);
         actionBar.icon.active[actionBar.concussiveShotIndex] = true;
+        actionBar.icon.zIndex[actionBar.concussiveShotIndex] =
+            ACTION_BAR_ICON_Z_INDEX;
     }
     if (findTileByIcon(tileset, "petAutoAttack", tileIndex))
     {
         loadEntityBase(base, actionBar.petAutoAttackIndex, tileset, tileIndex, props);
         actionBar.icon.active[actionBar.petAutoAttackIndex] = true;
+        actionBar.icon.zIndex[actionBar.petAutoAttackIndex] =
+            ACTION_BAR_ICON_Z_INDEX;
     }
     if (findTileByIcon(tileset, "taunt", tileIndex))
     {
         loadEntityBase(base, actionBar.petTauntIndex, tileset, tileIndex, props);
         actionBar.icon.active[actionBar.petTauntIndex] = true;
+        actionBar.icon.zIndex[actionBar.petTauntIndex] =
+            ACTION_BAR_ICON_Z_INDEX;
     }
 
     const int rangedIndex = actionBar.rangedAutoAttackIndex;

@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-#include "RenderConstants.h"
+#include "RenderBufferConstants.h"
 
 struct RenderGroup
 {

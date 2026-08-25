@@ -4,6 +4,7 @@
 #include "../gameplay/ui/text/CreateTextEffect.h"
 #include "../../structs/entity/EntityType.h"
 #include "../../structs/core/constants/ActionBarConstants.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/core/constants/ScreenConstants.h"
 #include "../../structs/core/constants/TintConstants.h"
 #include "../../structs/effect/DestroyEffectType.h"
@@ -23,6 +24,8 @@ void loadMagicActionBar(Context &ctx, const tmx::Tileset &tileset)
         frostNovaTileIdx,
         ctx.data.tileMapProps);
     actionBar.icon.active[actionBar.frostNovaIndex] = true;
+    actionBar.icon.zIndex[actionBar.frostNovaIndex] =
+        ACTION_BAR_ICON_Z_INDEX;
 
     auto &base = actionBar.icon.base;
     const int iconIndex = actionBar.frostNovaIndex;

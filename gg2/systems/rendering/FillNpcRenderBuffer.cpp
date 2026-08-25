@@ -3,27 +3,37 @@
 #include "FillEquipmentRenderBuffer.h"
 #include "FillHealthbarRenderBuffer.h"
 #include "FillManabarRenderBuffer.h"
-#include "../../structs/core/constants/RenderConstants.h"
 
 void fillNpcRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &npc = ctx.data.npc;
-    for (uint32_t i = 0; i < MAX_NPCS; i++)
+    for (uint32_t npcIndex = 0; npcIndex < MAX_NPCS; npcIndex++)
     {
-        if (!npc.active[i])
+        if (!npc.active[npcIndex])
             continue;
 
-        int groupId = npc.group.id[i];
         fillEntityBaseRenderBuffer(
             rb,
             npc.base,
-            i,
-            groupId,
-            PARENT_Z_INDEX);
+            npcIndex,
+            npc.group.id[npcIndex],
+            npc.zIndex[npcIndex]);
 
-        fillEquipmentRenderBuffer(rb, npc.equipment, i, groupId);
-        fillHealthbarRenderBuffer(rb, npc.healthbar, i, groupId);
-        fillManabarRenderBuffer(rb, npc.manabar, i, groupId);
+        fillEquipmentRenderBuffer(
+            rb,
+            npc.equipment,
+            npcIndex,
+            npc.group.id[npcIndex]);
+        fillHealthbarRenderBuffer(
+            rb,
+            npc.healthbar,
+            npcIndex,
+            npc.group.id[npcIndex]);
+        fillManabarRenderBuffer(
+            rb,
+            npc.manabar,
+            npcIndex,
+            npc.group.id[npcIndex]);
     }
 }

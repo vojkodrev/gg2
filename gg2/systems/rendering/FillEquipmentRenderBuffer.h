@@ -2,7 +2,6 @@
 #include "FillEntityBaseRenderBuffer.h"
 #include "../../structs/equipment/Equipment.h"
 #include "../../structs/equipment/WeaponType.h"
-#include "../../structs/core/constants/RenderConstants.h"
 #include <cstdint>
 
 template<int N>
@@ -20,7 +19,7 @@ inline void fillEquipmentRenderBuffer(
         equipment.weapon.base,
         entityIndex,
         groupId,
-        WEAPON_Z_INDEX);
+        equipment.weapon.zIndex[entityIndex]);
     if (equipment.ammo.exists[entityIndex] &&
         equipment.weapon.type[entityIndex] == WeaponType::Ranged &&
         equipment.weapon.ranged.showAmmo[entityIndex])
@@ -30,6 +29,6 @@ inline void fillEquipmentRenderBuffer(
             equipment.ammo.base,
             entityIndex,
             groupId,
-            AMMO_Z_INDEX);
+            equipment.ammo.zIndex[entityIndex]);
     }
 }
