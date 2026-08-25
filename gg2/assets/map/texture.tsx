@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="400" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="1024" height="1600"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="416" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1664"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
@@ -369,5 +369,22 @@
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="-12.3153" y="-9.39305" width="86.165" height="83.7014"/>
   </objectgroup>
+ </tile>
+ <tile id="404">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="3"/>
+   <property name="type" value="arcaneExplosion"/>
+  </properties>
+  <animation>
+   <frame tileid="404" duration="100"/>
+   <frame tileid="405" duration="100"/>
+   <frame tileid="406" duration="100"/>
+   <frame tileid="407" duration="100"/>
+   <frame tileid="408" duration="100"/>
+   <frame tileid="409" duration="100"/>
+   <frame tileid="410" duration="100"/>
+   <frame tileid="411" duration="100"/>
+  </animation>
  </tile>
 </tileset>

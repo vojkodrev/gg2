@@ -94,6 +94,14 @@ images = [
     {"id": 58, "filename": "../frostnova.png", "dx": 11, "dy": 24, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 59, "filename": "../frostnova.png", "dx": 12, "dy": 24, "sx": 8 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 61, "filename": "../icons/Spell_Frost_FrostNova.png", "dx": 13, "dy": 22},
+    {"id": 62, "filename": "../arcane explosion.png", "dx": 4, "dy": 25, "sx": 0 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 63, "filename": "../arcane explosion.png", "dx": 5, "dy": 25, "sx": 1 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 64, "filename": "../arcane explosion.png", "dx": 6, "dy": 25, "sx": 2 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 65, "filename": "../arcane explosion.png", "dx": 7, "dy": 25, "sx": 3 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 66, "filename": "../arcane explosion.png", "dx": 8, "dy": 25, "sx": 4 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 67, "filename": "../arcane explosion.png", "dx": 9, "dy": 25, "sx": 5 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 68, "filename": "../arcane explosion.png", "dx": 10, "dy": 25, "sx": 6 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 69, "filename": "../arcane explosion.png", "dx": 11, "dy": 25, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
 ]
 
 
