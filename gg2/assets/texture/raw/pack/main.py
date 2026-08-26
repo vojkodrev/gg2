@@ -102,6 +102,7 @@ images = [
     {"id": 67, "filename": "../arcane explosion.png", "dx": 9, "dy": 25, "sx": 5 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 68, "filename": "../arcane explosion.png", "dx": 10, "dy": 25, "sx": 6 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 69, "filename": "../arcane explosion.png", "dx": 11, "dy": 25, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
+    {"id": 70, "filename": "../icons/Spell_Nature_WispSplode.png", "dx": 14, "dy": 22},
 ]
 
 

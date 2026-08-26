@@ -272,6 +272,12 @@
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
+ <tile id="366">
+  <properties>
+   <property name="icon" value="arcaneExplosion"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
  <tile id="368">
   <properties>
    <property name="type" value="manabar"/>

@@ -12,5 +12,6 @@ struct ActionBar
     int serpentStingIndex = INVALID_ID;
     int concussiveShotIndex = INVALID_ID;
     int frostNovaIndex = INVALID_ID;
+    int arcaneExplosionIndex = INVALID_ID;
     ActionBarIcon<MAX_ACTION_BAR_ICONS> icon;
 };
