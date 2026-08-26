@@ -29,6 +29,7 @@ add_library(systems_gameplay
     attacks/concussiveShot/PlayerConcussiveShotAttackSystem.cpp
     attacks/frostNova/PlayerFrostNovaAttackSystem.cpp
     attacks/arcaneExplosion/PlayerArcaneExplosionAttackSystem.cpp
+    attacks/arcaneExplosion/ArcaneExplosionDebuffSystem.cpp
     attacks/frostNova/FrostNovaDebuffSystem.cpp
     attacks/autoAttack/PlayerPetAttackSystem.cpp
     attacks/serpentSting/PlayerSerpentStingAttackSystem.cpp

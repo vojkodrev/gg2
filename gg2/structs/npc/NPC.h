@@ -38,6 +38,7 @@ struct NPC
     Debuff<MAX_NPCS> concussiveShotDebuff;
     Debuff<MAX_NPCS> frostNovaDebuff;
     Debuff<MAX_NPCS> serpentStingDebuff;
+    Debuff<MAX_NPCS> arcaneExplosionDebuff;
 
     NPC()
     {
