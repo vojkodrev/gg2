@@ -32,6 +32,7 @@ void addDebuff(
     if (slot == INVALID_ID)
         return;
 
+    debuff.active[n] = true;
     debuff.timer[n][slot] = timer;
     debuff.entityType[n][slot] = entityType;
     debuff.entityId[n][slot] = entityId;
