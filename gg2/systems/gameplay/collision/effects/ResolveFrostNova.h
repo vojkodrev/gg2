@@ -15,10 +15,18 @@ inline void resolveFrostNova(
 {
     auto &npc = ctx.data.npc;
     auto &debuff = npc.frostNovaDebuff;
-    for (uint32_t slot = 0; slot < debuff.pool.count[npcIndex]; slot++)
+    for (uint32_t debuffIndex = 0;
+        debuffIndex < debuff.pool.count[npcIndex];
+        debuffIndex++)
     {
-        if (debuff.pool.active[npcIndex][slot])
-            removeDebuff(debuff, npcIndex, static_cast<int>(slot));
+        if (!debuff.pool.active[npcIndex][debuffIndex])
+            continue;
+
+        if (debuff.entityType[npcIndex][debuffIndex] == parentType &&
+            debuff.entityId[npcIndex][debuffIndex] == parentId)
+            return;
+
+        removeDebuff(debuff, npcIndex, static_cast<int>(debuffIndex));
     }
 
     addDebuff(
