@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="400" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="1024" height="1600"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="416" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1664"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
@@ -272,6 +272,12 @@
    <property name="scale" type="float" value="0.75"/>
   </properties>
  </tile>
+ <tile id="366">
+  <properties>
+   <property name="icon" value="arcaneExplosion"/>
+   <property name="scale" type="float" value="0.75"/>
+  </properties>
+ </tile>
  <tile id="368">
   <properties>
    <property name="type" value="manabar"/>
@@ -316,7 +322,7 @@
    <property name="type" value="frostNova"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="16.4937" y="16.5421" width="30.5735" height="29.1971"/>
+   <object id="1" name="collision" x="13.3333" y="16.6667" width="37.3333" height="30.6667"/>
   </objectgroup>
   <animation>
    <frame tileid="388" duration="100"/>
@@ -332,42 +338,97 @@
  </tile>
  <tile id="389">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="6.95501" y="9.12845" width="49.1198" height="44.3382"/>
+   <object id="1" name="collision" x="7.3333" y="11.3333" width="49.3333" height="41.3333"/>
   </objectgroup>
  </tile>
  <tile id="390">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="4.34688" y="4.34688" width="55.4227" height="54.1187"/>
+   <object id="1" name="collision" x="3.3333" y="6" width="57.3333" height="52"/>
   </objectgroup>
  </tile>
  <tile id="391">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="1.30406" y="2.39078" width="60.639" height="58.0309"/>
+   <object id="1" name="collision" x="2" y="2.6667" width="60" height="58.6667"/>
   </objectgroup>
  </tile>
  <tile id="392">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="0" y="0.869376" width="63.8992" height="63.2471"/>
+   <object id="1" name="collision" x="0.6667" y="1.3333" width="62.6667" height="61.3333"/>
   </objectgroup>
  </tile>
  <tile id="393">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-6.13397" y="-7.51045" width="76.3604" height="77.4228"/>
+   <object id="1" name="collision" x="0.6667" y="0.6667" width="62.6667" height="62.6667"/>
   </objectgroup>
  </tile>
  <tile id="394">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-11.181" y="-10.1428" width="86.165" height="83.7014"/>
+   <object id="1" name="collision" x="0" y="0" width="64" height="64"/>
   </objectgroup>
  </tile>
  <tile id="395">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-11.9772" y="-10.0692" width="86.165" height="83.7014"/>
+   <object id="1" name="collision" x="-6.1166" y="-5.8603" width="76.2332" height="75.7205"/>
   </objectgroup>
  </tile>
  <tile id="396">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-12.3153" y="-9.39305" width="86.165" height="83.7014"/>
+   <object id="1" name="collision" x="-12.2332" y="-11.7205" width="88.4663" height="87.441"/>
+  </objectgroup>
+ </tile>
+ <tile id="404">
+  <properties>
+   <property name="animationStop" value="afterFirstCycle"/>
+   <property name="scale" type="float" value="3"/>
+   <property name="type" value="arcaneExplosion"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="22" y="17.3333" width="20" height="29.3333"/>
+  </objectgroup>
+  <animation>
+   <frame tileid="404" duration="100"/>
+   <frame tileid="405" duration="100"/>
+   <frame tileid="406" duration="100"/>
+   <frame tileid="407" duration="100"/>
+   <frame tileid="408" duration="100"/>
+   <frame tileid="409" duration="100"/>
+   <frame tileid="410" duration="100"/>
+   <frame tileid="411" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="405">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="10.6667" y="10.6667" width="42.6667" height="42.6667"/>
+  </objectgroup>
+ </tile>
+ <tile id="406">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="8" y="7.3333" width="48" height="49.3333"/>
+  </objectgroup>
+ </tile>
+ <tile id="407">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="6.6667" y="4.6667" width="50.6667" height="54.6667"/>
+  </objectgroup>
+ </tile>
+ <tile id="408">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="4.6667" y="2.6667" width="54.6667" height="58.6667"/>
+  </objectgroup>
+ </tile>
+ <tile id="409">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="2.6667" y="1.3333" width="58.6667" height="61.3333"/>
+  </objectgroup>
+ </tile>
+ <tile id="410">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="0" y="0" width="64" height="64"/>
+  </objectgroup>
+ </tile>
+ <tile id="411">
+  <objectgroup draworder="index" id="2">
+   <object id="1" name="collision" x="-11.0055" y="-13.0192" width="86.011" height="90.0383"/>
   </objectgroup>
  </tile>
 </tileset>

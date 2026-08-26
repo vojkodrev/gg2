@@ -4,6 +4,7 @@
 template<int N>
 struct Ammo
 {
+    int zIndex[N] = {};
     EntityBase<N> base;
     bool exists[N] = {};
 };

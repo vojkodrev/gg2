@@ -8,5 +8,6 @@ enum class EffectType : int
     BloodSplatter,
     Taunt,
     FrostNova,
+    ArcaneExplosion,
     Selector
 };

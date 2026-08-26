@@ -7,7 +7,7 @@
 #include "RenderTint.h"
 #include "../rotation/RotationCenter.h"
 #include "../facing/Facing.h"
-#include "RenderConstants.h"
+#include "RenderBufferConstants.h"
 
 struct RenderBuffer
 {

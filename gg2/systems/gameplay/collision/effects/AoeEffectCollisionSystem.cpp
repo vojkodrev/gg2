@@ -1,4 +1,5 @@
 #include "AoeEffectCollisionSystem.h"
+#include "ResolveArcaneExplosion.h"
 #include "ResolveFrostNova.h"
 #include "../../../structs/effect/EffectType.h"
 #include "../../../structs/entity/EntityType.h"
@@ -23,7 +24,8 @@ void aoeEffectCollisionSystem(Context &ctx)
         effectIndex++)
     {
         if (!effect.pool.active[0][effectIndex] ||
-            effect.type[effectIndex] != EffectType::FrostNova ||
+            (effect.type[effectIndex] != EffectType::FrostNova &&
+                effect.type[effectIndex] != EffectType::ArcaneExplosion) ||
             effect.parent.type[effectIndex] != EntityType::Player)
             continue;
 
@@ -54,6 +56,12 @@ void aoeEffectCollisionSystem(Context &ctx)
 
             if (effect.type[effectIndex] == EffectType::FrostNova)
                 resolveFrostNova(
+                    ctx,
+                    npcIndex,
+                    effect.parent.type[effectIndex],
+                    effect.parent.id[effectIndex]);
+            else if (effect.type[effectIndex] == EffectType::ArcaneExplosion)
+                resolveArcaneExplosion(
                     ctx,
                     npcIndex,
                     effect.parent.type[effectIndex],

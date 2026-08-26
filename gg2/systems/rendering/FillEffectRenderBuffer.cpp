@@ -1,32 +1,22 @@
 #include "FillEffectRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
-#include "../../structs/core/constants/RenderConstants.h"
-#include "../../structs/effect/EffectType.h"
 
 void fillEffectRenderBuffer(Context &ctx)
 {
     auto &rb = ctx.renderBuffer;
     auto &effect = ctx.data.effect;
-    for (uint32_t i = 0; i < effect.pool.count[0]; i++)
+    for (uint32_t effectIndex = 0;
+        effectIndex < effect.pool.count[0];
+        effectIndex++)
     {
-        if (!effect.pool.active[0][i])
+        if (!effect.pool.active[0][effectIndex])
             continue;
-
-        int zIndex = EFFECT_Z_INDEX;
-        if (effect.type[i] == EffectType::FrostNova)
-            zIndex = EFFECT_FROST_NOVA_Z_INDEX;
-        else if (effect.type[i] == EffectType::BloodSplatter)
-            zIndex = EFFECT_BLOOD_SPLATTER_Z_INDEX;
-        else if (effect.type[i] == EffectType::Taunt)
-            zIndex = EFFECT_TAUNT_Z_INDEX;
-        else if (effect.type[i] == EffectType::Character)
-            zIndex = EFFECT_CHARACTER_Z_INDEX;
 
         fillEntityBaseRenderBuffer(
             rb,
             effect.base,
-            i,
-            effect.groupId[i],
-            zIndex);
+            effectIndex,
+            effect.group.id[effectIndex],
+            effect.zIndex[effectIndex]);
     }
 }

@@ -18,6 +18,7 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
     effectTemplate.bloodSplatterIndex = effectTemplate.selectIndex + 1;
     effectTemplate.tauntIndex = effectTemplate.bloodSplatterIndex + 1;
     effectTemplate.frostNovaIndex = effectTemplate.tauntIndex + 1;
+    effectTemplate.arcaneExplosionIndex = effectTemplate.frostNovaIndex + 1;
 
     const SDL_Point fontGrid = decodeGridIndex(FONT_GRID_ID, (int)props.tilesetW);
     const int fontBaseX = fontGrid.x * (int)props.srcTileW;
@@ -102,6 +103,17 @@ void loadEffects(Context &ctx, const tmx::Tileset &tileset)
             (uint32_t)effectTemplate.frostNovaIndex,
             tileset,
             frostNovaTileIdx,
+            props);
+    }
+
+    uint32_t arcaneExplosionTileIdx = 0;
+    if (findTileByType(tileset, "arcaneExplosion", arcaneExplosionTileIdx))
+    {
+        loadEntityBase(
+            effectTemplate.base,
+            (uint32_t)effectTemplate.arcaneExplosionIndex,
+            tileset,
+            arcaneExplosionTileIdx,
             props);
     }
 }

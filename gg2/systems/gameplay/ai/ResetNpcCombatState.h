@@ -17,4 +17,5 @@ inline void resetNpcCombatState(Context &ctx, uint32_t n)
     resetDebuff(ctx.data.npc.concussiveShotDebuff, n);
     resetDebuff(ctx.data.npc.frostNovaDebuff, n);
     resetDebuff(ctx.data.npc.serpentStingDebuff, n);
+    resetDebuff(ctx.data.npc.arcaneExplosionDebuff, n);
 }

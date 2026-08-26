@@ -12,6 +12,7 @@
 struct Player
 {
     Group<1> group;
+    int zIndex[1] = {};
     EntityBase<1> base;
     
     int petId = INVALID_ID;

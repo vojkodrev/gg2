@@ -8,6 +8,7 @@ template<int N>
 struct Debuff
 {
     Pool<N, MAX_DEBUFF_SLOTS> pool;
+    bool active[N] = {};
     float timer[N][MAX_DEBUFF_SLOTS] = {};
     int entityId[N][MAX_DEBUFF_SLOTS];
     EntityType entityType[N][MAX_DEBUFF_SLOTS] = {};

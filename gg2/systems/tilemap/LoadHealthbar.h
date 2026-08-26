@@ -1,5 +1,6 @@
 #pragma once
 #include "../../structs/tilemap/TileMapProperties.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/ui/Healthbar.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
@@ -20,6 +21,7 @@ inline void loadHealthbar(
     bool hasHealthbar = !healthbarType.empty() && findTileByType(tileset, healthbarType.c_str(), healthbarIdx);
     healthbarData.show[parentEntityIdx] = false;
     healthbarData.dirty[parentEntityIdx] = false;
+    healthbarData.zIndex[parentEntityIdx] = HP_MANA_BAR_Z_INDEX;
     if (!hasHealthbar)
         return;
 

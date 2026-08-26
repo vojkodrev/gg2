@@ -1,5 +1,6 @@
 #pragma once
 #include "../../structs/tilemap/TileMapProperties.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/ui/Manabar.h"
 #include "LoadEntityBase.h"
 #include "properties/FindTileByType.h"
@@ -20,6 +21,7 @@ inline void loadManabar(
     bool hasManabar = !manabarType.empty() && findTileByType(tileset, manabarType.c_str(), manabarIdx);
     manabarData.show[parentEntityIdx] = false;
     manabarData.dirty[parentEntityIdx] = false;
+    manabarData.zIndex[parentEntityIdx] = HP_MANA_BAR_Z_INDEX;
     if (!hasManabar)
         return;
 

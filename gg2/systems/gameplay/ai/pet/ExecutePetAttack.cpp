@@ -1,5 +1,6 @@
 #include "ExecutePetAttack.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../../../structs/core/constants/ZIndexConstants.h"
 #include "NpcMonsterConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -40,6 +41,7 @@ void executePetAttack(Context &ctx, uint32_t n, EntityType targetType, int targe
         effectIndex);
 
     ctx.data.effect.type[effectIndex] = EffectType::BloodSplatter;
+    ctx.data.effect.zIndex[effectIndex] = EFFECT_BLOOD_SPLATTER_Z_INDEX;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
     ctx.data.effect.parent.type[effectIndex] = targetType;
     ctx.data.effect.parent.id[effectIndex] = targetId;

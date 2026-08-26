@@ -14,6 +14,7 @@
 #include "../../structs/core/constants/NpcMonsterConstants.h"
 #include "../../structs/core/constants/NpcPetConstants.h"
 #include "../../structs/core/constants/IndexConstants.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/equipment/WeaponType.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include "../../utils/timers/RandomTimer.h"
@@ -57,6 +58,7 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t n = npcCount++;
         npc.active[n] = true;
         npc.initialized[n] = true;
+        npc.zIndex[n] = PARENT_Z_INDEX;
 
         if (npc.group.id[n] == INVALID_ID)
             npc.group.id[n] = groupAlloc(ctx.data.groups);

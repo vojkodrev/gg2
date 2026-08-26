@@ -8,6 +8,7 @@ template<int N>
 void resetDebuff(Debuff<N> &debuff, uint32_t n)
 {
     resetPool(debuff.pool, n);
+    debuff.active[n] = false;
 
     for (int i = 0; i < MAX_DEBUFF_SLOTS; i++)
     {

@@ -3,6 +3,7 @@
 #include "../../../../structs/entity/EntityType.h"
 #include "../../../../structs/core/constants/FontConstants.h"
 #include "../../../../structs/core/constants/IndexConstants.h"
+#include "../../../../structs/core/constants/ZIndexConstants.h"
 #include "../../../../structs/core/constants/TintConstants.h"
 #include "../../../../structs/effect/DestroyEffectType.h"
 #include "../../../../structs/effect/EffectType.h"
@@ -46,6 +47,7 @@ inline void createTextEffect(
             effectIndex);
 
         ctx.data.effect.type[effectIndex] = EffectType::Character;
+        ctx.data.effect.zIndex[effectIndex] = EFFECT_CHARACTER_Z_INDEX;
         ctx.data.effect.destroyType[effectIndex] = destroyType;
         ctx.data.effect.destroyTimer[effectIndex] = destroyTimer;
         ctx.data.effect.parent.type[effectIndex] = parentType;

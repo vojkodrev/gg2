@@ -1,5 +1,6 @@
 #include "PetTaunt.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../../../structs/core/constants/ZIndexConstants.h"
 #include "../../../structs/core/constants/TauntConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
 #include "../../../structs/effect/EffectType.h"
@@ -29,6 +30,7 @@ void petTaunt(Context &ctx, uint32_t n)
         effectIndex);
 
     ctx.data.effect.type[effectIndex] = EffectType::Taunt;
+    ctx.data.effect.zIndex[effectIndex] = EFFECT_TAUNT_Z_INDEX;
     ctx.data.effect.destroyType[effectIndex] = DestroyEffectType::AnimationEnd;
     ctx.data.effect.parent.type[effectIndex] = EntityType::NPC;
     ctx.data.effect.parent.id[effectIndex] = targetId;

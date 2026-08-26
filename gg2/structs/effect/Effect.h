@@ -2,6 +2,7 @@
 #include <cstdint>
 #include "../entity/EntityBase.h"
 #include "../entity/EntityReference.h"
+#include "../groups/Group.h"
 #include "DestroyEffectType.h"
 #include "EffectConstants.h"
 #include "EffectType.h"
@@ -11,7 +12,8 @@
 struct Effect
 {
     Pool<1, MAX_EFFECTS> pool;
-    int groupId[MAX_EFFECTS] = {};
+    Group<MAX_EFFECTS> group;
+    int zIndex[MAX_EFFECTS] = {};
     EffectType type[MAX_EFFECTS] = {};
     ProjectileType projectileType[MAX_EFFECTS] = {};
     DestroyEffectType destroyType[MAX_EFFECTS] = {};

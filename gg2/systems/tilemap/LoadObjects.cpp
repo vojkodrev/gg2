@@ -2,6 +2,7 @@
 #include "FindLayer.h"
 #include "GetTileIndex.h"
 #include "LoadEntityBase.h"
+#include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../utils/groups/GroupAlloc.h"
 #include <tmxlite/TileLayer.hpp>
 
@@ -18,6 +19,7 @@ void loadObjects(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         uint32_t n = object.objectCount++;
         uint32_t idx = getTileIndex(objectTiles[i].ID, props);
         loadEntityBase(object.base, n, tileset, idx, props, i);
-        object.groupId[n] = groupAlloc(ctx.data.groups);
+        object.group.id[n] = groupAlloc(ctx.data.groups);
+        object.zIndex[n] = PARENT_Z_INDEX;
     }
 }

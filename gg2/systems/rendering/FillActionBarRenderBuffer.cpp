@@ -13,7 +13,7 @@ void fillActionBarRenderBuffer(Context &ctx)
             ctx.renderBuffer,
             base,
             iconIndex,
-            0,
-            0);
+            actionBar.groupId,
+            actionBar.icon.zIndex[iconIndex]);
     }
 }

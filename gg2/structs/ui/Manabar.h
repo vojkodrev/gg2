@@ -4,6 +4,7 @@
 template<int N>
 struct Manabar
 {
+    int zIndex[N] = {};
     EntityBase<N> base;
     bool show[N] = {};
     bool dirty[N] = {};

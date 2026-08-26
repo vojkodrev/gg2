@@ -10,4 +10,14 @@ void removeDebuff(Debuff<N> &debuff, uint32_t n, int slot)
     debuff.entityType[n][slot] = EntityType::None;
     debuff.entityId[n][slot] = INVALID_ID;
     poolFree(debuff.pool, n, slot);
+
+    debuff.active[n] = false;
+    for (uint32_t i = 0; i < debuff.pool.count[n]; i++)
+    {
+        if (debuff.pool.active[n][i])
+        {
+            debuff.active[n] = true;
+            break;
+        }
+    }
 }

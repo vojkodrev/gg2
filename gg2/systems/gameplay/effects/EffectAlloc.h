@@ -1,6 +1,7 @@
 #pragma once
 #include "../../../structs/groups/Groups.h"
 #include "../../../structs/core/constants/IndexConstants.h"
+#include "../../../structs/core/constants/ZIndexConstants.h"
 #include "../../../structs/effect/Effect.h"
 #include "../../../utils/groups/GroupRetain.h"
 #include "../../../utils/pool/PoolAlloc.h"
@@ -23,6 +24,7 @@ int effectAlloc(Effect &effect, Groups<TGroupCapacity> &groups, int groupId)
         return INVALID_ID;
     }
 
-    effect.groupId[effectIndex] = retainedGroupId;
+    effect.group.id[effectIndex] = retainedGroupId;
+    effect.zIndex[effectIndex] = EFFECT_Z_INDEX;
     return effectIndex;
 }

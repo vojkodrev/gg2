@@ -6,19 +6,28 @@
 
 void setMagicActionBarIconsTint(Context &ctx)
 {
-    const int frostNovaIndex = ctx.data.actionBar.frostNovaIndex;
+    auto &actionBar = ctx.data.actionBar;
+    const int frostNovaIndex = actionBar.frostNovaIndex;
     if (frostNovaIndex == INVALID_ID)
         return;
 
-    auto &tint = ctx.data.actionBar.icon.base.tint;
-    const bool onCooldown =
-        ctx.data.player.globalCooldownTimer > 0.0f ||
+    auto &tint = actionBar.icon.base.tint;
+    const bool onGlobalCooldown = ctx.data.player.globalCooldownTimer > 0.0f;
+    const bool frostNovaOnCooldown = onGlobalCooldown ||
         ctx.data.player.frostNovaCooldownTimer > 0.0f;
     setActionBarIconTint(
         tint,
         frostNovaIndex,
-        onCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R : CLEAR_TINT_R,
-        onCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G : CLEAR_TINT_G,
-        onCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B : CLEAR_TINT_B,
-        onCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A : CLEAR_TINT_A);
+        frostNovaOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R : CLEAR_TINT_R,
+        frostNovaOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G : CLEAR_TINT_G,
+        frostNovaOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B : CLEAR_TINT_B,
+        frostNovaOnCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A : CLEAR_TINT_A);
+
+    setActionBarIconTint(
+        tint,
+        actionBar.arcaneExplosionIndex,
+        onGlobalCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_R : CLEAR_TINT_R,
+        onGlobalCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_G : CLEAR_TINT_G,
+        onGlobalCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_B : CLEAR_TINT_B,
+        onGlobalCooldown ? GLOBAL_COOLDOWN_ACTION_BAR_TINT_A : CLEAR_TINT_A);
 }
