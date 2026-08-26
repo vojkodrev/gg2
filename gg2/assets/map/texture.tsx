@@ -322,7 +322,7 @@
    <property name="type" value="frostNova"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="16.4937" y="16.5421" width="30.5735" height="29.1971"/>
+   <object id="2" name="collision" x="20.4909" y="20.8596" width="21.7286" height="22.1417"/>
   </objectgroup>
   <animation>
    <frame tileid="388" duration="100"/>
@@ -338,42 +338,42 @@
  </tile>
  <tile id="389">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="6.95501" y="9.12845" width="49.1198" height="44.3382"/>
+   <object id="2" name="collision" x="15.1691" y="14.8188" width="33.2351" height="33.6482"/>
   </objectgroup>
  </tile>
  <tile id="390">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="4.34688" y="4.34688" width="55.4227" height="54.1187"/>
+   <object id="2" name="collision" x="11.1418" y="12.8051" width="42.1526" height="39.4014"/>
   </objectgroup>
  </tile>
  <tile id="391">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="1.30406" y="2.39078" width="60.639" height="58.0309"/>
+   <object id="2" name="collision" x="7.54606" y="7.33955" width="48.4812" height="49.1819"/>
   </objectgroup>
  </tile>
  <tile id="392">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="0" y="0.869376" width="63.8992" height="63.2471"/>
+   <object id="2" name="collision" x="3.51878" y="3.88758" width="56.2481" height="56.0858"/>
   </objectgroup>
  </tile>
  <tile id="393">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-6.13397" y="-7.51045" width="76.3604" height="77.4228"/>
+   <object id="2" name="collision" x="0.642143" y="-0.57118" width="63.152" height="64.7157"/>
   </objectgroup>
  </tile>
  <tile id="394">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-11.181" y="-10.1428" width="86.165" height="83.7014"/>
+   <object id="2" name="collision" x="-6.40559" y="-6.18058" width="76.3845" height="75.3592"/>
   </objectgroup>
  </tile>
  <tile id="395">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-11.9772" y="-10.0692" width="86.165" height="83.7014"/>
+   <object id="3" name="collision" x="-9.13837" y="-8.05039" width="81.8501" height="79.6741"/>
   </objectgroup>
  </tile>
  <tile id="396">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-12.3153" y="-9.39305" width="86.165" height="83.7014"/>
+   <object id="1" name="collision" x="-12.3153" y="-11.6943" width="88.4663" height="87.441"/>
   </objectgroup>
  </tile>
  <tile id="404">
@@ -383,7 +383,7 @@
    <property name="type" value="arcaneExplosion"/>
   </properties>
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="17.6913" y="15.9652" width="28.4784" height="29.6292"/>
+   <object id="1" name="collision" x="22" y="17.3333" width="20" height="29.3333"/>
   </objectgroup>
   <animation>
    <frame tileid="404" duration="100"/>
@@ -398,37 +398,37 @@
  </tile>
  <tile id="405">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="10.0682" y="10.212" width="42.8615" height="43.437"/>
+   <object id="1" name="collision" x="10.6667" y="10.6667" width="42.6667" height="42.6667"/>
   </objectgroup>
  </tile>
  <tile id="406">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="9.78059" y="8.48604" width="46.0258" height="48.6149"/>
+   <object id="1" name="collision" x="8" y="7.3333" width="48" height="49.3333"/>
   </objectgroup>
  </tile>
  <tile id="407">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="8.62992" y="7.9107" width="46.0258" height="48.6149"/>
+   <object id="1" name="collision" x="6.6667" y="4.6667" width="50.6667" height="54.6667"/>
   </objectgroup>
  </tile>
  <tile id="408">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="3.59581" y="3.3081" width="56.957" height="57.2448"/>
+   <object id="1" name="collision" x="4.6667" y="2.6667" width="54.6667" height="58.6667"/>
   </objectgroup>
  </tile>
  <tile id="409">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-0.575307" y="-3.27719e-05" width="64.1486" height="64.1487"/>
+   <object id="1" name="collision" x="2.6667" y="1.3333" width="58.6667" height="61.3333"/>
   </objectgroup>
  </tile>
  <tile id="410">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-7.33539" y="-8.19839" width="78.8194" height="78.8195"/>
+   <object id="1" name="collision" x="0" y="0" width="64" height="64"/>
   </objectgroup>
  </tile>
  <tile id="411">
   <objectgroup draworder="index" id="2">
-   <object id="1" name="collision" x="-10.9312" y="-13.5201" width="86.011" height="90.0383"/>
+   <object id="1" name="collision" x="-11.0055" y="-13.0192" width="86.011" height="90.0383"/>
   </objectgroup>
  </tile>
 </tileset>
