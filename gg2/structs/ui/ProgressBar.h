@@ -2,7 +2,7 @@
 #include "../entity/EntityBase.h"
 
 template<int N>
-struct Healthbar
+struct ProgressBar
 {
     int zIndex[N] = {};
     EntityBase<N> base;

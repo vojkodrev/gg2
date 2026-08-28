@@ -1,10 +1,10 @@
-#include "BarFrameSystem.h"
-#include "SetEntityBarFrames.h"
+#include "ProgressBarFrameSystem.h"
+#include "SetProgressBarFrames.h"
 #include <cstdint>
 
-void barFrameSystem(Context &ctx)
+void progressBarFrameSystem(Context &ctx)
 {
-    setEntityBarFrames(
+    setProgressBarFrames(
         ctx.data.player.healthbar,
         ctx.data.player.manabar,
         ctx.data.player.statistics,
@@ -15,7 +15,7 @@ void barFrameSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        setEntityBarFrames(
+        setProgressBarFrames(
             ctx.data.npc.healthbar,
             ctx.data.npc.manabar,
             ctx.data.npc.statistics,

@@ -30,7 +30,7 @@
 #include "flipx/EquipmentFacingSystem.h"
 #include "flipx/FlipEquipmentSystem.h"
 #include "depth/EquipmentDepthSystem.h"
-#include "depth/BarDepthSystem.h"
+#include "depth/ProgressBarDepthSystem.h"
 #include "depth/EffectDepthSystem.h"
 #include "rotation/RotateEquipmentSystem.h"
 #include "equipment/MoveEquipmentSystem.h"
@@ -67,9 +67,9 @@
 #include "animation/SpriteAnimationSystem.h"
 #include "CollisionSystem.h"
 #include "ProjectileCollisionSystem.h"
-#include "ui/bars/BarFrameSystem.h"
-#include "ui/bars/BarPositionSystem.h"
-#include "ui/bars/ShowBarSystem.h"
+#include "ui/bars/ProgressBarFrameSystem.h"
+#include "ui/bars/ProgressBarPositionSystem.h"
+#include "ui/bars/ProgressBarVisibilitySystem.h"
 #include "ui/actionbar/ActionBarTintSystem.h"
 #include "tint/DamageTintSystem.h"
 #include "tint/CalculateTintSystem.h"
@@ -190,10 +190,10 @@ int main()
         destroyNpcSelectorSystem(*ctx);
         createNpcSelectorSystem(*ctx);
 
-        showBarSystem(*ctx);
-        barFrameSystem(*ctx);
-        barPositionSystem(*ctx);
-        barDepthSystem(*ctx);
+        progressBarVisibilitySystem(*ctx);
+        progressBarFrameSystem(*ctx);
+        progressBarPositionSystem(*ctx);
+        progressBarDepthSystem(*ctx);
 
         actionBarTintSystem(*ctx);
         damageTintSystem(*ctx);

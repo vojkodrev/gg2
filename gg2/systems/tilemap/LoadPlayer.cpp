@@ -3,8 +3,7 @@
 #include "GetTileIndex.h"
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
-#include "LoadHealthbar.h"
-#include "LoadManabar.h"
+#include "LoadProgressBar.h"
 #include "../gameplay/statistics/SetHp.h"
 #include "../../structs/core/constants/IndexConstants.h"
 #include "../../structs/core/constants/ZIndexConstants.h"
@@ -35,8 +34,20 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
         ctx.data.player.targetVisibleTimer = 0.0f;
         ctx.data.player.targetVisible = false;
         loadEquipment(ctx.data.player.equipment, 0, tileset, idx, props);
-        loadHealthbar(ctx.data.player.healthbar, 0, tileset, idx, props);
-        loadManabar(ctx.data.player.manabar, 0, tileset, idx, props);
+        loadProgressBar(
+            ctx.data.player.healthbar,
+            0,
+            tileset,
+            idx,
+            props,
+            "healthbar");
+        loadProgressBar(
+            ctx.data.player.manabar,
+            0,
+            tileset,
+            idx,
+            props,
+            "manabar");
         ctx.data.player.group.id[0] = groupAlloc(ctx.data.groups);
         ctx.data.player.zIndex[0] = PARENT_Z_INDEX;
         break;

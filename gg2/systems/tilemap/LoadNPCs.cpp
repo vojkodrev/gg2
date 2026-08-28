@@ -6,8 +6,7 @@
 #include "LoadEntityBase.h"
 #include "LoadEquipment.h"
 #include "LoadRangedCollision.h"
-#include "LoadHealthbar.h"
-#include "LoadManabar.h"
+#include "LoadProgressBar.h"
 #include "../gameplay/statistics/SetHp.h"
 #include "../gameplay/ai/ResetNpcCombatState.h"
 #include "../../structs/core/constants/NpcConstants.h"
@@ -93,8 +92,20 @@ void loadNPCs(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
                 npc.base,
                 n,
                 npc.equipment.weapon.base.animation.frameCount[n]);
-        loadHealthbar(npc.healthbar, n, tileset, idx, props);
-        loadManabar(npc.manabar, n, tileset, idx, props);
+        loadProgressBar(
+            npc.healthbar,
+            n,
+            tileset,
+            idx,
+            props,
+            "healthbar");
+        loadProgressBar(
+            npc.manabar,
+            n,
+            tileset,
+            idx,
+            props,
+            "manabar");
 
         npc.ai.type[n] = NPCAiType::None;
         if (aiType == "monsterMelee")

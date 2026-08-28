@@ -1,8 +1,7 @@
 #include "FillNpcRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
 #include "FillEquipmentRenderBuffer.h"
-#include "FillHealthbarRenderBuffer.h"
-#include "FillManabarRenderBuffer.h"
+#include "FillProgressBarRenderBuffer.h"
 
 void fillNpcRenderBuffer(Context &ctx)
 {
@@ -25,12 +24,12 @@ void fillNpcRenderBuffer(Context &ctx)
             npc.equipment,
             npcIndex,
             npc.group.id[npcIndex]);
-        fillHealthbarRenderBuffer(
+        fillProgressBarRenderBuffer(
             rb,
             npc.healthbar,
             npcIndex,
             npc.group.id[npcIndex]);
-        fillManabarRenderBuffer(
+        fillProgressBarRenderBuffer(
             rb,
             npc.manabar,
             npcIndex,

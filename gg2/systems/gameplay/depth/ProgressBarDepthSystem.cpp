@@ -1,7 +1,7 @@
-#include "BarDepthSystem.h"
+#include "ProgressBarDepthSystem.h"
 #include <cstdint>
 
-void barDepthSystem(Context &ctx)
+void progressBarDepthSystem(Context &ctx)
 {
     ctx.data.player.healthbar.base.depthY[0] = ctx.data.player.base.depthY[0];
     ctx.data.player.manabar.base.depthY[0] = ctx.data.player.base.depthY[0];

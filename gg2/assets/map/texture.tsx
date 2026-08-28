@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="416" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
- <image source="../texture/texture.png" width="1024" height="1664"/>
+<tileset version="1.11" tiledversion="1.12.2" name="texture" tilewidth="64" tileheight="64" tilecount="432" columns="16" objectalignment="topleft" tilerendersize="grid" fillmode="preserve-aspect-fit">
+ <image source="../texture/texture.png" width="1024" height="1728"/>
  <tile id="6">
   <properties>
    <property name="ammo" value="arrow1"/>
+   <property name="castbar" value="castbar"/>
    <property name="facing" value="right"/>
    <property name="healthbar" value="healthbar"/>
    <property name="manabar" value="manabar"/>
@@ -430,5 +431,18 @@
   <objectgroup draworder="index" id="2">
    <object id="1" name="collision" x="-11.0055" y="-13.0192" width="86.011" height="90.0383"/>
   </objectgroup>
+ </tile>
+ <tile id="416">
+  <properties>
+   <property name="type" value="castbar"/>
+  </properties>
+  <animation>
+   <frame tileid="421" duration="1000"/>
+   <frame tileid="420" duration="1000"/>
+   <frame tileid="419" duration="1000"/>
+   <frame tileid="418" duration="1000"/>
+   <frame tileid="417" duration="1000"/>
+   <frame tileid="416" duration="1000"/>
+  </animation>
  </tile>
 </tileset>

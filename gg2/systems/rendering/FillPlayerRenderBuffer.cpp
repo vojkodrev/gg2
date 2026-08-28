@@ -1,8 +1,7 @@
 #include "FillPlayerRenderBuffer.h"
 #include "FillEntityBaseRenderBuffer.h"
 #include "FillEquipmentRenderBuffer.h"
-#include "FillHealthbarRenderBuffer.h"
-#include "FillManabarRenderBuffer.h"
+#include "FillProgressBarRenderBuffer.h"
 
 void fillPlayerRenderBuffer(Context &ctx)
 {
@@ -16,6 +15,6 @@ void fillPlayerRenderBuffer(Context &ctx)
         player.zIndex[0]);
 
     fillEquipmentRenderBuffer(rb, player.equipment, 0, player.group.id[0]);
-    fillHealthbarRenderBuffer(rb, player.healthbar, 0, player.group.id[0]);
-    fillManabarRenderBuffer(rb, player.manabar, 0, player.group.id[0]);
+    fillProgressBarRenderBuffer(rb, player.healthbar, 0, player.group.id[0]);
+    fillProgressBarRenderBuffer(rb, player.manabar, 0, player.group.id[0]);
 }

@@ -11,7 +11,7 @@ add_library(systems_gameplay
     depth/NpcDepthSystem.cpp
     depth/ObjectDepthSystem.cpp
     depth/EquipmentDepthSystem.cpp
-    depth/BarDepthSystem.cpp
+    depth/ProgressBarDepthSystem.cpp
     depth/EffectDepthSystem.cpp
     flipx/FlipPlayerSystem.cpp
     flipx/FlipNpcSystem.cpp
@@ -83,9 +83,9 @@ add_library(systems_gameplay
     ui/actionbar/ActionBarTintSystem.cpp
     ui/actionbar/SetMagicActionBarIconsTint.cpp
     ui/actionbar/SetRangedActionBarIconsTint.cpp
-    ui/bars/ShowBarSystem.cpp
-    ui/bars/BarFrameSystem.cpp
-    ui/bars/BarPositionSystem.cpp
+    ui/bars/ProgressBarVisibilitySystem.cpp
+    ui/bars/ProgressBarFrameSystem.cpp
+    ui/bars/ProgressBarPositionSystem.cpp
     tint/DamageTintSystem.cpp
     tint/CalculateTintSystem.cpp
     camera/CameraSystem.cpp

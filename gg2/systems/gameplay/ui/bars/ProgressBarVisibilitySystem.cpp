@@ -1,10 +1,10 @@
-#include "ShowBarSystem.h"
-#include "SetEntityBarVisibility.h"
+#include "ProgressBarVisibilitySystem.h"
+#include "SetProgressBarVisibility.h"
 #include <cstdint>
 
-void showBarSystem(Context &ctx)
+void progressBarVisibilitySystem(Context &ctx)
 {
-    setEntityBarVisibility(
+    setProgressBarVisibility(
         ctx.data.player.healthbar,
         ctx.data.player.manabar,
         ctx.data.player.statistics,
@@ -15,7 +15,7 @@ void showBarSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        setEntityBarVisibility(
+        setProgressBarVisibility(
             ctx.data.npc.healthbar,
             ctx.data.npc.manabar,
             ctx.data.npc.statistics,

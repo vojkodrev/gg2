@@ -103,6 +103,12 @@ images = [
     {"id": 68, "filename": "../arcane explosion.png", "dx": 10, "dy": 25, "sx": 6 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 69, "filename": "../arcane explosion.png", "dx": 11, "dy": 25, "sx": 7 * 96, "sy": 0, "sw": 96, "sh": 96, "w": 64},
     {"id": 70, "filename": "../icons/Spell_Nature_WispSplode.png", "dx": 14, "dy": 22},
+    {"id": 71, "filename": "../healthbars.png", "dx": 0, "dy": 26, "sx": 1 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 72, "filename": "../healthbars.png", "dx": 1, "dy": 26, "sx": 2 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 73, "filename": "../healthbars.png", "dx": 2, "dy": 26, "sx": 3 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 74, "filename": "../healthbars.png", "dx": 3, "dy": 26, "sx": 4 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 75, "filename": "../healthbars.png", "dx": 4, "dy": 26, "sx": 5 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 76, "filename": "../healthbars.png", "dx": 5, "dy": 26, "sx": 6 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
 ]
 
 

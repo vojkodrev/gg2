@@ -1,10 +1,10 @@
-#include "BarPositionSystem.h"
-#include "SetEntityBarPositions.h"
+#include "ProgressBarPositionSystem.h"
+#include "SetProgressBarPositions.h"
 #include <cstdint>
 
-void barPositionSystem(Context &ctx)
+void progressBarPositionSystem(Context &ctx)
 {
-    setEntityBarPositions(
+    setProgressBarPositions(
         ctx.data.player.healthbar,
         ctx.data.player.manabar,
         ctx.data.player.base,
@@ -16,7 +16,7 @@ void barPositionSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        setEntityBarPositions(
+        setProgressBarPositions(
             ctx.data.npc.healthbar,
             ctx.data.npc.manabar,
             ctx.data.npc.base,

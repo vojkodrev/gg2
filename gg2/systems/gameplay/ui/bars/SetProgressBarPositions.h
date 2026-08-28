@@ -3,14 +3,13 @@
 #include "../../../structs/entity/EntityBase.h"
 #include "../../../structs/core/constants/HealthbarConstants.h"
 #include "../../../structs/statistics/Statistics.h"
-#include "../../../structs/ui/Healthbar.h"
-#include "../../../structs/ui/Manabar.h"
+#include "../../../structs/ui/ProgressBar.h"
 #include <cstdint>
 
 template<int N>
-inline void setEntityBarPositions(
-    Healthbar<N> &healthbar,
-    Manabar<N> &manabar,
+inline void setProgressBarPositions(
+    ProgressBar<N> &healthbar,
+    ProgressBar<N> &manabar,
     const EntityBase<N> &entityBase,
     const Statistics<N> &statistics,
     uint32_t index)

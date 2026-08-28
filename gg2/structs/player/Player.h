@@ -6,8 +6,7 @@
 #include "../core/constants/IndexConstants.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
-#include "../ui/Healthbar.h"
-#include "../ui/Manabar.h"
+#include "../ui/ProgressBar.h"
 
 struct Player
 {
@@ -31,8 +30,8 @@ struct Player
     Statistics<1> statistics;
     Equipment<1> equipment;
     
-    Healthbar<1> healthbar;
-    Manabar<1> manabar;
+    ProgressBar<1> healthbar;
+    ProgressBar<1> manabar;
     
     AutoAttack<1> autoAttack;
     
