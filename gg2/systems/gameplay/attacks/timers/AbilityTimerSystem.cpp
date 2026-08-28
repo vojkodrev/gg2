@@ -1,16 +1,8 @@
 #include "AbilityTimerSystem.h"
-#include <algorithm>
 
 void abilityTimerSystem(Context &ctx)
 {
     const float dt = ctx.frame.dt;
-    auto &castBar = ctx.data.player.castbar;
-    if (castBar.timer[0] > 0.0f)
-    {
-        castBar.timer[0] = std::max(0.0f, castBar.timer[0] - dt);
-        castBar.progressBar.dirty[0] = true;
-    }
-
     auto &concussiveShotCooldownTimer = ctx.data.player.concussiveShotCooldownTimer;
     if (concussiveShotCooldownTimer > 0.0f)
     {

@@ -36,6 +36,7 @@
 #include "equipment/MoveEquipmentSystem.h"
 #include "equipment/CalculateRangedCollisionSystem.h"
 #include "attacks/timers/AutoAttackTimerSystem.h"
+#include "attacks/timers/CastBarTimerSystem.h"
 #include "attacks/autoAttack/NpcAutoAttackSystem.h"
 #include "attacks/timers/AbilityTimerSystem.h"
 #include "attacks/concussiveShot/ConcussiveShotDebuffSystem.h"
@@ -160,6 +161,7 @@ int main()
         equipmentDepthSystem(*ctx);
 
         autoAttackTimerSystem(*ctx);
+        castBarTimerSystem(*ctx);
         globalCooldownTimerSystem(*ctx);
         abilityTimerSystem(*ctx);
 

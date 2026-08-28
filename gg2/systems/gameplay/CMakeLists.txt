@@ -21,6 +21,7 @@ add_library(systems_gameplay
     equipment/MoveEquipmentSystem.cpp
     equipment/CalculateRangedCollisionSystem.cpp
     attacks/timers/AutoAttackTimerSystem.cpp
+    attacks/timers/CastBarTimerSystem.cpp
     attacks/autoAttack/NpcAutoAttackSystem.cpp
     attacks/ranged/CanPlayerRangedAttack.cpp
     attacks/timers/AbilityTimerSystem.cpp

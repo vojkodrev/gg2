@@ -9,5 +9,6 @@ inline void setCastBarVisibility(CastBar<N> &castBar, uint32_t index)
     if (!progressBar.dirty[index])
         return;
 
-    progressBar.show[index] = castBar.timer[index] > 0.0f;
+    progressBar.show[index] =
+        castBar.timer[index] > 0.0f || castBar.hideTimer[index] > 0.0f;
 }
