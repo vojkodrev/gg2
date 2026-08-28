@@ -4,7 +4,7 @@
 #include <cstdint>
 
 template<int N>
-inline void setBarPosition(
+inline void setProgressBarPositionAboveEntity(
     EntityBase<N> &barBase,
     const EntityBase<N> &parentBase,
     float yOffset,

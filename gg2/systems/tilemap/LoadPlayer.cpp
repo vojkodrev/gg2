@@ -2,6 +2,7 @@
 #include "FindLayer.h"
 #include "GetTileIndex.h"
 #include "LoadEntityBase.h"
+#include "LoadCastBar.h"
 #include "LoadEquipment.h"
 #include "LoadProgressBar.h"
 #include "../gameplay/statistics/SetHp.h"
@@ -48,6 +49,7 @@ void loadPlayer(Context &ctx, const tmx::Map &map, const tmx::Tileset &tileset)
             idx,
             props,
             "manabar");
+        loadCastBar(ctx, tileset, idx, props);
         ctx.data.player.group.id[0] = groupAlloc(ctx.data.groups);
         ctx.data.player.zIndex[0] = PARENT_Z_INDEX;
         break;

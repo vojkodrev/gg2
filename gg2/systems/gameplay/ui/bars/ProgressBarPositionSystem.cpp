@@ -1,10 +1,10 @@
 #include "ProgressBarPositionSystem.h"
-#include "SetProgressBarPositions.h"
+#include "SetProgressBarPositionsAboveEntity.h"
 #include <cstdint>
 
 void progressBarPositionSystem(Context &ctx)
 {
-    setProgressBarPositions(
+    setProgressBarPositionsAboveEntity(
         ctx.data.player.healthbar,
         ctx.data.player.manabar,
         ctx.data.player.base,
@@ -16,7 +16,7 @@ void progressBarPositionSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        setProgressBarPositions(
+        setProgressBarPositionsAboveEntity(
             ctx.data.npc.healthbar,
             ctx.data.npc.manabar,
             ctx.data.npc.base,

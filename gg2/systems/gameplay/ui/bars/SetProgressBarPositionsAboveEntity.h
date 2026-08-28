@@ -1,5 +1,5 @@
 #pragma once
-#include "SetBarPosition.h"
+#include "SetProgressBarPositionAboveEntity.h"
 #include "../../../structs/entity/EntityBase.h"
 #include "../../../structs/core/constants/HealthbarConstants.h"
 #include "../../../structs/statistics/Statistics.h"
@@ -7,7 +7,7 @@
 #include <cstdint>
 
 template<int N>
-inline void setProgressBarPositions(
+inline void setProgressBarPositionsAboveEntity(
     ProgressBar<N> &healthbar,
     ProgressBar<N> &manabar,
     const EntityBase<N> &entityBase,
@@ -19,7 +19,7 @@ inline void setProgressBarPositions(
         (entityBase.position.dirty[index] ||
          healthbar.dirty[index] ||
          statistics.health.dirty[index]))
-        setBarPosition(
+        setProgressBarPositionAboveEntity(
             healthbar.base,
             entityBase,
             hasMana ? HEALTHBAR_Y_OFFSET : 0.0f,
@@ -30,5 +30,9 @@ inline void setProgressBarPositions(
         (entityBase.position.dirty[index] ||
          manabar.dirty[index] ||
          statistics.mana.dirty[index]))
-        setBarPosition(manabar.base, entityBase, MANABAR_Y_OFFSET, index);
+        setProgressBarPositionAboveEntity(
+            manabar.base,
+            entityBase,
+            MANABAR_Y_OFFSET,
+            index);
 }

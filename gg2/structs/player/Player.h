@@ -32,6 +32,7 @@ struct Player
     
     ProgressBar<1> healthbar;
     ProgressBar<1> manabar;
+    ProgressBar<1> castbar;
     
     AutoAttack<1> autoAttack;
     
