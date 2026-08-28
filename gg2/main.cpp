@@ -37,7 +37,7 @@
 #include "equipment/CalculateRangedCollisionSystem.h"
 #include "attacks/timers/AutoAttackTimerSystem.h"
 #include "attacks/autoAttack/NpcAutoAttackSystem.h"
-#include "attacks/timers/AbilityCooldownTimerSystem.h"
+#include "attacks/timers/AbilityTimerSystem.h"
 #include "attacks/concussiveShot/ConcussiveShotDebuffSystem.h"
 #include "attacks/timers/GlobalCooldownTimerSystem.h"
 #include "attacks/concussiveShot/PlayerConcussiveShotAttackSystem.h"
@@ -160,7 +160,7 @@ int main()
 
         autoAttackTimerSystem(*ctx);
         globalCooldownTimerSystem(*ctx);
-        abilityCooldownTimerSystem(*ctx);
+        abilityTimerSystem(*ctx);
 
         togglePlayerAutoAttackSystem(*ctx);
 

@@ -6,6 +6,7 @@
 #include "../core/constants/IndexConstants.h"
 #include "../statistics/Statistics.h"
 #include "../equipment/Equipment.h"
+#include "../ui/CastBar.h"
 #include "../ui/ProgressBar.h"
 
 struct Player
@@ -32,7 +33,7 @@ struct Player
     
     ProgressBar<1> healthbar;
     ProgressBar<1> manabar;
-    ProgressBar<1> castbar;
+    CastBar<1> castbar;
     
     AutoAttack<1> autoAttack;
     

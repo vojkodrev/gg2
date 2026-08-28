@@ -15,14 +15,14 @@ inline void loadCastBar(
 {
     auto &castBar = ctx.data.player.castbar;
     loadProgressBar(
-        castBar,
+        castBar.progressBar,
         0,
         tileset,
         playerTileIndex,
         props,
         "castbar");
 
-    auto &base = castBar.base;
+    auto &base = castBar.progressBar.base;
     base.position.x[0] = (SCREEN_W - base.position.w[0]) / 2.0f;
     base.position.y[0] =
         SCREEN_H -
