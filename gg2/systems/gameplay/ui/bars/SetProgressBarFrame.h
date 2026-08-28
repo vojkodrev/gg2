@@ -3,7 +3,7 @@
 #include <cstdint>
 
 template<typename TBar>
-inline void setBarFrame(
+inline void setProgressBarFrame(
     TBar &bar,
     int currentValue,
     int maxValue,

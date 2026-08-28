@@ -1,10 +1,10 @@
 #include "ProgressBarFrameSystem.h"
-#include "SetProgressBarFrames.h"
+#include "SetHealthManaBars.h"
 #include <cstdint>
 
 void progressBarFrameSystem(Context &ctx)
 {
-    setProgressBarFrames(
+    setHealthManaBars(
         ctx.data.player.healthbar,
         ctx.data.player.manabar,
         ctx.data.player.statistics,
@@ -15,7 +15,7 @@ void progressBarFrameSystem(Context &ctx)
         if (!ctx.data.npc.active[i])
             continue;
 
-        setProgressBarFrames(
+        setHealthManaBars(
             ctx.data.npc.healthbar,
             ctx.data.npc.manabar,
             ctx.data.npc.statistics,
