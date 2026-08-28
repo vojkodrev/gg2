@@ -37,6 +37,7 @@
 #include "equipment/CalculateRangedCollisionSystem.h"
 #include "attacks/timers/AutoAttackTimerSystem.h"
 #include "attacks/timers/CastBarTimerSystem.h"
+#include "attacks/castBar/CancelCastBarSystem.h"
 #include "attacks/autoAttack/NpcAutoAttackSystem.h"
 #include "attacks/timers/AbilityTimerSystem.h"
 #include "attacks/concussiveShot/ConcussiveShotDebuffSystem.h"
@@ -193,6 +194,8 @@ int main()
         npcTabSelectSystem(*ctx);
         destroyNpcSelectorSystem(*ctx);
         createNpcSelectorSystem(*ctx);
+
+        cancelCastBarSystem(*ctx);
 
         progressBarVisibilitySystem(*ctx);
         progressBarFrameSystem(*ctx);
