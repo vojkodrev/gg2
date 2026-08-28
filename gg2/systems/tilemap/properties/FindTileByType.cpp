@@ -1,6 +1,9 @@
 #include "FindTileByType.h"
 
-bool findTileByType(const tmx::Tileset &tileset, const char *type, uint32_t &outTileIdx)
+bool findTileByType(
+    const tmx::Tileset &tileset,
+    const std::string &type,
+    uint32_t &outTileIdx)
 {
     for (auto &tile : tileset.getTiles())
     {

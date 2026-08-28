@@ -27,7 +27,8 @@ inline void loadEquipment(
     equipmentData.weapon.zIndex[parentEntityIdx] = WEAPON_Z_INDEX;
     std::string weaponAssetType = getTileStringProp(tileset, parentEntityTileIndex, "weapon");
     uint32_t weaponIdx = 0;
-    bool hasWeapon = !weaponAssetType.empty() && findTileByType(tileset, weaponAssetType.c_str(), weaponIdx);
+    bool hasWeapon = !weaponAssetType.empty() &&
+        findTileByType(tileset, weaponAssetType, weaponIdx);
     equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
     equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
     for (int frameIndex = 0;
@@ -80,7 +81,8 @@ inline void loadEquipment(
 
     std::string ammoType = getTileStringProp(tileset, parentEntityTileIndex, "ammo");
     uint32_t ammoIdx = 0;
-    bool hasAmmo = !ammoType.empty() && findTileByType(tileset, ammoType.c_str(), ammoIdx);
+    bool hasAmmo = !ammoType.empty() &&
+        findTileByType(tileset, ammoType, ammoIdx);
     if (hasWeapon && equipmentData.weapon.type[parentEntityIdx] == WeaponType::Ranged)
     {
         if (!hasAmmo)

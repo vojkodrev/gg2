@@ -24,7 +24,7 @@ inline void loadProgressBar(
     const bool hasProgressBar = !progressBarType.empty() &&
         findTileByType(
             tileset,
-            progressBarType.c_str(),
+            progressBarType,
             progressBarTileIndex);
     progressBar.show[parentEntityIndex] = false;
     progressBar.dirty[parentEntityIndex] = false;
