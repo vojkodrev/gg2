@@ -5,7 +5,7 @@
 #include <cstdint>
 
 template<int N>
-inline void setHealthManaBars(
+inline void setHealthManaBarFrames(
     ProgressBar<N> &healthbar,
     ProgressBar<N> &manabar,
     const Statistics<N> &statistics,

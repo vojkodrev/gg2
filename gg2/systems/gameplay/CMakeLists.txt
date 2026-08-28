@@ -28,6 +28,7 @@ add_library(systems_gameplay
     attacks/timers/GlobalCooldownTimerSystem.cpp
     attacks/concussiveShot/PlayerConcussiveShotAttackSystem.cpp
     attacks/frostNova/PlayerFrostNovaAttackSystem.cpp
+    attacks/frostBolt/PlayerFrostBoltAttackSystem.cpp
     attacks/arcaneExplosion/PlayerArcaneExplosionAttackSystem.cpp
     attacks/arcaneExplosion/ArcaneExplosionDebuffSystem.cpp
     attacks/frostNova/FrostNovaDebuffSystem.cpp

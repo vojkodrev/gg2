@@ -6,5 +6,5 @@ struct CastBar
 {
     ProgressBar<N> progressBar;
     float timer[N] = {};
-    float previousTimer[N] = {};
+    float duration[N] = {};
 };

@@ -4,7 +4,7 @@
 #include <cstdint>
 
 template<int N>
-inline void setProgressBarVisibility(
+inline void setHealthManaBarVisibility(
     ProgressBar<N> &healthbar,
     ProgressBar<N> &manabar,
     const Statistics<N> &statistics,

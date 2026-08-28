@@ -2,15 +2,15 @@
 #include <algorithm>
 #include <cstdint>
 
-template<typename TBar>
+template<typename TBar, typename TValue>
 inline void setProgressBarFrame(
     TBar &bar,
-    int currentValue,
-    int maxValue,
+    TValue currentValue,
+    TValue maxValue,
     uint32_t index)
 {
     const int frameCount = bar.base.animation.frameCount[index];
-    const int value = std::clamp(currentValue, 0, maxValue);
+    const TValue value = std::clamp(currentValue, TValue{}, maxValue);
 
     if (frameCount <= 0)
         return;

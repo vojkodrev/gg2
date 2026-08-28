@@ -17,4 +17,9 @@ void fillPlayerRenderBuffer(Context &ctx)
     fillEquipmentRenderBuffer(rb, player.equipment, 0, player.group.id[0]);
     fillProgressBarRenderBuffer(rb, player.healthbar, 0, player.group.id[0]);
     fillProgressBarRenderBuffer(rb, player.manabar, 0, player.group.id[0]);
+    fillProgressBarRenderBuffer(
+        rb,
+        player.castbar.progressBar,
+        0,
+        player.group.id[0]);
 }
