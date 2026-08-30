@@ -434,6 +434,7 @@
  </tile>
  <tile id="416">
   <properties>
+   <property name="scale" type="float" value="2"/>
    <property name="type" value="castbar"/>
   </properties>
   <animation>

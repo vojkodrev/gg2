@@ -1,5 +1,6 @@
 #include "PlayerFrostBoltAttackSystem.h"
 #include "../../../structs/core/constants/FrostBoltConstants.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/equipment/WeaponType.h"
 #include "../../../structs/ui/CastType.h"
 
@@ -10,6 +11,7 @@ void playerFrostBoltAttackSystem(Context &ctx)
     if (!ctx.data.action.digit3Released ||
         player.globalCooldownTimer > 0.0f ||
         player.castbar.timer[0] > 0.0f ||
+        player.selectedNpc == INVALID_ID ||
         !weapon.exists[0] ||
         weapon.type[0] != WeaponType::Magic)
         return;
