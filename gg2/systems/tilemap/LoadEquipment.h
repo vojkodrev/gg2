@@ -1,6 +1,7 @@
 #pragma once
 #include "../../structs/equipment/Equipment.h"
 #include "../../structs/equipment/WeaponType.h"
+#include "../../structs/core/constants/IndexConstants.h"
 #include "../../structs/core/constants/ZIndexConstants.h"
 #include "../../structs/tilemap/TileMapProperties.h"
 #include "ParseWeaponType.h"
@@ -30,11 +31,14 @@ inline void loadEquipment(
     bool hasWeapon = !weaponAssetType.empty() &&
         findTileByType(tileset, weaponAssetType, weaponIdx);
     equipmentData.weapon.type[parentEntityIdx] = WeaponType::Melee;
+    equipmentData.weapon.magic.castingEffectId[parentEntityIdx] = INVALID_ID;
     equipmentData.weapon.ranged.showAmmo[parentEntityIdx] = false;
     for (int frameIndex = 0;
         frameIndex < MAX_ANIMATION_FRAMES;
         frameIndex++)
     {
+        equipmentData.weapon.magic.spellAnchor
+            .exists[parentEntityIdx][frameIndex][0] = false;
         equipmentData.weapon.ranged.ammoAnchor
             .exists[parentEntityIdx][frameIndex][0] = false;
     }
@@ -58,6 +62,7 @@ inline void loadEquipment(
         for (const auto &tile : tileset.getTiles())
             if (tile.ID == weaponIdx) { weaponTile = &tile; break; }
 
+        auto &spellAnchor = equipmentData.weapon.magic.spellAnchor;
         auto &ammoAnchor = equipmentData.weapon.ranged.ammoAnchor;
         const int frameCount = weaponBase.animation.frameCount[parentEntityIdx];
         for (int frameIndex = 0; frameIndex < frameCount; frameIndex++)
@@ -68,6 +73,14 @@ inline void loadEquipment(
                     weaponTile->animation.frames[frameIndex].tileID,
                     props)
                 : weaponIdx;
+            loadAnchors(
+                spellAnchor,
+                parentEntityIdx,
+                frameIndex,
+                tileset,
+                frameTileIdx,
+                "spellAnchor",
+                weaponBase.scale.value[parentEntityIdx]);
             loadAnchors(
                 ammoAnchor,
                 parentEntityIdx,

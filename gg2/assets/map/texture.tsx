@@ -185,6 +185,7 @@
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" name="anchor" x="18.9089" y="38.9046" width="4.99891" height="6.30298"/>
+   <object id="2" name="spellAnchor" x="42.2727" y="14.0909" width="7.45455" height="7.81818"/>
   </objectgroup>
  </tile>
  <tile id="259">
