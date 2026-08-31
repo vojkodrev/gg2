@@ -4,6 +4,7 @@ const int AOE_PARENT_SPELL_Z_INDEX = 0;
 const int ACTION_BAR_ICON_Z_INDEX = 0;
 const int PARENT_Z_INDEX = 1;
 const int WEAPON_Z_INDEX = 2;
+const int EFFECT_FROST_CAST_Z_INDEX = WEAPON_Z_INDEX + 1;
 const int AMMO_Z_INDEX = 3;
 const int EFFECT_Z_INDEX = 4;
 const int EFFECT_BLOOD_SPLATTER_Z_INDEX = 4;

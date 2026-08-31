@@ -1,33 +1,43 @@
 #include "DestroyEffectSystem.h"
 #include "../../../structs/animation/AnimationState.h"
+#include "../../../structs/core/constants/IndexConstants.h"
 #include "../../../structs/effect/DestroyEffectType.h"
+#include "../../../structs/effect/EffectType.h"
 #include "EffectFree.h"
 #include <cstdint>
 
 void destroyEffectSystem(Context &ctx)
 {
-    for (uint32_t i = 0; i < ctx.data.effect.pool.count[0]; i++)
+    auto &effect = ctx.data.effect;
+    auto &castingEffectId =
+        ctx.data.player.equipment.weapon.magic.castingEffectId[0];
+    for (uint32_t i = 0; i < effect.pool.count[0]; i++)
     {
-        if (!ctx.data.effect.pool.active[0][i])
+        if (!effect.pool.active[0][i])
             continue;
 
-        if (ctx.data.effect.destroyType[i] == DestroyEffectType::None)
+        bool shouldDestroy = false;
+        if (effect.destroyType[i] == DestroyEffectType::None)
         {
             continue;
         }
-        else if (ctx.data.effect.destroyType[i] == DestroyEffectType::AnimationEnd)
+        else if (effect.destroyType[i] == DestroyEffectType::AnimationEnd)
         {
-            if (ctx.data.effect.base.animation.animationState[i] != AnimationState::Finished)
-                continue;
-
-            effectFree(ctx.data.effect, ctx.data.groups, i);
+            shouldDestroy =
+                effect.base.animation.animationState[i] ==
+                AnimationState::Finished;
         }
-        else if (ctx.data.effect.destroyType[i] == DestroyEffectType::Timer)
+        else if (effect.destroyType[i] == DestroyEffectType::Timer)
         {
-            if (ctx.data.effect.destroyTimer[i] > 0.0f)
-                continue;
-
-            effectFree(ctx.data.effect, ctx.data.groups, i);
+            shouldDestroy = effect.destroyTimer[i] <= 0.0f;
         }
+
+        if (!shouldDestroy)
+            continue;
+
+        if (effect.type[i] == EffectType::FrostCast &&
+            castingEffectId == static_cast<int>(i))
+            castingEffectId = INVALID_ID;
+        effectFree(effect, ctx.data.groups, i);
     }
 }

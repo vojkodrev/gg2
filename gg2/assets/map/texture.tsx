@@ -449,6 +449,7 @@
  </tile>
  <tile id="422">
   <properties>
+   <property name="scale" type="float" value="3"/>
    <property name="type" value="frostCast"/>
   </properties>
   <animation>

@@ -20,7 +20,7 @@ add_library(systems_gameplay
     rotation/RotateEquipmentSystem.cpp
     equipment/MoveEquipmentSystem.cpp
     equipment/CalculateRangedCollisionSystem.cpp
-    attacks/castBar/CancelCastBarSystem.cpp
+    attacks/castBar/CancelPlayerCastSystem.cpp
     attacks/timers/AutoAttackTimerSystem.cpp
     attacks/timers/CastBarTimerSystem.cpp
     attacks/autoAttack/NpcAutoAttackSystem.cpp
