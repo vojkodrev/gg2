@@ -6,7 +6,7 @@
 void cancelPlayerCastSystem(Context &ctx)
 {
     auto &player = ctx.data.player;
-    if (!player.base.position.dirty[0])
+    if (!player.base.position.inputMovement[0])
         return;
 
     auto &castingEffectId =

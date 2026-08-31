@@ -31,7 +31,9 @@ void playerMovementSystem(Context &ctx)
         PLAYER_SPEED);
     const float moveX = dx * moveSpeed * ctx.frame.dt;
     const float moveY = dy * moveSpeed * ctx.frame.dt;
-    p.base.position.dirty[0] = moveX != 0.0f || moveY != 0.0f;
+    const bool movedByUserInput = moveX != 0.0f || moveY != 0.0f;
+    p.base.position.dirty[0] = movedByUserInput;
+    p.base.position.inputMovement[0] = movedByUserInput;
     p.base.position.x[0] += moveX;
     p.base.position.y[0] += moveY;
 }

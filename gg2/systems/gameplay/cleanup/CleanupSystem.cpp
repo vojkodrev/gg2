@@ -5,6 +5,7 @@
 void cleanupSystem(Context &ctx)
 {
     std::memset(ctx.data.player.base.position.dirty, 0, sizeof(ctx.data.player.base.position.dirty));
+    std::memset(ctx.data.player.base.position.inputMovement, 0, sizeof(ctx.data.player.base.position.inputMovement));
     std::memset(ctx.data.player.base.facing.dirty, 0, sizeof(ctx.data.player.base.facing.dirty));
     std::memset(ctx.data.player.equipment.weapon.base.position.dirty, 0, sizeof(ctx.data.player.equipment.weapon.base.position.dirty));
     std::memset(ctx.data.player.equipment.weapon.base.facing.dirty, 0, sizeof(ctx.data.player.equipment.weapon.base.facing.dirty));

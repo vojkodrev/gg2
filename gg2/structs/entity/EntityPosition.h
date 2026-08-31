@@ -11,4 +11,5 @@ struct EntityPosition
     float h[N];
     bool absolute[N] = {};
     bool dirty[N];
+    bool inputMovement[N] = {};
 };
