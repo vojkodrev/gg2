@@ -447,4 +447,19 @@
    <frame tileid="416" duration="1000"/>
   </animation>
  </tile>
+ <tile id="422">
+  <properties>
+   <property name="type" value="frostCast"/>
+  </properties>
+  <animation>
+   <frame tileid="422" duration="100"/>
+   <frame tileid="423" duration="100"/>
+   <frame tileid="424" duration="100"/>
+   <frame tileid="425" duration="100"/>
+   <frame tileid="426" duration="100"/>
+   <frame tileid="427" duration="100"/>
+   <frame tileid="428" duration="100"/>
+   <frame tileid="429" duration="100"/>
+  </animation>
+ </tile>
 </tileset>

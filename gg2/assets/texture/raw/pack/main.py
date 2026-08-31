@@ -109,6 +109,14 @@ images = [
     {"id": 74, "filename": "../healthbars.png", "dx": 3, "dy": 26, "sx": 4 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 75, "filename": "../healthbars.png", "dx": 4, "dy": 26, "sx": 5 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
     {"id": 76, "filename": "../healthbars.png", "dx": 5, "dy": 26, "sx": 6 * 48, "sy": 1 * 16, "sw": 50, "sh": 16, "w": 64},
+    {"id": 77, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 6, "dy": 26, "sx": 8 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 78, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 7, "dy": 26, "sx": 9 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 79, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 8, "dy": 26, "sx": 10 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 80, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 9, "dy": 26, "sx": 11 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 81, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 10, "dy": 26, "sx": 12 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 82, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 11, "dy": 26, "sx": 13 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 83, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 12, "dy": 26, "sx": 14 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
+    {"id": 84, "filename": "../Bullet 24x24 Free  Part 1B.png", "dx": 13, "dy": 26, "sx": 15 * 24, "sy": 4 * 24, "sw": 24, "sh": 24},
 ]
 
 
