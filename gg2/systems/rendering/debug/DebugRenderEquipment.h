@@ -24,23 +24,34 @@ inline void debugRenderEquipment(
 
         const int frameIndex =
             equipment.weapon.base.animation.frameIndex[entityIndex];
-        SDL_FRect ammoAnchor = {
-            equipment.weapon.base.position.x[entityIndex] +
-                equipment.weapon.ranged.ammoAnchor
-                    .offX[entityIndex][frameIndex][0],
-            equipment.weapon.base.position.y[entityIndex] +
-                equipment.weapon.ranged.ammoAnchor
-                    .offY[entityIndex][frameIndex][0],
-            equipment.weapon.ranged.ammoAnchor
-                .w[entityIndex][frameIndex][0],
-            equipment.weapon.ranged.ammoAnchor
-                .h[entityIndex][frameIndex][0]
-        };
-
-        if (ammoAnchor.w > 0.0f && ammoAnchor.h > 0.0f)
+        const auto &ammoAnchorData = equipment.weapon.ranged.ammoAnchor;
+        if (ammoAnchorData.exists[entityIndex][frameIndex][0])
         {
+            const SDL_FRect ammoAnchor = {
+                equipment.weapon.base.position.x[entityIndex] +
+                    ammoAnchorData.offX[entityIndex][frameIndex][0],
+                equipment.weapon.base.position.y[entityIndex] +
+                    ammoAnchorData.offY[entityIndex][frameIndex][0],
+                ammoAnchorData.w[entityIndex][frameIndex][0],
+                ammoAnchorData.h[entityIndex][frameIndex][0]
+            };
             SDL_SetRenderDrawColor(ctx.renderer, 255, 128, 0, 255);
             renderColBox(ctx, ammoAnchor);
+        }
+
+        const auto &spellAnchorData = equipment.weapon.magic.spellAnchor;
+        if (spellAnchorData.exists[entityIndex][frameIndex][0])
+        {
+            const SDL_FRect spellAnchor = {
+                equipment.weapon.base.position.x[entityIndex] +
+                    spellAnchorData.offX[entityIndex][frameIndex][0],
+                equipment.weapon.base.position.y[entityIndex] +
+                    spellAnchorData.offY[entityIndex][frameIndex][0],
+                spellAnchorData.w[entityIndex][frameIndex][0],
+                spellAnchorData.h[entityIndex][frameIndex][0]
+            };
+            SDL_SetRenderDrawColor(ctx.renderer, 128, 128, 255, 255);
+            renderColBox(ctx, spellAnchor);
         }
     }
 

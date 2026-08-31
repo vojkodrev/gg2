@@ -2,43 +2,31 @@
 #include "ShouldClearRotationAnimationStart.h"
 #include "IsRotationAnimationFinished.h"
 #include "IsRotationAnimationRunning.h"
-#include "RotateEntityBase.h"
+#include "RotateEquipment.h"
 #include "ShouldUseRotationAnimationStart.h"
-#include "../../../utils/rect/RotateRectCenter.h"
 #include <cstdint>
 
 void rotateEquipmentSystem(Context &ctx)
 {
-    auto &playerWeapon = ctx.data.player.equipment.weapon;
-    if (
+    auto &playerEquipment = ctx.data.player.equipment;
+    auto &playerWeapon = playerEquipment.weapon;
+    const bool rotatePlayerWeapon =
         playerWeapon.exists[0] &&
         (playerWeapon.base.facing.dirty[0] ||
          isRotationAnimationRunning(playerWeapon.base, 0) ||
-         isRotationAnimationFinished(playerWeapon.base, 0)))
-    {
-        rotateEntityBase(playerWeapon.base, 0);
-        if (playerWeapon.type[0] == WeaponType::Ranged)
-            for (int frameIndex = 0;
-                frameIndex < playerWeapon.base.animation.frameCount[0];
-                frameIndex++)
-                rotateRectCenter(
-                    playerWeapon.ranged.ammoAnchor.offX[0][frameIndex][0],
-                    playerWeapon.ranged.ammoAnchor.offY[0][frameIndex][0],
-                    playerWeapon.ranged.ammoAnchor.w[0][frameIndex][0],
-                    playerWeapon.ranged.ammoAnchor.h[0][frameIndex][0],
-                    playerWeapon.base.position.w[0] * 0.5f,
-                    playerWeapon.base.position.h[0] * 0.5f,
-                    playerWeapon.base.rotation.rotate[0]);
-    }
+         isRotationAnimationFinished(playerWeapon.base, 0));
+    const bool rotatePlayerAmmo =
+        playerEquipment.ammo.exists[0] &&
+        playerEquipment.ammo.base.facing.dirty[0] &&
+        playerWeapon.type[0] == WeaponType::Ranged;
+    rotateEquipment(
+        playerEquipment,
+        0,
+        rotatePlayerWeapon,
+        rotatePlayerAmmo);
 
-    auto &playerAmmo = ctx.data.player.equipment.ammo;
-    if (playerAmmo.exists[0] &&
-        playerAmmo.base.facing.dirty[0] &&
-        playerWeapon.type[0] == WeaponType::Ranged)
-        rotateEntityBase(playerAmmo.base, 0);
-
-    auto &npcAmmo = ctx.data.npc.equipment.ammo;
-    auto &npcWeapon = ctx.data.npc.equipment.weapon;
+    auto &npcEquipment = ctx.data.npc.equipment;
+    auto &npcWeapon = npcEquipment.weapon;
     for (uint32_t entityIndex = 0; entityIndex < MAX_NPCS; entityIndex++)
     {
         if (!ctx.data.npc.active[entityIndex] ||
@@ -55,7 +43,7 @@ void rotateEquipmentSystem(Context &ctx)
                 npcWeapon,
                 entityIndex);
 
-        if (
+        const bool rotateNpcWeapon =
             npcWeapon.base.facing.dirty[entityIndex] ||
             npcWeaponRotationRunning ||
             npcWeaponRotationFinished ||
@@ -63,33 +51,16 @@ void rotateEquipmentSystem(Context &ctx)
             shouldClearRotationAnimationStart(
                 ctx.data.npc.ai,
                 npcWeapon,
-                entityIndex))
-        {
-            rotateEntityBase(
-                npcWeapon.base,
-                entityIndex,
-                useRotationAnimationStart);
-            if (npcWeapon.type[entityIndex] == WeaponType::Ranged)
-                for (int frameIndex = 0;
-                    frameIndex <
-                        npcWeapon.base.animation.frameCount[entityIndex];
-                    frameIndex++)
-                    rotateRectCenter(
-                        npcWeapon.ranged.ammoAnchor
-                            .offX[entityIndex][frameIndex][0],
-                        npcWeapon.ranged.ammoAnchor
-                            .offY[entityIndex][frameIndex][0],
-                        npcWeapon.ranged.ammoAnchor
-                            .w[entityIndex][frameIndex][0],
-                        npcWeapon.ranged.ammoAnchor
-                            .h[entityIndex][frameIndex][0],
-                        npcWeapon.base.position.w[entityIndex] * 0.5f,
-                        npcWeapon.base.position.h[entityIndex] * 0.5f,
-                        npcWeapon.base.rotation.rotate[entityIndex]);
-        }
-        if (npcAmmo.exists[entityIndex] &&
-            npcAmmo.base.facing.dirty[entityIndex] &&
-            npcWeapon.type[entityIndex] == WeaponType::Ranged)
-            rotateEntityBase(npcAmmo.base, entityIndex);
+                entityIndex);
+        const bool rotateNpcAmmo =
+            npcEquipment.ammo.exists[entityIndex] &&
+            npcEquipment.ammo.base.facing.dirty[entityIndex] &&
+            npcWeapon.type[entityIndex] == WeaponType::Ranged;
+        rotateEquipment(
+            npcEquipment,
+            entityIndex,
+            rotateNpcWeapon,
+            rotateNpcAmmo,
+            useRotationAnimationStart);
     }
 }
